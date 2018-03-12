@@ -1,0 +1,70 @@
+   <skin>
+<!-- Infobar Light FHD -->
+<screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1920,1080" title="InfoBar" backgroundColor="transparent">
+	<ePixmap pixmap="Anadol/menu/Anadol_bg.png" position="0,934" zPosition="-10" size="1920,150" />
+	<ePixmap pixmap="Anadol/Progress_BG.png" position="380,1011" zPosition="0" size="998,18" alphatest="blend"/>
+	<widget source="session.Event_Now" render="Label" position="378,953" size="120,50" font="Regular; 40" backgroundColor="background" transparent="1" zPosition="3" halign="right" foregroundColor="white">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Label" position="656,953" size="560,50" font="Regular; 40" backgroundColor="black" transparent="1" zPosition="3" foregroundColor="white">
+    <convert type="EventName">Name</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Label" position="1213,953" size="190,50" font="Regular; 40" backgroundColor="background" halign="center" transparent="1" zPosition="3" foregroundColor="white">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="378,1035" size="120,50" font="Regular; 40" foregroundColor="greyblue" backgroundColor="black" transparent="1" zPosition="2" halign="right">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="656,1036" size="570,50" font="Regular; 40" foregroundColor="greyblue" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">Name</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="1230,1036" size="180,50" font="Regular; 40" foregroundColor="greyblue" backgroundColor="background" halign="center" transparent="1" zPosition="3">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Label" position="498,953" size="150,50" font="Regular; 40" halign="center" backgroundColor="background" transparent="1" zPosition="4" valign="center" foregroundColor="white">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:- %H:%M</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Progress" pixmap="Anadol/Anadol_Progress.png" position="382,1013" size="994,14" zPosition="1" transparent="1">
+    <convert type="EventTime">Progress</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="498,1035" size="150,50" font="Regular; 40" halign="center" foregroundColor="greyblue" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:- %H:%M</convert>
+	</widget>
+	<widget alphatest="blend" position="11,802" size="317,190" render="Picon" source="session.CurrentService" transparent="1" zPosition="1" borderWidth="1" borderColor="verygrey">
+    <convert type="ServiceName">Reference</convert>
+	</widget>
+	<widget alphatest="blend" pixmap="Anadol/icons/ico_rec_on.png" position="245,805" render="Pixmap" size="80,26" source="session.RecordState" zPosition="2">
+    <convert type="ConditionalShowHide">Blink</convert>
+	</widget>
+	<widget backgroundColor="background" font="Regular; 40" noWrap="1" valign="center" halign="center" position="1417,1036" render="Label" size="330,50" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="greyblue">
+    <convert type="ClockToText">Format:%e. %B</convert>
+	</widget>
+	<widget backgroundColor="background" font="Regular; 40" valign="center" halign="center" noWrap="1" position="1417,953" render="Label" size="330,50" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="white">
+    <convert type="ClockToText">Format:%A</convert>
+	</widget>
+	<widget source="session.CurrentService" render="Label" position="22,1035" size="120,50" font="Regular; 40" halign="right" valign="center" transparent="1" backgroundColor="background" foregroundColor="greyblue">
+    <convert type="ServiceInfo">VideoWidth</convert>
+	</widget>
+	<eLabel text="x" position="147,1035" size="40,50" font="Regular; 40" halign="center" valign="center" transparent="1" backgroundColor="black" foregroundColor="greyblue" />
+	<widget source="session.CurrentService" render="Label" position="192,1035" size="120,50" font="Regular; 40" halign="left" valign="center" transparent="1" backgroundColor="background" foregroundColor="greyblue">
+    <convert type="ServiceInfo">VideoHeight</convert>
+	</widget>
+    <widget source="global.CurrentTime" render="ANDWatches" position="1784,963" size="90,90" zPosition="4" foregroundColor="black" alphatest="blend">
+    <convert type="ANDAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="ANDWatches" position="1784,963" size="90,90" zPosition="3" foregroundColor="bluetitle" alphatest="blend">
+    <convert type="ANDAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="ANDWatches" position="1794,973" size="70,70" zPosition="2" foregroundColor="red" alphatest="blend">
+    <convert type="ANDAnalogClock">hourHand</convert>
+    </widget>
+	<eLabel name="Picon_BG" position="-4,791" size="343,210" foregroundColor="black" backgroundColor="black" />
+	<ePixmap pixmap="Anadol/icons/AL_Clock.png" position="1754,934" size="150,145" alphatest="blend" />
+	</screen>
+  </skin>
