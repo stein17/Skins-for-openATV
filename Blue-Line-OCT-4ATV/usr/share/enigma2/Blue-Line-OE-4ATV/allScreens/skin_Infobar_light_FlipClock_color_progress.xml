@@ -1,0 +1,66 @@
+<skin>
+<!--  skin_Infobar_light_FlipClock_color_progress-->
+ <screen name="InfoBar" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" borderWidth="0" borderColor="transparent">
+  <ePixmap pixmap="Blue-Line-OE-4ATV/menu/Infobar_light.png" position="0,845" zPosition="-1" size="1920,232" />
+  <widget pixmap="Blue-Line-OE-4ATV/icons/ico_rec_on.png" alphatest="blend" position="267,848" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="BLXPicon" position="1,844" size="350,198" zPosition="4" transparent="0" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="395,945" size="150,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1" valign="top">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1216,945" size="180,45" font="Regular; 36" halign="center" backgroundColor="darkgrey" transparent="1" valign="top">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="545,945" size="680,45" font="Regular; 36" halign="left" backgroundColor="darkgrey" foregroundColor="white" transparent="1" zPosition="1">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1396,945" size="180,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" pixmap="Blue-Line-OE-4ATV/Color_Progress.png" position="366,999" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="545,1022" size="850,45" font="Regular; 36" halign="left" backgroundColor="black" transparent="1" valign="top" foregroundColor="darkgrey">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="1395,1022" size="180,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1" foregroundColor="darkgrey">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="395,1022" size="150,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1" noWrap="1" zPosition="1" foregroundColor="darkgrey">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1593,1008" size="320,36" font="Regular; 30" halign="center" backgroundColor="backtop" transparent="1" foregroundColor="cyan1">
+  <convert type="ClockToText">Format:%A</convert>
+</widget>
+  <widget source="global.CurrentTime" render="Label" position="1593,1044" size="320,36" font="Regular; 30" halign="center" backgroundColor="backtop" transparent="1" foregroundColor="cyan1">
+  <convert type="ClockToText">Format:%d. %B %Y</convert>
+</widget>
+   <widget source="global.CurrentTime" render="Label" position="1597,850" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+    <convert type="ClockToText">Format:%H</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1764,851" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+    <convert type="ClockToText">Format:%M</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 100" position="1740,861" size="30,100" halign="center" zPosition="3" valign="center" foregroundColor="cyan1" transparent="1">
+    <convert type="BLBlinkingClock" />
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="50,1047" size="100,30" font="Regular; 30" halign="right" backgroundColor="black" transparent="1" valign="center" foregroundColor="foregroundClock">
+    <convert type="ServiceInfo">VideoWidth</convert>
+  </widget>
+  <eLabel text="x" position="150,1047" size="50,30" font="Regular; 30" halign="center" backgroundColor="black" transparent="1" valign="center" foregroundColor="foregroundClock" />
+  <widget source="session.CurrentService" render="Label" position="200,1047" size="100,30" font="Regular; 30" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="foregroundClock">
+    <convert type="ServiceInfo">VideoHeight</convert>
+  </widget>
+  <ePixmap pixmap="Blue-Line-OE-4ATV/icons/event.png" position="366,949" size="44,35" zPosition="3" alphatest="blend" />
+  <ePixmap alphatest="blend" pixmap="Blue-Line-OE-4ATV/icons/ico_rec_off.png" position="267,848" size="80,26" zPosition="2" />
+  </screen>
+  </skin>

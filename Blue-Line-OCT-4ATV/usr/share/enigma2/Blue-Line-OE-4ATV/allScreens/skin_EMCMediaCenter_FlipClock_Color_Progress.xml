@@ -1,0 +1,100 @@
+ <skin>
+ <!-- EMCMediaCenter_FlipClock_Color_Progress -->
+<screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
+    <ePixmap pixmap="Blue-Line-OE-4ATV/menu/InfobarOCTFlip.png" position="0,780" zPosition="-1" size="1920,1080" />
+    <widget pixmap="Blue-Line-OE-4ATV/icons/ico_rec_on.png" alphatest="blend" position="967,821" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1587,785" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+    <convert type="ClockToText">Format:%H</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1767,785" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+    <convert type="ClockToText">Format:%M</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 100" position="1729,794" size="40,100" halign="center" zPosition="3" valign="center" foregroundColor="cyan1" transparent="1">
+    <convert type="BLBlinkingClock" />
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1596,955" size="300,58" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+    <convert type="ClockToText">Format:%A</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1596,1015" size="300,50" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+    <convert type="ClockToText">Format:%d.%b.%Y</convert>
+  </widget>
+    <widget source="session.CurrentService" position="1226,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">0,719</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="1226,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1079</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="1226,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1080</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="1226,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_uhd_on.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">1081,5000</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_dolby_off.png" position="1319,1030" size="63,35" zPosition="1" alphatest="blend">
+      <convert type="BLServiceInfo">IsStereo</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_dolby_on.png" position="1319,1030" size="63,35" zPosition="1" alphatest="blend">
+      <convert type="BLServiceInfo">IsMultichannel</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_format_off.png" position="1412,1030" size="63,35" zPosition="1" alphatest="blend">
+      <convert type="BLServiceInfo">IsNotWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_format_on.png" position="1412,1030" size="63,35" zPosition="1" alphatest="blend">
+      <convert type="BLServiceInfo">IsWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <ePixmap alphatest="blend" pixmap="Blue-Line-OE-4ATV/icons/ico_rec_off.png" position="967,821" size="80,26" zPosition="2" />
+    <widget source="session.CurrentService" render="Label" position="1392,960" size="105,40" font="Regular; 32" halign="center" valign="center" backgroundColor="background" transparent="1" zPosition="4">
+      <convert type="BLServiceEndTime">EndTime</convert>
+    </widget>
+    <widget source="Service" render="PositionGauge" position="367,937" size="1200,6" zPosition="3" transparent="1">
+      <convert type="EMCServicePosition">Gauge</convert>
+    </widget>
+    <widget source="Service" render="Progress" pixmap="Blue-Line-OE-4ATV/Color_Progress.png" position="366,934" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="EMCServicePosition">Position</convert>
+    </widget>
+    <widget source="Service" render="EMCPositionGauge" pointer="Blue-Line-OE-4ATV/menu/EMCPointerRecord.png:1470,0" position="367,937" size="1200,6" zPosition="4" transparent="1">
+      <convert type="EMCRecordPosition">Position</convert>
+    </widget>
+    <eLabel text="Min." font="Regular; 32" position="866,797" size="90,40" halign="left" backgroundColor="black" transparent="1" />
+    <eLabel text="endet um" font="Regular; 32" position="1230,960" size="160,40" halign="right" backgroundColor="black" transparent="1" />
+    <eLabel text="Uhr" font="Regular; 32" position="1495,960" size="70,40" halign="left" backgroundColor="black" transparent="1" />
+    <eLabel text="Laufzeit:" font="Regular; 32" position="606,797" size="160,40" halign="right" backgroundColor="black" transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="405,880" size="150,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1" valign="top">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1370,880" size="180,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1">
+      <convert type="ServicePosition">Remaining,Negate</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="766,797" size="100,40" font="Regular; 32" halign="right" foregroundColor="white" backgroundColor="dark" transparent="1" zPosition="3">
+      <convert type="ServicePosition">Length</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="557,880" size="680,45" font="Regular; 36" halign="left" backgroundColor="darkgrey" foregroundColor="white" transparent="1" zPosition="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget name="Cover" position="13,651" size="345,400" zPosition="1" alphatest="on" backgroundColor="transparent" foregroundColor="transparent" />
+    <widget source="session.CurrentService" render="Label" position="404,960" size="100,40" font="Regular; 32" halign="right" backgroundColor="background" transparent="1" valign="center" zPosition="3">
+      <convert type="ServiceInfo">VideoWidth</convert>
+    </widget>
+    <eLabel text="x" position="505,960" size="45,40" font="Regular; 32" halign="center" backgroundColor="black" transparent="1" valign="center" zPosition="3" />
+    <widget source="session.CurrentService" render="Label" position="551,960" size="100,40" font="Regular; 32" halign="left" backgroundColor="black" transparent="1" valign="center" zPosition="3">
+      <convert type="ServiceInfo">VideoHeight</convert>
+    </widget>
+    <ePixmap position="56,780" zPosition="0" size="256,256" alphatest="blend" pixmap="Blue-Line-OE-4ATV/icons/play_movie.png" />
+    <ePixmap pixmap="Blue-Line-OE-4ATV/icons/event.png" position="377,884" size="44,35" zPosition="12" alphatest="blend" />
+  </screen>
+  </skin>

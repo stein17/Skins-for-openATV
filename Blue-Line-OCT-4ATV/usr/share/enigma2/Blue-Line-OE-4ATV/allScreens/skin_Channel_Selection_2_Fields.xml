@@ -1,0 +1,94 @@
+<skin>
+<!-- Channel selection 2 Fields FHD -->
+<screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="transparent2" flags="wfNoBorder" size="1920,1080">
+<widget source="Title" render="Label" position="130,10" size="1000,95" font="Regular;40" halign="center" valign="center" transparent="1" zPosition="1" />
+<ePixmap name="back" position="0,0" size="1920,1080" pixmap="Blue-Line-OE-4ATV/menu/bg1920.png" zPosition="-75" />
+<eLabel name="vertikalline" position="1252,803" size="645,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" zPosition="5" />
+<eLabel name="vertikalline" position="1252,946" size="645,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" zPosition="5" />
+<ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_updown.png" position="21,17" size="60,60" alphatest="blend" />
+<ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_menu.png" position="1383,1011" size="60,50" alphatest="on" />
+<ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_info.png" position="1308,1011" size="60,50" alphatest="on" />
+<ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_epg.png" position="1236,1011" size="60,50" alphatest="on" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
+  <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget source="global.CurrentTime" render="Label" position="1380,1016" size="520,40" font="Regular; 27" halign="right" backgroundColor="black" transparent="1" foregroundColor="foregroundClock">
+  <convert type="ClockToText">Format:%A, %d.%m.%Y   %H:%M</convert>
+  </widget>
+  <eLabel backgroundColor="black" position="1252,126" size="400,225" zPosition="-15" />
+  
+  <eLabel position="1252,126" size="400,225" backgroundColor="white" zPosition="-20" />
+  <widget source="session.VideoPicture" render="Pig" position="1252,126" size="400,225" zPosition="5" backgroundColor="backgroundPig" />
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/sat.png" position="1147,13" size="70,70" zPosition="2" alphatest="blend">
+  <convert type="FrontendInfo">TYPE</convert>
+  <convert type="ValueRange">0,0</convert>
+  <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/dvbt.png" position="1147,13" size="70,70" zPosition="2" alphatest="blend">
+  <convert type="FrontendInfo">TYPE</convert>
+  <convert type="ValueRange">2,2</convert>
+  <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/kabel.png" position="1147,13" size="70,70" zPosition="2" alphatest="blend">
+  <convert type="FrontendInfo">TYPE</convert>
+  <convert type="ValueRange">1,1</convert>
+  <convert type="ConditionalShowHide" />
+  </widget>
+  <widget name="list" position="10,110" size="1220,880" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
+  serviceItemHeight="60" 
+  serviceNumberFont="Regular;38" 
+  serviceNameFont="Regular;43" 
+  serviceInfoFont="Regular;37" 
+  foregroundColor="white" 
+  foregroundColorSelected="cyan1" 
+  backgroundColor="black" 
+  backgroundColorSelected="backgroundBlue" 
+  foregroundColorMarkedSelected="yellow" 
+  colorServiceDescription="cyan1" 
+  colorServiceDescriptionSelected="white" 
+  colorServiceRecording="red" 
+  foregroundColorServiceNotAvail="dark" 
+  colorEventProgressbar="bluelabel" 
+  colorEventProgressbarBorder="foregroundClock" 
+  colorEventProgressbarBorderSelected="blue" 
+  fieldMargins="15" nonplayableMargins="15" itemsDistances="8" progressBarWidth="80" progressPercentWidth="90" progressbarHeight="12" />
+  <widget source="ServiceEvent" render="Picon" position="1663,143" size="220,132" zPosition="1" alphatest="blend" transparent="1">
+  <convert type="BLRefString">ServicelistRef</convert>
+  </widget>
+  <eLabel text="Start Time :" position="1660,285" size="150,30" font="Regular; 24" halign="left" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
+  <widget source="ServiceEvent" render="Label" position="1810,285" size="80,30" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="foregroundClock">
+  <convert type="EventTime">StartTime</convert>
+  <convert type="ClockToText">
+  </convert>
+  </widget>
+  <eLabel text="End Time   :" position="1660,320" size="150,30" font="Regular; 24" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="foregroundClock" />
+  <widget source="ServiceEvent" render="Label" position="1810,320" size="80,30" font="Regular; 24" foregroundColor="red" backgroundColor="black" transparent="1" zPosition="1">
+  <convert type="EventTime">EndTime</convert>
+  <convert type="ClockToText">
+  </convert>
+  </widget>
+  <widget source="ServiceEvent" render="Progress" position="1252,436" pixmap="Blue-Line-OE-4ATV/p_bar_sel.png" size="644,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
+  <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="ServiceEvent" render="BLEmptyEpg" emptyText="Event data unavailable" position="1252,353" size="645,80" font="Regular;32" foregroundColor="cyan1" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1">
+  <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="ServiceEvent" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=6000,wrap=1,always=0,repeat=2,oneshot=1" position="1252,455" size="645,345" font="Regular;34" foregroundColor="foregroundClock" backgroundColor="black" valign="top" halign="left" transparent="1" zPosition="2">
+  <convert type="EventName">FullDescription</convert>
+</widget>
+  <widget source="ServiceEvent" render="BLNextEvents" position="1252,808" size="645,135" noWrap="1" font="Regular;30" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="5">
+  <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="ServiceEvent" render="BLRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=200,always=0" position="1252,950" size="645,40" font="Regular; 34" foregroundColor="cyan1" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+  <convert type="BLPrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="1242,10" size="610,95" font="Regular; 40" halign="center" valign="center" transparent="1" zPosition="1">
+  <convert type="ServiceName">Name</convert>
+  </widget>
+</screen>
+ </skin>
