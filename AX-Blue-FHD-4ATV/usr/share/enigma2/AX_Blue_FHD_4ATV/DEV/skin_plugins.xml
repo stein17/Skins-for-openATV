@@ -3641,20 +3641,29 @@ self.instance.move(ePoint(0,0))
     <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_exit.png" position="1395,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
   </screen>
     <!-- VideoEnhancementPreview FHD-->
-<screen name="VideoEnhancementPreview" position="0,0" size="1920,1080" title="VideoEnhancementPreview" backgroundColor="transparent" flags="wfNoBorder">
-    <widget source="global.CurrentTime" render="Label" position="508,30" size="600,40" font="Regular; 32" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
+<screen name="VideoEnhancementPreview" position="center,800" size="1280,280" title="VideoEnhancementPreview" backgroundColor="transparent" flags="wfNoBorder">
+    <widget source="global.CurrentTime" render="Label" position="508,30" size="600,40" font="Regular; 32" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
     </widget>
-    <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/menu/menu_duo_blue.png" position="0,0" zPosition="-20" size="1920,1080" />
-    <eLabel position="943,122" size="311,524" backgroundColor="trbluelabel" transparent="0" zPosition="-12" />
+    <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/menu/menu_transp_black.png" position="0,0" zPosition="-20" size="1280,280" />
     <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_red.png" position="475,1027" size="35,35" alphatest="blend" />
     <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_green.png" position="806,1027" size="35,35" alphatest="blend" />
-    <ePixmap position="971,676" size="256,256" zPosition="2" pixmap="AX_Blue_FHD_4ATV/icons/media.png" transparent="1" />
     <widget source="key_red" render="Label" position="519,1025" size="255,40" noWrap="1" zPosition="1" valign="center" font="Regular;30" halign="left" backgroundColor="background" foregroundColor="white" transparent="1" />
     <widget source="key_green" render="Label" position="853,1025" size="255,40" noWrap="1" zPosition="1" valign="center" font="Regular;30" halign="left" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <widget source="introduction" render="Label" position="50,180" size="820,40" font="Regular;32" halign="left" foregroundColor="lightblue" backgroundColor="dark" transparent="1" />
-    <widget name="config" position="50,250" size="820,630" font="Regular;32" itemHeight="45" scrollbarMode="showOnDemand" backgroundColor="dark" transparent="1" zPosition="1" />
+    <widget source="introduction" render="Label" position="10,100" size="1260,40" font="Regular;32" halign="left" foregroundColor="lightblue" backgroundColor="dark" transparent="1" name="#" />
+    <widget name="config" position="10,155" size="1260,120" font="Regular;32" itemHeight="45" scrollbarMode="showOnDemand" backgroundColor="dark" transparent="1" zPosition="1" />
+    <applet type="onLayoutFinish">
+from enigma import getDesktop
+deskwidth = getDesktop(0).size().width()
+if deskwidth and deskwidth &gt; 1920:
+	f = 3
+elif deskwidth and deskwidth &gt; 1280:
+	f = 1.5
+else:
+	f = 1
+self['config'].l.setSeperation(int(300*f))
+  </applet>
   </screen>
   <!-- LED_GigaSetup FHD-->
   <screen name="LED_GigaSetup" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
