@@ -373,4 +373,187 @@
   <eLabel name="" position="10,331" size="280,2" backgroundColor="anadollabel" />
 <eLabel name="" position="10,680" size="1150,2" backgroundColor="anadollabel" />
 </screen>
+    <!-- EPGvertical ATV-->
+<screen name="EPGvertical" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transparent">
+  <ePixmap pixmap="Anadol/menu/Anadol_bg.png" position="1,0" zPosition="-20" size="1920,1080" />
+   <eLabel name="vertikalline" position="0,998" size="1920,2" foregroundColor="anadollabel" backgroundColor="anadollabel" zPosition="5" />
+  <widget source="global.CurrentTime" render="Label" position="1500,20" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="anadollabel" transparent="1">
+    <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+  </widget>
+    <!--  Analog Clock-->
+  <widget source="global.CurrentTime" render="ANDWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="black" alphatest="blend">
+    <convert type="ANDAnalogClock">secHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="ANDWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="bluetitle" alphatest="blend">
+    <convert type="ANDAnalogClock">minHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="ANDWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
+    <convert type="ANDAnalogClock">hourHand</convert>
+  </widget>
+  <eLabel text="Electronic Program Guide" position="10,23" size="540,45" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="anadollabel" borderWidth="3" transparent="1" zPosition="1" />
+  <ePixmap position="654,29" size="30,29" zPosition="10" pixmap="Anadol/buttons/left.png" alphatest="on" />
+  <ePixmap position="1230,29" size="30,29" zPosition="10" pixmap="Anadol/buttons/right.png" alphatest="on" />
+  <widget source="Title" render="Label" position="690,23" size="540,45" font="Italic; 40" halign="center" valign="center" foregroundColor="white" backgroundColor="background" borderColor="anadollabel" borderWidth="3" transparent="1" zPosition="1" />
+  <widget source="Event" render="Label" position="10,90" size="800,45" font="Regular;36" backgroundColor="background" foregroundColor="bluetitle" transparent="0">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="Event" render="ANDRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="10,135" size="1900,155" font="Regular;35" backgroundColor="background" foregroundColor="white" transparent="1" valign="top" zPosition="1">
+  <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="Event" render="Label" position="820,90" size="120,45" font="Regular; 36" halign="right" backgroundColor="background" foregroundColor="bernstein" transparent="1" valign="center">
+  <convert type="EventTime">StartTime</convert>
+  <convert type="ClockToText">Format:%H:%M </convert>
+  </widget>
+  <widget source="Event" render="Label" position="1590,90" size="120,45" font="Regular; 36" backgroundColor="background" foregroundColor="bernstein" transparent="1" halign="left" valign="center">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="Event" render="Progress" position="945,110" pixmap="Anadol/p_bar_color2.png" size="645,8" borderWidth="1" borderColor="foregroundClock" transparent="1" zPosition="2">
+  <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="Event" render="Label" position="1730,90" size="180,45" font="Regular; 36" backgroundColor="background" foregroundColor="bernstein" transparent="1" halign="right" valign="center">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">
+    </convert>
+  </widget>
+  <widget name="lab1" position="10,670" size="1900,53" font="Regular;36" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="white" transparent="1" />
+  <eLabel name="epg-service-background" position="10,310" size="1900,45" backgroundColor="background" zPosition="0" transparent="0" font="Regular; 32" />
+  <widget name="bouquetlist" position="11,309" size="1900,45" zPosition="3" itemHeight="45" font="Regular;29" borderColor="foregroundClock" borderWidth="1" foregroundColor="white" foregroundColorSelected="bluetitle" backgroundColor="black" backgroundColorSelected="bluelabel" transparent="0" />
+  <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!-->
+  <widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,150" zPosition="-10" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh1" backgroundColor="background" noWrap="1" position="85,310" size="285,45" zPosition="2" transparent="1" foregroundColor="bernstein" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh2" backgroundColor="background" noWrap="1" position="470,310" size="285,45" zPosition="2" transparent="1" foregroundColor="bernstein" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh3" backgroundColor="background" noWrap="1" position="851,310" size="285,45" zPosition="2" transparent="1" foregroundColor="bernstein" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh4" backgroundColor="background" noWrap="1" position="1234,310" size="285,45" zPosition="2" transparent="1" foregroundColor="bernstein" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh5" backgroundColor="background" noWrap="1" position="1617,310" size="285,45" zPosition="2" transparent="1" foregroundColor="bernstein" />
+  <widget backgroundColor="darkbrown" name="Active1" position="10,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active2" position="393,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active3" position="775,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active4" position="1158,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active5" position="1540,310" size="355,45" zPosition="1" transparent="0" />
+  <widget source="piconCh1" render="MetrixHDXPicon" position="10,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh2" render="MetrixHDXPicon" position="393,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh3" render="MetrixHDXPicon" position="775,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh4" render="MetrixHDXPicon" position="1158,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh5" render="MetrixHDXPicon" position="1540,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget name="list1" position="10,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" transparent="0" />
+  <widget name="list2" position="393,365" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <widget name="list3" position="775,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <widget name="list4" position="1158,361" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <widget name="list5" position="1540,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <panel name="template_name_long_red_o_blue" />
+  <panel name="template_menu_info" />
+  <eLabel name="vertikalline" position="10,295" size="1900,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+</screen>
+<!-- EPGvertical ATV-->
+<!-- EPGvertical PIG ATV-->
+<screen name="EPGverticalPIG" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transparent">
+ <ePixmap pixmap="Anadol/menu/Anadol_bg.png" position="1,-1" zPosition="-20" size="1920,1080" />
+   <eLabel name="vertikalline" position="0,998" size="1920,2" foregroundColor="anadollabel" backgroundColor="anadollabel" zPosition="5" />
+  <widget source="global.CurrentTime" render="Label" position="1500,20" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="anadollabel" transparent="1">
+    <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+  </widget>
+    <!--  Analog Clock-->
+  <widget source="global.CurrentTime" render="ANDWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="black" alphatest="blend">
+    <convert type="ANDAnalogClock">secHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="ANDWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="bluetitle" alphatest="blend">
+    <convert type="ANDAnalogClock">minHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="ANDWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
+    <convert type="ANDAnalogClock">hourHand</convert>
+  </widget>
+  <eLabel text="Electronic Program Guide" position="10,23" size="540,45" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="anadollabel" borderWidth="3" transparent="1" zPosition="1" />
+  <ePixmap position="652,29" size="30,29" zPosition="10" pixmap="Anadol/buttons/left.png" alphatest="on" />
+  <ePixmap position="1231,29" size="30,29" zPosition="10" pixmap="Anadol/buttons/right.png" alphatest="on" />
+  <widget source="Title" render="Label" position="690,23" size="540,45" font="Italic; 40" halign="center" valign="center" foregroundColor="white" backgroundColor="background" borderColor="anadollabel" borderWidth="3" transparent="1" zPosition="1" />
+  <widget source="Event" render="Label" position="1310,180" size="600,45" font="Regular;36" backgroundColor="background" foregroundColor="white" transparent="0">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="Event" render="ANDRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="10,90" size="1140,195" font="Regular;36" backgroundColor="background" foregroundColor="bluetitle" transparent="1" valign="top" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
+  <widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,90" zPosition="-10" />
+  <widget source="session.CurrentService" render="MetrixHDXPicon" position="1225,180" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="MetrixHDServiceName2">Reference</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Progress" position="1313,743" size="435,12" foregroundColor="bluelabel" borderWidth="1" transparent="1" zPosition="2" borderColor="foregroundClock">
+  <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1200,730" size="100,45" foregroundColor="bernstein" backgroundColor="background" valign="center" font="Regular;29" halign="right">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1760,730" size="130,45" foregroundColor="bernstein" backgroundColor="background" valign="center" halign="right" font="Regular;29">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1200,810" size="100,45" foregroundColor="bernstein" backgroundColor="background" valign="center" font="Regular;29" halign="right">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1313,810" size="435,45" foregroundColor="white" backgroundColor="background" valign="center" font="Regular;29" noWrap="1">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1760,810" size="130,45" foregroundColor="bernstein" backgroundColor="background" valign="center" font="Regular;29" halign="right" transparent="1">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="1200,890" size="100,45" foregroundColor="bernstein" backgroundColor="background" valign="center" font="Regular;29" halign="right">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="1313,890" size="435,45" foregroundColor="white" backgroundColor="background" valign="center" font="Regular;29" noWrap="1">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="1760,890" size="130,45" foregroundColor="bernstein" backgroundColor="background" valign="center" font="Regular;29" halign="right" transparent="1">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget name="lab1" position="10,646" size="1135,53" font="Regular;36" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="white" transparent="1" />
+  <eLabel name="epg-service-background" position="10,300" size="1140,45" backgroundColor="background" zPosition="0" transparent="0" font="Regular; 32" />
+  <widget name="bouquetlist" position="12,310" size="1140,45" zPosition="3" itemHeight="45" font="Regular;29" borderColor="foregroundClock" borderWidth="1" foregroundColor="white" foregroundColorSelected="bluetitle" backgroundColor="black" backgroundColorSelected="bluelabel" transparent="0" />
+  <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!-->
+  <widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,150" zPosition="-10" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh1" backgroundColor="background" foregroundColor="bernstein" noWrap="1" position="85,310" size="295,45" zPosition="2" transparent="1" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh2" backgroundColor="background" foregroundColor="bernstein" noWrap="1" position="470,310" size="295,45" zPosition="2" transparent="1" />
+  <widget font="Regular;29" halign="center" valign="center" name="currCh3" backgroundColor="background" foregroundColor="bernstein" noWrap="1" position="851,310" size="295,45" zPosition="2" transparent="1" />
+  <widget backgroundColor="darkbrown" name="Active1" position="10,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active2" position="393,310" size="355,45" zPosition="1" transparent="0" />
+  <widget backgroundColor="darkbrown" name="Active3" position="775,310" size="355,45" zPosition="1" transparent="0" />
+  <widget source="piconCh1" render="MetrixHDXPicon" position="10,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh2" render="MetrixHDXPicon" position="393,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="piconCh3" render="MetrixHDXPicon" position="775,310" size="75,45" zPosition="2" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <ePixmap pixmap="Anadol/colors/Anadol_Background.png" position="1223,253" size="674,423" zPosition="-15" />
+  <eLabel backgroundColor="anadollabel" position="1225,633" size="670,1" zPosition="6" />
+  <eLabel backgroundColor="black" position="1225,255" size="671,420" zPosition="-10" />
+  <widget position="1226,255" size="670,377" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+  <widget position="1225,634" size="670,40" source="session.CurrentService" render="Label" font="Regular; 36" foregroundColor="cyan1" backgroundColor="black" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget name="list1" position="10,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" transparent="0" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <widget name="list2" position="393,365" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <widget name="list3" position="775,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
+  <panel name="template_name_long_red_o_blue" />
+  <panel name="template_menu_info" />
+  <eLabel name="vertikalline" position="10,295" size="1130,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+</screen>
+	<!-- EPGvertical PIG ATV-->
     </skin>
