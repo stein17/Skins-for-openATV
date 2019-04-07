@@ -3992,6 +3992,229 @@
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
 </screen>
+	<!-- File Commander -->
+  <screen name="FileCommanderScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head1" position="10,100" size="940,80" font="Regular;34" valign="center" transparent="1" />
+<widget source="list_left_head2" render="Listbox" position="10,190" size="940,55" selectionDisabled="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+			{"template": [
+				MultiContentEntryText(pos = (10, 0), size = (200, 60), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
+				MultiContentEntryText(pos = (260, 0), size = (240, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
+				MultiContentEntryText(pos = (510, 0), size = (425, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
+				],
+				"fonts": [gFont("Regular", 34)],
+				"itemHeight": 60,
+				"selectionEnabled": False
+			}
+	</convert>
+</widget>
+<widget name="list_right_head1" position="975,100" size="940,80" font="Regular;34" valign="center" transparent="1" />
+<widget source="list_right_head2" render="Listbox" position="975,190" size="940,55" selectionDisabled="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+			{"template": [
+				MultiContentEntryText(pos = (10, 0), size = (200, 60), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
+				MultiContentEntryText(pos = (260, 0), size = (240, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
+				MultiContentEntryText(pos = (510, 0), size = (425, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
+				],
+				"fonts": [gFont("Regular", 34)],
+				"itemHeight": 60,
+				"selectionEnabled": False
+			}
+	</convert>
+</widget>
+<eLabel position="10,185" size="1900,2" backgroundColor="Line" />
+<eLabel position="10,247" size="1900,2" backgroundColor="Line" />
+<eLabel position="960,100" size="2,870" backgroundColor="Line" />
+<widget name="list_left" position="10,255" size="940,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="list_right" position="975,255" size="940,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_left.png" position="1380,1026" size="30,29" zPosition="10" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_right.png" position="1475,1026" size="30,29" zPosition="10" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_0.png" position="1425,1023" size="35,35" zPosition="10" transparent="1" />
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_menu_ok_exit" />
+<panel name="template_name_red_o_blue" />
+</screen>
+  <screen name="FileCommanderScreenFileSelect" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head1" position="10,100" size="940,80" font="Regular;34" valign="center" transparent="1" />
+<widget source="list_left_head2" render="Listbox" position="10,190" size="940,55" selectionDisabled="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+			{"template": [
+				MultiContentEntryText(pos = (10, 0), size = (200, 60), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
+				MultiContentEntryText(pos = (260, 0), size = (240, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
+				MultiContentEntryText(pos = (510, 0), size = (425, 60), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
+				],
+				"fonts": [gFont("Regular", 34)],
+				"itemHeight": 60,
+				"selectionEnabled": False
+			}
+	</convert>
+</widget>
+<widget name="list_right_head1" position="975,100" size="940,80" font="Regular;34" valign="center" transparent="1" />
+<widget source="list_right_head2" render="Listbox" position="975,190" size="940,55" selectionDisabled="1" transparent="1">
+	<convert type="TemplatedMultiContent">
+			{"template": [
+				MultiContentEntryText(pos = (10, 0), size = (200, 55), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
+				MultiContentEntryText(pos = (260, 0), size = (240, 55), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
+				MultiContentEntryText(pos = (510, 0), size = (425, 55), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
+				],
+				"fonts": [gFont("Regular", 34)],
+				"itemHeight": 55,
+				"selectionEnabled": False
+			}
+	</convert>
+</widget>
+<eLabel position="10,185" size="1900,2" backgroundColor="Line" />
+<eLabel position="10,247" size="1900,2" backgroundColor="Line" />
+<eLabel position="960,100" size="2,870" backgroundColor="Line" />
+<widget name="list_left" position="10,255" size="940,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="list_right" position="975,255" size="940,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_left.png" position="1380,1026" size="30,29" zPosition="10" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_right.png" position="1475,1026" size="30,29" zPosition="10" transparent="1" />
+<ePixmap pixmap="Multibox/buttons/key_0.png" position="1425,1023" size="35,35" zPosition="10" transparent="1" />
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_menu_ok_exit" />
+<panel name="template_name_red_o_blue" />
+</screen>
+  <screen name="FileCommanderContextMenu" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="menu" position="10,100" size="1180,895" font="Regular;36" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarMode="showNever" itemHeight="54" enableWrapAround="1" transparent="1" />
+<eLabel text="File Commander menu" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+<panel name="template_fullscreen" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+</screen>
+  <screen name="FileCommanderFileStatInfo" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="File/Directory Status Information">
+<widget name="filename" position="10,100" size="1180,80" font="Regular; 34" valign="center" />
+	<widget source="list" render="Listbox" position="10,200" size="1180,790" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1">
+		<convert type="TemplatedMultiContent">
+				{"template": [
+					# 0   100 200 300 400 500
+					# |   |   |   |   |   |
+					# 00000000 1111111111111
+					MultiContentEntryText(pos = (200, 0), size = (650, 60), font = 0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is a label
+					MultiContentEntryText(pos = (700, 0), size = (800, 60), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the information
+					],
+					"fonts": [gFont("Regular", 34)],
+					"itemHeight": 60,
+					"selectionEnabled": False
+				}
+			</convert>
+		</widget>
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="setup_filecommander" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="background">
+<widget name="config" position="10,100" size="1180,800" itemHeight="45" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="description" position="1220,550" size="680,440" font="Regular;34" halign="center" valign="center" transparent="1" />
+<widget name="HelpWindow" position="1227,37" size="603,192" zPosition="1" transparent="1" alphatest="blend" />
+<widget name="footnote" position="10,910" size="1180,80" font="Regular; 34" halign="right" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="labelInfo" position="1220,550" size="680,440" font="Regular;34" halign="center" valign="center" transparent="1" />
+<panel name="template_source_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="InputBoxWide" position="0,0" size="1920,1080" flags="wfNoBorder" title="Input..." backgroundColor="background">
+<eLabel text="Input..." position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+<widget source="Title" render="Label" position="10,135" size="1180,120" font="Regular;34" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<eLabel position="10,802" size="1900,3" backgroundColor="Line" />
+<widget name="text" position="10,675" size="1900,135" font="Regular;34" transparent="1" />
+<widget name="input" position="10,900" size="1900,45" font="Regular;34" transparent="1" foregroundColor="Line" backgroundColor="background" />
+<panel name="template_fullscreen" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="vEditorScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_head" position="10,100" size="1900,120" font="Regular;34" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="filedata" position="10,250" size="1900,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<panel name="template_source_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+</screen>
+  <screen name="ArchiverInfoScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1900,120" font="Regular;34" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1900,720" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="ArchiverMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="RarMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="UnzipMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="TarMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="ipkMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="GunzipMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+  <screen name="UnpackInfoScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<widget name="list_left_head" position="10,100" size="1180,100" font="Regular;34" noWrap="1" valign="center" foregroundColor="Line" backgroundColor="background" transparent="1" />
+<widget name="list_left" position="10,250" size="1180,280" itemHeight="55" font="Regular;34" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" scrollbarMode="showOnDemand" transparent="1" />
+<widget name="unpacking" position="10,570" size="1180,55" itemHeight="55" font="Regular;34" transparent="1" />
+<panel name="template_name_red_green" />	
+<panel name="template_fullscreen_title" />
+<panel name="template_pixmap_BG" />
+<panel name="template_pig_setup" />
+<panel name="template_ok_exit" />
+</screen>
+	<!-- File Commander -->
   </skin>
 
 
