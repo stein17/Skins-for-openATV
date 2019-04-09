@@ -1926,7 +1926,360 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Multibox/menu/Progress_CS_color.png"
 	backgroundColor="background" 
 	backgroundColorSelected="red"/>
-	
-	
+	</screen>
+<screen name="Enhanced_Movie_Center">
+<!-- EMC_Mini_TV+Cover_FHD -->
+      <widget source="Service" render="Label" position="1280,950" size="420,45" font="Regular;28" halign="left" backgroundColor="background" foregroundColor="grey" transparent="1" noWrap="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Date</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1704,950" size="150,45" font="Regular;28" halign="right" backgroundColor="background" foregroundColor="grey" transparent="1" noWrap="1">
+      <convert type="EMCMovieInfo">FileSize</convert>
+    </widget>
+    <ePixmap position="1717,126" zPosition="1" size="190,200" alphatest="blend" pixmap="Multibox/mmp/play_emc.png" />
+	<eLabel text="bis" position="1384,504" size="61,37" font="Regular; 30" halign="center" valign="center" transparent="1" zPosition="1" foregroundColor="grey" />
+    <eLabel name="vertikalline" position="1280,548" size="627,2" backgroundColor="Line" foregroundColor="Line" />
+    <eLabel name="vertikalline" position="1280,941" size="627,2" backgroundColor="Line" foregroundColor="Line" />
+    <widget name="list" position="10,161" size="1245,835" 
+	itemHeight="56" 
+	CoolFont="Regular;36" 
+	CoolSelectFont="Regular;30" 
+	CoolDateFont="Regular;22" 
+	CoolSelNumTxtWidth="39" 
+	CoolProgressPos="53" 
+	CoolProgressHPos="2" 
+	CoolIconPos="1" 
+	CoolIconHPos="10" 
+	CoolIconSize="40,40" 
+	CoolBarPos="1045" 
+	CoolBarHPos="38"
+	CoolBarSize="175,15" 
+	CoolBarSizeSa="175,15" 
+	CoolMoviePos="125" 
+	CoolMovieHPos="8" 
+	CoolMovieSize="880" 
+	CoolFolderSize="777" 
+	CoolDatePos="1035" 
+	CoolDateHPos="1" 
+	CoolDateWidth="192"
+	CoolPiconPos="52" 
+	CoolPiconHPos="13" 
+	CoolPiconWidth="66" 
+	CoolPiconHeight="36" 
+	CoolMoviePiconPos="125" 
+	CoolMoviePiconSize="880" 
+	CoolCSWidth="210" 
+	CoolDirInfoWidth="210" 
+	CoolCSPos="837" 
+	CoolTitleColor="1" 
+	CoolDateColor="1" 
+	CoolHighlightColor="1" 
+	DefaultColor="white" TitleColor="cyan1" DateColor="greenlight" UnwatchedColor="white" WatchingColor="yellow" FinishedColor="green" RecordingColor="red" BackColor="black" BackColorSel="verydarkgrey" FrontColorSel="cyan1" scrollbarMode="showOnDemand" transparent="1" />
+    <widget source="Service" render="Label" position="1280,423" size="627,75" font="Regular;33" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="center">
+      <convert type="EMCEventName">Name</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1355,380" size="550,37" font="Regular;30" halign="left" backgroundColor="background" foregroundColor="white" transparent="1">
+      <convert type="EMCMovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1280,504" size="112,37" font="Regular;30" halign="center" backgroundColor="background" foregroundColor="grey" transparent="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1438,504" size="112,37" font="Regular;30" backgroundColor="background" foregroundColor="grey" transparent="1" halign="center">
+      <convert type="EMCServiceTime">EndTime</convert>
+      <convert type="EMCClockToText">Format:  %H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1590,504" size="150,37" font="Regular;30" halign="right" backgroundColor="background" foregroundColor="grey" transparent="1">
+      <convert type="EMCServiceTime">Duration</convert>
+      <convert type="EMCClockToText">InMinutes</convert>
+    </widget>
+    <widget source="Service" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1280,555" size="627,380" font="Regular;34" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EMCEventName">FullDescription</convert>
+    </widget>
+    <widget name="Cover" position="1716,98" size="192,260" alphatest="blend" zPosition="2" halign="left" />
+    <widget source="Service" render="Picon" position="1280,380" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+    <convert type="MovieInfo">RecordServiceRef</convert>
+    </widget>
+    <eLabel  position="1280,339" size="423,1" backgroundColor="Line" zPosition="6" />
+    <eLabel backgroundColor="background" position="1281,101" size="423,273" zPosition="-10" />
+    <eLabel position="1280,100" size="425,275" zPosition="-15" backgroundColor="cyan1" transparent="0" />
+    <widget position="1281,101" size="422,237" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="1281,341" size="423,33" source="session.CurrentService" render="Label" font="Regular; 27" foregroundColor="cyan1" backgroundColor="background" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <panel name="template_info_menu_exit" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_name_red_o_blue" />
+  </screen>
+<!-- EMC_Big_Mini_TV FHD -->
+   <screen name="EMC_Big_Mini_TV">
+   <widget source="Service" render="Label" position="1305,965" size="400,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Date</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1790,965" size="120,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="EMCMovieInfo">FileSize</convert>
+    </widget>
+    <ePixmap position="1230,705" zPosition="1" size="190,200" alphatest="blend" pixmap="Multibox/mmp/play_emc.png" />
+    <widget name="list" position="10,130" size="1200,620" 
+	itemHeight="56" 
+	CoolFont="Regular;36" 
+	CoolSelectFont="Regular;30" 
+	CoolDateFont="Regular;22" 
+	CoolSelNumTxtWidth="39" 
+	CoolProgressPos="53" 
+	CoolProgressHPos="2" 
+	CoolIconPos="1" 
+	CoolIconHPos="10" 
+	CoolIconSize="40,40" 
+	CoolBarPos="1000" 
+	CoolBarHPos="38"
+	CoolBarSize="175,15" 
+	CoolBarSizeSa="175,15" 
+	CoolMoviePos="125" 
+	CoolMovieHPos="8" 
+	CoolMovieSize="850" 
+	CoolFolderSize="777" 
+	CoolDatePos="990" 
+	CoolDateHPos="1" 
+	CoolDateWidth="192"
+	CoolPiconPos="52" 
+	CoolPiconHPos="13" 
+	CoolPiconWidth="66" 
+	CoolPiconHeight="36" 
+	CoolMoviePiconPos="125" 
+	CoolMoviePiconSize="850" 
+	CoolCSWidth="210" 
+	CoolDirInfoWidth="210" 
+	CoolCSPos="837" 
+	CoolTitleColor="1" 
+	CoolDateColor="1" 
+	CoolHighlightColor="1"  
+	DefaultColor="white" TitleColor="cyan1" DateColor="greenlight" UnwatchedColor="white" WatchingColor="yellow" FinishedColor="green" RecordingColor="red" BackColor="black" BackColorSel="verydarkgrey" FrontColorSel="cyan1" scrollbarMode="showOnDemand" transparent="1" />
+    <widget source="Service" render="Label" position="1320,570" size="600,75" font="Regular;33" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EMCEventName">Name</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1230,918" size="680,37" font="Regular;30" halign="center" transparent="1">
+      <convert type="EMCMovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1512,660" size="100,37" font="Regular;30" halign="left" transparent="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1675,660" size="100,37" font="Regular;30" transparent="1" halign="left">
+      <convert type="EMCServiceTime">EndTime</convert>
+      <convert type="EMCClockToText">Format:  %H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1780,660" size="150,37" font="Regular;30" halign="center" transparent="1">
+      <convert type="EMCServiceTime">Duration</convert>
+      <convert type="EMCClockToText">InMinutes</convert>
+    </widget>
+    <widget source="Service" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="10,760" size="1200,240" font="Regular;34" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EMCEventName">FullDescription</convert>
+    </widget>
+    <widget name="Cover" position="1230,649" size="192,260" alphatest="blend" zPosition="2" halign="left" />
+    <widget source="Service" render="Picon" position="1495,706" zPosition="10" size="347,197" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <convert type="MovieInfo">RecordServiceRef</convert>
+  </widget>
+  <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Date:" position="1230,965" size="95,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Start:" position="1430,660" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Ende:" position="1600,660" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Title:" position="1230,570" size="85,75" font="Regular; 33" transparent="1" zPosition="2" foregroundColor="cyan1" valign="top" />
+  <eLabel name="vertikalline" position="10,755" size="1200,2" backgroundColor="Line" foregroundColor="Line" />
+  <eLabel name="vertikalline" position="1230,960" size="680,2" backgroundColor="Line" foregroundColor="Line" />
+  <panel name="template_info_menu_exit" />
+  <panel name="template_fullscreen" />
+  <panel name="template_pixmap_BG" />
+  <panel name="template_name_red_o_blue" />
+  <panel name="template_pig_setup" />
+ </screen>
+<!-- Enhanced Movie Center_Cover FHD -->
+  <screen name="EMC_Cover">
+	<widget source="Service" render="Label" position="1305,965" size="400,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Date</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1790,965" size="120,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="EMCMovieInfo">FileSize</convert>
+    </widget>
+    <ePixmap position="1334,514" zPosition="1" size="171,232" alphatest="blend" pixmap="Multibox/mmp/no-cover.png" />
+    <widget name="list" position="10,130" size="1200,620" 
+	itemHeight="56" 
+	CoolFont="Regular;36" 
+	CoolSelectFont="Regular;30" 
+	CoolDateFont="Regular;22" 
+	CoolSelNumTxtWidth="39" 
+	CoolProgressPos="53" 
+	CoolProgressHPos="2" 
+	CoolIconPos="1" 
+	CoolIconHPos="10" 
+	CoolIconSize="40,40" 
+	CoolBarPos="1000" 
+	CoolBarHPos="38"
+	CoolBarSize="175,15" 
+	CoolBarSizeSa="175,15" 
+	CoolMoviePos="125" 
+	CoolMovieHPos="8" 
+	CoolMovieSize="850" 
+	CoolFolderSize="777" 
+	CoolDatePos="990" 
+	CoolDateHPos="1" 
+	CoolDateWidth="192"
+	CoolPiconPos="52" 
+	CoolPiconHPos="13" 
+	CoolPiconWidth="66" 
+	CoolPiconHeight="36" 
+	CoolMoviePiconPos="125" 
+	CoolMoviePiconSize="850" 
+	CoolCSWidth="210" 
+	CoolDirInfoWidth="210" 
+	CoolCSPos="837" 
+	CoolTitleColor="1" 
+	CoolDateColor="1" 
+	CoolHighlightColor="1"  
+	DefaultColor="white" TitleColor="cyan1" DateColor="greenlight" UnwatchedColor="white" WatchingColor="yellow" FinishedColor="green" RecordingColor="red" BackColor="black" BackColorSel="verydarkgrey" FrontColorSel="cyan1" scrollbarMode="showOnDemand" transparent="1" />
+    <widget source="Service" render="Label" position="1322,770" size="600,75" font="Regular;33" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EMCEventName">Name</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1310,918" size="600,37" font="Regular;30" halign="left" transparent="1">
+      <convert type="EMCMovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1392,875" size="100,37" font="Regular;30" halign="left" transparent="1">
+      <convert type="EMCServiceTime">StartTime</convert>
+      <convert type="EMCClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1625,875" size="100,37" font="Regular;30" transparent="1" halign="left">
+      <convert type="EMCServiceTime">EndTime</convert>
+      <convert type="EMCClockToText">Format:  %H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1750,875" size="150,37" font="Regular;30" halign="center" transparent="1">
+      <convert type="EMCServiceTime">Duration</convert>
+      <convert type="EMCClockToText">InMinutes</convert>
+    </widget>
+    <widget source="Service" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="10,760" size="1200,240" font="Regular;34" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EMCEventName">FullDescription</convert>
+    </widget>
+    <widget name="Cover" position="1322,100" size="464,650" alphatest="blend" zPosition="2" halign="left" />
+    <widget source="Service" render="Picon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <convert type="MovieInfo">RecordServiceRef</convert>
+  </widget>
+  <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Date:" position="1230,965" size="95,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Start:" position="1310,875" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Ende:" position="1550,875" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Title:" position="1230,770" size="85,75" font="Regular; 33" transparent="1" zPosition="2" foregroundColor="cyan1" valign="top" />
+  <eLabel name="vertikalline" position="10,755" size="1200,2" backgroundColor="Line" foregroundColor="Line" />
+  <eLabel name="vertikalline" position="1230,960" size="680,2" backgroundColor="Line" foregroundColor="Line" />
+  <panel name="template_info_menu_exit" />
+  <panel name="template_fullscreen" />
+  <panel name="template_pixmap_BG" />
+  <panel name="template_name_red_o_blue" />
 </screen>
+     <!-- EMC_Selection_Default-->
+<screen name="EMC_Default">
+   <panel name="Enhanced_Movie_Center" />
+  </screen>
+
+ 
+ <!-- Movie_Selection_Mini_TV-->
+ <screen name="Movie_Selection">
+    <eLabel text="Movie Center" position="180,20" size="500,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <eLabel name="vertikalline" position="1223,589" size="670,2" backgroundColor="Line" foregroundColor="Line" />
+    <widget name="list" position="10,160" size="1165,820" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="50" transparent="1" />
+    <widget name="waitingtext" position="129,468" size="950,150" zPosition="1" font="Regular;36" backgroundColor="background" foregroundColor="white" halign="center" valign="center" transparent="0" />
+    <widget name="freeDiskSpace" position="10,100" size="1165,45" font="Regular;33" valign="center" halign="left" backgroundColor="background" foregroundColor="Line" transparent="1" />
+    <widget source="Service" render="Label" position="1223,551" noWrap="1" size="670,36" font="Regular; 29" zPosition="2" backgroundColor="background" foregroundColor="foregroundClock" transparent="1">
+      <convert type="MovieInfo">ShortDescription</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1314,595" size="300,36" font="Regular;29" zPosition="2" backgroundColor="background" foregroundColor="cyan1" transparent="1">
+      <convert type="MovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1776,595" size="120,36" font="Regular;29" halign="center" zPosition="2" backgroundColor="background" foregroundColor="grey" transparent="0">
+      <convert type="ServiceTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+    <widget source="Service" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1223,644" size="670,340" font="Regular;36" zPosition="2" backgroundColor="background" foregroundColor="white" transparent="1" valign="top">
+      <convert type="EventName">ExtendedDescription</convert>
+    </widget>
+    <eLabel name="vertikalline" position="10,150" size="1165,2" backgroundColor="Line" foregroundColor="Line" />
+    <eLabel name="vertikalline" position="1223,635" size="670,2" backgroundColor="Line" foregroundColor="Line" />
+    <widget source="Service" render="Label" position="1613,595" size="165,36" font="Regular; 29" halign="center" foregroundColor="grey" backgroundColor="background" transparent="1" zPosition="2">
+      <convert type="MovieInfo">FileSize</convert>
+    </widget>
+    <widget source="Service" render="Picon" position="1223,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+     <convert type="MovieInfo">RecordServiceRef</convert>
+    </widget>
+    <panel name="template_info_menu_exit" />
+    <panel name="template_name_red_o_blue" />
+    <panel name="template_pig_setup" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+  </screen>
+
+
+
+ 
+  
+  
+    <!-- Movie_Selection_Cover-->
+<screen name="Movie_Selection_Cover">
+    <widget source="Title" render="Label" position="652,20" size="800,50" font="Regular; 36" halign="left" valign="center" backgroundColor="blue" transparent="1" zPosition="1" />
+    <eLabel text="Movie Center" position="180,20" size="460,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <eLabel name="vertikalline" position="10,125" size="1200,2" backgroundColor="Line" foregroundColor="Line" />
+    <widget name="waitingtext" position="0,0" size="0,0" />
+    <widget name="list" itemHeight="50" Font="Regular;36" position="10,130" size="1200,620" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="freeDiskSpace" position="10,85" size="1165,45" font="Regular;33" halign="center" foregroundColor="Line" backgroundColor="background" transparent="1" zPosition="2" />
+    <widget source="Service" render="Label" position="1392,798" size="520,75" font="Regular;33" backgroundColor="background" foregroundColor="Line" transparent="1" halign="left" valign="top">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1305,965" size="400,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="ServiceTime">StartTime</convert>
+      <convert type="ClockToText">Date</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1310,918" size="600,37" font="Regular;30" halign="left" transparent="1">
+      <convert type="MovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1392,875" size="100,37" font="Regular;30" halign="left" transparent="1">
+      <convert type="ServiceTime">StartTime</convert>
+      <convert type="ClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1625,875" size="100,37" font="Regular;30" transparent="1" halign="left">
+      <convert type="ServiceTime">EndTime</convert>
+      <convert type="ClockToText">Format:  %H:%M </convert>
+    </widget>
+    <widget source="Service" render="Label" position="1750,875" size="150,37" font="Regular;30" halign="center" transparent="1">
+      <convert type="ServiceTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+	  <widget source="Service" render="Label" position="1790,965" size="120,37" font="Regular;28" halign="left" transparent="1" noWrap="1">
+      <convert type="MovieInfo">FileSize</convert>
+    </widget>
+    <widget source="Service" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="10,760" size="1200,240" font="Regular;34" backgroundColor="background" foregroundColor="cyan1" transparent="1" halign="left" valign="top">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+   <widget source="Service" render="Cover" position="1322,100" size="464,650" alphatest="blend" zPosition="5"  />
+    <widget source="Service" render="Picon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" >
+    <convert type="MovieInfo">RecordServiceRef</convert>
+  </widget>
+  <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Date:" position="1230,965" size="95,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Start:" position="1310,875" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Ende:" position="1550,875" size="85,37" font="Regular; 30" transparent="1" zPosition="2" foregroundColor="cyan1" />
+  <eLabel text="Title:" position="1310,798" size="85,75" font="Regular; 33" transparent="1" zPosition="2" foregroundColor="cyan1" valign="top" />
+  <eLabel name="vertikalline" position="10,755" size="1200,2" backgroundColor="Line" foregroundColor="Line" />
+  <eLabel name="vertikalline" position="1230,960" size="680,2" backgroundColor="Line" foregroundColor="Line" />
+  <panel name="template_info_menu_exit" />
+  <panel name="template_fullscreen" />
+  <panel name="template_pixmap_BG" />
+  <panel name="template_name_red_o_blue" />
+  </screen>
+ 
+ 
+     <!-- Movie_Selection_Default-->
+<screen name="Movie_Selection_Default">
+   <panel name="Movie_Selection" />
+  </screen>
+ 
  </skin>
