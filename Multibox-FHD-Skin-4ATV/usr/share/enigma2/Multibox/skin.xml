@@ -3358,25 +3358,25 @@ self['config'].l.setSeperation(int(300*f))
     <widget backgroundColor="background" font="Regular;36" halign="right" name="number" position="5,5" size="150,36" />
   </screen>
   <!-- NumberZapWithName -->
-  <screen backgroundColor="transparent" name="NumberZapWithName" position="center,center" size="650,215" title="">
-    <widget backgroundColor="background" font="Regular; 100" halign="center" name="servicenumber" position="5,5" size="220,132" transparent="1" valign="center" foregroundColor="cyan1" />
-    <eLabel backgroundColor="background" position="0,0" size="230,142" zPosition="-1" />
-    <eLabel backgroundColor="background" position="235,0" size="415,142" zPosition="-1" />
-    <eLabel backgroundColor="background" position="0,147" size="650,70" zPosition="-1" />
-    <widget name="servicename" position="5,152" size="640,60" font="Regular; 48" halign="left" transparent="1" />
-    <widget name="servicebouquet" position="240,5" size="405,132" font="Regular; 36" halign="left" transparent="1" />
-  </screen>
-  <!-- NumberZapWithName -->
-  <screen name="NumberZapPicon" position="center,center" size="905,365" title="" backgroundColor="transparent">
-    <eLabel name="picon" position="455,0" size="450,274" zPosition="-10" />
-    <eLabel name="number" position="0,0" size="450,274" zPosition="-10" />
-    <eLabel name="name" position="0,280" size="905,85" zPosition="-10" />
-    <widget name="number" position="5,5" size="440,264" halign="center" valign="center" font="Regular; 100" foregroundColor="cyan1" />
-    <widget alphatest="blend" position="460,5" render="Picon" size="440,264" source="Service" transparent="1" zPosition="1">
-      <convert type="ServiceName">Reference</convert>
-    </widget>
-    <widget name="servicename" position="0,285" size="900,75" halign="center" valign="center" font="Regular;60" foregroundColor="yellow" />
-  </screen>
+<screen name="NumberZapWithName" position="50,770" size="550,270" backgroundColor="background" flags="wfNoBorder">
+  <eLabel name="BG" position="0,0" size="550,270" zPosition="-20" backgroundColor="Line" />
+  <eLabel name="BG" position="2,2" size="546,266" zPosition="-15" backgroundColor="black" />
+  <widget name="servicebouquet" position="5,9" size="540,60" font="Regular; 42" halign="center" transparent="1" />
+  <widget name="servicename" position="5,204" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="black" foregroundColor="Line" noWrap="1" transparent="1" />
+  <widget name="number" position="12,85" size="525,100" halign="center" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
+ </screen>
+  <!-- NumberZapWithPicon -->
+<screen name="NumberZapPicon" position="50,820" size="550,220" backgroundColor="background" flags="wfNoBorder">
+  <eLabel name="BG" position="319,9" size="222,134" zPosition="-10" backgroundColor="Line" />
+  <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="black" />
+  <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
+  <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="black" />
+  <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+  <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="black" foregroundColor="Line" noWrap="1" transparent="1" />
+  <widget name="number" position="12,31" size="280,100" halign="right" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
+ </screen>
   <screen name="HistoryZapSelector" position="0,0" size="1920,1080">
     <eLabel text="History Zap..." position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget source="menu" render="Listbox" position="0,100" size="1180,870" scrollbarMode="showOnDemand" transparent="1" zPosition="0">
