@@ -206,6 +206,14 @@ class BLEmuInfo(Converter, object):
                 msecIndex = x[0].find('msec')
                 if msecIndex is not -1:
                     ecmtime = x[0].strip()
+		>>> ecmtime = '1,2345'
+                >>> float(ecmtime)
+                Traceback (most recent call last):
+                  File "<stdin>", line 1, in <module>
+                ValueError: invalid literal for float(): 1,2345
+                >>> ecmtime=ecmtime.replace(',','.')
+                >>> float(ecmtime)
+                1.2345
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
             if protocol != '' and reader != '':
