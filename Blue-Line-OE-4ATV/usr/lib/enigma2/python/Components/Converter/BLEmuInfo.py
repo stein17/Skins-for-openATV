@@ -206,7 +206,7 @@ class BLEmuInfo(Converter, object):
                 msecIndex = x[0].find('msec')
                 if msecIndex is not -1:
                     ecmtime = x[0].strip()
-		    ecmtime=ecmtime.replace(',','.')
+	    ecmtime=ecmtime.replace(',','.')
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
             if protocol != '' and reader != '':
