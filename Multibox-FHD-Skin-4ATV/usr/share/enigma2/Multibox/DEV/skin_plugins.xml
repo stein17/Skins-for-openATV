@@ -1244,22 +1244,23 @@
   </screen>
   <!-- EPGRefresh -->
   <!-- Cutlist Editor -->
-  <screen name="CutListEditor" position="0,0" size="1920,1080" title="Cutlist editor" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Cutlist editor" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
-    <eLabel position="105,195" zPosition="1" size="1050,572" backgroundColor="Multiboxlabel" />
-    <eLabel position="108,198" zPosition="3" size="1044,566" backgroundColor="background" />
-    <widget name="Video" position="108,198" zPosition="-10" size="1044,566" />
-    <widget source="session.CurrentService" render="Label" position="105,780" size="1050,48" font="Regular;36" halign="center" valign="center" backgroundColor="background" transparent="1">
-      <convert type="ServiceName">Name</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="105,840" size="1050,38" font="Regular; 36" halign="center" valign="center" backgroundColor="background" transparent="1" foregroundColor="greenlight">
-      <convert type="ServicePosition">Position,Detailed</convert>
-    </widget>
-    <widget name="Timeline" position="105,896" size="1050,30" backgroundColor="Multiboxlabel" pointer="skin_default/position_arrow.png:3,5" foregroundColor="white" />
-    <eLabel position="1201,195" size="630,660" zPosition="1" backgroundColor="background" />
-    <eLabel position="1203,198" size="624,654" zPosition="2" backgroundColor="Multiboxlabel" />
-    <widget source="cutlist" render="Listbox" position="1215,211" size="600,630" zPosition="3" scrollbarMode="showOnDemand" transparent="1">
-      <convert type="TemplatedMultiContent">
+<screen name="CutListEditor" position="0,0" size="1920,1080" title="Cutlist editor" flags="wfNoBorder" backgroundColor="background">
+  <eLabel text="Cutlist editor" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+  <eLabel position="105,195" size="1050,572" backgroundColor="Multiboxlabel" />
+  <eLabel position="108,198" size="1044,566" backgroundColor="background" />
+  <widget name="Video" position="108,198" zPosition="1" size="1044,566" backgroundColor="transparent" />
+  <widget source="session.CurrentService" render="Label" position="105,780" size="1050,48" font="Regular;36" halign="center" valign="center">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="255,840" size="900,38" font="Regular; 36" halign="center" valign="center" zPosition="1" backgroundColor="background" foregroundColor="greenlight">
+    <convert type="ServicePosition">Position,Detailed</convert>
+  </widget>
+  <widget name="SeekState" position="105,839" zPosition="1" size="150,38" halign="right" font="Regular; 36" valign="center" />
+  <widget name="Timeline" position="105,896" size="1050,30" backgroundColor="Multiboxlabel" pointer="skin_default/position_arrow.png:3,5" foregroundColor="white" />
+  <eLabel position="1201,195" size="630,660" zPosition="1" backgroundColor="background" />
+  <eLabel position="1203,198" size="624,654" zPosition="2" backgroundColor="Multiboxlabel" />
+  <widget source="cutlist" render="Listbox" position="1215,211" size="600,630" zPosition="1" scrollbarMode="showOnDemand" transparent="1">
+    <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (0, 6), size = (420, 50), text = 1, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER, backcolor = MultiContentTemplateColor(3)),
 						MultiContentEntryText(pos = (420, 6), size = (180, 50), text = 2, flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER, backcolor = MultiContentTemplateColor(3))
@@ -1268,11 +1269,11 @@
 				 "itemHeight": 55
 				}
 			</convert>
-    </widget>
-    <ePixmap pixmap="Multibox/mmp/mp_buttons.png" position="1302,880" size="450,60" alphatest="blend" />
-    <panel name="template_fullscreen" />
-    <panel name="template_pixmap_BG" />
-  </screen>
+  </widget>
+  <ePixmap pixmap="Multibox/mmp/mp_buttons.png" position="1302,880" size="450,60" alphatest="blend" />
+  <panel name="template_fullscreen" />
+  <panel name="template_pixmap_BG" />
+</screen>
   <screen name="CutListContextMenu" position="0,0" size="1920,1080" title="Menu Cutlisteditor" flags="wfNoBorder" backgroundColor="background">
     <widget source="menu" render="Listbox" position="10,100" size="1180,870" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
       <convert type="TemplatedMultiContent">
@@ -4198,6 +4199,54 @@
 <panel name="template_ok_exit" />
 </screen>
 	<!-- File Commander -->
+ <screen name="Birthday Reminder" position="0,0" size="1920,1080" flags="wfNoBorder" title="Birthday Reminder" backgroundColor="background">
+	<widget name="name" position="80,120" size="270,50" zPosition="5" valign="center" halign="left" font="Regular; 36" transparent="1" foregroundColor="white" />
+	<widget name="birthday" position="600,120" size="265,50" zPosition="5" valign="center" halign="center" font="Regular; 36" transparent="1" foregroundColor="white" />
+	<widget name="age" position="1080,120" size="100,60" zPosition="5" valign="center" halign="right" font="Regular; 36" transparent="1" foregroundColor="white" />
+	<widget source="list" render="Listbox" position="80,190" size="1120,780" scrollbarMode="showOnDemand">
+	<convert type="TemplatedMultiContent">
+		{"template": [MultiContentEntryText(pos = (10, 0), size = (495, 45), font=0, flags = RT_HALIGN_LEFT, text = 0),
+						MultiContentEntryText(pos = (530, 0), size = (265, 45), font=0, flags = RT_HALIGN_CENTER, text = 1),
+						MultiContentEntryText(pos = (1020, 0), size = (60, 45), font=0, flags = RT_HALIGN_RIGHT, text = 2),],
+						"fonts": [gFont("Regular", 36)],"itemHeight": 45}</convert>
+	</widget>
+	<panel name="template_fullscreen_title" />
+	<panel name="template_pixmap_BG" />
+	<panel name="template_source_red_o_blue" />
+    <panel name="template_pig_setup" />
+</screen>
+
+
+ <screen name="EditBirthdayScreen" position="0,0" size="1920,1080" flags="wfNoBorder" title="Edit Birthday" backgroundColor="background">
+	<ePixmap pixmap="Multibox/buttons/key_yellow.png" position="618,1022" size="35,35" />
+        <ePixmap pixmap="Multibox/buttons/key_blue.png" position="918,1022" size="35,35" />
+	<widget name="config" position="10,170" size="1180,780" itemHeight="55" font="Regular;36" scrollbarMode="showOnDemand" />
+	<widget name="error" position="10,100" size="1180,50" zPosition="5" font="Regular; 36" transparent="1" halign="center" valign="center" foregroundColor="red" />
+	<panel name="template_fullscreen_title" />
+	<panel name="template_pixmap_BG" />
+	<panel name="template_source_red_green" />
+    <panel name="template_pig_setup" />
+</screen>
+
+  <screen name="BirthdayReminderSettings" position="0,0" size="1920,1080" flags="wfNoBorder" title="Birthday Reminder Settings" backgroundColor="background">
+	<ePixmap pixmap="Multibox/buttons/key_yellow.png" position="618,1022" size="35,35" />
+	<widget name="config" position="10,100" size="1180,870" itemHeight="55" font="Regular;36" scrollbarMode="showOnDemand" />
+	<panel name="template_fullscreen_title" />
+	<panel name="template_pixmap_BG" />
+	<panel name="template_source_red_o_blue" />
+    <panel name="template_pig_setup" />
+</screen>
+
+ <screen name="PathSelectionScreen" position="0,0" size="1920,1080" flags="wfNoBorder" title="Select a path for the birthday file" backgroundColor="background">
+	<ePixmap pixmap="Multibox/buttons/key_yellow.png" position="618,1022" size="35,35" />
+        <ePixmap pixmap="Multibox/buttons/key_blue.png" position="918,1022" size="35,35" />
+	<widget name="target" position="10,100" size="1180,50" valign="center" font="Regular; 36" foregroundColor="Line" />
+	<widget name="filelist" position="10,180" size="1180,735" itemHeight="55" font="Regular;36" scrollbarMode="showOnDemand" zPosition="5" />
+	<panel name="template_fullscreen_title" />
+	<panel name="template_pixmap_BG" />
+	<panel name="template_source_red_green" />
+    <panel name="template_pig_setup" />
+</screen>
   </skin>
 
 
