@@ -8,16 +8,7 @@
   <widget source="global.CurrentTime" render="Label" position="1477,22" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="Multiboxlabel" transparent="1">
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <!--  Analog Clock-->
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
-    <convert type="AMBAnalogClock">secHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">minHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">hourHand</convert>
-  </widget>
+    <panel name="template_analogclock_widget" />
     <panel name="template_vertikalline" />
 	<panel name="template_pixmap_Clock" />
 	<panel name="template_pixmap_Userlogo" />
@@ -27,16 +18,7 @@
     <widget source="global.CurrentTime" render="Label" position="1477,22" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="Multiboxlabel" transparent="1">
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
   </widget>
-  <!--  Analog Clock-->
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
-    <convert type="AMBAnalogClock">secHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">minHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">hourHand</convert>
-  </widget>
+    <panel name="template_analogclock_widget" />
     <panel name="template_vertikalline" />
 	<panel name="template_pixmap_Clock" />
 	<panel name="template_pixmap_Userlogo" />
@@ -45,35 +27,31 @@
   <screen name="template_pixmap_Clock">
   <ePixmap pixmap="Multibox/icons/Clock.png" position="1812,3" zPosition="1" size="90,90" transparent="1" alphatest="on" />
   </screen>
+     <!-- TEMPLATES Clocks no Icon-->
+  <screen name="template_no_pixmap_Clock">
+  <ePixmap pixmap="Multibox/icons/Clock.png" position="1930,-80" zPosition="1" size="1,1" transparent="1" alphatest="on" />
+  </screen>
   <!-- TEMPLATES Userlogos-->
  <screen name="template_pixmap_Userlogo">
  <ePixmap pixmap="Multibox/menu/User_Logo.png" position="11,20" size="150,48" zPosition="1" alphatest="blend" />
   </screen>
+   <!-- template_digitalclock_widget-->
   <screen name="template_digitalclock_widget">
-  <widget foregroundColor="default" font="LCD; 60" noWrap="1" valign="center" halign="center" position="1109,11" render="Label" size="160,58" source="global.CurrentTime" transparent="0">
-  <convert type="ClockToText">Format:%H:%M</convert>
+<widget source="global.CurrentTime" render="Label" position="1805,22" size="120,50" font="Italic; 40" halign="left" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1">
+    <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget font="Regular; 20" noWrap="1" valign="bottom" halign="right" position="970,48" render="Label" size="135,22" source="global.CurrentTime" transparent="0">
-  <convert type="ClockToText">Format:%e. %B</convert>
-  </widget>
-  <widget font="Regular; 20" valign="bottom" halign="right" noWrap="1" position="970,23" render="Label" size="135,22" source="global.CurrentTime" transparent="0">
-  <convert type="ClockToText">Format:%A</convert>
-  </widget>
-  <eLabel backgroundColor="default" position="968,9" size="304,74" transparent="0" zPosition="-2" />
-  <eLabel position="970,11" size="300,70" transparent="0" zPosition="-1" />
  </screen>
    <!--  Analog Clock-->
 <screen name="template_analogclock_widget">
-<widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
+  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
     <convert type="AMBAnalogClock">secHand</convert>
   </widget>
   <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
     <convert type="AMBAnalogClock">minHand</convert>
   </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
+  <widget source="global.CurrentTime" render="AMBWatches" position="1831,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
     <convert type="AMBAnalogClock">hourHand</convert>
   </widget>
-  <ePixmap pixmap="Multibox/icons/Clock.png" position="1812,3" zPosition="1" size="90,90" transparent="1" alphatest="on" />
  </screen>
  <!-- Android-Clock -->
  <screen name="template_analogclock_widget">
