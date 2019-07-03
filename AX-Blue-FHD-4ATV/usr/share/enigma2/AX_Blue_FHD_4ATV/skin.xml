@@ -384,29 +384,31 @@
     <widget name="picture" pixmap="distro-logo.png" position="0,0" size="500,500" alphatest="on" zPosition="1" />
   </screen>
   <!-- Virtual Keyboard FHD -->
-  <screen name="VirtualKeyBoard" position="0,0" size="1920,1080" zPosition="99" title="Virtual KeyBoard" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Virtual KeyBoard" position="214,324" size="788,75" foregroundColor="cyan" noWrap="1" valign="center" font="Regular; 48" backgroundColor="black" halign="left" transparent="1" zPosition="1" />
-    <widget name="header" position="215,280" size="950,45" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="center" transparent="1" noWrap="1" />
-    <eLabel position="211,402" size="950,69" zPosition="1" backgroundColor="grey" foregroundColor="cyan" />
-    <widget name="text" position="214,404" size="944,63" backgroundColor="background" foregroundColor="white" zPosition="3" font="Regular;45" noWrap="1" valign="center" halign="right" />
-    <widget name="list" position="221,480" size="700,250" selectionDisabled="1" transparent="1" />
-    <widget source="country" render="Label" position="647,745" size="150,40" noWrap="1" zPosition="1" valign="center" font="Regular;27" halign="left" backgroundColor="background" foregroundColor="white" transparent="1" />
-    <widget source="country" render="Pixmap" position="1068,481" size="90,60" alphatest="blend" borderWidth="0">
-      <convert type="ValueToPixmap">LanguageCode</convert>
-    </widget>
-    <eLabel position="215,280" size="950,45" backgroundColor="background" zPosition="-1" />
-    <eLabel position="208,277" size="966,510" backgroundColor="background" zPosition="-2" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_red.png" position="223,746" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_green.png" position="406,746" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_blue.png" position="792,746" size="35,35" alphatest="blend" />
-    <eLabel text="Delete" position="271,745" size="140,40" font="Regular; 27" halign="left" foregroundColor="grey" backgroundColor="background" transparent="1" zPosition="2" />
-    <eLabel text="OK" position="454,745" size="150,40" font="Regular; 27" halign="left" foregroundColor="grey" backgroundColor="background" transparent="1" zPosition="2" />
-    <eLabel text="Umstellen" position="840,745" size="160,40" font="Regular;27" halign="left" foregroundColor="grey" backgroundColor="background" transparent="1" zPosition="2" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_yellow.png" position="599,746" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_ok.png" position="1101,738" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_exit.png" position="1030,738" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
-    <ePixmap position="891,511" size="270,220" zPosition="2" pixmap="AX_Blue_FHD_4ATV/icons/keyboard.png" transparent="1" alphatest="blend" />
-  </screen>
+<screen name="VirtualKeyBoard" position="0,0" size="1920,1080" zPosition="99" title="Virtual KeyBoard" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Virtual KeyBoard" position="214,280" size="788,60" foregroundColor="cyan1" noWrap="1" valign="center" font="Regular; 48" backgroundColor="black" halign="left" transparent="1" zPosition="1" />
+    <widget name="header" conditional="header" position="215,340" size="1150,45" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="center" transparent="1" noWrap="1" />
+    <widget name="prompt" conditional="prompt" position="215,340" size="1150,45" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="center" transparent="1" noWrap="1" />
+    <eLabel position="211,392" size="1150,69" zPosition="1" backgroundColor="grey" foregroundColor="cyan" />
+    <widget name="text" position="214,395" size="1144,63" backgroundColor="background" foregroundColor="white" zPosition="3" font="Regular;33" noWrap="1" valign="center" halign="right" />
+    <widget name="list" position="222,499" size="960,440" itemHeight="70" selectionDisabled="1" transparent="1" zPosition="1" />
+    <widget name="language" conditional="language" position="0,0" size="0,0" font="Regular;33" backgroundColor="background" foregroundColor="white" transparent="1" noWrap="1" />
+    <widget name="mode" conditional="mode" position="221,460" size="225,42" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="left" transparent="1" noWrap="1" />
+    <widget name="locale" conditional="locale" position="1192,500" size="270,250" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="center" valign="center" transparent="1" />
+    <eLabel position="215,342" size="1150,45" backgroundColor="background" zPosition="-1" />
+    <eLabel position="208,277" size="1266,710" backgroundColor="background" zPosition="-2" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_text.png" position="1401,938" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_exit.png" position="1330,938" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_info.png" position="1260,938" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+    <ePixmap position="1191,711" size="270,220" zPosition="2" pixmap="AX_Blue_FHD_4ATV/icons/keyboard.png" transparent="1" alphatest="blend" />
+    <widget source="key_red" render="Label" position="267,950" size="200,35" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget source="key_green" render="Label" position="520,950" size="200,35" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget source="key_yellow" render="Label" position="775,950" size="200,35" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget source="key_blue" render="Label" position="1033,950" size="200,35" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_red.png" position="223,950" size="35,35" backgroundColor="Background" alphatest="blend" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_green.png" position="475,950" size="35,35" backgroundColor="Background" alphatest="blend" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_yellow.png" position="729,950" size="35,35" backgroundColor="Background" alphatest="blend" />
+    <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_blue.png" position="986,950" size="35,35" backgroundColor="Background" alphatest="blend" />
+ </screen>
   <!-- Numerical help dialog FHD -->
   <screen name="NumericalTextInputHelpDialog" position="1280,50" size="635,186" backgroundColor="transparent" flags="wfNoBorder" zPosition="8">
     <eLabel name="b" position="1,0" size="633,185" backgroundColor="white" zPosition="-10" />
