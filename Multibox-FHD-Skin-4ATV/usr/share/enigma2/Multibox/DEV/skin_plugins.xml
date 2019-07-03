@@ -3262,6 +3262,45 @@
   </screen>
   <!-- Foreca -->
   <!-- Youtube -->
+ <screen name="YouTubeMain" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+   <eLabel text="YouTube Main" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget source="list" render="Listbox" position="20,160" size="1180,820" scrollbarMode="showOnDemand">
+      <convert type="TemplatedMultiContent">
+	           {"template": [
+		   MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(150,108), png=2), # Thumbnail
+		   MultiContentEntryText(pos=(165,1), size=(1060,78), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=3), # Title
+		   MultiContentEntryText(pos=(180, 73), size=(400,34), font=1, flags=RT_HALIGN_LEFT, text=4), # Views
+		   MultiContentEntryText(pos=(680,73), size=(400,34), font=1, flags=RT_HALIGN_LEFT, text=5), # Duration
+		   ],
+		   "fonts": [gFont("Regular",32), gFont("Regular",27)],
+		   "itemHeight": 108}
+	</convert>
+    </widget>
+    <widget name="text" position="20,100" size="1180,40" transparent="1" font="Regular; 34" />
+    <widget name="thumbnail" position="1572,580" size="150,108" zPosition="1" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_pig_setup" />
+    <panel name="template_info_menu_exit" />
+    <panel name="template_source_red_green" />
+  </screen>
+   <!-- YouTubeSearch -->
+<screen name="YouTubeSearch" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="YouTube Search" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="config" position="20,100" size="1180,90" zPosition="2" scrollbarMode="showNever" itemHeight="45" font="Regular; 34" />
+    <widget source="list" render="Listbox" position="20,210" size="1180,770" scrollbarMode="showOnDemand">
+      <convert type="TemplatedMultiContent">
+                                    {"template": [MultiContentEntryText(pos=(15,1), size=(1180,45),
+									font=0, flags=RT_HALIGN_LEFT, text=0)],"fonts": [gFont("Regular",32)],
+                                    "itemHeight": 45}
+         </convert>
+    </widget>
+    <widget name="HelpWindow" pixmap="Multibox/buttons/key_board.png" position="1102,1011" zPosition="1" size="85,50" transparent="1" alphatest="blend" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_pig_setup" />
+    <panel name="template_source_red_o_yellow" />
+  </screen>
   <screen name="YoutubeTVSettings" position="center,center" size="1920,1080" title="Preference" flags="wfNoBorder" backgroundColor="background">
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget name="config" position="10,100" size="1180,870" font="Regular;36" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
