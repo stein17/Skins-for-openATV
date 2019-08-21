@@ -1,0 +1,78 @@
+<skin>
+<!-- Channel_Selection_Default FHD -->
+  <!-- ChannelSelection  -->
+  <screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="background" flags="wfNoBorder" size="1920,1080">
+  <widget source="Title" render="Label" position="180,20" size="650,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+  <eLabel name="vertikalline" position="10,804" size="670,2" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
+  <eLabel name="vertikalline" position="10,946" size="670,2" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
+  <eLabel name="vertikalline" position="10,483" size="670,1" backgroundColor="Line" foregroundColor="Line" zPosition="6" />
+  <widget source="session.CurrentService" render="Label" position="96,108" size="500,36" font="Regular; 32" foregroundColor="Line" backgroundColor="background" halign="center" valign="bottom" transparent="0" zPosition="6">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <ePixmap pixmap="Multibox/buttons/key_red.png" position="18,1022" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Multibox/buttons/key_green.png" position="200,1022" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Multibox/buttons/key_yellow.png" position="458,1022" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Multibox/buttons/key_blue.png" position="678,1022" size="35,35" alphatest="blend" />
+  <widget name="key_red"  position="61,1005" size="140,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+  <widget name="key_green"  position="244,1005" size="210,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+  <widget name="key_yellow"  position="503,1005" size="170,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+  <widget name="key_blue"  position="722,1003" size="170,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+  <ePixmap pixmap="Multibox/buttons/key_epg.png" position="1535,1022" size="103,35" alphatest="on" />
+  <ePixmap pixmap="Multibox/buttons/key_info.png" position="1795,1022" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="Multibox/buttons/key_menu.png" position="1665,1022" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
+  <eLabel text="Start Time :" position="10,530" size="150,30" font="Regular; 27" halign="left" backgroundColor="background" foregroundColor="Line" transparent="1" zPosition="1" />
+  <eLabel text="End Time :" position="476,530" size="150,30" font="Regular; 27" backgroundColor="background" transparent="1" zPosition="1" foregroundColor="Line" />
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Multibox/icons/sat.png" position="910,1015" size="50,50" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Multibox/icons/dvbt.png" position="910,1015" size="50,50" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Multibox/icons/kabel.png" position="910,1015" size="50,50" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="ServiceEvent" render="AMBFrontend" position="984,1022" zPosition="1" valign="center" size="520,35" font="Regular; 27" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left" />
+  <!-- <widget source="session.CurrentService" render="Label" position="984,1022" zPosition="1" valign="center" size="520,35" font="Regular; 27" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+    <convert type="AMBSatInfo">ExpertInfo</convert>
+  </widget> -->
+  <!-- <widget name="list" position="700,100" size="1220,880" scrollbarMode="showOnDemand" transparent="1" zPosition="1" serviceItemHeight="60" serviceNumberFont="Regular;38" serviceNameFont="Regular;43" serviceInfoFont="Regular;37" foregroundColor="white" foregroundColorMarkedSelected="darkyellow" colorServiceDescription="cyan" colorServiceDescriptionSelected="white" colorServiceRecording="red" foregroundColorServiceNotAvail="dark" colorEventProgressbar="Multiboxlabel" colorEventProgressbarBorder="foregroundClock" colorEventProgressbarBorderSelected="Multiboxlabel" fieldMargins="15" nonplayableMargins="15" itemsDistances="8" progressBarWidth="80" progressPercentWidth="90" progressbarHeight="12" />
+   -->
+  <widget source="ServiceEvent" render="Picon" position="11,484" size="71,40" zPosition="5" alphatest="blend" transparent="1">
+    <convert type="AMBRefString">ServicelistRef</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="160,530" size="80,30" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" zPosition="1" foregroundColor="default">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">
+    </convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="610,530" size="80,30" font="Regular; 27" foregroundColor="default" backgroundColor="background" transparent="1" zPosition="1">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">
+    </convert>
+  </widget>
+  <widget source="ServiceEvent" render="Progress" position="245,537" foregroundColor="Line" size="218,16" borderWidth="2" borderColor="greyblue" zPosition="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="ServiceEvent" render="AMBRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=6000,wrap=1,always=0,repeat=2,oneshot=1" position="10,563" size="670,242" font="Regular;36" foregroundColor="white" backgroundColor="background" valign="top" halign="left" transparent="1" zPosition="2">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="AMBNextEvents" position="10,809" size="670,135" noWrap="1" font="Regular;30" backgroundColor="background" foregroundColor="white" transparent="1" zPosition="5">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="ServiceEvent" render="AMBRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=200,always=0" position="10,955" size="670,40" font="Regular; 36" foregroundColor="Line" zPosition="5" noWrap="1" transparent="1" backgroundColor="background">
+    <convert type="AMBPrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+  <eLabel text="Zapp Favorites " position="1000,20" size="300,50" font="Regular; 40" backgroundColor="blue" transparent="1" zPosition="1" foregroundColor="white" />
+  <eLabel text="CH +/-" zPosition="1" position="850,20" size="150,50" valign="center" font="Regular; 40" foregroundColor="white" transparent="1" halign="center" />
+  <panel name="template_fullscreen" />
+  <panel name="template_pig_channel" />
+  <panel name="template_pixmap_BG" />
+  <panel name="ChannelSelection_default" />
+</screen>
+ </skin>
