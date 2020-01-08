@@ -1,0 +1,2040 @@
+<skin>
+  <!-- Ultimate -->
+  <!-- Ultimate Skin  for OPD image, by stein17 -->
+  <!-- Support https://droidsat.org/forum/-->
+  <!-- Recommended to use with XPicons (220x132) -->
+  <!-- You can not modify and redistribute  -->
+  <!-- You may not modify this skin without my permission, remove parts of my xml,s and paste into other skin projects and publish -->
+  <!--
+       ########################################################################
+	   #  Credits and thanks! goes to karlchen1963, @iPkay, @formiano, @madie,# 
+	   #  the NFR-Team, ATV-Team, HDF-Team for the help and implementation,   #                                                           
+	   #  and all I have forgotten                                            #          
+	   ########################################################################
+  --> 
+  <!-- TEMPLATES -->
+  <screen name="template_title_date" zPosition="1">
+    <widget source="Title" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="global.CurrentTime" render="Label" position="930,4" size="240,44" font="Regular;32" halign="right" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
+      <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+    </widget>
+	</screen>
+  <!-- TEMPLATE Date-->
+  <screen name="template_date">
+    <widget source="global.CurrentTime" render="Label" position="930,4" size="240,44" font="Regular;32" halign="right" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
+      <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+    </widget>
+  </screen>
+  <!-- TEMPLATES Clocks-->
+  <screen name="template_pixmap_Clock">
+    <ePixmap pixmap="Ultimate/Skinparts/Clocks/Clock_F.png" position="1220,4" zPosition="0" size="44,44" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_Analogclock_Infobar">
+    <ePixmap pixmap="Ultimate/Skinparts/Clocks/Analog_Clock_A.png" position="1085,541" zPosition="0"  size="150,150" alphatest="blend" transparent="1"/>
+  </screen>
+
+  <!-- TEMPLATES Userlogos-->
+  <screen name="template_pixmap_Userlogo">
+    <ePixmap pixmap="Ultimate/Skinparts/User_Logos/User_Logo.png" position="5,1" size="150,48" zPosition="1" alphatest="blend" transparent="1" />
+  </screen>
+  <!-- template_digitalclock_widget-->
+  <screen name="template_digitalclock_widget">
+    <widget source="global.CurrentTime" render="Label" position="1185,3" size="94,44" font="Regular;32" halign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+  </screen>
+  <!-- template_analogclock_widget-->
+  <screen name="template_analogclock_widget">
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="4" foregroundColor="blue" alphatest="blend">
+      <convert type="UltimateAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="3" foregroundColor="red" alphatest="blend">
+      <convert type="UltimateAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1230,14" size="22,22" zPosition="2" foregroundColor="red" alphatest="blend">
+      <convert type="UltimateAnalogClock">hourHand</convert>
+    </widget>
+	<panel name="template_pixmap_Clock"/>
+  </screen>
+  <!-- Digitalclock-Clock-Infobar -->
+<screen name="template_digitalclock_widget_infobar">
+  <widget  source="global.CurrentTime" transparent="1" font="LCD; 88" noWrap="1" foregroundColor="selectedFG" backgroundColor="background" valign="center" halign="center" position="1050,540" render="Label" size="220,88" >
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget font="Regular; 27" noWrap="1" valign="center" halign="center" position="1050,680" render="Label" size="220,40" backgroundColor="background" source="global.CurrentTime" transparent="1">
+    <convert type="ClockToText">Format:%e. %B</convert>
+  </widget>
+  <widget font="Regular; 27" valign="center" halign="center" noWrap="1" position="1050,640" render="Label" size="220,40" backgroundColor="background" 
+  source="global.CurrentTime" transparent="1">
+    <convert type="ClockToText">Format:%A</convert>
+  </widget>
+</screen>
+
+  <!-- TEMPLATE Infobar 4Day_Weather-->
+  <screen name="template_Infobar_4Day_Weather">
+  <ePixmap position="0,0" zPosition="-5" size="1280,50" pixmap="Ultimate/Skinparts/Infobar/4_Day_Back.png" />
+  <eLabel name="" position="1066,3" size="1,42" backgroundColor="selectedFG" />
+  <eLabel name="" position="848,3" size="1,42" backgroundColor="selectedFG" />
+  <eLabel name="" position="629,3" size="1,42" backgroundColor="selectedFG" />
+  <eLabel name="" position="409,3" size="1,42" backgroundColor="selectedFG" />
+  <eLabel name="" position="0,49" size="1280,1" backgroundColor="selectedFG" />
+  <panel name="template_weather" />
+  </screen>
+  <!-- Android-Clock-Infobar -->
+<screen name="template_androidclock_widget_infobar">
+    <widget source="global.CurrentTime" render="Label" position="1045,690" size="230,24" font="Regular; 20" halign="center" foregroundColor="selectedFG" backgroundColor="black" zPosition="2" transparent="1">
+      <convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
+    </widget>
+    <widget font="Regular; 34" halign="center" render="Label" position="1059,607" size="70,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="2" foregroundColor="black" backgroundColor="grey" borderWidth="1" borderColor="bluelabel">
+      <convert type="ClockToText">Format:%H</convert>
+    </widget>
+    <widget font="Regular;32" halign="center" render="Label" position="1109,605" size="70,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="2" foregroundColor="black" backgroundColor="grey" borderWidth="1" borderColor="bluelabel">
+      <convert type="ClockToText">Format:%M</convert>
+    </widget>
+    <widget source="session.MSNWeather" render="MSNWeatherPixmap" position="1050,550" size="220,134" alphatest="blend" transparent="1" zPosition="1">
+      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Ultimate/Android/,png</convert>
+    </widget>
+<!--     <widget noWrap="1" font="Regular; 27" foregroundColor="black" backgroundColor="grey" borderWidth="1" borderColor="white" render="Label" position="1122,644" size="130,29" source="session.MSNWeather" zPosition="2" halign="right" valign="center" transparent="1">
+      <convert type="MSNWeather">temperature_current</convert>
+    </widget> -->
+    <widget noWrap="1" font="Regular; 27" foregroundColor="black" backgroundColor="background" borderWidth="1" borderColor="white" render="Label" position="1051,551" size="85,32" source="session.MSNWeather" zPosition="2" halign="center" valign="center" transparent="1">
+    <convert type="MSNWeather">temperature_current</convert>
+    </widget>
+  </screen>
+  <!-- HTC-Clock-Infobar -->
+<screen name="template_htc_clock_widget_infobar">
+  <ePixmap pixmap="Ultimate/Android/htc_clock.png" position="1045,535" size="230,137" zPosition="1" alphatest="blend" transparent="1"/>
+  <widget source="global.CurrentTime" render="Label" position="1040,696" size="240,22" font="Regular; 20" halign="center" foregroundColor="selectedFG" backgroundColor="black" zPosition="2" transparent="1">
+    <convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
+  </widget>
+  <widget font="Regular; 52" halign="center" render="Label" position="1070,540" size="80,80" source="global.CurrentTime" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="grey" borderColor="black" borderWidth="2">
+    <convert type="ClockToText">Format:%H</convert>
+  </widget>
+  <widget font="Regular; 52" halign="center" render="Label" position="1170,540" size="80,80" source="global.CurrentTime" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="grey" borderColor="black" borderWidth="2">
+    <convert type="ClockToText">Format:%M</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="1117,586" size="96,96" source="session.MSNWeather" transparent="1" zPosition="2">
+  <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+</widget>
+  <widget noWrap="1" font="Regular; 18" foregroundColor="selectedFG" backgroundColor="black" render="Label" position="1200,644" size="60,24" source="session.MSNWeather" zPosition="3" halign="right" valign="center" transparent="1">
+    <convert type="MSNWeather">temperature_current</convert>
+  </widget>
+  <widget Wrap="1" font="Regular; 20" foregroundColor="selectedFG" backgroundColor="black" render="Label" position="1040,673" size="240,22" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
+    <convert type="MSNWeather">city</convert>
+  </widget>
+</screen>
+  <!-- Analog-Clock-Infobar-->
+  <screen name="template_analog_clock_widget_infobar">
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1110,566" size="100,100" zPosition="4" foregroundColor="red" alphatest="blend">
+      <convert type="UltimateAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1110,566" size="100,100" zPosition="3" foregroundColor="grey" alphatest="blend">
+      <convert type="UltimateAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1120,577" size="80,80" zPosition="2" foregroundColor="grey" alphatest="blend">
+      <convert type="UltimateAnalogClock">hourHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1041,696" size="239,22" font="Regular; 20" halign="center" foregroundColor="selectedFG" backgroundColor="black" zPosition="2" transparent="1">
+      <convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
+    </widget>
+   </screen>
+    <!-- TEMPLATES Pixmaps Lines Vertikal -->
+  <screen name="template_pixmap_line_vert_881">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="881,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_vert_463">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="463,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_450">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="450,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_738">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="738,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_760">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="760,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_782">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="782,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_805">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="805,53" zPosition="2" size="21,549" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_vert_line_628">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="628,53" size="21,623" alphatest="blend" transparent="1" zPosition="2" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines Horizontal 700-->
+  <screen name="template_pixmap_line_hor_70">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="0,70" zPosition="2" size="720,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_95">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,95" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_100">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,100" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_120">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,120" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_130">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,130" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_150">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,150" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_190">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,190" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_210">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,210" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_230">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,230" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_270">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,270" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_330">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,330" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_380">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,380" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_400">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,400" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_440">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,440" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_480">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,480" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_510">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,510" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_520">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,520" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_540">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,540" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_550">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,550" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_580">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,580" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_610">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,610" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_620">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,620" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_630">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,630" zPosition="2" size="700,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_680">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="10,60" zPosition="3" size="680,5" />
+  </screen>
+  <screen name="template_pixmap_line_hor_Message">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="10,70" zPosition="3" size="780,5" />
+  </screen>
+  <screen name="template_pixmap_line_hor_765_422">
+	<ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,422" zPosition="3" size="485,5" />
+  </screen>
+  <screen name="template_pixmap_line_hor_765_457">
+	<ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,457" zPosition="3" size="485,5" />
+  </screen>
+  <screen name="template_pixmap_line_hor_765_444">
+	<ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,444" zPosition="3" size="485,5" />
+  </screen>
+  <screen name="template_pixmap_line_Wizard">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="185,453" zPosition="3" size="695,5" alphatest="blend" transparent="1" />
+  </screen>
+  <screen name="template_pixmap_line_upm">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,550" zPosition="2" size="700,5" alphatest="blend" transparent="1" />  
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="765,625" zPosition="2" size="485,5" alphatest="blend" transparent="1" />  
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,170" zPosition="2" size="700,5" alphatest="blend" transparent="1" /> 
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines Horizontal 1220-->
+  <screen name="template_pixmap_line_hor_343,1220">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,343" zPosition="3" size="1220,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_584,1220">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,584" zPosition="2" size="1220,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_603,1220">
+    <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,603" zPosition="2" size="1220,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines QuitMainloop-->
+  <screen name="template_pixmap_line_hor_QuitMainloop">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="262,233" zPosition="3" size="750,5" />
+  <ePixmap position="center,center" zPosition="-15" size="781,452" pixmap="Ultimate/Skinparts/Pig_Large/Pig_large_Org.png" alphatest="blend" transparent="1"/>
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines MovieSelectionSlim-->
+  <screen name="template_pixmap_line_MovieSelectionSlim">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,474" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,412" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,381" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,442" zPosition="2" size="485,5" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines MovieSelection-->
+  <screen name="template_pixmap_line_MovieSelection">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,90" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,640" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,600" zPosition="2" size="485,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="765,340" zPosition="2" size="485,5" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines EMCSelection-->
+  <screen name="template_pixmap_line_EMCSelection">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="785,635" zPosition="2" size="465,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,505" zPosition="2" size="720,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="760,53" zPosition="2" size="21,623" alphatest="blend" transparent="1" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines ServiceName-->
+  <screen name="template_pixmap_line_ServiceName_pig_menu">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="760,380" zPosition="2" size="495,5" alphatest="blend" transparent="1" />
+  </screen>
+  <screen name="template_pixmap_line_ServiceName_pig_setup">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="805,345" zPosition="2" size="447,5" alphatest="blend" transparent="1" />
+  </screen>
+  <screen name="template_pixmap_line_ServiceName_pig_smal">
+   <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="890,300" zPosition="2" size="365,5" alphatest="blend" transparent="1" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines ch_se_right-->
+  <screen name="template_pixmap_lines_ch_se_right">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="900,525" zPosition="2" size="355,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="900,300" zPosition="2" size="355,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="863,53" size="21,623" alphatest="blend" transparent="1" zPosition="2" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,630" zPosition="2" size="820,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines ch_se_nfr-->
+  <screen name="template_pixmap_lines_ch_se_nfr">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="900,345" zPosition="2" size="355,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="900,630" zPosition="2" size="355,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="900,525" zPosition="2" size="355,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="863,53" size="21,623" alphatest="blend" transparent="1" zPosition="2" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,630" zPosition="2" size="820,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines ch_se_3_fields-->
+  <screen name="template_pixmap_lines_ch_se_3_fields">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="929,349" zPosition="2" size="325,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="929,96" zPosition="2" size="325,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="929,430" zPosition="2" size="325,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,273" zPosition="2" size="315,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,634" zPosition="2" size="315,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" alphatest="blend" transparent="1" position="348,53" zPosition="2" size="21,623" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" alphatest="blend" transparent="1" position="913,53" zPosition="2" size="21,623" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines SecondInfoBar-->
+  <screen name="template_pixmap_lines_SecondInfoBar">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="665,360" zPosition="2" size="585,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,412" zPosition="2" size="585,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,647" zPosition="2" size="585,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,381" zPosition="2" size="483,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="665,87" zPosition="2" size="585,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="840,344" zPosition="2" size="100,5" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines GraphicalEPG-->
+  <screen name="template_pixmap_line_hor_GraphicalEPG">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,90" zPosition="2" size="1220,5" />
+  </screen>
+    <!-- TEMPLATES Pixmaps Lines File Commander-->
+  <screen name="template_pixmap_line_hor_File_Commander">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,110" zPosition="2" size="600,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,150" zPosition="2" size="600,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="650,110" zPosition="2" size="600,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="650,150" zPosition="2" size="600,5" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" alphatest="blend" transparent="1" position="630,53" zPosition="2" size="21,623"  />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines GraphicalEPGPIG-->
+  <screen name="template_pixmap_line_hor_GraphicalEPGPIG">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,386" zPosition="2" size="1220,5" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines Horizontal_menu 1220-->
+  <screen name="template_pixmap_line_hor_menu">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,567" zPosition="1" size="1220,5" alphatest="blend" transparent="1" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Lines EPG_Vertikal-->
+  <screen name="template_pixmap_line_epg_vertikal">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,210" zPosition="3" size="1220,5" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,175" zPosition="3" size="1220,5" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,97" zPosition="3" size="1220,5" alphatest="blend" transparent="1" />
+  </screen>
+   <!-- TEMPLATES Pixmaps Lines GioppyGio-->
+  <screen name="template_pixmap_line_GioppyGio">
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,610" zPosition="2" size="855,5" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="30,460" zPosition="2" size="235,5" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/Skinparts/Line_Vert/Line_Vert_Org.png" position="260,53" zPosition="2" size="21,555" alphatest="blend" transparent="1" />
+  </screen>
+<!-- TEMPLATES Pixmaps Window-->
+  <screen name="template_pixmap_pig_large">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Large/Pig_large_Org.png" position="474,139" zPosition="-15" size="781,452" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_left">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Menu/Pig_Menu_Org.png" position="27,57" zPosition="-15" size="497,288" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_menu">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Menu/Pig_Menu_Org.png" position="758,57" zPosition="-15" size="497,288" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_smal">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Smal/Pig_Smal_Org.png" position="892,57" zPosition="-15" size="361,209" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_smal_left">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Smal/Pig_Smal_Org.png" position="30,57" zPosition="-15" size="361,209" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_setup">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Setup/Pig_Setup_Org.png" position="810,65" zPosition="-15" size="436,252" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_mini_left">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Mini/Pig_Mini_Org.png" position="27,55" zPosition="-15" size="323,187" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_pig_mini">
+  <ePixmap pixmap="Ultimate/Skinparts/Pig_Mini/Pig_Mini_Org.png" position="927,60" zPosition="-15" size="323,187" alphatest="blend" transparent="1"/>
+  </screen>
+   <!-- TEMPLATES Pixmaps Infobar-->
+  <screen name="template_pixmap_Infobar">
+    <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_Org.png" />
+  </screen>
+  <screen name="template_pixmap_Infobar_light">
+    <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_light.png" />
+  </screen>
+  <screen name="template_pixmap_Infobar_Player">
+    <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_movie.png" />
+  </screen>
+
+  <!-- TEMPLATES Pixmaps Frame 1280x720-->
+  <screen name="template_pixmap_rahmen">
+    <ePixmap pixmap="Ultimate/Skinparts/Rahmen/Rahmen_Org.png" position="0,0" zPosition="-25" size="1280,720" />
+  </screen>
+  <!-- TEMPLATES Pixmaps Background 1230x623-->
+  <screen name="template_pixmap_center">
+    <ePixmap position="25,53" zPosition="-20" size="1230,623" pixmap="Ultimate/Skinparts/Center/Center_Org.png" />
+  </screen>
+
+  <!-- TEMPLATES TV Window-->
+  <screen name="template_pig_smal">
+    <widget position="900,64" size="345,192" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="900,268" size="345,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_smal_left">
+    <widget position="38,64" size="345,192" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="38,268" size="345,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_menu">
+    <widget position="768,66" size="476,266" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="767,350" size="475,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_left">
+    <widget position="37,66" size="476,266" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="37,350" size="475,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_setup">
+    <widget source="session.VideoPicture" render="Pig" position="821,73" size="413,231" zPosition="3" backgroundColor="background-pig" />
+    <widget source="session.CurrentService" render="Label" position="820,320" size="413,25" font="Regular; 22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG" >
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_large">
+    <widget position="490,70" size="750,50" source="session.CurrentService" render="Label" font="Regular;32" foregroundColor="selectedFG" backgroundColor="background" transparent="1" valign="center" halign="left" noWrap="1" zPosition="5">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget   position="490,610" size="750,50" source="session.Event_Now" render="Label" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget position="488,154" size="749,419" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+  </screen>
+  <screen name="template_pig_mini_left">
+    <widget position="34,60" size="307,172" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="30,243" size="315,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_pig_mini">
+    <widget position="934,65" size="307,172" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="930,248" size="315,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+  <screen name="template_source_help">
+    <widget source="help" render="Label" position="810,370" size="435,300" font="Regular; 20" backgroundColor="background" halign="center" valign="center" transparent="1" />
+  </screen>
+  <!-- TEMPLATES Color Keys Name-->
+  <screen name="template_name_red_o_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="640,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_red" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_yellow" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_blue" position="669,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_name_red_o_yellow">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_red" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_yellow" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_name_red_green_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_red" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_blue" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+    <screen name="template_name_green_yellow_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_green" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_yellow" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_blue" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_name_red_green">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_red" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <!-- TEMPLATES Long Color Keys Name-->
+  <screen name="template_name_long_red_o_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="11,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="261,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="510,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="760,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="key_red" position="39,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="289,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_yellow" position="538,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_blue" position="787,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <!-- TEMPLATES Color Keys Source-->
+  <screen name="template_source_red_o_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="640,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_blue" render="Label" position="669,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_source_red_o_yellow">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_source_red_green_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_blue" render="Label" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <screen name="template_source_green_yellow_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_green" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_blue" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+    <screen name="template_widget_green_yellow_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="green" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" />
+    <widget name="yellow" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" />
+    <widget name="blue" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" />
+  </screen>
+  <screen name="template_source_red_green">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <!-- TEMPLATES Long Color Keys Source-->
+  <screen name="template_source_long_red_o_blue">
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="11,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="261,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="510,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="760,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="39,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="289,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="538,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_blue" render="Label" position="787,689" size="220,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  </screen>
+  <!-- TEMPLATES Buttons-->
+  <screen name="template_info_menu_exit_1280">
+    <ePixmap position="1050,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_info_ok_exit_1280">
+    <ePixmap position="1050,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/ok.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_menu_ok_exit_1280">
+    <ePixmap position="1050,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/ok.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_info_ok_1280">
+    <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/ok.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_menu_ok_1280">
+    <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/ok.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_ok_exit_1280">
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/ok.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_info_exit_1280">
+    <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_menu_exit_1280">
+    <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_menu_info_1280">
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_menu_help_1280">
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="Ultimate/buttons/help.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="template_exit_1280">
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
+  <!-- TEMPLATES crypt_info-->
+  <screen name="template_crypt_info">
+    <eLabel text="CRYPT:" position="1030,633" size="65,21" font="Regular; 16" halign="left" valign="center" transparent="1" />
+    <eLabel position="1088,633" size="15,21" text="B" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1088,633" size="15,21" text="B" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">BetaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1089,651" size="13,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">BetaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1103,633" size="15,21" text="I" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1103,633" size="15,21" text="I" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">IrdCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1104,651" size="13,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">IrdEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1118,633" size="15,21" text="S" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1118,633" size="15,21" text="S" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">SecaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1119,651" size="13,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">SecaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1133,633" size="15,21" text="V" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1133,633" size="15,21" text="V" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">ViaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1134,651" size="13,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">ViaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1148,633" size="15,21" text="N" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1148,633" size="15,21" text="N" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">NagraCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1149,651" size="13,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">NagraEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1163,633" size="30,21" text="CW" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1163,633" size="30,21" text="CW" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">CrwCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1165,651" size="26,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">CrwEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1193,633" size="30,21" text="ND" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1193,633" size="30,21" text="ND" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">NdsCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1195,651" size="26,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">NdsEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel position="1223,633" size="30,21" text="CO" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
+    <widget position="1223,633" size="30,21" text="CO" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
+      <convert type="UltimateCaidInfo">ConaxCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget position="1225,651" size="26,3" backgroundColor="selectedFG" foregroundColor="menu" source="session.CurrentService" render="FixedLabel" zPosition="4" transparent="0">
+      <convert type="UltimateCaidInfo">ConaxEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+  <!-- TEMPLATES crypt_tuner_info-->
+  <screen name="template_crypt_tuner_info">
+    <!--  TunerInfo -->
+    <eLabel text="Tuner:" position="763,658" size="60,18" font="Regular; 16" backgroundColor="background" transparent="1" zPosition="1" valign="center" foregroundColor="selectedFG" />
+    <eLabel text="A" position="814,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="B" position="833,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="C" position="852,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="D" position="871,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <eLabel text="E " position="890,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="F" position="909,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="G" position="928,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="H" position="947,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="I" position="966,659" zPosition="2" size="15,16" font="Regular; 16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="813,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="832,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="851,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="870,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="0" position="889,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="908,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="927,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="946,658" size="17,18" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="965,658" size="17,18" />
+    <widget source="session.TunerInfo" render="FixedLabel" text="A" position="814,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="B" position="833,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="C" position="852,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="D" position="871,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <widget source="session.TunerInfo" render="FixedLabel" text="E " position="890,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="F" position="909,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="G" position="928,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="H" position="947,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="I" position="966,659" zPosition="3" size="15,16" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">256</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="814,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="833,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="852,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="871,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <widget source="session.FrontendInfo" render="FixedLabel" text="E " position="890,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="F" position="909,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="G" position="928,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="H" position="947,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="I" position="966,659" zPosition="5" size="15,16" font="Regular; 16" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">8,8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--  Crypt info-->
+    <eLabel text="Crypt:" position="993,658" size="55,18" font="Regular; 16" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="selectedFG" zPosition="5" />
+    <eLabel text="B" font="Regular; 16" position="1048,659" size="15,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1048,659" size="15,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="B">
+      <convert type="UltimateCaidInfo">BetaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1048,659" size="15,16" halign="center" zPosition="4" transparent="0" valign="center" text="B">
+      <convert type="UltimateCaidInfo">BetaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="I" font="Regular; 16" position="1067,659" size="15,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1067,659" size="15,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="I">
+      <convert type="UltimateCaidInfo">IrdCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1067,659" size="15,16" halign="center" zPosition="4" transparent="0" valign="center" text="I">
+      <convert type="UltimateCaidInfo">IrdEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="S" font="Regular; 16" position="1086,659" size="15,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1086,659" size="15,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="S">
+      <convert type="UltimateCaidInfo">SecaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1086,659" size="15,16" halign="center" zPosition="4" transparent="0" valign="center" text="S">
+      <convert type="UltimateCaidInfo">SecaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="V" font="Regular; 16" position="1105,659" size="15,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1105,659" size="15,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="V">
+      <convert type="UltimateCaidInfo">ViaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" text="V" font="Regular; 16" position="1105,659" size="15,16" halign="center" zPosition="4" transparent="0" valign="center">
+      <convert type="UltimateCaidInfo">ViaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="N" font="Regular; 16" position="1124,659" size="15,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1124,659" size="15,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="N">
+      <convert type="UltimateCaidInfo">NagraCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1124,659" size="15,16" halign="center" zPosition="4" transparent="0" valign="center" text="N">
+      <convert type="UltimateCaidInfo">NagraEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="CW" font="Regular; 16" position="1143,659" size="34,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1143,659" size="34,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="CW">
+      <convert type="UltimateCaidInfo">CrwCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1143,659" size="34,16" halign="center" zPosition="4" transparent="0" valign="center" text="CW">
+      <convert type="UltimateCaidInfo">CrwEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="ND" font="Regular; 16" position="1181,659" size="30,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1181,659" size="30,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="ND">
+      <convert type="UltimateCaidInfo">NdsCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1181,659" size="30,16" halign="center" zPosition="4" transparent="0" valign="center" text="ND">
+      <convert type="UltimateCaidInfo">NdsEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="CO" font="Regular; 16" position="1215,659" size="32,16" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 16" position="1215,659" size="32,16" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="CO">
+      <convert type="UltimateCaidInfo">ConaxCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" backgroundColor="selectedFG" foregroundColor="menu" render="FixedLabel" font="Regular; 16" position="1215,659" size="32,16" halign="center" zPosition="5" transparent="0" valign="center" text="CO">
+      <convert type="UltimateCaidInfo">ConaxEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1180,658" size="32,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1214,658" size="34,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1142,658" size="36,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1066,658" size="17,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1085,658" size="17,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1047,658" size="17,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1104,658" size="17,18" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="1123,658" size="17,18" />
+    <!-- CRYPT  -->
+  </screen>
+  <!--Template SecondInfoBar Tuner Info  -->
+  <screen name="template_sib_tuner_info">
+    <eLabel text="Tuner:" position="20,692" size="70,20" font="Regular; 20" backgroundColor="background" transparent="1" zPosition="1" valign="center" foregroundColor="selectedFG" />
+    <eLabel text="A" position="92,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="B" position="112,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="C" position="132,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="D" position="152,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <eLabel text="E " position="172,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="F" position="192,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="G" position="212,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="H" position="232,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="I" position="252,692" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="91,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="111,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="131,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="151,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="0" position="171,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="191,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="211,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="231,691" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="251,691" size="18,22" />
+    <widget source="session.TunerInfo" render="FixedLabel" text="A" position="92,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="B" position="112,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="C" position="132,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="D" position="152,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <widget source="session.TunerInfo" render="FixedLabel" text="E " position="172,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="F" position="192,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="G" position="212,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="H" position="232,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="I" position="252,692" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">256</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="92,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="112,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="132,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="152,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <widget source="session.FrontendInfo" render="FixedLabel" text="E " position="172,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="F" position="192,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="G" position="212,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="H" position="232,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="I" position="252,692" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">8,8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+  <!--Template SecondInfoBar Crypt Info  -->
+  <screen name="template_sib_crypt_info">
+    <eLabel text="Crypt:" position="304,692" size="65,20" font="Regular; 20" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="selectedFG" zPosition="5" />
+    <eLabel text="B" font="Regular; 20" position="372,692" size="16,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="372,692" size="16,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="B">
+      <convert type="UltimateCaidInfo">BetaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="372,692" size="16,20" halign="center" zPosition="4" transparent="0" valign="center" text="B" foregroundColor="menu" backgroundColor="selectedFG">
+      <convert type="UltimateCaidInfo">BetaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="I" font="Regular; 20" position="392,692" size="16,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="392,692" size="16,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="I">
+      <convert type="UltimateCaidInfo">IrdCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="392,692" size="16,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="I">
+      <convert type="UltimateCaidInfo">IrdEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="S" font="Regular; 20" position="412,692" size="16,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="412,692" size="16,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="S">
+      <convert type="UltimateCaidInfo">SecaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="412,692" size="16,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="S">
+      <convert type="UltimateCaidInfo">SecaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="V" font="Regular; 20" position="432,692" size="16,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="432,692" size="16,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="V">
+      <convert type="UltimateCaidInfo">ViaCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="432,692" size="16,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="V">
+      <convert type="UltimateCaidInfo">ViaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="N" font="Regular; 20" position="452,692" size="16,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="452,692" size="16,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="N">
+      <convert type="UltimateCaidInfo">NagraCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="452,692" size="16,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="N">
+      <convert type="UltimateCaidInfo">NagraEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="CW" font="Regular; 20" position="472,692" size="42,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="472,692" size="42,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="CW">
+      <convert type="UltimateCaidInfo">CrwCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="472,692" size="42,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="CW">
+      <convert type="UltimateCaidInfo">CrwEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="ND" font="Regular; 20" position="518,692" size="40,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="518,692" size="40,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="ND">
+      <convert type="UltimateCaidInfo">NdsCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="518,692" size="40,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="4" transparent="0" valign="center" text="ND">
+      <convert type="UltimateCaidInfo">NdsEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel text="CO" font="Regular; 20" position="562,692" size="40,20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" zPosition="2" />
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="562,692" size="40,20" halign="center" foregroundColor="yellow2" backgroundColor="background" zPosition="3" transparent="0" valign="center" text="CO">
+      <convert type="UltimateCaidInfo">ConaxCrypt</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="FixedLabel" font="Regular; 20" position="562,692" size="40,20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" zPosition="5" transparent="0" valign="center" text="CO">
+      <convert type="UltimateCaidInfo">ConaxEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="517,691" size="42,22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="561,691" size="42,22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="471,691" size="44,22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="391,691" size="18, 22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="411,691" size="18, 22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="371,691" size="18, 22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="431,691" size="18, 22" />
+    <eLabel name="Rahmem_crypt" backgroundColor="selectedFG" zPosition="1" position="451,691" size="18, 22" />
+  </screen>
+  <!--Template InfoBar Tuner Info  -->
+  <screen name="template_infobar_tuner_info">
+    <eLabel text="Tuner:" position="2,697" size="70,20" font="Regular; 20" backgroundColor="background" transparent="1" zPosition="1" valign="center" foregroundColor="selectedFG" />
+    <eLabel text="A" position="74,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="B" position="94,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="C" position="114,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="D" position="134,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <eLabel text="E " position="154,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="F" position="174,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="G" position="194,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="H" position="214,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel text="I" position="234,697" zPosition="2" size="16,20" font="Regular; 20" halign="center" foregroundColor="grey" backgroundColor="background" transparent="0" valign="center" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="73,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="93,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="113,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="133,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="0" position="153,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="173,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="193,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="213,696" size="18,22" />
+    <eLabel name="Rahmem_tuner" backgroundColor="selectedFG" zPosition="1" position="233,696" size="18,22" />
+    <widget source="session.TunerInfo" render="FixedLabel" text="A" position="74,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="B" position="94,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="C" position="114,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="D" position="134,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <widget source="session.TunerInfo" render="FixedLabel" text="E " position="154,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="F" position="174,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="G" position="194,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="H" position="214,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" render="FixedLabel" text="I" position="234,697" zPosition="3" size="16,20" font="Regular; 20" halign="center" foregroundColor="yellow2" backgroundColor="background" transparent="0" valign="center">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">256</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="A" position="74,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="B" position="94,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="C" position="114,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="D" position="134,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--text="E" results "O" -> text="E " results "E"-->
+    <!--  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/skin_default/system/ValueRange4,4.png" position="172,697" zPosition="5" size="16,20" alphatest="blend"> -->
+    <widget source="session.FrontendInfo" render="FixedLabel" text="E " position="154,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="F" position="174,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="G" position="194,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="H" position="214,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="I" position="234,697" zPosition="5" size="16,20" font="Regular; 20" halign="center" foregroundColor="menu" backgroundColor="selectedFG" transparent="0" valign="center">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">8,8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+  <!--Template MSN Weather  -->
+  <screen name="template_weather">
+    <widget noWrap="1" foregroundColor="yellow" backgroundColor="background" font="Regular; 18" render="Label" position="295,3" size="60,20" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
+      <convert type="MSNWeather">temperature_current</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="242,25" size="160,20" source="session.MSNWeather" backgroundColor="background" halign="center" transparent="1" zPosition="8" valign="top">
+      <convert type="MSNWeather">temperature_text,current</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="196,0" size="48,48" source="session.MSNWeather" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="414,0" size="48,48" source="session.MSNWeather" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="473,3" size="30,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">weekshortday,day2</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="512,3" size="100,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">temperature_heigh_low,day2</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="462,25" size="160,20" source="session.MSNWeather" backgroundColor="background" halign="center" transparent="1" zPosition="8" valign="top">
+      <convert type="MSNWeather">temperature_text,day2</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="634,0" size="48,48" source="session.MSNWeather" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="733,3" size="100,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">temperature_heigh_low,day3</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="683,25" size="160,20" source="session.MSNWeather" backgroundColor="background" halign="center" transparent="1" zPosition="8" valign="top">
+      <convert type="MSNWeather">temperature_text,day3</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="693,3" size="30,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">weekshortday,day3</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="953,3" size="100,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">temperature_heigh_low,day4</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="913,3" size="30,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">weekshortday,day4</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="902,25" size="160,20" source="session.MSNWeather" backgroundColor="background" halign="center" transparent="1" zPosition="8" valign="top">
+      <convert type="MSNWeather">temperature_text,day4</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="854,0" size="48,48" source="session.MSNWeather" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="1072,0" size="48,48" source="session.MSNWeather" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/Ultimate/Wettericons/,png</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="1120,25" size="160,20" source="session.MSNWeather" backgroundColor="background" halign="center" transparent="1" zPosition="8" valign="top">
+      <convert type="MSNWeather">temperature_text,day5</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="1171,3" size="100,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">temperature_heigh_low,day5</convert>
+    </widget>
+    <widget font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="1131,3" size="30,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+      <convert type="MSNWeather">weekshortday,day5</convert>
+    </widget>
+    <eLabel text="Status:" position="37,25" size="65,20" backgroundColor="background" zPosition="8" halign="left" font="Regular; 18" transparent="1" />
+    <widget Wrap="1" font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" render="Label" position="1,2" size="210,20" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
+      <convert type="MSNWeather">city</convert>
+    </widget>
+    <widget render="Label" noWrap="1" source="session.MSNWeather" backgroundColor="background" position="92,25" zPosition="8" size="50,20" font="Regular; 18" transparent="1" halign="right">
+      <convert type="MSNWeather">observationtime</convert>
+    </widget>
+    <eLabel text="Uhr" position="145,25" size="40,20" zPosition="8" halign="left" backgroundColor="background" font="Regular; 18" transparent="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="503,1" size="9,24" alphatest="blend" transparent="1" backgroundColor="background" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="723,1" size="9,24" alphatest="blend" transparent="1" backgroundColor="background" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="943,1" size="9,24" alphatest="blend" transparent="1" backgroundColor="background" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="1161,1" size="9,24" alphatest="blend" transparent="1" backgroundColor="background" zPosition="1" />
+  </screen>
+  <!--Template Setup Config  -->
+  <screen name="template_setup_config">
+    <widget name="config" position="30,60" size="700,440" itemHeight="36" font="Regular; 22" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="description" position="30,520" size="700,100" font="Regular; 22" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+    <widget name="HelpWindow" position="78,300" size="600,200" zPosition="2" transparent="1" alphatest="blend" />
+    <widget name="footnote" position="30,640" size="700,30" font="Regular; 22" halign="right" valign="center" transparent="1" />
+	<panel name="ScrollBarTemplate size=700,440" />
+  </screen>
+  <!--Template _menu_listbox_430  -->
+  <screen name="template_menu_listbox_430">
+    <widget source="menu" render="Listbox" position="30,60" size="440,610"   scrollbarMode="showOnDemand"   sliderPixmap="Ultimate/menu/Scrollbar.png"  enableWrapAround="1" alphatest="blend" transparent="1">
+	
+      <convert type="TemplatedMultiContent">
+					{"template": [ MultiContentEntryText(pos = (2, 4), size = (440, 40), flags = RT_HALIGN_LEFT, text = 0) ],
+					"fonts": [gFont("Regular", 27)],
+					"itemHeight": 40
+					}
+				</convert>
+    </widget>
+  </screen>
+  <!--Template _menu_listbox_740  -->
+  <screen name="template_menu_listbox_740">  
+    <widget source="menu" render="Listbox" position="30,60" size="740,610"  scrollbarMode="showOnDemand" sliderPixmap="Ultimate/menu/Scrollbar.png"  backgroundColor="listboxBG" foregroundColor="foreground"  enableWrapAround="1" transparent="1">
+      <convert type="TemplatedMultiContent">
+					{"template": [ MultiContentEntryText(pos = (6, 4), size = (730, 40), flags = RT_HALIGN_LEFT, text = 0) ],
+					"fonts": [gFont("Regular", 27)],
+					"itemHeight": 40
+					}
+				</convert>
+    </widget>
+  </screen>
+  <!--Template MessageBox  -->
+  <screen name="MessageBox-template">
+    <widget source="Title" render="Label" position="68,11" size="600,50" valign="bottom" font="Regular;32" />
+    <eLabel name="line1" position="10,69" size="780,1" backgroundColor="selectedFG" zPosition="1" />
+    <widget name="text" position="10,80" size="780,50" font="Regular;22" valign="center" halign="center" />
+    <widget name="ErrorPixmap" pixmap="Ultimate/skin_default/icons/input_error.png" position="8,8" size="53,53" alphatest="blend" />
+    <widget name="QuestionPixmap" pixmap="Ultimate/skin_default/icons/input_question.png" position="8,8" size="53,53" alphatest="blend" />
+    <widget name="InfoPixmap" pixmap="Ultimate/skin_default/icons/input_info.png" position="8,8" size="53,53" alphatest="blend" />
+    <widget name="list" position="10,140" size="780,240" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" />
+    <applet type="onLayoutFinish">
+# this should be factored out into some helper code,but currently demonstrates applets.
+from enigma import eSize,ePoint, getDesktop
+#orgwidth = self.instance.size().width()
+#orgheight = self.instance.size().height()
+#---
+offset_listposx = 10
+offset_listposy = 90
+offset_listwidth = 10
+offset_listheight = 30
+offset_textwidth = 170
+offset_textheight = 20
+min_width = 400
+min_height = 50
+#----
+deskwidth = getDesktop(0).size().width()
+deskheight = getDesktop(0).size().height()
+textsize = self["text"].getSize()
+textwidth = textsize[0] + offset_textwidth
+textheight = textsize[1] + offset_textheight
+
+listwidth = 0
+listheight = 0
+
+if self.list:
+	try:
+		for i in self.list:
+			if len(i[0]) &gt; listwidth:
+				listwidth = len(i[0])
+		listwidth = listwidth * offset_listwidth
+		listheight = len(self.list) * offset_listheight
+	except:
+		pass
+
+if (min_height &gt; textheight):
+	textheight = min_height
+if (min_width &gt; textwidth):
+	textwidth = min_width
+if (listheight &gt; 0):
+	offset = 21
+else:
+	offset = 13
+if (textwidth &gt; listwidth):
+	wsizex = textwidth + offset_listposx * 2
+else:
+	textwidth = listwidth - offset_listposx
+	wsizex = listwidth + offset_listposx
+
+wsizey = textheight + listheight + offset
+
+if ((wsizey + offset_listposy - offset_listposx) &gt; deskheight):
+	textheight = deskheight - listheight - offset - offset_listposy + offset_listposx
+	wsizey = textheight + listheight + offset
+
+if (wsizex &gt; deskwidth):
+	textwidth = deskwidth - offset_listposx * 2
+	listwidth = wsizex = deskwidth
+
+wsize = (wsizex,wsizey + offset_listposy - offset_listposx)
+
+# resize
+self.instance.resize(eSize(*wsize))
+
+# resize label
+textsize = (textwidth,textheight)
+self["text"].instance.resize(eSize(*textsize))
+
+# move list
+listsize = (wsizex - offset_listposx * 2,listheight)
+self["list"].instance.move(ePoint(offset_listposx,textheight + offset_listposy))
+self["list"].instance.resize(eSize(*listsize))
+
+# center window
+newwidth = wsize[0]
+newheight = wsize[1]
+self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight)/2))
+		</applet>
+  </screen>
+  <!--Template_wizard  -->
+  <screen name="template_wizard">
+    <widget name="text" position="185,60" size="695,390" font="Regular;20" valign="bottom" transparent="1" />
+    <!-- <ePixmap pixmap="Ultimate/Skinparts/Line_Hor/Line_Hor_Org.png" position="185,453"  zPosition="3" size="695,5" alphatest="blend" transparent="1" /> -->
+    <widget source="list" render="Listbox" position="185,460" size="695,210" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" transparent="1">
+      <convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos = (5, 0), size = (680, 30), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular",22)],
+				"itemHeight": 30
+				}
+			</convert>
+    </widget>
+    <widget name="config" position="185,460" size="695,210" itemHeight="30" zPosition="14" font="Regular; 22" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selectedFG" transparent="1" />
+    <widget name="HelpWindow" position="330,180" size="402,128" zPosition="1" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <widget name="languagetext" position="49,689" size="170,25" noWrap="1" zPosition="1" valign="center" font="Regular; 20" halign="left" transparent="1" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Ultimate/skin_default/system/Wizard.png" position="900,314" size="350,360" />
+	<panel name="template_pixmap_line_Wizard"/>
+  </screen>
+  <!--Template_wizardrc  -->
+  <screen name="template_wizardrc">
+    <widget name="rc" position="30,84" size="154,500" pixmaps="skin_default/rc.png,skin_default/rcold.png" zPosition="10" alphatest="blend" />
+    <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="Ultimate/arrowdown.png" zPosition="11" alphatest="blend" />
+    <widget name="arrowdown2" position="-100,-100" size="37,70" pixmap="Ultimate/arrowdown.png" zPosition="11" alphatest="blend" />
+    <widget name="arrowup" position="-100,-100" size="37,70" pixmap="Ultimate/arrowup.png" zPosition="11" alphatest="blend" />
+    <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="Ultimate/arrowup.png" zPosition="11" alphatest="blend" />
+  </screen>
+  <!--Template progress Infobar  -->
+  <screen name="template_progress_infobar">
+    <widget render="Progress" position="265,629" size="762,10" source="session.Event_Now" pixmap="Ultimate/Skinparts/Progress/Progress_org.png" transparent="1" zPosition="7">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+  </screen>
+  <!--Template Yahoo-Weather  -->
+  <screen name="template_yahoo_weather">
+    <eLabel text="Wetter für:" position="0,3" size="210,20" zPosition="8" halign="center" font="Regular; 18" transparent="1" />
+    <panel name="template_pixmap_nfr_bag" />
+    <widget source="session.CurrentService" render="Label" position="478,3" size="34,20" font="Regular; 18" zPosition="1" halign="center" valign="top" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTodayDay</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" font="Meteo;42" position="423,0" size="48,48" zPosition="1" transparent="1" foregroundColor="selectedFG" alphatest="blend">
+      <convert type="UltimateYahooWeather">forecastTodayCode</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="582,3" size="50,20" font="Regular; 18" zPosition="1" halign="left" valign="center" foregroundColor="yellow" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTodayTempMin</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="511,3" size="50,20" font="Regular; 18" zPosition="1" halign="right" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTodayTempMax</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="472,26" size="160,20" font="Regular; 16" zPosition="1" halign="center" valign="top" foregroundColor="grey" backgroundColor="background" transparent="1">
+      <convert type="UltimateYahooWeather">forecastTodayText</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="694,3" size="34,20" font="Regular; 18" zPosition="1" halign="center" valign="top" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrowDay</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" font="Meteo;42" position="639,1" size="48,48" zPosition="1" transparent="1" foregroundColor="selectedFG" alphatest="blend">
+      <convert type="UltimateYahooWeather">forecastTomorrowCode</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="798,3" size="50,20" font="Regular; 18" zPosition="1" halign="left" valign="center" foregroundColor="yellow" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrowTempMin</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="726,3" size="50,20" font="Regular; 18" zPosition="1" halign="right" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrowTempMax</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="688,26" size="160,20" font="Regular; 16" zPosition="1" halign="center" valign="top" foregroundColor="grey" backgroundColor="background" transparent="1">
+      <convert type="UltimateYahooWeather">forecastTomorrowText</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="910,3" size="34,20" font="Regular; 18" zPosition="1" halign="center" valign="top" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow1Day</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" font="Meteo;42" position="855,0" size="48,48" zPosition="1" transparent="1" foregroundColor="selectedFG" alphatest="blend">
+      <convert type="UltimateYahooWeather">forecastTomorrow1Code</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1014,3" size="50,20" font="Regular; 18" zPosition="1" halign="left" valign="center" foregroundColor="yellow" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow1TempMin</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="942,3" size="50,20" font="Regular; 18" zPosition="1" halign="right" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow1TempMax</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="904,26" size="160,20" font="Regular; 16" zPosition="1" halign="center" valign="top" foregroundColor="grey" backgroundColor="background" transparent="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow1Text</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1127,3" size="34,20" font="Regular; 18" zPosition="1" halign="center" valign="top" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow2Day</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" font="Meteo;42" position="1072,0" size="48,48" zPosition="1" transparent="1" foregroundColor="selectedFG" alphatest="blend">
+      <convert type="UltimateYahooWeather">forecastTomorrow2Code</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1230,3" size="50,20" font="Regular; 18" zPosition="1" halign="left" valign="center" foregroundColor="yellow" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow2TempMin</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1159,3" size="50,20" font="Regular; 18" zPosition="1" halign="right" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow2TempMax</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1120,26" size="160,20" font="Regular; 16" zPosition="1" halign="center" valign="top" foregroundColor="grey" backgroundColor="background" transparent="1">
+      <convert type="UltimateYahooWeather">forecastTomorrow2Text</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="0,26" size="210,20" font="Regular; 18" zPosition="1" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">currentLocation</convert>
+    </widget>
+    <eLabel text="Aktuell" position="272,3" size="65,20" font="Regular; 18" zPosition="1" halign="right" valign="top" foregroundColor="foreground" backgroundColor="background" transparent="1" />
+    <widget source="session.CurrentService" render="Label" font="Meteo;42" position="210,0" size="48,48" zPosition="1" transparent="1" foregroundColor="selectedFG" alphatest="blend">
+      <convert type="UltimateYahooWeather">currentWeatherCode</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="350,3" size="40,20" font="Regular; 18" zPosition="1" halign="right" valign="top" foregroundColor="green" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">currentWeatherTemp</convert>
+    </widget>
+    <widget Wrap="1" font="Regular; 16" render="Label" position="258,25" size="160,20" source="session.CurrentService" halign="center" transparent="1" zPosition="8" valign="top" foregroundColor="grey">
+      <convert type="UltimateYahooWeather">currentWeatherText</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="368,3" size="30,20" font="Regular;18" zPosition="10" halign="left" valign="center" foregroundColor="green" backgroundColor="background" transparent="1" noWrap="1">
+      <convert type="UltimateYahooWeather">CF</convert>
+    </widget>
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="566,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="1215,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="998,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
+    <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="782,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
+  </screen>
+  <!--Template List ChannelSelection Default -->
+  <screen name="ChannelSelection_color_default">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways"  progressPercentWidth="100"  transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22"  colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="selectedFG" 
+	colorEventProgressbarBorder="selectedFG" 
+	colorEventProgressbarBorderSelected="selectedFG" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="selectedFG" 
+	foregroundColorSelected="selectedFG" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_color_2.png" />
+  </screen>
+  <screen name="ChannelSelection_color_stein17">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showOnDemand" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" 
+	colorServiceRecorded="red" 
+	colorServicePseudoRecorded="pink" 
+	colorServiceStreamed="orange" 
+	foregroundColorServiceNotAvail="lila" 
+	foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="lightblue" 
+	colorServiceDescriptionSelected="bernstein" 
+	colorEventProgressbarBorder="lightblue" 
+	colorEventProgressbarBorderSelected="lightblue" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="white" 
+	foregroundColorSelected="lightblue" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_color_2.png" />
+  </screen>
+    <screen name="ChannelSelection_color_Lemon">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways"  progressPercentWidth="100"  transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22"  colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="lemon" 
+	colorEventProgressbarBorder="lemon" 
+	colorEventProgressbarBorderSelected="lemon" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="lemon" 
+	foregroundColorSelected="lemon" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_lemon.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Bernstein">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="bernstein" 
+	colorEventProgressbarBorder="bernstein" 
+	colorEventProgressbarBorderSelected="bernstein" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="bernstein" 
+	foregroundColorSelected="bernstein" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_bernstein.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Orange">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="orange2" 
+	colorEventProgressbarBorder="orange2" 
+	colorEventProgressbarBorderSelected="orange2" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="orange2" 
+	foregroundColorSelected="orange2" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_orange.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Green">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColorSelected="green" 
+	foregroundColor="green" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="green" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="green" 
+	colorEventProgressbarBorderSelected="green" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_green.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Grey">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="grey" 
+	foregroundColorSelected="grey" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="grey" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="grey" 
+	colorEventProgressbarBorderSelected="grey" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_color.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Red_White">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecording="red" colorServicePseudoRecorded="orange" colorServiceStreamed="rose" foregroundColorMarkedSelected="yellow" foregroundColorServiceNotAvail="dark" 
+	foregroundColor="red" 
+	foregroundColorSelected="white" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="red" 
+	colorEventProgressbarBorder="red" 
+	colorEventProgressbarBorderSelected="white" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_red.png" />
+  </screen>
+    <screen name="ChannelSelection_color_White_Red">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecording="red" colorServicePseudoRecorded="orange" colorServiceStreamed="rose" foregroundColorMarkedSelected="yellow" foregroundColorServiceNotAvail="dark" 
+	foregroundColor="red" 
+	foregroundColorSelected="red" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="red" 
+	backgroundColor="background" 
+	backgroundColorSelected="grey1" 
+	colorEventProgressbarBorder="red" 
+	colorEventProgressbarBorderSelected="red" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_red.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Pink">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="orange" colorServiceStreamed="green" foregroundColorServiceNotAvail="orange2" foregroundColorMarkedSelected="yellow" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="pink" 
+	colorEventProgressbarBorder="pink" 
+	colorEventProgressbarBorderSelected="pink" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="pink" 
+	foregroundColorSelected="pink" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_pink.png" />
+	</screen>
+  <screen name="ChannelSelection_color_Cyan">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="cyan" 
+	colorEventProgressbarBorder="cyan" 
+	colorEventProgressbarBorderSelected="cyan" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="cyan" 
+	foregroundColorSelected="cyan" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_cyan.png" />
+	</screen>
+  <screen name="ChannelSelection_color_Black_White">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	colorEventProgressbarBorder="white" 
+	colorEventProgressbarBorderSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="grey" 
+	foregroundColorSelected="white" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_grey.png" />
+  </screen>
+    <screen name="ChannelSelection_color_Grey_Black">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="black" 
+	colorEventProgressbarBorder="white" 
+	colorEventProgressbarBorderSelected="black" 
+	backgroundColor="background" 
+	backgroundColorSelected="grey1" 
+	foregroundColor="grey" 
+	foregroundColorSelected="black" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_grey.png" />
+  </screen>
+  <screen name="ChannelSelection_color_Blue">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="bluetitle" 
+	foregroundColorSelected="bluetitle" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="bluetitle" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="metrixblue" 
+	colorEventProgressbarBorderSelected="metrixblue" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_blue.png" />
+  </screen>
+  <screen name="ChannelSelection_color_White_Blue">
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="bluetitle" 
+	foregroundColorSelected="white" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="backgroundBlue" 
+	colorEventProgressbarBorder="metrixblue" 
+	colorEventProgressbarBorderSelected="metrixblue" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_blue.png" />
+  </screen>
+  <!--Template List ChannelSelection Eventtime left -->
+  <screen name="ChannelSelection_color_eventtime_left">
+    <widget name="list" position="30,60" size="820,610" scrollbarMode="showAlways" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" picServiceEventProgressbar="Ultimate/menu/Progress_CS_color.png" colorEventProgressbarBorder="white" colorEventProgressbarBorderSelected="white" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="lila" foregroundColorSelected="selectedFG" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" />
+  </screen>
+   <!--Template List ChannelSelection 3 Fields -->
+  <screen name="ChannelSelection_3_fields_color_default">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20"  
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="selectedFG" 
+	colorEventProgressbarBorder="selectedFG" 
+	colorEventProgressbarBorderSelected="selectedFG" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="selectedFG" 
+	foregroundColorSelected="selectedFG" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_color_2.png" />
+  </screen>
+   <screen name="ChannelSelection_3_fields_color_Lemon">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20"  
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="lemon" 
+	colorEventProgressbarBorder="lemon" 
+	colorEventProgressbarBorderSelected="lemon" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="lemon" 
+	foregroundColorSelected="lemon" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_lemon.png" />
+  </screen>
+   <screen name="ChannelSelection_3_fields_color_Bernstein">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20"  
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="bernstein" 
+	colorEventProgressbarBorder="bernstein" 
+	colorEventProgressbarBorderSelected="bernstein" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="bernstein" 
+	foregroundColorSelected="bernstein" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_bernstein.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Orange">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="orange2" 
+	colorEventProgressbarBorder="orange2" 
+	colorEventProgressbarBorderSelected="orange2" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="orange2" 
+	foregroundColorSelected="orange2" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_orange.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Green">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColorSelected="green" 
+	foregroundColor="green" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="green" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="green" 
+	colorEventProgressbarBorderSelected="green" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_green.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Grey">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="grey" 
+	foregroundColorSelected="grey" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="grey" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="grey" 
+	colorEventProgressbarBorderSelected="grey" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_color.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Red_White">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecording="red" colorServicePseudoRecorded="orange" colorServiceStreamed="rose" foregroundColorMarkedSelected="yellow" foregroundColorServiceNotAvail="dark" 
+	foregroundColor="red" 
+	foregroundColorSelected="white" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="red" 
+	colorEventProgressbarBorder="red" 
+	colorEventProgressbarBorderSelected="white" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_red.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_White_Red">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecording="red" colorServicePseudoRecorded="orange" colorServiceStreamed="rose" foregroundColorMarkedSelected="yellow" foregroundColorServiceNotAvail="dark" 
+	foregroundColor="red" 
+	foregroundColorSelected="red" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="red" 
+	backgroundColor="background" 
+	backgroundColorSelected="grey1" 
+	colorEventProgressbarBorder="red" 
+	colorEventProgressbarBorderSelected="red" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_red.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Pink">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20"  
+	colorServiceRecorded="red" colorServicePseudoRecorded="orange" colorServiceStreamed="green" foregroundColorServiceNotAvail="orange2" foregroundColorMarkedSelected="yellow" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="pink" 
+	colorEventProgressbarBorder="pink" 
+	colorEventProgressbarBorderSelected="pink" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="pink" 
+	foregroundColorSelected="pink" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_pink.png" />
+	</screen>
+    <screen name="ChannelSelection_3_fields_color_Cyan">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="cyan" 
+	colorEventProgressbarBorder="cyan" 
+	colorEventProgressbarBorderSelected="cyan" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	foregroundColor="cyan" 
+	foregroundColorSelected="cyan" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_cyan.png" />
+	</screen>
+    <screen name="ChannelSelection_3_fields_color_Black_White">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	colorEventProgressbarBorder="white" 
+	colorEventProgressbarBorderSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="grey" 
+	foregroundColorSelected="white" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_grey.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Grey_Black">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="black" 
+	colorEventProgressbarBorder="white" 
+	colorEventProgressbarBorderSelected="black" 
+	backgroundColor="background" 
+	backgroundColorSelected="grey1" 
+	foregroundColor="grey" 
+	foregroundColorSelected="black" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_grey.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_Blue">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="bluetitle" 
+	foregroundColorSelected="bluetitle" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="bluetitle" 
+	backgroundColor="background" 
+	backgroundColorSelected="verydarkgrey" 
+	colorEventProgressbarBorder="metrixblue" 
+	colorEventProgressbarBorderSelected="metrixblue" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_blue.png" />
+  </screen>
+    <screen name="ChannelSelection_3_fields_color_White_Blue">
+    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" transparent="1" sliderPixmap="Ultimate/menu/Scrollbar.png" fieldMargins="5" itemsDistances="5" progressbarHeight="8" 
+	progressBarWidth="50" progressbarBorderWidth="1" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" 
+	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
+	foregroundColor="bluetitle" 
+	foregroundColorSelected="white" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="white" 
+	backgroundColor="background" 
+	backgroundColorSelected="backgroundBlue" 
+	colorEventProgressbarBorder="metrixblue" 
+	colorEventProgressbarBorderSelected="metrixblue" 
+	picServiceEventProgressbar="Ultimate/Skinparts/Progress/Progress_CS_blue.png" />
+  </screen>
+ <!-- temlates_Scrollbar_Org -->
+
+    <!--menu_listbox_430  -->
+  <screen name="ScrollBarTemplate size=430,400">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="445,53" size="20,380" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="445,420" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+      <!--Skin Selector  -->
+  <screen name="ScrollBarTemplate size=700,260">
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,260" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,275" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+   	<!-- ChannelSelection 3 Fields  -->
+  <screen name="ScrollBarTemplate size=550,610">    
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="895,53" size="20,585" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="895,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,380">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,340" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,390" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,420">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,380" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,430" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,440">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,410" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,460" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+	  	<!-- (Einzel)EPG Selection  -->
+  <screen name="ScrollBarTemplate size=700,450_P220">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,214" size="20,420" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,460">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,420" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,470" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  	  	<!-- About  -->
+  <screen name="ScrollBarTemplate size=700,470_P200">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,194" size="20,430" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,620" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+
+  	  	<!-- OPD  -->
+  <screen name="ScrollBarTemplate size=700,520_P155">  
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,155" size="20,480" zPosition="5" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  
+  <!-- UpdatePluginMenu-HDF  -->
+  <screen name="ScrollBarTemplate size=700,370_P176">
+    <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,175" size="20,370" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,500" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  
+    <!-- Hdf_Downloader  -->
+  <screen name="ScrollBarTemplate size=500,330">
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="515,53" size="20,330" zPosition="15" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="515,345" size="20,51" zPosition="16" transparent="1" alphatest="blend" />
+  </screen>
+  
+  <screen name="ScrollBarTemplate size=700,510">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,470" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,520" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,540">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,500" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,550" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,540_P120">
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,114" size="20,500" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,610" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,540_P130">
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,124" size="20,510" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,560">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,530" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,580" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,560_P110">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,104" size="20,530" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,570">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,54" size="20,530" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,580" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=700,610">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="715,53" size="20,585" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="715,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="ScrollBarTemplate size=720,440">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="735,54" size="20,400" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="735,450" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+	  <!-- menu_listbox_740  -->
+  <screen name="ScrollBarTemplate size=740,610">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="755,53" size="20,585" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="755,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+    <!-- ChannelSelection_Standard -->
+  <screen name="ScrollBarTemplate size=820,570">  
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="835,54" size="20,530" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="835,580" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+      <!-- Help Menu -->
+  <screen name="ScrollBarTemplate size=860,610"> 
+   <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="840,54" size="20,585" zPosition="5" transparent="1" alphatest="blend" />
+   <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="840,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+    <screen name="ScrollBarTemplate size=1220,610">
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="1235,54" size="20,585" zPosition="5" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="1235,625" size="20,51" zPosition="6" transparent="1" alphatest="blend" />
+  </screen>
+        <!-- TEMPLATES ScrollBar-->
+<screen name="ScrollBarTemplate_GioppyGio">
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_top_Org.png" position="870,57" size="20,520" zPosition="25" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="Ultimate/Skinparts/Scrollbar/Overlay_bot_Org.png" position="870,560" size="20,51" zPosition="26" transparent="1" alphatest="blend" />
+</screen>
+  <!-- templates  -->
+  <!--######################################### -->
+
+</skin>

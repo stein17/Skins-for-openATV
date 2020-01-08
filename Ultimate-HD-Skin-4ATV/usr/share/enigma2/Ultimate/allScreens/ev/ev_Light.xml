@@ -1,0 +1,114 @@
+<skin>
+ <!-- EventView_light -->
+<screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="background">
+    <widget source="Service" render="Picon" position="30,60" size="71,40" zPosition="5" transparent="1" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="session.Event_Next" render="Label" position="1161,430" size="90,24" font="Regular; 20" transparent="1" zPosition="2" halign="left" foregroundColor="selectedFG">
+      <convert type="EventTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+    <widget source="session.Event_Next" render="Label" position="901,430" size="70,24" font="Regular; 20" transparent="1" zPosition="2" halign="left">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="session.Event_Next" render="Label" position="1090,430" size="70,24" font="Regular; 20" transparent="1" zPosition="2" halign="left">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="session.Event_Now" render="Label" position="621,645" size="110,29" transparent="1" zPosition="1" font="Regular; 22" halign="left">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">InMinutes</convert>
+    </widget>
+    <widget source="session.Event_Next" render="UltimateRunningText" options="movetype=running,startdelay=10000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="765,465" size="485,190" font="Regular;24" halign="left" transparent="1" zPosition="2">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel text="Next:" position="765,390" size="70,30" font="Regular; 24" halign="left" transparent="1" valign="center" foregroundColor="selectedFG" />
+    <widget source="session.Event_Next" render="UltimateRunningText" position="850,390" size="397,30" font="Regular;24" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=5000,always=0" transparent="1" noWrap="1" zPosition="5">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <eLabel text="End Time :" position="981,430" size="110,24" font="Regular; 20" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="selectedFG" />
+    <eLabel text="Start Time :" position="765,430" size="115,24" font="Regular; 20" halign="left" backgroundColor="black" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+    <widget name="epg_description" position="30,110" size="700,520" font="Regular; 24" transparent="1" />
+    <widget name="channel" position="110,60" size="620,40" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="Service" render="Progress" position="516,654" size="100,10" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget name="datetime" position="54,645" size="230,29" font="Regular; 22" halign="center" transparent="1" />
+    <ePixmap position="30,645" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" transparent="1" alphatest="blend" />
+    <ePixmap position="286,645" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" transparent="1" alphatest="blend" />
+    <widget name="duration" position="319,645" size="120,29" font="Regular; 22" halign="center" transparent="1" />
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="860,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsMultichannel</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_dolby_off.png" position="860,688" size="47,26" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">IsStereo</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">0,719</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1079</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1080</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_uhd_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">Is4K</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hd_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsHDHDR</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsHDR</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr10_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsHDR10</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hlg_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsHLG</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_format_off.png" position="920,688" size="47,26" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">IsNotWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_format_on.png" position="920,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+      <convert type="ServiceInfo">IsWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <ePixmap alphatest="blend" pixmap="Ultimate/icons/ico_rec_off.png" position="801,84" size="47,15" zPosition="2" />
+    <widget alphatest="blend" pixmap="Ultimate/icons/ico_rec_on.png" position="801,84" render="Pixmap" size="47,15" source="session.RecordState" zPosition="5">
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <eLabel text="ENDE:" position="442,645" size="70,29" font="Regular; 22" halign="left" transparent="1" valign="center" />
+	<widget source="Title" position="160,4" size="760,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <panel name="template_pixmap_line_hor_765_457"/>
+    <panel name="template_pixmap_line_hor_765_422"/>
+	<panel name="template_pixmap_line_hor_630" />
+    <panel name="template_pixmap_line_hor_100" />
+    <panel name="template_name_red_o_blue" />
+    <panel name="template_menu_ok_exit_1280" />
+    <panel name="template_date" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />
+    <panel name="template_digitalclock_widget" />
+    <panel name="template_pixmap_rahmen" />
+    
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="template_pixmap_vert_line_738" />
+  </screen>
+ </skin>

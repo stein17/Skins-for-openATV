@@ -1,0 +1,47 @@
+<skin>
+ <!-- skin_MovieSelection_cover_Picon -->
+<screen name="MovieSelection" position="0,0" size="1280,720" title="Select a movie" flags="wfNoBorder" backgroundColor="background">
+    <eLabel text="Select a movie" position="640,4" size="300,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" position="30,60" size="700,610" scrollbarMode="showOnDemand" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" font="Regular;20" itemHeight="30" backgroundColor="background" transparent="1" />
+    <widget name="waitingtext" position="62,443" size="640,100" zPosition="1" font="Regular;24" halign="center" valign="center" transparent="1" />
+    <widget name="freeDiskSpace" position="765,650" size="485,25" font="Regular; 20" valign="center" halign="left" transparent="1" />
+    <widget source="Service" render="Label" position="765,310" noWrap="1" size="485,25" font="Regular; 22" transparent="1" foregroundColor="selectedFG">
+      <convert type="MovieInfo">ShortDescription</convert>
+    </widget>
+    <widget source="Service" render="Label" position="930,265" size="320,25" font="Regular; 22" transparent="1" halign="center">
+      <convert type="MovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="765,345" size="485,250" font="Regular;22" transparent="1" valign="top">
+      <convert type="EventName">ExtendedDescription</convert>
+    </widget>
+    <widget source="Service" render="Label" position="830,610" size="80,24" font="Regular;19" halign="left" transparent="1">
+      <convert type="ServiceTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1060,610" size="195,24" font="Regular;19" halign="left" transparent="1">
+      <convert type="MovieInfo">FileSize</convert>
+    </widget>
+    <eLabel text="Grösse:" position="985,610" size="80,24" font="Regular;19" transparent="1" zPosition="2" foregroundColor="selectedFG" />
+    <eLabel text="Zeit:" position="765,610" size="50,24" font="Regular;19" transparent="1" zPosition="2" foregroundColor="selectedFG" />
+    <widget source="Service" font="Regular; 22" position="840,60" render="Label" size="410,25" transparent="1" zPosition="1" halign="left">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="Service" render="Picon" position="986,130" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+      <convert type="MovieInfo">RecordServiceRef</convert>
+    </widget>
+    <ePixmap position="768,111" size="143,190" alphatest="blend" zPosition="1" pixmap="Ultimate/mmp/no_cover.png" />
+    <eLabel text="Title:" position="765,60" size="65,25" font="Regular; 22" transparent="1" zPosition="2" foregroundColor="selectedFG" valign="top" />
+    <widget source="Service" render="Cover" position="765,102" size="153,203" zPosition="5" transparent="1" alphatest="blend" />
+    <panel name="template_pixmap_line_MovieSelection"/>
+	<panel name="ScrollBarTemplate size=700,610" />
+    <panel name="template_pixmap_vert_line_738" />
+    <panel name="template_name_long_red_o_blue" />
+    <panel name="template_title_date" />
+    <panel name="template_info_menu_exit_1280" />
+    <panel name="template_digitalclock_widget" />
+    <panel name="template_pixmap_rahmen" />
+    
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+  </screen>
+  </skin>

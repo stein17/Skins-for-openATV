@@ -1,0 +1,68 @@
+<skin>
+   <!-- skin_infobar_digital_light_servicename -->
+<screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar" backgroundColor="transparent">
+  <widget font="Regular; 30" halign="left" position="20,624" render="Label" size="90,38" source="session.Event_Now" transparent="0">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <eLabel font="Regular;32" halign="center" position="107,624" size="20,38" text="-" transparent="0" />
+  <widget font="Regular; 30" halign="left" position="135,624" render="Label" size="100,38" source="session.Event_Now" transparent="0">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="session.Event_Now" position="240,624" size="720,38" font="Regular; 30" foregroundColor="white" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=30,repeat=2,oneshot=1,startdelay=1000,always=0" zPosition="1" noWrap="1" transparent="0" backgroundColor="black">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Next" position="240,681" size="720,38" font="Regular; 30" foregroundColor="grey" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=30,repeat=2,oneshot=1,startdelay=1000,always=0" zPosition="1" noWrap="1" transparent="0" backgroundColor="black">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget font="Regular; 30" halign="right" position="970,624" render="Label" size="140,38" source="session.Event_Now" transparent="0">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <widget font="Regular; 30" foregroundColor="grey" halign="right" position="970,681" render="Label" size="140,38" source="session.Event_Next" transparent="0">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget font="Regular; 30" foregroundColor="grey" halign="left" noWrap="1" position="20,681" render="Label" size="90,38" source="session.Event_Next" transparent="0" valign="top">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <eLabel font="Regular;32" foregroundColor="grey" halign="center" noWrap="1" position="107,681" size="20,38" text="-" transparent="0" valign="top" />
+  <widget font="Regular; 30" foregroundColor="grey" halign="left" noWrap="1" position="135,680" render="Label" size="100,38" source="session.Event_Next" transparent="0" valign="top">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <!--   <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_light.png" /> -->
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_rec_on.png" position="588,576" render="Pixmap" size="47,15" source="session.RecordState" zPosition="2">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="110,575" size="525,42" font="Regular;32" noWrap="1" backgroundColor="background" transparent="1" halign="left" valign="center" foregroundColor="selectedFG">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <eLabel name="" position="970,627" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="228,684" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="970,684" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="228,627" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="1120,627" size="1,90" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="0,570" size="640,51" zPosition="-5" />
+  <eLabel name="" position="0,624" size="1280,100" zPosition="-20" />
+  <panel name="template_digitalclock_widget_infobar0" />
+  <widget render="Progress" position="30,665" size="1070,13" source="session.Event_Now" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget alphatest="blend" position="23,573" render="Picon" size="75,45" source="session.CurrentService" borderWidth="1" borderColor="selectedFG" transparent="1" zPosition="1">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget foregroundColor="selectedFG" backgroundColor="black" font="LCD; 48" noWrap="1" valign="center" halign="center" position="1120,625" render="Label" size="160,48" source="global.CurrentTime" transparent="0">
+  <convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+  <widget font="Regular; 20" noWrap="1" valign="center" halign="center" position="1120,695" render="Label" size="160,24" source="global.CurrentTime" transparent="0">
+    <convert type="ClockToText">Format:%e. %B</convert>
+  </widget>
+  <widget font="Regular; 20" valign="center" halign="center" noWrap="1" position="1120,670" render="Label" size="160,24" source="global.CurrentTime" transparent="0">
+    <convert type="ClockToText">Format:%A</convert>
+  </widget>
+  <!-- <eLabel name="" position="35,669" size="1090,1" backgroundColor="verygrey" zPosition="-15" /> -->
+</screen>
+  </skin>

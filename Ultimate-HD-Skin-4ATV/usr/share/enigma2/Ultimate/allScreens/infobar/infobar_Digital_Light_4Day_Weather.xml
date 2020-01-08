@@ -1,0 +1,125 @@
+<skin>
+ <!-- skin_infobar_digital_light -->
+<screen name="InfoBar" flags="wfNoBorder" position="-1,0" size="1280,720" title="InfoBar" backgroundColor="transparent">
+  <widget alphatest="blend" position="58,583" size="195,110" render="Picon" source="session.CurrentService" transparent="1" zPosition="2" borderWidth="1" borderColor="selectedFG">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget font="Regular; 27" halign="right" position="265,623" render="Label" size="80,38" source="session.Event_Now" transparent="0" foregroundColor="selectedFG" zPosition="1">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <eLabel font="Regular; 27" halign="center" position="346,623" size="20,38" text="-" transparent="0" foregroundColor="selectedFG" zPosition="1" />
+  <widget font="Regular; 27" halign="left" position="366,623" render="Label" size="80,38" source="session.Event_Now" transparent="0" foregroundColor="selectedFG" zPosition="1">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget font="Regular; 27" halign="left" noWrap="1" position="445,623" render="Label" size="470,38" source="session.Event_Now" transparent="0" valign="center" foregroundColor="selectedFG">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget font="Regular; 27" halign="right" position="915,623" render="Label" size="120,38" source="session.Event_Now" transparent="0" foregroundColor="selectedFG" zPosition="1">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <widget font="Regular; 27" foregroundColor="steelblue" halign="right" noWrap="1" position="265,681" render="Label" size="80,38" source="session.Event_Next" transparent="0" valign="top" zPosition="1">
+  <convert type="EventTime">StartTime</convert>
+  <convert type="ClockToText">Default</convert>
+</widget>
+  <eLabel font="Regular; 30" foregroundColor="grey" halign="center" noWrap="1" position="346,681" size="20,38" text="-" transparent="0" valign="top" zPosition="1" />
+  <widget font="Regular; 27" foregroundColor="steelblue" halign="left" noWrap="1" position="366,681" render="Label" size="80,38" source="session.Event_Next" transparent="0" valign="top" zPosition="1">
+  <convert type="EventTime">EndTime</convert>
+  <convert type="ClockToText">Default</convert>
+</widget>
+  <widget font="Regular; 27" foregroundColor="steelblue" halign="left" noWrap="1" position="445,681" render="Label" size="470,38" source="session.Event_Next" transparent="0" valign="center" zPosition="1">
+  <convert type="EventName">Name</convert>
+</widget>
+  <widget font="Regular; 27" foregroundColor="steelblue" halign="right" position="915,681" render="Label" size="120,38" source="session.Event_Next" transparent="0" zPosition="1">
+  <convert type="EventTime">Duration</convert>
+  <convert type="ClockToText">InMinutes</convert>
+</widget>
+  <widget source="session.CurrentService" render="Label" position="2,697" size="55,22" font="Regular; 20" halign="right" valign="center" transparent="0" foregroundColor="selectedFG">
+    <convert type="ServiceInfo">VideoWidth</convert>
+  </widget>
+  <eLabel text="x" position="57,697" size="20,22" font="Regular; 20" halign="center" valign="center" transparent="0" foregroundColor="selectedFG" />
+  <widget source="session.CurrentService" render="Label" position="77,697" size="55,22" font="Regular; 20" halign="left" valign="center" transparent="0" foregroundColor="selectedFG">
+    <convert type="ServiceInfo">VideoHeight</convert>
+  </widget>
+  <eLabel text="SNR:" position="152,697" size="52,22" font="Regular; 20" halign="left" valign="center" transparent="0" foregroundColor="steelblue" />
+  <widget source="session.FrontendStatus" render="Label" position="203,697" size="52,22" font="Regular; 20" valign="center" noWrap="1" transparent="0" halign="left" foregroundColor="selectedFG">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_rec_on.png" position="203,586" render="Pixmap" size="47,15" source="session.RecordState" zPosition="4">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_dolby_off.png" position="5,666" size="47,26" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsStereo</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="5,666" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="5,624" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">0,719</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="5,624" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1079</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="5,624" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1080</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_uhd_on.png" position="5,624" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">Is4K</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_hd_hdr_on.png" position="5,624" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr_on.png" position="5,624" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr10_on.png" position="5,624" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDR10</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_hlg_on.png" position="5,624" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHLG</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_format_off.png" position="5,583" size="47,26" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsNotWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="Ultimate/icons/ico_format_on.png" position="5,583" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget foregroundColor="selectedFG" backgroundColor="black" font="LCD; 48" noWrap="1" valign="center" halign="center" position="1045,620" render="Label" size="240,48" source="global.CurrentTime" transparent="0">
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget font="Regular; 20" halign="center" position="1045,671" render="Label" size="240,22" source="global.CurrentTime" transparent="0">
+    <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+  </widget>
+  <eLabel name="" position="0,581" size="255,140" zPosition="-5" />
+  <widget source="session.CurrentService" render="Label" position="1045,697" size="240,22" font="Regular; 20" halign="center" backgroundColor="background" transparent="0" zPosition="1">
+    <convert type="PliExtraInfo">TunerSystem</convert>
+  </widget>
+  <widget render="Progress" position="265,665" size="770,13" source="session.Event_Now" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <eLabel name="" position="258,620" size="782,100" zPosition="-10" />
+  <eLabel name="" position="445,627" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="914,684" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="445,684" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="914,627" size="1,32" backgroundColor="selectedFG" zPosition="3" />
+  <eLabel name="" position="1044,620" size="240,100" zPosition="-10" />
+  <panel name="template_Infobar_4Day_Weather" />
+</screen>
+</skin>

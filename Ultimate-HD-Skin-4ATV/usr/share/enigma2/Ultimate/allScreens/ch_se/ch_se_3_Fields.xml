@@ -1,0 +1,82 @@
+<skin>
+ <!-- ChannelSelection_3_Fields-->
+<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+  <widget source="ServiceEvent" render="Label" position="1034,360" size="58,20" font="Regular; 19" foregroundColor="white" transparent="1" halign="left" valign="center">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="1195,360" size="58,20" font="Regular; 19" foregroundColor="white" transparent="1" valign="center">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Progress" position="929,385" size="320,10" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+  <convert type="EventTime">Progress</convert>
+</widget>
+  <!--  <widget name="list" position="349,70" size="578,590" scrollbarMode="showOnDemand" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="cyan" colorServiceDescriptionSelected="white" colorEventProgressbar="cyan" colorEventProgressbarBorder="white" colorEventProgressbarBorderSelected="cyan" foregroundColorServiceNotAvail="lila" foregroundColorSelected="cyan" foregroundColor="white" serviceItemHeight="30" serviceNumberFont="Regular;20" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" /> -->
+  <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startdelay=8000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="929,103" size="325,245" font="Regular; 22" foregroundColor="white" transparent="1" halign="left" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="UltimateRunningText" options=" movetype=running,startdelay=8000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="929,440" size="325,230" font="Regular;22" halign="left" valign="top" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="5">
+    <convert type="UltimateServiceNameEventNobile">ExtendedDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=1000,always=0" position="30,645" size="315,26" font="Regular; 22" foregroundColor="selectedFG" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+  <convert type="UltimatePrimeTime">PrimeTime,noDuration</convert>
+</widget>
+  <widget source="ServiceEvent" render="Label" position="985,60" size="265,32" font="Regular; 22" foregroundColor="selectedFG" backgroundColor="black" halign="center" valign="center" transparent="1" zPosition="6">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget source="ServiceEvent" render="UltimateSingleEpgListFull" position="30,285" size="315,345" noWrap="1" font="Regular;20" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="2" />
+  <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=1000,always=0" position="1066,401" zPosition="1" size="190,24" font="Regular; 20" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="selectedFG">
+  <convert type="UltimateServiceNameEventNobile">NextEvent</convert>
+</widget>
+  <widget source="ServiceEvent" render="Label" position="1005,401" zPosition="1" size="60,24" font="Regular; 20" halign="center" backgroundColor="background" transparent="1" foregroundColor="white">
+    <convert type="UltimateServiceNameEventNobile">StartTime</convert>
+  </widget>
+  <eLabel text="Start Time :" position="929,360" size="110,20" font="Regular; 19" halign="left" backgroundColor="black" foregroundColor="grey" transparent="1" zPosition="1" />
+  <eLabel text="End Time :" position="1102,360" size="100,20" font="Regular; 19" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="grey" />
+  <eLabel text="es folgt:" position="929,401" size="80,24" font="Regular; 20" halign="left" backgroundColor="background" transparent="1" zPosition="2" valign="center" foregroundColor="selectedFG" />
+  <eLabel text="CH +/-" position="560,4" size="120,44" font="Regular;32" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <eLabel text="Zapp Favorites " position="680,4" size="260,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget source="ServiceEvent" render="Picon" position="929,60" size="53,32" zPosition="5" alphatest="blend" transparent="1">
+    <convert type="UltimateRefString">ServicelistRef</convert>
+  </widget>
+  <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_green.png" position="148,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="355,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="512,689" size="26,26" alphatest="blend" transparent="1" />
+  <widget name="key_red" position="49,689" size="90,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_green" position="177,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_yellow" position="384,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_blue" position="541,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/sat.png" position="682,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/dvbt.png" position="682,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/kabel.png" position="682,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="ServiceEvent" render="UltimateFrontend" position="721,689" zPosition="1" valign="center" size="350,25" font="Regular; 20" backgroundColor="black" foregroundColor="white" transparent="1" halign="left" />
+  <panel name="ScrollBarTemplate size=550,610"/> 
+  <panel name="template_pixmap_lines_ch_se_3_fields" />
+  <panel name="ChannelSelection_3_fields_color_default" />
+  <panel name="template_menu_ok_exit_1280" />
+  <panel name="template_pig_mini_left" />
+  <panel name="template_pixmap_pig_mini_left" />
+  <panel name="template_digitalclock_widget" />
+  <panel name="template_pixmap_rahmen" />
+  
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  <panel name="template_title_date" />
+</screen>
+ </skin>
+ 
+ 
