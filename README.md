@@ -1,5 +1,6 @@
 # Skins-for-openATV
 Skins for openATV Images by stein17
+
 Für das Ultimate Skin-setup muss die AtileHD plugin.py ersetzt werden.
 die plugin.py ist die von mir geänderte py.
 Nach dem Neustart ist aus der plugin.py eine plugin.pyo geworden.
