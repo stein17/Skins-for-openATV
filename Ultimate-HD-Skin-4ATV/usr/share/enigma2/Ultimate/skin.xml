@@ -613,7 +613,13 @@
     </widget>
   </screen>
   <screen name="menu_system" position="0,0" size="1280,720" title="Main menu" flags="wfNoBorder" backgroundColor="background">
-    <panel name="template_menu_listbox_430" />
+      <widget source="menu" render="Listbox" position="30,59" size="430,400" scrollbarMode="showOnDemand" sliderPixmap="Ultimate/menu/Scrollbar.png" enableWrapAround="1" alphatest="blend" transparent="1">
+      <convert type="TemplatedMultiContent">
+	{"template": [ MultiContentEntryText(pos = (30, 4), size = (420, 40), flags = RT_HALIGN_LEFT, text = 0) ],
+	"fonts": [gFont("Regular", 27)],"itemHeight": 40}
+     </convert>
+    </widget>
+    <panel name="ScrollBarTemplate size=430,400" />
     <panel name="template_pig_large" />
     <panel name="template_pixmap_pig_large" />
     <panel name="template_title_date" />
@@ -733,7 +739,7 @@
       <convert type="MenuEntryCompare">iptv_config</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="menu" render="Pixmap" pixmap="Ultimate/menu/setup_ultimate2.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
+    <widget source="menu" render="Pixmap" pixmap="Ultimate/menu/setup_ultimate22.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
       <convert type="MenuEntryCompare">atilehd_setup</convert>
       <convert type="ConditionalShowHide" />
     </widget>
