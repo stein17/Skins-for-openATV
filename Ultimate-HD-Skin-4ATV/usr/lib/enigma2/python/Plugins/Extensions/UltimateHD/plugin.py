@@ -188,7 +188,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
 
 		self.default_font_file = "font_atile_Roboto.xml"
-		self.default_color_file = "colors_atile_Grey_transparent.xml"
+		self.default_color_file = "colors_Original.xml"
 		self.default_sb_file = "sb_Original.xml"
 
 		self.default_frame_file = "frame_Original.xml"
