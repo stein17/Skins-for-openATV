@@ -1,0 +1,145 @@
+<skin>
+
+   <!-- Channel_selection_3_Fields_default_user
+
+  Mit Notpad++ die /usr/share/enigma2/Multibox/allScreens/Channel_selection_?????? user.xml öffnen.
+  Dann eure bevorzugte ( left, 3-Fields oder default) Channel_selection.... user editieren.
+  
+  Diese Zeilen sind relevant.
+	 
+	 foregroundColor
+	 foregroundColorSelected
+
+	 colorServiceDescription
+	 colorServiceDescriptionSelected 
+	 
+	 backgroundColor
+	 backgroundColorSelected
+
+	 colorEventProgressbarBorder 
+	 colorEventProgressbarBorderSelected
+	 picServiceEventProgressbar="Multibox/menu/Progress_CS_color.png"
+	 oder 
+	 colorEventProgressbar
+	 
+  Es dürfen nur die Farben genommen werden, die auch in der skin.xml 
+  in <colors> eingetragen sind, sonst crasht es.
+  
+  Um die Farbe eurer Wahl zu bestimmen, schaut im Skinsetup bei Farbe,
+  merkt euch die Zahl und schaut dann in /usr/share/enigma2/Multibox/allScreens/colors/
+  nach.
+  Sieht zB.so aus:     Colors_Title_Foreground_Background_3Grey 
+	                   <colors>
+	                   <color name="Line" value="#0092a8bf" />
+                       </colors>
+					   
+  Hier dann den Farbcode suchen:
+ 
+    <color name="blue" value="#000000ff" />
+    <color name="blue2" value="#204176b6" />
+    <color name="bluelabel" value="#00003399" />
+    <color name="bluetitle" value="#0050bbff" />
+	<color name="darkblue" value="#0016244b" />
+    <color name="darkblue2" value="#00031b5e" />
+    <color name="darkbluelabel" value="#00002672" />
+	<color name="Multiboxlabel" value="#00065c9e" />
+	<color name="metrixblue" value="#000050ef" />
+    <color name="lightblue" value="#0066ccff" />
+    <color name="lightbluelabel" value="#000040c0" />
+    <color name="backgroundBlue" value="#00003366" />
+    <color name="cobalt" value="#000064c7" />
+	<color name="cobaltlight" value="#004082b7" />
+    <color name="cyan" value="#0000ffff" />
+	<color name="bubbless" value="#00e7feff" />
+	<color name="foregroundClock" value="#00ccffff" />
+	
+	<color name="verydarkgreen" value="#00002200" />
+	<color name="darkgreen" value="#00008a00" />
+    <color name="green" value="#0000ff00" />
+    <color name="greenlight" value="#00a4c400" />
+	<color name="greygreen" value="#006d8764" />
+	
+	<color name="lila" value="#009f40ca" />
+    <color name="pink" value="#00ff349f" />
+	<color name="verypink" value="#00990099" />
+	<color name="rose" value="#00ff4a3c" />
+	<color name="rosa" value="#00ff99cc" />
+    <color name="red" value="#00ff0000" />
+    <color name="darkred" value="#00a00000" />
+	
+    <color name="grey" value="#00bbbbbb" />
+    <color name="grey1" value="#00a6a6a6" />
+    <color name="grey2" value="#00cccccc" />
+	<color name="greyblue" value="#0092a8bf" />
+
+    <color name="verydarkgrey" value="#003a3a3a" />
+    <color name="verygrey" value="#00666666" />
+    <color name="darkgrey" value="#00999999" />
+
+    <color name="yellow" value="#00ffff00" />
+	<color name="darkyellow" value="#00fcc000" />
+	
+    <color name="orange" value="#00FF7F00" />
+	<color name="orange2" value="#00ff4500" />
+	<color name="darkorange" value="#00f47d19" />
+	
+	<color name="bernstein" value="#00d08222" />
+	<color name="darkbernstein" value="#00bf9217" />
+	
+	<color name="brown" value="#00825a2c" />
+    <color name="darkbrown" value="#00502800" />
+	<color name="verybrown" value="#003c1e00" />
+	<color name="verydarkbrown" value="#0033200e" />
+	<color name="lightbrown" value="#00985f28" />
+	
+    <color name="black" value="#00000000" />
+	<color name="white" value="#00ffffff" />
+	<color name="menu" value="#20062748" />
+    <color name="dark" value="#00031324" />
+	
+  Das ist dann eure Farbe <color name="greyblue" value="#0092a8bf" />
+  Also müsst ihr 
+  Beispiel: backgroundColorSelected="dark" ersetzen in backgroundColorSelected="greyblue"
+  
+  Anstelle Des Bildes für die Progressbar, kann man auch eine Farbe eurer Wahl eintragen.
+  Das heißt: picServiceEventProgressbar="Multibox/menu/Progress_CS_color.png"/>
+  durch colorEventProgressbar="Farbe eurer Wahl" ersetzen.
+  
+  Speichern und die Oberfläche neu starten. -->
+
+ <screen name="Channel_selection_3_Fields_default">
+
+	 <widget name="list" position="523,100" size="877,892" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
+	 serviceItemHeight="56" 
+	 serviceNumberFont="Regular;36" 
+	 serviceNameFont="Regular;40" 
+	 serviceInfoFont="Regular;36" 
+	 fieldMargins="15" 
+	 nonplayableMargins="15" 
+	 itemsDistances="8"
+	 progressBarWidth="80" 
+	 progressPercentWidth="90" 
+	 progressbarHeight="12" 
+	
+	 colorServiceRecorded="red" 
+	 colorServicePseudoRecorded="pink" 
+	 colorServiceStreamed="darkorange" 
+	 foregroundColorServiceNotAvail="lila"
+	 foregroundColorMarkedSelected="darkyellow"
+	 
+	 foregroundColor="white" 
+	 foregroundColorSelected="white"
+
+	 colorServiceDescription="cyan" 
+	 colorServiceDescriptionSelected="greenlight" 
+	 
+	 backgroundColor="background" 
+	 backgroundColorSelected="verydarkgrey"
+
+	 colorEventProgressbarBorder="cyan" 
+	 colorEventProgressbarBorderSelected="cyan" 
+	 picServiceEventProgressbar="Multibox/menu/Progress_CS_color.png"/>
+	 
+	</screen>
+
+ </skin>
