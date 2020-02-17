@@ -26,11 +26,11 @@ Anleitung Channel_selection.... user
   Um die Farbe eurer Wahl zu bestimmen, schaut im Skinsetup bei Farbe,
   merkt euch die Zahl und schaut dann in /usr/share/enigma2/Multibox/allScreens/colors/
   nach.
-  Sieht zB.so aus:     Colors_Title_Foreground_Background_3Grey 
-	                   <colors>
-	                   <color name="Line" value="#0092a8bf" />
-                       </colors>
-					   
+  Sieht zB.so aus:    
+  Colors_Title_Foreground_Background_3Grey 
+  <colors>
+  <color name="Line" value="#0092a8bf" />
+  </colors>				   
  Hier dann den Farbcode suchen:
  
     <color name="blue" value="#000000ff" />
