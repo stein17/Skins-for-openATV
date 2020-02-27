@@ -27,23 +27,23 @@
     <convert type="ValueRange">721,1080</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-   <widget alphatest="blend" pixmap="Multibox/icons/ico_uhd_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
+   <widget alphatest="blend" pixmap="Multibox/icons/ico_uhd_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
       <convert type="ServiceInfo">Is4K</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-	<widget alphatest="blend" pixmap="Multibox/icons/ico_hd_hdr_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
+	<widget alphatest="blend" pixmap="Multibox/icons/ico_hd_hdr_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
       <convert type="ServiceInfo">IsHDHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-	<widget alphatest="blend" pixmap="Multibox/icons/ico_hdr_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
+	<widget alphatest="blend" pixmap="Multibox/icons/ico_hdr_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
       <convert type="ServiceInfo">IsHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-	<widget alphatest="blend" pixmap="Multibox/icons/ico_hdr10_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
+	<widget alphatest="blend" pixmap="Multibox/icons/ico_hdr10_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
       <convert type="ServiceInfo">IsHDR10</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-	<widget alphatest="blend" pixmap="Multibox/icons/ico_hlg_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
+	<widget alphatest="blend" pixmap="Multibox/icons/ico_hlg_on.png" position="1816,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
       <convert type="ServiceInfo">IsHLG</convert>
       <convert type="ConditionalShowHide" />
     </widget>
@@ -90,18 +90,21 @@
     <ePixmap position="0,854" zPosition="-20" size="1920,226" pixmap="Multibox/menu/Player1.png" />
     <widget name="statusicon" position="45,45" size="20,20" zPosition="3" alphatest="on" pixmaps="Multibox/skin_default/system/play.png,Multibox/skin_default/system/pause.png,Multibox/skin_default/system/stop.png,Multibox/skin_default/system/forward.png,Multibox/skin_default/system/backward.png,Multibox/skin_default/system/slow.png,Multibox/skin_default/system/blank.png" />
     <widget name="speed" position="30,48" size="80,15" font="Regular;17" halign="left" transparent="1" zPosition="4" />
-    <widget source="global.CurrentTime" render="Label" position="1490,874" size="420,50" font="Italic; 40" halign="center" foregroundColor="white" backgroundColor="background" borderColor="dark" borderWidth="3" transparent="1" zPosition="1">
+    <widget source="global.CurrentTime" render="Label" position="1470,874" size="420,50" font="Italic; 40" halign="center" foregroundColor="white" backgroundColor="background" borderColor="dark" borderWidth="3" transparent="1" zPosition="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
+    </widget>
+	<widget source="global.CurrentTime" render="Label" position="1880,870" size="45,40" font="LCD; 30" valign="top" halign="left" foregroundColor="white" backgroundColor="background" borderColor="dark" borderWidth="2" transparent="1">
+    <convert type="ClockToText">Format:%S</convert>
     </widget>
 	<eLabel text="Start:" font="Regular; 36" halign="right" valign="center" position="419,1030" size="120,40" transparent="1" foregroundColor="default" zPosition="1" />
     <eLabel text="Ende:" font="Regular; 36" halign="right" valign="center" position="1170,1030" size="120,40" transparent="1" foregroundColor="default" zPosition="1" />
-    <widget source="Service" render="Progress" pixmap="Multibox/Player_Progress.png" position="415,991" size="1008,24" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+    <widget source="Service" render="Progress" position="415,991" size="1008,24" pixmap="Multibox/mmp/Player_Progress.png" zPosition="5" transparent="1">
       <convert type="EMCServicePosition">Position</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" position="415,990" size="1008,26" zPosition="3" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" position="415,990" size="1008,26" zPosition="6" transparent="1">
       <convert type="EMCServicePosition">Gauge</convert>
     </widget>
-    <widget source="Service" render="EMCPositionGauge" pointer="Multibox/colors/48Red_ff0000.png:1917,4" position="415,992" size="1008,20" zPosition="4" transparent="1">
+    <widget source="Service" render="EMCPositionGauge" position="415,992" size="1008,20" pointer="Multibox/mmp/Progress_rec.png:1104,0" zPosition="4" transparent="1">
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
     <ePixmap pixmap="Multibox/Skinparts/User_Logo.png" position="10,850" size="150,48" zPosition="1" alphatest="blend" />

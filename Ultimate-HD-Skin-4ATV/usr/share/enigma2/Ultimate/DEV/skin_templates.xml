@@ -402,7 +402,15 @@
   <screen name="template_pixmap_Infobar_Player">
     <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_movie.png" />
   </screen>
-
+   <!-- TEMPLATES Pixmaps Infobar-->
+  <screen name="template_pixmap_Infobar_black">
+    <ePixmap position="0,0" zPosition="-10" size="1280,720" pixmap="Ultimate/Skinparts/Infobar/Infobar_Org.png" />
+	<ePixmap pixmap="Ultimate/colors/00ff0000.png" position="0,535" size="1280,185" zPosition="-50" />
+  </screen>
+  <!-- TEMPLATES Infobar transparent-->
+  <screen name="template_I_bar_transparent">
+	<eLabel name="background_infobar" position="0,535" size="1280,185" backgroundColor="transparent" zPosition="-12"/>
+  </screen>
   <!-- TEMPLATES Pixmaps Frame 1280x720-->
   <screen name="template_pixmap_rahmen">
     <ePixmap pixmap="Ultimate/Skinparts/Rahmen/Rahmen_Org.png" position="0,0" zPosition="-25" size="1280,720" />
@@ -447,11 +455,17 @@
     <widget position="490,70" size="750,50" source="session.CurrentService" render="Label" font="Regular;32" foregroundColor="selectedFG" backgroundColor="background" transparent="1" valign="center" halign="left" noWrap="1" zPosition="5">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <widget   position="490,610" size="750,50" source="session.Event_Now" render="Label" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1">
+<!--     <widget   position="490,610" size="750,50" source="session.Event_Now" render="Label" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1">
       <convert type="EventName">Name</convert>
-    </widget>
+    </widget> -->
+	 <widget position="490,595" size="750,76" source="session.Event_Now" render="Label" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1">
+  <convert type="EventName">Name</convert>
+</widget>
     <widget position="488,154" size="749,419" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
   </screen>
+  
+ 
+  
   <screen name="template_pig_mini_left">
     <widget position="34,60" size="307,172" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
     <widget position="30,243" size="315,30" source="session.CurrentService" render="Label" font="Regular;22" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
@@ -626,7 +640,8 @@
   <screen name="template_exit_1280">
     <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="Ultimate/buttons/exit.png" transparent="1" alphatest="blend" />
   </screen>
-   <screen name="template_crypt_info">
+  <!-- TEMPLATES crypt_info-->
+  <screen name="template_crypt_info">
     <eLabel text="CRYPT:" position="1030,633" size="65,21" font="Regular; 16" halign="left" valign="center" transparent="1" />
     <eLabel position="1088,633" size="15,21" text="B" font="Regular; 16" halign="center" foregroundColor="selectedFG" transparent="1" valign="center" zPosition="3" />
     <widget position="1088,633" size="15,21" text="B" font="Regular; 16" halign="center" foregroundColor="yellow2" backgroundColor="background" source="session.CurrentService" render="FixedLabel" transparent="1" valign="center" zPosition="4">
@@ -1631,6 +1646,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="998,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
     <ePixmap pixmap="Ultimate/Wettericons/cold_hot.png" position="782,3" size="9,24" alphatest="blend" transparent="1" zPosition="1" />
   </screen>
+
   <!--Template List ChannelSelection Default -->
   <screen name="ChannelSelection_color_default">
     <widget name="list" position="30,60" size="820,570" 
