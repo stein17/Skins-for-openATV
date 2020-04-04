@@ -1,3 +1,4 @@
+# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/SYSTemp.py
 from Components.VariableText import VariableText
 from enigma import eLabel
 from Renderer import Renderer
@@ -24,6 +25,9 @@ class AMBSYSTemp(Renderer, VariableText):
                 elif path.exists('/proc/stb/fp/temp_sensor_avs'):
                     out_line = popen('cat /proc/stb/fp/temp_sensor_avs').readline()
                     systemp = out_line.replace('\n', '').replace(' ', '')
+                elif path.exists('/sys/class/thermal/thermal_zone0/temp'):
+                    out_line = popen('cat /sys/class/thermal/thermal_zone0/temp').readline()
+                    systemp = out_line.replace('\n', '')
                 if not systemp == '-- ' and len(systemp) > 2:
                     systemp = systemp[:2]
             except:
