@@ -292,7 +292,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
 		choices.append(default)
 
 		# current setting
-		myfile = self.skin_base_dir + user_file
+		myfile = self.skin_base_dir  + "mySkin_off/" + user_file
 		current = ''
 		if not path.exists(myfile):
 			if path.exists(self.skin_base_dir + default_file):
@@ -336,35 +336,36 @@ class Ultimate_Config(Screen, ConfigListScreen):
 		self.find_woeid = getConfigListEntry(_("Search weather location ID"), ConfigNothing())
 		self.list = []
 		self.list.append(self.set_myatile)
-		if len(self.myAtileHD_color.choices)>1:
-			self.list.append(self.set_color)
-		if len(self.myAtileHD_sb.choices)>1:
-			self.list.append(self.set_sb)
-		if len(self.myAtileHD_frame.choices)>1:
-			self.list.append(self.set_frame)
-		if len(self.myAtileHD_center.choices)>1:
-			self.list.append(self.set_center)
-		if len(self.myAtileHD_lines.choices)>1:
-			self.list.append(self.set_lines)
-		if len(self.myAtileHD_sbar.choices)>1:
-			self.list.append(self.set_sbar)
-		if len(self.myAtileHD_infobar.choices)>1:
-			self.list.append(self.set_infobar)
-		if len(self.myAtileHD_wget.choices)>1:
-			self.list.append(self.set_wget)
-		if len(self.myAtileHD_sib.choices)>1:
-			self.list.append(self.set_sib)
-		if len(self.myAtileHD_ch_se.choices)>1:
-			self.list.append(self.set_ch_se)
-		if len(self.myAtileHD_ev.choices)>1:
-			self.list.append(self.set_ev)
-		if len(self.myAtileHD_emcsel.choices)>1:
-			self.list.append(self.set_emcsel)
-		if len(self.myAtileHD_movsel.choices)>1:
-			self.list.append(self.set_movsel)
-		if len(self.myAtileHD_volume.choices)>1:
-			self.list.append(self.set_volume)
-		self.list.append(self.set_new_skin)
+		if self.myAtileHD_active.value:
+			if len(self.myAtileHD_color.choices)>1:
+				self.list.append(self.set_color)
+			if len(self.myAtileHD_sb.choices)>1:
+				self.list.append(self.set_sb)
+			if len(self.myAtileHD_frame.choices)>1:
+				self.list.append(self.set_frame)
+			if len(self.myAtileHD_center.choices)>1:
+				self.list.append(self.set_center)
+			if len(self.myAtileHD_lines.choices)>1:
+				self.list.append(self.set_lines)
+			if len(self.myAtileHD_sbar.choices)>1:
+				self.list.append(self.set_sbar)
+			if len(self.myAtileHD_infobar.choices)>1:
+				self.list.append(self.set_infobar)
+			if len(self.myAtileHD_wget.choices)>1:
+				self.list.append(self.set_wget)
+			if len(self.myAtileHD_sib.choices)>1:
+				self.list.append(self.set_sib)
+			if len(self.myAtileHD_ch_se.choices)>1:
+				self.list.append(self.set_ch_se)
+			if len(self.myAtileHD_ev.choices)>1:
+				self.list.append(self.set_ev)
+			if len(self.myAtileHD_emcsel.choices)>1:
+				self.list.append(self.set_emcsel)
+			if len(self.myAtileHD_movsel.choices)>1:
+				self.list.append(self.set_movsel)
+			if len(self.myAtileHD_volume.choices)>1:
+				self.list.append(self.set_volume)
+			self.list.append(self.set_new_skin)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 		if self.myAtileHD_active.value:
@@ -406,6 +407,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
 				self["key_yellow"].setText("%s pro" % cur_skin)
 			else:
 				self["key_yellow"].setText("")
+			self.createConfigList()
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.set_color:
@@ -585,10 +587,10 @@ class Ultimate_Config(Screen, ConfigListScreen):
 				self.close()
 
 	def makeSettings(self, config_entry, user_file):
-		if path.exists(user_file) or path.islink(user_file):
-			remove(user_file)
+		if path.exists("mySkin_off/" + user_file) or path.islink("mySkin_off/" + user_file):
+			remove("mySkin_off/" + user_file)
 		if config_entry.value != 'default':
-			symlink(config_entry.value, user_file)
+			symlink(config_entry.value, "mySkin_off/" + user_file)
 
 	def UltimateScreenCB(self):
 		self.changed_screens = True
