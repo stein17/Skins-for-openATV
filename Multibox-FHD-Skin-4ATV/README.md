@@ -1,4 +1,4 @@
-# Multibox FHD Skin 4 NFR
+# Multibox FHD Skin
 Anleitung Channel_selection.... user
   Mit Notpad++ die /usr/share/enigma2/Multibox/allScreens/Channel_selection_?????? user.xml öffnen.
   Dann eure bevorzugte ( left, 3-Fields oder default) Channel_selection.... user editieren.
