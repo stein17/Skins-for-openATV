@@ -3404,17 +3404,18 @@ self['config'].l.setSeperation(int(300*f))
   <widget name="number" position="12,85" size="525,100" halign="center" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
  </screen>
   <!-- NumberZapWithPicon -->
-<screen name="NumberZapPicon" position="50,820" size="550,220" backgroundColor="background" flags="wfNoBorder">
-  <eLabel name="BG" position="319,9" size="222,134" zPosition="-10" backgroundColor="Line" />
-  <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="black" />
-  <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
-  <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="black" />
-  <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
-  <convert type="ServiceName">Reference</convert>
-  </widget>
-  <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="black" foregroundColor="Line" noWrap="1" transparent="1" />
-  <widget name="number" position="12,31" size="280,100" halign="right" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
- </screen>
+<screen name="NumberZapPicon" position="50,820" size="550,220" backgroundColor="transparent" flags="wfNoBorder">
+    <eLabel name="BG" position="319,9" size="222,134" zPosition="-10" backgroundColor="Line" />
+    <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="background40" />
+    <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
+    <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="background40" />
+    <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="background40" foregroundColor="Line" noWrap="1"  />
+    <widget name="number" position="12,31" size="280,100" halign="right" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="background40" />
+  <eLabel name="" position="5,150" size="540,1" zPosition="5" backgroundColor="Line" />
+</screen>
   <screen name="HistoryZapSelector" position="0,0" size="1920,1080">
     <eLabel text="History Zap..." position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget source="menu" render="Listbox" position="0,100" size="1180,870" scrollbarMode="showOnDemand" transparent="1" zPosition="0">
