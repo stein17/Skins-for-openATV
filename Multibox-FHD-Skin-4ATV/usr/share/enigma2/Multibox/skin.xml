@@ -980,20 +980,19 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
   </screen>
-  
-  
-  
-  
   <screen name="EMCSelection" position="0,0" size="1920,1080" title="Enhanced Movie Center" flags="wfNoBorder">
-    <widget source="Title" render="Label" position="10,85" size="1200,50" font="Regular; 36" halign="left" valign="center" foregroundColor="default" backgroundColor="background" transparent="1" zPosition="1" />
+    <!-- <widget source="Title" render="Label" position="10,85" size="1200,50" font="Regular; 36" halign="left" valign="center" foregroundColor="default" backgroundColor="background" transparent="1" zPosition="1" /> -->
+	<widget source="Service" render="Label" position="10,85" size="700,50" font="Regular;36" foregroundColor="default" backgroundColor="background" transparent="1" noWrap="1" halign="left">
+	<convert type="AMBDiskSpace">path</convert>
+	</widget>
+	<widget source="Service" render="Label" position="710,85" size="545,50" font="Regular;36" foregroundColor="default" backgroundColor="background" transparent="1" noWrap="1" halign="right">
+	<convert type="AMBDiskSpace">both</convert>
+	</widget>
+	<eLabel name="vertikalline" position="10,145" size="1245,2" backgroundColor="Line" foregroundColor="Line" />
     <eLabel text="Enhanced Movie Center" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget name="wait" position="180,20" size="800,45" zPosition="1" font="Regular;36" backgroundColor="background" foregroundColor="yellow" halign="center" valign="center" transparent="1" />
     <panel name="Enhanced_Movie_Center" />
   </screen>
-  
-
-  
-  
   <screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="Label" position="360,874" size="1060,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1">
       <convert type="ServiceName">Name</convert>
