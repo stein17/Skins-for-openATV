@@ -74,10 +74,10 @@ class AMBDiskSpace(Poll, Converter, object):
                     return 'N/A'
 
             elif self.type == self.path:
-				if "." in str(service.getPath()) or "@" in str(service.getPath()) or "Latest Recordings" in str(service.getPath()):
-					return service.getPath().rsplit('/', 1)[0]
-				else:
-					return service.getPath().replace('/Latest Recordings','')
+                if "." in str(service.getPath()) or "@" in str(service.getPath()) or "Latest Recordings" in str(service.getPath()):
+                    return service.getPath().rsplit('/', 1)[0]
+                else:
+                    return service.getPath().replace('/Latest Recordings','')
 
         return ""
 

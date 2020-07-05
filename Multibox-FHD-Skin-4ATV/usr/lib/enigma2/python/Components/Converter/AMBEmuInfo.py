@@ -135,7 +135,7 @@ class AMBEmuInfo(Converter, object):
                             caID = caID.strip(',;.:-*_<>()[]{}')
                             sysID = self.getCryptName(caID)
                             return sysID
-			file.close()
+                        file.close()
         else:
             return ''
 
