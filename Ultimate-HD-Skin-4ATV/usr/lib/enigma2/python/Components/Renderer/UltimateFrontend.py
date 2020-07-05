@@ -66,10 +66,10 @@ class UltimateFrontend(VariableText, Renderer):
                     sname = info.getInfoObject(serviceref, iServiceInformation.sTransponderData)
                     fq = pol = fec = sr = orb = ""
                     try:
-                        if sname.has_key("frequency"):
+                        if "frequency" in sname:
                             tmp = int(sname["frequency"])/1000
                             fq = str(tmp) + "  "
-                        if sname.has_key("polarization"):
+                        if "polarization" in sname:
                             try:
                                 pol = {
                                         eDVBFrontendParametersSatellite.Polarisation_Horizontal : "H  ",
@@ -78,7 +78,7 @@ class UltimateFrontend(VariableText, Renderer):
                                         eDVBFrontendParametersSatellite.Polarisation_CircularRight : "CR  "}[sname["polarization"]]
                             except:
                                 pol = "N/A  "
-                        if sname.has_key("fec_inner"):
+                        if "fec_inner" in sname:
                             try:
                                 fec = {
                                         eDVBFrontendParametersSatellite.FEC_None : _("None  "),
@@ -97,27 +97,27 @@ class UltimateFrontend(VariableText, Renderer):
                             if fec == "N/A  ":
                                 try:
                                     fec = {
-                                            eDVBFrontendParametersCable.FEC_None : _("None  "),
-                                            eDVBFrontendParametersCable.FEC_Auto : _("Auto  "),
-                                            eDVBFrontendParametersCable.FEC_1_2 : "1/2  ",
-                                            eDVBFrontendParametersCable.FEC_2_3 : "2/3  ",
-                                            eDVBFrontendParametersCable.FEC_3_4 : "3/4  ",
-                                            eDVBFrontendParametersCable.FEC_5_6 : "5/6  ",
-                                            eDVBFrontendParametersCable.FEC_7_8 : "7/8  ",
-                                            eDVBFrontendParametersCable.FEC_8_9 : "8/9  ",}[sname["fec_inner"]]
+                                            eDVBFrontendParametersCable.FEC_None: _("None  "),
+                                            eDVBFrontendParametersCable.FEC_Auto: _("Auto  "),
+                                            eDVBFrontendParametersCable.FEC_1_2: "1/2  ",
+                                            eDVBFrontendParametersCable.FEC_2_3: "2/3  ",
+                                            eDVBFrontendParametersCable.FEC_3_4: "3/4  ",
+                                            eDVBFrontendParametersCable.FEC_5_6: "5/6  ",
+                                            eDVBFrontendParametersCable.FEC_7_8: "7/8  ",
+                                            eDVBFrontendParametersCable.FEC_8_9: "8/9  ",}[sname["fec_inner"]]
                                 except:
                                     fec = "N/A  "
-                        if sname.has_key("symbol_rate"):
+                        if "symbol_rate" in sname:
                             tmp = int(sname["symbol_rate"])/1000
                             sr = str(tmp) + "  "
-                        if sname.has_key("orbital_position"):
+                        if "orbital_position" in sname:
                             numSat = sname["orbital_position"]
                             if numSat > 1800:
                                 idx = str((float(3600 - numSat))/10.0) + "W"
                             else:
                                 idx = str((float(numSat))/10.0) + "E"
                             if not self.ena:
-                                if self.allSat.has_key(idx):
+                                if idx in self.allSat:
                                     orb = self.allSat.get(idx)
                                 else:
                                     orb = "Sat on position: %s" % idx
@@ -127,7 +127,7 @@ class UltimateFrontend(VariableText, Renderer):
                         pass
                     if fq != "":
                         try:
-                            self.text = fq + pol + fec + sr + orb.replace("E)","\xc2\xb0E)").replace("W)","\xc2\xb0W)")
+                            self.text = fq + pol + fec + sr + orb.replace("E)", "\xc2\xb0E)").replace("W)", "\xc2\xb0W)")
                         except:
                             self.text = fq + pol + fec + sr + orb
                     else:

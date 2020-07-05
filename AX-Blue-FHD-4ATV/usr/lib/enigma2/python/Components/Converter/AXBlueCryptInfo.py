@@ -588,13 +588,13 @@ class AXBlueCryptInfo(Poll, Converter, object):
                                     item[1] = item[1][tt + 1:]
                             info[item[0].strip().lower()] = item[1].strip()
                         else:
-                            if not info.has_key('caid'):
+                            if 'caid' not in info:
                                 x = line.lower().find('caid')
                                 if x != -1:
                                     y = line.find(',')
                                     if y != -1:
                                         info['caid'] = line[x + 5:y]
-                            if not info.has_key('pid'):
+                            if 'pid' not in info:
                                 x = line.lower().find('pid')
                                 if x != -1:
                                     y = line.find(' =')

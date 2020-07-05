@@ -9,7 +9,9 @@
 
 
 # for localized messages
-from __init__ import _
+from __future__ import absolute_import
+from __future__ import print_function
+from .__init__ import _
 
 from enigma import eTimer
 from Components.ActionMap import ActionMap
@@ -96,7 +98,7 @@ class WeatherLocationChoiceList(Screen):
 
     def createChoiceList(self):
         list = []
-        print self.location_list
+        print(self.location_list)
         for x in self.location_list:
             list.append((str(x[1]), str(x[0])))
         self["choicelist"].l.setList(list)
@@ -271,7 +273,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
         default = ("default", _("Default"))
 
         # search typ
-        styp = default_file.replace('_Original.xml','')
+        styp = default_file.replace('_Original.xml', '')
         if self.is_atile:
             search_str = '%s_atile_' %styp
         else:
@@ -285,8 +287,8 @@ class Ultimate_Config(Screen, ConfigListScreen):
         for f in sorted(files, key=str.lower):
             if f.endswith('.xml') and f.startswith(search_str):
                 friendly_name = f.replace(search_str, "").replace(".xml", "").replace("_", " ")
-                if path.exists(self.skin_base_dir + 'allScreens/%s/%s' %(styp,f)):
-                    choices.append((self.skin_base_dir + 'allScreens/%s/%s' %(styp,f), friendly_name))
+                if path.exists(self.skin_base_dir + 'allScreens/%s/%s' %(styp, f)):
+                    choices.append((self.skin_base_dir + 'allScreens/%s/%s' %(styp, f), friendly_name))
                 else:
                     choices.append((self.skin_base_dir + f, friendly_name))
         choices.append(default)
@@ -454,9 +456,9 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
     def cancelConfirm(self, result):
         if result is None or result is False:
-            print "[%s]: Cancel confirmed." % cur_skin
+            print("[%s]: Cancel confirmed." % cur_skin)
         else:
-            print "[%s]: Cancel confirmed. Config changes will be lost." % cur_skin
+            print("[%s]: Cancel confirmed. Config changes will be lost." % cur_skin)
             for x in self["config"].list:
                 x[1].cancel()
             self.close()
@@ -503,10 +505,10 @@ class Ultimate_Config(Screen, ConfigListScreen):
     def search_weather_id_callback(self, res):
         if res:
             id_dic = get_woeid_from_yahoo(res)
-            if id_dic.has_key('error'):
+            if 'error' in id_dic:
                 error_txt = id_dic['error']
                 self.session.open(MessageBox, _("Sorry, there was a problem:") + "\n%s" % error_txt, MessageBox.TYPE_ERROR)
-            elif id_dic.has_key('count'):
+            elif 'count' in id_dic:
                 result_no = int(id_dic['count'])
                 location_list = []
                 for i in range(0, result_no):
@@ -515,7 +517,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
     def select_weather_id_callback(self, res):
         if res and isInteger(res):
-            print res
+            print(res)
             config.plugins.Ultimate.woeid.value = int(res)
 
     def skinChanged(self, ret = None):
@@ -564,10 +566,10 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")
-                print "makedir mySkin_off"
+                print("makedir mySkin_off")
             if self.myAtileHD_active.value:
                 if not path.exists("mySkin") and path.exists("mySkin_off"):
-                    symlink("mySkin_off","mySkin")
+                    symlink("mySkin_off", "mySkin")
             else:
                 if path.exists("mySkin"):
                     if path.exists("mySkin_off"):
@@ -597,7 +599,7 @@ class Ultimate_Config(Screen, ConfigListScreen):
         self["config"].setCurrentIndex(0)
 
     def restartGUI(self):
-        restartbox = self.session.openWithCallback(self.restartGUIcb,MessageBox,_("Restart necessary, restart GUI now?"), MessageBox.TYPE_YESNO)
+        restartbox = self.session.openWithCallback(self.restartGUIcb, MessageBox, _("Restart necessary, restart GUI now?"), MessageBox.TYPE_YESNO)
         restartbox.setTitle(_("Message"))
 
     def about(self):
@@ -664,7 +666,7 @@ class UltimateScreens(Screen):
         try:
             self["title"]=StaticText(self.title)
         except:
-            print 'self["title"] was not found in skin'
+            print('self["title"] was not found in skin')
 
         self["key_red"] = StaticText(_("Exit"))
         self["key_green"] = StaticText(_("on"))

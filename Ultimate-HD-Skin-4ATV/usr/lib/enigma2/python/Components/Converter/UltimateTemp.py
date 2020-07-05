@@ -102,7 +102,7 @@ class UltimateTemp(Poll, Converter):
                     l.close()
                 except:
                     load = ""
-                cpuload = load.replace("\n", "").replace(" ","")
+                cpuload = load.replace("\n", "").replace(" ", "")
                 return ("CPU Load: %s") % cpuload
         elif (self.type == self.TEMPERATURE):
             while True:

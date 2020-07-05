@@ -204,7 +204,7 @@ class ANDEmuInfo(Converter, object):
             if ecmtime2 != '':
                 x = line.split('--', 1)
                 msecIndex = x[0].find('msec')
-                if msecIndex is not -1:
+                if msecIndex != -1:
                     ecmtime = x[0].strip()
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
