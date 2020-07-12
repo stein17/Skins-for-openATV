@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
+from Components.config import config
 from Components.Element import cached
-from Poll import Poll
+from Components.Converter.Poll import Poll
 from os import popen, statvfs
 SIZE_UNITS = ['B',
  'KB',
