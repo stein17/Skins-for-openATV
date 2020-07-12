@@ -3792,7 +3792,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="708,30" size="400,40" font="Regular; 32" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
     </widget>
-    <eLabel text="OMBManagerList" position="10,25" size="400,50" backgroundColor="black" transparent="1" zPosition="1" font="Regular; 42" foregroundColor="bluetitle" halign="left" valign="center" />
+    <eLabel text="OMBManagerList" position="10,25" size="500,50" backgroundColor="black" transparent="1" zPosition="1" font="Regular; 42" foregroundColor="bluetitle" halign="left" valign="center" />
     <ePixmap pixmap="icons/Open_multiboot.png" position="861,758" size="390,200" alphatest="blend" />
     <widget name="label1" zPosition="2" position="30,130" size="875,40" font="Regular; 30" halign="center" valign="center" transparent="1" />
     <widget name="label2" zPosition="2" position="30,180" size="875,40" font="Regular; 30" halign="center" valign="center" transparent="1" />
@@ -3809,11 +3809,26 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
   </screen>
   <!-- OMBManagerInstall FHD-->
-  <screen name="OMBManagerInstall" position="360,150" size="800,600">
-    <widget name="info" position="10,10" size="780,100" font="Regular;30" zPosition="1" />
-    <widget source="list" render="Listbox" position="10,128" itemHeight="45" font="Regular;32" zPosition="1" size="780,460" scrollbarMode="showOnDemand" transparent="1">
+<screen name="OMBManagerInstall" position="center,center" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap pixmap="menu/menu_duo_blue.png" position="0,0" zPosition="-20" size="1920,1080" />
+    <eLabel position="943,122" size="311,524" backgroundColor="trbluelabel" transparent="0" zPosition="-12" />
+    <widget source="global.CurrentTime" render="Label" position="708,30" size="400,40" font="Regular; 32" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
+    </widget>
+    <eLabel text="OMBManagerInstall" position="10,25" size="500,50" backgroundColor="black" transparent="1" zPosition="1" font="Regular; 42" foregroundColor="bluetitle" halign="left" valign="center" />
+    <ePixmap pixmap="icons/Open_multiboot.png" position="861,758" size="390,200" alphatest="blend" />
+    <widget name="info" zPosition="2" position="30,130" size="875,110" font="Regular; 30" halign="center" valign="center" transparent="1" />
+     <widget source="list" render="Listbox" position="30,261" zPosition="3" itemHeight="45" font="Regular;32" size="875,680" scrollbarMode="showOnDemand" transparent="1">
       <convert type="StringList" />
     </widget>
+    <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
   </screen>
   <!-- OMBManagerAbout FHD-->
   <screen name="OMBManagerAbout" position="center,center" size="800,600">

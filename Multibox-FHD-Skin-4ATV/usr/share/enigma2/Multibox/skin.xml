@@ -352,7 +352,7 @@
     <convert type="ValueRange">1,1</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="Label" position="710,1033" size="200,44" font="Regular; 27" halign="left" valign="center" backgroundColor="background" transparent="1" zPosition="2">
+  <widget source="session.CurrentService" render="Label" position="680,1040" size="230,32" font="Regular; 27" halign="left" valign="center" backgroundColor="background" transparent="1" zPosition="2">
     <convert type="ServiceName">Provider</convert>
   </widget>
 <widget source="session.CurrentService" render="Label" position="1666,1054" size="250,24" font="Regular; 22" halign="right" foregroundColor="green" backgroundColor="background" transparent="1" zPosition="1">
@@ -459,8 +459,8 @@
   <widget source="session.CurrentService" render="Label" position="487,1033" size="80,44" font="Regular; 27" halign="left" valign="center" transparent="1" backgroundColor="background">
     <convert type="ServiceInfo">VideoHeight</convert>
   </widget>
-  <eLabel text="Provider :" position="568,1033" size="140,44" font="Regular; 27" backgroundColor="background" transparent="1" zPosition="1" valign="center" halign="right" />
-  <eLabel text="Orb:" position="1774,1028" size="60,24" font="Regular; 24" backgroundColor="background" transparent="1" zPosition="1" />
+  <eLabel text="Provider :" position="568,1033" size="140,44" font="Regular; 27" backgroundColor="background" transparent="1" zPosition="1" valign="center" halign="left" />
+ <eLabel text="Orb:" position="1774,1028" size="60,24" font="Regular; 24" backgroundColor="background" transparent="1" zPosition="1" />
   <widget source="session.CurrentService" render="Label" position="1000,857" size="540,55" font="Console; 20" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
     <convert type="CryptoInfo">VerboseInfo</convert>
   </widget>
@@ -980,20 +980,11 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
   </screen>
-  
-  
-  
-  
   <screen name="EMCSelection" position="0,0" size="1920,1080" title="Enhanced Movie Center" flags="wfNoBorder">
-    <widget source="Title" render="Label" position="10,85" size="1200,50" font="Regular; 36" halign="left" valign="center" foregroundColor="default" backgroundColor="background" transparent="1" zPosition="1" />
     <eLabel text="Enhanced Movie Center" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget name="wait" position="180,20" size="800,45" zPosition="1" font="Regular;36" backgroundColor="background" foregroundColor="yellow" halign="center" valign="center" transparent="1" />
     <panel name="Enhanced_Movie_Center" />
   </screen>
-  
-
-  
-  
   <screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="Label" position="360,874" size="1060,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1">
       <convert type="ServiceName">Name</convert>
@@ -3404,17 +3395,18 @@ self['config'].l.setSeperation(int(300*f))
   <widget name="number" position="12,85" size="525,100" halign="center" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
  </screen>
   <!-- NumberZapWithPicon -->
-<screen name="NumberZapPicon" position="50,820" size="550,220" backgroundColor="background" flags="wfNoBorder">
-  <eLabel name="BG" position="319,9" size="222,134" zPosition="-10" backgroundColor="Line" />
-  <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="black" />
-  <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
-  <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="black" />
-  <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
-  <convert type="ServiceName">Reference</convert>
-  </widget>
-  <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="black" foregroundColor="Line" noWrap="1" transparent="1" />
-  <widget name="number" position="12,31" size="280,100" halign="right" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="black" transparent="1" />
- </screen>
+<screen name="NumberZapPicon" position="50,820" size="550,220" backgroundColor="transparent" flags="wfNoBorder">
+    <eLabel name="BG" position="319,9" size="222,134" zPosition="-10" backgroundColor="Line" />
+    <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="background40" />
+    <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
+    <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="background40" />
+    <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="background40" foregroundColor="Line" noWrap="1"  />
+    <widget name="number" position="12,31" size="280,100" halign="right" valign="center" font="Regular; 100" foregroundColor="white" backgroundColor="background40" />
+  <eLabel name="" position="5,150" size="540,1" zPosition="5" backgroundColor="Line" />
+</screen>
   <screen name="HistoryZapSelector" position="0,0" size="1920,1080">
     <eLabel text="History Zap..." position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget source="menu" render="Listbox" position="0,100" size="1180,870" scrollbarMode="showOnDemand" transparent="1" zPosition="0">
