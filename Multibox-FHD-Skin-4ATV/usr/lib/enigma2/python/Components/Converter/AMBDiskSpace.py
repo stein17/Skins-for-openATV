@@ -1,7 +1,7 @@
 from Components.Converter.Converter import Converter
 from os import statvfs
 from Components.Element import cached, ElementError
-from Poll import Poll
+from Components.Converter.Poll import Poll
 
 class AMBDiskSpace(Poll, Converter, object):
     free = 0

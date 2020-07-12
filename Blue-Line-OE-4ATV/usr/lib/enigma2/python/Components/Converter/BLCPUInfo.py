@@ -1,6 +1,6 @@
 # Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXBlueCPUInfo.py
 from Components.Converter.Converter import Converter
-from Poll import Poll
+from Components.Converter.Poll import Poll
 from Components.Element import cached
 
 class BLCPUInfo(Converter, object):
