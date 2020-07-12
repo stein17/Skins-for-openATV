@@ -1,5 +1,5 @@
 # Embedded file name: /usr/lib/enigma2/python/Components/Renderer/AXBlueXPicon.py
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr
 from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, resolveFilename

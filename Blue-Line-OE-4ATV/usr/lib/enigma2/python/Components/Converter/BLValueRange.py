@@ -1,5 +1,5 @@
 # Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXBlueValueRange.py
-from Converter import Converter
+from Components.Converter.Converter import Converter
 from Components.Element import cached
 
 class BLValueRange(Converter, object):
