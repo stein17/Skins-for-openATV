@@ -33,7 +33,7 @@ class UltimateSYSTemp(Renderer, VariableText):
             except:
                 pass
 
-            self.text = systemp + str('\xc2\xb0') + 'C'
+            self.text = systemp + str('\xc2\xb0') + "C" 
 
     def onShow(self):
         self.suspended = False
