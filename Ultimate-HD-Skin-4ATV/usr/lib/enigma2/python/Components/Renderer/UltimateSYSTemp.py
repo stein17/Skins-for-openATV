@@ -1,7 +1,7 @@
 # Embedded file name: /usr/lib/enigma2/python/Components/Renderer/SYSTemp.py
 from Components.VariableText import VariableText
 from enigma import eLabel
-from Components.Renderer.Renderer import Renderer
+from Renderer import Renderer
 from os import path, popen
 
 class UltimateSYSTemp(Renderer, VariableText):
@@ -33,7 +33,7 @@ class UltimateSYSTemp(Renderer, VariableText):
             except:
                 pass
 
-            self.text = systemp + str('\xc2\xb0') + "C" 
+            self.text = systemp + str('\xc2\xb0') + 'C'
 
     def onShow(self):
         self.suspended = False

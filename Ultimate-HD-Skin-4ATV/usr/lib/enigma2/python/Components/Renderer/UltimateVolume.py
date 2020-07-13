@@ -1,6 +1,6 @@
 from Components.VariableText import VariableText
 from enigma import eLabel, eDVBVolumecontrol, eTimer
-from Components.Renderer.Renderer import Renderer
+from Renderer import Renderer
 
 class UltimateVolume(Renderer, VariableText):
 

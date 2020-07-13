@@ -1570,7 +1570,7 @@
 </screen>
   <screen name="EMCMediaCenter" position="0,0" size="1280,720" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="415,604" size="600,36" font="Regular; 24" valign="center" halign="center" backgroundColor="black" transparent="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1178,612" size="80,24" font="Regular;24" halign="center" backgroundColor="black" transparent="1">
       <convert type="UltimateServiceTime">EndTime</convert>
@@ -1675,7 +1675,7 @@
   </screen>
   <screen name="MoviePlayer" position="0,0" size="1280,720" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="416,603" size="600,36" font="Regular; 24" valign="center" halign="center" foregroundColor="selectedFG" backgroundColor="black" transparent="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1178,610" size="80,24" font="Regular;24" halign="center" foregroundColor="cyan" backgroundColor="black" transparent="1">
       <convert type="UltimateServiceTime">EndTime</convert>
@@ -1802,7 +1802,7 @@
   </screen>
   <screen name="DVDPlayer" position="0,0" size="1280,720" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="415,604" size="600,36" font="Regular; 24" valign="center" halign="center" backgroundColor="black" transparent="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1178,612" size="80,24" font="Regular;24" halign="center" backgroundColor="black" transparent="1">
       <convert type="UltimateServicePosition">EndTime,ShowNoSeconds</convert>
@@ -1919,7 +1919,7 @@
   </screen>
   <screen name="RadioInfoBar" position="0,0" size="1280,720" title="Radio" zPosition="-9" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="Label" position="265,538" size="300,40" font="Regular; 27" foregroundColor="selectedFG" transparent="1" valign="top" halign="left" noWrap="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <eLabel text="SOP" position="1122,620" size="50,22" font="Regular;18" transparent="1" halign="right" noWrap="1" />
     <widget source="session.CurrentService" render="Label" position="1178,621" size="80,22" font="Regular;18" transparent="1" halign="left">
@@ -1988,7 +1988,7 @@
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Service" render="Label" position="80,60" size="560,30" halign="left" font="Regular;24" noWrap="1" transparent="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <eLabel name="new eLabel" position="650,60" zPosition="-9" size="600,120" backgroundColor="selectedFG" transparent="1" />
     <widget source="Event" render="UltimateRunningText" options="movetype=none,startdelay=600,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="650,60" size="600,120" font="Regular;19" backgroundColor="selectedFG" transparent="1" valign="top" zPosition="1">
@@ -4484,7 +4484,7 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="ConditionalShowHide" />
   </widget>
     <widget source="session.CurrentService" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=10,repeat=5,startdelay=900,always=0" position="264,538" size="350,42" font="Regular; 30" noWrap="1" backgroundColor="background" transparent="1" halign="left" valign="center" foregroundColor="foreground">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="704,564" size="330,16" font="Console; 16" transparent="1" halign="right" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="selectedFG">
     <convert type="CryptoInfo">VerboseInfo</convert>
@@ -4587,12 +4587,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ConditionalShowHide" />
     </widget>
      <eLabel text="CPU Temperatur:" position="665,385" size="180,25" zPosition="1" font="Regular; 20" halign="left" valign="center" backgroundColor="background" transparent="1" />
-	 
-	 <widget  source="global.CurrentTime" render="Label"  position="825,385" size="470,25" font="Regular;20" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" >
-      <convert type="UltimateSTBinfo">CPUtemp</convert>
-    </widget>
-	 
-   <!--  <widget source="global.CurrentTime" render="UltimateSYSTemp" position="825,385" size="470,25" font="Regular;20" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" /> -->
+    <widget source="global.CurrentTime" render="UltimateSYSTemp" position="825,385" size="470,25" font="Regular;20" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" />
      <widget source="session.CurrentService" render="Label" position="665,535" size="590,25" zPosition="1" font="Regular; 20" halign="left" valign="center" backgroundColor="background" transparent="1">
       <convert type="UltimateReceiverInfo">FlashInfo</convert>
     </widget>
@@ -4672,13 +4667,9 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="900,305" size="355,215" font="Regular; 23" foregroundColor="selectedFG" transparent="1" halign="left" valign="top">
       <convert type="EventName">FullDescription</convert>
     </widget>
-<!--     <widget source="ServiceEvent" render="UltimateNextEvents" position="900,532" size="355,140" noWrap="1" font="Regular;20" backgroundColor="black" transparent="1" zPosition="5">
+    <widget source="ServiceEvent" render="UltimateNextEvents" position="900,532" size="355,140" noWrap="1" font="Regular;20" backgroundColor="black" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
-    </widget> -->
-	
-	<widget source="ServiceEvent" render="UltimateSingleEpgList" position="900,532" size="355,140" noWrap="1" font="Regular;20" backgroundColor="black" transparent="1" zPosition="5" />
-
-	
+    </widget>
     <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="380,642" size="470,30" font="Regular; 24" foregroundColor="foreground" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
       <convert type="UltimatePrimeTime">PrimeTime,noDuration</convert>
     </widget>
@@ -4712,13 +4703,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ConditionalShowHide" />
     </widget>
     <ePixmap name="PrimeTimeClock" pixmap="skin_default/system/PTClock3.png" position="355,647" size="22, 22" alphatest="blend" />
-    <!-- <widget source="ServiceEvent" render="UltimateFrontend" position="710,689" zPosition="1" valign="center" size="350,25" font="Regular; 20" backgroundColor="black" transparent="1" halign="left" />
-	 -->
-	<widget source="ServiceEvent" render="Label" position="710,689" zPosition="1" valign="center" size="350,25" font="Regular; 20" backgroundColor="black" transparent="1" halign="left">
-  <!--convert type="MetrixHDSmartInfo">ExpertInfo</convert-->
-  <convert type="ServiceName2">TpansponderInfo</convert>
-</widget>
-	
+    <widget source="ServiceEvent" render="UltimateFrontend" position="710,689" zPosition="1" valign="center" size="350,25" font="Regular; 20" backgroundColor="black" transparent="1" halign="left" />
     <panel name="ScrollBarTemplate size=820,570" />
     <panel name="template_pixmap_lines_ch_se_right" />
     <panel name="ChannelSelection_color_default" />
@@ -4789,7 +4774,7 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget source="Service" render="Label" position="250,106" size="480,40" valign="bottom" font="Regular;34" halign="center" transparent="1" foregroundColor="selectedFG">
-    <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+    <convert type="ServiceName">Name</convert>
   </widget>
   <widget name="bouquetlist" position="250,60" size="480,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
   <widget name="list" position="30,220" size="700,450" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" itemHeight="30" EventFontSingle="Regular;22" backgroundColor="background" enableWrapAround="1" transparent="1" />
@@ -4955,7 +4940,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="jump" position="1536,1018" size="0,0" backgroundColor="black" font="Regular;27" transparent="1" />
     <ePixmap pixmap="buttons/key_0.png" position="914,691" size="30,29" alphatest="blend" zPosition="1" />
 <widget source="session.CurrentService" render="Label" position="122,54" size="320,44" font="Regular; 24" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
-  <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+  <convert type="ServiceName">Name</convert>
   </widget>
     <widget alphatest="blend" position="30,53" render="Picon" size="78,44" source="Service" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
@@ -5055,7 +5040,7 @@ self['config'].l.setSeperation(int(300*f))
 </screen>
   <screen name="GraphicalInfoBarEPG" title="InfoBar EPG" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="session.CurrentService" render="Label" position="160,499" size="600,44" font="Regular; 34" valign="center" noWrap="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
     <widget source="Event" render="Label" position="910,688" size="120,30" font="Regular;20" foregroundColor="selectedFG" backgroundColor="background" transparent="1" halign="right" valign="center">
       <convert type="EventTime">Remaining</convert>
@@ -6224,7 +6209,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget source="Title" render="Label" position="5,6" size="600,50" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="CurrentSubserviceNumber" position="9,62" size="50,34" font="Regular;22" shadowColor="black" shadowOffset="-1,-1" />
     <widget source="session.CurrentService" render="Label" position="62,62" size="420,34" font="Regular;22" shadowColor="black" shadowOffset="-1,-1">
-      <convert type="UltimateServiceInfo">ServiceNumberAndName</convert>
+      <convert type="ServiceName">Name</convert>
     </widget>
   </screen>
   <screen name="Subtitles" position="0,0" size="1280,720" title="Subtitle selection">
