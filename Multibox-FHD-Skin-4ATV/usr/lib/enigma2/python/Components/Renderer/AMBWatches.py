@@ -38,7 +38,7 @@ class AMBWatches(Renderer):
     def hand(self):
         width = self.instance.size().width()
         height = self.instance.size().height()
-        r = min(width, height) / 2
+        r = int(min(width, height) / 2)
         endX, endY = self.calculate(self.numval, r, r)
         self.draw_line(r, r, endX, endY)
 
