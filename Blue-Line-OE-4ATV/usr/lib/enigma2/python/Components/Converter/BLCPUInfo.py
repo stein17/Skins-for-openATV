@@ -1,4 +1,4 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXBlueCPUInfo.py
+
 from Components.Converter.Converter import Converter
 from Components.Converter.Poll import Poll
 from Components.Element import cached

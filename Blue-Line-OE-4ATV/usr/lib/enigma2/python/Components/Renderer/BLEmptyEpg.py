@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/AXEmptyEpg.py
 from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, eTimer
 from Components.VariableText import VariableText

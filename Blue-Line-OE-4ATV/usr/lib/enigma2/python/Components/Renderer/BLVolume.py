@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/AXBlueVolume.py
 from Components.VariableText import VariableText
 from enigma import eLabel, eDVBVolumecontrol, eTimer
 from Components.Renderer.Renderer import Renderer

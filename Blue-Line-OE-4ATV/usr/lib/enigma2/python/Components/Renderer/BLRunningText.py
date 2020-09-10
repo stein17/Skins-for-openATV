@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/AXBlueRunningText.py
 from Components.Renderer.Renderer import Renderer
 from skin import parseColor, parseFont
 from enigma import eWidget, eCanvas, eLabel, eTimer, eRect, ePoint, eSize, gRGB, gFont, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_HALIGN_RIGHT, RT_HALIGN_BLOCK, RT_VALIGN_TOP, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP

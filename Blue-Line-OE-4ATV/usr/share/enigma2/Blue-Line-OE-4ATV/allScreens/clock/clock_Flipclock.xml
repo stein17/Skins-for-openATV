@@ -1,0 +1,40 @@
+<skin>
+<!--  FlipClock_Infobar-->
+<!-- TEMPLATES FlipClock_Infobar-->
+ <screen name="template_clock_infobar">
+     <widget source="global.CurrentTime" render="Label" position="1587,785" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+      <convert type="ClockToText">Format:%H</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1767,785" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+      <convert type="ClockToText">Format:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 100" position="1729,790" size="40,100" halign="center" zPosition="3" valign="center" foregroundColor="cyan1" transparent="1">
+      <convert type="BLBlinkingClock" />
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1596,960" size="300,58" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%A</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1596,1020" size="300,50" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%d.%b.%Y</convert>
+    </widget>
+ </screen>
+   <!-- TEMPLATES Pixmap_Infobar-->
+  <screen name="template_pixmap_infobar">
+     <ePixmap pixmap="menu/InfobarOCTFlip.png" position="0,780" zPosition="-1" size="1920,1080" />
+ </screen>
+   <!-- TEMPLATES Progress_Infobar-->
+<!--  <screen name="template_progress_infobar">
+<widget source="session.Event_Now" render="Progress" pixmap="colors/00ffffff.png" position="366,934" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen> -->
+  <!-- TEMPLATES Tunerinfo_Infobar_string -->
+<!--  <screen name="template_tunerinfo_string_infobar">
+    <widget source="session.FrontendInfo" render="Label" position="1075,784" size="350,28" font="Regular; 28" halign="left" foregroundColor="cyan1" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="FrontendInfo">STRING</convert>
+    </widget>
+    <eLabel text="Tuner:" position="960,784" size="125,28"  halign="center" valign="top" font="Regular; 28" backgroundColor="background" transparent="1" foregroundColor="cyan1" zPosition="5"/>
+    <eLabel name="Rahmem_Tuner" backgroundColor="background" position="959,787" size="475,28" zPosition="1" transparent="0"/>
+ </screen> -->
+</skin>

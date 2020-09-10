@@ -206,7 +206,6 @@ class BLEmuInfo(Converter, object):
                 msecIndex = x[0].find('msec')
                 if msecIndex != -1:
                     ecmtime = x[0].strip()
-            ecmtime=ecmtime.replace(',', '.')
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
             if protocol != '' and reader != '':
@@ -300,3 +299,4 @@ class BLEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
+

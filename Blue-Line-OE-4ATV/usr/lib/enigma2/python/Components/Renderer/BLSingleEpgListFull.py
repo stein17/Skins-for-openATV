@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Renderer/AXSingleEpgListFull.py
 from Components.VariableText import VariableText
 from enigma import eLabel, eEPGCache
 from Components.Renderer.Renderer import Renderer
