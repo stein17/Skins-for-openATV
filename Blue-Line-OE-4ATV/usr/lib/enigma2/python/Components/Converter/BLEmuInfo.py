@@ -135,7 +135,7 @@ class BLEmuInfo(Converter, object):
                             caID = caID.strip(',;.:-*_<>()[]{}')
                             sysID = self.getCryptName(caID)
                             return sysID
-			file.close()
+                        file.close()
         else:
             return ''
 
@@ -204,9 +204,8 @@ class BLEmuInfo(Converter, object):
             if ecmtime2 != '':
                 x = line.split('--', 1)
                 msecIndex = x[0].find('msec')
-                if msecIndex is not -1:
+                if msecIndex != -1:
                     ecmtime = x[0].strip()
-	    ecmtime=ecmtime.replace(',','.')
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
             if protocol != '' and reader != '':
@@ -300,3 +299,4 @@ class BLEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
+

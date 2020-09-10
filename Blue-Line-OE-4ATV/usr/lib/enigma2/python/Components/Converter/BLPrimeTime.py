@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXBluePrimeTime.py
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.VariableText import VariableText

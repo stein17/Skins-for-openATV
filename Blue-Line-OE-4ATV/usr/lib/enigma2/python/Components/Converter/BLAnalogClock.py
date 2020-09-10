@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXBlueAnalogClock.py
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from time import localtime, strftime

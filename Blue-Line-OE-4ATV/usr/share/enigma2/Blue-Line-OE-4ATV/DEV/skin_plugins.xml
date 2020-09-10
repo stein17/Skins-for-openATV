@@ -3325,16 +3325,16 @@ self.instance.move(ePoint(0,0))
     <widget font="Regular;120" foregroundColor="white" halign="center" name="chNum" position="101,108" size="300,150" transparent="0" zPosition="0" />
     <widget font="Regular;30" foregroundColor="white" halign="center" name="chName" noWrap="1" position="443,269" size="581,39" transparent="0" zPosition="0" />
     <eLabel halign="center" position="407,48" size="641,272" zPosition="-1" />
-    <eLabel backgroundColor="cyan" position="1041,53" size="2,263" />
-    <eLabel backgroundColor="cyan" position="411,53" size="630,2" />
+    <eLabel backgroundColor="cyan1" position="1041,53" size="2,263" />
+    <eLabel backgroundColor="cyan1" position="411,53" size="630,2" />
     <eLabel halign="center" position="69,69" size="338,231" zPosition="-1" />
-    <eLabel backgroundColor="cyan" position="74,74" size="2,221" />
-    <eLabel backgroundColor="cyan" position="74,74" size="353,2" />
-    <eLabel backgroundColor="cyan" position="426,74" size="2,221" />
-    <eLabel backgroundColor="cyan" position="74,293" size="353,2" />
-    <eLabel backgroundColor="cyan" position="411,314" size="630,2" />
-    <eLabel backgroundColor="cyan" position="411,294" size="2,21" />
-    <eLabel backgroundColor="cyan" position="411,53" size="2,21" />
+    <eLabel backgroundColor="cyan1" position="74,74" size="2,221" />
+    <eLabel backgroundColor="cyan1" position="74,74" size="353,2" />
+    <eLabel backgroundColor="cyan1" position="426,74" size="2,221" />
+    <eLabel backgroundColor="cyan1" position="74,293" size="353,2" />
+    <eLabel backgroundColor="cyan1" position="411,314" size="630,2" />
+    <eLabel backgroundColor="cyan1" position="411,294" size="2,21" />
+    <eLabel backgroundColor="cyan1" position="411,53" size="2,21" />
   </screen>
   <!-- VideoEnhancementSetup FHD-->
   <screen name="VideoEnhancementSetup" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -3382,20 +3382,10 @@ self.instance.move(ePoint(0,0))
     <ePixmap pixmap="buttons/key_ok.png" position="1052,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
     <ePixmap pixmap="buttons/key_exit.png" position="1123,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
   </screen>
-  <!-- EMCMediacenter FHD-->
+    <!-- EMCMediacenter FHD-->
   <screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="InfoBar" backgroundColor="transparent" flags="wfNoBorder">
-    <ePixmap pixmap="menu/Infobar_OCT.png" position="0,780" zPosition="-1" size="1920,1080" />
     <widget pixmap="icons/ico_rec_on.png" alphatest="blend" position="967,821" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="BLWatches" position="1660,863" size="160,160" zPosition="4" foregroundColor="red" alphatest="blend">
-      <convert type="BLAnalogClock">secHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="BLWatches" position="1660,863" size="160,160" zPosition="3" foregroundColor="bluelabel" alphatest="blend">
-      <convert type="BLAnalogClock">minHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="BLWatches" position="1675,878" size="130,130" zPosition="2" foregroundColor="bluelabel" alphatest="blend">
-      <convert type="BLAnalogClock">hourHand</convert>
     </widget>
     <widget source="session.CurrentService" position="1226,1030" size="63,35" render="Pixmap" pixmap="icons/ico_sd_on.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
@@ -3440,9 +3430,9 @@ self.instance.move(ePoint(0,0))
     <widget source="Service" render="PositionGauge" position="367,937" size="1200,6" zPosition="3" transparent="1">
       <convert type="EMCServicePosition">Gauge</convert>
     </widget>
-    <widget source="Service" render="Progress" pixmap="00ffffff.png" position="366,934" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+<!--     <widget source="Service" render="Progress" pixmap="00ffffff.png" position="366,934" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
       <convert type="EMCServicePosition">Position</convert>
-    </widget>
+    </widget> -->
     <widget source="Service" render="EMCPositionGauge" pointer="menu/EMCPointerRecord.png:1470,0" position="367,937" size="1200,6" zPosition="4" transparent="1">
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
@@ -3472,6 +3462,9 @@ self.instance.move(ePoint(0,0))
     </widget>
     <ePixmap position="56,780" zPosition="0" size="256,256" alphatest="blend" pixmap="icons/play_movie.png" />
     <ePixmap pixmap="icons/event.png" position="377,884" size="44,35" zPosition="12" alphatest="blend" />
+	<panel name="template_progress_emcplayer" />
+    <panel name="template_clock_infobar" />
+    <panel name="template_pixmap_infobar" />
   </screen>
   <!-- MovieInfoSetup FHD-->
   <screen name="MovieInfoSetup" position="0,0" size="1920,1080" title="Movie Information Download Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -3738,7 +3731,7 @@ FrontColorSel="white"
 backgroundColorSelected="bluelabel" 
 foregroundColorSelected="white" 
 backgroundColor="black" 
-foregroundColor="cyan" 
+foregroundColor="cyan1" 
 scrollbarMode="showOnDemand" 
 transparent="1" />
  <widget source="Service" render="Label" position="1262,171" size="450,122" font="Regular;33" backgroundColor="background" foregroundColor="cyan1" transparent="1">
@@ -4103,9 +4096,9 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <!-- KeyBoard -->
   <screen name="KeyBoard" position="0,0" size="1920,1080" zPosition="99" title="Virtual KeyBoard" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Virtual KeyBoard" position="214,324" size="788,75" foregroundColor="cyan" noWrap="1" valign="center" font="Regular; 48" backgroundColor="black" halign="left" transparent="1" zPosition="1" />
+    <eLabel text="Virtual KeyBoard" position="214,324" size="788,75" foregroundColor="cyan1" noWrap="1" valign="center" font="Regular; 48" backgroundColor="black" halign="left" transparent="1" zPosition="1" />
     <widget name="header" position="215,280" size="950,45" font="Regular;33" backgroundColor="background" foregroundColor="white" halign="center" transparent="1" noWrap="1" />
-    <eLabel position="211,402" size="950,69" zPosition="1" backgroundColor="grey" foregroundColor="cyan" />
+    <eLabel position="211,402" size="950,69" zPosition="1" backgroundColor="grey" foregroundColor="cyan1" />
     <widget name="text" position="214,404" size="944,63" backgroundColor="background" foregroundColor="white" zPosition="3" font="Regular;45" noWrap="1" valign="center" halign="right" />
     <widget name="list" position="221,480" size="700,250" selectionDisabled="1" transparent="1" />
     <widget source="country" render="Label" position="647,745" size="150,40" noWrap="1" zPosition="1" valign="center" font="Regular;27" halign="left" backgroundColor="background" foregroundColor="white" transparent="1" />
@@ -7044,7 +7037,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="global.CurrentTime" render="Label" position="673,27" size="600,40" font="Regular; 32" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
     </widget>
-    <widget source="Title" render="Label" position="15,100" size="890,80" font="Regular; 36" halign="left" valign="center" transparent="1" zPosition="1" foregroundColor="cyan" />
+    <widget source="Title" render="Label" position="15,100" size="890,80" font="Regular; 36" halign="left" valign="center" transparent="1" zPosition="1" foregroundColor="cyan1" />
     <ePixmap position="30,10" size="116,66" pixmap="icons/tvspielfilm-hd.png" alphatest="blend" zPosition="1" />
     <widget name="textpage" position="912,100" size="350,525" font="Regular; 25" scrollbarMode="showNever" halign="left" zPosition="1" backgroundColor="black" transparent="1" />
     <widget name="picture" position="15,182" size="890,443" alphatest="blend" zPosition="1" backgroundColor="black" backgroundColorSelected="black" transparent="1" halign="center" />

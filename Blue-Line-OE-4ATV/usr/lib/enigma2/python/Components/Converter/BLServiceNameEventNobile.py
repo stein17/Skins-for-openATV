@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/AXServiceNameEventNobile.py
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eEPGCache
 from Components.Element import cached

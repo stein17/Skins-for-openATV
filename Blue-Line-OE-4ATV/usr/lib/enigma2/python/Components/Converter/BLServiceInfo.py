@@ -1,4 +1,3 @@
-# Embedded file name: /usr/lib/enigma2/python/Components/Converter/ASBlueServiceInfo.py
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation, iPlayableService
 from Components.Element import cached
