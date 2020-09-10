@@ -1,5 +1,5 @@
 <skin>
- <!--######################################### -->
+  <!--######################################### -->
   <!-- D E V - T E A M S  -->
   <!--######################################### -->
   <!--######################################### -->
@@ -1637,7 +1637,6 @@
 <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 42" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
 <widget name="AboutScrollLabel" position="30,339" size="1165,615" transparent="0" zPosition="1" font="Regular;27" />
 <ePixmap position="23,123" size="1180,210" zPosition="10" pixmap="DEV/NFR_Logo.png" transparent="1" alphatest="blend" />
-<ePixmap position="1265,580" size="613,344" zPosition="10" pixmap="DEV/AX_Blue_logo.png" transparent="1" alphatest="blend" />
 <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
 <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
 <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
@@ -1650,7 +1649,7 @@
 <ePixmap pixmap="buttons/key_info.png" position="1252,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
 <ePixmap pixmap="buttons/key_exit.png" position="1323,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
 <eLabel name="" position="1265,580" size="613,343" backgroundColor="blue" foregroundColor="blue" transparent="0" zPosition="1" alphatest="blend" />
-<eLabel text=" Support: https://www.axforum.de/ " position="1407,932" size="350,25" zPosition="1" font="Regular; 19" halign="left" foregroundColor="blue" backgroundColor="background" transparent="1" />
+<eLabel text=" Support: https://www.opena.tv/skins/ " position="1307,932" size="550,25" zPosition="1" font="Regular; 19" halign="center" foregroundColor="blue" backgroundColor="background" transparent="1" />
 <ePixmap pixmap="menu/line1200.png" position="23,335" size="1180,2" zPosition="2" alphatest="blend" />
 <ePixmap position="1249,110" size="646,447" zPosition="10" pixmap="DEV/AX_Info.png" transparent="1" alphatest="blend" />
 </screen>
@@ -3296,7 +3295,14 @@
       <convert type="MenuEntryCompare">about_screen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="192,674" size="90,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
+<!--      <widget source="global.CurrentTime" render="Label" position="30,674" size="755,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3">
+    <convert type="AXBlueSTBinfo">CPUtemp</convert>
+    </widget>   -->
+	
+	<eLabel text="CPU Temp:" position="30,674" size="225,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
+   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="270,674" size="630,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3"  />
+
+	
     <widget source="session.CurrentService" render="Label" position="30,908" size="755,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="lightblue">
       <convert type="AXBlueCPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
     </widget>
@@ -3312,7 +3318,6 @@
     <widget source="session.CurrentService" render="Label" position="30,720" size="755,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="white">
       <convert type="AXBlueReceiverInfo">UsbInfo,Long</convert>
     </widget>
-    <eLabel text="SysTemp:" position="30,674" size="160,45" font="Regular; 32" halign="left" valign="bottom" backgroundColor="background" noWrap="1" transparent="1" zPosition="2" foregroundColor="orange" />
-  </screen>
-
-  </skin>
+   <!--  <eLabel text="SysTemp:" position="30,674" size="160,45" font="Regular; 32" halign="left" valign="bottom" backgroundColor="background" noWrap="1" transparent="1" zPosition="2" foregroundColor="orange" />
+  --> </screen>
+ </skin>
