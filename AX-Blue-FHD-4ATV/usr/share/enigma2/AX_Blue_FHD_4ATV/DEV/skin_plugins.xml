@@ -3375,22 +3375,18 @@ self.instance.move(ePoint(0,0))
     <ePixmap pixmap="buttons/key_exit.png" position="1123,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
   </screen>
     <!-- EMCMediacenter FHD-->
-    <screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="MoviePlayer" backgroundColor="transparent" flags="wfNoBorder">
-    <ePixmap pixmap="menu/Infobar_analog.png" position="3,787" zPosition="-10" size="1920,1080" />
+<screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="MoviePlayer" backgroundColor="transparent" flags="wfNoBorder">
     <widget pixmap="icons/ico_rec_on.png" alphatest="blend" position="967,821" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="967,821" size="80,26" zPosition="2" />
-    <widget source="global.CurrentTime" render="Label" position="1819,818" size="100,22" font="Regular; 20" halign="center" backgroundColor="black" transparent="1" foregroundColor="blue">
-      <convert type="ClockToText">Format:%H:%M:%S</convert>
-    </widget>
     <widget source="session.CurrentService" render="Label" position="1392,950" size="105,40" font="Regular; 32" halign="center" valign="center" backgroundColor="background" transparent="1" zPosition="4">
       <convert type="AXBlueServiceEndTime">EndTime</convert>
     </widget>
     <widget source="Service" render="PositionGauge" position="374,935" size="1192,5" zPosition="3" transparent="1">
       <convert type="EMCServicePosition">Gauge</convert>
     </widget>
-    <widget source="Service" render="Progress" pixmap="p_bar_sel.png" position="373,935" size="1193,5" zPosition="7" transparent="1">
+    <widget source="Service" render="Progress" pixmap="Color_Progress.png" position="373,935" size="1193,5" zPosition="7" transparent="1">
       <convert type="EMCServicePosition">Position</convert>
     </widget>
     <widget source="Service" render="EMCPositionGauge" pointer="menu/EMCPointerRecord.png:1470,0" position="373,935" size="1190,5" zPosition="4" transparent="1">
@@ -3413,15 +3409,6 @@ self.instance.move(ePoint(0,0))
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget name="Cover" position="13,651" size="345,400" zPosition="1" alphatest="on" backgroundColor="transparent" foregroundColor="transparent" />
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="8" foregroundColor="red" alphatest="blend">
-      <convert type="AXBlueAnalogClock">secHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="7" foregroundColor="grey" alphatest="blend">
-      <convert type="AXBlueAnalogClock">minHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1709,897" size="80,80" zPosition="6" foregroundColor="grey" alphatest="blend">
-      <convert type="AXBlueAnalogClock">hourHand</convert>
-    </widget>
     <widget source="session.CurrentService" render="Label" position="404,950" size="100,40" font="Regular; 32" halign="right" backgroundColor="background" transparent="1" valign="center" zPosition="3">
       <convert type="ServiceInfo">VideoWidth</convert>
     </widget>
@@ -3450,6 +3437,8 @@ self.instance.move(ePoint(0,0))
       <convert type="ServiceInfo">IsWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
+	<panel name="template_pixmap_infobar" />
+	<panel name="template_clock_infobar" />
   </screen>
     <!-- MovieInfoSetup FHD-->
 <screen name="MovieInfoSetup" position="0,0" size="1920,1080" title="Movie Information Download Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -3672,7 +3661,7 @@ self.instance.move(ePoint(0,0))
       <convert type="EMCMovieInfo">FileSize</convert>
     </widget>
     <ePixmap position="1710,137" zPosition="1" size="180,196" alphatest="blend" pixmap="mmp/play_emc.png" />
-    <widget name="list" position="30,185" size="1190,777" itemHeight="56" CoolFont="Regular;36" CoolSelectFont="Regular;30" CoolDateFont="Regular;28" CoolSelNumTxtWidth="39" CoolProgressPos="53" CoolProgressHPos="2" CoolIconPos="1" CoolIconHPos="8" CoolIconSize="40,40" CoolBarPos="1010" CoolBarHPos="38" CoolBarSize="160,15" CoolBarSizeSa="160,15" CoolMoviePos="135" CoolMovieHPos="8" CoolMovieSize="840" CoolFolderSize="747" CoolDatePos="1012" CoolDateHPos="1" CoolDateWidth="162" CoolPiconPos="52" CoolPiconHPos="9" CoolPiconWidth="66" CoolPiconHeight="39" CoolMoviePiconPos="135" CoolMoviePiconSize="840" CoolCSWidth="210" CoolDirInfoWidth="210" CoolCSPos="817" CoolTitleColor="1" CoolDateColor="1" CoolHighlightColor="1" DefaultColor="white" TitleColor="lightblue" DateColor="greenlight" UnwatchedColor="white" WatchingColor="bernstein" FinishedColor="green" RecordingColor="red" BackColor="black" BackColorSel="backgroundBlue" FrontColorSel="white" backgroundColorSelected="bluelabel" foregroundColorSelected="white" backgroundColor="black" foregroundColor="cyan" scrollbarMode="showOnDemand" transparent="1" />
+    <widget name="list" position="30,185" size="1190,777" itemHeight="56" CoolFont="Regular;36" CoolSelectFont="Regular;30" CoolDateFont="Regular;20" CoolSelNumTxtWidth="39" CoolProgressPos="53" CoolProgressHPos="2" CoolIconPos="1" CoolIconHPos="8" CoolIconSize="40,40" CoolBarPos="1010" CoolBarHPos="38" CoolBarSize="160,15" CoolBarSizeSa="160,15" CoolMoviePos="135" CoolMovieHPos="8" CoolMovieSize="840" CoolFolderSize="747" CoolDatePos="1012" CoolDateHPos="1" CoolDateWidth="162" CoolPiconPos="52" CoolPiconHPos="9" CoolPiconWidth="66" CoolPiconHeight="39" CoolMoviePiconPos="135" CoolMoviePiconSize="840" CoolCSWidth="210" CoolDirInfoWidth="210" CoolCSPos="817" CoolTitleColor="1" CoolDateColor="1" CoolHighlightColor="1" DefaultColor="white" TitleColor="lightblue" DateColor="greenlight" UnwatchedColor="white" WatchingColor="bernstein" FinishedColor="green" RecordingColor="red" BackColor="black" BackColorSel="backgroundBlue" FrontColorSel="white" backgroundColorSelected="bluelabel" foregroundColorSelected="white" backgroundColor="black" foregroundColor="cyan" scrollbarMode="showOnDemand" transparent="1" />
   <widget source="Service" render="Label" position="1255,140" size="440,110" font="Regular;33" backgroundColor="background" foregroundColor="white" transparent="1" halign="center">
       <convert type="EMCEventName">Name</convert>
     </widget>
@@ -3882,7 +3871,7 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap pixmap="icons/ico_hd_off.png" position="1200,1016" size="86,35" zPosition="1" alphatest="blend" />
     <widget source="session.CurrentService" render="Pixmap" position="1200,1016" size="86,35" zPosition="2" pixmap="icons/ico_hd_on.png" alphatest="blend">
       <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="AXBlueValueRange">721,1980</convert>
+      <convert type="ValueRange">721,1980</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget name="tsenable" backgroundColor="background" zPosition="1" transparent="1" foregroundColor="foregroundClock" position="670,1015" size="200,40" font="Regular; 24" halign="left" />
