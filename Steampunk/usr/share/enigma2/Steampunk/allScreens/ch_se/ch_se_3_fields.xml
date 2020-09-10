@@ -1,0 +1,71 @@
+<skin>
+ <!-- skin_ChannelSelection_3_Fields -->
+<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+  <widget source="ServiceEvent" render="Label" position="118,274" size="60,20" font="Regular;18" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="background" transparent="1" halign="right" valign="center">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="200,274" size="60,20" font="Regular;18" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="background" transparent="1" valign="center">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget font="Regular;18" borderColor="black" borderWidth="1" halign="right" position="260,274" render="Label" size="90,20" source="session.Event_Now" transparent="1" foregroundColor="lightblue"  backgroundColor="background" >
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <eLabel font="Regular;18" borderColor="black" borderWidth="1" halign="center" position="182,274" size="15,20" text="-" transparent="1" foregroundColor="lightblue"  backgroundColor="background" />
+  <!-- <widget name="list" position="20,70" size="800,552" scrollbarMode="showOnDemand" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" colorEventProgressbar="selectedFG" colorEventProgressbarBorder="verygrey" colorEventProgressbarBorderSelected="selectedFG" foregroundColorServiceNotAvail="lila" foregroundColorSelected="selectedFG"serviceItemHeight="30" serviceNumberFont="Regular;22" borderColor="black" borderWidth="1" serviceNameFont="Regular;24" borderColor="black" borderWidth="1" serviceInfoFont="Regular;22" borderColor="black" borderWidth="1" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" /> -->
+  <widget source="ServiceEvent" position="55,320" size="305,143" font="Regular;20" borderColor="black" borderWidth="1" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" foregroundColor="brown2"  backgroundColor="background" transparent="1" halign="left" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="SteampunkSingleEpgListFull" position="915,70" size="303,570" noWrap="1" itemHeight="30" font="Regular;19" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="black" transparent="1" zPosition="5" />
+  <widget source="ServiceEvent" position="424,616" size="440,28" font="Regular;22" borderColor="black" borderWidth="1" render="SteampunkRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" foregroundColor="lightblue" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+    <convert type="SteampunkPrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Picon" position="54,268" size="50,28" zPosition="5" alphatest="blend" transparent="1">
+    <convert type="SteampunkRefString">ServicelistRef</convert>
+  </widget>
+  <ePixmap pixmap="Steampunk/buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Steampunk/buttons/key_green.png" position="167,667" size="30,30" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Steampunk/buttons/key_yellow.png" position="372,667" size="30,30" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Steampunk/buttons/key_blue.png" position="530,667" size="30,30" alphatest="blend" transparent="1" />
+  <widget name="key_red" position="77,667" size="90,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_green" position="202,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_yellow" position="409,667" size="120,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_blue" position="565,667" size="120,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Steampunk/icons/sat.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Steampunk/icons/dvbt.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Steampunk/icons/kabel.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="ServiceEvent" position="55,503" size="305,135" font="Regular;20" borderColor="black" borderWidth="1" render="SteampunkRunningText" options=" movetype=running,startdelay=8000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" valign="top" foregroundColor="brown2" backgroundColor="black" transparent="1" zPosition="5">
+    <convert type="SteampunkServiceNameEventNobile">ExtendedDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" position="55,471" zPosition="1" size="60,24" font="Regular;20" borderColor="black" borderWidth="1" render="Label" halign="center" backgroundColor="background" transparent="1" foregroundColor="lightblue">
+    <convert type="SteampunkServiceNameEventNobile">StartTime</convert>
+  </widget>
+  <widget source="ServiceEvent" position="120,471" zPosition="1" size="240,24" font="Regular;20" borderColor="black" borderWidth="1" render="SteampunkRunningText" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=1000,always=0" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="lightblue">
+    <convert type="SteampunkServiceNameEventNobile">NextEvent</convert>
+  </widget>
+  <ePixmap pixmap="Steampunk/Skinparts/Line_Hor_680.png" position="50,465" size="315,3" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Steampunk/Skinparts/Line_Hor_680.png" position="50,498" size="315,3" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Steampunk/Skinparts/Line_Hor_680.png" position="390,609" size="476,3" alphatest="blend" transparent="1" zPosition="2" />
+  <ePixmap name="PrimeTimeClock" pixmap="Steampunk/Skinparts/PTClock.png" position="390,613" size="32,32" alphatest="blend" />
+  <widget source="ServiceEvent" render="SteampunkFrontend" position="720,667" zPosition="1" valign="center" size="300,30" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="black" transparent="1" halign="left" />
+  <panel name="ChannelSelection_color_default_3_Fields" />
+  <panel name="template_info_menu_exit_1280" />
+  <panel name="template_pig_Channel_3_Fields" />
+  <panel name="template_Steampunk_Background_Channel_3_Fields" />
+  <panel name="template_title_date" />
+</screen>
+  </skin>

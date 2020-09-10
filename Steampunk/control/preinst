@@ -1,0 +1,24 @@
+#!/bin/sh
+echo "                                                                            "
+echo "                         ***** WARNING ****                                 "
+echo "Steampunk skin requires a minimal dual core.                         "
+echo "Steampunk skin is NOT guaranteed to work on slower or older receivers.    "
+echo "                                                                            "
+echo "                                                                            "
+echo "                                                                            "
+echo "Check if a previous version of the Steampunk skin is installed"
+if [ -f /usr/share/enigma2/Steampunk/skin.xml ]; then
+    cp -R /usr/share/enigma2/Steampunk/ /tmp
+    rm -rf /usr/share/enigma2/Steampunk
+    rm -rf /usr/lib/enigma2/python/Components/Converter/Steampunk*
+    rm -rf /usr/lib/enigma2/python/Components/Renderer/Steampunk*
+	rm -rf /usr/lib/enigma2/python/Plugins/Extensions/SteampunkHD*
+    echo "                                                   "
+    echo "Previous Steampunk skin installation        "
+    echo "    was found and removed successfully!            "
+    echo "                                                   "
+fi
+echo "                                                       "
+echo "Steampunk skin is now being installed...        "
+echo "                                                       "
+exit 0
