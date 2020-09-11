@@ -266,10 +266,6 @@
   <eLabel name="Rahmem_crypt" backgroundColor="blue" zPosition="1" position="154,1029" size="30,36" />
   <eLabel name="Rahmem_crypt" backgroundColor="blue" zPosition="1" position="122,1029" size="30,36" />
   <eLabel text="Ch." position="1253,148" size="1,1" font="Regular;40" backgroundColor="black" foregroundColor="cyan1" transparent="1" zPosition="9" />
-   <eLabel text="CPU Temp:" position="307,887" size="150,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" /> 
-<!--   	<widget source="global.CurrentTime" render="Label" position="307,887" size="640,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
-    <convert type="BLSTBinfo">CPUtemp</convert>
-  </widget> -->
   <eLabel text="Bouquet:" position="53,623" size="130,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="greenlight" />
    <eLabel text="Provider:" position="53,655" size="130,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="lightblue" />
    <eLabel text="CPU-usage:" position="53,887" size="155,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="red" />
@@ -334,11 +330,16 @@
    <widget source="session.CurrentService" render="BLRunningText" options=" movetype=running,startdelay=2000,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="205,955" size="490,30" font="Regular; 24" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
       <convert type="BLServiceInfo">HasHBBTV</convert>
    </widget>
-   <widget source="global.CurrentTime" render="BLSYSTemp" position="457,887" size="230,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" />
-   
+    <!-- template_cpu_infobar ATV 6.4-->
+   <!-- <eLabel text="CPU Temp:" position="307,887" size="150,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" /> 
+   <widget source="global.CurrentTime" render="BLSYSTemp" position="457,887" size="230,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" /> -->
    <widget source="session.CurrentService" render="Label" position="205,887" size="100,30" zPosition="1" font="Regular; 24" halign="left" valign="center" noWrap="1" transparent="1" foregroundColor="red">
       <convert type="BLCPUInfo">$0</convert>
    </widget>
+   <!-- template_cpu_infobar ATV 6.5-->
+   <widget source="global.CurrentTime" render="Label" position="307,887" size="330,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
+    <convert type="BLSTBinfo">CPUtemp</convert>
+  </widget>
   <panel name="template_progress_secondinfobar_diagonal"/>
   <panel name="template_weather"/>
 </screen>
