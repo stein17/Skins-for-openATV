@@ -14,7 +14,7 @@ lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 
-TEMPSIGN = '°C' if six.PY3 else str('\xc2\xb0C')
+TEMPSIGN = u'\N{DEGREE SIGN}' if six.PY3 else str('\xc2\xb0C')
 
 class BLSTBinfo(Converter, object):
 
@@ -84,7 +84,7 @@ class BLSTBinfo(Converter, object):
 		if temp and int(temp.replace('\n', '')) > 0:
 			#info ="CPU-Temp: " + temp.replace('\n', '')  + str('\xc2\xb0') + "C"
 			info = temp.replace('\n', '').replace(' ', '') + TEMPSIGN
-			info = _("CPU-Temp: %s") % info
+			info = _("CPU-Temp:%s") % info
 		return info
 
 	def getSYStemp(self):
