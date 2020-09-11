@@ -296,7 +296,7 @@
   </screen>
       <!-- NumberZapExt With Picon FHD -->
   <screen backgroundColor="transparent" flags="wfNoBorder" name="NumberZapPicon" position="396,324" size="1071,365" title="QuickZap">
-  <widget alphatest="blend" position="564,71" render="AXBlueXPicon" size="324,182" source="Service" transparent="1" zPosition="1">
+  <widget alphatest="blend" position="564,71" render="MetrixHDXPicon" size="324,182" source="Service" transparent="1" zPosition="1">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
   <widget name="number" position="101,108" size="300,150" halign="center" valign="center" font="Regular;120" backgroundColor="background" foregroundColor="cyan1" borderColor="backgroundBlue" borderWidth="7"/>
@@ -595,7 +595,7 @@
     <ePixmap pixmap="buttons/key_exit.png" position="1051,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
     <ePixmap name="AudioPixmap" position="971,676" size="256,256" pixmap="icons/audio.png" transparent="1" />
   </screen>
-  <!-- TEMPLATES Progress_Infobar-->
+   <!-- TEMPLATES Progress_Infobar-->
  <screen name="template_progress_infobar">
      <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="373,934" size="1193,7" zPosition="7" transparent="1">
       <convert type="EventTime">Progress</convert>
@@ -858,18 +858,24 @@
     <widget source="session.CurrentService" render="Label" position="1470,72" size="120,36" font="Regular;32" halign="left" foregroundColor="cyan1" backgroundColor="background10" transparent="1" zPosition="1">
       <convert type="PliExtraInfo">TunerSystem</convert>
     </widget>
-    <widget source="session.FrontendInfo" render="Label" position="1705,72" size="210,36" font="Regular;32" halign="left" backgroundColor="background10" transparent="1" zPosition="1">
+    <widget source="session.FrontendInfo" render="Label" position="1695,72" size="220,36" font="Regular;32" halign="left" backgroundColor="background10" transparent="1" zPosition="1">
       <convert type="FrontendInfo">STRING</convert>
     </widget>
-    <eLabel text="Tuner:" position="1590,70" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
-	 <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1780,112" size="130,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
-  <widget source="session.CurrentService" render="Label" position="1555,112" size="100,36" font="Regular; 32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
-  <convert type="AXBlueCPUInfo">$0</convert>
-</widget>
-  <eLabel text="CPU:" position="1470,112" size="90,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
-  <eLabel text="Temp:" position="1670,112" size="110,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
-
-  </screen>
+    <eLabel text="Tuner:" position="1590,70" size="125,36" zPosition="8" halign="left" font="Regular; 32" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
+	 <eLabel text="CPU:" position="1470,112" size="90,36" font="Regular; 34" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
+     <widget source="session.CurrentService" render="Label" position="1555,112" size="100,36" font="Regular; 34" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
+      <convert type="AXBlueCPUInfo">$0</convert>
+     </widget>
+	   
+    <!-- template_cpu_infobar ATV 6.4-->
+    <!--    <eLabel text="Temp:" position="1670,112" size="110,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
+   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1780,112" size="130,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" /> -->
+  
+  	<!-- template_cpu_infobar ATV 6.5-->
+    <widget source="global.CurrentTime" render="Label" position="1660,111" size="280,36" font="Regular; 32" foregroundColor="foregroundClock" backgroundColor="black" halign="left"  valign="center" transparent="1"  zPosition="1">
+    <convert type="AXBlueSTBinfo">CPUtemp</convert>
+    </widget>
+	</screen> 
        <!-- TEMPLATES Channel_Selection_2_Fields -->
   <screen name="Channel_Selection_Progress_Color">
     <widget source="ServiceEvent" render="Progress" position="1252,436" pixmap="p_bar_sel.png" size="644,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
@@ -931,7 +937,7 @@
     <widget pixmap="icons/ico_rec_on.png" alphatest="blend" position="10,805" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
-    <widget source="session.CurrentService" render="AXBlueXPicon" position="26,857" size="310,175" zPosition="4" transparent="0" alphatest="blend">
+    <widget source="session.CurrentService" render="AXBlueXPicon" position="3,857"  size="360,203" zPosition="4" transparent="0" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="405,880" size="150,45" font="Regular; 36" halign="center" backgroundColor="black" transparent="1" valign="top">
@@ -1037,7 +1043,7 @@
       <convert type="ValueRange">1081,5000</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-   <widget font="Regular;20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,822" render="Label" size="150,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+     <widget font="Regular;20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,822" render="Label" size="150,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
     <convert type="AXBlueEmuInfo">Emu</convert>
    </widget>
    <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1120,822" render="Label" size="430,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
@@ -1052,10 +1058,6 @@
    <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,846" render="Label" size="250,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
     <convert type="AXBlueEmuInfo">Caid</convert>
    </widget>
-   <eLabel text="Tuner:" position="26,1040" zPosition="5" size="100,24" font="Regular; 24" halign="center" foregroundColor="green" backgroundColor="black" transparent="1" valign="left" />
-    <widget source="session.FrontendInfo" render="Label" position="115,1040" size="220,24" font="Regular; 24" halign="left" foregroundColor="green" backgroundColor="background" transparent="1" zPosition="5">
-      <convert type="FrontendInfo">STRING</convert>
-    </widget>
   <panel name="template_progress_infobar" />
   <panel name="template_clock_infobar" />
   <panel name="template_pixmap_infobar" />
@@ -1385,7 +1387,6 @@
 	<panel name="template_progress_secondinfobar"/>
 <!-- <panel name="template_weather_infobar"/> -->
   </screen>
-
   <!-- Channel selection - TV FHD -->
 <screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="transparent2" flags="wfNoBorder" size="1920,1080">
     <widget source="Title" render="Label" position="126,10" size="1000,95" font="Regular;40" halign="center" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
@@ -1775,22 +1776,9 @@
     <widget source="session.Event_Next" render="AXBlueRunningText" position="1252,557" size="645,40" font="Regular;34" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="lightblue" backgroundColor="dark" transparent="1" noWrap="1" zPosition="5">
       <convert type="EventName">Name</convert>
     </widget>
-  <widget font="Regular;24" foregroundColor="orange" backgroundColor="background" halign="left" position="53,887" render="Label" size="170,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Emu</convert>
+    <widget source="session.CurrentService" render="Label" font="Regular; 32" position="205,862" size="800,95" halign="center" zPosition="50" backgroundColor="black" transparent="1" valign="center" foregroundColor="lightblue">
+      <convert type="MetrixHDCaidDisplay">Default</convert>
   </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="225,887" render="Label" size="470,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Address</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="575,921" render="Label" size="120,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Hops</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="335,921" render="Label" size="240,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Ecmtime</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="53,921" render="Label" size="280,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
-    <convert type="AXBlueEmuInfo">Caid</convert>
-  </widget>
-  
     <ePixmap alphatest="blend" pixmap="buttons/key_leftright.png" position="1457,1016" size="100,40" transparent="1" zPosition="10" />
     <ePixmap pixmap="buttons/key_menu.png" position="1253,1011" size="60,50" alphatest="on" />
     <ePixmap pixmap="buttons/key_info.png" position="1338,1011" size="60,50" alphatest="on" />
@@ -2514,13 +2502,13 @@
     <ePixmap pixmap="buttons/key_exit.png" position="1123,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
     <ePixmap position="971,676" size="256,256" zPosition="2" pixmap="icons/net.png" transparent="1" />
   </screen>
- <!-- Network Adapter Test FHD -->
+  <!-- Network Adapter Test FHD -->
   <screen name="NetworkAdapterTest" position="0,0" size="1920,1080" title="Network test..." flags="wfNoBorder" backgroundColor="transparent">
   <widget source="global.CurrentTime" render="Label" position="508,30" size="600,40" font="Regular; 32" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
     <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
   </widget>
   <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
-  <ePixmap pixmap="menu/menu_duo_blue.png" position="0,0" zPosition="-20" size="1920,1080" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/menu/menu_duo_blue.png" position="0,0" zPosition="-20" size="1920,1080" />
   <eLabel position="943,122" size="311,524" backgroundColor="trbluelabel" transparent="0" zPosition="-12" />
   <widget name="Adaptertext" position="25,135" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
   <widget name="Adapter" position="25,180" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
@@ -2555,14 +2543,14 @@
   <widget name="EditSettings_Text" position="290,797" size="450,51" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey,grey,#ffffff" backgroundColor="background" transparent="1" />
   <widget name="EditSettingsButton" position="290,795" size="450,53" pixmaps="AX_Blue_FHD_4ATV/skin_default/lan-seloff.png,AX_Blue_FHD_4ATV/skin_default/lan-sel300.png" zPosition="1" alphatest="blend" />
   <widget name="InfoText" position="26,132" size="765,620" zPosition="25" font="Regular;33" valign="center" halign="center" />
-  <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
-  <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
-  <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
   <widget source="key_red" render="Label" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
   <widget source="key_green" render="Label" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
   <widget source="key_yellow" render="Label" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-  <ePixmap pixmap="buttons/key_ok.png" position="1052,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
-  <ePixmap pixmap="buttons/key_exit.png" position="1123,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_ok.png" position="1052,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/buttons/key_exit.png" position="1123,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
   <ePixmap position="971,676" size="256,256" zPosition="2" pixmap="AX_Blue_FHD_4ATV/icons/net.png" transparent="1" />
 </screen>
   <!-- Network MacAdress Setup FHD -->
@@ -3373,9 +3361,14 @@
     <convert type="MenuEntryCompare">service_info_screen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <eLabel text="CPU Temp:" position="30,674" size="225,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
-   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="270,674" size="630,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3"  />
+  <!-- template_cpu_infobar ATV 6.4-->
+ <!-- <eLabel text="CPU Temp:" position="30,674" size="225,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
+   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="270,674" size="630,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3"  /> -->
 
+<!-- template_cpu_infobar ATV 6.5-->
+  <widget source="global.CurrentTime" render="Label" position="30,674" size="625,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3">
+    <convert type="AXBlueSTBinfo">CPUtemp</convert>
+  </widget>
   <widget source="session.CurrentService" render="Label" position="30,908" size="880,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="lightblue">
     <convert type="AXBlueCPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
   </widget>
@@ -3391,7 +3384,8 @@
   <widget source="session.CurrentService" render="Label" position="30,720" size="880,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="white">
     <convert type="AXBlueReceiverInfo">UsbInfo,Long</convert>
   </widget>
-  </screen>
+  <!-- <eLabel text="SysTemp:" position="30,674" size="160,45" font="Regular; 32" halign="left" valign="bottom" backgroundColor="background" noWrap="1" transparent="1" zPosition="2" foregroundColor="orange" /> -->
+</screen>
   <!-- Info Devices FHD -->
   <screen name="Devices" position="0,0" size="1920,1080" title="Device Information" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
@@ -3464,20 +3458,8 @@
   <widget source="session.CurrentService" render="Label" position="30,800" size="1200,40" font="Regular; 30" foregroundColor="red" halign="left" zPosition="50" backgroundColor="black" transparent="1" noWrap="1" valign="center">
     <convert type="ServiceInfo">HasHBBTV</convert>
   </widget>
-    <widget font="Regular;24" foregroundColor="orange" backgroundColor="background" halign="left" position="53,887" render="Label" size="170,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Emu</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="225,887" render="Label" size="470,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Address</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="575,921" render="Label" size="120,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Hops</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="335,921" render="Label" size="240,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Ecmtime</convert>
-  </widget>
-  <widget font="Regular; 24" foregroundColor="orange" backgroundColor="background" halign="left" position="53,921" render="Label" size="280,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
-    <convert type="AXBlueEmuInfo">Caid</convert>
+  <widget source="session.CurrentService" render="Label" font="Regular; 32" position="30,854" size="1000,95" halign="left" zPosition="50" backgroundColor="black" transparent="1" noWrap="1" valign="center" foregroundColor="green">
+    <convert type="MetrixHDCaidDisplay">Default</convert>
   </widget>
 </screen>
   <!-- History Zap -->
@@ -4618,7 +4600,7 @@
     <widget source="key_red" render="Label" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
     <ePixmap position="1305,679" size="256,256" zPosition="2" pixmap="icons/menu_osd_menu_skin_setup.png" transparent="1" alphatest="blend" />
     <eLabel text="Dieser Skin kann in   Menü -&gt; Einstellungen -&gt; Bedienung und Oberfläche, angepasst werden. Dort findet ihr auch Infos zum Einstellen Des Wetters in der 2en Infobar." position="30,635" size="1220,100" zPosition="2" font="Regular; 30" transparent="1" backgroundColor="black" halign="left" foregroundColor="foregroundClock" />
-    <eLabel text="Für weniger Transparenz in der Benutzeroberfläche, in /usr/share/enigma2/Blue-Line-OE-4ATV/DEV/ diePixmaps: bg1280.png und bg1920.png kopieren und in /usr/share/enigma2/Blue-Line-OE-4ATV/menu einfügen. -  Benutzer Oberfläche neustarten." position="30,807" size="1190,160" zPosition="2" font="Regular; 30" transparent="1" backgroundColor="black" halign="left" foregroundColor="foregroundClock" valign="center" />
+    <eLabel text="Für weniger Transparenz in der Benutzeroberfläche, in /usr/share/enigma2/AX_Blue_FHD_4ATV/DEV/ diePixmaps: bg1280.png und bg1920.png kopieren und in /usr/share/enigma2/AX_Blue_FHD_4ATV/menu einfügen. -  Benutzer Oberfläche neustarten." position="30,807" size="1190,160" zPosition="2" font="Regular; 30" transparent="1" backgroundColor="black" halign="left" foregroundColor="foregroundClock" valign="center" />
   </screen>
   <!-- User Positioner Interface FHD -->
   <!-- ServiceInfo FHD -->
@@ -6905,13 +6887,13 @@ self.instance.move(ePoint((1920-wsizex), (1280-wsizex)/2, (720-wsizey)/(count &g
      <!--  AtileHD_Config FHD  -->
 <screen name="AtileHD_Config" backgroundColor="background"  position="center,center" size="1000,480">
   <eLabel text="* AX Blue FHD *   FHD Skin for ATV Images by stein17" position="20,30" size="960,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
-  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AXBlueFHD/plugin.png" position="30,115" size="150,60" alphatest="blend" />
+  <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/AX_Blue_FHD/plugin.png" position="30,115" size="150,60" alphatest="blend" />
   <ePixmap pixmap="buttons/key_blue.png" position="30,420" size="35,35" alphatest="blend" />
   <eLabel text="um Ihre Einstellungen vorzunehmen." position="30,290" size="680,50" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
-  <eLabel text="Bitte rufen Sie das Plugin auf" position="200,120" size="680,50" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
+  <eLabel text="Bitte rufen Sie das Plugin auf" position="30,120" size="680,50" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
   <eLabel text="Menü - Erweiterungen - AXBlue FHD" position="30,205" size="680,50" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="green" />
   <widget name="key_blue" position="75,420" size="340,35" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
-  <ePixmap pixmap="DEV/AX Blue Black Background/Mediaportal-Without_transparency/AX Blue_skin_icon.png" position="720,114" size="256,256" zPosition="10" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="icons/ax_blue_skin_icon.png" position="720,114" size="256,256" zPosition="10" transparent="1" alphatest="blend" />
   <ePixmap pixmap="menu/line1000.png" position="20,80" size="960,2" alphatest="blend" zPosition="3" />
   <ePixmap pixmap="menu/line1000.png" position="20,400" size="960,2" alphatest="blend" zPosition="3" />
 </screen>
