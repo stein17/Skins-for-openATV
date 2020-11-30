@@ -1,560 +1,184 @@
-#
-#  CaidInfo2 - Converter
-#
-#  ver 1.1.3 23/12/2012
-#
-#  Coded by bigroma & 2boom
-
+from enigma import iServiceInformation
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService
-from Tools.Directories import fileExists
 from Components.Element import cached
-from Poll import Poll
+from Components.Converter.Poll import Poll
 import os
-
-info = {}
+import six
+ECM_INFO = '/tmp/ecm.info'
 old_ecm_mtime = None
+data = None
 
 class UltimateCaidInfo(Poll, Converter, object):
-        CAID = 0
-        PID = 1
-        PROV = 2
-        ALL = 3
-        IS_NET = 4
-        IS_EMU = 5
-        CRYPT = 6
-        BETA = 7
-        CONAX = 8
-        CRW = 9
-        DRE = 10
-        IRD = 11
-        NAGRA = 12
-        NDS = 13
-        SECA = 14
-        VIA = 15
-        BETA_C = 16
-        CONAX_C = 17
-        CRW_C = 18
-        DRE_C = 19
-        IRD_C = 20
-        NAGRA_C = 21
-        NDS_C = 22
-        SECA_C = 23
-        VIA_C = 24
-        BISS = 25
-        BISS_C = 26
-        HOST = 27
-        DELAY = 28
-        FORMAT = 29
-        CRYPT2 = 30
-        CURCAM = 31
-        my_interval = 1000 
+	IRDCRYPT = 0
+	SECACRYPT = 1
+	NAGRACRYPT = 2
+	VIACRYPT = 3
+	CONAXCRYPT = 4
+	BETACRYPT = 5
+	CRWCRYPT = 6
+	NDSCRYPT = 7
+	IRDECM = 8
+	SECAECM = 9
+	NAGRAECM = 10
+	VIAECM = 11
+	CONAXECM = 12
+	BETAECM = 13
+	CRWECM = 14
+	NDSECM = 15
 
-        def __init__(self, type):
-                Poll.__init__(self)
-                Converter.__init__(self, type)
-                if type == "CAID":
-                        self.type = self.CAID
-                elif type == "PID":
-                        self.type = self.PID
-                elif type == "ProvID":
-                        self.type = self.PROV
-                elif type == "Delay":
-                        self.type = self.DELAY
-                elif type == "Host":
-                        self.type = self.HOST
-                elif type == "Net":
-                        self.type = self.IS_NET
-                elif type == "Emu":
-                        self.type = self.IS_EMU
-                elif type == "CryptInfo":
-                        self.type = self.CRYPT
-                elif type == "CryptInfo2":
-                        self.type = self.CRYPT2
-                elif type == "CurCam":
-                        self.type = self.CURCAM
-                elif type == "BetaCrypt":
-                        self.type = self.BETA
-                elif type == "ConaxCrypt":
-                        self.type = self.CONAX
-                elif type == "CrwCrypt":
-                        self.type = self.CRW
-                elif type == "DreamCrypt":
-                        self.type = self.DRE
-                elif type == "IrdCrypt":
-                        self.type = self.IRD
-                elif type == "NagraCrypt":
-                        self.type = self.NAGRA
-                elif type == "NdsCrypt":
-                        self.type = self.NDS
-                elif type == "SecaCrypt":
-                        self.type = self.SECA
-                elif type == "ViaCrypt":
-                        self.type = self.VIA
-                elif type == "BetaEcm":
-                        self.type = self.BETA_C
-                elif type == "ConaxEcm":
-                        self.type = self.CONAX_C
-                elif type == "CrwEcm":
-                        self.type = self.CRW_C
-                elif type == "DreamEcm":
-                        self.type = self.DRE_C
-                elif type == "IrdEcm":
-                        self.type = self.IRD_C
-                elif type == "NagraEcm":
-                        self.type = self.NAGRA_C
-                elif type == "NdsEcm":
-                        self.type = self.NDS_C
-                elif type == "SecaEcm":
-                        self.type = self.SECA_C
-                elif type == "ViaEcm":
-                        self.type = self.VIA_C
-                elif type == "BisCrypt":
-                        self.type = self.BISS
-                elif type == "BisEcm":
-                        self.type = self.BISS_C
-                elif type == "Default" or type == "" or type == None or type == "%":
-                        self.type = self.ALL
-                else:
-                        self.type = self.FORMAT
-                        self.sfmt = type[:]
+	def __init__(self, type):
+		Converter.__init__(self, type)
+		Poll.__init__(self)
+		self.poll_interval = 2000
+		self.poll_enabled = True
+		if type == 'IrdCrypt':
+			self.type = self.IRDCRYPT
+		elif type == 'SecaCrypt':
+			self.type = self.SECACRYPT
+		elif type == 'NagraCrypt':
+			self.type = self.NAGRACRYPT
+		elif type == 'ViaCrypt':
+			self.type = self.VIACRYPT
+		elif type == 'ConaxCrypt':
+			self.type = self.CONAXCRYPT
+		elif type == 'BetaCrypt':
+			self.type = self.BETACRYPT
+		elif type == 'CrwCrypt':
+			self.type = self.CRWCRYPT
+		elif type == 'NdsCrypt':
+			self.type = self.NDSCRYPT
+		elif type == 'IrdEcm':
+			self.type = self.IRDECM
+		elif type == 'SecaEcm':
+			self.type = self.SECAECM
+		elif type == 'NagraEcm':
+			self.type = self.NAGRAECM
+		elif type == 'ViaEcm':
+			self.type = self.VIAECM
+		elif type == 'ConaxEcm':
+			self.type = self.CONAXECM
+		elif type == 'BetaEcm':
+			self.type = self.BETAECM
+		elif type == 'CrwEcm':
+			self.type = self.CRWECM
+		elif type == 'NdsEcm':
+			self.type = self.NDSECM
 
-                self.systemTxtCaids = {
-                        "26" : "BiSS",
-                        "01" : "Seca-Mguard",
-                        "06" : "Irdeto",
-                        "17" : "BetaCrypt",
-                        "05" : "Viacces",
-                        "18" : "Nagravision",
-                        "09" : "NDS-Vdguard",
-                        "0B" : "Conax",
-                        "0D" : "Cryptoworks",
-                        "4A" : "DRE-Crypt",
-                        "27" : "DRE-Crypt",
-                        "0E" : "PowerVu",
-                        "22" : "Codicrypt",
-                        "07" : "DigiCipher",
-                        "56" : "Verimatrix",
-                        "7B" : "DRE-Crypt",
-                        "A1" : "Rosscrypt"}
+	@cached
+	def getBoolean(self):
+		service = self.source.service
+		info = service and service.info()
+		if not info:
+			return False
+		if info.getInfo(iServiceInformation.sIsCrypted) == 1:
+			currentcaid = self.getCaid()
+			searchcaids = info.getInfoObject(iServiceInformation.sCAIDs)
+			if self.type == self.IRDCRYPT:
+				caemm = self.getCrypt('06', searchcaids)
+				return caemm
+			if self.type == self.SECACRYPT:
+				caemm = self.getCrypt('01', searchcaids)
+				return caemm
+			if self.type == self.NAGRACRYPT:
+				caemm = self.getCrypt('18', searchcaids)
+				return caemm
+			if self.type == self.VIACRYPT:
+				caemm = self.getCrypt('05', searchcaids)
+				return caemm
+			if self.type == self.CONAXCRYPT:
+				caemm = self.getCrypt('0B', searchcaids)
+				return caemm
+			if self.type == self.BETACRYPT:
+				caemm = self.getCrypt('17', searchcaids)
+				return caemm
+			if self.type == self.CRWCRYPT:
+				caemm = self.getCrypt('0D', searchcaids)
+				return caemm
+			if self.type == self.NDSCRYPT:
+				caemm = self.getCrypt('09', searchcaids)
+				return caemm
+			if self.type == self.IRDECM:
+				if currentcaid == '06':
+					return True
+			elif self.type == self.SECAECM:
+				if currentcaid == '01':
+					return True
+			elif self.type == self.NAGRAECM:
+				if currentcaid == '18':
+					return True
+			elif self.type == self.VIAECM:
+				if currentcaid == '05':
+					return True
+			elif self.type == self.CONAXECM:
+				if currentcaid == '0B':
+					return True
+			elif self.type == self.BETAECM:
+				if currentcaid == '17':
+					return True
+			elif self.type == self.CRWECM:
+				if currentcaid == '0D':
+					return True
+			elif self.type == self.NDSECM:
+				if currentcaid == '09':
+					return True
+		else:
+			self.poll_enabled = False
+		return False
 
-                self.systemCaids = {
-                        "26" : "BiSS",
-                        "01" : "SEC",
-                        "06" : "IRD",
-                        "17" : "BET",
-                        "05" : "VIA",
-                        "18" : "NAG",
-                        "09" : "NDS",
-                        "0B" : "CON",
-                        "0D" : "CRW",
-                        "7B" : "DRE",
-                        "7B" : "DRE",
-                        "4A" : "DRE" }
+	boolean = property(getBoolean)
 
-        @cached
-        def getBoolean(self):
+	def getCrypt(self, iscaid, caids):
+		if caids and len(caids) > 0:
+			for caid in caids:
+				caid = self.int2hex(caid)
+				if len(caid) == 3:
+					caid = '0%s' % caid
+				caid = caid[:2]
+				caid = caid.upper()
+				if caid == iscaid:
+					return True
 
-                service = self.source.service
-                info = service and service.info()
-                if not info:
-                        return False
+		return False
 
-                caids = info.getInfoObject(iServiceInformation.sCAIDs)
-                if caids:
-                        if self.type == self.SECA:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "01":
-                                                return True
-                                return False
-                        if self.type == self.BETA:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "17":
-                                                return True
-                                return False
-                        if self.type == self.CONAX:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "0B":
-                                                return True
-                                return False
-                        if self.type == self.CRW:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "0D":
-                                                return True
-                                return False
-                        if self.type == self.DRE:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "4A" or ("%0.4X" % int(caid))[:2] == "7B" or ("%0.4X" % int(caid))[:2] == "27":
-                                                return True
-                                return False
-                        if self.type == self.NAGRA:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "18":
-                                                return True
-                                return False
-                        if self.type == self.NDS:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "09":
-                                                return True
-                                return False
-                        if self.type == self.IRD:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "06":
-                                                return True
-                                return False
-                        if self.type == self.VIA:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "05":
-                                                return True
-                                return False
-                        if self.type == self.BISS:
-                                for caid in caids:
-                                        if ("%0.4X" % int(caid))[:2] == "26":
-                                                return True
-                                return False
-                        self.poll_interval = self.my_interval
-                        self.poll_enabled = True
-                        ecm_info = self.ecmfile()
-                        if ecm_info:
-                                caid = ("%0.4X" % int(ecm_info.get("caid", ""),16))[:2]
-                                if self.type == self.SECA_C:
-                                        if caid == "01":
-                                                return True
-                                        return False
-                                if self.type == self.BETA_C:
-                                        if caid == "17":
-                                                return True
-                                        return False
-                                if self.type == self.CONAX_C:
-                                        if caid == "0B":
-                                                return True
-                                        return False
-                                if self.type == self.CRW_C:
-                                        if caid == "0D":
-                                                return True
-                                        return False
-                                if self.type == self.DRE_C:
-                                        if caid == "4A" or caid == "27" or caid == "7B":
-                                                return True
-                                        return False
-                                if self.type == self.NAGRA_C:
-                                        if caid == "18":
-                                                return True
-                                        return False
-                                if self.type == self.NDS_C:
-                                        if caid == "09":
-                                                return True
-                                        return False
-                                if self.type == self.IRD_C:
-                                        if caid == "06":
-                                                return True
-                                        return False
-                                if self.type == self.VIA_C:
-                                        if caid == "05":
-                                                return True
-                                        return False
-                                if self.type == self.BISS_C:
-                                        if caid == "26":
-                                                return True
-                                        return False
-                                #oscam
-                                reader = ecm_info.get("reader", None)
-                                #cccam  
-                                usingx = ecm_info.get("usingx", "")
-                                #mgcamd
-                                source = ecm_info.get("source", None)
-                                if self.type == self.IS_EMU:
-                                        return usingx == "emu" or source == "emu" or reader == "emu"
-                                if self.type == self.IS_NET:
-                                        if usingx == "CCcam-s2s":
-                                                return 1
-                                        else:
-                                                return  (source != None and source != "emu") or (reader != None and reader != "emu")
-                                else:
-                                        return False
+	def getCaid(self):
+		global old_ecm_mtime
+		global data
+		try:
+			ecm_mtime = os.stat(ECM_INFO).st_mtime
+		except:
+			ecm_mtime = None
 
-                return False
+		if ecm_mtime != old_ecm_mtime:
+			old_ecm_mtime = ecm_mtime
+			data = self.getCaidFromEcmInfo()
+		return data
 
-        boolean = property(getBoolean)
+	def getCaidFromEcmInfo(self):
+		try:
+			ecm = open(ECM_INFO, 'rb').readlines()
+			info = {}
+			for line in ecm:
+				line = six.ensure_str(line)
+				d = line.split(':', 1)
+				if len(d) > 1:
+					info[d[0].strip()] = d[1].strip()
 
-        @cached
-        def getText(self):
-                textvalue = ""
-                server = ""
-                service = self.source.service
-                if service:
-                        info = service and service.info()
-                        if info:
-                                if info.getInfoObject(iServiceInformation.sCAIDs):
-                                        self.poll_interval = self.my_interval
-                                        self.poll_enabled = True
-                                        ecm_info = self.ecmfile()
-                                        # crypt2
-                                        if self.type == self.CRYPT2:
-                                                if fileExists("/tmp/ecm.info"):
-                                                        try:
-                                                                caid = "%0.4X" % int(ecm_info.get("caid", ""),16)
-                                                                return "%s" % self.systemTxtCaids.get(caid[:2])
-                                                        except:
-                                                                return 'NoCrypt'
-                                                else:
-                                                        return 'NoCrypt'
-                                        # CURCAM
-                                        if self.type == self.CURCAM:
-                                                if fileExists("/tmp/ecm.info"):
-                                                        try:
-                                                                ccam = ecm_info.get("using", "")
-                                                                return ccam
-                                                        except:
-                                                                return 'No-Emu'
-                                                else:
-                                                        return 'No-Emu'
-                                        if ecm_info:
-                                                # caid
-                                                caid = "%0.4X" % int(ecm_info.get("caid", ""),16)
-                                                if self.type == self.CAID:
-                                                        return caid
-                                                # crypt
-                                                if self.type == self.CRYPT:
-                                                        return "%s" % self.systemTxtCaids.get(caid[:2])
-                                                #pid
-                                                try:
-                                                        pid = "%0.4X" % int(ecm_info.get("pid", ""),16)
-                                                except:
-                                                        pid = ""
-                                                if self.type == self.PID:
-                                                        return pid
-                                                # oscam
-                                                try:
-                                                        prov = "%0.6X" % int(ecm_info.get("prov", ""),16)
-                                                except:
-                                                        prov = ecm_info.get("prov", "")
-                                                if self.type == self.PROV:
-                                                        return prov
-                                                ecm_time = ecm_info.get("ecm time", "")
-                                                if self.type == self.DELAY:
-                                                        return ecm_time
-                                                #protocol
-                                                protocol = ecm_info.get("protocol", "")
-                                                #port
-                                                port = ecm_info.get("port", "")
-                                                # source        
-                                                source = ecm_info.get("source", "")
-                                                # server
-                                                server = ecm_info.get("server", "")
-                                                # hops
-                                                hops = ecm_info.get("hops", "")
-                                                #system
-                                                system = ecm_info.get("system", "")
-                                                #provider
-                                                provider = ecm_info.get("provider", "")
-                                                # reader
-                                                reader = ecm_info.get("reader", "")
-                                                if self.type == self.HOST:
-                                                        return server
-                                                if self.type == self.FORMAT:
-                                                        textvalue = ""
-                                                        params = self.sfmt.split(" ")
-                                                        for param in params:
-                                                                if param != '':
-                                                                        if param[0] != '%':
-                                                                                textvalue+=param
-                                                                        #server
-                                                                        elif param == "%S":
-                                                                                textvalue+=server
-                                                                        #hops
-                                                                        elif param == "%H":
-                                                                                textvalue+=hops
-                                                                        #system
-                                                                        elif param == "%SY":
-                                                                                textvalue+=system
-                                                                        #provider
-                                                                        elif param == "%PV":
-                                                                                textvalue+=provider
-                                                                        #port
-                                                                        elif param == "%SP":
-                                                                                textvalue+=port
-                                                                        #protocol
-                                                                        elif param == "%PR":
-                                                                                textvalue+=protocol
-                                                                        #caid
-                                                                        elif param == "%C":
-                                                                                textvalue+=caid
-                                                                        #Pid
-                                                                        elif param == "%P":
-                                                                                textvalue+=pid
-                                                                        #prov
-                                                                        elif param == "%p":
-                                                                                textvalue+=prov
-                                                                        #sOurce
-                                                                        elif param == "%O":
-                                                                                textvalue+=source
-                                                                        #Reader
-                                                                        elif param == "%R":
-                                                                                textvalue+=reader
-                                                                        #ECM Time
-                                                                        elif param == "%T":
-                                                                                textvalue+=ecm_time
-                                                                        elif param == "%t":
-                                                                                textvalue+="\t"
-                                                                        elif param == "%n":
-                                                                                textvalue+="\n"
-                                                                        elif param[1:].isdigit():
-                                                                                textvalue=textvalue.ljust(len(textvalue)+int(param[1:]))
-                                                                        if len(textvalue) > 0:
-                                                                                if textvalue[-1] != "\t" and textvalue[-1] != "\n":
-                                                                                        textvalue+=" "
-                                                        return textvalue[:-1]
-                                                if self.type == self.ALL:
-                                                        if source == "emu":
-                                                                textvalue = "%s - %s (Caid: %s)" % (source, self.systemTxtCaids.get(caid[:2]), caid)
-                                                        #new oscam ecm.info with port parametr
-                                                        elif reader != "" and source == "net" and port != "":
-                                                                textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (%s:%s) - %ss, %s hops" % (source, prov, caid, reader, protocol, server, port, ecm_time, hops)
-                                                        elif reader != "" and source == "net":
-                                                                textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (%s) - %ss, %s hops" % (source, prov, caid, reader, protocol, server, ecm_time, hops)
-                                                        elif reader != "" and source != "net":
-                                                                textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (local) - %ss, %s hops" % (source, prov, caid, reader, protocol, ecm_time, hops)
-                                                        elif server == "" and port == "":
-                                                                textvalue = "%s - Prov: %s, Caid: %s %s - %s" % (source, prov, caid, protocol, ecm_time)
-                                                        else:
-                                                                try:
-                                                                	textvalue = "%s Prov: %s, Caid: %s %s %s (Src: %s   p:%s) - %s ms, hop%s" % (source, prov, caid, reader, protocol, server, port, ecm_time, hops)
-                                                                except:
-                                                                        pass
-                                        else:
-                                                if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-                                                        textvalue = "No parse cannot emu"
-                                else:
-                                        if self.type == self.CURCAM:
-                                                textvalue = "NoEmu"
+			caid = info.get('caid', '')
+		except:
+			caid = ''
 
-                                        if self.type == self.CRYPT2:
-                                                textvalue = "Free To Air"
+		if caid:
+			idx = caid.index('x')
+			caid = caid[idx + 1:]
+			if len(caid) == 3:
+				caid = '0%s' % caid
+			caid = caid[:2]
+			caid = caid.upper()
+		return caid
 
-                                        if self.type == self.CAID:
-                                                textvalue = "0000"
+	def int2hex(self, int):
+		return '%x' % int
 
-                                        if self.type == self.PID:
-                                                textvalue = "0000"
+	def changed(self, what):
+		Converter.changed(self, what)
 
-                                        if self.type == self.PROV:
-                                                textvalue = "000000"
-
-                                        if self.type == self.DELAY:
-                                                textvalue = "0.000"
-
-                                        if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-                                                textvalue = "Free To Air"
-                return textvalue
-        text = property(getText)
-
-        def ecmfile(self):
-                global info
-                global old_ecm_mtime
-                ecm = None
-                service = self.source.service
-                if service:
-                        try:
-                                ecm_mtime = os.stat("/tmp/ecm.info").st_mtime
-                                if not os.stat("/tmp/ecm.info").st_size > 0:
-                                        info = {}
-                                if ecm_mtime == old_ecm_mtime:
-                                        return info
-                                old_ecm_mtime = ecm_mtime
-                                ecmf = open("/tmp/ecm.info", "rb")
-                                ecm = ecmf.readlines()
-                        except:
-                                old_ecm_mtime = None
-                                info = {}
-                                return info
-                        if ecm:
-                                for line in ecm:
-                                        x = line.lower().find("msec")
-                                        #ecm time for mgcamd and oscam
-                                        if x != -1:
-                                                info["ecm time"] = line[0:x+4]
-                                        else:
-                                                item = line.split(":", 1)
-                                                if len(item) > 1:
-                                                        #wicard block
-                                                        if item[0] == "Provider":
-                                                                item[0] = "prov"
-                                                                item[1] = item[1].strip()[2:]
-                                                        elif item[0] == "ECM PID":
-                                                                item[0] = "pid"
-                                                        elif item[0] == "response time":
-                                                                info["source"] = "net"
-                                                                it_tmp = item[1].strip().split(" ")
-                                                                info["ecm time"] = "%s msec" % it_tmp[0]
-                                                                y = it_tmp[-1].find('[')
-                                                                if y !=-1:
-                                                                        info["server"] = it_tmp[-1][:y]
-                                                                        info["protocol"] = it_tmp[-1][y+1:-1]
-                                                                item[0]="port"
-                                                                item[1] = ""
-                                                        elif item[0] == "hops":
-                                                                item[1] = item[1].strip("\n")
-                                                        elif item[0] == "system":
-                                                                item[1] = item[1].strip("\n")
-                                                        elif item[0] == "provider":
-                                                                item[1] = item[1].strip("\n")
-                                                        elif item[0][:2] == 'cw'or item[0] =='ChID' or item[0] == "Service":
-                                                                pass
-                                                        #mgcamd new_oscam block
-                                                        elif item[0] == "source":
-                                                                if item[1].strip()[:3] == "net":
-                                                                        it_tmp = item[1].strip().split(" ")
-                                                                        info["protocol"] = it_tmp[1][1:]
-                                                                        info["server"] = it_tmp[-1].split(":",1)[0]
-                                                                        info["port"] = it_tmp[-1].split(':',1)[1][:-1]
-                                                                        item[1] = "net"
-                                                        elif item[0] == "prov":
-                                                                y = item[1].find(",")
-                                                                if y != -1:
-                                                                        item[1] = item[1][:y]
-                                                        #old oscam block
-                                                        elif item[0] == "reader":
-                                                                if item[1].strip() == "emu":
-                                                                        item[0] = "source"
-                                                        elif item[0] == "from":
-                                                                if item[1].strip() == "local":
-                                                                        item[1] = "Local"
-                                                                        item[0] = "source"
-                                                                else:
-                                                                        info["source"] = "net"
-                                                                        item[0] = "server"
-                                                        #cccam block
-                                                        elif item[0] == "provid":
-                                                                item[0] = "prov"
-                                                        elif item[0] == "using:":
-                                                                if item[1].strip() == "emu" or item[1].strip() == "Local":
-                                                                        item[0] = "source"
-                                                                else:
-                                                                        info["source"] = "net"
-                                                                        item[0] = "protocol"
-                                                        elif item[0] == "address":
-                                                                tt = item[1].find(":")
-                                                                if tt != -1:
-                                                                        info["server"] = item[1][:tt].strip()
-                                                                        item[0] = "port"
-                                                                        item[1] = item[1][tt+1:]
-                                                        info[item[0].strip().lower()] = item[1].strip()
-                                                else:
-                                                        if not info.has_key("caid"):
-                                                                x = line.lower().find("caid")
-                                                                if x != -1:
-                                                                        y = line.find(",")
-                                                                        if y != -1:
-                                                                                info["caid"] = line[x+5:y]
-                                                        if not info.has_key("pid"):
-                                                                x = line.lower().find("pid")
-                                                                if x != -1:
-                                                                        y = line.find(" =")
-                                                                        if y != -1:
-                                                                                info["pid"] = line[x+4:y]
-                                ecmf.close()
-                return info
-        def changed(self, what):
-                Converter.changed(self, (self.CHANGED_POLL,))
-                

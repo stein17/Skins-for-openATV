@@ -1,5 +1,5 @@
 import math
-from Renderer import Renderer
+from Components.Renderer.Renderer import Renderer
 from skin import parseColor
 from enigma import eCanvas, eSize, gRGB, eRect
 from Components.VariableText import VariableText
@@ -38,7 +38,7 @@ class AMBWatches(Renderer):
     def hand(self):
         width = self.instance.size().width()
         height = self.instance.size().height()
-        r = min(width, height) / 2
+        r = int(min(width, height) / 2)
         endX, endY = self.calculate(self.numval, r, r)
         self.draw_line(r, r, endX, endY)
 

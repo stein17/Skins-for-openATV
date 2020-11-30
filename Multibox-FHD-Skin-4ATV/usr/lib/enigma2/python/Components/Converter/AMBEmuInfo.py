@@ -135,7 +135,7 @@ class AMBEmuInfo(Converter, object):
                             caID = caID.strip(',;.:-*_<>()[]{}')
                             sysID = self.getCryptName(caID)
                             return sysID
-			file.close()
+                        file.close()
         else:
             return ''
 
@@ -204,7 +204,7 @@ class AMBEmuInfo(Converter, object):
             if ecmtime2 != '':
                 x = line.split('--', 1)
                 msecIndex = x[0].find('msec')
-                if msecIndex is not -1:
+                if msecIndex != -1:
                     ecmtime = x[0].strip()
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
@@ -299,3 +299,4 @@ class AMBEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
+
