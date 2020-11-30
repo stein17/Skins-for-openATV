@@ -3789,42 +3789,80 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)/2, orgpos.y()))
   </screen>
   <!-- PicturePlayer -->
   <!-- XMLTV Import -->
-  <screen name="EPGImportConfig" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="EPG Import Configuration" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <screen name="EPGImportConfig" position="0,0" size="1280,720" title="EPG Import Configuration" flags="wfNoBorder" backgroundColor="background">
     <widget name="config" position="50,70" size="680,400" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" backgroundColor="background" transparent="1" />
-    <widget name="statusbar" position="50,622" size="680,34" font="Regular;20" foregroundColor="selectedFG" />
-    <widget name="status" position="50,550" size="680,60" font="Regular;20" foregroundColor="selectedFG" />
-    <panel name="template_date" />
+    <widget name="statusbar" position="50,580" size="680,34" font="Regular;20" foregroundColor="selectedFG" />
+    <widget name="status" position="50,500" size="680,60" font="Regular;20" foregroundColor="selectedFG" />
+    <panel name="template_title_date" />
     <panel name="template_source_red_o_blue" />
     <panel name="template_info_menu_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-28.png" transparent="1" alphatest="blend" />
   </screen>
-  <screen name="EPGImportSources" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="EPG Import Sources" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="config" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" itemHeight="30" font="Regular; 20" enableWrapAround="1" backgroundColor="background" transparent="1" />
-    <widget name="list" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" />
-    <panel name="template_date" />
-    <panel name="template_source_red_o_yellow" />
-    <panel name="template_exit_1280" />
+  <screen name="EPGImportSources" position="0,0" size="1280,720" title="EPG Import Sources" backgroundColor="background">
+    <widget name="list" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1" />
+   <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
+   <ePixmap pixmap="buttons/key_green.png" position="280,667" size="30,30" alphatest="blend" transparent="1" />
+   <ePixmap pixmap="buttons/key_yellow.png" position="520,667" size="30,30" alphatest="blend" transparent="1" />
+   <widget name="key_red" position="70,667" size="210,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+   <widget name="key_green" position="310,667" size="210,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+   <widget name="key_yellow" position="550,667" size="250,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+   <panel name="template_title_date" />
+   <panel name="template_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-27.png" transparent="1" alphatest="blend" />
   </screen>
-  <screen name="EPGImportProfile" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Days Profile" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <screen name="EPGImportProfile" position="0,0" size="1280,720" title="Days Profile" flags="wfNoBorder" backgroundColor="background">
     <widget name="config" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" itemHeight="30" font="Regular; 20" enableWrapAround="1" backgroundColor="background" transparent="1" />
-    <panel name="template_date" />
+    <panel name="template_title_date" />
     <panel name="template_source_red_green" />
     <panel name="template_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-26.png" transparent="1" alphatest="blend" />
   </screen>
+    <screen name="EPGImportLog" position="0,0" size="1280,720" title="EPG Import Log" flags="wfNoBorder" backgroundColor="background">
+    <widget name="list" position="22,70" size="720,400" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" />
+	<ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
+    <panel name="template_title_date" />
+    <panel name="template_info_menu_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-25.png" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="filtersServicesSetup" position="0,0" size="1280,720" title="Ignore services list" flags="wfNoBorder" backgroundColor="background">
+	<widget source="list" render="Listbox" position="22,70" size="720,400" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="white" transparent="1">
+			 <convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (5, 5), size = (400, 20), font = 0, flags = RT_HALIGN_LEFT, text = 0),
+						MultiContentEntryText(pos = (5, 30), size = (400, 20), font = 1, flags = RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (0, 20), size = (650, 20), font = 2, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text = 2),
+					],
+				 "fonts": [gFont("Regular", 20), gFont("Regular", 18), gFont("Regular", 16)],
+				 "itemHeight": 60
+				}
+			</convert>
+  </widget>
+	<widget source="introduction" render="Label" position="22,490" size="720,175" font="Regular; 20" foregroundColor="white" halign="center" backgroundColor="background" valign="center" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="template_source_red_o_blue" />
+    <panel name="template_info_menu_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-24.png" transparent="1" alphatest="blend" />
+   </screen>
+   <screen name="filtersServicesSelection" position="0,0" size="1280,720" title="Select service to add..." flags="wfNoBorder" backgroundColor="background">
+    <widget name="list" position="22,70" size="720,400" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="template_name_long_red_o_blue" />
+    <panel name="template_info_menu_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-23.png" transparent="1" alphatest="blend" />
+   </screen>
   <!-- XMLTV Import -->
   <!-- GigaBlue IPBox Client -->
   <screen name="GBIpboxMenu" position="0,0" size="1280,720" title="IPBox Client" flags="wfNoBorder" backgroundColor="background">

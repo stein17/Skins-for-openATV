@@ -4,7 +4,6 @@ from Components.config import config
 from Components.Element import cached
 from Components.Language import language
 from os import path, popen, environ
-from Plugins.Extensions.MyMetrixLite.__init__ import initOtherConfig
 from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
 import Screens.Standby
 import gettext
@@ -14,18 +13,8 @@ import six
 lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("MyMetrixLite", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/MyMetrixLite/locale/"))
 
-TEMPSIGN = '°C' if six.PY3 else str('\xc2\xb0C')
-
-def _(txt):
-	t = gettext.dgettext("MyMetrixLite", txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
-
-initOtherConfig()
+TEMPSIGN = u'\N{DEGREE SIGN}' + 'C' if six.PY3 else str('\xc2\xb0C')
 
 class UltimateSTBinfo(Converter, object):
 
@@ -45,32 +34,12 @@ class UltimateSTBinfo(Converter, object):
 			return self.getCPUtemp()
 		elif self.type == "SYStemp":
 			return self.getSYStemp()
-		elif self.type =="MyMetrixConfig":
-			return self.getMyMetrixConfig()
 		elif self.type == "FLASHfree":
 			return self.getFLASHfree()
 		elif self.type == "CPUspeed":
 			return self.getCPUspeed()
 		return ""
 
-	def getMyMetrixConfig(self):
-		#stime = time()
-		info = ""
-		try:
-			space = " " * int(config.plugins.MyMetrixLiteOther.STBDistance.value)
-			if config.plugins.MyMetrixLiteOther.showCPULoad.value:
-				info += self.getCPUload()
-			if config.plugins.MyMetrixLiteOther.showRAMfree.value:
-				info += space + self.getRAMfree()
-			if config.plugins.MyMetrixLiteOther.showCPUTemp.value:
-				info += space + self.getCPUtemp()
-			if config.plugins.MyMetrixLiteOther.showSYSTemp.value:
-				info += space + self.getSYStemp()
-		except:
-			pass
-		#etime = time()
-		#info += space + "Time: " + str(int(float(etime - stime)*1000)) + " ms"
-		return info
 
 	def getCPUload(self):
 		info = ""

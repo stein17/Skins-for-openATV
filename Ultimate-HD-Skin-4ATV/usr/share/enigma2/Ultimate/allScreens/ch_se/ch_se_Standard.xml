@@ -1,0 +1,69 @@
+<skin>
+  <!-- ChannelSelection_Standard -->
+<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+  <widget source="ServiceEvent" render="Label" position="110,648" size="60,20" font="Regular; 20" foregroundColor="selectedFG" transparent="1" halign="right" valign="center">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="290,648" size="60,20" font="Regular; 20" foregroundColor="selectedFG" transparent="1" valign="center">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+   <widget source="ServiceEvent" render="Progress" position="173,652" size="110,10" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <!--     <widget name="list" position="20,70" size="800,552" scrollbarMode="showOnDemand" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" colorEventProgressbar="selectedFG" colorEventProgressbarBorder="verygrey" colorEventProgressbarBorderSelected="selectedFG" foregroundColorServiceNotAvail="lila" foregroundColorSelected="selectedFG"  serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" /> -->
+  <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="900,305" size="355,215" font="Regular; 23" foregroundColor="selectedFG" transparent="1" halign="left" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="UltimateNextEvents" position="900,532" size="355,140" noWrap="1" font="Regular;20" backgroundColor="black" transparent="1" zPosition="5">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="ServiceEvent" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="380,642" size="470,30" font="Regular; 24" foregroundColor="foreground" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+    <convert type="UltimatePrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+  <eLabel text="CH +/-" position="556,4" size="120,44" font="Regular;32" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <eLabel text="Zapp Favorites " position="680,4" size="260,44" font="Regular;32" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget source="Title" render="Label" position="160,4" size="400,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget source="ServiceEvent" render="Picon" position="30,635" size="75,42" zPosition="5" alphatest="blend" transparent="1">
+    <convert type="UltimateRefString">ServicelistRef</convert>
+  </widget>
+  <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_green.png" position="148,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="355,689" size="26,26" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="512,689" size="26,26" alphatest="blend" transparent="1" />
+  <widget name="key_red" position="49,689" size="90,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_green" position="177,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_yellow" position="384,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget name="key_blue" position="541,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/sat.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/dvbt.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/kabel.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap name="PrimeTimeClock" pixmap="Ultimate/skin_default/system/PTClock.png" position="357,648" size="21, 21" />
+  <widget source="ServiceEvent" render="UltimateFrontend" position="710,689" zPosition="1" valign="center" size="350,25" font="Regular; 20" backgroundColor="black" transparent="1" halign="left" />
+  <panel name="ScrollBarTemplate size=820,570" /> 
+  <panel name="template_pixmap_lines_ch_se_right" />
+  <panel name="ChannelSelection_color_default" />
+  <panel name="template_menu_ok_exit_1280" />
+  <panel name="template_pig_smal" />
+  <panel name="template_pixmap_pig_smal" />
+  <panel name="template_digitalclock_widget" />
+  <panel name="template_pixmap_rahmen" />
+  
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  <panel name="template_date" />
+</screen>
+ </skin>

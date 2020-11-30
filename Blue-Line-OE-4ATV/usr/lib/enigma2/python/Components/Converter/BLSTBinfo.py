@@ -14,7 +14,7 @@ lang = language.getLanguage()
 environ["LANGUAGE"] = lang[:2]
 gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 
-TEMPSIGN = '°C' if six.PY3 else str('\xc2\xb0C')
+TEMPSIGN = u'\N{DEGREE SIGN}' + 'C' if six.PY3 else str('\xc2\xb0C')
 
 class BLSTBinfo(Converter, object):
 

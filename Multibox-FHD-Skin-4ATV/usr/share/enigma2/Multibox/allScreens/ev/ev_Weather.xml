@@ -1,7 +1,7 @@
 
 <skin>
  <!-- EventView_full_msn_weather-->
-<screen name="EventView" position="0,0" size="1920,1080" title="Eventview" flags="wfNoBorder" backgroundColor="background">
+  <screen name="EventView" position="0,0" size="1920,1080" title="Eventview" flags="wfNoBorder" backgroundColor="background">
     <widget source="Title" render="Label" position="480,100" size="710,50" font="Regular; 40" foregroundColor="default" backgroundColor="background" zPosition="1" valign="center" halign="left" transparent="1" />
     <widget source="Service" render="Picon" position="10,100" size="89,50" zPosition="5" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
@@ -44,7 +44,7 @@
     <eLabel name="" position="10,152" size="1180,1" backgroundColor="Line" />
     <eLabel name="" position="10,907" size="1180,1" backgroundColor="Line" />
     <eLabel name="" position="1223,624" size="670,1" backgroundColor="Line" />
-   <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_sd_on.png" position="1352,1020" size="82,44" zPosition="1" alphatest="blend">
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_sd_on.png" position="1352,1020" size="82,44" zPosition="1" alphatest="blend">
     <convert type="ServiceInfo">VideoHeight</convert>
     <convert type="ValueRange">0,576</convert>
     <convert type="ConditionalShowHide" />
@@ -113,56 +113,58 @@
     <panel name="template_tuner_info" />
     <!-- <panel name="template_weather" />-->
     <panel name="template_pig_setup" />
-    <widget noWrap="1" backgroundColor="background20" foregroundColor="green" font="Regular; 27" render="Label" position="610,18" size="90,30" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
-      <convert type="MSNWeather">temperature_current</convert>
-    </widget>
-    <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="544,51" size="290,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-      <convert type="MSNWeather">temperature_text,current</convert>
-    </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="467,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-    </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="836,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-    </widget>
-    <widget backgroundColor="background" font="Regular; 27" foregroundColor="default" render="Label" position="935,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-      <convert type="MSNWeather">weekshortday,day2</convert>
-    </widget>
-    <widget backgroundColor="background" font="Regular; 27" foregroundColor="bernstein" render="Label" position="978,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-      <convert type="MSNWeather">temperature_heigh_low,day2</convert>
-    </widget>
-    <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="913,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-      <convert type="MSNWeather">temperature_text,day2</convert>
-    </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="1155,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-    </widget>
-    <widget backgroundColor="background" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1295,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-      <convert type="MSNWeather">temperature_heigh_low,day3</convert>
-    </widget>
-    <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="1232,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-      <convert type="MSNWeather">temperature_text,day3</convert>
-    </widget>
-    <widget backgroundColor="background" font="Regular; 27" foregroundColor="default" render="Label" position="1250,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-      <convert type="MSNWeather">weekshortday,day3</convert>
-    </widget>
-    <eLabel text="Status:" position="230,51" size="100,30" zPosition="8" halign="left" font="Regular; 24" backgroundColor="background" transparent="1" />
-    <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="green" render="Label" position="185,15" size="285,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
-      <convert type="MSNWeather">city</convert>
-    </widget>
-    <widget render="Label" noWrap="1" source="session.MSNWeather" position="306,51" zPosition="8" size="75,30" font="Regular; 24" transparent="1" halign="right" backgroundColor="background">
-      <convert type="MSNWeather">observationtime</convert>
-    </widget>
-    <eLabel name="" position="0,0" size="1920,88" backgroundColor="background" zPosition="-1" />
-    <eLabel name="" position="1,91" size="1920,2" backgroundColor="Line" />
-    <widget source="session.CurrentService" render="Label" position="1427,964" size="450,34" backgroundColor="background" font="Regular; 27" halign="center" noWrap="1" transparent="1" zPosition="1" foregroundColor="greenlight">
+  <widget noWrap="1" backgroundColor="background20" foregroundColor="green" font="Regular; 27" render="Label" position="610,18" size="90,30" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
+    <convert type="MSNWeather">temperature_current</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="544,51" size="290,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,current</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="467,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="836,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
+  </widget>
+  <widget backgroundColor="background" font="Regular; 27" foregroundColor="default" render="Label" position="935,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day2</convert>
+  </widget>
+  <widget backgroundColor="background" font="Regular; 27" foregroundColor="bernstein" render="Label" position="978,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day2</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="913,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day2</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="1155,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
+  </widget>
+  <widget backgroundColor="background" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1295,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day3</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="white" render="Label" position="1232,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day3</convert>
+  </widget>
+  <widget backgroundColor="background" font="Regular; 27" foregroundColor="default" render="Label" position="1250,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day3</convert>
+  </widget>
+  <eLabel text="Status:" position="230,51" size="100,30" zPosition="8" halign="left" font="Regular; 24" backgroundColor="background" transparent="1" />
+  <widget Wrap="1" backgroundColor="background" font="Regular; 24" foregroundColor="green" render="Label" position="185,15" size="285,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
+    <convert type="MSNWeather">city</convert>
+  </widget>
+  <widget render="Label" noWrap="1" source="session.MSNWeather" position="306,51" zPosition="8" size="75,30" font="Regular; 24" transparent="1" halign="right" backgroundColor="background">
+    <convert type="MSNWeather">observationtime</convert>
+  </widget>
+<eLabel name="" position="0,0" size="1920,88" backgroundColor="background" zPosition="-1" />
+  <eLabel name="" position="1,91" size="1920,2" backgroundColor="Line" />
+    <widget source="session.CurrentService" render="Label" position="1427,964" size="450,34" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center"  zPosition="1" backgroundColor="background" foregroundColor="default">
       <convert type="ServiceName2">%S</convert>
       <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
       <convert type="ServiceName2">%R</convert>
       <convert type="ConverterRotator">3</convert>
     </widget>
-  <widget source="session.CurrentService" render="Label" position="850,957" size="583,45" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
-    <convert type="MetrixHDCaidDisplay">Default</convert>
+    <widget source="session.CurrentService" render="Label" position="850,957" size="300,45" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
+    <convert type="CryptoInfo">VerboseInfo</convert>
   </widget>
-  </screen>
+    <widget source="session.CurrentService" render="Label" position="1160,957"  size="300,45"  font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
+     <convert type="AMBEmuInfo">Emu</convert>
+  </widget>
  </skin>
