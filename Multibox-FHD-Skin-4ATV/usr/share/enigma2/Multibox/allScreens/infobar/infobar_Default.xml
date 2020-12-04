@@ -66,9 +66,13 @@
  <widget source="session.CurrentService" render="Label" position="1670,1055" size="65,24" font="Regular; 24" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="2">
   <convert type="AMBCPUInfo">$0</convert>
 </widget>
-<widget source="global.CurrentTime" render="Label" position="1730,1055" size="200,24" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1">
+ <!-- Python 2 -->
+ <eLabel text="CPU-Temp:" position="1730,1055" size="130,25" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1" />
+ <widget source="global.CurrentTime" position="1846,1055" size="80,25" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1" render="AMBSYSTemp" />
+ <!-- Python 3 -->
+ <!--  <widget source="global.CurrentTime" render="Label" position="1730,1055" size="200,24" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1">
   <convert type="AMBSTBinfo">CPUtemp</convert>
-</widget>
+ </widget> -->
 <eLabel text="CPU:" position="1625,1055" size="55,24" font="Regular; 24" backgroundColor="background" transparent="1" zPosition="1" />
 <widget alphatest="blend" position="16,868" size="347,197" render="Picon" source="session.CurrentService" transparent="1" zPosition="1">
     <convert type="ServiceName">Reference</convert>

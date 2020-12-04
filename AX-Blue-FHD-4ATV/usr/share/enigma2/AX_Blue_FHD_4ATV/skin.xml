@@ -881,14 +881,18 @@
       <convert type="FrontendInfo">STRING</convert>
     </widget>
     <eLabel text="Tuner:" position="1590,72" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
-	<widget source="session.CurrentService" render="Label" position="1560,112" size="80,36" font="Regular; 32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
+	<widget source="session.CurrentService" render="Label" position="1540,112" size="85,36" font="Regular; 32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
     <convert type="AXBlueCPUInfo">$0</convert>
     </widget>
     <eLabel text="CPU:" position="1470,112" size="90,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
-    <widget source="global.CurrentTime" render="Label" position="1660,112" size="245,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3">
+    <!-- template_cpu_infobar ATV 6.4-->
+    <eLabel text="CPU-Temp:" position="1640,112" size="170,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
+    <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1810,112" size="105,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
+    <!-- template_cpu_infobar ATV 6.5-->
+    <!-- <widget source="global.CurrentTime" render="Label" position="1660,112" size="245,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3">
     <convert type="AXBlueSTBinfo">CPUtemp</convert>
-    </widget>
-  </screen>
+    </widget> -->
+ </screen>
 
   <!-- TEMPLATES Channel_Selection_2_Fields -->
   <screen name="Channel_Selection_Progress_Color">
@@ -947,8 +951,7 @@
   </screen>
   <!-- Main infobar FHD -->
  <!-- Main infobar FHD -->
-<screen name="InfoBar" position="0,10" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" borderWidth="0" borderColor="transparent">
-    <!-- <ePixmap pixmap="DEV/NFR-icon.png" position="1463,820" size="100,50" alphatest="blend" zPosition="10" /> -->
+ <screen name="InfoBar" position="0,10" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" borderWidth="0" borderColor="transparent">
     <widget pixmap="icons/ico_rec_on.png" alphatest="blend" position="10,805" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
@@ -1381,9 +1384,13 @@
    <widget source="session.CurrentService" render="Label" position="1253,854" size="640,30" zPosition="1" font="Regular;24" halign="left" valign="center" foregroundColor="yellow" backgroundColor="background" transparent="1">
     <convert type="AXBlueReceiverInfo">HddInfo</convert>
    </widget>
-     <widget source="global.CurrentTime" render="Label" position="1507,887" size="240,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
+   <!-- template_cpu_infobar ATV 6.4-->
+   <eLabel text="CPU Temp:" position="1507,887" size="140,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" />
+   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1637,887" size="100,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3"  />
+    <!-- template_cpu_infobar ATV 6.5-->
+   <!-- <widget source="global.CurrentTime" render="Label" position="1507,887" size="240,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
     <convert type="AXBlueSTBinfo">CPUtemp</convert>
-  </widget>
+  </widget> -->
   <widget source="session.CurrentService" render="Label" position="1253,887" size="305,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="red">
     <convert type="AXBlueCPUInfo">CPU Auslastung:$0 </convert>
   </widget>
@@ -3535,13 +3542,13 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <!-- template_cpu_infobar ATV 6.4-->
- <!-- <eLabel text="CPU Temp:" position="30,674" size="225,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
-   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="270,674" size="630,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3"  /> -->
+ <eLabel text="CPU Temp:" position="30,674" size="180,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3" />
+ <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="200,674" size="630,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3"  />
 
 <!-- template_cpu_infobar ATV 6.5-->
-  <widget source="global.CurrentTime" render="Label" position="30,674" size="625,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3">
+<!--   <widget source="global.CurrentTime" render="Label" position="30,674" size="625,45" font="Regular;32" halign="left" valign="bottom" backgroundColor="background" foregroundColor="orange" noWrap="1" transparent="1" zPosition="3">
     <convert type="AXBlueSTBinfo">CPUtemp</convert>
-  </widget>
+  </widget> -->
   <widget source="session.CurrentService" render="Label" position="30,908" size="880,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="lightblue">
     <convert type="AXBlueCPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
   </widget>
@@ -3557,7 +3564,6 @@
   <widget source="session.CurrentService" render="Label" position="30,720" size="880,45" zPosition="1" font="Regular; 32" halign="left" valign="center" transparent="0" foregroundColor="white">
     <convert type="AXBlueReceiverInfo">UsbInfo,Long</convert>
   </widget>
-  <!-- <eLabel text="SysTemp:" position="30,674" size="160,45" font="Regular; 32" halign="left" valign="bottom" backgroundColor="background" noWrap="1" transparent="1" zPosition="2" foregroundColor="orange" /> -->
 </screen>
   <!-- Info Devices FHD -->
   <screen name="Devices" position="0,0" size="1920,1080" title="Device Information" flags="wfNoBorder" backgroundColor="transparent">
