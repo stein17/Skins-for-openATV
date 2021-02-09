@@ -730,6 +730,7 @@
   <panel name="template_crypt"/>
   <panel name="template_3_fields_info"/>
   <panel name="template_tunerinfo"/>
+  <panel name="template_ib_poster"/>
  </screen>
   <!-- SecondInfoBar FHD -->
   <screen backgroundColor="background" flags="wfNoBorder" name="SecondInfoBar" position="0,0" size="1920,1080" title="SecondInfoBar">
@@ -738,12 +739,6 @@
       <convert type="ClockToText">Format:%A, %d.%m.%Y   %H:%M</convert>
     </widget>
   <ePixmap pixmap="menu/bg1920.png" position="0,0" zPosition="-20" size="1920,1080" />
-  <widget source="session.Event_Now" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,161" size="1170,340" font="Regular;36" foregroundColor="foregroundClock" halign="center" transparent="1" zPosition="2">
-    <convert type="EventName">ExtendedDescription</convert>
-  </widget>
-  <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="27,585" size="1170,340" font="Regular;36" halign="center" valign="top" foregroundColor="foregroundClock" transparent="1" zPosition="2">
-    <convert type="EventName">ExtendedDescription</convert>
-  </widget>
   <widget source="session.Event_Now" render="Label" position="25,100" size="1100,50" font="Regular; 40" halign="left" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="cyan1">
     <convert type="EventName">NameNow</convert>
   </widget>
@@ -751,7 +746,7 @@
     <convert type="EventTime">Duration</convert>
     <convert type="ClockToText">InMinutes</convert>
   </widget>
-  <widget source="session.CurrentService" render="Picon" position="1258,539" size="100,60" zPosition="6" transparent="1" alphatest="blend">
+  <widget source="session.CurrentService" render="BLXPicon" position="1258,539" size="100,60" zPosition="6" transparent="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget source="session.Event_Now" render="Label" position="1362,545" size="150,50" font="Regular;36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
@@ -1076,6 +1071,7 @@
     <convert type="BLReceiverInfo">HddInfo</convert>
    </widget>
    <panel name="template_progress_secondinfobar" />
+   <panel name="template_sib_now_next_h_default"/>
 </screen>
   <!-- Channel selection - TV FHD -->
 <screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="background" flags="wfNoBorder" size="1920,1080">
@@ -1120,7 +1116,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
  <!--  <widget name="list" position="10,110" size="1220,880" scrollbarMode="showOnDemand" transparent="1" zPosition="1" serviceItemHeight="40" serviceNumberFont="Regular;38" serviceNameFont="Regular;43" serviceInfoFont="Regular;37" fieldMargins="8" itemsDistances="8" progressBarWidth="100" progressbarHeight="12" foregroundColor="white" foregroundColorSelected="cyan1" backgroundColor="black" backgroundColorSelected="backgroundBlue" foregroundColorMarkedSelected="yellow" colorServiceDescription="cyan1" colorServiceDescriptionSelected="white" colorServiceRecording="red" foregroundColorServiceNotAvail="dark" colorEventProgressbar="bluelabel" colorEventProgressbarBorder="foregroundClock" colorEventProgressbarBorderSelected="blue" /> -->
-  <widget source="ServiceEvent" render="Picon" position="1252,472" size="124,70" zPosition="1" alphatest="blend" transparent="1">
+  <widget source="ServiceEvent" render="BLXPicon" position="1252,472" size="124,70" zPosition="1" alphatest="blend" transparent="1">
     <convert type="BLRefString">ServicelistRef</convert>
   </widget>
   <eLabel text="Start Time:" position="1252,555" size="150,30" font="Regular; 24" halign="left" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
@@ -1154,6 +1150,7 @@
   <eLabel text="CH +/-" zPosition="1" position="910,0" size="160,95" valign="center" font="Regular; 40" foregroundColor="white" transparent="1" halign="center" />
   <eLabel text="Zapp Favorites " position="1070,0" size="400,95" valign="center" font="Regular; 40" foregroundColor="white" transparent="1" halign="center" />
   <panel name="Channel_Selection_Progress_Color" />
+  <panel name="template_ch_se_poster"/>
  </screen>
   <!-- Radio FHD -->
   <screen name="ChannelSelectionRadio" position="0,0" size="1920,1080" title="Radio Channel Selection" zPosition="-10" flags="wfNoBorder" backgroundColor="transparent">
@@ -1403,111 +1400,79 @@
   </screen>
    <!-- Eventview FHD -->
   <screen name="EventView" position="0,0" size="1920,1080" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
-    <ePixmap pixmap="menu/bg1920.png" position="0,0" zPosition="-20" size="1920,1080" />
-    <widget source="Title" render="Label" position="709,23" size="950,50" font="Regular; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
-    <widget name="channel" position="15,19" size="580,60" font="Regular;46" transparent="1" zPosition="2" halign="center" />
-    <widget alphatest="blend" position="1261,135" render="BLXPicon" size="100,56" source="Title" transparent="1" zPosition="10">
-      <convert type="BLRefString">CurrentRef</convert>
-    </widget>
-    <widget name="datetime" position="140,926" size="400,40" font="Regular; 32" halign="left" transparent="1" />
-    <eLabel text="Ende:" position="975,926" size="110,40" font="Regular; 32" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1" />
-    <eLabel text="Start:" position="30,925" size="110,40" font="Regular; 32" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1" />
-    <widget name="epg_description" position="20,134" size="1210,722" font="Regular;34" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
-    <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="icons/ico_sd_on.png" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">0,719</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="icons/ico_hd_off.png" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,1079</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="icons/ico_hd_on.png" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,1080</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="icons/ico_uhd_on.png" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1081,5000</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="1716,1030" size="63,35" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsStereo</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1716,1030" size="63,35" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsMultichannel</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="1812,1030" size="63,35" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsNotWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_on.png" position="1812,1030" size="63,35" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_iptv_on.png" alphatest="blend" position="1427,1030" zPosition="3" size="63,35" transparent="1">
-      <convert type="ServiceInfo">IsStream</convert>
-      <convert type="ConditionalShowHide">
-      </convert>
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" position="1524,1032" size="63,35" zPosition="2" pixmap="icons/ico_hbbtv_on.png" alphatest="blend">
-      <convert type="ServiceInfo">HasHBBTV</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <eLabel name="vertikalline" position="34,909" size="1198,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
-    <eLabel name="vertikalline" position="1252,592" size="645,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
-    <eLabel name="vertikalline" position="1240,120" size="2,840" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
-    <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="1145,872" size="80,26" zPosition="2" />
-    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="1145,872" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <widget backgroundColor="black" font="Regular; 30" halign="center" name="duration" position="500,926" size="160,40" transparent="1" />
-	
-	<eLabel position="1250,124" size="649,367" zPosition="-15" backgroundColor="bluelabel"   />
-    <eLabel position="1251,125" size="647,365" zPosition="-20" backgroundColor="white"  />
-    <widget position="1252,126" size="645,363" zPosition="5" backgroundColor="backgroundPig" source="session.VideoPicture" render="Pig" />
-	
-    <eLabel text="Next:" position="1249,504" size="150,40" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
-    <eLabel text="Start:" position="1300,560" size="95,30" font="Regular; 30" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
-    <eLabel text="Ende:" position="1570,559" size="90,30" font="Regular; 30" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
-    <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,startdelay=10000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1252,606" size="640,360" font="Regular;32" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
-      <convert type="EventName">FullDescription</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1660,560" size="100,30" font="Regular; 30" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="white">
-      <convert type="EventTime">EndTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1400,560" size="100,30" font="Regular; 30" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="white">
-      <convert type="EventTime">StartTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1760,559" size="140,30" font="Regular;30" backgroundColor="black" transparent="1" zPosition="2" halign="center" foregroundColor="white">
-      <convert type="EventTime">Duration</convert>
-      <convert type="ClockToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Now" render="Label" position="1080,926" size="155,40" transparent="0" zPosition="1" backgroundColor="black" font="Regular; 32" halign="left" foregroundColor="white">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Next" render="BLRunningText" position="1363,504" size="545,40" font="Regular;34" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="lightblue" backgroundColor="dark" transparent="1" noWrap="1" zPosition="5">
-      <convert type="EventName">Name</convert>
-    </widget>
-    <ePixmap alphatest="blend" pixmap="buttons/key_leftright.png" position="601,29" size="100,40" transparent="1" zPosition="10" />
-    <ePixmap pixmap="buttons/key_menu.png" position="1253,1024" size="60,50" alphatest="on" />
-    <ePixmap pixmap="buttons/key_info.png" position="1337,1024" size="60,50" alphatest="on" />
-    <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
-    <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-	<panel name="template_progress_Eventview"/>
+  <ePixmap pixmap="Blue-Line-OE-4ATV/menu/bg1920.png" position="0,0" zPosition="-20" size="1920,1080" />
+  <widget source="Title" render="Label" position="709,23" size="950,50" font="Regular; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
+  <widget name="channel" position="15,19" size="580,60" font="Regular;46" transparent="1" zPosition="2" halign="center" />
+  <widget alphatest="blend" position="1261,135" render="BLXPicon" size="100,56" source="Title" transparent="1" zPosition="10">
+    <convert type="BLRefString">CurrentRef</convert>
+  </widget>
+  <widget name="epg_description" position="20,134" size="1210,722" font="Regular;34" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
+  <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">0,719</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1079</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1080</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1622,1030" size="63,35" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_uhd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">1081,5000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_dolby_off.png" position="1716,1030" size="63,35" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsStereo</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_dolby_on.png" position="1716,1030" size="63,35" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_format_off.png" position="1812,1030" size="63,35" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsNotWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_format_on.png" position="1812,1030" size="63,35" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Blue-Line-OE-4ATV/icons/ico_iptv_on.png" alphatest="blend" position="1427,1030" zPosition="3" size="63,35" transparent="1">
+    <convert type="ServiceInfo">IsStream</convert>
+    <convert type="ConditionalShowHide">
+    </convert>
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" position="1524,1032" size="63,35" zPosition="2" pixmap="Blue-Line-OE-4ATV/icons/ico_hbbtv_on.png" alphatest="blend">
+    <convert type="ServiceInfo">HasHBBTV</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <eLabel name="vertikalline" position="34,909" size="1198,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+  <eLabel name="vertikalline" position="1240,120" size="2,840" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+  <ePixmap alphatest="blend" pixmap="Blue-Line-OE-4ATV/icons/ico_rec_off.png" position="1145,872" size="80,26" zPosition="2" />
+  <widget alphatest="blend" pixmap="Blue-Line-OE-4ATV/icons/ico_rec_on.png" position="1145,872" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <eLabel position="1250,124" size="649,367" zPosition="-15" backgroundColor="bluelabel" />
+  <eLabel position="1251,125" size="647,365" zPosition="-20" backgroundColor="white" />
+  <widget position="1252,126" size="645,363" zPosition="5" backgroundColor="backgroundPig" source="session.VideoPicture" render="Pig" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_menu.png" position="1253,1024" size="60,50" alphatest="on" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_info.png" position="1337,1024" size="60,50" alphatest="on" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="Blue-Line-OE-4ATV/buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
+  <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <!-- <panel name="template_progress_Eventview" /> -->
+  <panel name="template_ev_default" />
   </screen>
   <!-- EPG Selection FHD -->
  <screen name="EPGSelection" position="0,0" size="1920,1080" title="EPG Selection" backgroundColor="background" flags="wfNoBorder" >
@@ -1695,7 +1660,7 @@
     <widget source="global.CurrentTime" render="Label" position="1544,24" size="350,50" font="Regular; 36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a.%d.%m   %H:%M</convert>
     </widget>
-    <widget source="Service" render="Picon" position="609,17" size="107,60" transparent="0" zPosition="2" alphatest="blend">
+    <widget source="Service" render="BLXPicon" position="609,17" size="107,60" transparent="0" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap pixmap="menu/bg1920.png" position="0,2" zPosition="-20" size="1920,1080" />
@@ -1777,7 +1742,7 @@
     <widget source="global.CurrentTime" render="Label" position="1544,25" size="350,50" font="Regular; 36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a.%d.%m   %H:%M</convert>
     </widget>
-    <widget source="Service" render="Picon" position="609,17" size="107,60" transparent="0" zPosition="2" alphatest="blend">
+    <widget source="Service" render="BLXPicon" position="609,17" size="107,60" transparent="0" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap pixmap="menu/bg1920.png" position="2,5" zPosition="-20" size="1920,1080" />
@@ -3543,7 +3508,7 @@
   <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
   <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
   <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
-  <widget source="Service" render="Picon" position="1590,261" zPosition="10" size="220,132" transparent="1" alphatest="blend">
+  <widget source="Service" render="BLXPicon" position="1590,261" zPosition="10" size="220,132" transparent="1" alphatest="blend">
     <convert type="MovieReference" />
   </widget>
 </screen>
@@ -3597,7 +3562,7 @@
   <widget source="Service" render="Label" position="1613,595" size="165,36" font="Regular; 29" halign="center" foregroundColor="grey" backgroundColor="black" transparent="1" zPosition="2">
   <convert type="MovieInfo">FileSize</convert>
 </widget>
-<widget source="Service" render="Picon" position="1251,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+<widget source="Service" render="BLXPicon" position="1251,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
   <convert type="MovieReference" />
 </widget>
 </screen>
@@ -3681,6 +3646,7 @@
 	<panel name="template_pixmap_infobar" />
     <panel name="template_clock_infobar" />
 	<panel name="template_progress_movieplayer" />
+	<panel name="template_emc_poster"/>
   </screen>
   <!-- DVD Player -->
   <screen name="DVDPlayer" position="0,0" size="1920,1080" title="DVDPlayer" flags="wfNoBorder" backgroundColor="transparent">
@@ -3776,7 +3742,41 @@
     </widget>
   </screen>
   <!-- Timeshift state -->
- <screen name="TimeshiftState" title="TimeShift" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
+<!--   <screen name="TimeshiftState" title="TimeShift" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
+  <ePixmap pixmap="menu/Infobar_OCT.png" position="0,780" zPosition="-1" size="1920,1080" />
+  <widget source="global.CurrentTime" render="Label" position="661,955" size="600,50" font="Regular; 36" halign="center" foregroundColor="white" backgroundColor="black" transparent="1">
+    <convert type="ClockToText">Format:%A, %d.%m.%Y   </convert>
+  </widget>
+  <ePixmap position="962,821" size="80,26" pixmap="icons/ico_rec_off.png" alphatest="blend" zPosition="1" />
+  <widget source="global.CurrentTime" render="BLWatches" position="1660,863" size="160,160" zPosition="4" foregroundColor="red" alphatest="blend">
+    <convert type="BLAnalogClock">secHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="BLWatches" position="1660,863" size="160,160" zPosition="3" foregroundColor="bluelabel" alphatest="blend">
+    <convert type="BLAnalogClock">minHand</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="BLWatches" position="1675,878" size="130,130" zPosition="2" foregroundColor="bluelabel" alphatest="blend">
+    <convert type="BLAnalogClock">hourHand</convert>
+  </widget>
+  <widget name="speed" position="1269,811" size="300,60" font="Regular;32" halign="right" valign="center" foregroundColor="bernstein" backgroundColor="dark" transparent="1" zPosition="2" />
+  <widget name="state" position="280,954" size="50,52" font="Regular;48" halign="left" foregroundColor="bernstein" backgroundColor="bluelabel" transparent="1" zPosition="2" />
+  <widget name="eventname" position="377,877" size="1190,50" font="Regular; 34" halign="left" foregroundColor="white" backgroundColor="bluelabel" transparent="1" zPosition="2" />
+  <widget source="session.CurrentService" render="BLXPicon" position="18,907" size="220,132" alphatest="blend" zPosition="1">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="379,955" size="200,50" font="Regular;40" halign="left" backgroundColor="background" zPosition="3" transparent="1">
+  <convert type="ServicePosition">Position</convert>
+</widget>
+  <widget source="session.CurrentService" render="Label" position="1355,955" size="200,50" font="Regular;40" halign="right" backgroundColor="background" zPosition="3" transparent="1">
+    <convert type="ServicePosition">Length</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Progress" pixmap="00ffffff.png" position="365,934" size="1202,12" zPosition="7" borderWidth="1" borderColor="black" transparent="1">
+    <convert type="ServicePosition">Position</convert>
+  </widget>
+  <widget name="PTSSeekBack" position="480,961" size="1210,0" pixmap="slider_back.png" alphatest="on" zPosition="2" />
+  <widget name="PTSSeekPointer" position="366,915" size="8,18" pixmap="position_arrow.png" alphatest="blend" zPosition="7" />
+  <eLabel text="T I M E S H I F T" position="2,792" size="950,50" font="Regular; 50" foregroundColor="grey" backgroundColor="dark" transparent="1" zPosition="1" halign="center" />
+</screen> -->
+<screen name="TimeshiftState" title="TimeShift" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
     <widget name="state" position="696,790" size="50,50" font="Regular;50" halign="left" foregroundColor="grey" backgroundColor="dark" transparent="1" zPosition="2" />
     <widget name="speed" position="796,790" size="50,50" font="Regular;50" halign="left" foregroundColor="grey" backgroundColor="dark" transparent="1" zPosition="2" />
     <widget name="eventname" position="377,877" size="1190,50" font="Regular; 34" halign="left" foregroundColor="white" backgroundColor="bluelabel" transparent="1" zPosition="2" />
@@ -7874,4 +7874,160 @@ self.instance.move(ePoint((1920-wsizex), (1280-wsizex)/2, (720-wsizey)/(count &g
   progressPercentWidth="90" 
   progressbarHeight="12" />
   </screen>
-  </skin>
+  
+ <!-- TEMPLATES SIB Poster-->
+ <screen name="template_sib_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+
+<!-- TEMPLATES SIB Now Next Poster-->
+ <screen name="template_sib_now_next_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+
+  
+  <!-- TEMPLATES SecondInfoBar Poster Diagonal Poster -->
+  <screen name="template_sib_now_next_d_poster">
+   <widget source="session.Event_Next" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="1722,632" size="185,279" zPosition="10" />
+   <widget source="session.Event_Now" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="775,245" size="185,279" zPosition="10" />
+   <widget source="session.Event_Now" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,155" size="745,460" font="Regular;36" halign="left" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+   <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="1003,607" size="715,327" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+  </screen>
+  <!-- TEMPLATES SecondInfoBar Poster Horizontal Poster -->
+  <screen name="template_sib_now_next_h_poster">
+   <widget source="session.Event_Next" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="1010,615" size="185,279" zPosition="10" />
+   <widget source="session.Event_Now" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="1010,195" size="185,279" zPosition="10" />
+   <widget source="session.Event_Now" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,161" size="980,340" font="Regular;36" foregroundColor="foregroundClock" halign="left" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+   <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,585" size="980,340" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+  </screen>
+  <!-- TEMPLATES-SIB_session_Event_Horizontal_Org -->
+  <screen name="template_sib_now_next_h_default">
+   <widget source="session.Event_Now" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,161" size="1170,340" font="Regular;36" foregroundColor="foregroundClock" halign="left" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+   <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="27,585" size="1170,340" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+  </screen>
+  <!-- TEMPLATES-SIB_session_Event_Diagonal_ORG -->
+  <screen name="template_sib_now_next_d_default" >
+   <widget source="session.Event_Now" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="25,155" size="935,460" font="Regular;36" halign="left" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+   <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="1003,607" size="905,327" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+   <convert type="EventName">ExtendedDescription</convert>
+   </widget>
+  </screen>
+  
+  
+ <!-- TEMPLATES Ch-SE Poster-->
+ <screen name="template_ch_se_poster_d">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen> 
+ <screen name="template_ch_se_poster_me">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+ <screen name="template_ch_se_poster_3f">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-Default-->
+  <screen name="template_ChannelSelection_Poster_D">
+  <widget source="ServiceEvent" render="BLPoster" position="1015,400" size="185,279" zPosition="10" borderColor="backgroundBlue" borderWidth="1" />
+  </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-More-Events-->
+  <screen name="template_ChannelSelection_Poster_ME">
+  <widget source="ServiceEvent" render="BLPoster" position="1015,400" size="185,279" zPosition="10" borderColor="backgroundBlue" borderWidth="1" />
+  </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-3Fields-->
+   <screen name="template_ChannelSelection_Poster_3F">
+  <widget source="ServiceEvent" render="BLPoster" position="655,460" size="112,169" zPosition="10" borderColor="backgroundBlue" borderWidth="1" />
+  </screen>
+  
+  
+  
+ <!-- TEMPLATES IB Poster-->
+ <screen name="template_ib_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- skin_infobar_Poster_Infobar_Now -->
+<screen name="template_Poster_Infobar">
+ <widget source="session.Event_Now" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="10,250" size="342,514" zPosition="10" />
+</screen>
+
+
+
+ <!-- TEMPLATES EMC Poster-->
+ <screen name="template_emc_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- TEMPLATES-EMCMediaCenter-Poster-->
+  <screen name="template_EMCMediaCenter_Backdrop_Poster">
+  <widget source="session.Event_Now" render="BLPoster" borderColor="backgroundBlue" borderWidth="3" position="1320,610" size="156,234" zPosition="10" />
+  <widget source="session.Event_Now" render="BLBackdrop" borderColor="backgroundBlue" borderWidth="3" position="1490,610" size="415,234" zPosition="10" />
+  </screen> 
+  
+  
+  
+ <!-- TEMPLATES EV Default-->
+<screen name="template_ev_default">
+ <eLabel text="Start:" position="30,925" size="110,40" font="Regular; 32" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1" />
+ <widget name="datetime" position="140,926" size="400,40" font="Regular; 32" halign="left" transparent="1" />
+ <widget name="duration" position="500,926" size="160,40" backgroundColor="black" font="Regular; 30" halign="center" transparent="1" />
+ <eLabel text="Ende:" position="975,926" size="110,40" font="Regular; 32" halign="center" backgroundColor="black" foregroundColor="white" transparent="1" zPosition="1" />
+ <widget source="session.Event_Now" render="Label" position="1080,926" size="155,40" transparent="1" zPosition="1" backgroundColor="black" font="Regular; 32" halign="left" foregroundColor="white">
+ <convert type="EventTime">Remaining</convert>
+ <convert type="RemainingToText">InMinutes</convert>
+ </widget>
+ <eLabel text="Next:" position="1249,504" size="150,40" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
+ <widget source="session.Event_Next" render="BLRunningText" position="1363,504" size="545,40" font="Regular;34" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="lightblue" backgroundColor="dark" transparent="1" noWrap="1" zPosition="5">
+  <convert type="EventName">Name</convert>
+ </widget>
+ <eLabel text="Start:" position="1300,560" size="95,30" font="Regular; 30" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
+ <widget source="session.Event_Next" render="Label" position="1400,560" size="100,30" font="Regular; 30" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="white">
+  <convert type="EventTime">StartTime</convert>
+  <convert type="ClockToText">Default</convert>
+ </widget>
+ <widget source="session.Event_Next" render="Label" position="1660,560" size="100,30" font="Regular; 30" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="white">
+  <convert type="EventTime">EndTime</convert>
+  <convert type="ClockToText">Default</convert>
+ </widget>
+ <widget source="session.Event_Next" render="Label" position="1760,559" size="140,30" font="Regular;30" backgroundColor="black" transparent="1" zPosition="2" halign="center" foregroundColor="white">
+  <convert type="EventTime">Duration</convert>
+  <convert type="ClockToText">InMinutes</convert>
+ </widget>
+ <eLabel name="vertikalline" position="1252,592" size="645,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+ <widget source="session.Event_Next" render="BLRunningText" options="movetype=running,startdelay=10000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1252,606" size="640,360" font="Regular;32" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
+  <convert type="EventName">FullDescription</convert>
+ </widget>
+ <ePixmap alphatest="blend" pixmap="Blue-Line-OE-4ATV/buttons/key_leftright.png" position="601,29" size="100,40" transparent="1" zPosition="10" />
+ <panel name="template_progress_Eventview" />
+ </screen>
+  <!-- TEMPLATES EV Poster-->
+ <screen name="template_ev_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES EV Poster Default -->
+ <screen name="template_ev_default_poster" >
+  <eLabel text="Next:" position="31,926" size="150,40" font="Regular; 34" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="white" />
+  <ePixmap alphatest="blend" pixmap="Blue-Line-OE-4ATV/buttons/key_leftright.png" position="135,926" size="100,40" transparent="1" zPosition="10" />
+  <widget name="datetime" position="240,926" size="400,40" font="Regular; 32" halign="left" transparent="1" />
+  <widget name="duration" position="600,926" size="160,40" backgroundColor="black" font="Regular; 30" halign="center"  transparent="1" />
+  <widget source="Event" render="Progress" pixmap="Blue-Line-OE-4ATV/colors/00ffffff.png" position="750,940" size="310,12" zPosition="1" transparent="1" borderWidth="1" borderColor="blue">
+   <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="1080,926" size="155,40" transparent="1" zPosition="1" backgroundColor="black" font="Regular; 32" halign="left" foregroundColor="white">
+   <convert type="EventTime">Remaining</convert>
+   <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <eLabel name="vertikalline" position="1252,592" size="645,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+  <widget source="Event" render="BLBackdrop" position="1252,592" size="645,366" borderColor="backgroundBlue" borderWidth="2" zPosition="2" />
+ </screen>
+</skin>

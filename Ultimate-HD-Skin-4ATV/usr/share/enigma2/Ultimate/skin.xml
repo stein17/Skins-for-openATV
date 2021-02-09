@@ -1193,7 +1193,7 @@
     <widget source="Service" font="Regular; 22" position="840,60" render="Label" size="410,25" transparent="1" zPosition="1" halign="left">
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="Service" render="Picon" position="986,130" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <widget source="Service" render="UltimateXPicon" position="986,130" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
       <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <ePixmap position="768,111" size="143,190" alphatest="blend" zPosition="1" pixmap="mmp/no_cover.png" />
@@ -1228,7 +1228,7 @@
     <widget source="Service" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="918,480" size="333,195" font="Regular;22" zPosition="2" transparent="1" valign="top">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
-    <widget source="Service" render="Picon" position="766,448" zPosition="10" size="43,24" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <widget source="Service" render="UltimateXPicon" position="766,448" zPosition="10" size="43,24" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
       <convert type="MovieReference" />
     </widget>
     <widget source="Service" render="Label" position="1055,448" size="115,24" font="Regular; 20" halign="center" backgroundColor="black" transparent="1" zPosition="2">
@@ -1543,7 +1543,7 @@
     <convert type="EMCServiceTime">Duration</convert>
     <convert type="EMCClockToText">InMinutes</convert>
   </widget>
-  <widget source="Service" render="Picon" position="1000,485" zPosition="10" size="187,112" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+  <widget source="Service" render="UltimateXPicon" position="1000,485" zPosition="10" size="187,112" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
     <convert type="MovieInfo">RecordServiceRef</convert>
   </widget>
   <widget source="Title" render="Label" position="160,4" size="760,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1655,6 +1655,7 @@
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
     <panel name="template_pixmap_Infobar_Player" />
+	<panel name="template_EMCMediaCenter_Backdrop_Poster0" />
   </screen>
   <screen name="MovieListTags" position="0,0" size="1280,720" title="Please select tag to filter..." flags="wfNoBorder" backgroundColor="background">
     <widget source="windowtitle" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1781,6 +1782,7 @@
     </widget>
   <!--   <ePixmap pixmap="mmp/Pointer.png" position="497,658" size="435,18" zPosition="3" transparent="1" /> -->
     <panel name="template_pixmap_Infobar_Player" />
+	<panel name="template_EMCMediaCenter_Backdrop_Poster0" />
   </screen>
   <!-- DVDPlayer -->
   <screen name="FileBrowser" position="0,0" size="1280,720" title="DVD File Browser" flags="wfNoBorder" backgroundColor="background">
@@ -1958,7 +1960,7 @@
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
-    <widget alphatest="blend" position="14,556" size="234,132" render="Picon" source="session.CurrentService" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="14,556" size="234,132" render="UltimateXPicon" source="session.CurrentService" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="568,537" size="460,40" font="Regular; 25" noWrap="1" transparent="1" zPosition="1">
@@ -1984,7 +1986,7 @@
   </screen>
   <screen name="QuickEPG" title="InfoBar QuickEPG" position="0,490" size="1280,230" flags="wfNoBorder" backgroundColor="background">
     <widget name="lab1" position="30,100" size="610,35" font="Regular;24" halign="center" valign="center" zPosition="20" transparent="1" />
-    <widget alphatest="blend" position="30,60" render="Picon" size="50,30" source="Service" transparent="1" zPosition="1">
+    <widget alphatest="blend" position="30,60" render="UltimateXPicon" size="50,30" source="Service" transparent="1" zPosition="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Service" render="Label" position="80,60" size="560,30" halign="left" font="Regular;24" noWrap="1" transparent="1">
@@ -4362,7 +4364,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <!-- InfoBar -->
   <screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar" backgroundColor="transparent">
-    <widget alphatest="blend" position="13,550" size="234,132" render="Picon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="13,550" size="234,132" render="UltimateXPicon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget font="Regular; 24" halign="right" position="263,592" render="Label" size="70,32" source="session.Event_Now" transparent="1" backgroundColor="background" foregroundColor="selectedFG">
@@ -4505,10 +4507,11 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_digitalclock_widget_infobar" />
     <panel name="template_progress_infobar" />
     <panel name="template_infobar_tuner_info" />
+	<panel name="template_Poster_Infobar_Now0" />
   </screen>
   <!-- SecondInfoBar_light -->
 <screen name="SecondInfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="SecondInfoBar" backgroundColor="background">
-  <widget alphatest="blend" position="525,336" render="Picon" size="90,51" source="session.CurrentService" transparent="1" zPosition="1">
+  <widget alphatest="blend" position="525,336" render="UltimateXPicon" size="90,51" source="session.CurrentService" transparent="1" zPosition="1">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget source="Title" render="Label" position="160,4" size="760,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -4566,12 +4569,12 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="EventTime">Duration</convert>
     <convert type="ClockToText">InMinutes</convert>
   </widget>
-  <widget source="session.Event_Now" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="585,225" position="30,420" font="Regular; 24" halign="left" transparent="1" zPosition="1">
+<!--   <widget source="session.Event_Now" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="585,225" position="30,420" font="Regular; 24" halign="left" transparent="1" zPosition="1">
     <convert type="EventName">FullDescription</convert>
   </widget>
   <widget source="session.Event_Next" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="585,225" position="665,95" foregroundColor="selectedFG" font="Regular; 24" halign="left" transparent="1" zPosition="1">
     <convert type="EventName">FullDescription</convert>
-  </widget>
+  </widget> -->
   <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/iptv.png" alphatest="blend" position="860,685" size="35,35" zPosition="2" transparent="1">
     <convert type="ServiceInfo">IsStream</convert>
     <convert type="ConditionalShowHide">
@@ -4717,6 +4720,8 @@ self['config'].l.setSeperation(int(300*f))
   <panel name="template_pig_left" />
   <panel name="template_pixmap_pig_left" />
   <panel name="template_pixmap_vert_line_628" />
+  <panel name="template_SecondInfoBar_Poster0" />
+  <panel name="template_SIB_session_Event_Now_Next" />
 </screen>
   <!-- ChannelSelection */ -->
   <screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
@@ -4744,7 +4749,7 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel text="CH +/-" position="556,4" size="120,44" font="Regular;32" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <eLabel text="Zapp Favorites " position="680,4" size="260,44" font="Regular;32" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget source="Title" render="Label" position="160,4" size="400,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="ServiceEvent" render="Picon" position="30,635" size="75,42" zPosition="5" alphatest="blend" transparent="1">
+    <widget source="ServiceEvent" render="UltimateXPicon" position="30,635" size="75,42" zPosition="5" alphatest="blend" transparent="1">
       <convert type="UltimateRefString">ServicelistRef</convert>
     </widget>
     <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
@@ -4784,7 +4789,8 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
     <panel name="template_date" />
-  </screen>
+	<panel name="template_ChannelSelection_Poster0" />
+	</screen>
   <screen name="SlimChannelSelection" position="0,0" size="1280,720" title="Select a movie" flags="wfNoBorder" backgroundColor="background">
     <widget source="Title" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget source="ServiceEvent" render="Label" position="765,395" size="485,25" font="Regular; 22" zPosition="2" foregroundColor="selectedFG" transparent="1" halign="left">
@@ -4838,7 +4844,7 @@ self['config'].l.setSeperation(int(300*f))
   <!-- EPG Screens -->
   <screen name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection" flags="wfNoBorder" backgroundColor="background">
     <widget source="Title" render="Label" position="160,4" size="750,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget alphatest="blend" position="30,70" render="Picon" size="220,132" source="Service" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="30,70" render="UltimateXPicon" size="220,132" source="Service" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Service" render="Label" position="250,106" size="480,40" valign="bottom" font="Regular;34" halign="center" transparent="1" foregroundColor="selectedFG">
@@ -4900,7 +4906,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Event" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="765,430" size="485,245" font="Regular;22" foregroundColor="selectedFG" transparent="1" valign="top">
       <convert type="EventName">FullDescription</convert>
     </widget>
-    <widget alphatest="blend" position="778,273" render="Picon" size="90,51" source="Service" transparent="1" zPosition="5">
+    <widget alphatest="blend" position="778,273" render="UltimateXPicon" size="90,51" source="Service" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget name="bouquetlist" position="28,55" size="700,34" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -5007,7 +5013,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="122,54" size="320,44" font="Regular; 24" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <widget alphatest="blend" position="30,53" render="Picon" size="78,44" source="Service" transparent="1" zPosition="5">
+    <widget alphatest="blend" position="30,53" render="UltimateXPicon" size="78,44" source="Service" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap position="25,53" zPosition="-15" size="1230,623" pixmap="Ultimate/epg/Center_EPG.png" />
@@ -5030,7 +5036,7 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap position="1002,687" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" alphatest="on" />
     <ePixmap position="1066,687" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" alphatest="on" />
     <widget source="Title" render="Label" zPosition="1" position="160,9" size="330,34" valign="center" font="Regular; 27" foregroundColor="selectedFG" transparent="1" halign="left" />
-    <widget alphatest="blend" position="503,1" render="Picon" size="85,48" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
+    <widget alphatest="blend" position="503,1" render="UltimateXPicon" size="85,48" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
@@ -5138,44 +5144,12 @@ self['config'].l.setSeperation(int(300*f))
   <!-- EventView_light -->
   <screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="background">
     <widget source="Title" render="Label" position="160,4" size="760,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="Service" render="Picon" position="30,60" size="71,40" zPosition="5" transparent="1" alphatest="blend">
+    <widget source="Service" render="UltimateXPicon" position="30,60" size="71,40" zPosition="5" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="session.Event_Next" render="Label" position="1161,430" size="90,24" font="Regular; 20" transparent="1" zPosition="2" halign="left" foregroundColor="selectedFG">
-      <convert type="EventTime">Duration</convert>
-      <convert type="ClockToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="901,430" size="70,24" font="Regular; 20" transparent="1" zPosition="2" halign="left">
-      <convert type="EventTime">StartTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1090,430" size="70,24" font="Regular; 20" transparent="1" zPosition="2" halign="left">
-      <convert type="EventTime">EndTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Now" render="Label" position="621,645" size="110,29" transparent="1" zPosition="1" font="Regular; 22" halign="left">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Next" render="UltimateRunningText" options="movetype=running,startdelay=10000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="765,470" size="485,200" font="Regular;24" halign="left" transparent="1" zPosition="2">
-      <convert type="EventName">FullDescription</convert>
-    </widget>
-    <eLabel text="Next:" position="765,390" size="70,30" font="Regular; 24" halign="left" transparent="1" valign="center" foregroundColor="selectedFG" />
-    <widget source="session.Event_Next" render="UltimateRunningText" position="850,390" size="400,30" font="Regular;24" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=5000,always=0" transparent="1" noWrap="1" zPosition="5">
-      <convert type="EventName">Name</convert>
-    </widget>
-    <eLabel text="End Time :" position="981,430" size="110,24" font="Regular; 20" backgroundColor="black" transparent="1" zPosition="1" foregroundColor="selectedFG" />
-    <eLabel text="Start Time :" position="765,430" size="115,24" font="Regular; 20" halign="left" backgroundColor="black" foregroundColor="selectedFG" transparent="1" zPosition="1" />
-    <widget name="epg_description" position="30,110" size="700,520" font="Regular; 24" transparent="1" />
+	<widget name="epg_description" position="30,110" size="700,520" font="Regular; 24" transparent="1" />
     <widget name="channel" position="110,60" size="620,40" font="Regular;32" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="selectedFG" />
-    <widget source="Service" render="Progress" position="516,654" size="100,10" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
-    <widget name="datetime" position="54,645" size="230,29" font="Regular; 22" halign="center" transparent="1" />
-    <ePixmap position="30,645" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" transparent="1" alphatest="blend" />
-    <ePixmap position="286,645" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" transparent="1" alphatest="blend" />
-    <widget name="duration" position="319,645" size="120,29" font="Regular; 22" halign="center" transparent="1" />
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="860,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+	<widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="860,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsMultichannel</convert>
       <convert type="ConditionalShowHide" />
     </widget>
@@ -5230,10 +5204,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget alphatest="blend" pixmap="Ultimate/icons/ico_rec_on.png" position="801,84" render="Pixmap" size="47,15" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
-    <eLabel text="ENDE:" position="442,645" size="70,29" font="Regular; 22" halign="left" transparent="1" valign="center" />
-    <panel name="template_pixmap_line_hor_765_457" />
-    <panel name="template_pixmap_line_hor_765_422" />
-    <panel name="template_pixmap_line_hor_100" />
+	<panel name="template_pixmap_line_hor_100" />
     <panel name="template_pixmap_line_hor_630" />
     <panel name="template_name_red_o_blue" />
     <panel name="template_menu_ok_exit_1280" />
@@ -5246,6 +5217,8 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
     <panel name="template_pixmap_vert_line_738" />
+	<panel name="template_EventView_Backdrop0" />
+	<panel name="template_EV_session_Event_Now_Next" />
   </screen>
   <screen name="EventViewSimple" position="0,0" size="1280,720" title="EventviewSimple" flags="wfNoBorder" backgroundColor="background">
     <!--eLabel text="Eventview" position="58,36" size="525,50" valign="bottom" font="Regular;34"      transparent="1" /-->
@@ -5259,7 +5232,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" font="Regular; 24" halign="center" position="1175,460" size="80,30" transparent="1">
       <convert type="UltimateServiceTime">EndTime</convert>
     </widget>
-    <widget source="Service" render="Picon" position="770,388" size="107,60" zPosition="5" transparent="1" alphatest="blend">
+    <widget source="Service" render="UltimateXPicon" position="770,388" size="107,60" zPosition="5" transparent="1" alphatest="blend">
       <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <widget source="session.CurrentService" render="Progress" position="1027,473" size="150,10" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="1">
@@ -5478,7 +5451,7 @@ self['config'].l.setSeperation(int(300*f))
   <eLabel name="layer2" position="215,7" size="234,146" zPosition="-15" backgroundColor="selectedFG" />
   <eLabel name="layer3" position="217,9" size="230,142" zPosition="-10" backgroundColor="background40" />
   <eLabel name="layer4" position="8,34" size="200,100" zPosition="-10" backgroundColor="background40" />
-  <widget source="Service" render="Picon" position="221,13" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+  <widget source="Service" render="UltimateXPicon" position="221,13" size="220,132" transparent="1" zPosition="1" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget name="servicename" position="0,159" size="460,40" halign="center" valign="center" font="Regular; 30" foregroundColor="white" backgroundColor="background" borderColor="black" borderWidth="1" noWrap="1" transparent="1" />

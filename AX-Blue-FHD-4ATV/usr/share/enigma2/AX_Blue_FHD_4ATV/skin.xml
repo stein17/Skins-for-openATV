@@ -216,6 +216,507 @@
     <color name="WindowTitleForeground" color="white" />
     <color name="WindowTitleBackground" color="black" />
   </windowstyle>
+  <!-- ***************** Templates FHD ******************-->
+   <!-- TEMPLATES Progress_Infobar-->
+ <screen name="template_progress_infobar">
+     <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="373,934" size="1193,7" zPosition="7" transparent="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+   <!-- TEMPLATES Progress_SecondInfobar-->
+ <screen name="template_progress_secondinfobar">
+    <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="1252,640" size="640,10" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+    <!-- TEMPLATES Progress_SecondInfobar_Diagonal-->
+ <screen name="template_progress_secondinfobar_diagonal">
+    <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="1642,359" size="250,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+ 
+<!-- TEMPLATES Progress_Eventview-->
+ <screen name="template_progress_Eventview">
+	<widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="650,938" size="280,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+	<convert type="EventTime">Progress</convert>
+	</widget>
+ </screen>
+<!-- TEMPLATES Progress_EPG_Selection-->
+ <screen name="template_progress_EPG_Selection">
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,535" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+   <!-- TEMPLATES Progress_GraphMultiEPGList-->
+ <screen name="template_progress_GraphMultiEPGList">
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,535" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+<!-- TEMPLATES Progress_EPGSelectionMulti-->
+ <screen name="template_progress_EPGSelectionMulti">
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,470" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+<!-- TEMPLATES Progress_GraphicalEPG-->
+ <screen name="template_progress_GraphicalEPG">
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1496,369" size="320,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+ <!-- TEMPLATES Progress_GraphicalEPGPIG-->
+ <screen name="template_progress_GraphicalEPGPIG">
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="180,135" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+   <!-- TEMPLATES Pixmap_Infobar-->
+ <screen name="template_pixmap_infobar">
+ <ePixmap pixmap="menu/Infobar_analog.png" position="0,787" zPosition="-1" size="1920,1080" />
+ </screen>
+   <!-- TEMPLATES Progress_Infobar_FlipClock-->
+ <screen name="template_progress_infobar_flipclock">
+     <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="373,935" size="1193,5" zPosition="7" transparent="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+ </screen>
+   <!-- TEMPLATES Pixmap_Infobar_Flipclock -->
+ <screen name="template_pixmap_infobar_flipclock">
+ <ePixmap pixmap="menu/Infobarflip.png" position="0,787" zPosition="-1" size="1920,1080" />
+ </screen>
+ <!-- TEMPLATES Tunerinfo_Infobar_string -->
+ <screen name="template_tunerinfo_string_infobar">
+    <widget source="session.FrontendInfo" render="Label" position="1075,784" size="350,28" font="Regular; 28" halign="left" foregroundColor="green" backgroundColor="background" transparent="1" zPosition="5">
+      <convert type="FrontendInfo">STRING</convert>
+    </widget>
+    <eLabel text="Tuner:" position="960,784" size="125,28"  halign="center" valign="top" font="Regular; 28" backgroundColor="background" transparent="1" foregroundColor="green" zPosition="5"/>
+    <eLabel name="Rahmem_Tuner" backgroundColor="background" position="959,787" size="475,28" zPosition="1" transparent="0"/>
+ </screen>
+<!-- TEMPLATES FlipClock_Infobar-->
+ <screen name="template_flipclock_infobar">
+    <widget source="global.CurrentTime" render="Label" position="1587,800" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+      <convert type="ClockToText">Format:%H</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1767,800" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
+      <convert type="ClockToText">Format:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 100" position="1729,804" size="40,100" halign="center" zPosition="3" valign="center" foregroundColor="cyan1" transparent="1">
+      <convert type="AXBlueBlinkingClock" />
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1596,960" size="300,58" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%A</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1596,1020" size="300,50" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%d.%b.%Y</convert>
+    </widget>
+ </screen>
+<!-- TEMPLATES AnalogClock_Infobar-->
+ <screen name="template_clock_infobar">
+    <widget source="global.CurrentTime" render="Label" position="1593,1036" size="160,28" font="Regular; 24" halign="center" backgroundColor="black" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%A</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1751,1036" size="160,28" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" zPosition="0">
+      <convert type="ClockToText">Format:%d.%b.%Y</convert>
+    </widget>
+	<widget source="global.CurrentTime" render="Label" position="1819,818" size="100,22" font="Regular; 20" halign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock">
+      <convert type="ClockToText">Format:%H:%M:%S</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="4" foregroundColor="red" alphatest="blend">
+      <convert type="AXBlueAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="3" foregroundColor="grey" alphatest="blend">
+      <convert type="AXBlueAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AXBlueWatches" position="1709,897" size="80,80" zPosition="2" foregroundColor="grey" alphatest="blend">
+      <convert type="AXBlueAnalogClock">hourHand</convert>
+    </widget>
+ </screen>
+    <!-- TEMPLATES Weather_Infobar -->
+<screen name="template_weather_infobar">
+<!--  Wetter-->
+ <eLabel name="background_wetter" position="0,82" size="1920,1" backgroundColor="backgroundBlue" zPosition="5" />
+ <eLabel name="line_wetter" position="0,0" size="1920,84" zPosition="-1" />
+ <widget noWrap="1" backgroundColor="background20" foregroundColor="red" font="Regular; 27" render="Label" position="420,18" size="90,30" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
+    <convert type="MSNWeather">temperature_current</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="354,51" size="290,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,current</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="277,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="646,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="745,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day2</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="788,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day2</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="723,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day2</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="965,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1105,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day3</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1042,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day3</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1060,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day3</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1421,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day4</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1376,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day4</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1359,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day4</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="1282,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
+  </widget>
+  <widget alphatest="blend" render="MSNWeatherPixmap" position="1600,6" size="75,75" font="Meteo; 40" source="session.MSNWeather" transparent="1" zPosition="5">
+    <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1677,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
+    <convert type="MSNWeather">temperature_text,day5</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1741,17" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">temperature_heigh_low,day5</convert>
+  </widget>
+  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1696,17" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
+    <convert type="MSNWeather">weekshortday,day5</convert>
+  </widget>
+  <eLabel text="Status:" position="40,51" size="100,30" zPosition="8" halign="left" font="Regular; 24" backgroundColor="black" transparent="1" />
+  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="green" render="Label" position="2,15" size="285,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
+    <convert type="MSNWeather">city</convert>
+  </widget>
+  <widget render="Label" noWrap="1" source="session.MSNWeather" position="116,51" zPosition="8" size="75,30" font="Regular; 24" transparent="1" halign="right" backgroundColor="black">
+    <convert type="MSNWeather">observationtime</convert>
+  </widget>
+ </screen>
+ <!-- TEMPLATES Emu_Infobar -->
+ <screen name="template_emu_infobar">
+  <widget font="Regular;20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,822" render="Label" size="150,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AXBlueEmuInfo">Emu</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1120,822" render="Label" size="430,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AXBlueEmuInfo">Address</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1440,846" render="Label" size="110,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AXBlueEmuInfo">Hops</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1220,846" render="Label" size="220,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AXBlueEmuInfo">Ecmtime</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,846" render="Label" size="250,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
+    <convert type="AXBlueEmuInfo">Caid</convert>
+  </widget>
+</screen>
+     <!-- TEMPLATES Emu_Info_Weather_Infobar -->
+<screen name="template_emu_info_weather_infobar">
+    <eLabel text="Stand:" position="140,72" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
+    <widget render="Label" noWrap="1" source="session.MSNWeather" position="255,72" zPosition="8" size="125,36" font="Regular; 34" transparent="1" halign="left" backgroundColor="black" foregroundColor="cyan1">
+      <convert type="MSNWeather">observationtime</convert>
+    </widget>
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="8,31" size="120,120" zPosition="2" alphatest="blend">
+      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons_Infobar/,png</convert>
+    </widget>
+    <widget source="session.MSNWeather" render="Label" position="140,35" size="455,36" font="Regular; 34" halign="left" foregroundColor="green" backgroundColor="background10" transparent="1" zPosition="2">
+      <convert type="MSNWeather">city</convert>
+    </widget>
+    <ePixmap position="760,35" size="36,36" pixmap="icons/temp_icon.png" alphatest="blend" zPosition="3" />
+    <ePixmap position="400,72" size="36,36" pixmap="icons/temp_icon.png" alphatest="blend" zPosition="3" />
+    <ePixmap position="760,72" size="36,36" pixmap="icons/wind.png" alphatest="blend" zPosition="1" />
+    <widget source="session.MSNWeather" render="Label" position="820,72" size="500,36" font="Regular; 34" halign="left" foregroundColor="cyan1" backgroundColor="background10" transparent="1" zPosition="2">
+      <convert type="MSNWeather">winddisplay</convert>
+    </widget>
+    <widget noWrap="1" backgroundColor="background20" foregroundColor="red" font="Regular; 34" render="Label" position="445,72" size="150,36" source="session.MSNWeather" transparent="1" zPosition="8" halign="left">
+      <convert type="MSNWeather">temperature_current</convert>
+    </widget>
+    <widget Wrap="1" backgroundColor="black" font="Regular; 34" foregroundColor="foregroundClock" render="Label" position="140,111" size="450,36" source="session.MSNWeather" halign="left" transparent="1" zPosition="8" valign="center">
+      <convert type="MSNWeather">temperature_text,current</convert>
+    </widget>
+    <widget alphatest="blend" render="MSNWeatherPixmap" position="642,42" size="96,96" source="session.MSNWeather" transparent="1" zPosition="5">
+      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons_Infobar/,png</convert>
+    </widget>
+    <widget backgroundColor="black" font="Regular; 34" render="Label" position="747,111" size="65,36" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1" foregroundColor="cyan1">
+      <convert type="MSNWeather">weekshortday,day2</convert>
+    </widget>
+    <widget backgroundColor="black" font="Regular; 34" foregroundColor="green" render="Label" position="820,35" size="500,36" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" noWrap="1">
+      <convert type="MSNWeather">temperature_heigh_low,day2</convert>
+    </widget>
+    <widget Wrap="1" backgroundColor="black" font="Regular; 34" foregroundColor="foregroundClock" render="Label" position="820,111" size="490,36" source="session.MSNWeather" halign="left" transparent="1" zPosition="8" valign="center">
+      <convert type="MSNWeather">temperature_text,day2</convert>
+    </widget>
+    <eLabel position="0,30" size="600,120" backgroundColor="background10" zPosition="-1" />
+    <eLabel position="598,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="0,30" size="600,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="630,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="1360,30" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="1328,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="0,150" size="600,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="630,30" size="700,120" backgroundColor="background10" zPosition="-1" />
+    <eLabel position="630,30" size="700,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="630,150" size="700,2" backgroundColor="backgroundBlue" zPosition="-1" foregroundColor="backgroundBlue" />
+    <eLabel position="1360,30" size="560,120" backgroundColor="background10" zPosition="-1" />
+    <eLabel position="1360,30" size="560,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <eLabel position="1360,150" size="560,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1380,55" size="70,70" zPosition="2" transparent="1">
+      <convert type="ServiceInfo">IsStream</convert>
+      <convert type="ConditionalShowHide">
+      </convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1470,35" size="435,36" font="Regular;34" halign="left" foregroundColor="green" backgroundColor="background10" transparent="1" zPosition="2">
+      <convert type="ServiceName">Provider</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1470,72" size="120,36" font="Regular;32" halign="left" foregroundColor="cyan1" backgroundColor="background10" transparent="1" zPosition="1">
+      <convert type="PliExtraInfo">TunerSystem</convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="Label" position="1705,72" size="210,36" font="Regular;32" halign="left" backgroundColor="background10" transparent="1" zPosition="1">
+      <convert type="FrontendInfo">STRING</convert>
+    </widget>
+    <eLabel text="Tuner:" position="1590,72" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
+	<widget source="session.CurrentService" render="Label" position="1540,112" size="85,36" font="Regular; 32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
+    <convert type="AXBlueCPUInfo">$0</convert>
+    </widget>
+    <eLabel text="CPU:" position="1470,112" size="90,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
+    <!-- template_cpu_infobar ATV 6.4-->
+    <eLabel text="CPU-Temp:" position="1640,112" size="170,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
+    <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1810,112" size="105,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
+    <!-- template_cpu_infobar ATV 6.5-->
+    <!-- <widget source="global.CurrentTime" render="Label" position="1660,112" size="245,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3">
+    <convert type="AXBlueSTBinfo">CPUtemp</convert>
+    </widget> -->
+ </screen>
+ <!-- TEMPLATES SIB Poster-->
+ <screen name="template_sib_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+
+<!-- TEMPLATES SIB Now Next Poster-->
+ <screen name="template_sib_now_next_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+
+  
+  <!-- TEMPLATES SecondInfoBar Poster Diagonal Poster -->
+<screen name="template_sib_now_next_d_poster">
+  <widget source="session.Event_Next" render="AXBluePoster" borderColor="foregroundClock" borderWidth="2" position="1696,612" size="185,279" zPosition="10" />
+  <widget source="session.Event_Now" render="AXBluePoster" borderColor="foregroundClock" borderWidth="2" position="769,245" size="185,279" zPosition="10" />
+  <widget source="session.Event_Now" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="38,185" size="725,390" font="Regular;36" halign="left" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="994,597" size="697,310" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+</screen>
+  <!-- TEMPLATES SecondInfoBar Poster Horizontal Poster -->
+<screen name="template_sib_now_next_h_poster">
+  <widget source="session.Event_Next" render="AXBluePoster" borderColor="foregroundClock" borderWidth="2" position="1010,605" size="185,279" zPosition="10" />
+  <widget source="session.Event_Now" render="AXBluePoster" borderColor="foregroundClock" borderWidth="2" position="1010,205" size="185,279" zPosition="10" />
+  <widget source="session.Event_Now" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="27,178" size="980,330" font="Regular;36" foregroundColor="foregroundClock" halign="left" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=8000,wrap=1,always=0,repeat=2,oneshot=1" position="27,580" size="980,330" font="Regular;36" halign="left" valign="top" foregroundColor="foregroundClock" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+</screen>
+  <!-- TEMPLATES-SIB_session_Event_Horizontal_Org -->
+  <screen name="template_sib_now_next_h_default">
+  <widget source="session.Event_Now" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="27,178" size="1170,330" font="Regular;34" halign="center" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="27,580" size="1170,330" font="Regular;34" halign="center" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  </screen>
+  <!-- TEMPLATES-SIB_session_Event_Diagonal_ORG -->
+  <screen name="template_sib_now_next_d_default" >
+  <widget source="session.Event_Now" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="37,184" size="920,390" font="Regular;34" halign="center" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="994,595" size="890,310" font="Regular;34" halign="center" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  </screen>
+  
+  
+ <!-- TEMPLATES Ch-SE Poster-->
+ <screen name="template_ch_se_poster_d">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen> 
+ <screen name="template_ch_se_poster_me">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+ <screen name="template_ch_se_poster_3f">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-Default-->
+  <screen name="template_ChannelSelection_Poster_D">
+  <widget source="ServiceEvent" render="AXBluePoster" position="1015,400" size="185,279" zPosition="10" borderColor="bluelabel" borderWidth="1" />
+  </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-More-Events-->
+  <screen name="template_ChannelSelection_Poster_ME">
+  <widget source="ServiceEvent" render="AXBluePoster" position="1015,400" size="185,279" zPosition="10" borderColor="bluelabel" borderWidth="1" />
+  </screen>
+  <!-- TEMPLATES-ChannelSelection-Poster-3Fields-->
+   <screen name="template_ChannelSelection_Poster_3F">
+  <widget source="ServiceEvent" render="AXBluePoster" position="655,460" size="112,169" zPosition="10" borderColor="bluelabel" borderWidth="1" />
+  </screen>
+  
+  
+  
+ <!-- TEMPLATES IB Poster-->
+ <screen name="template_ib_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- skin_infobar_Poster_Infobar_Now -->
+<screen name="template_Poster_Infobar">
+ <widget source="session.Event_Now" render="AXBluePoster" borderColor="bluelabel" borderWidth="3" position="10,250" size="342,514" zPosition="10" />
+</screen>
+
+
+
+ <!-- TEMPLATES EMC Poster-->
+ <screen name="template_emc_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- TEMPLATES-EMCMediaCenter-Poster-->
+  <screen name="template_EMCMediaCenter_Backdrop_Poster">
+  <widget source="session.Event_Now" render="AXBluePoster" borderColor="bluelabel" borderWidth="3" position="1320,610" size="156,234" zPosition="10" />
+  <widget source="session.Event_Now" render="AXBlueBackdrop" borderColor="bluelabel" borderWidth="3" position="1490,610" size="415,234" zPosition="10" />
+  </screen> 
+  
+  
+  
+ <!-- TEMPLATES EV Default-->
+<screen name="template_ev_default">
+	<eLabel text="Start:" position="30,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
+	<widget name="datetime" position="140,920" size="400,40" foregroundColor="foregroundClock" font="Regular; 32" halign="left" valign="center" transparent="1" />
+	<widget name="duration" backgroundColor="black" foregroundColor="foregroundClock" font="Regular; 30" halign="center" valign="center" position="500,920" size="160,40" transparent="1" />
+	<eLabel text="End:" position="945,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
+	<widget source="session.Event_Now" render="Label" position="1030,920" size="155,40" transparent="1" zPosition="1" backgroundColor="black" font="Regular; 32" halign="left" valign="center" foregroundColor="foregroundClock">
+	<convert type="EventTime">Remaining</convert>
+	<convert type="RemainingToText">InMinutes</convert>
+	</widget>
+	<eLabel text="Next:" position="1249,504" size="150,40" font="Regular; 34" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="foregroundClock" />
+	<widget source="session.Event_Next" render="AXBlueRunningText" position="1363,504" size="545,40" font="Regular;34" halign="left" valign="center" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="lightblue" backgroundColor="dark" transparent="1" noWrap="1" zPosition="5">
+	<convert type="EventName">Name</convert>
+	</widget>
+	<widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=10000,wrap=1,always=0,repeat=2,oneshot=1" position="1252,562" size="640,345" font="Regular;34" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+	<ePixmap pixmap="AX_Blue_FHD_4ATV/menu/line648.png" position="1252,556" size="645,2" alphatest="blend" zPosition="6" />
+	<ePixmap pixmap="AX_Blue_FHD_4ATV/menu/line648.png" position="1252,912" size="645,2" alphatest="blend" zPosition="6" />
+	<eLabel position="1249,560" size="648,350" backgroundColor="bluelabel" transparent="0" zPosition="0" />
+	<eLabel text="Start:" position="1252,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock" />
+	<widget source="session.Event_Next" render="Label" position="1350,920" size="100,40" halign="left" valign="center" font="Regular; 32" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+	<eLabel text="End:" position="1550,920" size="90,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock" />
+	<widget source="session.Event_Next" render="Label" position="1640,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
+	<convert type="EventTime">EndTime</convert>
+	<convert type="ClockToText">Default</convert>
+	</widget>
+	<widget source="session.Event_Next" render="Label" position="1730,920" size="160,40" font="Regular; 32" halign="right" valign="center" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
+      <convert type="EventTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+	<ePixmap alphatest="blend" pixmap="AX_Blue_FHD_4ATV/buttons/key_leftright.png" position="1457,1016" size="100,40" transparent="1" zPosition="10" />
+	<panel name="template_progress_Eventview" />
+ </screen>
+  <!-- TEMPLATES EV Poster-->
+ <screen name="template_ev_poster">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES EV Poster Default -->
+ <screen name="template_ev_default_poster" >
+
+
+ </screen>
+  <!-- TEMPLATES Poster End -->
+  <!-- TEMPLATES Channel_Selection_2_Fields -->
+  <screen name="Channel_Selection_Progress_Color">
+    <widget source="ServiceEvent" render="Progress" position="1252,436" pixmap="p_bar_sel.png" size="644,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+  <widget name="list" position="25,130" size="1190,820" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
+  serviceItemHeight="40" 
+  serviceNumberFont="Regular;38" 
+  serviceNameFont="Regular;43" 
+  serviceInfoFont="Regular;37" 
+  fieldMargins="8" 
+  itemsDistances="8" 
+  progressBarWidth="100" 
+  progressbarHeight="12" 
+  foregroundColor="foregroundClock" 
+  foregroundColorMarkedSelected="yellow" 
+  foregroundColorSelected="bluetitle" 
+  backgroundColor="black" 
+  backgroundColorSelected="trbluelabel" 
+  colorServiceDescription="bluetitle" 
+  colorServiceDescriptionSelected="white" 
+  colorServiceRecording="red" 
+  foregroundColorServiceNotAvail="dark" 
+  colorEventProgressbar="bluelabel" 
+  colorEventProgressbarBorder="foregroundClock" 
+  colorEventProgressbarBorderSelected="bluetitle" />
+  </screen>
+  <!-- TEMPLATES Channel_Selection_3_Fields -->
+  <screen name="Channel_Selection_3_Fields_Progress_Color">
+    <widget source="ServiceEvent" render="Progress" position="790,393" pixmap="p_bar_sel.png" size="595,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+	<widget name="list" position="25,125" size="760,830" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
+	serviceItemHeight="60" 
+	serviceNumberFont="Regular;30" 
+	serviceNameFont="Regular;32" 
+	serviceInfoFont="Regular;32" 
+	foregroundColor="foregroundClock" 
+	foregroundColorMarkedSelected="yellow" 
+	foregroundColorSelected="bluetitle" 
+	backgroundColor="black" 
+	backgroundColorSelected="trbluelabel" 
+	colorServiceDescription="bluetitle" 
+	colorServiceDescriptionSelected="white" 
+	colorServiceRecording="red" 
+	foregroundColorServiceNotAvail="dark" 
+	colorEventProgressbarBorder="foregroundClock" 
+	colorEventProgressbarBorderSelected="bluetitle" 
+	fieldMargins="15" 
+	nonplayableMargins="15" 
+	itemsDistances="8" 
+	progressBarWidth="80" 
+	progressPercentWidth="90" 
+	progressbarHeight="12" />
+  </screen>
+   <!-- ******* END Templates FHD *******-->
   <!-- Standby FHD -->
   <screen name="Standby" position="0,0" size="1920,1080" title="Standby" flags="wfNoBorder" backgroundColor="black">
   </screen>
@@ -597,358 +1098,7 @@
     <ePixmap pixmap="buttons/key_exit.png" position="1051,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
     <ePixmap name="AudioPixmap" position="971,676" size="256,256" pixmap="icons/audio.png" transparent="1" />
   </screen>
- <!-- TEMPLATES Progress_Infobar-->
- <screen name="template_progress_infobar">
-     <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="373,934" size="1193,7" zPosition="7" transparent="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-   <!-- TEMPLATES Progress_SecondInfobar-->
- <screen name="template_progress_secondinfobar">
-    <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="1252,640" size="640,10" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-    <!-- TEMPLATES Progress_SecondInfobar_Diagonal-->
- <screen name="template_progress_secondinfobar_diagonal">
-    <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="1642,359" size="250,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
- 
-<!-- TEMPLATES Progress_Eventview-->
- <screen name="template_progress_Eventview">
-	<widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="650,938" size="280,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-	<convert type="EventTime">Progress</convert>
-	</widget>
- </screen>
-<!-- TEMPLATES Progress_EPG_Selection-->
- <screen name="template_progress_EPG_Selection">
-    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,535" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-   <!-- TEMPLATES Progress_GraphMultiEPGList-->
- <screen name="template_progress_GraphMultiEPGList">
-    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,535" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-<!-- TEMPLATES Progress_EPGSelectionMulti-->
- <screen name="template_progress_EPGSelectionMulti">
-    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1255,470" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-<!-- TEMPLATES Progress_GraphicalEPG-->
- <screen name="template_progress_GraphicalEPG">
-    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1496,369" size="320,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
- <!-- TEMPLATES Progress_GraphicalEPGPIG-->
- <screen name="template_progress_GraphicalEPGPIG">
-    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="180,135" size="635,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-   <!-- TEMPLATES Pixmap_Infobar-->
- <screen name="template_pixmap_infobar">
- <ePixmap pixmap="menu/Infobar_analog.png" position="0,787" zPosition="-1" size="1920,1080" />
- </screen>
-   <!-- TEMPLATES Progress_Infobar_FlipClock-->
- <screen name="template_progress_infobar_flipclock">
-     <widget source="session.Event_Now" render="Progress" pixmap="p_bar_sel.png" position="373,935" size="1193,5" zPosition="7" transparent="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
- </screen>
-   <!-- TEMPLATES Pixmap_Infobar_Flipclock -->
- <screen name="template_pixmap_infobar_flipclock">
- <ePixmap pixmap="menu/Infobarflip.png" position="0,787" zPosition="-1" size="1920,1080" />
- </screen>
- <!-- TEMPLATES Tunerinfo_Infobar_string -->
- <screen name="template_tunerinfo_string_infobar">
-    <widget source="session.FrontendInfo" render="Label" position="1075,784" size="350,28" font="Regular; 28" halign="left" foregroundColor="green" backgroundColor="background" transparent="1" zPosition="5">
-      <convert type="FrontendInfo">STRING</convert>
-    </widget>
-    <eLabel text="Tuner:" position="960,784" size="125,28"  halign="center" valign="top" font="Regular; 28" backgroundColor="background" transparent="1" foregroundColor="green" zPosition="5"/>
-    <eLabel name="Rahmem_Tuner" backgroundColor="background" position="959,787" size="475,28" zPosition="1" transparent="0"/>
- </screen>
-<!-- TEMPLATES FlipClock_Infobar-->
- <screen name="template_flipclock_infobar">
-    <widget source="global.CurrentTime" render="Label" position="1587,800" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
-      <convert type="ClockToText">Format:%H</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1767,800" size="140,120" font="DIGI; 100" halign="center" backgroundColor="black" transparent="1" foregroundColor="bluetitle">
-      <convert type="ClockToText">Format:%M</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="FixedLabel" text=":" font="DIGI; 100" position="1729,804" size="40,100" halign="center" zPosition="3" valign="center" foregroundColor="cyan1" transparent="1">
-      <convert type="AXBlueBlinkingClock" />
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1596,960" size="300,58" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
-      <convert type="ClockToText">Format:%A</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1596,1020" size="300,50" font="Regular; 42" halign="center" backgroundColor="black" foregroundColor="bluetitle" transparent="1" zPosition="0">
-      <convert type="ClockToText">Format:%d.%b.%Y</convert>
-    </widget>
- </screen>
-<!-- TEMPLATES AnalogClock_Infobar-->
- <screen name="template_clock_infobar">
-    <widget source="global.CurrentTime" render="Label" position="1593,1036" size="160,28" font="Regular; 24" halign="center" backgroundColor="black" transparent="1" zPosition="0">
-      <convert type="ClockToText">Format:%A</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" position="1751,1036" size="160,28" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" zPosition="0">
-      <convert type="ClockToText">Format:%d.%b.%Y</convert>
-    </widget>
-	<widget source="global.CurrentTime" render="Label" position="1819,818" size="100,22" font="Regular; 20" halign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock">
-      <convert type="ClockToText">Format:%H:%M:%S</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="4" foregroundColor="red" alphatest="blend">
-      <convert type="AXBlueAnalogClock">secHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1699,887" size="100,100" zPosition="3" foregroundColor="grey" alphatest="blend">
-      <convert type="AXBlueAnalogClock">minHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="AXBlueWatches" position="1709,897" size="80,80" zPosition="2" foregroundColor="grey" alphatest="blend">
-      <convert type="AXBlueAnalogClock">hourHand</convert>
-    </widget>
- </screen>
-    <!-- TEMPLATES Weather_Infobar -->
-<screen name="template_weather_infobar">
-<!--  Wetter-->
- <eLabel name="background_wetter" position="0,82" size="1920,1" backgroundColor="backgroundBlue" zPosition="5" />
- <eLabel name="line_wetter" position="0,0" size="1920,84" zPosition="-1" />
- <widget noWrap="1" backgroundColor="background20" foregroundColor="red" font="Regular; 27" render="Label" position="420,18" size="90,30" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
-    <convert type="MSNWeather">temperature_current</convert>
-  </widget>
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="354,51" size="290,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-    <convert type="MSNWeather">temperature_text,current</convert>
-  </widget>
-  <widget alphatest="blend" render="MSNWeatherPixmap" position="277,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
-  </widget>
-  <widget alphatest="blend" render="MSNWeatherPixmap" position="646,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="745,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">weekshortday,day2</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="788,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">temperature_heigh_low,day2</convert>
-  </widget>
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="723,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-    <convert type="MSNWeather">temperature_text,day2</convert>
-  </widget>
-  <widget alphatest="blend" render="MSNWeatherPixmap" position="965,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1105,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">temperature_heigh_low,day3</convert>
-  </widget>
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1042,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-    <convert type="MSNWeather">temperature_text,day3</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1060,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">weekshortday,day3</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1421,18" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">temperature_heigh_low,day4</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1376,18" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">weekshortday,day4</convert>
-  </widget>
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1359,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-    <convert type="MSNWeather">temperature_text,day4</convert>
-  </widget>
-  <widget alphatest="blend" render="MSNWeatherPixmap" position="1282,6" size="75,75" source="session.MSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
-  </widget>
-  <widget alphatest="blend" render="MSNWeatherPixmap" position="1600,6" size="75,75" font="Meteo; 40" source="session.MSNWeather" transparent="1" zPosition="5">
-    <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons/,png</convert>
-  </widget>
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="white" render="Label" position="1677,51" size="240,30" source="session.MSNWeather" halign="center" transparent="1" zPosition="8" valign="top">
-    <convert type="MSNWeather">temperature_text,day5</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="bernstein" render="Label" position="1741,17" size="150,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">temperature_heigh_low,day5</convert>
-  </widget>
-  <widget backgroundColor="black" font="Regular; 27" foregroundColor="cyan1" render="Label" position="1696,17" size="45,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1">
-    <convert type="MSNWeather">weekshortday,day5</convert>
-  </widget>
-  <eLabel text="Status:" position="40,51" size="100,30" zPosition="8" halign="left" font="Regular; 24" backgroundColor="black" transparent="1" />
-  <widget Wrap="1" backgroundColor="black" font="Regular; 24" foregroundColor="green" render="Label" position="2,15" size="285,30" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" valign="center">
-    <convert type="MSNWeather">city</convert>
-  </widget>
-  <widget render="Label" noWrap="1" source="session.MSNWeather" position="116,51" zPosition="8" size="75,30" font="Regular; 24" transparent="1" halign="right" backgroundColor="black">
-    <convert type="MSNWeather">observationtime</convert>
-  </widget>
- </screen>
- <!-- TEMPLATES Emu_Infobar -->
- <screen name="template_emu_infobar">
-  <widget font="Regular;20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,822" render="Label" size="150,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Emu</convert>
-  </widget>
-  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1120,822" render="Label" size="430,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Address</convert>
-  </widget>
-  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1440,846" render="Label" size="110,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Hops</convert>
-  </widget>
-  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="1220,846" render="Label" size="220,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
-    <convert type="AXBlueEmuInfo">Ecmtime</convert>
-  </widget>
-  <widget font="Regular; 20" foregroundColor="foregroundClock" backgroundColor="background" halign="left" position="970,846" render="Label" size="250,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
-    <convert type="AXBlueEmuInfo">Caid</convert>
-  </widget>
-</screen>
-     <!-- TEMPLATES Emu_Info_Weather_Infobar -->
-<screen name="template_emu_info_weather_infobar">
-    <eLabel text="Stand:" position="140,72" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
-    <widget render="Label" noWrap="1" source="session.MSNWeather" position="255,72" zPosition="8" size="125,36" font="Regular; 34" transparent="1" halign="left" backgroundColor="black" foregroundColor="cyan1">
-      <convert type="MSNWeather">observationtime</convert>
-    </widget>
-    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="8,31" size="120,120" zPosition="2" alphatest="blend">
-      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons_Infobar/,png</convert>
-    </widget>
-    <widget source="session.MSNWeather" render="Label" position="140,35" size="455,36" font="Regular; 34" halign="left" foregroundColor="green" backgroundColor="background10" transparent="1" zPosition="2">
-      <convert type="MSNWeather">city</convert>
-    </widget>
-    <ePixmap position="760,35" size="36,36" pixmap="icons/temp_icon.png" alphatest="blend" zPosition="3" />
-    <ePixmap position="400,72" size="36,36" pixmap="icons/temp_icon.png" alphatest="blend" zPosition="3" />
-    <ePixmap position="760,72" size="36,36" pixmap="icons/wind.png" alphatest="blend" zPosition="1" />
-    <widget source="session.MSNWeather" render="Label" position="820,72" size="500,36" font="Regular; 34" halign="left" foregroundColor="cyan1" backgroundColor="background10" transparent="1" zPosition="2">
-      <convert type="MSNWeather">winddisplay</convert>
-    </widget>
-    <widget noWrap="1" backgroundColor="background20" foregroundColor="red" font="Regular; 34" render="Label" position="445,72" size="150,36" source="session.MSNWeather" transparent="1" zPosition="8" halign="left">
-      <convert type="MSNWeather">temperature_current</convert>
-    </widget>
-    <widget Wrap="1" backgroundColor="black" font="Regular; 34" foregroundColor="foregroundClock" render="Label" position="140,111" size="450,36" source="session.MSNWeather" halign="left" transparent="1" zPosition="8" valign="center">
-      <convert type="MSNWeather">temperature_text,current</convert>
-    </widget>
-    <widget alphatest="blend" render="MSNWeatherPixmap" position="642,42" size="96,96" source="session.MSNWeather" transparent="1" zPosition="5">
-      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/AX_Blue_FHD_4ATV/Wettericons_Infobar/,png</convert>
-    </widget>
-    <widget backgroundColor="black" font="Regular; 34" render="Label" position="747,111" size="65,36" source="session.MSNWeather" zPosition="3" halign="center" transparent="1" noWrap="1" foregroundColor="cyan1">
-      <convert type="MSNWeather">weekshortday,day2</convert>
-    </widget>
-    <widget backgroundColor="black" font="Regular; 34" foregroundColor="green" render="Label" position="820,35" size="500,36" source="session.MSNWeather" zPosition="3" halign="left" transparent="1" noWrap="1">
-      <convert type="MSNWeather">temperature_heigh_low,day2</convert>
-    </widget>
-    <widget Wrap="1" backgroundColor="black" font="Regular; 34" foregroundColor="foregroundClock" render="Label" position="820,111" size="490,36" source="session.MSNWeather" halign="left" transparent="1" zPosition="8" valign="center">
-      <convert type="MSNWeather">temperature_text,day2</convert>
-    </widget>
-    <eLabel position="0,30" size="600,120" backgroundColor="background10" zPosition="-1" />
-    <eLabel position="598,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="0,30" size="600,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="630,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="1360,30" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="1328,31" size="2,120" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="0,150" size="600,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="630,30" size="700,120" backgroundColor="background10" zPosition="-1" />
-    <eLabel position="630,30" size="700,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="630,150" size="700,2" backgroundColor="backgroundBlue" zPosition="-1" foregroundColor="backgroundBlue" />
-    <eLabel position="1360,30" size="560,120" backgroundColor="background10" zPosition="-1" />
-    <eLabel position="1360,30" size="560,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <eLabel position="1360,150" size="560,2" backgroundColor="backgroundBlue" zPosition="1" foregroundColor="backgroundBlue" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1380,55" size="70,70" zPosition="2" transparent="1">
-      <convert type="ServiceInfo">IsStream</convert>
-      <convert type="ConditionalShowHide">
-      </convert>
-    </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
-      <convert type="FrontendInfo">TYPE</convert>
-      <convert type="ValueRange">0,0</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
-      <convert type="FrontendInfo">TYPE</convert>
-      <convert type="ValueRange">2,2</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1380,55" size="70,70" zPosition="2" alphatest="blend">
-      <convert type="FrontendInfo">TYPE</convert>
-      <convert type="ValueRange">1,1</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1470,35" size="435,36" font="Regular;34" halign="left" foregroundColor="green" backgroundColor="background10" transparent="1" zPosition="2">
-      <convert type="ServiceName">Provider</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1470,72" size="120,36" font="Regular;32" halign="left" foregroundColor="cyan1" backgroundColor="background10" transparent="1" zPosition="1">
-      <convert type="PliExtraInfo">TunerSystem</convert>
-    </widget>
-    <widget source="session.FrontendInfo" render="Label" position="1705,72" size="210,36" font="Regular;32" halign="left" backgroundColor="background10" transparent="1" zPosition="1">
-      <convert type="FrontendInfo">STRING</convert>
-    </widget>
-    <eLabel text="Tuner:" position="1590,72" size="125,36" zPosition="8" halign="left" font="Regular; 34" backgroundColor="black" transparent="1" foregroundColor="cyan1" />
-	<widget source="session.CurrentService" render="Label" position="1540,112" size="85,36" font="Regular; 32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="2">
-    <convert type="AXBlueCPUInfo">$0</convert>
-    </widget>
-    <eLabel text="CPU:" position="1470,112" size="90,36" font="Regular; 32" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="foregroundClock" zPosition="2" />
-    <!-- template_cpu_infobar ATV 6.4-->
-    <eLabel text="CPU-Temp:" position="1640,112" size="170,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
-    <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="1810,112" size="105,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3" />
-    <!-- template_cpu_infobar ATV 6.5-->
-    <!-- <widget source="global.CurrentTime" render="Label" position="1660,112" size="245,36" font="Regular;32" halign="left" valign="center" backgroundColor="background" foregroundColor="foregroundClock" noWrap="1" transparent="1" zPosition="3">
-    <convert type="AXBlueSTBinfo">CPUtemp</convert>
-    </widget> -->
- </screen>
 
-  <!-- TEMPLATES Channel_Selection_2_Fields -->
-  <screen name="Channel_Selection_Progress_Color">
-    <widget source="ServiceEvent" render="Progress" position="1252,436" pixmap="p_bar_sel.png" size="644,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
-  <widget name="list" position="25,130" size="1190,820" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
-  serviceItemHeight="40" 
-  serviceNumberFont="Regular;38" 
-  serviceNameFont="Regular;43" 
-  serviceInfoFont="Regular;37" 
-  fieldMargins="8" 
-  itemsDistances="8" 
-  progressBarWidth="100" 
-  progressbarHeight="12" 
-  foregroundColor="foregroundClock" 
-  foregroundColorMarkedSelected="yellow" 
-  foregroundColorSelected="bluetitle" 
-  backgroundColor="black" 
-  backgroundColorSelected="trbluelabel" 
-  colorServiceDescription="bluetitle" 
-  colorServiceDescriptionSelected="white" 
-  colorServiceRecording="red" 
-  foregroundColorServiceNotAvail="dark" 
-  colorEventProgressbar="bluelabel" 
-  colorEventProgressbarBorder="foregroundClock" 
-  colorEventProgressbarBorderSelected="bluetitle" />
-  </screen>
-  <!-- TEMPLATES Channel_Selection_3_Fields -->
-  <screen name="Channel_Selection_3_Fields_Progress_Color">
-    <widget source="ServiceEvent" render="Progress" position="790,393" pixmap="p_bar_sel.png" size="595,8" borderWidth="1" borderColor="foregroundClock" zPosition="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
-	<widget name="list" position="25,125" size="760,830" scrollbarMode="showOnDemand" transparent="1" zPosition="1" 
-	serviceItemHeight="60" 
-	serviceNumberFont="Regular;30" 
-	serviceNameFont="Regular;32" 
-	serviceInfoFont="Regular;32" 
-	foregroundColor="foregroundClock" 
-	foregroundColorMarkedSelected="yellow" 
-	foregroundColorSelected="bluetitle" 
-	backgroundColor="black" 
-	backgroundColorSelected="trbluelabel" 
-	colorServiceDescription="bluetitle" 
-	colorServiceDescriptionSelected="white" 
-	colorServiceRecording="red" 
-	foregroundColorServiceNotAvail="dark" 
-	colorEventProgressbarBorder="foregroundClock" 
-	colorEventProgressbarBorderSelected="bluetitle" 
-	fieldMargins="15" 
-	nonplayableMargins="15" 
-	itemsDistances="8" 
-	progressBarWidth="80" 
-	progressPercentWidth="90" 
-	progressbarHeight="12" />
-  </screen>
   <!-- Main infobar FHD -->
  <!-- Main infobar FHD -->
  <screen name="InfoBar" position="0,10" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" borderWidth="0" borderColor="transparent">
@@ -1064,6 +1214,7 @@
   <panel name="template_progress_infobar" />
   <panel name="template_clock_infobar" />
   <panel name="template_pixmap_infobar" />
+  <panel name="template_ib_poster"/>
   </screen>
 <!-- SecondInfoBar FHD -->
 <screen backgroundColor="background" flags="wfNoBorder" name="SecondInfoBar" position="0,0" size="1920,1080" title="SecondInfoBar">
@@ -1077,12 +1228,7 @@
   <convert type="ClockToText">Format:%A, %d.%m.%Y   %H:%M</convert>
 </widget>
     <ePixmap name="back" position="0,-1" size="1920,1080" pixmap="menu/Chanel.png" zPosition="-10" />
-    <widget source="session.Event_Now" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="27,178" size="1170,330" font="Regular;34" halign="center" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
-      <convert type="EventName">ExtendedDescription</convert>
-    </widget>
-    <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="27,580" size="1170,330" font="Regular;34" halign="center" valign="top" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
-      <convert type="EventName">ExtendedDescription</convert>
-    </widget>
+
     <widget source="session.Event_Now" render="Label" position="28,127" size="1100,50" font="Regular;34" halign="left" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="lightblue">
       <convert type="EventName">NameNow</convert>
     </widget>
@@ -1090,7 +1236,7 @@
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
-    <widget source="session.CurrentService" render="Picon" position="1253,218" size="100,60" zPosition="6" transparent="1" alphatest="blend">
+    <widget source="session.CurrentService" render="AXBlueXPicon" position="1253,218" size="100,60" zPosition="6" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1402,586" size="150,50" font="Regular;36" halign="right" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
@@ -1393,6 +1539,7 @@
 	<eLabel name="Rahmem_crypt" backgroundColor="bluelabel" zPosition="1" position="122,1017" size="30,36" />
 	<panel name="template_progress_secondinfobar"/>
 <!-- <panel name="template_weather_infobar"/> -->
+    <panel name="template_sib_now_next_h_default"/>
   </screen>
 
   <!-- Channel selection - TV FHD -->
@@ -1435,7 +1582,7 @@
       <convert type="ValueRange">1,1</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="ServiceEvent" render="Picon" position="1663,143" size="220,132" zPosition="1" alphatest="blend" transparent="1">
+    <widget source="ServiceEvent" render="AXBlueXPicon" position="1663,143" size="220,132" zPosition="1" alphatest="blend" transparent="1">
       <convert type="AXBlueRefString">ServicelistRef</convert>
     </widget>
     <eLabel text="Start Time :" position="1660,285" size="150,30" font="Regular; 24" halign="left" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
@@ -1467,6 +1614,7 @@
       <convert type="ServiceName">Name</convert>
     </widget>
 	 <panel name="Channel_Selection_Progress_Color"/>
+	 <panel name="template_ch_se_poster_d"/>
   </screen>
   <!-- Radio FHD -->
   <screen name="ChannelSelectionRadio" position="0,0" size="1920,1080" title="Radio Channel Selection" zPosition="-10" flags="wfNoBorder" backgroundColor="transparent">
@@ -1712,81 +1860,48 @@
   </screen>
 <!-- Eventview FHD -->
 <screen name="EventView" position="0,0" size="1920,1080" title="Eventview" flags="wfNoBorder" backgroundColor="transparent">
-    <ePixmap name="back" position="0,0" zPosition="-10" size="1920,1080" pixmap="menu/Chanel.png" />
-    <widget source="Title" render="Label" position="1024,25" size="900,50" font="Regular; 36" halign="center" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
-    <widget name="channel" position="13,19" size="680,60" font="Regular;46" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2" halign="center" />
-    <widget alphatest="blend" position="1263,419" render="AXBlueXPicon" size="100,56" source="Title" transparent="1" zPosition="7">
-      <convert type="AXBlueRefString">CurrentRef</convert>
-    </widget>
-    <widget name="epg_description" position="30,130" size="1170,760" font="Regular;34" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="1" />
-    <ePixmap pixmap="icons/ico_hd_off.png" position="1698,1018" size="86,35" zPosition="1" alphatest="blend" />
-    <widget source="session.CurrentService" render="Pixmap" position="1698,1018" size="86,35" zPosition="2" pixmap="icons/ico_hd_on.png" alphatest="blend">
-      <convert type="ServiceInfo">VideoWidth</convert>
-      <convert type="ValueRange">721,1980</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <ePixmap pixmap="icons/ico_dolby_off.png" position="1809,1018" size="86,35" zPosition="1" alphatest="blend" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1809,1018" size="86,35" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsMultichannel</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <ePixmap pixmap="icons/ico_format_off.png" position="1608,1018" size="66,35" zPosition="1" alphatest="blend" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_on.png" position="1608,1018" size="66,35" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <ePixmap pixmap="menu/line1200.png" position="23,910" size="1177,2" alphatest="blend" zPosition="6" />
-    <ePixmap pixmap="menu/line648.png" position="1252,487" size="645,2" alphatest="blend" zPosition="6" />
-    <ePixmap pixmap="menu/line648.png" position="1252,556" size="645,2" alphatest="blend" zPosition="6" />
-    <ePixmap pixmap="menu/line648.png" position="1252,912" size="645,2" alphatest="blend" zPosition="6" />
-    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="1265,135" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <eLabel backgroundColor="black" position="1251,125" size="642,362" zPosition="-15" />
-    <eLabel backgroundColor="white" position="1253,126" size="640,362" zPosition="-20" />
-    <widget source="session.VideoPicture" render="Pig" position="1253,126" size="640,360" zPosition="5" backgroundColor="backgroundPig" />
-    <eLabel position="1249,560" size="648,350" backgroundColor="bluelabel" transparent="0" zPosition="0" />
-    <eLabel text="Start:" position="1252,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock" />
-    <eLabel text="End:" position="1550,920" size="90,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="foregroundClock" />
-    <widget source="session.Event_Next" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=10000,wrap=1,always=0,repeat=2,oneshot=1" position="1252,562" size="640,345" font="Regular;34" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
-      <convert type="EventName">FullDescription</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1350,920" size="100,40" halign="left" valign="center" font="Regular; 32" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
-      <convert type="EventTime">StartTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1730,920" size="160,40" font="Regular; 32" halign="right" valign="center" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
-      <convert type="EventTime">Duration</convert>
-      <convert type="ClockToText">InMinutes</convert>
-    </widget>
-	<ePixmap alphatest="blend" pixmap="buttons/key_leftright.png" position="1457,1016" size="100,40" transparent="1" zPosition="10" />
-    <ePixmap pixmap="buttons/key_menu.png" position="1253,1011" size="60,50" alphatest="on" />
-    <ePixmap pixmap="buttons/key_info.png" position="1338,1011" size="60,50" alphatest="on" />
-    <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
-    <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-    <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
-	<eLabel text="Start:" position="30,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
-	<widget name="datetime" position="140,920" size="400,40" foregroundColor="foregroundClock" font="Regular; 32" halign="left" valign="center" transparent="1" />
-	<widget name="duration" backgroundColor="black" foregroundColor="foregroundClock" font="Regular; 30" halign="center" valign="center" position="500,920" size="160,40" transparent="1" />
-	<eLabel text="End:" position="945,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" foregroundColor="foregroundClock" transparent="1" zPosition="1" />
-	<widget source="session.Event_Now" render="Label" position="1030,920" size="155,40" transparent="1" zPosition="1" backgroundColor="black" font="Regular; 32" halign="left" valign="center" foregroundColor="foregroundClock">
-	<convert type="EventTime">Remaining</convert>
-	<convert type="RemainingToText">InMinutes</convert>
-	</widget>
-	<eLabel text="Next:" position="1249,504" size="150,40" font="Regular; 34" backgroundColor="black" transparent="1" halign="left" valign="center" foregroundColor="foregroundClock" />
-	<widget source="session.Event_Next" render="AXBlueRunningText" position="1363,504" size="545,40" font="Regular;34" halign="left" valign="center" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="lightblue" backgroundColor="dark" transparent="1" noWrap="1" zPosition="5">
-	<convert type="EventName">Name</convert>
-	</widget>
-	<widget source="session.Event_Next" render="Label" position="1640,920" size="110,40" font="Regular; 32" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="2" foregroundColor="foregroundClock">
-	<convert type="EventTime">EndTime</convert>
-	<convert type="ClockToText">Default</convert>
-	</widget>
-	<panel name="template_progress_Eventview" />
+  <ePixmap name="back" position="0,0" zPosition="-10" size="1920,1080" pixmap="AX_Blue_FHD_4ATV/menu/Chanel.png" />
+  <widget source="Title" render="Label" position="1024,25" size="900,50" font="Regular; 36" halign="center" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1" />
+  <widget name="channel" position="13,19" size="680,60" font="Regular;46" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2" halign="center" />
+  <widget alphatest="blend" position="1263,419" render="AXBlueXPicon" size="100,56" source="Title" transparent="1" zPosition="7">
+    <convert type="AXBlueRefString">CurrentRef</convert>
+  </widget>
+  <widget name="epg_description" position="30,130" size="1170,760" font="Regular;34" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="1" />
+  <ePixmap pixmap="icons/ico_hd_off.png" position="1698,1018" size="86,35" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" position="1698,1018" size="86,35" zPosition="2" pixmap="icons/ico_hd_on.png" alphatest="blend">
+    <convert type="ServiceInfo">VideoWidth</convert>
+    <convert type="ValueRange">721,1980</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="icons/ico_dolby_off.png" position="1809,1018" size="86,35" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1809,1018" size="86,35" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="icons/ico_format_off.png" position="1608,1018" size="66,35" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_on.png" position="1608,1018" size="66,35" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/menu/line1200.png" position="23,910" size="1177,2" alphatest="blend" zPosition="6" />
+  <ePixmap pixmap="AX_Blue_FHD_4ATV/menu/line648.png" position="1252,487" size="645,2" alphatest="blend" zPosition="6" />
+  <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="1265,135" render="Pixmap" size="80,26" source="session.RecordState" zPosition="5">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <eLabel backgroundColor="black" position="1251,125" size="642,362" zPosition="-15" />
+  <eLabel backgroundColor="white" position="1253,126" size="640,362" zPosition="-20" />
+  <widget source="session.VideoPicture" render="Pig" position="1253,126" size="640,360" zPosition="5" backgroundColor="backgroundPig" />
+  <ePixmap pixmap="buttons/key_menu.png" position="1253,1011" size="60,50" alphatest="on" />
+  <ePixmap pixmap="buttons/key_info.png" position="1338,1011" size="60,50" alphatest="on" />
+  <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="buttons/key_green.png" position="325,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="buttons/key_yellow.png" position="629,1018" size="35,35" alphatest="blend" />
+  <ePixmap pixmap="buttons/key_blue.png" position="936,1018" size="35,35" alphatest="blend" />
+  <widget name="key_red" position="67,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_green" position="370,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_yellow" position="675,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+  <widget name="key_blue" position="983,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+	<panel name="template_ev_default" />
    </screen>
   <!-- EPG Selection FHD -->
   <screen name="EPGSelection" position="0,0" size="1920,1080" title="EPG Selection" backgroundColor="transparent2" flags="wfNoBorder" >
@@ -2056,7 +2171,7 @@
     <widget source="global.CurrentTime" render="Label" position="1425,25" size="350,50" font="Regular; 36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a.%d.%m   %H:%M</convert>
     </widget>
-    <widget source="Service" render="Picon" position="430,15" size="125,70" transparent="0" zPosition="2" alphatest="blend">
+    <widget source="Service" render="AXBlueXPicon" position="430,15" size="125,70" transparent="0" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap pixmap="menu/Browser.png" position="0,0" zPosition="-20" size="1920,1080" />
@@ -3833,7 +3948,7 @@
     <ePixmap position="1425,1011" size="60,50" zPosition="10" pixmap="buttons/key_info.png" transparent="1" alphatest="blend" />
     <ePixmap position="1568,1011" size="60,50" zPosition="10" pixmap="buttons/key_menu.png" transparent="1" alphatest="blend" />
     <ePixmap position="1710,1011" size="60,50" zPosition="10" pixmap="buttons/key_exit.png" transparent="1" alphatest="blend" />
-  <widget source="Service" render="Picon" position="1251,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+  <widget source="Service" render="AXBlueXPicon" position="1251,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
 <convert type="MovieReference" />
 </widget>
 <widget source="Service" render="Label" position="1613,595" size="165,40" font="Regular; 29" halign="center" foregroundColor="grey" backgroundColor="black" transparent="1" zPosition="2">
@@ -3912,6 +4027,7 @@
     <widget source="session.CurrentService" render="Label" position="1392,950" size="105,40" font="Regular; 32" halign="center" valign="center" backgroundColor="background" transparent="1" zPosition="4">
       <convert type="AXBlueServiceEndTime">EndTime</convert>
     </widget>
+	<panel name="template_emc_poster"/>
   </screen>
   <!-- DVD Player -->
   <screen name="DVDPlayer" position="0,0" size="1920,1080" title="DVDPlayer" flags="wfNoBorder" backgroundColor="transparent">
@@ -3998,7 +4114,7 @@
     <widget name="statusicon" position="1806,902" size="100,100" pixmaps="icons/play.png,icons/pause.png,icons/stop.png,icons/forward.png,icons/rewind.png,icons/slow.png" alphatest="on" zPosition="2" />
     <widget name="state" position="60,850" size="50,52" font="Regular;48" halign="left" foregroundColor="bernstein" backgroundColor="bluelabel" transparent="1" zPosition="2" />
     <widget name="eventname" position="374,879" size="1190,50" font="Regular; 34" halign="left" foregroundColor="white" backgroundColor="bluelabel" transparent="1" zPosition="2" />
-    <widget source="session.CurrentService" render="Picon" position="50,920" size="220,132" alphatest="blend" zPosition="1">
+    <widget source="session.CurrentService" render="AXBlueXPicon" position="50,920" size="220,132" alphatest="blend" zPosition="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="383,944" size="200,50" font="Regular;40" halign="left" backgroundColor="background" zPosition="3">

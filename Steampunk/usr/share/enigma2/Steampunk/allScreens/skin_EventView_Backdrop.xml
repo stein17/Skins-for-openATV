@@ -1,0 +1,92 @@
+<skin>
+<!-- TEMPLATES-EventView-Backdrop-Poster-->
+  <screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="background">
+  <widget source="Title" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget source="Service" render="SteampunkXPicon" position="50,70" size="71,40" zPosition="5" transparent="1" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="620,614" size="110,30" transparent="1" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" foregroundColor="selectedFG">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <eLabel text="Next:" position="52,613" size="65,30" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" foregroundColor="selectedFG" />
+  <widget name="epg_description" position="50,115" size="680,490" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="channel" position="120,70" size="610,40" font="Regular;24" borderColor="black" borderWidth="1" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="selectedFG" />
+  <widget source="Service" render="Progress" position="511,623" size="100,10" foregroundColor="selectedBG" borderWidth="2" borderColor="selectedFG" transparent="1" zPosition="1">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget name="datetime" position="145,616" size="200,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" transparent="1" foregroundColor="selectedFG" />
+  <ePixmap position="110,613" size="30,30" zPosition="10" pixmap="buttons/left.png" transparent="1" alphatest="blend" />
+  <ePixmap position="350,613" size="30,30" zPosition="10" pixmap="buttons/right.png" transparent="1" alphatest="blend" />
+  <widget name="duration" position="390,616" size="120,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" transparent="1" foregroundColor="selectedFG" />
+  <widget alphatest="blend" pixmap="icons/ico_dolby_on.png" position="920,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="920,667" size="44,30" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsStereo</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1040,667" size="44,30" render="Pixmap" pixmap="icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">0,719</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1040,667" size="44,30" render="Pixmap" pixmap="icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1079</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" position="1040,667" size="44,30" render="Pixmap" pixmap="icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1080</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_uhd_on.png" position="1040,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">Is4K</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hd_hdr_on.png" position="1040,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hdr_on.png" position="1040,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hdr10_on.png" position="1040,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHDR10</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hlg_on.png" position="1040,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsHLG</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="980,667" size="44,30" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsNotWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_format_on.png" position="980,667" render="Pixmap" size="44,30" source="session.CurrentService" zPosition="2">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="801,84" size="45,24" zPosition="2" />
+  <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="801,84" render="Pixmap" size="45,24" source="session.RecordState" zPosition="5">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="1100,667" size="30,30" zPosition="10" pixmap="buttons/key_menu.png" transparent="1" alphatest="blend" />
+  <ePixmap position="1145,667" size="30,30" zPosition="10" pixmap="buttons/key_ok.png" transparent="1" alphatest="blend" />
+  <ePixmap position="1190,667" size="30,30" zPosition="10" pixmap="buttons/key_exit.png" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,605" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+  <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,110" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+  <widget source="Event" render="SteampunkBackdrop" position="805,390" size="415,234" borderColor="brown" borderWidth="2" zPosition="2" />
+ <!--  <widget source="Event" render="SteampunkPoster" position="915,368" size="185,278" zPosition="1" /> -->
+  <panel name="template_name_red_o_blue" />
+  <panel name="template_date" />
+  <panel name="template_pig_menu" />
+  <panel name="template_Steampunk_Background_Setup" />  
+  <panel name="template_EventView_Backdrop0" />  
+ </screen>
+</skin>
+
+  
