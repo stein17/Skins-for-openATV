@@ -1,0 +1,23 @@
+<skin>
+ <!-- EventView_Backdrop-->
+  <!-- TEMPLATES-EV_session_Event_Now_Next-Poster-->
+ <screen name="template_EV_session_Event_Now_Next" >
+ <widget source="Event" render="UltimateBackdrop" position="800,400" size="415,234" borderColor="selectedFG" borderWidth="2" zPosition="2" />
+ <eLabel text="Next:" position="30,645" size="70,29" font="Regular; 22" halign="left" transparent="1" valign="center" foregroundColor="selectedFG" />
+ <widget name="datetime" position="125,645" size="230,29" font="Regular; 22" halign="center" transparent="1" />
+ <widget name="duration" position="389,645" size="120,29" font="Regular; 22" halign="center" transparent="1" />
+ <widget source="Service" render="Progress" position="516,654" size="100,10" foregroundColor="selectedFG" borderWidth="2" borderColor="verygrey" transparent="1" zPosition="1">
+  <convert type="EventTime">Progress</convert>
+ </widget>
+ <widget source="session.Event_Now" render="Label" position="621,645" size="110,29" transparent="1" zPosition="1" font="Regular; 22" halign="left">
+  <convert type="EventTime">Remaining</convert>
+  <convert type="RemainingToText">InMinutes</convert>
+ </widget>
+ <ePixmap position="100,645" size="30,29" zPosition="10" pixmap="buttons/left.png" transparent="1" alphatest="blend" />
+ <ePixmap position="356,645" size="30,29" zPosition="10" pixmap="buttons/right.png" transparent="1" alphatest="blend" />
+ </screen>
+ </skin>
+
+
+ 
+ 
