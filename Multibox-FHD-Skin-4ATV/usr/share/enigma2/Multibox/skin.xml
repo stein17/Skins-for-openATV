@@ -111,8 +111,8 @@
     <sub name="Subtitle_Italic" font="Regular;32" foregroundColor="white" shadowColor="black" shadowOffset="3,3" />
   </subtitles>
   <switchpixmap>
-	<pixmap name="menu_on" filename="skin_default/icons/lock_on.png" backgroundColor="background" alphatest="blend" />
-	<pixmap name="menu_off" filename="skin_default/icons/lock_error.png" backgroundColor="background" alphatest="blend" />
+	<pixmap name="menu_on" filename="Multibox/skin_default/icons/lock_on.png" backgroundColor="background" alphatest="blend" />
+	<pixmap name="menu_off" filename="Multibox/skin_default/icons/lock_error.png" backgroundColor="background" alphatest="blend" />
   </switchpixmap>
   <fonts>
     <font filename="lcd.ttf" name="LCD" scale="100" />
@@ -352,11 +352,15 @@
  <widget source="session.CurrentService" render="Label" position="1670,1055" size="65,24" font="Regular; 24" backgroundColor="background" halign="left" valign="center" noWrap="1" transparent="1" zPosition="2">
   <convert type="AMBCPUInfo">$0</convert>
 </widget>
-<widget source="global.CurrentTime" render="Label" position="1730,1055" size="200,24" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1">
+ <!-- Python 2 -->
+<!--  <eLabel text="CPU-Temp:" position="1730,1055" size="130,25" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1" />
+ <widget source="global.CurrentTime" position="1846,1055" size="80,25" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1" render="AMBSYSTemp" /> -->
+ <!-- Python 3 -->
+  <widget source="global.CurrentTime" render="Label" position="1730,1055" size="200,24" font="Regular; 24" backgroundColor="black" halign="left" valign="center" transparent="1" zPosition="1">
   <convert type="AMBSTBinfo">CPUtemp</convert>
-</widget>
+ </widget>
 <eLabel text="CPU:" position="1625,1055" size="55,24" font="Regular; 24" backgroundColor="background" transparent="1" zPosition="1" />
-<widget alphatest="blend" position="16,868" size="347,197" render="Picon" source="session.CurrentService" transparent="1" zPosition="1">
+<widget alphatest="blend" position="16,868" size="347,197" render="AMBXPicon" source="session.CurrentService" transparent="1" zPosition="1">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="280,826" render="Pixmap" size="80,26" source="session.RecordState" zPosition="2">
@@ -477,6 +481,7 @@
   <panel name="template_progress_bg_default" />
   <panel name="template_pixmap_Infobar_full" />
   <panel name="template_infobar_digitalclock_widget" />
+   <panel name="template_Poster_Infobar_Now0" />
 </screen>
   <!-- ChannelSelection  -->
   <screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="background" flags="wfNoBorder" size="1920,1080">
@@ -516,7 +521,7 @@
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="ServiceEvent" render="AMBFrontend" position="984,1022" zPosition="1" valign="center" size="520,35" font="Regular; 27" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left" />
-  <widget source="ServiceEvent" render="Picon" position="11,484" size="71,40" zPosition="5" alphatest="blend" transparent="1">
+  <widget source="ServiceEvent" render="AMBXPicon" position="11,484" size="71,40" zPosition="5" alphatest="blend" transparent="1">
     <convert type="AMBRefString">ServicelistRef</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="160,530" size="80,30" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" zPosition="1" foregroundColor="default">
@@ -547,10 +552,11 @@
   <panel name="template_pig_channel" />
   <panel name="template_pixmap_BG" />
   <panel name="ChannelSelection_default" />
+  <panel name="template_ChannelSelection_Poster0" />
 </screen>
  <!-- SecondInfoBar -->
 <screen name="SecondInfoBar" flags="wfNoBorder" position="0,0" size="1920,1080" title="SecondInfoBar">
-  <widget alphatest="blend" position="1226,484" render="Picon" size="71,40" source="session.CurrentService" transparent="1" zPosition="8">
+  <widget alphatest="blend" position="1226,484" render="AMBXPicon" size="71,40" source="session.CurrentService" transparent="1" zPosition="8">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget font="Regular; 36" halign="left" noWrap="1" position="110,100" render="Label" size="1000,40" source="session.Event_Now" transparent="1" valign="center" zPosition="2" backgroundColor="background" foregroundColor="default">
@@ -603,12 +609,12 @@
     <convert type="EventTime">Duration</convert>
     <convert type="ClockToText">InMinutes</convert>
   </widget>
-  <widget source="session.Event_Now" render="AMBRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="1000,350" position="110,144" font="Regular; 36" halign="left" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
+<!--   <widget source="session.Event_Now" render="AMBRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="1000,350" position="110,144" font="Regular; 36" halign="left" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
     <convert type="EventName">FullDescription</convert>
   </widget>
   <widget source="session.Event_Next" render="AMBRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="1000,340" position="110,615" font="Regular; 36" halign="left" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
     <convert type="EventName">FullDescription</convert>
-  </widget>
+  </widget> -->
   
    <eLabel text="Now:" position="10,100" size="95,40" font="Regular; 36" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white" />
   <eLabel text="Next:" position="10,570" size="100,40" font="Regular; 36" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white" />
@@ -685,15 +691,7 @@
     <convert type="ServiceInfo">IsWidescreen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <!--  Caid Info -->
-<!--   <widget source="session.CurrentService" position="1223,890" size="674,30" render="Label" font="Regular; 27" halign="left" valign="center" backgroundColor="background" transparent="1">
-  <convert type="MetrixHDCaidDisplay">Default</convert>
-</widget> -->
-<!--   <widget source="session.CurrentService" render="Label" position="1223,920" size="674,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" transparent="1" zPosition="6">
-  <convert type="AMBEmuInfo">Emu</convert>
-  </widget> -->
-
-<widget font="Regular;27" backgroundColor="background" halign="left" position="1223,890" render="Label" size="175,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+ <widget font="Regular;27" backgroundColor="background" halign="left" position="1223,890" render="Label" size="175,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
     <convert type="AMBEmuInfo">Emu</convert>
   </widget>
   <widget font="Regular; 27" backgroundColor="background" halign="left" position="1400,890" render="Label" size="500,30" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
@@ -745,9 +743,13 @@
     <convert type="FrontendInfo">BER</convert>
   </widget>
   <!--  SNR -->
+  <!-- Python 2 -->
+ <!--  <eLabel text="CPU-Temp:" position="1223,680" size="130,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" />
+  <widget source="global.CurrentTime" position="1355,680" size="80,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" render="AMBSYSTemp" /> -->
+  <!-- Python 3 -->
   <widget source="global.CurrentTime" render="Label" position="1223,680" size="674,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3">
    <convert type="AMBSTBinfo">CPUtemp</convert>
-</widget>
+  </widget>
   <widget source="session.CurrentService" render="Label" position="1223,830" size="674,30" zPosition="1" font="Regular; 27" halign="left" valign="center" backgroundColor="background" foregroundColor="white" transparent="1">
     <convert type="AMBReceiverInfo">FlashInfo</convert>
   </widget>
@@ -808,6 +810,8 @@
   <panel name="template_fullscreen" />
   <panel name="template_pig_setup" />
   <panel name="template_pixmap_BG" />
+  <panel name="template_SecondInfoBar_Poster0" />
+  <panel name="template_SIB_session_Event_Now_Next" />
 </screen>
 
       <!-- Movie_Selection_Mini_TV-->
@@ -951,8 +955,8 @@ self['config'].l.setSeperation(int(300*f))
   <screen name="MovieInfoTMDb" position="0,0" size="1920,1080" title="Movie Information TMDb" flags="wfNoBorder" backgroundColor="background">
     <widget name="movie_name" position="30,130" size="1166,90" zPosition="0" font="Regular;31" valign="center" halign="center" transparent="1" foregroundColor="grey" backgroundColor="background" />
     <widget name="previewlist" position="30,600" size="1166,350" font="Regular;36" itemHeight="50" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="starsbg" position="843,240" size="315,31" pixmap="skin_default/icons/starsbar_empty.png" zPosition="2" alphatest="blend" />
-    <widget name="stars" position="840,240" size="315,31" pixmap="skin_default/icons/starsbar_filled.png" zPosition="3" transparent="1" />
+    <widget name="starsbg" position="843,240" size="315,31" pixmap="Multibox/skin_default/icons/starsbar_empty.png" zPosition="2" alphatest="blend" />
+    <widget name="stars" position="840,240" size="315,31" pixmap="Multibox/skin_default/icons/starsbar_filled.png" zPosition="3" transparent="1" />
     <widget name="rating" position="840,277" size="315,45" font="Regular;30" halign="left" foregroundColor="bernstein" backgroundColor="background" transparent="1" />
     <widget name="ratingtxt" position="840,277" size="315,45" font="Regular;30" halign="right" foregroundColor="bernstein" backgroundColor="background" transparent="1" />
     <widget name="previewcover" position="105,240" size="240,336" alphatest="blend" />
@@ -1084,15 +1088,15 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="968,937" size="100,40" backgroundColor="background" transparent="1" font="Regular; 36" halign="left">
       <convert type="ServiceInfo">VideoHeight</convert>
     </widget>
-    <ePixmap pixmap="skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
-    <ePixmap pixmap="skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
     <widget source="session.CurrentService" render="Label" position="900,1030" size="120,40" font="Regular; 36" halign="left" foregroundColor="white" backgroundColor="background" transparent="1" zPosition="3">
       <convert type="ServicePosition">Length</convert>
     </widget>
     <eLabel font="Regular; 36" halign="left" valign="center" position="1021,1030" size="90,40" text="Min." transparent="1" foregroundColor="default" />
     <eLabel font="Regular; 36" halign="right" valign="center" position="719,1030" size="180,40" text="Laufzeit:" transparent="1" foregroundColor="default" />
     <ePixmap position="0,854" zPosition="-20" size="1920,226" pixmap="menu/Player.png" />
-    <widget name="statusicon" position="45,45" size="20,20" zPosition="3" alphatest="on" pixmaps="skin_default/system/play.png,Multibox/skin_default/system/pause.png,Multibox/skin_default/system/stop.png,Multibox/skin_default/system/forward.png,Multibox/skin_default/system/backward.png,Multibox/skin_default/system/slow.png,Multibox/skin_default/system/blank.png" />
+    <widget name="statusicon" position="45,45" size="20,20" zPosition="3" alphatest="on" pixmaps="Multibox/skin_default/system/play.png,Multibox/skin_default/system/pause.png,Multibox/skin_default/system/stop.png,Multibox/skin_default/system/forward.png,Multibox/skin_default/system/backward.png,Multibox/skin_default/system/slow.png,Multibox/skin_default/system/blank.png" />
     <widget name="speed" position="30,48" size="80,15" font="Regular;17" halign="left" transparent="1" zPosition="4" />
     <widget source="global.CurrentTime" render="AMBWatches" position="1822,866" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
       <convert type="AMBAnalogClock">secHand</convert>
@@ -1118,6 +1122,7 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EMCRecordPosition">Position</convert>
     </widget>
     <ePixmap pixmap="Skinparts/User_Logo.png" position="10,850" size="150,48" zPosition="1" alphatest="blend" />
+	<panel name="template_EMCMediaCenter_Backdrop_Poster0" />
   </screen>
   <screen name="MovieListTags" position="0,0" size="1920,1080" title="Please select tag to filter..." flags="wfNoBorder" backgroundColor="background">
     <widget source="windowtitle" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -1210,8 +1215,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="968,937" size="100,40" backgroundColor="background" transparent="1" font="Regular; 36" halign="left">
       <convert type="ServiceInfo">VideoHeight</convert>
     </widget>
-    <ePixmap pixmap="skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
-    <ePixmap pixmap="skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
     <widget source="session.CurrentService" render="Label" position="900,1030" size="120,40" font="Regular; 36" halign="left" foregroundColor="white" backgroundColor="background" transparent="1" zPosition="3">
       <convert type="ServicePosition">Length</convert>
     </widget>
@@ -1219,7 +1224,7 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel font="Regular; 36" halign="right" valign="center" position="719,1030" size="180,40" text="Laufzeit:" transparent="1" foregroundColor="default" />
     <ePixmap position="0,854" zPosition="-20" size="1920,226" pixmap="menu/Player.png" />
     <!--     <widget name="statusicon" position="45,45" size="20,20" zPosition="3" alphatest="on" 
-	pixmaps="skin_default/system/play.png,Multibox/skin_default/system/pause.png,
+	pixmaps="Multibox/skin_default/system/play.png,Multibox/skin_default/system/pause.png,
 	Multibox/skin_default/system/stop.png,
 	Multibox/skin_default/system/forward.png,
 	Multibox/skin_default/system/backward.png,
@@ -1344,8 +1349,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" position="968,937" size="100,40" backgroundColor="background" transparent="1" font="Regular; 36" halign="left">
       <convert type="ServiceInfo">VideoHeight</convert>
     </widget>
-    <ePixmap pixmap="skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
-    <ePixmap pixmap="skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/clock_player.png" position="419,1038" size="24,24" zPosition="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/system/time_end.png" position="1175,1040" size="20,20" zPosition="1" alphatest="blend" />
 
     <eLabel font="Regular; 36" halign="left" valign="center" position="1021,1030" size="90,40" text="Min." transparent="1" foregroundColor="default" />
     <eLabel font="Regular; 36" halign="right" valign="center" position="719,1030" size="180,40" text="Laufzeit:" transparent="1" foregroundColor="default" />
@@ -1425,7 +1430,7 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="EventTime">Duration</convert>
     <convert type="ClockToText">InMinutes</convert>
   </widget>
-  <widget alphatest="blend" position="1,936" size="250,140" render="Picon" source="session.CurrentService" transparent="1" zPosition="1">
+  <widget alphatest="blend" position="1,936" size="250,140" render="AMBXPicon" source="session.CurrentService" transparent="1" zPosition="1">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget render="Progress" position="262,967" size="1030,16" source="session.Event_Now" foregroundColor="Line" backgroundColor="Line" borderWidth="1" borderColor="verygrey" transparent="1" zPosition="2">
@@ -1444,7 +1449,7 @@ self['config'].l.setSeperation(int(300*f))
   <widget source="RdsDecoder" render="Label" position="320,1040" size="1050,40" font="LCD; 34" halign="center" transparent="1" zPosition="1">
     <convert type="RdsInfo">RadioText</convert>
   </widget>
-  <widget source="RdsDecoder" render="Pixmap" alphatest="blend" pixmap="skin_default/system/rass_logo.png" position="265,1050" size="50,21" zPosition="1">
+  <widget source="RdsDecoder" render="Pixmap" alphatest="blend" pixmap="Multibox/skin_default/system/rass_logo.png" position="265,1050" size="50,21" zPosition="1">
     <convert type="RdsInfo">RasInteractiveAvailable</convert>
     <convert type="ConditionalShowHide" />
   </widget>
@@ -1499,7 +1504,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <screen name="QuickEPG" title="InfoBar QuickEPG" position="0,735" size="1920,345" flags="wfNoBorder" backgroundColor="background">
     <widget name="lab1" position="15,99" size="945,53" font="Regular;36" halign="center" valign="center" zPosition="20" transparent="1" />
-    <widget alphatest="blend" position="17,11" render="Picon" size="146,83" source="Service" transparent="1" zPosition="1">
+    <widget alphatest="blend" position="17,11" render="AMBXPicon" size="146,83" source="Service" transparent="1" zPosition="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Service" render="Label" position="164,12" size="1275,83" halign="left" font="Regular;40" noWrap="1" transparent="1">
@@ -1746,7 +1751,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="IFtext" render="Label" position="260,881" size="240,40" zPosition="10" font="Regular; 36" halign="left" transparent="1" />
     <widget source="IF" render="Label" position="441,881" size="500,40" zPosition="10" font="Regular; 36" halign="left" transparent="1" />
     <widget source="Statustext" render="Label" position="260,930" size="210,40" zPosition="10" font="Regular; 36" foregroundColor="white" halign="left" transparent="1" />
-    <widget name="statuspic" position="480,934" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
+    <widget name="statuspic" position="480,934" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
@@ -1844,7 +1849,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget source="IF" render="Label" position="299,202" size="800,40" font="Regular;36" backgroundColor="background" transparent="1" halign="center" />
     <widget source="Statustext" render="Label" position="11,200" size="240,40" font="Regular;36" backgroundColor="background" transparent="1" />
-    <widget name="statuspic" position="263,204" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
+    <widget name="statuspic" position="263,204" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
     <eLabel position="10,700" size="1180,2" backgroundColor="Line" foregroundColor="Line" />
     <widget name="menulist" position="10,250" size="1180,440" itemHeight="50" font="Regular;36" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
     <widget source="description" render="Label" position="10,710" size="1180,280" font="Regular; 36" foregroundColor="white" halign="center" backgroundColor="background" valign="center" transparent="1" />
@@ -1913,31 +1918,31 @@ self['config'].l.setSeperation(int(300*f))
   <screen name="NetworkAdapterTest" position="0,0" size="1920,1080" title="Network test..." flags="wfNoBorder">
     <widget name="Adaptertext" position="25,135" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
     <widget name="Adapter" position="25,180" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
-    <widget name="AdapterInfo_OK" position="490,160" size="32,31" pixmap="skin_default/icons/lock_on.png" zPosition="2" alphatest="blend" />
+    <widget name="AdapterInfo_OK" position="490,160" size="32,31" pixmap="Multibox/skin_default/icons/lock_on.png" zPosition="2" alphatest="blend" />
     <widget name="AdapterInfo_Text" position="542,154" size="250,51" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey" backgroundColor="background" transparent="1" />
-    <widget name="AdapterInfo" position="540,153" size="250,53" pixmap="skin_default/lan-seloff.png,Multibox/skin_default/lan-sel.png" zPosition="1" alphatest="blend" />
+    <widget name="AdapterInfo" position="540,153" size="250,53" pixmap="Multibox/skin_default/lan-seloff.png,Multibox/skin_default/lan-sel.png" zPosition="1" alphatest="blend" />
     <eLabel position="24,243" size="765,2" backgroundColor="Line" foregroundColor="Line" />
     <widget name="Networktext" position="25,261" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
     <widget name="Network" position="25,306" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
-    <widget name="NetworkInfo_Check" position="493,288" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
+    <widget name="NetworkInfo_Check" position="493,288" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
     <widget name="NetworkInfo_Text" position="540,277" size="250,51" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey" backgroundColor="background" transparent="1" />
     <widget name="NetworkInfo" position="539,276" size="250,53" pixmap="menu/lan-seloff.png,Multibox/menu/lan-sel.png" zPosition="1" alphatest="blend" />
     <eLabel position="24,368" size="765,2" backgroundColor="Line" foregroundColor="Line" />
     <widget name="Dhcptext" position="25,389" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
     <widget name="Dhcp" position="25,434" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
-    <widget name="DhcpInfo_Check" position="493,416" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
+    <widget name="DhcpInfo_Check" position="493,416" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
     <widget name="DhcpInfo_Text" position="540,402" size="250,53" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey" backgroundColor="background" transparent="1" />
     <widget name="DhcpInfo" position="540,402" size="250,53" pixmap="menu/lan-seloff.png,Multibox/menu/lan-sel.png" zPosition="1" alphatest="blend" />
     <eLabel position="23,495" size="765,2" backgroundColor="Line" foregroundColor="Line" />
     <widget name="IPtext" position="25,514" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
     <widget name="IP" position="25,559" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
-    <widget name="IPInfo_Check" position="493,541" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
+    <widget name="IPInfo_Check" position="493,541" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
     <widget name="IPInfo_Text" position="540,529" size="250,51" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey" backgroundColor="background" transparent="1" />
     <widget name="IPInfo" position="541,528" size="250,53" pixmap="menu/lan-seloff.png,Multibox/menu/lan-sel.png" zPosition="1" alphatest="blend" />
     <eLabel position="24,620" size="765,2" backgroundColor="Line" foregroundColor="Line" />
     <widget name="DNStext" position="25,639" size="460,45" zPosition="1" font="Regular;33" backgroundColor="background" transparent="1" />
     <widget name="DNS" position="25,684" size="460,45" zPosition="1" font="Regular;33" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
-    <widget name="DNSInfo_Check" position="493,666" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
+    <widget name="DNSInfo_Check" position="493,666" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" zPosition="2" alphatest="blend" />
     <widget name="DNSInfo_Text" position="541,652" size="250,51" zPosition="2" font="Regular;33" halign="center" valign="center" foregroundColors="grey" backgroundColor="background" transparent="1" />
     <widget name="DNSInfo" position="541,651" size="250,53" pixmap="menu/lan-seloff.png,Multibox/menu/lan-sel.png" zPosition="1" alphatest="blend" />
     <eLabel position="24,748" size="765,2" backgroundColor="Line" foregroundColor="Line" />
@@ -1954,7 +1959,7 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel text="W-LAN Status" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <widget source="IF" render="Label" position="100,115" size="750,40" font="Regular;24" transparent="1" />
     <widget source="Statustext" render="Label" position="836,115" size="240,40" font="Regular;24" foregroundColor="grey" transparent="1" />
-    <widget name="statuspic" position="1100,117" size="32,31" pixmaps="skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
+    <widget name="statuspic" position="1100,117" size="32,31" pixmaps="Multibox/skin_default/icons/lock_on.png,Multibox/skin_default/icons/lock_error.png" transparent="1" alphatest="blend" />
     <eLabel position="100,157" size="980,2" backgroundColor="Line" />
     <widget source="LabelBSSID" render="Label" position="100,180" size="400,40" valign="center" font="Regular; 36" transparent="1" />
     <widget source="LabelESSID" render="Label" position="100,260" size="400,40" valign="center" font="Regular; 36" transparent="1" />
@@ -2515,19 +2520,19 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pig_setup" />
   </screen>
   <screen name="RestartNetwork" position="center,center" size="800,140" title="">
-    <ePixmap name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
+    <ePixmap name="InfoPixmap" pixmap="Multibox/skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
     <eLabel text="Restart Network Adapter" position="100,29" size="600,50" valign="bottom" font="Regular; 36" foregroundColor="default" transparent="1" />
     <eLabel name="line1" position="10,80" size="790,1" backgroundColor="Line" zPosition="1" />
     <widget name="label" position="5,90" size="790,50" font="Regular; 36" valign="center" halign="center" />
   </screen>
   <screen name="installedPlugins" position="center,center" size="800,140" title="">
-    <ePixmap name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
+    <ePixmap name="InfoPixmap" pixmap="Multibox/skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
     <eLabel text="Install Plugins" position="100,29" size="600,50" valign="bottom" font="Regular; 36" foregroundColor="default" transparent="1" />
     <eLabel name="line1" position="10,80" size="790,1" backgroundColor="Line" zPosition="1" />
     <widget name="label" position="5,90" size="790,50" font="Regular; 36" valign="center" halign="center" />
   </screen>
   <screen name="RestoreMyskin_default" position="center,center" size="800,140" title="">
-    <ePixmap name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
+    <ePixmap name="InfoPixmap" pixmap="Multibox/skin_default/icons/input_info.png" position="10,2" size="80,80" alphatest="blend" />
     <eLabel text="Restore skin_default Settings" position="100,29" size="600,50" valign="bottom" font="Regular; 36" foregroundColor="default" transparent="1" />
     <eLabel name="line1" position="10,80" size="790,1" backgroundColor="Line" zPosition="1" />
     <widget name="label" position="5,90" size="790,50" font="Regular; 36" valign="center" halign="center" />
@@ -2820,7 +2825,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <!-- EPG Screens -->
   <screen name="EPGSelection" position="0,0" size="1920,1080" title="EPG Selection" flags="wfNoBorder" backgroundColor="background">
-    <widget alphatest="blend" position="30,100" render="Picon" size="220,132" source="Service" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="30,100" render="AMBXPicon" size="220,132" source="Service" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Event" render="AMBRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="260,120" foregroundColor="default" size="940,50" valign="center" font="Regular; 40" halign="center" transparent="1">
@@ -2868,7 +2873,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Event" render="AMBRunningText" options="movetype=running,startdelay=9000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1223,665" size="670,320" font="Regular;34" foregroundColor="default" transparent="1" valign="top">
       <convert type="EventName">FullDescription</convert>
     </widget>
-    <widget alphatest="blend" position="1223,540" render="Picon" size="107,60" source="Service" transparent="1" zPosition="5">
+    <widget alphatest="blend" position="1223,540" render="AMBXPicon" size="107,60" source="Service" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget name="bouquetlist" position="728,20" size="470,50" zPosition="2" itemHeight="45" font="Regular;40" borderColor="darkgrey" borderWidth="1" transparent="1" />
@@ -2899,7 +2904,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <screen name="GraphicalEPG" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder">
     <widget source="Title" render="Label" position="200,20" size="450,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
-<!-- <widget source="Service" render="Picon" position="9,3" size="107,60" transparent="1" zPosition="12" alphatest="blend">
+<!-- <widget source="Service" render="AMBXPicon" position="9,3" size="107,60" transparent="1" zPosition="12" alphatest="blend">
   <convert type="ServiceName">Reference</convert>
 </widget> -->
     <widget source="Event" render="AMBRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="590,17" size="470,50" font="Regular; 36" halign="center" valign="center" foregroundColor="white" backgroundColor="blue" transparent="1" zPosition="2">
@@ -2972,7 +2977,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
  <screen name="GraphicalEPGPIG" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="background">
   <widget source="Title" render="Label" position="200,20" size="450,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
-  <widget source="Service" render="Picon" position="11,76" size="107,60" zPosition="12" backgroundColor="background" borderColor="Line" borderWidth="1" transparent="0">
+  <widget source="Service" render="AMBXPicon" position="11,76" size="107,60" zPosition="12" backgroundColor="background" borderColor="Line" borderWidth="1" transparent="0">
     <convert type="ServiceName">Reference</convert>
   </widget>
   <widget source="Event" render="AMBRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="790,17" size="670,50" font="Regular; 36" halign="center" valign="center" foregroundColor="white" backgroundColor="blue" transparent="1" zPosition="2">
@@ -3083,47 +3088,13 @@ self['config'].l.setSeperation(int(300*f))
   <ePixmap pixmap="buttons/key_info.png" position="1675,300" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
 </screen>
 <screen name="EventView" position="0,0" size="1920,1080" title="Eventview" flags="wfNoBorder" backgroundColor="background">
-    <widget source="Service" render="Picon" position="10,100" size="89,50" zPosition="5" transparent="1" alphatest="blend">
-      <convert type="ServiceName">Reference</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1770,582" size="140,40" font="Regular; 34" transparent="1" zPosition="2" halign="left" backgroundColor="background">
-      <convert type="EventTime">Duration</convert>
-      <convert type="ClockToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1312,582" size="110,40" font="Regular; 34" transparent="1" zPosition="2" halign="center" backgroundColor="background">
-      <convert type="EventTime">StartTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Next" render="Label" position="1447,582" size="110,40" font="Regular; 34" transparent="1" zPosition="2" halign="center">
-      <convert type="EventTime">EndTime</convert>
-      <convert type="ClockToText">Default</convert>
-    </widget>
-    <widget source="session.Event_Now" render="Label" position="1037,909" size="160,40" transparent="1" zPosition="1" font="Regular; 34" halign="left" backgroundColor="background">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
-    </widget>
-    <widget source="session.Event_Next" render="AMBRunningText" options="movetype=running,startdelay=10000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1223,627" size="670,320" font="Regular;34" halign="center" transparent="1" zPosition="2">
-      <convert type="EventName">FullDescription</convert>
-    </widget>
-    <eLabel text="-" position="1422,582" size="25,40" font="Regular; 34" halign="left" transparent="1" valign="center" />
-    <eLabel text="Start:" position="10,909" size="110,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="default" />
-    <eLabel text="Start:" position="1223,582" size="100,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="default" />
-    <eLabel text="Ende:" position="1681,582" size="100,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="default" />
-    <eLabel text="ENDE:" position="926,909" size="110,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="default" />
-    <eLabel text="Next:" position="1223,533" size="100,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="default" />
-    <widget source="session.Event_Next" render="AMBRunningText" position="1314,533" size="583,40" font="Regular;34" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" foregroundColor="white" transparent="1" noWrap="1" zPosition="5">
-      <convert type="EventName">Name</convert>
-    </widget>
-    <widget name="epg_description" position="10,155" size="1180,748" font="Regular;36" transparent="1" />
-    <widget name="channel" position="105,100" size="370,50" font="Regular; 40" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="default" />
-    <widget source="Service" render="Progress" foregroundColor="Line" backgroundColor="Line" position="605,921" size="300,16" borderWidth="1" borderColor="grey" transparent="1" zPosition="1">
-      <convert type="EventTime">Progress</convert>
-    </widget>
-    <widget name="datetime" position="90,909" size="340,40" font="Regular; 34" halign="center" transparent="1" backgroundColor="background" />
-    <widget name="duration" position="430,909" size="170,40" font="Regular; 34" halign="center" transparent="1" backgroundColor="background" />
-    <eLabel name="" position="10,152" size="1180,1" backgroundColor="Line" />
-    <eLabel name="" position="10,907" size="1180,1" backgroundColor="Line" />
-    <eLabel name="" position="1223,624" size="670,1" backgroundColor="Line" />
+  <widget source="Service" render="AMBXPicon" position="10,100" size="89,50" zPosition="5" transparent="1" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget name="epg_description" position="10,155" size="1180,748" font="Regular;36" transparent="1" />
+  <widget name="channel" position="105,100" size="670,50" font="Regular; 40" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="default" />
+  <eLabel name="" position="10,152" size="1180,1" backgroundColor="Line" />
+  <eLabel name="" position="10,907" size="1180,1" backgroundColor="Line" />
   <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_sd_on.png" position="1352,1020" size="82,44" zPosition="1" alphatest="blend">
     <convert type="ServiceInfo">VideoHeight</convert>
     <convert type="ValueRange">0,576</convert>
@@ -3139,73 +3110,73 @@ self['config'].l.setSeperation(int(300*f))
     <convert type="ValueRange">721,1080</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-   <widget alphatest="blend" pixmap="icons/ico_uhd_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
-      <convert type="ServiceInfo">Is4K</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget alphatest="blend" pixmap="icons/ico_hd_hdr_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
-      <convert type="ServiceInfo">IsHDHDR</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget alphatest="blend" pixmap="icons/ico_hdr_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
-      <convert type="ServiceInfo">IsHDR</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget alphatest="blend" pixmap="icons/ico_hdr10_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
-      <convert type="ServiceInfo">IsHDR10</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<widget alphatest="blend" pixmap="icons/ico_hlg_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1" >
-      <convert type="ServiceInfo">IsHLG</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="1252,1020" size="82,44" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsStereo</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1252,1020" size="82,44" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsMultichannel</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="1454,1020" size="82,44" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsNotWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_on.png" position="1454,1020" size="82,44" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <eLabel name="vertikalline" position="10,950" size="1880,1" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
-    <!--  <ePixmap pixmap="icons/ico_crypt_on.png" position="655,838" size="37,44" zPosition="1" alphatest="blend" /> -->
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_crypt_off.png" position="1198,1020" size="37,44" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsCrypted</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="1230,491" size="80,26" zPosition="6" />
-    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="1230,491" render="Pixmap" size="80,26" source="session.RecordState" zPosition="6">
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1427,964" size="450,34" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center"  zPosition="1" backgroundColor="background" foregroundColor="default">
-      <convert type="ServiceName2">%S</convert>
-      <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
-      <convert type="ServiceName2">%R</convert>
-      <convert type="ConverterRotator">3</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="850,957" size="300,45" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
+  <widget alphatest="blend" pixmap="icons/ico_uhd_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
+    <convert type="ServiceInfo">Is4K</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hd_hdr_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
+    <convert type="ServiceInfo">IsHDHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hdr_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
+    <convert type="ServiceInfo">IsHDR</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hdr10_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
+    <convert type="ServiceInfo">IsHDR10</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget alphatest="blend" pixmap="icons/ico_hlg_on.png" position="1352,1020" render="Pixmap" size="82,44" source="session.CurrentService" zPosition="1">
+    <convert type="ServiceInfo">IsHLG</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="1252,1020" size="82,44" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsStereo</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1252,1020" size="82,44" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="1454,1020" size="82,44" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsNotWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_on.png" position="1454,1020" size="82,44" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <eLabel name="vertikalline" position="10,950" size="1880,1" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
+  <!--  <ePixmap pixmap="icons/ico_crypt_on.png" position="655,838" size="37,44" zPosition="1" alphatest="blend" /> -->
+  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_crypt_off.png" position="1198,1020" size="37,44" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsCrypted</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="1230,491" size="80,26" zPosition="6" />
+  <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="1230,491" render="Pixmap" size="80,26" source="session.RecordState" zPosition="6">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1427,964" size="450,34" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="1" backgroundColor="background" foregroundColor="default">
+    <convert type="ServiceName2">%S</convert>
+    <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
+    <convert type="ServiceName2">%R</convert>
+    <convert type="ConverterRotator">3</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="850,957" size="300,45" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
     <convert type="CryptoInfo">VerboseInfo</convert>
   </widget>
-    <widget source="session.CurrentService" render="Label" position="1160,957"  size="300,45"  font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
-     <convert type="AMBEmuInfo">Emu</convert>
+  <widget source="session.CurrentService" render="Label" position="1160,957" size="300,45" font="Regular; 27" transparent="1" halign="left" noWrap="1" valign="center" zPosition="3" backgroundColor="background" foregroundColor="default">
+    <convert type="AMBEmuInfo">Emu</convert>
   </widget>
-    <panel name="template_fullscreen_title" />
-    <panel name="template_pixmap_BG" />
-    <panel name="template_name_red_o_blue" />
-    <panel name="template_menu_ok_exit" />
-    <panel name="template_crypt_info" />
-    <panel name="template_tuner_info" />
-    <!-- <panel name="template_weather" />-->
-    <panel name="template_pig_setup" />
-  </screen>
+  <panel name="template_fullscreen_title" />
+  <panel name="template_pixmap_BG" />
+  <panel name="template_name_red_o_blue" />
+  <panel name="template_menu_ok_exit" />
+  <panel name="template_crypt_info" />
+  <panel name="template_tuner_info" />
+  <panel name="template_pig_setup" />
+  <panel name="template_EV_session_Event_Now_Next" />
+</screen>
   <screen name="EventViewSimple" position="0,0" size="1920,1080" title="EventviewSimple" flags="wfNoBorder" backgroundColor="background">
     <!--eLabel text="Eventview" position="58,36" size="525,50" valign="bottom" font="Regular;34"    transparent="1" /-->
     <widget name="epg_description" position="10,100" size="1180,870" font="Regular; 36" transparent="1" />
@@ -3217,7 +3188,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="session.CurrentService" render="Label" font="Regular; 34" halign="center" position="1787,650" size="110,40" transparent="1">
       <convert type="AMBServiceTime">EndTime</convert>
     </widget>
-    <widget source="Service" render="Picon" position="1223,570" size="107,60" zPosition="5" transparent="1" alphatest="blend">
+    <widget source="Service" render="AMBXPicon" position="1223,570" size="107,60" zPosition="5" transparent="1" alphatest="blend">
       <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <widget source="session.CurrentService" render="Progress" position="1581,659" size="200,16" foregroundColor="Line" backgroundColor="Line" borderWidth="1" borderColor="grey" transparent="1" zPosition="1">
@@ -3379,7 +3350,7 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel name="BG" position="320,10" size="220,132" zPosition="-5" backgroundColor="background40" />
     <eLabel name="BG" position="0,0" size="550,220" zPosition="-20" backgroundColor="Line" />
     <eLabel name="BG" position="2,2" size="546,216" zPosition="-15" backgroundColor="background40" />
-    <widget source="Service" render="Picon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+    <widget source="Service" render="AMBXPicon" position="320,10" size="220,132" transparent="1" zPosition="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget name="servicename" position="5,154" size="540,60" halign="center" valign="center" font="Regular; 48" backgroundColor="background40" foregroundColor="Line" noWrap="1"  />
@@ -3525,7 +3496,7 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_exit" />
   </screen>
   <screen name="RassInteractive" position="100,100" size="120,275">
-    <ePixmap pixmap="skin_default/system/rass_logo.png" position="25,0" size="50,21" transparent="1" alphatest="on" />
+    <ePixmap pixmap="Multibox/skin_default/system/rass_logo.png" position="25,0" size="50,21" transparent="1" alphatest="on" />
     <eLabel text="Index" position="36,25" size="80,25" font="Regular;21" />
     <eLabel text="0" position="5,25" size="16,25" font="Regular;21" />
     <widget name="Marker" position="21,25" size="16,25" font="Regular;21" />
@@ -3549,7 +3520,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="subpages_9" position="35,250" size="36,20" alphatest="on" />
   </screen>
   <screen name="RdsInfoDisplay" position="0,950" size="1920,100" zPosition="-8" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="RassLogo" pixmap="skin_default/system/rass_logo.png" position="27,64" size="50,21" alphatest="blend" zPosition="1" />
+    <widget name="RassLogo" pixmap="Multibox/skin_default/system/rass_logo.png" position="27,64" size="50,21" alphatest="blend" zPosition="1" />
     <widget name="RadioText" position="0,0" size="1920,50" font="LCD;50" halign="center" valign="center" noWrap="1" backgroundColor="transpBlack" foregroundColor="white" shadowOffset="-2,-2" shadowColor="black" transparent="0" zPosition="1" />
     <widget name="RtpText" position="0,40" size="1920,60" font="LCD;50" halign="center" valign="center" noWrap="1" backgroundColor="transpBlack" foregroundColor="white" shadowOffset="-2,-2" shadowColor="black" transparent="0" zPosition="1" />
   </screen>
@@ -3574,11 +3545,11 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="FrontendInfo">BER</convert>
     </widget>
     <eLabel name="lock" text="Lock:" position="80,250" size="110,40" font="Regular; 36" halign="right" transparent="1" />
-    <widget source="Frontend" render="Pixmap" position="200,253" size=" 32,32" zPosition="1" pixmap="skin_default/icons/lock_on.png" alphatest="blend">
+    <widget source="Frontend" render="Pixmap" position="200,253" size=" 32,32" zPosition="1" pixmap="Multibox/skin_default/icons/lock_on.png" alphatest="blend">
       <convert type="FrontendInfo">LOCK</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="Frontend" render="Pixmap" position="200,253" size=" 32,32" zPosition="1" pixmap="skin_default/icons/lock_off.png" alphatest="blend">
+    <widget source="Frontend" render="Pixmap" position="200,253" size=" 32,32" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" alphatest="blend">
       <convert type="FrontendInfo">LOCK</convert>
       <convert type="ConditionalShowHide">Invert</convert>
     </widget>
@@ -3784,7 +3755,7 @@ self['config'].l.setSeperation(int(300*f))
   <screen name="Standby" position="0,0" size="1920,1080" title="Standby" flags="wfNoBorder" backgroundColor="background">
   </screen>
   <screen name="QuitMainloopScreen" position="0,0" size="1920,1080" backgroundColor="background">
-    <ePixmap pixmap="skin_default/icons/input_info.png" position="322,499" size="80,80" alphatest="blend" />
+    <ePixmap pixmap="Multibox/skin_default/icons/input_info.png" position="322,499" size="80,80" alphatest="blend" />
     <widget name="text" position="center,center" size="1056,196" font="Regular;40" valign="center" halign="center" backgroundColor="background" />
     <eLabel name="" position="center,center" size="1060,200" backgroundColor="Line" zPosition="-1" />
   </screen>
@@ -3801,7 +3772,7 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="MessageBox-template" />
   </screen>
   <screen name="SubservicesQuickzap" position="380,600" size="560,100" title="Subservices">
-    <widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="511,7" zPosition="2" size="48,48" alphatest="on">
+    <widget source="session.RecordState" render="Pixmap" pixmap="Multibox/skin_default/icons/record.png" position="511,7" zPosition="2" size="48,48" alphatest="on">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="Title" render="Label" position="5,6" size="600,50" valign="bottom" font="Regular;32" transparent="1" />
@@ -3920,7 +3891,7 @@ self['config'].l.setSeperation(int(300*f))
 </screen>
 <!--   <screen name="PVRState_Top" position="20,10" zPosition="2" size="1880,102" flags="wfNoBorder" backgroundColor="background20">
     <widget name="state" position="10,60" size="1860,40" backgroundColor="background20" foregroundColor="transpWhite" font="Regular; 36" halign="center" transparent="1" valign="center" />
-    <widget name="statusicon" position="939,21" zPosition="3" size="20,20" alphatest="on" pixmaps="skin_default/system/play.png,icons/pause.png,icons/stop.png,icons/forward.png,icons/backward.png,icons/slow.png" />
+    <widget name="statusicon" position="939,21" zPosition="3" size="20,20" alphatest="on" pixmaps="Multibox/skin_default/system/play.png,icons/pause.png,icons/stop.png,icons/forward.png,icons/backward.png,icons/slow.png" />
     <widget name="speed" position="979,9" size="250,45" font="Regular; 36" halign="right" transparent="1" zPosition="4" />
     <eLabel text="Playback Time:" foregroundColor="white" backgroundColor="background" font="Regular; 30" halign="left" position="1400,9" size="240,45" transparent="1" />
     <widget source="session.CurrentService" render="Label" position="1620,9" size="100,45" foregroundColor="white" backgroundColor="background" font="Regular; 30" halign="right" transparent="1" valign="center">
@@ -3951,7 +3922,6 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="videomode" position="10,10" size="230,40" font="Regular;23" halign="left" />
   </screen>
   <!-- VirtualKeyBoard -->
-  <!-- VirtualKeyBoard -->
 <screen name="VirtualKeyBoard" position="center,300" size="1320,640" zPosition="99" title="" backgroundColor="background20">
     <eLabel text="Virtual KeyBoard" position="3,5" size="788,45" noWrap="1" valign="center" font="Regular; 36" backgroundColor="background" halign="left" transparent="1" zPosition="1" />
     <widget name="header" conditional="header" position="133,55" size="990,45" font="Regular; 36" backgroundColor="background" foregroundColor="yellow" halign="center" transparent="1" noWrap="1" />
@@ -3962,7 +3932,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="list" position="5,200" size="970,350" selectionDisabled="1" transparent="1" />
     <widget name="mode" conditional="mode" position="1338,175" size="300,40" noWrap="1" zPosition="1" valign="center" font="Regular;27" halign="left" backgroundColor="background" foregroundColor="green" transparent="1" />
     <widget name="language" conditional="language" position="0,0" size="0,0" font="Regular;30" backgroundColor="background" foregroundColor="white" transparent="1" noWrap="1" />
-    <widget name="locale" conditional="locale" position="982,200" size="330,200" valign="center" halign="center" font="Regular;27" backgroundColor="background" transparent="1" foregroundColor="yellow" />
+    <widget name="locale" conditional="locale" position="982,270" size="330,130" valign="center" halign="center" font="Regular;27" backgroundColor="background" transparent="1" foregroundColor="yellow" />
     <ePixmap pixmap="Multibox/buttons/key_red.png" position="10,582" size="35,35" />
     <ePixmap pixmap="Multibox/buttons/key_green.png" position="270,582" size="35,35" />
     <ePixmap pixmap="Multibox/buttons/key_yellow.png" position="510,582" size="35,35" />
@@ -3975,9 +3945,10 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel position="0,0" size="1320,640" backgroundColor="background20" zPosition="-2" />
     <ePixmap pixmap="Multibox/buttons/key_text.png" position="1080,582" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
     <ePixmap pixmap="Multibox/buttons/key_exit.png" position="1200,582" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
-    <ePixmap position="26,62" size="103,35" zPosition="2" pixmap="Multibox/buttons/key_board.png" transparent="1" alphatest="blend" />
- <ePixmap position="1033,425" size="220,120" zPosition="2" pixmap="Multibox/icons/keyboard.png" transparent="1" alphatest="blend" />
-  <eLabel name="" position="8,108" size="1304,63" zPosition="2" backgroundColor="background" />
+    <ePixmap position="26,62" size="103,35" zPosition="2" pixmap="buttons/key_board.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1033,425" size="220,120" zPosition="2" pixmap="Multibox/icons/keyboard.png" transparent="1" alphatest="blend" />
+    <eLabel name="" position="8,108" size="1304,63" zPosition="2" backgroundColor="background" />
+    <eLabel text="Press TEXT" backgroundColor="background" font="Regular; 27" foregroundColor="default" halign="center" position="1060,210" size="180,45" transparent="1" zPosition="3" />
 </screen>
   <!-- Wizzard's -->
   <screen name="NetworkWizard" position="0,0" size="1920,1080" title="Welcome..." flags="wfNoBorder">
@@ -4097,9 +4068,9 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <screen name="MessageBoxWizard" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
     <widget name="text" position="150,100" size="1000,400" itemHeight="50" font="Regular; 36" valign="bottom" foregroundColor="default" backgroundColor="background" transparent="1" />
-    <widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="40,200" size="80,80" alphatest="blend" />
-    <widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="40,200" size="80,80" alphatest="blend" />
-    <widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="40,200" size="80,80" alphatest="blend" />
+    <widget name="ErrorPixmap" pixmap="Multibox/skin_default/icons/input_error.png" position="40,200" size="80,80" alphatest="blend" />
+    <widget name="QuestionPixmap" pixmap="Multibox/skin_default/icons/input_question.png" position="40,200" size="80,80" alphatest="blend" />
+    <widget name="InfoPixmap" pixmap="Multibox/skin_default/icons/input_info.png" position="40,200" size="80,80" alphatest="blend" />
     <widget name="list" position="150,550" size="1000,420" itemHeight="50" font="Regular; 36" zPosition="0" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
     <eLabel text="MessageBoxWizard" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <panel name="template_fullscreen" />
@@ -4257,7 +4228,7 @@ self['config'].l.setSeperation(int(300*f))
   </screen>
   <screen name="SystemMessage" position="center,center" size="650,300">
     <widget source="text" position="0,0" size="650,300" font="Regular;36" halign="center" valign="center" render="Label" />
-    <ePixmap pixmap="skin_default/icons/input_error.png" position="5,5" size="80,80" alphatest="on" />
+    <ePixmap pixmap="Multibox/skin_default/icons/input_error.png" position="5,5" size="80,80" alphatest="on" />
   </screen>
   <screen name="SecParameterSetup" position="0,0" size="1920,1080" flags="wfNoBorder">
     <widget name="config" position="10,110" itemHeight="50" font="Regular; 36" size="1180,870" transparent="0" enableWrapAround="1" scrollbarMode="showOnDemand" />
@@ -4570,11 +4541,11 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="labstop" position="610,170" size="350,50" font="Regular; 40" valign="center" halign="center" backgroundColor="red" zPosition="1" />
     <widget name="labrun" position="610,170" size="350,50" font="Regular; 40" valign="center" halign="center" backgroundColor="darkblue" zPosition="2" />
     <widget name="ci0" position="80,235" size="450,40" font="Regular; 36" valign="center" halign="left" transparent="1" />
-    <widget name="ci0active" position="30,240" zPosition="1" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
-    <widget name="ci0inactive" position="30,240" zPosition="2" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="ci0active" position="30,240" zPosition="1" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="ci0inactive" position="30,240" zPosition="2" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
     <widget name="ci1" position="610,235" size="450,40" font="Regular;36" valign="center" halign="left" transparent="1" />
-    <widget name="ci1active" position="560,240" zPosition="1" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
-    <widget name="ci1inactive" position="560,240" zPosition="2" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="ci1active" position="560,240" zPosition="1" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="ci1inactive" position="560,240" zPosition="2" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
     <widget source="Title" render="Label" position="180,20" size="600,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <ePixmap pixmap="buttons/key_red.png" position="18,322" size="35,35" alphatest="blend" />
     <ePixmap pixmap="buttons/key_green.png" position="318,322" size="35,35" alphatest="blend" />
@@ -4986,8 +4957,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="labpass" position="520,380" size="500,40" font="Regular; 36" valign="center" />
     <widget name="alias" position="30,450" size="250,40" font="Regular; 36" valign="center" transparent="1" />
     <widget name="labalias" position="520,450" size="500,40" font="Regular; 36" valign="center" />
-    <widget name="sinactive" position="30,520" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="sactive" position="30,520" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="sinactive" position="30,520" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="sactive" position="30,520" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="system" position="110,520" size="150,40" font="Regular; 36" valign="center" transparent="1" />
     <widget name="labsys" position="520,520" size="500,40" font="Regular; 36" valign="center" />
     <panel name="template_menu_ok_exit" />
@@ -5077,17 +5048,17 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="sharedir" position="30,520" size="400,40" font="Regular; 36" valign="center" transparent="1" />
     <widget name="labsharedir" position="520,520" size="500,40" font="Regular; 36" valign="center" />
     <widget name="web" position="70,800" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="webinactive" position="30,805" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="webactive" position="30,805" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="webinactive" position="30,805" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="webactive" position="30,805" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="telnet" position="70,730" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="telnetinactive" position="30,735" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="telnetactive" position="30,735" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="telnetinactive" position="30,735" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="telnetactive" position="30,735" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="xbox" position="70,590" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="xboxinactive" position="30,593" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="xboxactive" position="30,593" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="xboxinactive" position="30,593" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="xboxactive" position="30,593" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="dlna" position="70,660" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="dlnainactive" position="30,665" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="dlnaactive" position="30,665" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="dlnainactive" position="30,665" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="dlnaactive" position="30,665" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <panel name="template_name_red_o_blue" />
     <panel name="template_menu_ok_exit" />
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -5130,14 +5101,14 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="sharedir" position="30,520" size="400,40" font="Regular; 36" valign="center" transparent="1" />
     <widget name="labsharedir" position="520,520" size="500,40" font="Regular; 36" valign="center" />
     <widget name="inotify" position="70,590" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="inotifyinactive" position="30,595" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="inotifyactive" position="30,595" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="inotifyinactive" position="30,595" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="inotifyactive" position="30,595" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="tivo" position="70,730" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="tivoinactive" position="30,735" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="tivoactive" position="30,735" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="tivoinactive" position="30,735" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="tivoactive" position="30,735" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <widget name="dlna" position="70,660" size="450,40" font="Regular; 36" valign="center" transparent="1" />
-    <widget name="dlnainactive" position="30,665" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
-    <widget name="dlnaactive" position="30,665" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
+    <widget name="dlnainactive" position="30,665" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="32,32" alphatest="on" />
+    <widget name="dlnaactive" position="30,665" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="32,32" alphatest="on" />
     <panel name="template_name_red_o_blue" />
     <panel name="template_menu_ok_exit" />
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -5403,8 +5374,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="lab4" position="30,345" size="250,45" font="Regular;36" foregroundColor="white" backgroundColor="background" valign="center" transparent="1" />
     <widget name="inactive" position="300,345" size="200,45" font="Regular;36" valign="center" halign="center" foregroundColor="white" backgroundColor="red" />
     <widget name="active" position="300,345" size="200,45" font="Regular;36" valign="center" halign="center" foregroundColor="white" backgroundColor="green" />
-    <widget name="autostart_off" position="105,450" zPosition="1" pixmap="skin_default/icons/lock_off.png" size="48,48" alphatest="on" />
-    <widget name="autostart_on" position="105,450" zPosition="2" pixmap="skin_default/icons/lock_on.png" size="48,48" alphatest="on" />
+    <widget name="autostart_off" position="105,450" zPosition="1" pixmap="Multibox/skin_default/icons/lock_off.png" size="48,48" alphatest="on" />
+    <widget name="autostart_on" position="105,450" zPosition="2" pixmap="Multibox/skin_default/icons/lock_on.png" size="48,48" alphatest="on" />
     <widget name="lab1" position="165,450" size="640,45" font="Regular;36" foregroundColor="white" backgroundColor="background" valign="center" transparent="1" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
