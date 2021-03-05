@@ -24,8 +24,8 @@
 <sub name="Subtitle_Italic" font="Regular;32" shadowColor="black" shadowOffset="3,3" />
 </subtitles>
 <switchpixmap>
-<pixmap name="menu_on" filename="skin_default/icons/menu_on.png" backgroundColor="background" alphatest="blend" />
-<pixmap name="menu_off" filename="skin_default/icons/menu_off.png" backgroundColor="background" alphatest="blend" />
+<pixmap name="menu_on" filename="Steampunk/skin_default/icons/menu_on.png" backgroundColor="background" alphatest="blend" />
+<pixmap name="menu_off" filename="Steampunk/skin_default/icons/menu_off.png" backgroundColor="background" alphatest="blend" />
 </switchpixmap>
 <colors>
 <color name="background" value="#00000000" />
@@ -44,6 +44,7 @@
 <color name="brown" value="#00825a2c" />
 <color name="brown2" value="#00c38c4d" />
 <color name="brown3" value="#00956732" />
+<color name="brown4" value="#002c0505" />
 <color name="darkbrown" value="#00680000" />
 <color name="cobalt" value="#000064c7" />
 <color name="cyan" value="#0000ffff" />
@@ -1028,7 +1029,7 @@
 <convert type="MenuEntryCompare">cablescan</convert>
 <convert type="ConditionalShowHide" />
 </widget>
-<widget source="menu" render="Pixmap" pixmap="skin_default/icons/Service.png" position="405,290" size="64,64" alphatest="blend" zPosition="1">
+<widget source="menu" render="Pixmap" pixmap="Steampunk/skin_default/icons/Service.png" position="405,290" size="64,64" alphatest="blend" zPosition="1">
 <convert type="MenuEntryCompare">cablescan</convert>
 <convert type="ConditionalShowHide" />
 </widget>
@@ -1108,7 +1109,7 @@
 <widget source="Service" font="Regular;20" borderColor="black" borderWidth="1" position="850,70" render="Label" size="355,25" transparent="1" zPosition="1" halign="left">
 <convert type="EventName">Name</convert>
 </widget>
-<widget source="Service" render="Picon" position="964,123" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+<widget source="Service" render="SteampunkXPicon" position="964,123" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
 <convert type="MovieInfo">RecordServiceRef</convert>
 </widget>
 <ePixmap position="800,103" size="143,190" alphatest="blend" zPosition="1" pixmap="mmp/no_cover.png" />
@@ -1137,7 +1138,7 @@
 <widget source="Service" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="945,455" size="280,190" font="Regular;22" borderColor="black" borderWidth="1" zPosition="2" transparent="1" valign="top">
 <convert type="EventName">ExtendedDescription</convert>
 </widget>
-<widget source="Service" render="Picon" position="800,429" zPosition="10" size="43,24" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+<widget source="Service" render="SteampunkXPicon" position="800,429" zPosition="10" size="43,24" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
 <convert type="MovieReference" />
 </widget>
 <widget source="Service" render="Label" position="1055,430" size="105,22" font="Regular;18" borderColor="black" borderWidth="1" halign="center" backgroundColor="black" transparent="1" zPosition="2" name="#">
@@ -1379,7 +1380,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
       <convert type="EMCServiceTime">Duration</convert>
       <convert type="EMCClockToText">InMinutes</convert>
     </widget>
-    <widget source="Service" render="Picon" position="997,440" zPosition="10" size="187,112" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <widget source="Service" render="SteampunkXPicon" position="997,440" zPosition="10" size="187,112" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
       <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <widget source="Title" render="Label" position="50,70" size="680,28" font="Regular;24" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1" />
@@ -1506,12 +1507,12 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
     <convert type="EMCRecordPosition">Position</convert>
   </widget>
   <ePixmap pixmap="Skinparts/Steampunk_Player.png" position="0,0" zPosition="-20" size="1280,720" />
-  <widget source="session.CurrentService" render="Picon" alphatest="blend" position="37,618" size="144,86"  zPosition="1">
+  <widget source="session.CurrentService" render="SteampunkXPicon" alphatest="blend" position="37,618" size="144,86"  zPosition="1">
     <convert type="Steampunk_MovieReference" />
   </widget>
-  
-<eLabel name="" position="33,614" size="152,94" zPosition="-2" backgroundColor="background" />
-<eLabel name="" position="32,613" size="154,96" zPosition="-5" backgroundColor="selectedFG" />
+  <eLabel name="" position="33,614" size="152,94" zPosition="-2" backgroundColor="background" />
+  <eLabel name="" position="32,613" size="154,96" zPosition="-5" backgroundColor="selectedFG" />
+  <panel name="template_EMCMediaCenter_Backdrop_Poster0" />
 </screen>
 <screen name="MovieListTags" position="0,0" size="1280,720" title="Please select tag to filter..." flags="wfNoBorder" backgroundColor="background">
 <widget source="windowtitle" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1632,7 +1633,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
     </widget>
     <!-- <ePixmap pixmap="mmp/Pointer.png" position="497,658" size="435,18" zPosition="3" transparent="1" /> -->
     <ePixmap position="0,0" zPosition="-20" size="1280,720" pixmap="Skinparts/Steampunk_Player.png" />
-   <widget source="session.CurrentService" render="Picon" alphatest="blend" position="20,603" size="180,108" transparent="1" zPosition="1">
+   <widget source="session.CurrentService" render="SteampunkXPicon" alphatest="blend" position="20,603" size="180,108" transparent="1" zPosition="1">
    <convert type="Steampunk_MovieReference" />
    </widget>
   </screen>
@@ -1826,7 +1827,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
       <convert type="EventTime">Duration</convert>
       <convert type="ClockToText">InMinutes</convert>
     </widget>
-    <widget alphatest="blend" position="124,569" size="163,97" render="Picon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="124,569" size="163,97" render="SteampunkXPicon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="630,537" size="440,34" font="Regular;24" borderColor="black" borderWidth="1" noWrap="1" transparent="1" zPosition="1" foregroundColor="selectedFG">
@@ -1862,7 +1863,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
   </screen>
 <screen name="QuickEPG" title="InfoBar QuickEPG" position="0,488" size="1280,232" flags="wfNoBorder" backgroundColor="background">
     <widget name="lab1" position="45,100" size="580,35" font="Regular;24" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="20" transparent="1" />
-    <widget alphatest="blend" position="45,60" render="Picon" size="50,30" source="Service" transparent="1" zPosition="1">
+    <widget alphatest="blend" position="45,60" render="SteampunkXPicon" size="50,30" source="Service" transparent="1" zPosition="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget source="Service" render="Label" position="105,60" size="520,30" halign="left" font="Regular;24" borderColor="black" borderWidth="1" noWrap="1" transparent="1">
@@ -2202,7 +2203,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
 <widget source="IFtext" render="Label" position="50,455" size="120,21" zPosition="10" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" />
 <widget source="IF" render="Label" position="50,422" size="680,23" zPosition="10" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" />
 <widget source="Statustext" render="Label" position="50,515" size="115,21" zPosition="10" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" />
-<widget name="statuspic" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="191,509" zPosition="10" size="32,31" transparent="1" alphatest="on" />
+<widget name="statuspic" pixmaps="Steampunk/skin_default/icons/lock_on.png,Steampunk/skin_default/icons/lock_error.png" position="191,509" zPosition="10" size="32,31" transparent="1" alphatest="on" />
 <widget source="LabelBSSID" render="Label" position="50,480" size="200,30" valign="center" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
 <widget source="BSSID" render="Label" position="240,480" size="490,30" valign="center" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
 <widget source="LabelESSID" render="Label" position="240,450" size="200,30" valign="center" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
@@ -2318,7 +2319,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
 <widget source="IFtext" render="Label" position="50,120" size="220,28" zPosition="10" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
 <widget source="IF" position="250,120" render="Label" size="280,28" zPosition="10" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
 <widget source="Statustext" position="530,120" render="Label" size="160,28" zPosition="10" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
-<widget name="statuspic" pixmaps="skin_default/icons/lock_on.png,skin_default/icons/lock_error.png" position="690,119" zPosition="10" size="32,31" transparent="1" alphatest="on" />
+<widget name="statuspic" pixmaps="Steampunk/skin_default/icons/lock_on.png,Steampunk/skin_default/icons/lock_error.png" position="690,119" zPosition="10" size="32,31" transparent="1" alphatest="on" />
 <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
 <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-33-Steampunk.png" transparent="1" alphatest="blend" />
 <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" noWrap="1" />
@@ -2401,24 +2402,24 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
 <widget name="Adaptertext" position=" 70,120" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
 <widget name="Adapter" position="70,151" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
 <widget name="AdapterInfo_Text" position="520,130" size="200,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="#8c8c93,grey,#ffffff" backgroundColor="background" transparent="1" />
-<widget name="AdapterInfo" position="520,130" size="200,35" pixmaps="skin_default/menu/lan-seloff.png,skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" transparent="1" />
+<widget name="AdapterInfo" position="520,130" size="200,35" pixmaps="Steampunk/skin_default/menu/lan-seloff.png,Steampunk/skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" transparent="1" />
 <widget name="Networktext" position=" 70,200" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
 <widget name="Network" position=" 70,230" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
 <widget name="NetworkInfo_Text" position="520,210" size="200,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="#8c8c93,grey,#ffffff" backgroundColor="background" transparent="1" />
-<widget name="NetworkInfo" position="520,210" size="200,35" pixmaps="skin_default/menu/lan-seloff.png,skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" transparent="1" />
+<widget name="NetworkInfo" position="520,210" size="200,35" pixmaps="Steampunk/skin_default/menu/lan-seloff.png,Steampunk/skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" transparent="1" />
 <widget name="Dhcptext" position=" 70,280" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
 <widget name="Dhcp" position=" 70,310" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
 <widget name="DhcpInfo_Text" position="520,290" size="200,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="#8c8c93,grey,#ffffff" backgroundColor="background" transparent="1" />
-<widget name="DhcpInfo" position="520,290" size="200,35" pixmaps="skin_default/menu/lan-seloff.png,skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
+<widget name="DhcpInfo" position="520,290" size="200,35" pixmaps="Steampunk/skin_default/menu/lan-seloff.png,Steampunk/skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
 <eLabel position=" 70,345" size="650,2" backgroundColor="selectedFG" foregroundColor="selectedFG" />
 <widget name="IPtext" position=" 70,360" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
 <widget name="IP" position=" 70,390" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
 <widget name="IPInfo_Text" position="520,370" size="200,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="#8c8c93,grey,#ffffff" backgroundColor="background" transparent="1" />
-<widget name="IPInfo" position="520,370" size="200,35" pixmaps="skin_default/menu/lan-seloff.png,skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
+<widget name="IPInfo" position="520,370" size="200,35" pixmaps="Steampunk/skin_default/menu/lan-seloff.png,Steampunk/skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
 <widget name="DNStext" position=" 70,440" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
 <widget name="DNS" position=" 70,470" size="400,25" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" foregroundColors="#8c8c93,#f23d21,#1cff1c" backgroundColor="background" transparent="1" />
 <widget name="DNSInfo_Text" position="520,450" size="200,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="#8c8c93,grey,#ffffff" backgroundColor="background" transparent="1" />
-<widget name="DNSInfo" position="520,450" size="200,35" pixmaps="skin_default/menu/lan-seloff.png,skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
+<widget name="DNSInfo" position="520,450" size="200,35" pixmaps="Steampunk/skin_default/menu/lan-seloff.png,Steampunk/skin_default/menu/lan-sel.png" zPosition="1" alphatest="blend" />
 <widget name="EditSettings_Text" position="420,530" size="300,35" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColors="grey,grey,#ffffff" backgroundColor="background" transparent="1" />
 <widget name="EditSettingsButton" position="420,530" size="300,35" pixmaps="menu/lan-seloff.png,menu/lan-sel300.png" zPosition="2" alphatest="blend" />
 <widget name="InfoText" position="50,120" size="680,380" zPosition="25" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="center" transparent="0" />
@@ -2438,7 +2439,7 @@ CoolTitleColor="1" DefaultColor="foreground" WatchingColor="#D8C100" FinishedCol
 <eLabel text="W-LAN Status" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 <widget source="IF" render="Label" position="50,100" size="495,32" font="Regular;24" borderColor="black" borderWidth="1" transparent="1" />
 <widget source="Statustext" render="Label" position="530,100" size="160,32" font="Regular;24" borderColor="black" borderWidth="1" transparent="1" />
-<widget name="statuspic" position="700,100" size=" 30,30" pixmaps="skin_default/buttons/key_green.png,skin_default/buttons/grey.png" transparent="1" alphatest="blend" />
+<widget name="statuspic" position="700,100" size=" 30,30" pixmaps="Steampunk/skin_default/buttons/key_green.png,Steampunk/skin_default/buttons/grey.png" transparent="1" alphatest="blend" />
 <widget source="LabelBSSID" render="Label" position="100,180" size="250,35" valign="center" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
 <widget source="LabelESSID" render="Label" position="100,220" size="250,35" valign="center" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
 <widget source="LabelQuality" render="Label" position="100,260" size="250,35" valign="center" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
@@ -3559,9 +3560,9 @@ self['config'].l.setSeperation(int(300*f))
 <panel name="template_Steampunk_Background_Setup" />  
 
 </screen>
-<!-- InfoBar's -->
+  <!-- InfoBar's -->
 <screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar" backgroundColor="transparent">
-    <widget alphatest="blend" position="124,569" size="163,97" render="Picon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
+    <widget alphatest="blend" position="124,569" size="163,97" render="SteampunkXPicon" source="session.CurrentService" backgroundColor="background" transparent="1" zPosition="2">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <widget font="Regular;22" borderColor="black" borderWidth="1" halign="right" position="327,582" render="Label" size="65,30" source="session.Event_Now" transparent="1"  backgroundColor="background" foregroundColor="lightblue">
@@ -3709,21 +3710,23 @@ self['config'].l.setSeperation(int(300*f))
     <ePixmap position="0,0" zPosition="-20" size="1280,720" pixmap="Skinparts/Steampunk_Infobar.png" />
     <ePixmap position="5,540" zPosition="-10" size="88,152" pixmap="Skinparts/SNR_AGC.png" alphatest="blend" />
     <ePixmap position="489,619" zPosition="0" size="471,18" pixmap="Skinparts/Progress_Background_Infobar.png" />
-  <panel name="template_steampunk_clock_digi_widget_infobar0" />
-  <panel name="template_steampunk_clock_org_widget_infobar" />
-  <panel name="template_androidclock_widget_infobar0" />
-  <panel name="template_htc_clock_widget_infobar0" />
-  <panel name="template_analog_clock_widget_infobar0" />
-  <panel name="template_progress_infobar" />
-  <panel name="template_infobar_tuner_info0" />
-  <panel name="template_Infobar_4Day_Weather0" />
-  <panel name="template_pixmap_Analogclock_Infobar0" />
-  <panel name="template_digitalclock_widget_infobar0" />
- <panel name="template_weather0" />
+	<panel name="template_steampunk_clock_digi_widget_infobar0" />
+	<panel name="template_steampunk_clock_org_widget_infobar" />
+	<panel name="template_androidclock_widget_infobar0" />
+	<panel name="template_htc_clock_widget_infobar0" />
+	<panel name="template_analog_clock_widget_infobar0" />
+	<panel name="template_progress_infobar" />
+	<panel name="template_infobar_tuner_info0" />
+	<panel name="template_Infobar_4Day_Weather0" />
+	<panel name="template_pixmap_Analogclock_Infobar0" />
+	<panel name="template_digitalclock_widget_infobar0" />
+	<panel name="template_weather0" />
+	<panel name="template_Poster_Infobar_Now0" />
+	<panel name="template_VpnIp_IF" />
   </screen>
 <!-- SecondInfoBar_light -->
 <screen name="SecondInfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="SecondInfoBar" backgroundColor="background" >
-<widget alphatest="blend" position="130,10" render="Picon" size="64,36" source="session.CurrentService" transparent="1" zPosition="1">
+<widget alphatest="blend" position="130,10" render="SteampunkXPicon" size="64,36" source="session.CurrentService" transparent="1" zPosition="1">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <widget source="Title" render="Label" position="230,10" size="500,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -3778,10 +3781,10 @@ self['config'].l.setSeperation(int(300*f))
 <convert type="EventTime">Duration</convert>
 <convert type="ClockToText">InMinutes</convert>
 </widget>
-<widget source="session.Event_Now" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="585,225" position="50,100" foregroundColor="white" backgroundColor="background" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" zPosition="1">
+<widget source="session.Event_Now" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="525,225" position="50,100" foregroundColor="white" backgroundColor="background" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" zPosition="1">
 <convert type="EventName">FullDescription</convert>
 </widget>
-<widget source="session.Event_Next" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="585,225" position="50,390" foregroundColor="white" backgroundColor="background" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" zPosition="1">
+<widget source="session.Event_Next" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="525,225" position="50,390" foregroundColor="white" backgroundColor="background" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" zPosition="1">
 <convert type="EventName">FullDescription</convert>
 </widget>
 <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="870,660" size="35,35" zPosition="2" transparent="1">
@@ -3804,10 +3807,14 @@ self['config'].l.setSeperation(int(300*f))
 <convert type="ValueRange">1,1</convert>
 <convert type="ConditionalShowHide" />
 </widget>
-<widget source="global.CurrentTime" render="Label" position="800,375" size="420,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+<!-- Python 2 -->
+ <!-- <eLabel text="CPU-Temp:" position="800,375" size="100,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
+ <widget source="global.CurrentTime" position="895,375" size="60,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="SteampunkSYSTemp" /> -->
+ <!-- Python 3 -->
+ <widget source="global.CurrentTime" render="Label" position="800,375" size="420,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
  <convert type="SteampunkSTBinfo">CPUtemp</convert>
  </widget>
-<widget source="session.CurrentService" render="Label" position="800,403" size="420,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+ <widget source="session.CurrentService" render="Label" position="800,403" size="420,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
 <convert type="SteampunkReceiverInfo">UsbInfo</convert>
 </widget>
  <widget source="session.CurrentService" render="Label" position="800,431" size="420,25" zPosition="1" font="Regular;18" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
@@ -3872,7 +3879,9 @@ self['config'].l.setSeperation(int(300*f))
 <panel name="template_sib_tuner_info" />
 <panel name="template_pig_menu" />
 <panel name="template_date" />
-<panel name="template_Steampunk_Background_Setup" />  
+<panel name="template_Steampunk_Background_Setup" /> 
+<panel name="template_SecondInfoBar_Poster0" />
+<panel name="template_VpnIp_SIF" />
 </screen>
 <!-- ChannelSelection */ -->
 <screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
@@ -3897,7 +3906,7 @@ self['config'].l.setSeperation(int(300*f))
   <widget source="ServiceEvent" render="SteampunkRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="174,613" size="550,30" font="Regular;24" borderColor="black" borderWidth="1" foregroundColor="lightblue" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
     <convert type="SteampunkPrimeTime">PrimeTime,noDuration</convert>
   </widget>
-  <widget source="ServiceEvent" render="Picon" position="50,606" size="75,42" zPosition="5" alphatest="blend" transparent="1">
+  <widget source="ServiceEvent" render="SteampunkXPicon" position="50,606" size="75,42" zPosition="5" alphatest="blend" transparent="1">
     <convert type="SteampunkRefString">ServicelistRef</convert>
   </widget>
   <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
@@ -3932,6 +3941,7 @@ self['config'].l.setSeperation(int(300*f))
   <panel name="template_pig_smal" />
   <panel name="template_Steampunk_Background_Channel" />
   <panel name="template_title_date" />
+  <panel name="template_ChannelSelection_Poster0" />
 </screen>
 <screen name="SlimChannelSelection" position="0,0" size="1280,720" title="Select a movie" flags="wfNoBorder" backgroundColor="background">
 <widget source="Title" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -3974,7 +3984,7 @@ self['config'].l.setSeperation(int(300*f))
 <!-- EPG Screens -->
 <screen name="EPGSelection" position="0,0" size="1280,720" title="EPG Selection" flags="wfNoBorder" backgroundColor="background">
 <widget source="Title" render="Label" position="130,9" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-<widget alphatest="blend" position="50,80" render="Picon" size="190,114" source="Service" transparent="1" zPosition="2">
+<widget alphatest="blend" position="50,80" render="SteampunkXPicon" size="190,114" source="Service" transparent="1" zPosition="2">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <widget source="Service" render="Label" position="250,106" size="480,40" valign="bottom" font="Regular;34" halign="center" transparent="1" foregroundColor="selectedFG">
@@ -4030,7 +4040,7 @@ self['config'].l.setSeperation(int(300*f))
 <widget source="Event" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="805,400" size="415,245" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selectedFG" transparent="1" valign="top">
 <convert type="EventName">FullDescription</convert>
 </widget>
-<widget alphatest="blend" position="809,236" render="Picon" size="90,51" source="Service" transparent="1" zPosition="5">
+<widget alphatest="blend" position="809,236" render="SteampunkXPicon" size="90,51" source="Service" transparent="1" zPosition="5">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <widget name="bouquetlist" position="50,70" size="680,34" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -4121,7 +4131,7 @@ self['config'].l.setSeperation(int(300*f))
 <widget source="session.CurrentService" render="Label" position="120,60" size="260,25" font="Regular;20" borderColor="black" borderWidth="1" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="10">
 <convert type="ServiceName">Name</convert>
 </widget>
-<widget alphatest="blend" position="50,52" render="Picon" size="67,40" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
+<widget alphatest="blend" position="50,52" render="SteampunkXPicon" size="67,40" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <ePixmap pixmap="Skinparts/Line_Hor.png" position="39,620" zPosition="2" size="1200,3" alphatest="blend" transparent="1" />
@@ -4138,7 +4148,7 @@ self['config'].l.setSeperation(int(300*f))
 <widget source="Event" render="SteampunkRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="455,60" size="330,25" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="black" transparent="1" zPosition="2">
 <convert type="EventName">Name</convert>
 </widget>
-<widget alphatest="blend" position="40,50" render="Picon" size="67,40" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
+<widget alphatest="blend" position="40,50" render="SteampunkXPicon" size="67,40" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <widget name="timeline_now" position="40,380" zPosition="2" size="16,280" pixmap="epg/timeline-now.png" alphatest="blend" />
@@ -4339,7 +4349,7 @@ self['config'].l.setSeperation(int(300*f))
 <panel name="template_date" />
 <panel name="template_pig_menu" />
 <panel name="template_Steampunk_Background_Setup" />  
-
+<panel name="template_EventView_Backdrop0" />  
 </screen>
 <screen name="EventViewSimple" position="0,0" size="1280,720" title="EventviewSimple" flags="wfNoBorder" backgroundColor="background">
 <!--eLabel text="Eventview" position="58,36" size="525,50" valign="bottom" font="Regular;34"transparent="1" /-->
@@ -4353,7 +4363,7 @@ self['config'].l.setSeperation(int(300*f))
 <widget source="session.CurrentService" render="Label" font="Regular;20" borderColor="black" borderWidth="1" halign="left" position="1155,460" size="70,30" transparent="1">
 <convert type="ServiceTime">EndTime</convert>
 </widget>
-<widget source="Service" render="Picon" position="800,387" size="85,51" zPosition="5" transparent="1" alphatest="blend">
+<widget source="Service" render="SteampunkXPicon" position="800,387" size="85,51" zPosition="5" transparent="1" alphatest="blend">
 <convert type="MovieInfo">RecordServiceRef</convert>
 </widget>
 <widget source="session.CurrentService" render="Progress" position="1027,473" size="120,10" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="1">
@@ -4455,7 +4465,7 @@ self['config'].l.setSeperation(int(300*f))
 <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,370" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
 <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,405" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
 <panel name="template_title_date" />
-<panel name="template_name_red_o_blue" />
+<panel name="template_source_red_o_yellow" />
 <panel name="template_menu_ok_exit_1280" />
 <panel name="template_pig_menu" />
 <panel name="template_Steampunk_Background_Setup" />  
@@ -4543,7 +4553,7 @@ self['config'].l.setSeperation(int(300*f))
 <eLabel name="layer2" position="215,7" size="234,146" zPosition="-15" backgroundColor="selectedFG" />
 <eLabel name="layer3" position="217,9" size="230,142" zPosition="-10" backgroundColor="background40" />
 <eLabel name="layer4" position="8,34" size="200,100" zPosition="-10" backgroundColor="background40" />
-<widget source="Service" render="Picon" position="221,13" size="220,132" transparent="1" zPosition="1" alphatest="blend">
+<widget source="Service" render="SteampunkXPicon" position="221,13" size="220,132" transparent="1" zPosition="1" alphatest="blend">
 <convert type="ServiceName">Reference</convert>
 </widget>
 <widget name="servicename" position="0,159" size="460,40" halign="center" valign="center" font="Regular; 30" foregroundColor="white" backgroundColor="background" borderColor="black" borderWidth="1" noWrap="1" transparent="1" />
@@ -4566,7 +4576,7 @@ self['config'].l.setSeperation(int(300*f))
 </widget>
 </screen>
 <screen name="NumericalTextInputHelpDialog" position="90,480" zPosition="8" size="600,131" title="NumericalTextInputHelpDialog" backgroundColor="black">
-<ePixmap pixmap="skin_default/BG_InputHelpDialog.png" position="0,10" zPosition="-5" size="600,121" alphatest="blend" transparent="1" />
+<ePixmap pixmap="Steampunk/skin_default/BG_InputHelpDialog.png" position="0,10" zPosition="-5" size="600,121" alphatest="blend" transparent="1" />
 <widget name="key1" position="1,10" size="197,28" font="Regular;18" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" />
 <widget name="key2" position="200,10" size="199,28" font="Regular;18" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" />
 <widget name="key3" position="401,10" size="197,28" font="Regular;18" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" />
@@ -4655,7 +4665,7 @@ self['config'].l.setSeperation(int(300*f))
 
 </screen>
 <screen name="RassInteractive" position="100,100" size="120,275">
-<ePixmap pixmap="skin_default/icons/rass_logo.png" position="50,0" size="50,21" transparent="1" alphatest="on" />
+<ePixmap pixmap="Steampunk/skin_default/icons/rass_logo.png" position="50,0" size="50,21" transparent="1" alphatest="on" />
 <eLabel text="Index" position="36,25" size="80,25" font="Regular;21" borderColor="black" borderWidth="1" />
 <eLabel text="0" position="5,25" size="16,25" font="Regular;21" borderColor="black" borderWidth="1" />
 <widget name="Marker" position="50,25" size="16,25" font="Regular;21" borderColor="black" borderWidth="1" />
@@ -4679,7 +4689,7 @@ self['config'].l.setSeperation(int(300*f))
 <widget name="subpages_9" position="35,250" size="36,20" alphatest="on" />
 </screen>
 <screen name="RdsInfoDisplay" position="0,620" size="1280,100" zPosition="-8" flags="wfNoBorder" backgroundColor="transparent">
-<widget name="RassLogo" pixmap="skin_default/icons/rass_logo.png" position="1230,79" size="50,21" alphatest="blend" zPosition="1" />
+<widget name="RassLogo" pixmap="Steampunk/skin_default/icons/rass_logo.png" position="1230,79" size="50,21" alphatest="blend" zPosition="1" />
 <widget name="RadioText" position="0,0" size="1280,50" font="LCD;50" halign="center" valign="center" noWrap="1" shadowOffset="-2,-2" shadowColor="black" transparent="1" zPosition="1" />
 <widget name="RtpText" position="0,40" size="1280,60" font="LCD;50" halign="center" valign="center" noWrap="1" shadowOffset="-2,-2" shadowColor="black" transparent="1" zPosition="1" />
 </screen>
@@ -4900,9 +4910,9 @@ self['config'].l.setSeperation(int(300*f))
 </screen>
 <screen name="MessageBox" position="center,center" size="800,400" zPosition="10" title="" backgroundColor="background20">
  <widget name="text" position="80,10" size="720,80" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="cyan" valign="center" halign="left" />
-<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="ErrorPixmap" pixmap="Steampunk/skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="QuestionPixmap" pixmap="Steampunk/skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="InfoPixmap" pixmap="Steampunk/skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
 <widget name="list" position="10,100" size="780,280" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" transparent="1" />
 <applet type="onLayoutFinish">
 # this should be factored out into some helper code,but currently demonstrates applets.
@@ -4984,9 +4994,9 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 </screen>
 <screen name="MessageBoxExt" position="center,center" size="800,400" zPosition="10" title="" backgroundColor="background20">
  <widget name="text" position="80,10" size="720,80" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="cyan" valign="center" halign="left" />
-<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="ErrorPixmap" pixmap="Steampunk/skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="QuestionPixmap" pixmap="Steampunk/skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="InfoPixmap" pixmap="Steampunk/skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
 <ePixmap pixmap="Skinparts/Line_Hor.png" position="10,170" zPosition="2" size="820,3" alphatest="blend" transparent="1" />
 <widget name="list" position="10,100" size="780,280" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" transparent="1" />
 <applet type="onLayoutFinish">
@@ -5069,9 +5079,9 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 </screen>
 <screen name="MessageBoxSimple" position="center,center" size="800,400" zPosition="10" title="" backgroundColor="background20">
  <widget name="text" position="80,10" size="720,80" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="cyan" valign="center" halign="left" />
-<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="ErrorPixmap" pixmap="Steampunk/skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="QuestionPixmap" pixmap="Steampunk/skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="InfoPixmap" pixmap="Steampunk/skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
 <!-- <ePixmap pixmap="Skinparts/Line_Hor.png" position="10,170" zPosition="2" size="820,3" alphatest="blend" transparent="1" /> -->
 <widget name="list" position="10,100" size="780,280" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" transparent="1" />
 <applet type="onLayoutFinish">
@@ -5154,9 +5164,9 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 </screen>
 <screen name="RemoveTimerQuestion" position="center,center" size="800,400" zPosition="10" title="" backgroundColor="background20">
  <widget name="text" position="80,10" size="720,80" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="cyan" valign="center" halign="left" />
-<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
-<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="ErrorPixmap" pixmap="Steampunk/skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="QuestionPixmap" pixmap="Steampunk/skin_default/icons/input_question.png" position="10,20" size="60,60" alphatest="blend" />
+<widget name="InfoPixmap" pixmap="Steampunk/skin_default/icons/input_info.png" position="10,20" size="60,60" alphatest="blend" />
 <ePixmap pixmap="Skinparts/Line_Hor.png" position="10,170" zPosition="2" size="820,3" alphatest="blend" transparent="1" />
 <widget name="list" position="10,100" size="780,280" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" transparent="1" />
 <applet type="onLayoutFinish">
@@ -5238,7 +5248,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 		</applet>
 </screen>
 <screen name="SubservicesQuickzap" position="384,260" size="512,50" title="">
-<widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/rec.png" position="475,16" zPosition="2" size="20,20" alphatest="on">
+<widget source="session.RecordState" render="Pixmap" pixmap="Steampunk/skin_default/icons/rec.png" position="475,16" zPosition="2" size="20,20" alphatest="on">
 <convert type="ConditionalShowHide">Blink</convert>
 </widget>
 <widget name="CurrentSubserviceNumber" position="1,6" size="50,34" font="Regular;22" borderColor="black" borderWidth="1" shadowColor="black" shadowOffset="-1,-1" />
@@ -5559,18 +5569,18 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 </screen>
 <screen name="MessageBoxWizard" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
 <widget name="text" position="210,70" size="620,370" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
-<widget name="ErrorPixmap" pixmap="skin_default/icons/input_error.png" position="75,90" size="60,60" alphatest="blend" />
-<widget name="QuestionPixmap" pixmap="skin_default/icons/input_question.png" position="75,90" size="60,60" alphatest="blend" />
-<widget name="InfoPixmap" pixmap="skin_default/icons/input_info.png" position="75,90" size="60,60" alphatest="blend" />
+<widget name="ErrorPixmap" pixmap="Steampunk/skin_default/icons/input_error.png" position="75,90" size="60,60" alphatest="blend" />
+<widget name="QuestionPixmap" pixmap="Steampunk/skin_default/icons/input_question.png" position="75,90" size="60,60" alphatest="blend" />
+<widget name="InfoPixmap" pixmap="Steampunk/skin_default/icons/input_info.png" position="75,90" size="60,60" alphatest="blend" />
 <widget name="list" position="210,445" size="620,200" transparent="1" />
-<widget name="rc" position="50,155" size="154,500" pixmaps="skin_default/rc.png,skin_default/rcold.png" zPosition="10" alphatest="blend" />
+<widget name="rc" position="50,155" size="154,500" pixmaps="Steampunk/skin_default/rc.png,Steampunk/skin_default/rcold.png" zPosition="10" alphatest="blend" />
 <widget name="arrowdown" position="-100,-100" size="37,70" pixmap="arrowdown.png" zPosition="11" alphatest="blend" />
 <widget name="arrowdown2" position="-100,-100" size="37,70" pixmap="arrowdown.png" zPosition="11" alphatest="blend" />
 <widget name="arrowup" position="-100,-100" size="37,70" pixmap="arrowup.png" zPosition="11" alphatest="blend" />
 <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="arrowup.png" zPosition="11" alphatest="blend" />
 <eLabel text="MessageBoxWizard" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-<ePixmap pixmap="skin_default/icons/Wizard.png" position="900,314" size="350,360" />
+<ePixmap pixmap="Steampunk/skin_default/icons/Wizard.png" position="900,314" size="350,360" />
 <panel name="template_pig_smal" />
 <panel name="template_Steampunk_Background_Channel" />  
 
@@ -5784,7 +5794,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 </screen>
 <screen name="SystemMessage" position="center,center" size="530,220">
 <widget source="text" position="75,10" size="450,200" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" render="Label" />
-<ePixmap pixmap="skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="on" />
+<ePixmap pixmap="Steampunk/skin_default/icons/input_error.png" position="10,20" size="60,60" alphatest="on" />
 </screen>
 <screen name="SecParameterSetup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
 <widget name="config" position="50,70" size="680,570" transparent="1" enableWrapAround="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" />
