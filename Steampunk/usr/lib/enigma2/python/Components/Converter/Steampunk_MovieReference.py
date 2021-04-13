@@ -19,6 +19,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import iServiceInformation, eServiceReference, iPlayableServicePtr
 
+
 class Steampunk_MovieReference(Converter, object):
 
     def __init__(self, type):
@@ -42,7 +43,7 @@ class Steampunk_MovieReference(Converter, object):
             path = refstr and eServiceReference(refstr).getPath()
             if path:
                 try:
-                    fd = open("%s.meta"%(path), "r")
+                    fd = open("%s.meta" % (path), "r")
                     refstr = fd.readline().strip()
                     fd.close()
                 except:
@@ -52,4 +53,3 @@ class Steampunk_MovieReference(Converter, object):
             return info.getInfoString(service, iServiceInformation.sServiceref)
 
     text = property(getText)
-

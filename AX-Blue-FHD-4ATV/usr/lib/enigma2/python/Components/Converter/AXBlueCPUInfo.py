@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Converter.Poll import Poll
 from Components.Element import cached
 
+
 class AXBlueCPUInfo(Converter, object):
     CPU_ALL = -2
     CPU_TOTAL = -1

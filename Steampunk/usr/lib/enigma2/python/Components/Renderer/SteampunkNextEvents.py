@@ -3,6 +3,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, eEPGCache
 from time import localtime
 
+
 class SteampunkNextEvents(VariableText, Renderer):
 
     def __init__(self):

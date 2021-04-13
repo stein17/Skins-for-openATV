@@ -8,6 +8,7 @@ ECM_INFO = '/tmp/ecm.info'
 old_ecm_mtime = None
 data = None
 
+
 class BLCryptInfo(Poll, Converter, object):
 	IRDCRYPT = 0
 	SECACRYPT = 1
@@ -181,4 +182,3 @@ class BLCryptInfo(Poll, Converter, object):
 
 	def changed(self, what):
 		Converter.changed(self, what)
-

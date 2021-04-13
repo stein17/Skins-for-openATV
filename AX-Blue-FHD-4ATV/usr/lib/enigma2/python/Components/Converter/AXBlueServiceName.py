@@ -9,6 +9,7 @@ try:
 except:
     correctChannelNumber = False
 
+
 class AXBlueServiceName(Converter, object):
     NAME = 0
     NUMBER = 1
@@ -57,7 +58,7 @@ class AXBlueServiceName(Converter, object):
         self.AlternativeControl = self.isAdditionalService(type=1)
         return
 
-    def isAdditionalService(self, type = 0):
+    def isAdditionalService(self, type=0):
 
         def searchService(serviceHandler, bouquet):
             istype = False

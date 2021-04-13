@@ -5,6 +5,7 @@ from Tools.Directories import fileExists
 from os import path, popen
 import re
 
+
 class AXBlueEmuInfo(Converter, object):
     TEMPERATURE = 1
     EMU = 2
@@ -299,4 +300,3 @@ class AXBlueEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
-

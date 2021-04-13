@@ -5,6 +5,7 @@ from Components.Element import cached, ElementError
 from time import localtime, strftime, time, gmtime, asctime
 from Components.Sources.Clock import Clock
 
+
 class AXBlueServiceEndTime(Poll, Converter, object):
     TYPE_ENDTIME = 0
 

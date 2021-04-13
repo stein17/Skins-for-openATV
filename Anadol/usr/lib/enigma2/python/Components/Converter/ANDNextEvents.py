@@ -11,14 +11,15 @@ from time import localtime, strftime, mktime, time
 from datetime import datetime
 from Components.config import config
 
+
 class ANDNextEvents(Converter, object):
-	
+
 	Event1 = 0
 	Event2 = 1
 	Event3 = 2
 	PrimeTime = 3
 	Event0 = 4
-	
+
 	noDuration = 10
 	onlyDuration = 11
 	withDuration = 12
@@ -31,12 +32,12 @@ class ANDNextEvents(Converter, object):
 		self.epgcache = eEPGCache.getInstance()
 
 		args = type.split(',')
-		if len(args) != 2: 
+		if len(args) != 2:
 			raise ElementError("type must contain exactly 2 arguments")
-	
+
 		type = args.pop(0)
 		showDuration = args.pop(0)
-				
+
 		if type == "Event1":
 			self.type = self.Event1
 		elif type == "Event2":
@@ -47,7 +48,7 @@ class ANDNextEvents(Converter, object):
 			self.type = self.PrimeTime
 		else:
 			self.type = self.Event0
-			
+
 		if showDuration == "noDuration":
 			self.showDuration = self.noDuration
 		elif showDuration == "onlyDuration":
@@ -58,7 +59,7 @@ class ANDNextEvents(Converter, object):
 			self.showDuration = self.shortDescription
 		else:
 			self.showDuration = self.longDescription
-	
+
 	@cached
 	def getText(self):
 		ref = self.source.service
@@ -77,7 +78,7 @@ class ANDNextEvents(Converter, object):
 				next = self.epgcache.getNextTimeEntry()
 				if next:
 					textvalue = self.formatEvent(next)
-		
+
 		elif self.type == self.PrimeTime:
 			curEvent = self.source.getCurrentEvent()
 			if curEvent:
@@ -99,7 +100,7 @@ class ANDNextEvents(Converter, object):
 		return textvalue
 
 	text = property(getText)
-	
+
 	def formatEvent(self, event):
 		begin = strftime("%H:%M", localtime(event.getBeginTime()))
 		end = strftime("%H:%M", localtime(event.getBeginTime() + event.getDuration()))
@@ -109,12 +110,12 @@ class ANDNextEvents(Converter, object):
 		ldescr = event.getExtendedDescription()
 		if self.showDuration == self.withDuration:
 			f = "{begin} - {end:10}{title:<} -  {duration}"
-			return f.format(begin = begin, end = end, title = title, duration = duration)
+			return f.format(begin=begin, end=end, title=title, duration=duration)
 		elif self.showDuration == self.onlyDuration:
 			return duration
 		elif self.showDuration == self.noDuration:
 			f = "{begin} {title:<}"
-			return f.format(begin = begin, end = end, title = title)
+			return f.format(begin=begin, end=end, title=title)
 		elif self.showDuration == self.shortDescription:
 			return sdescr
 		elif self.showDuration == self.longDescription:

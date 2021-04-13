@@ -2,9 +2,11 @@ from __future__ import print_function
 # Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/SteampunkConfig/__init__.py
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-import os, gettext
+import os
+import gettext
 PluginLanguageDomain = 'SteampunkConfig'
 PluginLanguagePath = 'Extensions/SteampunkConfig/locale'
+
 
 def localeInit():
     lang = language.getLanguage()[:2]

@@ -18,6 +18,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, eTimer, eDVBVolumecontrol
 from Components.config import config
 
+
 class Steampunkdigiclock(Renderer):
 
     def __init__(self):
@@ -30,7 +31,7 @@ class Steampunkdigiclock(Renderer):
     def changed(self, what):
         if not self.suspended:
             value = self.source.text
-            
+
             if 'H1' in value:
                value = value[3:4]
             elif 'H2' in value:
@@ -42,7 +43,7 @@ class Steampunkdigiclock(Renderer):
             elif 'S1' in value:
                value = value[3:4]
             elif 'S2' in value:
-               value = value[4:5]  
+               value = value[4:5]
             else:
                value = 0
             self.instance.setPixmapFromFile('/usr/share/enigma2/Steampunk/Skinparts/Digits/' + str(value) + '.png')

@@ -22,6 +22,7 @@ from enigma import eServiceCenter, iServiceInformation, eDVBFrontendParametersSa
 from xml.etree.cElementTree import parse
 from Components.config import config
 
+
 class AXBlueFrontend(VariableText, Renderer):
 
     def __init__(self):
@@ -30,7 +31,8 @@ class AXBlueFrontend(VariableText, Renderer):
         self.ena = True
         try:
             self.ena = config.plugins.stein17skins
-        except: pass
+        except:
+            pass
         if not self.ena:
             try:
                 self.allSat = {}
@@ -48,7 +50,8 @@ class AXBlueFrontend(VariableText, Renderer):
                             if position.startswith("."):
                                 position = "0%s" % position
                             self.allSat[position] = str(name.encode("utf-8"))
-            except: pass
+            except:
+                pass
     GUI_WIDGET = eLabel
 
     def connect(self, source):
@@ -67,31 +70,31 @@ class AXBlueFrontend(VariableText, Renderer):
                     fq = pol = fec = sr = orb = ""
                     try:
                         if "frequency" in sname:
-                            tmp = int(sname["frequency"])/1000
+                            tmp = int(sname["frequency"]) / 1000
                             fq = str(tmp) + "  "
                         if "polarization" in sname:
                             try:
                                 pol = {
-                                        eDVBFrontendParametersSatellite.Polarisation_Horizontal : "H  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_Vertical : "V  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_CircularLeft : "CL  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_CircularRight : "CR  "}[sname["polarization"]]
+                                        eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_Vertical: "V  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "CL  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_CircularRight: "CR  "}[sname["polarization"]]
                             except:
                                 pol = "N/A  "
                         if "fec_inner" in sname:
                             try:
                                 fec = {
-                                        eDVBFrontendParametersSatellite.FEC_None : _("None  "),
-                                        eDVBFrontendParametersSatellite.FEC_Auto : _("Auto  "),
-                                        eDVBFrontendParametersSatellite.FEC_1_2 : "1/2  ",
-                                        eDVBFrontendParametersSatellite.FEC_2_3 : "2/3  ",
-                                        eDVBFrontendParametersSatellite.FEC_3_4 : "3/4  ",
-                                        eDVBFrontendParametersSatellite.FEC_5_6 : "5/6  ",
-                                        eDVBFrontendParametersSatellite.FEC_7_8 : "7/8  ",
-                                        eDVBFrontendParametersSatellite.FEC_3_5 : "3/5  ",
-                                        eDVBFrontendParametersSatellite.FEC_4_5 : "4/5  ",
-                                        eDVBFrontendParametersSatellite.FEC_8_9 : "8/9  ",
-                                        eDVBFrontendParametersSatellite.FEC_9_10 : "9/10  "}[sname["fec_inner"]]
+                                        eDVBFrontendParametersSatellite.FEC_None: _("None  "),
+                                        eDVBFrontendParametersSatellite.FEC_Auto: _("Auto  "),
+                                        eDVBFrontendParametersSatellite.FEC_1_2: "1/2  ",
+                                        eDVBFrontendParametersSatellite.FEC_2_3: "2/3  ",
+                                        eDVBFrontendParametersSatellite.FEC_3_4: "3/4  ",
+                                        eDVBFrontendParametersSatellite.FEC_5_6: "5/6  ",
+                                        eDVBFrontendParametersSatellite.FEC_7_8: "7/8  ",
+                                        eDVBFrontendParametersSatellite.FEC_3_5: "3/5  ",
+                                        eDVBFrontendParametersSatellite.FEC_4_5: "4/5  ",
+                                        eDVBFrontendParametersSatellite.FEC_8_9: "8/9  ",
+                                        eDVBFrontendParametersSatellite.FEC_9_10: "9/10  "}[sname["fec_inner"]]
                             except:
                                 fec = "N/A  "
                             if fec == "N/A  ":
@@ -104,18 +107,18 @@ class AXBlueFrontend(VariableText, Renderer):
                                             eDVBFrontendParametersCable.FEC_3_4: "3/4  ",
                                             eDVBFrontendParametersCable.FEC_5_6: "5/6  ",
                                             eDVBFrontendParametersCable.FEC_7_8: "7/8  ",
-                                            eDVBFrontendParametersCable.FEC_8_9: "8/9  ",}[sname["fec_inner"]]
+                                            eDVBFrontendParametersCable.FEC_8_9: "8/9  ", }[sname["fec_inner"]]
                                 except:
                                     fec = "N/A  "
                         if "symbol_rate" in sname:
-                            tmp = int(sname["symbol_rate"])/1000
+                            tmp = int(sname["symbol_rate"]) / 1000
                             sr = str(tmp) + "  "
                         if "orbital_position" in sname:
                             numSat = sname["orbital_position"]
                             if numSat > 1800:
-                                idx = str((float(3600 - numSat))/10.0) + "W"
+                                idx = str((float(3600 - numSat)) / 10.0) + "W"
                             else:
-                                idx = str((float(numSat))/10.0) + "E"
+                                idx = str((float(numSat)) / 10.0) + "E"
                             if not self.ena:
                                 if idx in self.allSat:
                                     orb = self.allSat.get(idx)

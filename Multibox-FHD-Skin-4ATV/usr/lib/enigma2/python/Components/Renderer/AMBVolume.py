@@ -2,6 +2,7 @@ from Components.VariableText import VariableText
 from enigma import eLabel, eDVBVolumecontrol, eTimer
 from Components.Renderer.Renderer import Renderer
 
+
 class AMBVolume(Renderer, VariableText):
 
     def __init__(self):

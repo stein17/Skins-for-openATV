@@ -12,6 +12,7 @@ BOTTOM = 3
 CENTER = 2
 BLOCK = 3
 
+
 class AXBlueRunningText(Renderer):
 
     def __init__(self):
@@ -57,7 +58,7 @@ class AXBlueRunningText(Renderer):
 
     def applySkin(self, desktop, screen):
 
-        def retValue(val, limit, default, Min = False):
+        def retValue(val, limit, default, Min=False):
             try:
                 if Min:
                     x = min(limit, int(val))

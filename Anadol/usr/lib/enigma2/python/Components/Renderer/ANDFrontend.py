@@ -12,7 +12,7 @@
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
-#    
+#
 #######################################################################
 
 from Renderer import Renderer
@@ -22,6 +22,7 @@ from enigma import eServiceCenter, iServiceInformation, eDVBFrontendParametersSa
 from xml.etree.cElementTree import parse
 from Components.config import config
 
+
 class ANDFrontend(VariableText, Renderer):
 
 	def __init__(self):
@@ -30,7 +31,8 @@ class ANDFrontend(VariableText, Renderer):
 		self.ena = True
 		try:
 			self.ena = config.plugins.stein17skins
-		except: pass
+		except:
+			pass
 		if not self.ena:
 			try:
 				self.allSat = {}
@@ -48,13 +50,14 @@ class ANDFrontend(VariableText, Renderer):
 							if position.startswith("."):
 								position = "0%s" % position
 							self.allSat[position] = str(name.encode("utf-8"))
-			except: pass
+			except:
+				pass
 	GUI_WIDGET = eLabel
 
 	def connect(self, source):
 		Renderer.connect(self, source)
 		self.changed((self.CHANGED_DEFAULT,))
-		
+
 	def changed(self, what):
 		if self.instance:
 			if what[0] == self.CHANGED_CLEAR:
@@ -67,55 +70,55 @@ class ANDFrontend(VariableText, Renderer):
 					fq = pol = fec = sr = orb = ""
 					try:
 						if sname.has_key("frequency"):
-							tmp = int(sname["frequency"])/1000
+							tmp = int(sname["frequency"]) / 1000
 							fq = str(tmp) + "  "
 						if sname.has_key("polarization"):
 							try:
 								pol = {
-									eDVBFrontendParametersSatellite.Polarisation_Horizontal : "H  ",
-									eDVBFrontendParametersSatellite.Polarisation_Vertical : "V  ",
-									eDVBFrontendParametersSatellite.Polarisation_CircularLeft : "CL  ",
-									eDVBFrontendParametersSatellite.Polarisation_CircularRight : "CR  "}[sname["polarization"]]
+									eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H  ",
+									eDVBFrontendParametersSatellite.Polarisation_Vertical: "V  ",
+									eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "CL  ",
+									eDVBFrontendParametersSatellite.Polarisation_CircularRight: "CR  "}[sname["polarization"]]
 							except:
 								pol = "N/A  "
 						if sname.has_key("fec_inner"):
 							try:
 								fec = {
-									eDVBFrontendParametersSatellite.FEC_None : _("None  "),
-									eDVBFrontendParametersSatellite.FEC_Auto : _("Auto  "),
-									eDVBFrontendParametersSatellite.FEC_1_2 : "1/2  ",
-									eDVBFrontendParametersSatellite.FEC_2_3 : "2/3  ",
-									eDVBFrontendParametersSatellite.FEC_3_4 : "3/4  ",
-									eDVBFrontendParametersSatellite.FEC_5_6 : "5/6  ",
-									eDVBFrontendParametersSatellite.FEC_7_8 : "7/8  ",
-									eDVBFrontendParametersSatellite.FEC_3_5 : "3/5  ",
-									eDVBFrontendParametersSatellite.FEC_4_5 : "4/5  ",
-									eDVBFrontendParametersSatellite.FEC_8_9 : "8/9  ",
-									eDVBFrontendParametersSatellite.FEC_9_10 : "9/10  "}[sname["fec_inner"]]
+									eDVBFrontendParametersSatellite.FEC_None: _("None  "),
+									eDVBFrontendParametersSatellite.FEC_Auto: _("Auto  "),
+									eDVBFrontendParametersSatellite.FEC_1_2: "1/2  ",
+									eDVBFrontendParametersSatellite.FEC_2_3: "2/3  ",
+									eDVBFrontendParametersSatellite.FEC_3_4: "3/4  ",
+									eDVBFrontendParametersSatellite.FEC_5_6: "5/6  ",
+									eDVBFrontendParametersSatellite.FEC_7_8: "7/8  ",
+									eDVBFrontendParametersSatellite.FEC_3_5: "3/5  ",
+									eDVBFrontendParametersSatellite.FEC_4_5: "4/5  ",
+									eDVBFrontendParametersSatellite.FEC_8_9: "8/9  ",
+									eDVBFrontendParametersSatellite.FEC_9_10: "9/10  "}[sname["fec_inner"]]
 							except:
 								fec = "N/A  "
 							if fec == "N/A  ":
 								try:
 									fec = {
-										eDVBFrontendParametersCable.FEC_None : _("None  "),
-										eDVBFrontendParametersCable.FEC_Auto : _("Auto  "),
-										eDVBFrontendParametersCable.FEC_1_2 : "1/2  ",
-										eDVBFrontendParametersCable.FEC_2_3 : "2/3  ",
-										eDVBFrontendParametersCable.FEC_3_4 : "3/4  ",
-										eDVBFrontendParametersCable.FEC_5_6 : "5/6  ",
-										eDVBFrontendParametersCable.FEC_7_8 : "7/8  ",
-										eDVBFrontendParametersCable.FEC_8_9 : "8/9  ",}[sname["fec_inner"]]
+										eDVBFrontendParametersCable.FEC_None: _("None  "),
+										eDVBFrontendParametersCable.FEC_Auto: _("Auto  "),
+										eDVBFrontendParametersCable.FEC_1_2: "1/2  ",
+										eDVBFrontendParametersCable.FEC_2_3: "2/3  ",
+										eDVBFrontendParametersCable.FEC_3_4: "3/4  ",
+										eDVBFrontendParametersCable.FEC_5_6: "5/6  ",
+										eDVBFrontendParametersCable.FEC_7_8: "7/8  ",
+										eDVBFrontendParametersCable.FEC_8_9: "8/9  ", }[sname["fec_inner"]]
 								except:
 									fec = "N/A  "
 						if sname.has_key("symbol_rate"):
-							tmp = int(sname["symbol_rate"])/1000
+							tmp = int(sname["symbol_rate"]) / 1000
 							sr = str(tmp) + "  "
-						if sname.has_key("orbital_position"):	
+						if sname.has_key("orbital_position"):
 							numSat = sname["orbital_position"]
 							if numSat > 1800:
-								idx = str((float(3600 - numSat))/10.0) + "W"
+								idx = str((float(3600 - numSat)) / 10.0) + "W"
 							else:
-								idx = str((float(numSat))/10.0) + "E"
+								idx = str((float(numSat)) / 10.0) + "E"
 							if not self.ena:
 								if self.allSat.has_key(idx):
 									orb = self.allSat.get(idx)
@@ -127,8 +130,8 @@ class ANDFrontend(VariableText, Renderer):
 						pass
 					if fq != "":
 						try:
-							self.text = fq + pol + fec + sr + orb.replace("E)","\xc2\xb0E)").replace("W)","\xc2\xb0W)")
-						except: 
+							self.text = fq + pol + fec + sr + orb.replace("E)", "\xc2\xb0E)").replace("W)", "\xc2\xb0W)")
+						except:
 							self.text = fq + pol + fec + sr + orb
 					else:
 						self.text = "Transporder info not detected"

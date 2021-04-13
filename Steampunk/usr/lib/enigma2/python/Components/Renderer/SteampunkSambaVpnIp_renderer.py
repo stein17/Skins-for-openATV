@@ -1,6 +1,7 @@
 from Renderer import Renderer
 from enigma import ePixmap
 
+
 class SteampunkSambaVpnIp_renderer(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)

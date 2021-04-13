@@ -5,6 +5,7 @@ from Tools.Directories import fileExists
 from os import path, popen
 import re
 
+
 class SteampunkEmuInfo(Converter, object):
     TEMPERATURE = 1
     EMU = 2

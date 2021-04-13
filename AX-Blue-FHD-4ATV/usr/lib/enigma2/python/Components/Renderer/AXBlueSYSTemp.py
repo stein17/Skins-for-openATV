@@ -3,11 +3,12 @@ from enigma import eLabel
 from Renderer import Renderer
 from os import path, popen
 
+
 class AXBlueSYSTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
-		
+
 	GUI_WIDGET = eLabel
 
 	def changed(self, what):
@@ -28,7 +29,7 @@ class AXBlueSYSTemp(Renderer, VariableText):
 					systemp = out_line.replace('\n', '')
 				elif path.exists('/proc/stb/fp/temp_sensor_avs'):
 					out_line = popen("cat /proc/stb/fp/temp_sensor_avs").readline()
-					systemp = out_line.replace('\n', '').replace(' ','')
+					systemp = out_line.replace('\n', '').replace(' ', '')
 				elif path.exists('/proc/hisi/msp/pm_cpu'):
 					try:
 						for line in open('/proc/hisi/msp/pm_cpu').readlines():
@@ -48,7 +49,7 @@ class AXBlueSYSTemp(Renderer, VariableText):
 			except:
 				pass
 			self.text = systemp + str('\xc2\xb0') + "C"
-			
+
 	def onShow(self):
 		self.suspended = False
 		self.changed(None)

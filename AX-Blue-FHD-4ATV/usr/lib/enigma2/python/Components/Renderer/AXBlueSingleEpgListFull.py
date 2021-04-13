@@ -3,6 +3,7 @@ from enigma import eLabel, eEPGCache
 from Components.Renderer.Renderer import Renderer
 from time import localtime
 
+
 class AXBlueSingleEpgListFull(Renderer, VariableText):
 
     def __init__(self):
