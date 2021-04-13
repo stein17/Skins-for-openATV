@@ -201,6 +201,6 @@ class UltimatePoster(Renderer):
 	def savePoster(self):
 		if not os.path.isdir(path_folder):
 			os.makedirs(path_folder)
-		with open(self.dwn_poster,'wb') as f:
+		with open(self.dwn_poster, 'wb') as f:
 			f.write(urlopen(self.url_poster).read())
 			f.close()

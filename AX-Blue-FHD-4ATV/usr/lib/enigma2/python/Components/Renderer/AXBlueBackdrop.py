@@ -201,6 +201,6 @@ class AXBlueBackdrop(Renderer):
 	def saveBackdrop(self):
 		if not os.path.isdir(path_folder):
 			os.makedirs(path_folder)
-		with open(self.dwn_backdrop,'wb') as f:
+		with open(self.dwn_backdrop, 'wb') as f:
 			f.write(urlopen(self.url_backdrop).read())
 			f.close()

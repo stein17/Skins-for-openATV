@@ -28,7 +28,7 @@ class UltimateSYSTemp(Renderer, VariableText):
 					systemp = out_line.replace('\n', '')
 				elif path.exists('/proc/stb/fp/temp_sensor_avs'):
 					out_line = popen("cat /proc/stb/fp/temp_sensor_avs").readline()
-					systemp = out_line.replace('\n', '').replace(' ','')
+					systemp = out_line.replace('\n', '').replace(' ', '')
 				elif path.exists('/proc/hisi/msp/pm_cpu'):
 					try:
 						for line in open('/proc/hisi/msp/pm_cpu').readlines():

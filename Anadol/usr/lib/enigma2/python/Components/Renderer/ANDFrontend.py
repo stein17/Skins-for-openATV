@@ -106,7 +106,7 @@ class ANDFrontend(VariableText, Renderer):
 										eDVBFrontendParametersCable.FEC_3_4: "3/4  ",
 										eDVBFrontendParametersCable.FEC_5_6: "5/6  ",
 										eDVBFrontendParametersCable.FEC_7_8: "7/8  ",
-										eDVBFrontendParametersCable.FEC_8_9: "8/9  ",}[sname["fec_inner"]]
+										eDVBFrontendParametersCable.FEC_8_9: "8/9  ", }[sname["fec_inner"]]
 								except:
 									fec = "N/A  "
 						if sname.has_key("symbol_rate"):
@@ -129,7 +129,7 @@ class ANDFrontend(VariableText, Renderer):
 						pass
 					if fq != "":
 						try:
-							self.text = fq + pol + fec + sr + orb.replace("E)","\xc2\xb0E)").replace("W)","\xc2\xb0W)")
+							self.text = fq + pol + fec + sr + orb.replace("E)", "\xc2\xb0E)").replace("W)", "\xc2\xb0W)")
 						except: 
 							self.text = fq + pol + fec + sr + orb
 					else:
