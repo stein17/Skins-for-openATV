@@ -5,7 +5,8 @@ from Tools.Directories import fileExists, SCOPE_SKIN_IMAGE, SCOPE_CURRENT_SKIN, 
 from Components.config import config
 from PIL import Image, ImageFile, PngImagePlugin, ImageEnhance
 from ServiceReference import ServiceReference
-import re, unicodedata
+import re
+import unicodedata
 
 class AMBXPicon(Renderer):
     searchPaths = ('/media/mmc/%s/', '/media/usb/XPicons/%s/', '/media/usb/%s/', '/%s/', '/%sx/', '/usr/share/enigma2/XPicons/%s/', '/usr/share/enigma2/%s/', '/usr/%s/', '/media/hdd/XPicons/%s/', '/media/hdd/%s/')

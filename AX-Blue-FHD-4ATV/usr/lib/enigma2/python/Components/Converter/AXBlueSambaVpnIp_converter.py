@@ -4,7 +4,8 @@ from Poll import Poll
 import process
 import os
 from time import time
-import json, urllib
+import json
+import urllib
 from Tools.LoadPixmap import LoadPixmap
 
 myipdata = '/tmp/myipdata'
