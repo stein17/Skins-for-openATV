@@ -754,7 +754,7 @@ class SteampunkScreens(Screen):
                 else:
                     if path.islink(dir_path + "/" + f):
                         remove(dir_path + "/" + f)
-        menu_list = [ ]
+        menu_list = []
         for entry in f_list:
             menu_list.append((entry[0], entry[1], entry[2]))
         self["menu"].updateList(menu_list)

@@ -74,26 +74,26 @@ class UltimateFrontend(VariableText, Renderer):
                         if "polarization" in sname:
                             try:
                                 pol = {
-                                        eDVBFrontendParametersSatellite.Polarisation_Horizontal : "H  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_Vertical : "V  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_CircularLeft : "CL  ",
-                                        eDVBFrontendParametersSatellite.Polarisation_CircularRight : "CR  "}[sname["polarization"]]
+                                        eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_Vertical: "V  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "CL  ",
+                                        eDVBFrontendParametersSatellite.Polarisation_CircularRight: "CR  "}[sname["polarization"]]
                             except:
                                 pol = "N/A  "
                         if "fec_inner" in sname:
                             try:
                                 fec = {
-                                        eDVBFrontendParametersSatellite.FEC_None : _("None  "),
-                                        eDVBFrontendParametersSatellite.FEC_Auto : _("Auto  "),
-                                        eDVBFrontendParametersSatellite.FEC_1_2 : "1/2  ",
-                                        eDVBFrontendParametersSatellite.FEC_2_3 : "2/3  ",
-                                        eDVBFrontendParametersSatellite.FEC_3_4 : "3/4  ",
-                                        eDVBFrontendParametersSatellite.FEC_5_6 : "5/6  ",
-                                        eDVBFrontendParametersSatellite.FEC_7_8 : "7/8  ",
-                                        eDVBFrontendParametersSatellite.FEC_3_5 : "3/5  ",
-                                        eDVBFrontendParametersSatellite.FEC_4_5 : "4/5  ",
-                                        eDVBFrontendParametersSatellite.FEC_8_9 : "8/9  ",
-                                        eDVBFrontendParametersSatellite.FEC_9_10 : "9/10  "}[sname["fec_inner"]]
+                                        eDVBFrontendParametersSatellite.FEC_None: _("None  "),
+                                        eDVBFrontendParametersSatellite.FEC_Auto: _("Auto  "),
+                                        eDVBFrontendParametersSatellite.FEC_1_2: "1/2  ",
+                                        eDVBFrontendParametersSatellite.FEC_2_3: "2/3  ",
+                                        eDVBFrontendParametersSatellite.FEC_3_4: "3/4  ",
+                                        eDVBFrontendParametersSatellite.FEC_5_6: "5/6  ",
+                                        eDVBFrontendParametersSatellite.FEC_7_8: "7/8  ",
+                                        eDVBFrontendParametersSatellite.FEC_3_5: "3/5  ",
+                                        eDVBFrontendParametersSatellite.FEC_4_5: "4/5  ",
+                                        eDVBFrontendParametersSatellite.FEC_8_9: "8/9  ",
+                                        eDVBFrontendParametersSatellite.FEC_9_10: "9/10  "}[sname["fec_inner"]]
                             except:
                                 fec = "N/A  "
                             if fec == "N/A  ":

@@ -74,39 +74,39 @@ class ANDFrontend(VariableText, Renderer):
 						if sname.has_key("polarization"):
 							try:
 								pol = {
-									eDVBFrontendParametersSatellite.Polarisation_Horizontal : "H  ",
-									eDVBFrontendParametersSatellite.Polarisation_Vertical : "V  ",
-									eDVBFrontendParametersSatellite.Polarisation_CircularLeft : "CL  ",
-									eDVBFrontendParametersSatellite.Polarisation_CircularRight : "CR  "}[sname["polarization"]]
+									eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H  ",
+									eDVBFrontendParametersSatellite.Polarisation_Vertical: "V  ",
+									eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "CL  ",
+									eDVBFrontendParametersSatellite.Polarisation_CircularRight: "CR  "}[sname["polarization"]]
 							except:
 								pol = "N/A  "
 						if sname.has_key("fec_inner"):
 							try:
 								fec = {
-									eDVBFrontendParametersSatellite.FEC_None : _("None  "),
-									eDVBFrontendParametersSatellite.FEC_Auto : _("Auto  "),
-									eDVBFrontendParametersSatellite.FEC_1_2 : "1/2  ",
-									eDVBFrontendParametersSatellite.FEC_2_3 : "2/3  ",
-									eDVBFrontendParametersSatellite.FEC_3_4 : "3/4  ",
-									eDVBFrontendParametersSatellite.FEC_5_6 : "5/6  ",
-									eDVBFrontendParametersSatellite.FEC_7_8 : "7/8  ",
-									eDVBFrontendParametersSatellite.FEC_3_5 : "3/5  ",
-									eDVBFrontendParametersSatellite.FEC_4_5 : "4/5  ",
-									eDVBFrontendParametersSatellite.FEC_8_9 : "8/9  ",
-									eDVBFrontendParametersSatellite.FEC_9_10 : "9/10  "}[sname["fec_inner"]]
+									eDVBFrontendParametersSatellite.FEC_None: _("None  "),
+									eDVBFrontendParametersSatellite.FEC_Auto: _("Auto  "),
+									eDVBFrontendParametersSatellite.FEC_1_2: "1/2  ",
+									eDVBFrontendParametersSatellite.FEC_2_3: "2/3  ",
+									eDVBFrontendParametersSatellite.FEC_3_4: "3/4  ",
+									eDVBFrontendParametersSatellite.FEC_5_6: "5/6  ",
+									eDVBFrontendParametersSatellite.FEC_7_8: "7/8  ",
+									eDVBFrontendParametersSatellite.FEC_3_5: "3/5  ",
+									eDVBFrontendParametersSatellite.FEC_4_5: "4/5  ",
+									eDVBFrontendParametersSatellite.FEC_8_9: "8/9  ",
+									eDVBFrontendParametersSatellite.FEC_9_10: "9/10  "}[sname["fec_inner"]]
 							except:
 								fec = "N/A  "
 							if fec == "N/A  ":
 								try:
 									fec = {
-										eDVBFrontendParametersCable.FEC_None : _("None  "),
-										eDVBFrontendParametersCable.FEC_Auto : _("Auto  "),
-										eDVBFrontendParametersCable.FEC_1_2 : "1/2  ",
-										eDVBFrontendParametersCable.FEC_2_3 : "2/3  ",
-										eDVBFrontendParametersCable.FEC_3_4 : "3/4  ",
-										eDVBFrontendParametersCable.FEC_5_6 : "5/6  ",
-										eDVBFrontendParametersCable.FEC_7_8 : "7/8  ",
-										eDVBFrontendParametersCable.FEC_8_9 : "8/9  ",}[sname["fec_inner"]]
+										eDVBFrontendParametersCable.FEC_None: _("None  "),
+										eDVBFrontendParametersCable.FEC_Auto: _("Auto  "),
+										eDVBFrontendParametersCable.FEC_1_2: "1/2  ",
+										eDVBFrontendParametersCable.FEC_2_3: "2/3  ",
+										eDVBFrontendParametersCable.FEC_3_4: "3/4  ",
+										eDVBFrontendParametersCable.FEC_5_6: "5/6  ",
+										eDVBFrontendParametersCable.FEC_7_8: "7/8  ",
+										eDVBFrontendParametersCable.FEC_8_9: "8/9  ",}[sname["fec_inner"]]
 								except:
 									fec = "N/A  "
 						if sname.has_key("symbol_rate"):

@@ -120,37 +120,37 @@ class ANDCaidInfo(Poll, Converter, object):
                         self.sfmt = type[:]
 
                 self.systemTxtCaids = {
-                        "26" : "BiSS",
-                        "01" : "Seca-Mguard",
-                        "06" : "Irdeto",
-                        "17" : "BetaCrypt",
-                        "05" : "Viacces",
-                        "18" : "Nagravision",
-                        "09" : "NDS-Vdguard",
-                        "0B" : "Conax",
-                        "0D" : "Cryptoworks",
-                        "4A" : "DRE-Crypt",
-                        "27" : "DRE-Crypt",
-                        "0E" : "PowerVu",
-                        "22" : "Codicrypt",
-                        "07" : "DigiCipher",
-                        "56" : "Verimatrix",
-                        "7B" : "DRE-Crypt",
-                        "A1" : "Rosscrypt"}
+                        "26": "BiSS",
+                        "01": "Seca-Mguard",
+                        "06": "Irdeto",
+                        "17": "BetaCrypt",
+                        "05": "Viacces",
+                        "18": "Nagravision",
+                        "09": "NDS-Vdguard",
+                        "0B": "Conax",
+                        "0D": "Cryptoworks",
+                        "4A": "DRE-Crypt",
+                        "27": "DRE-Crypt",
+                        "0E": "PowerVu",
+                        "22": "Codicrypt",
+                        "07": "DigiCipher",
+                        "56": "Verimatrix",
+                        "7B": "DRE-Crypt",
+                        "A1": "Rosscrypt"}
 
                 self.systemCaids = {
-                        "26" : "BiSS",
-                        "01" : "SEC",
-                        "06" : "IRD",
-                        "17" : "BET",
-                        "05" : "VIA",
-                        "18" : "NAG",
-                        "09" : "NDS",
-                        "0B" : "CON",
-                        "0D" : "CRW",
-                        "7B" : "DRE",
-                        "7B" : "DRE",
-                        "4A" : "DRE" }
+                        "26": "BiSS",
+                        "01": "SEC",
+                        "06": "IRD",
+                        "17": "BET",
+                        "05": "VIA",
+                        "18": "NAG",
+                        "09": "NDS",
+                        "0B": "CON",
+                        "0D": "CRW",
+                        "7B": "DRE",
+                        "7B": "DRE",
+                        "4A": "DRE"}
 
         @cached
         def getBoolean(self):
@@ -423,7 +423,7 @@ class ANDCaidInfo(Poll, Converter, object):
                                                                 except:
                                                                         pass
                                         else:
-                                                if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
+                                                if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3)):
                                                         textvalue = "No parse cannot emu"
                                 else:
                                         if self.type == self.CURCAM:
@@ -444,7 +444,7 @@ class ANDCaidInfo(Poll, Converter, object):
                                         if self.type == self.DELAY:
                                                 textvalue = "0.000"
 
-                                        if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
+                                        if self.type == self.ALL or (self.type == self.FORMAT and (self.sfmt.count("%") > 3)):
                                                 textvalue = "Free To Air"
                 return textvalue
         text = property(getText)
