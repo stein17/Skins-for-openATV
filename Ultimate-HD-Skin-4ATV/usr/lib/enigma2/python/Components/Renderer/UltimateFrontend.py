@@ -30,7 +30,8 @@ class UltimateFrontend(VariableText, Renderer):
         self.ena = True
         try:
             self.ena = config.plugins.stein17skins
-        except: pass
+        except:
+            pass
         if not self.ena:
             try:
                 self.allSat = {}
@@ -48,7 +49,8 @@ class UltimateFrontend(VariableText, Renderer):
                             if position.startswith("."):
                                 position = "0%s" % position
                             self.allSat[position] = str(name.encode("utf-8"))
-            except: pass
+            except:
+                pass
     GUI_WIDGET = eLabel
 
     def connect(self, source):
