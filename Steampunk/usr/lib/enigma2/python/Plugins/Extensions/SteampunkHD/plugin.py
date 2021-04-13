@@ -46,9 +46,11 @@ config.plugins.Steampunk.tempUnit = ConfigSelection(default="Celsius", choices=[
                                 ("Fahrenheit", _("Fahrenheit"))
                                 ])
 
+
 def Plugins(**kwargs):
     return [PluginDescriptor(name=_("Steampunk HD Configtool"), description=_("Personalize your Steampunk HD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
     icon="plugin.png", fnc=main)]
+
 
 def main(session, **kwargs):
     if config.skin.primary_skin.value == "Steampunk/skin.xml":
@@ -57,12 +59,14 @@ def main(session, **kwargs):
         AddPopup(_('Please activate Steampunk HD Skin before run the Config Plugin'), type=MessageBox.TYPE_ERROR, timeout=10)
         return []
 
+
 def isInteger(s):
     try:
         int(s)
         return True
     except ValueError:
         return False
+
 
 class WeatherLocationChoiceList(Screen):
     skin = """
@@ -187,7 +191,6 @@ class Steampunk_Config(Screen, ConfigListScreen):
 
         self.title = _("SteampunkHD Setup")
         self.skin_base_dir = "/usr/share/enigma2/%s/" % cur_skin
-
 
         self.default_font_file = "font_atile_Roboto.xml"
         self.default_color_file = "colors_Original.xml"
@@ -611,6 +614,7 @@ class Steampunk_Config(Screen, ConfigListScreen):
         else:
             self.close()
 
+
 class Steampunk_About(Screen):
 
     def __init__(self, session, args=0):
@@ -627,6 +631,7 @@ class Steampunk_About(Screen):
 
     def cancel(self):
         self.close()
+
 
 class SteampunkScreens(Screen):
 

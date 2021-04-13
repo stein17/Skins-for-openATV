@@ -9,6 +9,7 @@ try:
 except:
     correctChannelNumber = False
 
+
 class AXBlueServiceName(Converter, object):
     NAME = 0
     NUMBER = 1

@@ -12,6 +12,7 @@ BOTTOM = 3
 CENTER = 2
 BLOCK = 3
 
+
 class UltimateRunningText(Renderer):
 
     def __init__(self):

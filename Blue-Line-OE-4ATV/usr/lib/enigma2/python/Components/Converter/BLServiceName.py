@@ -9,6 +9,7 @@ try:
 except:
     correctChannelNumber = False
 
+
 class BLServiceName(Converter, object):
     NAME = 0
     NUMBER = 1

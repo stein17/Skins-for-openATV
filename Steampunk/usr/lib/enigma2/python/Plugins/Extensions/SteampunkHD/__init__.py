@@ -7,6 +7,7 @@ import gettext
 PluginLanguageDomain = 'SteampunkConfig'
 PluginLanguagePath = 'Extensions/SteampunkConfig/locale'
 
+
 def localeInit():
     lang = language.getLanguage()[:2]
     os.environ['LANGUAGE'] = lang

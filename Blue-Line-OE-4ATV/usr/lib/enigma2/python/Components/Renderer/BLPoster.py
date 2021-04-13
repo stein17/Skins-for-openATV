@@ -30,6 +30,7 @@ try:
 except:
 	pass
 
+
 class BLPoster(Renderer):
 
 	def __init__(self):
@@ -47,6 +48,7 @@ class BLPoster(Renderer):
 			return False
 
 	GUI_WIDGET = ePixmap
+
 	def changed(self, what):
 		try:
 			if not self.instance:

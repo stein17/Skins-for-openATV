@@ -15,6 +15,7 @@ novpnfile = '/tmp/SambaVpnIp/novpn.txt'
 isvpnfile = '/usr/share/enigma2/Steampunk/skinparts/SambaVpnIp/isvpn.txt'
 myipdataupdatepause = 300 #in seconds
 
+
 def del_myipfiles(ip=1, flag=1, data=1):
 	if ip and os.path.exists(myipfile):
 		os.remove(myipfile)
@@ -22,6 +23,7 @@ def del_myipfiles(ip=1, flag=1, data=1):
 		os.remove(myflagfile)
 	if data and os.path.exists(myipdata):
 		os.remove(myipdata)
+
 
 def get_myipdata():
 	try:
@@ -41,7 +43,9 @@ def get_myipdata():
 		country = ip = None
 	return country, ip
 
+
 del_myipfiles()
+
 
 class SteampunkSambaVpnIp_converter(Poll, Converter, object):
 

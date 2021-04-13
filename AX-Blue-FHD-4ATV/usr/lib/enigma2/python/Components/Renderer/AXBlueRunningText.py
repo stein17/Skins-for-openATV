@@ -12,6 +12,7 @@ BOTTOM = 3
 CENTER = 2
 BLOCK = 3
 
+
 class AXBlueRunningText(Renderer):
 
     def __init__(self):

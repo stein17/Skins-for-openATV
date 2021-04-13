@@ -22,6 +22,7 @@ from enigma import eServiceCenter, iServiceInformation, eDVBFrontendParametersSa
 from xml.etree.cElementTree import parse
 from Components.config import config
 
+
 class AMBFrontend(VariableText, Renderer):
 
     def __init__(self):

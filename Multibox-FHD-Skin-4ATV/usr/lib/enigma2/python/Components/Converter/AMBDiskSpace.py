@@ -3,6 +3,7 @@ from os import statvfs
 from Components.Element import cached, ElementError
 from Components.Converter.Poll import Poll
 
+
 class AMBDiskSpace(Poll, Converter, object):
     free = 0
     size = 1
@@ -23,7 +24,6 @@ class AMBDiskSpace(Poll, Converter, object):
 
         self.poll_interval = 2000
         self.poll_enabled = True
-
 
     @cached
     def getText(self):

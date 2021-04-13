@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
+
 class ANDBlinkingClock(Converter, object):
 
     def __init__(self, type):

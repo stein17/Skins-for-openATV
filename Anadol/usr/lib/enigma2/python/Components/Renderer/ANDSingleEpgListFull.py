@@ -3,6 +3,7 @@ from enigma import eLabel, eEPGCache
 from Renderer import Renderer
 from time import localtime
 
+
 class ANDSingleEpgListFull(Renderer, VariableText):
 
     def __init__(self):

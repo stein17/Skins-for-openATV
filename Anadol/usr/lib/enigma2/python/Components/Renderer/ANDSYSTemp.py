@@ -3,6 +3,7 @@ from enigma import eLabel
 from Renderer import Renderer
 from os import path, popen
 
+
 class ANDSYSTemp(Renderer, VariableText):
 
     def __init__(self):

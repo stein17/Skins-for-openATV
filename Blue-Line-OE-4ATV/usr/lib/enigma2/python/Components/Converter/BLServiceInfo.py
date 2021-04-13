@@ -12,6 +12,7 @@ WIDESCREEN = [1,
  15,
  16]
 
+
 class BLServiceInfo(Converter, object):
     HAS_TELETEXT = 1
     IS_MULTICHANNEL = 2

@@ -8,6 +8,7 @@ from ServiceReference import ServiceReference
 import re
 import unicodedata
 
+
 class SteampunkXPicon(Renderer):
     searchPaths = ('/media/mmc/%s/', '/media/usb/XPicons/%s/', '/media/usb/%s/', '/%s/', '/%sx/', '/usr/share/enigma2/XPicons/%s/', '/usr/share/enigma2/%s/', '/usr/%s/', '/media/hdd/XPicons/%s/', '/media/hdd/%s/')
 

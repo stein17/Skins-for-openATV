@@ -3,6 +3,7 @@ from Components.Element import cached
 from Components.config import config
 from Components.NimManager import nimmanager
 
+
 class BLFrontendInfo(Converter, object):
 	BER = 0
 	SNR = 1

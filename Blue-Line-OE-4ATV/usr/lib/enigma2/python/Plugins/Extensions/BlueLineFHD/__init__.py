@@ -7,6 +7,7 @@ import gettext
 PluginLanguageDomain = 'BlueLineConfig'
 PluginLanguagePath = 'Extensions/BlueLineConfig/locale'
 
+
 def localeInit():
     lang = language.getLanguage()[:2]
     os.environ['LANGUAGE'] = lang

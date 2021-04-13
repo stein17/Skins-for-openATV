@@ -16,6 +16,7 @@ gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 
 TEMPSIGN = u'\N{DEGREE SIGN}' + 'C' if six.PY3 else str('\xc2\xb0C')
 
+
 class UltimateSTBinfo(Converter, object):
 
 	def __init__(self, type):
@@ -39,7 +40,6 @@ class UltimateSTBinfo(Converter, object):
 		elif self.type == "CPUspeed":
 			return self.getCPUspeed()
 		return ""
-
 
 	def getCPUload(self):
 		info = ""
