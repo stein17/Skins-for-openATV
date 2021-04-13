@@ -300,4 +300,3 @@ class AMBEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
-

@@ -8,7 +8,7 @@ class AMBSYSTemp(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
 		VariableText.__init__(self)
-		
+
 	GUI_WIDGET = eLabel
 
 	def changed(self, what):
@@ -49,7 +49,7 @@ class AMBSYSTemp(Renderer, VariableText):
 			except:
 				pass
 			self.text = systemp + str('\xc2\xb0') + "C"
-			
+
 	def onShow(self):
 		self.suspended = False
 		self.changed(None)

@@ -300,4 +300,3 @@ class AXBlueEmuInfo(Converter, object):
     def doSwitch(self):
         self.DynamicTimer.stop()
         Converter.changed(self, self.what)
-

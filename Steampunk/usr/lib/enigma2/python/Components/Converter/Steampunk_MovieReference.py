@@ -53,4 +53,3 @@ class Steampunk_MovieReference(Converter, object):
             return info.getInfoString(service, iServiceInformation.sServiceref)
 
     text = property(getText)
-

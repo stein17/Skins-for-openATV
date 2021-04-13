@@ -137,7 +137,7 @@ class AXBlueBackdrop(Renderer):
 						else:
 							return
 					else:
-						
+
 						return
 				except:
 					return
@@ -146,35 +146,35 @@ class AXBlueBackdrop(Renderer):
 		try:
 			sd = self.event.getShortDescription() + "\n" + self.event.getExtendedDescription()
 			w = [
-				"serial", 
-				"series", 
-				"serie", 
-				"serien", 
-				"séries", 
-				"serious", 
-				"folge", 
-				"episodio", 
-				"episode", 
-				"ep.", 
-				"staffel", 
-				"soap", 
-				"doku", 
-				"tv", 
-				"talk", 
-				"show", 
-				"news", 
-				"factual", 
-				"entertainment", 
-				"telenovela", 
-				"dokumentation", 
-				"dokutainment", 
-				"documentary", 
-				"informercial", 
-				"information", 
-				"sitcom", 
-				"reality", 
-				"program", 
-				"magazine", 
+				"serial",
+				"series",
+				"serie",
+				"serien",
+				"séries",
+				"serious",
+				"folge",
+				"episodio",
+				"episode",
+				"ep.",
+				"staffel",
+				"soap",
+				"doku",
+				"tv",
+				"talk",
+				"show",
+				"news",
+				"factual",
+				"entertainment",
+				"telenovela",
+				"dokumentation",
+				"dokutainment",
+				"documentary",
+				"informercial",
+				"information",
+				"sitcom",
+				"reality",
+				"program",
+				"magazine",
 				"mittagsmagazin"
 				]
 
@@ -184,7 +184,7 @@ class AXBlueBackdrop(Renderer):
 					break
 				else:
 					self.srch = "multi"
-			
+
 			pattern = ["(19[0-9][0-9])", "(20[0-9][0-9])"]
 			for i in pattern:
 				yr = re.search(i, sd)

@@ -182,4 +182,3 @@ class UltimateCaidInfo(Poll, Converter, object):
 
 	def changed(self, what):
 		Converter.changed(self, what)
-
