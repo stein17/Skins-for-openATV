@@ -50,7 +50,7 @@ class BLFrontendInfo(Converter, object):
 			percent = self.source.agc
 		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			percent = self.source.snr
-		elif self.type  == self.SNR or self.type == self.SNRdB:
+		elif self.type == self.SNR or self.type == self.SNRdB:
 			if self.source.snr_db is not None:
 				return "%3.01f dB" % (self.source.snr_db / 100.0)
 			elif self.source.snr is not None: #fallback to normal SNR...
@@ -71,7 +71,7 @@ class BLFrontendInfo(Converter, object):
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
 						string += " "
-					string += color + chr(ord("A")+n.slot)
+					string += color + chr(ord("A") + n.slot)
 			return string
 		if percent is None:
 			return "N/A"

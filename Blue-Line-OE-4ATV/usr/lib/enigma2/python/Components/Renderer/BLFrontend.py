@@ -69,7 +69,7 @@ class BLFrontend(VariableText, Renderer):
                     fq = pol = fec = sr = orb = ""
                     try:
                         if "frequency" in sname:
-                            tmp = int(sname["frequency"])/1000
+                            tmp = int(sname["frequency"]) / 1000
                             fq = str(tmp) + "  "
                         if "polarization" in sname:
                             try:
@@ -110,14 +110,14 @@ class BLFrontend(VariableText, Renderer):
                                 except:
                                     fec = "N/A  "
                         if "symbol_rate" in sname:
-                            tmp = int(sname["symbol_rate"])/1000
+                            tmp = int(sname["symbol_rate"]) / 1000
                             sr = str(tmp) + "  "
                         if "orbital_position" in sname:
                             numSat = sname["orbital_position"]
                             if numSat > 1800:
-                                idx = str((float(3600 - numSat))/10.0) + "W"
+                                idx = str((float(3600 - numSat)) / 10.0) + "W"
                             else:
-                                idx = str((float(numSat))/10.0) + "E"
+                                idx = str((float(numSat)) / 10.0) + "E"
                             if not self.ena:
                                 if idx in self.allSat:
                                     orb = self.allSat.get(idx)

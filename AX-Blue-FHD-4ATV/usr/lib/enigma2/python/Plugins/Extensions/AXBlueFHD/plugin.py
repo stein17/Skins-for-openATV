@@ -260,20 +260,20 @@ class AXBlue_Config(Screen, ConfigListScreen):
         # search typ
         styp = default_file.replace('_Original.xml', '')
         if self.is_atile:
-            search_str = '%s_atile_' %styp
+            search_str = '%s_atile_' % styp
         else:
-            search_str = '%s_' %styp
+            search_str = '%s_' % styp
 
         # possible setting
         choices = []
         files = listdir(self.skin_base_dir)
-        if path.exists(self.skin_base_dir + 'allScreens/%s/' %styp):
-            files += listdir(self.skin_base_dir + 'allScreens/%s/' %styp)
+        if path.exists(self.skin_base_dir + 'allScreens/%s/' % styp):
+            files += listdir(self.skin_base_dir + 'allScreens/%s/' % styp)
         for f in sorted(files, key=str.lower):
             if f.endswith('.xml') and f.startswith(search_str):
                 friendly_name = f.replace(search_str, "").replace(".xml", "").replace("_", " ")
-                if path.exists(self.skin_base_dir + 'allScreens/%s/%s' %(styp, f)):
-                    choices.append((self.skin_base_dir + 'allScreens/%s/%s' %(styp, f), friendly_name))
+                if path.exists(self.skin_base_dir + 'allScreens/%s/%s' % (styp, f)):
+                    choices.append((self.skin_base_dir + 'allScreens/%s/%s' % (styp, f), friendly_name))
                 else:
                     choices.append((self.skin_base_dir + f, friendly_name))
         choices.append(default)
@@ -287,11 +287,11 @@ class AXBlue_Config(Screen, ConfigListScreen):
                     remove(myfile)
                 chdir(self.skin_base_dir)
                 symlink(default_file, user_file)
-            elif path.exists(self.skin_base_dir + 'allScreens/%s/%s' %(styp, default_file)):
+            elif path.exists(self.skin_base_dir + 'allScreens/%s/%s' % (styp, default_file)):
                 if path.islink(myfile):
                     remove(myfile)
                 chdir(self.skin_base_dir)
-                symlink(self.skin_base_dir + 'allScreens/%s/%s' %(styp, default_file), user_file)
+                symlink(self.skin_base_dir + 'allScreens/%s/%s' % (styp, default_file), user_file)
             else:
                 current = None
         if current is None:
@@ -321,27 +321,27 @@ class AXBlue_Config(Screen, ConfigListScreen):
         self.list = []
         self.list.append(self.set_myatile)
         if self.myAtileHD_active.value:
-            if len(self.myAtileHD_color.choices)>1:
+            if len(self.myAtileHD_color.choices) > 1:
                 self.list.append(self.set_color)
-            if len(self.myAtileHD_infobar.choices)>1:
+            if len(self.myAtileHD_infobar.choices) > 1:
                 self.list.append(self.set_infobar)
-            if len(self.myAtileHD_clock.choices)>1:
+            if len(self.myAtileHD_clock.choices) > 1:
                 self.list.append(self.set_clock)
-            if len(self.myAtileHD_progr_infobar.choices)>1:
+            if len(self.myAtileHD_progr_infobar.choices) > 1:
                 self.list.append(self.set_progr_infobar)
-            if len(self.myAtileHD_sib.choices)>1:
+            if len(self.myAtileHD_sib.choices) > 1:
                 self.list.append(self.set_sib)
-            if len(self.myAtileHD_progr_sib.choices)>1:
+            if len(self.myAtileHD_progr_sib.choices) > 1:
                 self.list.append(self.set_progr_sib)
-            if len(self.myAtileHD_ch_se.choices)>1:
+            if len(self.myAtileHD_ch_se.choices) > 1:
                 self.list.append(self.set_ch_se)
-            if len(self.myAtileHD_progr_chse.choices)>1:
+            if len(self.myAtileHD_progr_chse.choices) > 1:
                 self.list.append(self.set_progr_chse)
-            if len(self.myAtileHD_epg.choices)>1:
+            if len(self.myAtileHD_epg.choices) > 1:
                 self.list.append(self.set_epg)
-            if len(self.myAtileHD_progr_epg.choices)>1:
+            if len(self.myAtileHD_progr_epg.choices) > 1:
                 self.list.append(self.set_progr_epg)
-            if len(self.myAtileHD_emcsel.choices)>1:
+            if len(self.myAtileHD_emcsel.choices) > 1:
                 self.list.append(self.set_emcsel)
             self.list.append(self.set_new_skin)
         self["config"].list = self.list
@@ -450,7 +450,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
             self["config"].setCurrentIndex(0)
 
     def keyOk(self):
-        sel =  self["config"].getCurrent()
+        sel = self["config"].getCurrent()
         if sel is not None and sel == self.set_new_skin:
             self.openSkinSelector()
         elif sel is not None and sel == self.find_woeid:
@@ -538,7 +538,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
                     else:
                         rename("mySkin", "mySkin_off")
             self.restartGUI()
-        elif  config.skin.primary_skin.value != self.start_skin:
+        elif config.skin.primary_skin.value != self.start_skin:
             self.restartGUI()
         else:
             if self.changed_screens:
@@ -622,7 +622,7 @@ class AXBlueScreens(Screen):
 
         self.title = _("%s additional screens") % cur_skin
         try:
-            self["title"]=StaticText(self.title)
+            self["title"] = StaticText(self.title)
         except:
             print('self["title"] was not found in skin')
 

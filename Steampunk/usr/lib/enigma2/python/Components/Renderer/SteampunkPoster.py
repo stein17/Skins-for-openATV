@@ -22,8 +22,8 @@ else:
 	path_folder = "/media/usb/poster/hd_skin/"
 
 try:
-	folder_size=sum([sum(map(lambda fname: os.path.getsize(os.path.join(path_folder, fname)), files)) for path_folder, folders, files in os.walk(path_folder)])
-	posters_sz = "%0.f" % (folder_size/(1024*1024.0))
+	folder_size = sum([sum(map(lambda fname: os.path.getsize(os.path.join(path_folder, fname)), files)) for path_folder, folders, files in os.walk(path_folder)])
+	posters_sz = "%0.f" % (folder_size / (1024 * 1024.0))
 	if posters_sz >= "100":    # folder remove size(100MB)...
 		import shutil
 		shutil.rmtree(path_folder)

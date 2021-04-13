@@ -69,7 +69,7 @@ class ANDFrontend(VariableText, Renderer):
 					fq = pol = fec = sr = orb = ""
 					try:
 						if sname.has_key("frequency"):
-							tmp = int(sname["frequency"])/1000
+							tmp = int(sname["frequency"]) / 1000
 							fq = str(tmp) + "  "
 						if sname.has_key("polarization"):
 							try:
@@ -110,14 +110,14 @@ class ANDFrontend(VariableText, Renderer):
 								except:
 									fec = "N/A  "
 						if sname.has_key("symbol_rate"):
-							tmp = int(sname["symbol_rate"])/1000
+							tmp = int(sname["symbol_rate"]) / 1000
 							sr = str(tmp) + "  "
 						if sname.has_key("orbital_position"):	
 							numSat = sname["orbital_position"]
 							if numSat > 1800:
-								idx = str((float(3600 - numSat))/10.0) + "W"
+								idx = str((float(3600 - numSat)) / 10.0) + "W"
 							else:
-								idx = str((float(numSat))/10.0) + "E"
+								idx = str((float(numSat)) / 10.0) + "E"
 							if not self.ena:
 								if self.allSat.has_key(idx):
 									orb = self.allSat.get(idx)
