@@ -57,7 +57,7 @@ class AXBlueRunningText(Renderer):
 
     def applySkin(self, desktop, screen):
 
-        def retValue(val, limit, default, Min = False):
+        def retValue(val, limit, default, Min=False):
             try:
                 if Min:
                     x = min(limit, int(val))

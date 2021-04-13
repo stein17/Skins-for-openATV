@@ -79,7 +79,7 @@ class AXBlueServiceInfo(Converter, object):
          'Is480': (self.IS_480, (iPlayableService.evVideoSizeChanged,)),
          'Is4K': (self.IS_4K, (iPlayableService.evVideoSizeChanged,))}[type]
 
-    def getServiceInfoString(self, info, what, convert = lambda x: '%d' % x):
+    def getServiceInfoString(self, info, what, convert=lambda x: '%d' % x):
         v = info.getInfo(what)
         if v == -1:
             return 'N/A'
@@ -87,7 +87,7 @@ class AXBlueServiceInfo(Converter, object):
             return info.getInfoString(what)
         return convert(v)
 
-    def getServiceInfoHexString(self, info, what, convert = lambda x: '%04x' % x):
+    def getServiceInfoHexString(self, info, what, convert=lambda x: '%04x' % x):
         v = info.getInfo(what)
         if v == -1:
             return 'N/A'

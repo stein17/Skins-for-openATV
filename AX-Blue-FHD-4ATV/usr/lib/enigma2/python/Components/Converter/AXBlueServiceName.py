@@ -57,7 +57,7 @@ class AXBlueServiceName(Converter, object):
         self.AlternativeControl = self.isAdditionalService(type=1)
         return
 
-    def isAdditionalService(self, type = 0):
+    def isAdditionalService(self, type=0):
 
         def searchService(serviceHandler, bouquet):
             istype = False

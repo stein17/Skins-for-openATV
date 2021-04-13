@@ -40,14 +40,14 @@ cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 
 config.plugins.AXBlue = ConfigSubsection()
 config.plugins.AXBlue.refreshInterval = ConfigNumber(default=10)
-config.plugins.AXBlue.woeid = ConfigNumber(default = 638242)
-config.plugins.AXBlue.tempUnit = ConfigSelection(default="Celsius", choices = [
+config.plugins.AXBlue.woeid = ConfigNumber(default=638242)
+config.plugins.AXBlue.tempUnit = ConfigSelection(default="Celsius", choices=[
                                 ("Celsius", _("Celsius")),
                                 ("Fahrenheit", _("Fahrenheit"))
                                 ])
 
 def Plugins(**kwargs):
-    return [PluginDescriptor(name=_("AXBlue FHD Configtool"), description=_("Personalize your AXBlue FHD (Skin by stein17)"), where = [PluginDescriptor.WHERE_PLUGINMENU],
+    return [PluginDescriptor(name=_("AXBlue FHD Configtool"), description=_("Personalize your AXBlue FHD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
     icon="plugin.png", fnc=main)]
 
 def main(session, **kwargs):
@@ -132,7 +132,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
             </screen>
     """
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         self.skin_lines = []
         self.changed_screens = False
@@ -144,7 +144,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
             self.getInitConfig()
 
         self.list = []
-        ConfigListScreen.__init__(self, self.list, session = self.session, on_change = self.changedEntry)
+        ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
 
         self["key_red"] = Label(_("Cancel"))
         self["key_green"] = Label(_("OK"))
@@ -217,37 +217,37 @@ class AXBlue_Config(Screen, ConfigListScreen):
 
         # color
         current, choices = self.getSettings(self.default_color_file, self.color_file)
-        self.myAtileHD_color = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_color = NoSave(ConfigSelection(default=current, choices=choices))
         # epg
         current, choices = self.getSettings(self.default_epg_file, self.epg_file)
-        self.myAtileHD_epg = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_epg = NoSave(ConfigSelection(default=current, choices=choices))
         # clock
         current, choices = self.getSettings(self.default_clock_file, self.clock_file)
-        self.myAtileHD_clock = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_clock = NoSave(ConfigSelection(default=current, choices=choices))
         # infobar
         current, choices = self.getSettings(self.default_infobar_file, self.infobar_file)
-        self.myAtileHD_infobar = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_infobar = NoSave(ConfigSelection(default=current, choices=choices))
         # progr_epg
         current, choices = self.getSettings(self.default_progr_epg_file, self.progr_epg_file)
-        self.myAtileHD_progr_epg = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_progr_epg = NoSave(ConfigSelection(default=current, choices=choices))
         # sib
         current, choices = self.getSettings(self.default_sib_file, self.sib_file)
-        self.myAtileHD_sib = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_sib = NoSave(ConfigSelection(default=current, choices=choices))
         # ch_se
         current, choices = self.getSettings(self.default_ch_se_file, self.ch_se_file)
-        self.myAtileHD_ch_se = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_ch_se = NoSave(ConfigSelection(default=current, choices=choices))
         # progr_sib
         current, choices = self.getSettings(self.default_progr_sib_file, self.progr_sib_file)
-        self.myAtileHD_progr_sib = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_progr_sib = NoSave(ConfigSelection(default=current, choices=choices))
         # emcsel
         current, choices = self.getSettings(self.default_emcsel_file, self.emcsel_file)
-        self.myAtileHD_emcsel = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_emcsel = NoSave(ConfigSelection(default=current, choices=choices))
         # progr_infobar
         current, choices = self.getSettings(self.default_progr_infobar_file, self.progr_infobar_file)
-        self.myAtileHD_progr_infobar = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_progr_infobar = NoSave(ConfigSelection(default=current, choices=choices))
         # progr_chse
         current, choices = self.getSettings(self.default_progr_chse_file, self.progr_chse_file)
-        self.myAtileHD_progr_chse = NoSave(ConfigSelection(default=current, choices = choices))
+        self.myAtileHD_progr_chse = NoSave(ConfigSelection(default=current, choices=choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -409,7 +409,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
 
     def cancel(self):
         if self["config"].isChanged():
-            self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, default = False)
+            self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), MessageBox.TYPE_YESNO, default=False)
         else:
             for x in self["config"].list:
                 x[1].cancel()
@@ -454,7 +454,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
         if sel is not None and sel == self.set_new_skin:
             self.openSkinSelector()
         elif sel is not None and sel == self.find_woeid:
-            self.session.openWithCallback(self.search_weather_id_callback, InputBox, title = _("Please enter search string for your location"), text = "")
+            self.session.openWithCallback(self.search_weather_id_callback, InputBox, title=_("Please enter search string for your location"), text="")
         else:
             self.keyGreen()
 
@@ -484,7 +484,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
             print(res)
             config.plugins.AXBlue.woeid.value = int(res)
 
-    def skinChanged(self, ret = None):
+    def skinChanged(self, ret=None):
         global cur_skin
         cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
         if cur_skin == "skin.xml":
@@ -571,7 +571,7 @@ class AXBlue_Config(Screen, ConfigListScreen):
 
 class AXBlue_About(Screen):
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         Screen.__init__(self, session)
         self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
@@ -649,11 +649,11 @@ class AXBlueScreens(Screen):
         my_path = resolveFilename(SCOPE_SKIN, "%s/icons/lock_on.png" % cur_skin)
         if not path.exists(my_path):
             my_path = resolveFilename(SCOPE_SKIN, "skin_default/icons/lock_on.png")
-        self.enabled_pic = LoadPixmap(cached = True, path = my_path)
+        self.enabled_pic = LoadPixmap(cached=True, path=my_path)
         my_path = resolveFilename(SCOPE_SKIN, "%s/icons/lock_off.png" % cur_skin)
         if not path.exists(my_path):
             my_path = resolveFilename(SCOPE_SKIN, "skin_default/icons/lock_off.png")
-        self.disabled_pic = LoadPixmap(cached = True, path = my_path)
+        self.disabled_pic = LoadPixmap(cached=True, path=my_path)
 
         if not self.selectionChanged in self["menu"].onSelectionChanged:
             self["menu"].onSelectionChanged.append(self.selectionChanged)

@@ -89,7 +89,7 @@ class AMBDiskSpace(Poll, Converter, object):
         elif what[0] is self.CHANGED_POLL:
             self.downstream_elements.changed(what)
 
-    def bytes2human(self, n, digits = 2):
+    def bytes2human(self, n, digits=2):
         symbols = ('KB', 'MB', 'GB', 'TB', 'PB')
         prefix = {}
         for i, s in enumerate(symbols):

@@ -15,7 +15,7 @@ novpnfile = '/tmp/SambaVpnIp/novpn.txt'
 isvpnfile = '/usr/share/enigma2/Ultimate/skinparts/SambaVpnIp/isvpn.txt'
 myipdataupdatepause = 300 #in seconds
 
-def del_myipfiles(ip = 1, flag = 1, data = 1):
+def del_myipfiles(ip=1, flag=1, data=1):
 	if ip and os.path.exists(myipfile):
 		os.remove(myipfile)
 	if flag and os.path.exists(myflagfile):
