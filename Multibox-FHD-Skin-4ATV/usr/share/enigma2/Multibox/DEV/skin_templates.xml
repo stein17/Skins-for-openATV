@@ -195,7 +195,8 @@
 </screen>
   <!-- TEMPLATES-EMCMediaCenter-Poster-->
   <screen name="template_EMCMediaCenter_Backdrop_Poster">
-  <widget source="session.Event_Now" render="AMBPoster" borderColor="Line" borderWidth="3" position="1320,610" size="156,234" zPosition="10" />
+  <widget source="session.Event_Now
+  " render="AMBPoster" borderColor="Line" borderWidth="3" position="1320,610" size="156,234" zPosition="10" />
   <widget source="session.Event_Now" render="AMBBackdrop" borderColor="Line" borderWidth="3" position="1490,610" size="415,234" zPosition="10" />
   </screen> 
    <!-- TEMPLATES-EV_session_Event_Now_Next-Poster-->
@@ -256,6 +257,10 @@
  <screen name="template_pixmap_Infobar_full">
   <ePixmap pixmap="menu/Infobar_full_default.png" position="0,856" zPosition="-20" size="1920,226" />
  </screen>
+ <screen name="template_pixmap_Infobar_color">
+  <ePixmap pixmap="Skinparts/Infobar_Color_default.png" position="0,830" zPosition="-10" size="1920,250" />
+  <ePixmap pixmap="Skinparts/Color_Progress_background.png" position="370,949" zPosition="-5" size="998,18" />
+ </screen>
  <screen name="template_pixmap_Infobar">
   <ePixmap pixmap="menu/Infobar_default.png" position="0,810" zPosition="-20" size="1920,271" />
  </screen>
@@ -287,6 +292,11 @@
 <ePixmap pixmap="Progress_BG.png" position="284,1013" zPosition="2" size="985,10" alphatest="blend" />
   </screen> 
   <!-- TEMPLATES Progress -->
+   <screen name="template_progress_color">
+   <widget source="session.Event_Now" render="Progress" pixmap="Skinparts/Color_Progress_default.png" position="372,952" size="994,12" zPosition="5" transparent="1" borderWidth="1" borderColor="verygrey">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+ </screen>
   <screen name="template_progress_default">
     <widget source="session.Event_Now" render="Progress" pixmap="Progress.png" position="386,964" size="985,10" zPosition="1" transparent="1" borderWidth="1" borderColor="verygrey" >
       <convert type="EventTime">Progress</convert>
@@ -295,6 +305,11 @@
   
   <screen name="template_progress_verlauf">
 <widget source="session.Event_Now" render="Progress" pixmap="Skinparts/Progress_Verlauf.png" position="386,964" size="985,10" zPosition="1" transparent="1" borderWidth="1" borderColor="verygrey" >
+  <convert type="EventTime">Progress</convert>
+  </widget>
+  </screen>
+    <screen name="template_progress_verlauf_2">
+<widget source="session.Event_Now" render="Progress" pixmap="Skinparts/Progress_Verlauf_2.png" position="386,964" size="985,10" zPosition="1" transparent="1" borderWidth="1" borderColor="verygrey" >
   <convert type="EventTime">Progress</convert>
   </widget>
   </screen>
@@ -340,6 +355,11 @@
 </screen>
  <screen name="template_progress_light_verlauf">
 <widget source="session.Event_Now" render="Progress" pixmap="Skinparts/Progress_Verlauf.png" position="284,1013"  size="985,10" zPosition="1" transparent="1" borderWidth="1" borderColor="verygrey">
+  <convert type="EventTime">Progress</convert>
+  </widget>
+</screen>
+ <screen name="template_progress_light_verlauf_2">
+<widget source="session.Event_Now" render="Progress" pixmap="Skinparts/Progress_Verlauf_2.png" position="284,1013"  size="985,10" zPosition="1" transparent="1" borderWidth="1" borderColor="verygrey">
   <convert type="EventTime">Progress</convert>
   </widget>
 </screen>
@@ -544,6 +564,32 @@
   <screen name="template_exit">
     <ePixmap pixmap="buttons/key_exit.png" position="1795,1022" size="103,35" zPosition="10" transparent="1" />
   </screen>
+  
+    <!--  Caminfo_fake-->
+  <screen name="template_cam_info_fake">
+  <eLabel name="cam_info" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
+  
+   <!--  Caminfo-->
+  <screen name="template_cam_info">
+    <widget font="Regular;20" foregroundColor="white" backgroundColor="background" halign="left" position="970,835" render="Label" size="150,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AMBEmuInfo">Emu</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="white" backgroundColor="background" halign="left" position="1120,835" render="Label" size="430,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AMBEmuInfo">Address</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="white" backgroundColor="background" halign="left" position="1440,860" render="Label" size="110,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AMBEmuInfo">Hops</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="white" backgroundColor="background" halign="left" position="1220,860" render="Label" size="220,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="AMBEmuInfo">Ecmtime</convert>
+  </widget>
+  <widget font="Regular; 20" foregroundColor="white" backgroundColor="background" halign="left" position="970,860" render="Label" size="250,24" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
+    <convert type="AMBEmuInfo">Caid</convert>
+  </widget>
+  </screen>
+  
+  
    <screen name="template_crypt_info">
     <!--  Crypt-->
     <eLabel text="Crypt:" position="401,963" size="110,36" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" valign="center" foregroundColor="default" zPosition="5" />
@@ -3088,7 +3134,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="EMCEventName">FullDescription</convert>
     </widget>
     <widget name="Cover" position="1716,98" size="192,260" alphatest="blend" zPosition="2" halign="left" />
-    <widget source="Service" render="AMBXPicon" position="1280,380" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+    <widget source="Service" render="MetrixHDXPicon" position="1280,380" zPosition="10" size="64,36" transparent="1" alphatest="blend">
     <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <eLabel  position="1280,339" size="423,1" backgroundColor="Line" zPosition="6" />
@@ -3178,7 +3224,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="EMCEventName">FullDescription</convert>
     </widget>
     <widget name="Cover" position="1230,649" size="192,260" alphatest="blend" zPosition="2" halign="left" />
-    <widget source="Service" render="AMBXPicon" position="1495,706" zPosition="10" size="347,197" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <widget source="Service" render="MetrixHDXPicon" position="1495,706" zPosition="10" size="347,197" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
     <convert type="MovieInfo">RecordServiceRef</convert>
   </widget>
   <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="default" />
@@ -3268,7 +3314,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="EMCEventName">FullDescription</convert>
     </widget>
     <widget name="Cover" position="1322,100" size="464,650" alphatest="blend" zPosition="2" halign="left" />
-    <widget source="Service" render="AMBXPicon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <widget source="Service" render="MetrixHDXPicon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
     <convert type="MovieInfo">RecordServiceRef</convert>
   </widget>
   <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="default" />
@@ -3314,7 +3360,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <widget source="Service" render="Label" position="1613,595" size="165,36" font="Regular; 29" halign="center" foregroundColor="grey" backgroundColor="background" transparent="1" zPosition="2">
       <convert type="MovieInfo">FileSize</convert>
     </widget>
-    <widget source="Service" render="AMBXPicon" position="1223,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
+    <widget source="Service" render="MetrixHDXPicon" position="1223,595" zPosition="10" size="64,36" transparent="1" alphatest="blend">
      <convert type="MovieInfo">RecordServiceRef</convert>
     </widget>
     <panel name="template_info_menu_exit" />
@@ -3366,7 +3412,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="EventName">FullDescription</convert>
     </widget>
    <widget source="Service" render="Cover" position="1322,100" size="464,650" alphatest="blend" zPosition="5"  />
-    <widget source="Service" render="AMBXPicon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" >
+    <widget source="Service" render="MetrixHDXPicon" position="1233,918" zPosition="10" size="64,36" transparent="1" alphatest="blend" >
     <convert type="MovieInfo">RecordServiceRef</convert>
   </widget>
   <eLabel text="Grösse:" position="1690,965" size="110,37" font="Regular; 28" transparent="1" zPosition="2" foregroundColor="default" />
