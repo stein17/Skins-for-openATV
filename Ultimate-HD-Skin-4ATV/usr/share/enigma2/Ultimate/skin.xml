@@ -656,6 +656,11 @@
       <convert type="MenuEntryCompare">skin_setup</convert>
       <convert type="ConditionalShowHide" />
     </widget>
+	<widget source="menu" render="Pixmap" pixmap="menu/setup_ultimate2.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
+      <convert type="MenuEntryCompare">atilehd_setup</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+
     <widget source="menu" render="Pixmap" pixmap="menu/display_display.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
       <convert type="MenuEntryCompare">display_selection</convert>
       <convert type="ConditionalShowHide" />
@@ -685,7 +690,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="menu" render="Pixmap" pixmap="menu/system_language_setup.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
-      <convert type="MenuEntryCompare">language_setup</convert>
+      <convert type="MenuEntryCompare">locale_setup</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="menu" render="Pixmap" pixmap="menu/system_dvdplayer_setup.png" position="280,490" size="180,180" alphatest="blend" zPosition="1">
@@ -858,6 +863,8 @@
       <convert type="ConditionalShowHide" />
     </widget>
   </screen>
+
+  
   <screen name="menu_harddisk" position="0,0" size="1280,720" title="Main menu" flags="wfNoBorder" backgroundColor="background">
     <panel name="template_menu_listbox_430" />
     <panel name="template_pig_large" />
@@ -3204,7 +3211,7 @@
     <eLabel position="1,1" size="69,69" zPosition="1" />
     <widget name="UnhandledKeyPixmap" position="3,3" size="64,64" zPosition="2" pixmap="icons/error.png" alphatest="blend" />
   </screen>
-  <screen name="HelpMenu" position="0,0" size="1280,720" title="Menu" flags="wfNoBorder" backgroundColor="background">
+<!--   <screen name="HelpMenu" position="0,0" size="1280,720" title="Menu" flags="wfNoBorder" backgroundColor="background">
     <widget name="list" position="185,60" size="670,570" itemHeight="34" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <widget name="long_key" position="30,640" size="825,30" font="Regular; 24" halign="center" valign="center" zPosition="2" transparent="1" foregroundColor="selectedFG" />
     <ePixmap pixmap="Ultimate/skin_default/system/Wizard.png" position="900,314" size="350,360" alphatest="blend" transparent="1" />
@@ -3221,7 +3228,7 @@
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
-  </screen>
+  </screen> -->
   <screen name="InputBox" position="center,center" size="1200,100" title="" zPosition="1">
     <eLabel name="b" position="0,0" size="1200,100" zPosition="-10" />
     <eLabel name="a" position="1,1" size="1198,98" zPosition="-9" />
@@ -4754,25 +4761,25 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="ServiceEvent" render="UltimateXPicon" position="30,635" size="75,42" zPosition="5" alphatest="blend" transparent="1">
       <convert type="UltimateRefString">ServicelistRef</convert>
     </widget>
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="148,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="355,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="512,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="148,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="355,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="512,689" size="26,26" alphatest="blend" transparent="1" />
     <widget name="key_red" position="49,689" size="90,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_green" position="177,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_yellow" position="384,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_blue" position="541,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/sat.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">0,0</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/dvbt.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">2,2</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="Ultimate/icons/kabel.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="670,683" size="35,35" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">1,1</convert>
       <convert type="ConditionalShowHide" />
@@ -4858,8 +4865,8 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel text="Favoriten" position="900,692" size="100,22" font="Regular; 20" halign="center" transparent="1" valign="center" />
-    <ePixmap position="871,689" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" alphatest="on" />
-    <ePixmap position="1001,689" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" alphatest="on" />
+    <ePixmap position="871,689" size="30,29" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
+    <ePixmap position="1001,689" size="30,29" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
     <eLabel text="Start:" position="250,157" size="70,30" font="Regular; 24" halign="center" transparent="1" zPosition="1" foregroundColor="selectedFG" />
     <eLabel text="Ende:" position="582,157" size="80,30" font="Regular; 24" halign="center" transparent="1" zPosition="1" foregroundColor="selectedFG" />
     <widget source="Event" render="Progress" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" position="400,169" size="170,10" zPosition="1" transparent="1">
@@ -4875,10 +4882,10 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="ClockToText">
       </convert>
     </widget>
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="600,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="600,689" size="26,26" alphatest="blend" transparent="1" />
     <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget source="key_yellow" render="Label" position="462,689" size="130,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
@@ -4897,9 +4904,9 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pixmap_vert_line_738" />
   </screen>
   <screen name="EPGSelectionMulti" position="0,0" size="1280,720" title="EPG Selection" flags="wfNoBorder" backgroundColor="background">
-    <widget name="now_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="Ultimate/tab_now.png" />
-    <widget name="next_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="Ultimate/tab_next.png" />
-    <widget name="more_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="Ultimate/tab_more.png" />
+    <widget name="now_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="tab_now.png" />
+    <widget name="next_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="tab_next.png" />
+    <widget name="more_button_sel" position="30,80" size="700,34" zPosition="2" pixmap="tab_more.png" />
     <widget name="now_text" position="40,82" size="150,30" zPosition="3" text="NOW" font="Regular;24" halign="center" transparent="1" />
     <widget name="next_text" position="205,82" size="150,30" zPosition="3" text="NEXT" font="Regular;24" halign="center" transparent="1" />
     <widget name="more_text" position="370,82" size="150,30" zPosition="3" text="MORE" font="Regular;24" halign="center" transparent="1" />
@@ -4913,8 +4920,8 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
     <widget name="bouquetlist" position="28,55" size="700,34" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <eLabel text="Favoriten" position="900,692" size="100,22" font="Regular; 20" halign="center" transparent="1" valign="center" />
-    <ePixmap position="869,689" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" alphatest="on" />
-    <ePixmap position="1001,689" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" alphatest="on" />
+    <ePixmap position="869,689" size="30,29" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
+    <ePixmap position="1001,689" size="30,29" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
     <eLabel text="Start:" position="765,390" size="70,30" font="Regular; 24" halign="center" transparent="1" zPosition="1" foregroundColor="selectedFG" />
     <eLabel text="Ende:" position="1100,390" size="75,30" font="Regular; 24" halign="center" transparent="1" zPosition="1" foregroundColor="selectedFG" />
     <widget source="Event" render="Progress" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" position="935,401" size="160,10" zPosition="1" transparent="1">
@@ -4931,10 +4938,10 @@ self['config'].l.setSeperation(int(300*f))
       </convert>
     </widget>
     <widget source="Title" render="Label" position="160,4" size="750,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="600,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="600,689" size="26,26" alphatest="blend" transparent="1" />
     <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget source="key_green" render="Label" position="255,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget source="key_yellow" render="Label" position="462,689" size="130,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
@@ -4957,8 +4964,8 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Event" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="820,53" size="430,44" font="Regular; 24" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
       <convert type="EventName">Name</convert>
     </widget>
-    <ePixmap position="882,691" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" alphatest="on" />
-    <ePixmap position="946,691" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" alphatest="on" />
+    <ePixmap position="882,691" size="30,29" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
+    <ePixmap position="946,691" size="30,29" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
     <widget source="Title" render="Label" zPosition="1" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" />
     <convert type="EventTime">StartTime</convert>
     <widget source="Event" render="Label" position="450,64" size="65,25" font="Regular; 20" halign="right" backgroundColor="background" transparent="1" valign="center">
@@ -4980,21 +4987,21 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="timeline_text" position="25,100" size="1230,30" itemHeight="30" TimelineFont="Regular;22" borderColor="grey" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" TimelineAlignment="left" zPosition="1" transparent="1" font="Regular; 20" />
     <widget name="bouquetlist" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" zPosition="1" transparent="1" />
     <widget name="list" position="25,130" size="1230,510" scrollbarMode="showNever" itemHeight="510" ServiceFontGraphical="Regular;20" EntryFontGraphical="Regular;19" enableWrapAround="1" transparent="1" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" ServiceForegroundColor="grey" ServiceForegroundColorNow="white" ServiceBackgroundColor="black" ServiceBackgroundColorNow="bernstein2" EntryForegroundColor="white" EntryforegroundColorSelected="lightblue" EntryBackgroundColor="dark" EntrybackgroundColorSelected="verydarkgrey" EntryBackgroundColorNow="menu" EntryBackgroundColorNowSelected="darkgreen" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="white" ServiceBorderColor="grey" EntryBorderColor="grey" RecordForegroundColor="white" RecordforegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="dark" ZapForegroundColor="white" ZapBackgroundColor="verydarkgrey" ZapforegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" />
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="176,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="375,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="527,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="176,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="375,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="527,689" size="26,26" alphatest="blend" transparent="1" />
     <widget name="key_red" position="49,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_green" position="205,689" size="167,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_yellow" position="403,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_blue" position="555,689" size="230,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
-    <widget alphatest="blend" name="timeline0" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline1" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline2" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline3" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline4" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline5" pixmap="Ultimate/epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
-    <widget alphatest="blend" name="timeline_now" pixmap="Ultimate/epg/timeline_s.png" position="25,98" zPosition="6" size="3,32" />
+    <widget alphatest="blend" name="timeline0" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline1" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline2" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline3" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline4" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline5" pixmap="epg/timeline.png" position="30,130" size="1,505" zPosition="2" />
+    <widget alphatest="blend" name="timeline_now" pixmap="epg/timeline_s.png" position="25,98" zPosition="6" size="3,32" />
     <eLabel text="Favoriten" position="980,693" size="100,25" backgroundColor="black" foregroundColor="selectedFG" font="Regular; 20" transparent="1" halign="left" valign="center" />
     <eLabel text="zurück / jetzt" position="90,647" size="130,25" font="Regular; 20" foregroundColor="selectedFG" transparent="1" halign="left" valign="center" />
     <eLabel text="Zeitraum vor" position="280,647" size="130,25" font="Regular; 20" foregroundColor="selectedFG" transparent="1" halign="left" valign="center" />
@@ -5002,23 +5009,23 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel text="Zeilen Verdoppeln" position="470,647" size="180,25" font="Regular; 20" foregroundColor="selectedFG" transparent="1" halign="left" valign="center" />
     <eLabel text="+ 24 Stunden" position="1118,647" size="130,25" backgroundColor="black" foregroundColor="selectedFG" font="Regular; 20" transparent="1" halign="left" valign="center" />
     <eLabel text="CH +/-" position="1044,647" size="80,25" font="Regular; 20" halign="center" transparent="1" valign="center" />
-    <ePixmap pixmap="Ultimate/buttons/key_5.png" position="50,645" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_6.png" position="240,645" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_7.png" position="430,645" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_9.png" position="880,645" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_8.png" position="660,645" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_5.png" position="50,645" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_6.png" position="240,645" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_7.png" position="430,645" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_9.png" position="880,645" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_8.png" position="660,645" size="30,29" alphatest="blend" zPosition="1" />
     <widget name="primetime" position="920,647" size="120,25" foregroundColor="selectedFG" font="Regular; 20" transparent="1" />
     <widget name="page" position="907,355" size="0,0" font="Regular;27" transparent="1" />
     <widget name="change_bouquet" position="733,395" size="1,1" backgroundColor="black" foregroundColor="bernstein" font="Regular; 27" transparent="1" />
     <widget name="jump" position="1536,1018" size="0,0" backgroundColor="black" font="Regular;27" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_0.png" position="914,691" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_0.png" position="914,691" size="30,29" alphatest="blend" zPosition="1" />
     <widget source="session.CurrentService" render="Label" position="122,54" size="320,44" font="Regular; 24" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
       <convert type="ServiceName">Name</convert>
     </widget>
     <widget alphatest="blend" position="30,53" render="UltimateXPicon" size="78,44" source="Service" transparent="1" zPosition="5">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <ePixmap position="25,53" zPosition="-15" size="1230,623" pixmap="Ultimate/epg/Center_EPG.png" />
+    <ePixmap position="25,53" zPosition="-15" size="1230,623" pixmap="epg/Center_EPG.png" />
     <eLabel name="" position="25,98" size="1230,1" backgroundColor="grey" zPosition="5" />
     <eLabel name="" position="25,130" size="1230,1" backgroundColor="grey" zPosition="5" />
     <eLabel name="" position="25,634" size="1230,1" backgroundColor="grey" zPosition="5" />
@@ -5035,26 +5042,26 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Event" render="UltimateRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="600,9" size="330,34" font="Regular; 27" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="black" transparent="1" zPosition="2">
       <convert type="EventName">Name</convert>
     </widget>
-    <ePixmap position="1002,687" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" alphatest="on" />
-    <ePixmap position="1066,687" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" alphatest="on" />
+    <ePixmap position="1002,687" size="30,29" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
+    <ePixmap position="1066,687" size="30,29" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
     <widget source="Title" render="Label" zPosition="1" position="160,9" size="330,34" valign="center" font="Regular; 27" foregroundColor="selectedFG" transparent="1" halign="left" />
     <widget alphatest="blend" position="503,1" render="UltimateXPicon" size="85,48" source="Service" transparent="1" zPosition="5" borderWidth="1" borderColor="grey">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="176,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="383,689" size="26,26" alphatest="blend" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="540,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="176,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="383,689" size="26,26" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="540,689" size="26,26" alphatest="blend" transparent="1" />
     <widget name="key_red" position="49,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_green" position="205,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_yellow" position="412,689" size="120,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
     <widget name="key_blue" position="569,689" size="230,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
-    <widget alphatest="blend" name="timeline0" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
-    <widget alphatest="blend" name="timeline1" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
-    <widget alphatest="blend" name="timeline2" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
-    <widget alphatest="blend" name="timeline3" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
-    <widget alphatest="blend" name="timeline4" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
-    <widget alphatest="blend" name="timeline5" pixmap="Ultimate/epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline0" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline1" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline2" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline3" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline4" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
+    <widget alphatest="blend" name="timeline5" pixmap="epg/timeline.png" position="25,386" size="1,290" zPosition="2" />
     <eLabel text="Reset Page Up/Down" position="630,317" size="180,25" backgroundColor="background" foregroundColor="selectedFG" font="Regular; 18" transparent="0" halign="left" valign="center" />
     <eLabel text="zurück / jetzt" position="630,92" size="180,25" font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" transparent="0" halign="left" valign="center" />
     <eLabel text="Zeitraum vor" position="630,137" size="180,25" font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" transparent="0" halign="left" valign="center" />
@@ -5062,17 +5069,17 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel text="Zeilen Verdoppeln" position="630,182" size="180,25" font="Regular; 18" foregroundColor="selectedFG" backgroundColor="background" transparent="0" halign="left" valign="center" />
     <eLabel text="+ 24 Stunden" position="870,689" size="120,25" backgroundColor="background" foregroundColor="selectedFG" font="Regular; 18" transparent="1" halign="left" valign="center" />
     <eLabel text="CH +/-" position="800,689" size="70,25" font="Regular; 18" halign="center" transparent="1" valign="center" />
-    <ePixmap pixmap="Ultimate/buttons/key_5.png" position="590,90" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_6.png" position="590,135" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_7.png" position="590,180" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_9.png" position="590,270" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_8.png" position="590,225" size="30,29" alphatest="blend" zPosition="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_0.png" position="590,315" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_5.png" position="590,90" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_6.png" position="590,135" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_7.png" position="590,180" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_9.png" position="590,270" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_8.png" position="590,225" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_0.png" position="590,315" size="30,29" alphatest="blend" zPosition="1" />
     <widget name="primetime" position="630,272" size="180,25" foregroundColor="selectedFG" backgroundColor="background" font="Regular; 18" transparent="0" />
     <widget name="page" position="907,355" size="0,0" font="Regular;27" transparent="1" />
     <widget name="change_bouquet" position="844,72" size="1,1" backgroundColor="black" foregroundColor="bernstein" font="Regular; 27" transparent="1" />
     <widget name="jump" position="1536,1018" size="0,0" backgroundColor="black" font="Regular;27" transparent="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_0.png" position="1034,687" size="30,29" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_0.png" position="1034,687" size="30,29" alphatest="blend" zPosition="1" />
     <widget source="Event" render="UltimateRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="30,95" size="550,250" font="Regular;22" transparent="1" valign="top" zPosition="1">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
@@ -5091,8 +5098,8 @@ self['config'].l.setSeperation(int(300*f))
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget alphatest="blend" name="timeline_now" pixmap="Ultimate/epg/timeline_s.png" position="25,354" zPosition="6" size="3,32" />
-    <ePixmap position="25,53" zPosition="-15" size="1230,623" pixmap="Ultimate/epg/Center_EPG.png" />
+    <widget alphatest="blend" name="timeline_now" pixmap="epg/timeline_s.png" position="25,354" zPosition="6" size="3,32" />
+    <ePixmap position="25,53" zPosition="-15" size="1230,623" pixmap="epg/Center_EPG.png" />
     <eLabel name="" position="25,354" size="1230,1" backgroundColor="grey" zPosition="5" />
     <eLabel name="" position="25,385" size="1230,1" backgroundColor="grey" zPosition="5" />
     <eLabel name="" position="25,677" size="1230,1" backgroundColor="grey" zPosition="5" />
@@ -5123,25 +5130,25 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="timeline_text" position="30,560" size="1220,25" itemHeight="30" TimelineFont="Regular;19" borderColor="grey" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" TimelineAlignment="left" zPosition="1" transparent="1" />
     <widget name="bouquetlist" position="30,560" size="1220,25" zPosition="2" itemHeight="30" font="Regular;19" borderColor="grey" borderWidth="1" backgroundColor="background" transparent="1" />
     <widget name="list" position="30,600" size="1220,80" itemHeight="80" ServiceFontInfobar="Regular;20" EventFontInfobar="Regular;19" ServiceForegroundColor="white" ServiceForegroundColorNow="white" ServiceBackgroundColor="background" ServiceBackgroundColorNow="verydarkgrey" EntryForegroundColor="white" EntryforegroundColorSelected="selectedFG" EntryBackgroundColor="background" EntrybackgroundColorSelected="verydarkgrey" EntryBackgroundColorNow="verydarkgrey" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="white" ServiceBorderColor="grey" ServiceBorderWidth="1" ServiceNamePadding="3" EntryBorderColor="grey" EventBorderWidth="1" EventNamePadding="3" RecordForegroundColor="white" RecordforegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="dark" ZapForegroundColor="white" ZapBackgroundColor="verydarkgrey" ZapforegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" enableWrapAround="1" scrollbarMode="showNever" transparent="1" />
-    <widget name="timeline_now" position="0,595" zPosition="2" size="16,90" pixmap="Ultimate/epg/timeline-now_s.png" backgroundColor="background" alphatest="blend" />
-    <ePixmap pixmap="Ultimate/buttons/key_red.png" position="30,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
+    <widget name="timeline_now" position="0,595" zPosition="2" size="16,90" pixmap="epg/timeline-now_s.png" backgroundColor="background" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_red.png" position="30,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
     <widget name="key_red" position="62,693" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" backgroundColor="background" valign="center" noWrap="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_green.png" position="244,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="244,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
     <widget name="key_green" position="276,693" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" backgroundColor="background" valign="center" noWrap="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_yellow.png" position="457,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="457,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
     <widget name="key_yellow" position="488,693" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" backgroundColor="background" valign="center" noWrap="1" />
-    <ePixmap pixmap="Ultimate/buttons/key_blue.png" position="669,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="669,693" size="26,26" alphatest="blend" backgroundColor="background" transparent="1" />
     <widget name="key_blue" position="701,693" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" backgroundColor="background" valign="center" noWrap="1" />
-    <ePixmap position="1050,692" size="64,26" zPosition="10" pixmap="Ultimate/buttons/info.png" backgroundColor="background" transparent="1" alphatest="blend" />
-    <ePixmap position="1125,692" size="64,26" zPosition="10" pixmap="Ultimate/buttons/menu.png" backgroundColor="background" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="Ultimate/BG-Pixmaps/Rahmen/Rahmen_Org.png" position="0,495" zPosition="-25" size="1280,230" />
-    <ePixmap pixmap="Ultimate/BG-Pixmaps/Center/Center_Dark.png" position="25,548" zPosition="-20" size="1230,177" />
-    <ePixmap pixmap="Ultimate/BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="26,683" zPosition="2" size="1225,5" />
-    <ePixmap pixmap="Ultimate/BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="26,590" zPosition="2" size="1225,5" />
+    <ePixmap position="1050,692" size="64,26" zPosition="10" pixmap="buttons/info.png" backgroundColor="background" transparent="1" alphatest="blend" />
+    <ePixmap position="1125,692" size="64,26" zPosition="10" pixmap="buttons/menu.png" backgroundColor="background" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BG-Pixmaps/Rahmen/Rahmen_Org.png" position="0,495" zPosition="-25" size="1280,230" />
+    <ePixmap pixmap="BG-Pixmaps/Center/Center_Dark.png" position="25,548" zPosition="-20" size="1230,177" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="26,683" zPosition="2" size="1225,5" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="26,590" zPosition="2" size="1225,5" />
     <widget source="global.CurrentTime" render="Label" position="1158,499" size="94,44" font="Regular;32" halign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-    <ePixmap pixmap="Ultimate/BG-Pixmaps/User_Logos/User_Logo.png" position="5,496" size="150,48" zPosition="1" backgroundColor="background" alphatest="blend" />
+    <ePixmap pixmap="BG-Pixmaps/User_Logos/User_Logo.png" position="5,496" size="150,48" zPosition="1" backgroundColor="background" alphatest="blend" />
   </screen>
   <!-- EventView_light -->
   <screen name="EventView" position="0,0" size="1280,720" title="Eventview" flags="wfNoBorder" backgroundColor="background">
@@ -5151,59 +5158,59 @@ self['config'].l.setSeperation(int(300*f))
     </widget>
 	<widget name="epg_description" position="30,110" size="700,520" font="Regular; 24" transparent="1" />
     <widget name="channel" position="110,60" size="620,40" font="Regular;32" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="selectedFG" />
-	<widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="860,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+	<widget alphatest="blend" pixmap="icons/ico_dolby_on.png" position="860,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsMultichannel</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_dolby_off.png" position="860,688" size="47,26" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="860,688" size="47,26" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">IsStereo</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="icons/ico_sd_on.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">0,719</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="icons/ico_hd_off.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">720,1079</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="980,688" size="47,26" render="Pixmap" pixmap="icons/ico_hd_on.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">720,1080</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_uhd_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_uhd_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">Is4K</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hd_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hd_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hdr_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr10_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hdr10_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDR10</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hlg_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hlg_on.png" position="980,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHLG</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_format_off.png" position="920,688" size="47,26" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="920,688" size="47,26" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">IsNotWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_format_on.png" position="920,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_format_on.png" position="920,688" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <ePixmap alphatest="blend" pixmap="Ultimate/icons/ico_rec_off.png" position="801,84" size="47,15" zPosition="2" />
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_rec_on.png" position="801,84" render="Pixmap" size="47,15" source="session.RecordState" zPosition="5">
+    <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="801,84" size="47,15" zPosition="2" />
+    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="801,84" render="Pixmap" size="47,15" source="session.RecordState" zPosition="5">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
 	<panel name="template_pixmap_line_hor_100" />
@@ -5245,59 +5252,59 @@ self['config'].l.setSeperation(int(300*f))
     <widget source="Service" render="Label" position="882,575" size="270,30" font="Regular;24" halign="center" transparent="1">
       <convert type="MovieInfo">FileSize</convert>
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_dolby_on.png" position="942,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_dolby_on.png" position="942,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsMultichannel</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_dolby_off.png" position="942,620" size="47,26" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="942,620" size="47,26" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">IsStereo</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_sd_on.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="icons/ico_sd_on.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">0,719</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_off.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="icons/ico_hd_off.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">720,1079</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="Ultimate/icons/ico_hd_on.png" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" position="1055,620" size="47,26" render="Pixmap" pixmap="icons/ico_hd_on.png" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">VideoHeight</convert>
       <convert type="ValueRange">720,1080</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_uhd_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_uhd_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">Is4K</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hd_hdr_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hd_hdr_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hdr_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDR</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hdr10_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hdr10_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHDR10</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_hlg_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_hlg_on.png" position="1055,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsHLG</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="Ultimate/icons/ico_format_off.png" position="999,620" size="47,26" zPosition="1" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_format_off.png" position="999,620" size="47,26" zPosition="1" alphatest="blend">
       <convert type="ServiceInfo">IsNotWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget alphatest="blend" pixmap="Ultimate/icons/ico_format_on.png" position="999,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
+    <widget alphatest="blend" pixmap="icons/ico_format_on.png" position="999,620" render="Pixmap" size="47,26" source="session.CurrentService" zPosition="2">
       <convert type="ServiceInfo">IsWidescreen</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <ePixmap position="851,506" size="30,29" zPosition="10" pixmap="Ultimate/buttons/left.png" transparent="1" alphatest="blend" />
-    <ePixmap position="1155,506" size="30,29" zPosition="10" pixmap="Ultimate/buttons/right.png" transparent="1" alphatest="blend" />
+    <ePixmap position="851,506" size="30,29" zPosition="10" pixmap="buttons/left.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1155,506" size="30,29" zPosition="10" pixmap="buttons/right.png" transparent="1" alphatest="blend" />
     <panel name="template_date" />
     <panel name="template_info_menu_exit_1280" />
     <panel name="template_pig_menu" />
