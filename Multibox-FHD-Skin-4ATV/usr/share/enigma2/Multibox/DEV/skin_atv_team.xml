@@ -36,7 +36,7 @@
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
-    <panel name="template_name_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_info_exit" />
   </screen>
   <screen name="TranslationInfo" position="0,0" size="1920,1080" title="Translation" flags="wfNoBorder" backgroundColor="background">
@@ -63,7 +63,7 @@
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_menu_ok_exit" />
     <panel name="template_pig_setup" />
   </screen>
@@ -107,7 +107,7 @@
 <widget source="description" render="Label" position="10,100" size="1180,140" font="Regular;36" foregroundColor="default" halign="center" valign="center" transparent="1" />
 <widget name="config" position="10,270" size="1180,705" transparent="0" zPosition="1" font="Regular;36" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="Line" scrollbarSliderBorderColor="white" scrollbarMode="showOnDemand" />
 <widget source="options" render="Label" position="1223,558" size="670,420" font="Regular;36" foregroundColor="Line" halign="center" valign="center" transparent="1" />
-<panel name="template_source_red_green" />
+<panel name="TemplateAllColorButtons_Automatic" />
 <panel name="template_fullscreen_title" />
 <panel name="template_pixmap_BG" />
 <panel name="template_pig_setup" />
@@ -119,7 +119,7 @@
 <widget name="config" position="10,270" size="1180,705" transparent="0" zPosition="1" font="Regular;36" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="Line" scrollbarSliderBorderColor="white" scrollbarMode="showOnDemand" />
 <widget source="options" render="Label" position="1223,558" size="670,420" font="Regular;36" foregroundColor="Line" halign="center" valign="center" transparent="1" />
 <panel name="template_ok_exit" />
-<panel name="template_source_red_green" />
+<panel name="TemplateAllColorButtons_Automatic" />
 <panel name="template_fullscreen_title" />
 <panel name="template_pixmap_BG" />
 <panel name="template_pig_setup" />
@@ -128,7 +128,7 @@
 <!-- <screen name="SoftcamSetup" position="0,0" size="1920,1080" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
 <widget name="config" position="10,100" size="1180,735" enableWrapAround="1" itemHeight="55" font="Regular;36" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="Line" scrollbarSliderBorderColor="white" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
 <widget name="info" position="10,420" size="1180,550" font="Regular;36" />
-<panel name="template_source_red_green_blue" />
+<panel name="TemplateAllColorButtons_Automatic" />
 <panel name="template_exit" />
 <panel name="template_fullscreen_title" />
 <panel name="template_pixmap_BG" />
@@ -146,7 +146,7 @@
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_menu_ok_exit" />
 </screen>
   <!-- ATV doFlashImage FHD  -->
@@ -162,7 +162,7 @@
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_menu_ok_exit" />
   </screen>
   <!--ATV SoftwareUpdateChanges FHD -->
@@ -178,9 +178,44 @@
     <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
-    <panel name="template_source_red_o_yellow" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_menu_ok_exit" />
     <panel name="template_pig_setup" />
+  </screen>
+
+    <!--ATV SoftwareUpdate FHD -->
+<screen name="SoftwareUpdate" position="0,0" size="1920,1080" title="Software Update" flags="wfNoBorder" backgroundColor="background">
+    <ePixmap pixmap="buttons/key_exit.png" position="1795,1022" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
+    <widget name="package_text" position="1270,676" size="375,53" zPosition="1" font="Regular;36" halign="right" backgroundColor="background" transparent="1" />
+    <widget name="package_count" position="1660,676" size="75,53" zPosition="1" font="Regular;36" halign="right" backgroundColor="background" transparent="1" />
+	<widget name="feedmessage" position="1223,558" size="670,120" font="Regular;36" foregroundColor="Line" halign="center" valign="center" transparent="1" />
+	<widget name="activity" position="1270,740" size="450,5" />
+    <widget source="list" render="Listbox" position="10,100" size="1180,880" scrollbarMode="showOnDemand" transparent="1">
+      <convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (8, 2), size = (1085, 45), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (8, 39), size = (985, 36), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
+						MultiContentEntryPixmapAlphaBlend(pos = (1000, 3), size = (72, 72), png = 4), # index 4 is the status pixmap
+						MultiContentEntryPixmapAlphaBlend(pos = (0, 75), size = (1050, 3), png = 5), # index 5 is the div pixmap
+					],
+				"fonts": [gFont("Regular", 36),gFont("Regular", 30)],
+				"itemHeight": 75
+				}
+	</convert>
+    </widget>
+    <widget name="traffic_off" position="1260,770" zPosition="1" size="62,160" pixmap="icons/aoff.png" alphatest="blend" />
+    <widget name="traffic_red" position="1260,770" zPosition="1" size="62,160" pixmap="icons/ared.png" alphatest="blend" />
+    <widget name="traffic_yellow" position="1260,770" zPosition="1" size="62,160" pixmap="icons/ayellow.png" alphatest="blend" />
+    <widget name="traffic_green" position="1260,770" zPosition="1" size="62,160" pixmap="icons/agreen.png" alphatest="blend" />
+	<widget name="feedstatus_off" text="nicht updaten! / No Update!" position="1330,881" size="554,38" zPosition="1" font="Regular; 29" foregroundColor="white" halign="left" backgroundColor="red" transparent="0" />
+    <widget name="feedstatus_red" text="nicht updaten! / No Update!" position="1330,881" size="554,38" zPosition="1" font="Regular; 29" foregroundColor="white" halign="left" backgroundColor="red" transparent="0" />
+    <widget name="feedstatus_yellow" text="auf eigene Gefahr! / update at your own risk" position="1330,831" size="554,38" zPosition="1" font="Regular; 25" halign="left" foregroundColor="black" backgroundColor="yellow" transparent="0" />
+    <widget name="feedstatus_green" text="Alles OK! / update recommend " position="1330,781" size="554,38" zPosition="1" font="Regular; 29" halign="left" foregroundColor="black" backgroundColor="green" transparent="0" />
+    <widget name="key_green_pic" pixmap="Multibox/skin_default/icons/lock_on.png" position="1756,685" size="32,31" alphatest="blend" zPosition="1" />
+    <panel name="template_fullscreen_title" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_pig_setup" />
+    <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
   <!--ATV SoftwarePanels FHD -->
   <screen name="SoftwarePanel" position="0,0" size="1920,1080" title="SoftwarePanel" flags="wfNoBorder" backgroundColor="background">
@@ -204,14 +239,15 @@
     <widget name="a_red" position="1260,770" zPosition="1" size="62,160" pixmap="icons/ared.png" alphatest="blend" />
     <widget name="a_yellow" position="1260,770" zPosition="1" size="62,160" pixmap="icons/ayellow.png" alphatest="blend" />
     <widget name="a_green" position="1260,770" zPosition="1" size="62,160" pixmap="icons/agreen.png" alphatest="blend" />
-    <widget name="feedstatusred" text="nicht updaten! / No Update!" position="1330,781" size="554,38" zPosition="1" font="Regular; 29" foregroundColor="white" halign="left" backgroundColor="red" transparent="0" />
+	<widget name="feedstatusOFF" text="nicht updaten! / No Update!" position="1330,781" size="554,38" zPosition="1" font="Regular; 29" foregroundColor="white" halign="left" backgroundColor="red" transparent="0" />
+    <widget name="feedstatusRED" text="nicht updaten! / No Update!" position="1330,781" size="554,38" zPosition="1" font="Regular; 29" foregroundColor="white" halign="left" backgroundColor="red" transparent="0" />
     <widget name="feedstatusYELLOW" text="auf eigene Gefahr! / update at your own risk" position="1330,831" size="554,38" zPosition="1" font="Regular; 25" halign="left" foregroundColor="black" backgroundColor="yellow" transparent="0" />
     <widget name="feedstatusGREEN" text="Alles OK! / update recommend " position="1330,881" size="554,38" zPosition="1" font="Regular; 29" halign="left" foregroundColor="black" backgroundColor="green" transparent="0" />
     <widget name="key_green_pic" pixmap="Multibox/skin_default/icons/lock_on.png" position="1756,665" size="32,31" alphatest="blend" zPosition="1" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
-    <panel name="template_name_red_green" />
+    <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
   <!--ATV Update Plugin Menu FHD -->
   <screen name="UpdatePluginMenu" flags="wfNoBorder" position="0,0" size="1920,1080" title="Update Plugin Menu" backgroundColor="background">
@@ -244,7 +280,16 @@
     <widget source="key_red" render="Label" position="61,1005" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
-    <!--  <panel name="template_source_red_o_blue" /> -->
+    <!--  <panel name="TemplateAllColorButtons_Automatic" /> -->
+    <panel name="template_pig_setup" />
+  </screen>
+  <screen name="RunSoftwareUpdate" position="0,0" size="1920,1080" title="Software Update..." flags="wfNoBorder" backgroundColor="background">
+    <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="activity" position="30,120" size="1000,40" borderColor="grey" foregroundColor="Multiboxlabel" borderWidth="3" transparent="1" />
+    <widget name="update" position="30,180" size="1100,800" font="Regular; 40" transparent="1" foregroundColor="greenlight" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_ok_exit" />
     <panel name="template_pig_setup" />
   </screen>
   <!--ATV Softcam Cardserver Manager FHD -->
@@ -272,7 +317,7 @@
     </widget>
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_pig_setup" />
   </screen>
   <!--ATV HddMount FHD -->
@@ -292,7 +337,7 @@
     <ePixmap pixmap="buttons/key_exit.png" position="1795,1022" size="103,35" zPosition="10" transparent="1" alphatest="blend" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_pig_setup" />
   </screen>
   <!--ATV HddPartitions FHD -->
@@ -308,7 +353,7 @@
 					"itemHeight": 52
 		}</convert>
     </widget>
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
@@ -325,7 +370,7 @@
 					"itemHeight": 52
 		}</convert>
     </widget>
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
@@ -342,19 +387,52 @@
 					"itemHeight": 85
 				}</convert>
     </widget>
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
   </screen>
   <screen backgroundColor="background" flags="wfNoBorder" name="WeatherLocationChoiceList" position="0,0" size="1920,1080" title="Location list">
     <widget name="choicelist" position="10,100" size="1180,880" itemHeight="50" font="Regular;36" scrollbarMode="showOnDemand" scrollbarWidth="6" transparent="1" />
-    <panel name="template_name_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
   </screen>
-
+  <screen name="NetworkSATPI" title="SATPI Setup" position="center,center" size="1200,380" flags="wfNoBorder" backgroundColor="background">
+    <widget name="lab1" position="80,100" size="300,50" font="Regular; 40" valign="center" halign="left" transparent="1" />
+    <widget name="labactive" position="610,100" size="350,50" font="Regular; 40" valign="center" halign="center" zPosition="2" backgroundColor="Multiboxlabel" />
+    <widget name="lab2" position="80,170" size="300,50" font="Regular; 40" valign="center" halign="left" transparent="1" />
+    <widget name="labstop" position="610,170" size="350,50" font="Regular; 40" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+    <widget name="labrun" position="610,170" size="350,50" font="Regular; 40" valign="center" halign="center" backgroundColor="green" zPosition="2" />
+    <widget source="Title" render="Label" position="180,20" size="600,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <ePixmap pixmap="buttons/key_red.png" position="8,322" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_green.png" position="308,322" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="608,322" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_blue.png" position="908,322" size="35,35" alphatest="blend" />
+    <widget name="key_red" render="Label" position="51,305" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="key_green" render="Label" position="352,305" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="key_yellow" render="Label" position="650,305" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="key_blue" render="Label" position="951,305" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <ePixmap pixmap="Skinparts/BG_3_red.png" position="0,0" zPosition="-20" size="1200,380" />
+    <ePixmap pixmap="Skinparts/User_Logo.png" position="10,20" size="150,48" zPosition="1" alphatest="blend" />
+    <eLabel name="vertikalline" position="0,290" size="1200,2" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
+    <widget source="global.CurrentTime" render="Label" position="780,20" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="Multiboxlabel" transparent="1">
+      <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+    </widget>
+    <!--  Analog Clock-->
+    <widget source="global.CurrentTime" render="AMBWatches" position="1102,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
+      <convert type="AMBAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AMBWatches" position="1102,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
+      <convert type="AMBAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AMBWatches" position="1112,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
+      <convert type="AMBAnalogClock">hourHand</convert>
+    </widget>
+    <ePixmap pixmap="icons/Clock.png" position="1092,2" zPosition="1" size="90,90" transparent="1" alphatest="on" />
+  </screen>
+	
 <!-- ATV AtileHD_About FHD  -->
  <screen name="AtileHD_About" position="0,0" size="1920,1080" title="AtileHD_About" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="* Multibox FHD *   FHD Skin for ATV Images by stein17" position="520,21" size="1060,50" font="Italic; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -457,7 +535,7 @@
  <ePixmap pixmap="buttons/key_menu.png" position="1341,1022" size="103,35" alphatest="blend" />
  <widget name="key_menu" position="1456,1020" size="350,40" zPosition="2" font="Regular; 27" halign="center" backgroundColor="black" transparent="1" />
  <eLabel name="vertikalline" position="10,610" size="1180,2" foregroundColor="Line" backgroundColor="Line" />
-<panel name="template_name_red_o_blue" />
+<panel name="TemplateAllColorButtons_Automatic" />
 <panel name="template_fullscreen_title" />
 <panel name="template_pixmap_BG" />
 <panel name="template_pig_setup" />
@@ -540,7 +618,7 @@
     <widget name="list3" position="775,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
     <widget name="list4" position="1158,361" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
     <widget name="list5" position="1540,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
-    <panel name="template_name_long_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
     <panel name="template_menu_info" />
     <eLabel name="vertikalline" position="10,295" size="1900,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
   </screen>
@@ -607,7 +685,7 @@
     <widget name="list3" position="775,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
     <widget name="list4" position="1158,361" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
     <widget name="list5" position="1540,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
-    <panel name="template_name_long_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
     <panel name="template_menu_info" />
 <panel name="template_fullscreen" />
 <panel name="template_pixmap_BG" />
@@ -695,7 +773,7 @@
     <widget name="list3" position="775,363" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="bluelabel" scrollbarMode="showAlways" size="370,620" zPosition="1" TimeforegroundColor="bernstein" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntrybackgroundColor="dark" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="bluelabel" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="bluelabel" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="black" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="bluelabel" EntryborderColor="foregroundClock" TimeFontVertical="Regular;29" EventFontVertical="Regular;27" font="Regular; 30" />
     <eLabel name="vertikalline" position="10,295" size="1130,2" foregroundColor="Line" backgroundColor="Line" />
     <eLabel name="" position="1227,253" size="674,423" zPosition="-15" backgroundColor="Line" />
-    <panel name="template_name_long_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
     <panel name="template_menu_info" />
 <panel name="template_fullscreen" />
 <panel name="template_pixmap_BG" />
@@ -749,7 +827,13 @@
  </screen>        
 <!-- NEW-Automatic-BUTTONS -->
 
-
+<!-- NEW-Automatic-BUTTONS-ALL -->
+  <screen name="TemplateAllColorButtons_Automatic_Long">
+    <panel name="TemplateButtonRed_Automatic_Long" />
+	<panel name="TemplateButtonGreen_Automatic_Long" />
+	<panel name="TemplateButtonYellow_Automatic_Long" />
+	<panel name="TemplateButtonBlue_Automatic_Long" />
+  </screen>
  <!-- NEW-Automatic-BUTTONS-Long -->
  <screen name="TemplateButtonRed_Automatic_Long">
   <ePixmap pixmap="buttons/key_red.png" position="18,1022" size="35,35" alphatest="blend" transparent="1" objectTypes="key_red,Button,Label" />
@@ -868,42 +952,6 @@
 		<ePixmap position="1335,263" size="384,384" zPosition="2" pixmap="icons/menu_system_language_setup.png" transparent="1" alphatest="blend" />
 	</screen>
 
-	<!-- wizard_rc_templateNew -->
-	<screen name="wizard_rc_templateNew">
-		<widget name="rc" position="1300,560" size="154,500" pixmaps="rc.png,rcold.png" zPosition="10" alphatest="blend" />
-		<widget alphatest="blend" name="indicatorU0" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU1" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU2" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU3" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU4" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU5" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU6" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU7" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU8" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU9" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU10" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU11" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU12" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend"  name="indicatorU13" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU14" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorU15" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL0"  pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL1" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL2" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL3" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL4" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL5" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL6" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL7" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL8" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL9" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL10" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL11" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL12" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL13" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL14" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-		<widget alphatest="blend" name="indicatorL15" pixmap="skin_default/yellow_circle23x23.png" position="1325,600" offset="11,11" size="23,23" zPosition="11" />
-	</screen>
 	<!-- SoftcamSetup -->
 	<screen name="SoftcamSetup" position="0,0" size="1920,1080" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
 	 <widget name="config" position="10,100" size="1180,735" backgroundColor="background" enableWrapAround="1" itemHeight="55" font="Regular;36" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="Line" scrollbarSliderBorderColor="white" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
@@ -916,4 +964,16 @@
 	 <panel name="template_pixmap_BG" />
 	 <panel name="template_pig_setup" />
 	</screen>
+
+    <screen name="Opkg" position="0,0" size="1920,1080" title="Installing Software..." flags="wfNoBorder" backgroundColor="background">
+    <eLabel text="Installing Software..." position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="activityslider" position="30,160" size="1000,40" borderColor="grey" foregroundColor="Multiboxlabel" borderWidth="3" transparent="1" />
+    <widget name="package" position="30,280" size="1100,50" font="Regular; 40" transparent="1" foregroundColor="greenlight" />
+    <widget name="status" position="30,360" size="1100,50" font="Regular; 40" transparent="1" foregroundColor="default" />
+    <widget name="slider" position="30,480" size="1000,40" borderColor="Multiboxlabel" foregroundColor="grey" borderWidth="3" transparent="1" />
+    <panel name="template_fullscreen" />
+    <panel name="template_pixmap_BG" />
+    <panel name="template_menu_exit" />
+    <panel name="template_pig_setup" />
+  </screen>
     </skin>
