@@ -1,37 +1,35 @@
 <skin>
-  <!-- Skinpart GraphicalEPG Picon-->
+  <!-- Skinpart GraphicalEPG Mini_TV-->
 <screen name="template_GraphicalEPG">
-    <widget source="global.CurrentTime" render="Label" position="1420,25" size="350,50" font="Regular; 36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
+    <widget source="Title" render="Label" position="25,25" size="400,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2" />
+    <widget source="global.CurrentTime" render="Label" position="1425,25" size="350,50" font="Regular; 36" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a.%d.%m   %H:%M</convert>
     </widget>
-    <eLabel text="-" position="1552,385" size="35,35" font="Regular; 27" halign="center" backgroundColor="black" foregroundColor="bernstein" transparent="1" valign="center" />
-    <widget source="Title" render="Label" position="25,25" size="400,50" font="Regular; 36" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2" />
-    <ePixmap pixmap="menu/Browser.png" position="0,0" zPosition="-20" size="1920,1080" />
-    <widget source="Event" render="AXBlueRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="428,25" size="1000,50" font="Regular; 36" transparent="0" foregroundColor="bluetitle">
-      <convert type="EventName">Name</convert>
-    </widget>
-    <widget source="Service" render="AXBlueXPicon" position="1485,172" size="339,190" transparent="1" zPosition="2" alphatest="blend">
+    <widget source="Service" render="AXBlueXPicon" position="430,15" size="125,70" transparent="0" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="1411,130" size="480,40" font="Regular; 32" halign="center" valign="top" backgroundColor="black" transparent="1" zPosition="10">
+    <ePixmap pixmap="menu/Browser.png" position="0,0" zPosition="-20" size="1920,1080" />
+    <widget source="Event" render="AXBlueRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="570,30" size="850,50" font="Regular; 36" transparent="0" foregroundColor="bluetitle">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <eLabel position="1405,130" size="489,275" zPosition="3" backgroundColor="backgroundPig" />
+    <eLabel position="30,160" size="1350,213" foregroundColor="bluelabel" zPosition="0" transparent="0" backgroundColor="bluelabel" />
+    <widget source="session.VideoPicture" render="Pig" position="1405,130" size="489,275" zPosition="-8" backgroundColor="backgroundPig" />
+    <widget source="session.CurrentService" render="Label" position="1404,130" size="489,40" font="Regular; 32" halign="center" valign="top" backgroundColor="black" transparent="1" zPosition="10">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <widget source="Event" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=10000,steptime=80,wrap=1,always=0,repeat=2,oneshot=1" position="30,130" size="1355,243" font="Regular;34" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
+    <widget source="Event" render="AXBlueRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=10000,steptime=80,wrap=1,always=0,repeat=2,oneshot=1" position="30,160" size="1350,213" font="Regular;34" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2">
       <convert type="EventName">ExtendedDescription</convert>
     </widget>
-    <eLabel position="30,130" size="1355,243" foregroundColor="trbluelabel" zPosition="0" transparent="0" backgroundColor="trbluelabel" />
-    <widget source="Event" render="Label" position="1452,385" size="100,35" font="Regular; 27" halign="right" backgroundColor="background20" foregroundColor="bernstein" transparent="1" valign="center">
+    <widget source="Event" render="Label" position="30,120" size="120,38" font="Regular;29" halign="right" backgroundColor="background20" foregroundColor="bernstein" transparent="1" valign="center">
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText">Format:%H:%M </convert>
     </widget>
-    <widget source="Event" render="Label" position="1587,385" size="120,35" font="Regular; 27" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="left" valign="center">
+    <widget source="Event" render="Label" position="850,120" size="120,38" font="Regular;29" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="left" valign="center">
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-<!--     <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1496,369" size="320,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
-      <convert type="EventTime">Progress</convert>
-    </widget> -->
-    <widget source="Event" render="Label" position="1707,385" size="150,35" font="Regular; 27" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="center" valign="center">
+    <widget source="Event" render="Label" position="1177,120" size="180,38" font="Regular; 29" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="right" valign="center">
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
@@ -76,6 +74,6 @@
     <widget name="change_bouquet" position="733,395" size="1,1" backgroundColor="black" foregroundColor="bernstein" font="Regular; 27" transparent="1" />
     <widget name="jump" position="1536,1018" size="0,0" backgroundColor="black" font="Regular;27" transparent="1" />
     <eLabel text="0" position="1100,1019" size="40,35" font="Arial; 35" halign="center" transparent="1" valign="top" />
-	<panel name="template_progress_GraphicalEPG"/>
+	<panel name="template_progress_GraphicalEPGPIG"/>
   </screen>
    </skin>

@@ -1,0 +1,77 @@
+<skin>
+  <!-- Skinpart GraphicalEPG Full-->
+<screen name="template_GraphicalEPG">
+    <widget source="Title" render="Label" position="10,25" size="450,50" font="Regular; 36" halign="center" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2" />
+    <widget source="global.CurrentTime" render="Label" position="1580,24" size="350,50" font="Regular; 36" halign="center" valign="center" foregroundColor="foregroundClock" backgroundColor="black" transparent="1" zPosition="2">
+      <convert type="ClockToText">Format:%a.%d.%m   %H:%M</convert>
+    </widget>
+    <widget source="Service" render="AXBlueXPicon" position="470,17" size="107,60" transparent="0" zPosition="2" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <ePixmap pixmap="menu/Browser.png" position="0,0" zPosition="-20" size="1920,1080" />
+    <widget source="Event" render="AXBlueRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="590,25" size="500,50" font="Regular; 36" halign="center" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="2">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1399,1019" size="350,34" font="Regular; 30" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="10" foregroundColor="bluetitle">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget source="Event" render="Label" position="1100,35" size="90,28" font="Regular; 28" halign="right" backgroundColor="background20" foregroundColor="bernstein" transparent="1" valign="center">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Format:%H:%M </convert>
+    </widget>
+    <widget source="Event" render="Label" position="1346,35" size="90,28" font="Regular; 28" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="left" valign="center">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="Event" render="Progress" pixmap="p_bar_sel.png" position="1196,47" size="145,8" zPosition="1" transparent="1" borderWidth="1" borderColor="foregroundClock">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget source="Event" render="Label" position="1437,35" size="150,28" font="Regular; 28" backgroundColor="background20" foregroundColor="bernstein" transparent="1" halign="left" valign="center">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">InMinutes</convert>
+    </widget>
+    <widget alphatest="blend" name="timeline0" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <widget alphatest="blend" name="timeline1" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <widget alphatest="blend" name="timeline2" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <widget alphatest="blend" name="timeline3" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <widget alphatest="blend" name="timeline4" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <widget alphatest="blend" name="timeline5" pixmap="epg/timeline.png" position="20,172" size="1,735" zPosition="2" />
+    <eLabel text="zurück / jetzt" position="70,925" size="190,35" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="Zeitraum vor" position="307,925" size="180,35" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="Seite Vor/Zurück" position="832,925" size="230,35" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="Zeilen Verdoppeln" position="534,925" size="250,35" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="+ 24 Stunden" position="1697,925" size="200,35" backgroundColor="black" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="Favoritenliste" position="1399,925" size="190,35" backgroundColor="black" font="Regular; 27" transparent="1" halign="left" valign="center" foregroundColor="bluetitle" />
+    <eLabel text="CH +/-" position="1597,925" size="100,35" font="Arial; 28" halign="center" transparent="1" valign="center" />
+    <widget name="bouquetlist" position="10,25" size="450,50" zPosition="1" itemHeight="36" font="Regular;34" halign="left" valign="center" foregroundColor="white" foregroundColorSelected="bluetitle" backgroundColor="black" backgroundColorSelected="bluelabel" transparent="1" scrollbarMode="showNever" />
+    <widget name="timeline_text" position="22,124" size="1875,32" itemHeight="35" TimelineFont="Regular;30" TimelineAlignment="left" zPosition="1" transparent="1" />
+    <widget name="list" position="22,172" size="1875,735" itemHeight="473" ServiceFontGraphical="Regular;30" EntryFontGraphical="Regular;29" ServiceForegroundColor="grey" ServiceForegroundColorNow="foregroundClock" ServicebackgroundColor="black" ServiceBackgroundColorNow="bluelabel" EntryForegroundColor="white" EntryForegroundColorSelected="foregroundClock" EntrybackgroundColor="darkgrey" EntryBackgroundColorSelected="darkbluelabel" EntryBackgroundColorNow="backgroundBlue" EntryBackgroundColorNowSelected="black" EntryForegroundColorNow="grey" EntryForegroundColorNowSelected="foregroundClock" ServiceBorderColor="grey" ServiceBorderWidth="1" ServiceNamePadding="3" EntryBorderColor="grey" EventBorderWidth="1" EventNamePadding="3" RecordForegroundColor="yellow" RecordForegroundColorSelected="red" RecordBackgroundColor="black" RecordBackgroundColorSelected="darkgrey" ZapForegroundColor="white" ZapBackgroundColor="black" ZapForegroundColorSelected="foregroundClock" ZapBackgroundColorSelected="dark" enableWrapAround="1" scrollbarMode="showNever" transparent="0" />
+    <widget name="timeline_now" position="20,161" zPosition="2" size="24,756" pixmap="epg/timeline-now-xxl.png" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_red.png" position="23,1018" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_green.png" position="285,1018" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="590,1020" size="35,35" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_blue.png" position="806,1018" size="35,35" alphatest="blend" />
+    <ePixmap position="1290,924" size="36,36" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
+    <ePixmap position="1360,924" size="36,36" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
+    <ePixmap position="1775,1011" size="60,50" zPosition="10" pixmap="buttons/key_info.png" transparent="1" alphatest="on" />
+    <ePixmap position="1847,1011" size="60,50" zPosition="10" pixmap="buttons/key_menu.png" transparent="1" alphatest="on" />
+    <widget name="key_red" position="67,1000" size="200,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_green" position="330,1000" size="240,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_yellow" position="635,1000" size="160,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="black" transparent="1" />
+    <widget name="key_blue" position="853,1000" size="400,70" zPosition="1" valign="center" font="Regular; 30" halign="left" backgroundColor="black" transparent="1" />
+    <ePixmap pixmap="menu/line1880.png" position="22,158" size="1875,1" alphatest="blend" zPosition="6" />
+    <ePixmap pixmap="menu/line1880.png" position="22,919" size="1875,2" alphatest="blend" zPosition="6" />
+    <ePixmap pixmap="buttons/key_5.png" position="28,924" size="35,35" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_6.png" position="266,924" size="35,35" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_7.png" position="492,924" size="35,35" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_9.png" position="1069,924" size="35,35" alphatest="blend" zPosition="1" />
+    <ePixmap pixmap="buttons/key_8.png" position="790,924" size="35,35" alphatest="blend" zPosition="1" />
+    <widget name="primetime" position="1110,925" size="180,35" font="Regular; 27" transparent="1" foregroundColor="bluetitle" />
+    <widget name="page" position="907,355" size="0,0" font="Regular;27" transparent="1" />
+    <widget name="change_bouquet" position="733,395" size="1,1" backgroundColor="black" foregroundColor="bernstein" font="Regular; 27" transparent="1" />
+    <widget name="jump" position="1536,1018" size="0,0" backgroundColor="black" font="Regular;27" transparent="1" />
+    <eLabel text="0" position="1323,923" size="40,35" font="Arial; 35" halign="center" transparent="1" valign="center" />
+  <eLabel name="" position="1806,0" size="110,85" backgroundColor="black" zPosition="-1" />
+ <eLabel text="Sender:" position="1270,1019" size="190,34" font="Regular; 30" halign="left" valign="center" backgroundColor="black" transparent="1" />
+ </screen>
+   </skin>
