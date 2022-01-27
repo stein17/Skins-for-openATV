@@ -1,0 +1,104 @@
+<skin>
+   <!-- ChannelSelection_3 Fields -->
+<screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+    <widget source="ServiceEvent" render="Label" position="575,110" size="55,20" font="Regular;18" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" halign="left" valign="center">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="745,110" size="55,20" font="Regular;18" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" valign="center" halign="right">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+<!--     <widget font="Regular;18" borderColor="black" borderWidth="1" halign="right" position="800,110" render="Label" size="85,20" source="session.Event_Now" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">InMinutes</convert>
+    </widget> -->
+	
+	<widget font="Regular;18" borderColor="black" borderWidth="1" halign="right" position="795,110" render="Label" size="90,20" source="ServiceEvent" transparent="1" foregroundColor="lightblue" backgroundColor="background">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+	
+	
+    <!--     <widget name="list" position="20,70" size="800,552" scrollbarMode="showOnDemand" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" colorEventProgressbar="selectedFG" colorEventProgressbarBorder="verygrey" colorEventProgressbarBorderSelected="selectedFG" foregroundColorServiceNotAvail="lila" foregroundColorSelected="selectedFG"  serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" /> -->
+    <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="575,135" size="310,220" font="Regular; 20" foregroundColor="white" transparent="1" halign="left" valign="top">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" render="BlueASingleEpgListFull" position="910,305" size="350,355" noWrap="1" itemHeight="24" font="Regular;19" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="black" transparent="1" zPosition="5" />
+    <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="125,632" size="760,30" font="Regular; 22" foregroundColor="green" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+      <convert type="BlueAPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="Title" render="Label" position="30,6" size="760,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="730,681" size="35,35" zPosition="2" transparent="1">
+      <convert type="ServiceInfo">IsStream</convert>
+      <convert type="ConditionalShowHide">
+      </convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="730,681" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="730,681" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="730,681" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="25,632" size="25, 25" />
+    <widget source="ServiceEvent" render="BlueAFrontend" position="768,687" zPosition="1" valign="center" size="350,26" font="Regular; 20" backgroundColor="black" transparent="1" halign="left" />
+    <ePixmap pixmap="buttons/key_red.png" position="15,692" size="16,16" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="180,692" size="16,16" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="385,692" size="16,16" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="560,692" size="16,16" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="886,69" zPosition="10" size="20,594" />
+<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="554,69" zPosition="10" size="20,556" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="18,625" zPosition="10" size="865,3" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="575,130" zPosition="10" size="311,3" />
+<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="575,360" zPosition="10" size="311,3" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="575,105" zPosition="10" size="311,3" />
+<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="575,395" zPosition="10" size="311,3" />
+    <widget name="key_red" position="35,687" size="140,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="200,687" size="180,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_yellow" position="405,687" size="150,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_blue" position="580,687" size="150,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <panel name="template_VideoPicture_wizard" />
+    <panel name="template_title_date" />
+    <panel name="template_background_full_black" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="Channel_Selection_List_Color0" />
+    <panel name="template_progress_channelselection0" />
+<widget source="ServiceEvent" render="Picon" position="57,628" size="61,34" zPosition="5" alphatest="blend" transparent="1">
+      <convert type="BlueARefString">ServicelistRef</convert>
+    </widget>
+<widget source="ServiceEvent" render="Progress" position="630,113" size="115,10" pixmap="BG-Pixmaps/Progress/progress_EPG_blue.png" alphatest="blend" transparent="1" zPosition="1" borderWidth="2" borderColor="scrollbarborder">
+    <convert type="EventTime">Progress</convert>
+</widget>
+	
+	
+<widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=1000,always=0" position="635,370" zPosition="1" size="250,24" font="Regular; 20" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="selectedFG">
+  <convert type="BlueAServiceNameEventNobile">NextEvent</convert>
+</widget>
+<!-- <widget source="ServiceEvent" render="Label" position="575,370" zPosition="1" size="55,24" font="Regular; 20" halign="center" backgroundColor="background" transparent="1" foregroundColor="white">
+    <convert type="SteampunkServiceNameEventNobile">StartTime</convert>
+  </widget> -->
+<widget source="ServiceEvent" render="Label" position="575,75" size="310,32" font="Regular; 22" foregroundColor="selectedFG" backgroundColor="black" halign="center" valign="center" transparent="1" zPosition="6">
+  <convert type="ServiceName">Name</convert>
+</widget>
+<widget source="ServiceEvent" render="BlueARunningText" options=" movetype=running,startdelay=8000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="575,400" size="310,220" font="Regular; 20" foregroundColor="white" transparent="1" halign="left" valign="top">
+  <convert type="BlueAServiceNameEventNobile">ExtendedDescription</convert>
+</widget>
+
+
+  <widget source="ServiceEvent" position="575,370" zPosition="1" size="60,24" font="Regular;20" borderColor="black" borderWidth="1" render="Label" halign="center" backgroundColor="background" transparent="1" foregroundColor="lightblue">
+    <convert type="BlueAServiceNameEventNobile">StartTime</convert>
+  </widget>
+
+
+<widget name="list" zPosition="12" position="20,75" size="540,550" listMarginLeft="5" listMarginRight="18" alphatest="blend" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="2" serviceItemHeight="30" serviceNumberFont="Regular;18" serviceNameFont="Regular;20" serviceInfoFont="Regular;18" progressInfoFont="Regular;18" transparent="1" colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" scrollbarSliderBorderWidth="2" scrollbarWidth="10" scrollbarSliderForegroundColor="scrollbarcolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" progressPercentWidth="100" colorServiceDescription="white" colorServiceDescriptionSelected="cyan" colorEventProgressbarBorder="scrollbarborder" colorEventProgressbarBorderSelected="scrollbarcolor" backgroundColor="background" backgroundColorSelected="black" foregroundColor="selectedFG" foregroundColorSelected="white" picServiceEventProgressbar="BlueAccents-HD/BG-Pixmaps/Progress/progress_CS_blue.png" />
+  </screen>
+ </skin>

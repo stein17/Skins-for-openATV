@@ -1,0 +1,65 @@
+<skin>
+  <!-- skin_infobar_digital_more -->
+  <screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar" backgroundColor="transparent">
+    <widget source="session.CurrentService" render="Label" position="4,640" size="55,20" font="Regular; 20" halign="right" valign="center" transparent="1" backgroundColor="background">
+      <convert type="ServiceInfo">VideoWidth</convert>
+    </widget>
+    <eLabel text="x" position="60,640" size="20,20" font="Regular; 20" halign="center" valign="center" transparent="1" backgroundColor="background" />
+    <widget source="session.CurrentService" render="Label" position="81,640" size="55,20" font="Regular; 20" halign="left" valign="center" transparent="1" backgroundColor="background">
+      <convert type="ServiceInfo">VideoHeight</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1115,678" size="70,16" font="Regular; 16" foregroundColor="grey" backgroundColor="black" halign="left" valign="center" transparent="1">
+      <convert type="ServiceOrbitalPosition" />
+    </widget>
+    <widget font="Regular; 16" foregroundColor="grey" backgroundColor="black" halign="left" position="1115,699" render="Label" size="162,16" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+      <convert type="BlueAEmuInfo">Ecmtime</convert>
+    </widget>
+    <eLabel text="AGC:" font="Regular; 16" position="1115,657" size="40,16" foregroundColor="grey" backgroundColor="black" halign="left" transparent="1" zPosition="3" />
+    <widget source="session.FrontendStatus" font="Regular; 16" render="Label" position="1225,657" size="50,16" foregroundColor="grey" backgroundColor="black" halign="right" transparent="1" zPosition="3">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+    <eLabel text="SNR:" position="1115,636" size="40,16" font="Regular; 16" halign="left" valign="center" transparent="1" foregroundColor="grey" backgroundColor="black" />
+    <widget source="session.FrontendStatus" render="Label" position="1225,636" size="50,16" font="Regular; 16" valign="center" transparent="1" halign="right" foregroundColor="grey" backgroundColor="black">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <widget source="session.FrontendStatus" position="1153,664" size="80,6" render="Progress" borderWidth="1" borderColor="backgroundBlue" zPosition="4" pixmap="BG-Pixmaps/Progress/agc.png" alphatest="blend" transparent="1">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+    <widget source="session.FrontendStatus" position="1153,642" size="80,6" render="Progress" borderWidth="1" borderColor="backgroundBlue" zPosition="3" pixmap="BG-Pixmaps/Progress/snr.png" alphatest="blend" transparent="1">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <eLabel text="TYPE:" position="1185,678" size="45,16" font="Regular;16" halign="left" valign="center" backgroundColor="background" foregroundColor="grey" transparent="1" />
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="1230,678" valign="center" size="50,16" font="Regular;16" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-C" position="1230,678" valign="center" size="50,16" font="Regular;16" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-T" position="1230,678" valign="center" size="50,16" font="Regular;16" backgroundColor="background" foregroundColor="grey1" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="ATSC" position="1230,678" valign="center" size="50,16" font="Regular;16" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <eLabel name="" position="1192,642" size="3,6" zPosition="5" backgroundColor="black" />
+    <eLabel name="" position="1192,664" size="3,6" zPosition="5" backgroundColor="black" />
+<!--     <widget render="Progress" position="164,671" size="922,6" source="session.Event_Now" pixmap="BG-Pixmaps/Progress/progress_Infobar_blue.png" transparent="1" zPosition="7">
+      <convert type="EventTime">Progress</convert>
+    </widget> -->
+    <panel name="template_pixmap_infobar_more" />
+    <panel name="template_digitalclock_widget_infobar_more" />
+    <panel name="template_progress_infobar_more" />
+    <panel name="template_tunerinfo_12_tuner_infobar" />
+    <panel name="template_icons_infobar" />
+    <panel name="template_event_infobar_more" />
+    <panel name="template_Poster_Infobar_Now0" />
+  </screen>
+</skin>
