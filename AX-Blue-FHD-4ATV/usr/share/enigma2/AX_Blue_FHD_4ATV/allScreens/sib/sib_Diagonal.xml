@@ -4,7 +4,7 @@
  <widget source="session.CurrentService" render="Label" position="160,0" size="1000,95" font="Regular;40" halign="left" valign="center" foregroundColor="bluetitle" backgroundColor="black" transparent="1" zPosition="1">
   <convert type="AXBlueServiceName">Bouquet</convert>
 </widget>
-<widget alphatest="blend" position="30,22" render="AXBlueXPicon" size="100,56" source="Title" transparent="1" zPosition="5">
+<widget alphatest="blend" position="30,22" render="Picon" size="100,56" source="Title" transparent="1" zPosition="5">
   <convert type="AXBlueRefString">CurrentRef</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1188,30" size="600,40" font="Regular; 32" halign="right" foregroundColor="foregroundClock" backgroundColor="black" transparent="1">
@@ -31,7 +31,7 @@
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText">InMinutes</convert>
     </widget>
-    <widget source="session.CurrentService" render="AXBlueXPicon" position="1642,204" size="250,141" zPosition="6" transparent="1" alphatest="blend">
+    <widget source="session.CurrentService" render="Picon" position="1642,204" size="250,141" zPosition="6" transparent="1" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
     <ePixmap pixmap="icons/ico_hd_off.png" position="1541,1016" size="86,35" zPosition="1" alphatest="blend" />
@@ -255,7 +255,7 @@
    <eLabel text="Bouquet:" position="53,593" size="130,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="greenlight" />
    <eLabel text="Provider:" position="53,625" size="130,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="lightblue" />
    <eLabel text="CPU-usage:" position="53,857" size="155,30" font="Regular;24" halign="left" valign="center" noWrap="1" backgroundColor="background" transparent="1" foregroundColor="red" />
-  <!--  <eLabel text="HBBTV Info:" position="53,925" size="155,30" font="Regular; 24" halign="left" valign="center" noWrap="1" backgroundColor="background" foregroundColor="white" transparent="1" /> -->
+
    <eLabel text="TYPE:" position="53,891" size="70,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="green" transparent="1" />
     <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="123,891" valign="center" size="70,30" font="Regular;24" backgroundColor="background" foregroundColor="green" transparent="1" halign="left">
       <convert type="FrontendInfo">TYPE</convert>
@@ -316,13 +316,18 @@
 <!--    <widget source="session.CurrentService" render="AXBlueRunningText" options=" movetype=running,startdelay=2000,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="205,925" size="490,30" font="Regular; 24" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
       <convert type="AXBlueServiceInfo">HasHBBTV</convert>
    </widget> -->
+   <widget source="session.CurrentService" render="AXBlueRunningText" options=" movetype=running,startdelay=2000,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="205,925" size="490,30" font="Regular; 24" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
+      <convert type="AXBlueServiceInfo">HasHBBTV</convert>
+   </widget>
+    <!--  <eLabel text="HBBTV Info:" position="53,925" size="155,30" font="Regular; 24" halign="left" valign="center" noWrap="1" backgroundColor="background" foregroundColor="white" transparent="1" /> -->
+  <eLabel text="HBBTV Info:" position="53,925" size="155,30" font="Regular; 24" halign="left" valign="center" noWrap="1" backgroundColor="background" foregroundColor="white" transparent="1" />
    <!-- template_cpu_infobar  6.4-->
-   <eLabel text="CPU Temp:" position="307,857" size="140,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" />
-   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="450,857" size="100,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3"  />
+  <!--  <eLabel text="CPU Temp:" position="307,857" size="140,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3" />
+   <widget source="global.CurrentTime" render="AXBlueSYSTemp" position="450,857" size="100,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3"  /> -->
     <!-- template_cpu_infobar  6.5-->
-<!--    <widget source="global.CurrentTime" render="Label" position="307,857" size="330,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
+   <widget source="global.CurrentTime" render="Label" position="307,857" size="330,30" font="Regular;24" halign="left" valign="center" backgroundColor="background" foregroundColor="red" noWrap="1" transparent="1" zPosition="3">
     <convert type="AXBlueSTBinfo">CPUtemp</convert>
-  </widget> -->
+  </widget>
    <widget source="session.CurrentService" render="Label" position="205,857" size="100,30" zPosition="1" font="Regular; 24" halign="left" valign="center" noWrap="1" transparent="1" foregroundColor="red">
       <convert type="AXBlueCPUInfo">$0</convert>
    </widget>
