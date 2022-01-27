@@ -4,7 +4,7 @@
   <!--######################################### -->
   <!-- ATV AboutOE HD -->
   <screen name="AboutOE" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
-  <widget name="AboutScrollLabel" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" render="Listbox" position="50,195" size="680,445" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
+  <widget name="AboutScrollLabel" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" render="Listbox" position="50,195" size="680,445" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
   <ePixmap position="50,70" size="680,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
   <eLabel text="https://github.com/openatv" position="460,670" size="300,28" font="Regular;18" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="foreground" halign="right" transparent="1" zPosition="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-18-Steampunk.png" transparent="1" alphatest="blend" />
@@ -22,19 +22,19 @@
   <panel name="template_Steampunk_Background_Setup" />  
 </screen>
 <screen name="QuitMainloopScreen" position="center,50" size="1240,650" title="please wait..." backgroundColor="background">
-  <ePixmap pixmap="DEV/steampunk_wallpaper.png" position="center,center" size="1220,648"  alphatest="blend" zPosition="-20" />
+  <ePixmap pixmap="Steampunk/DEV/steampunk_wallpaper.png" position="center,center" size="1220,648"  alphatest="blend" zPosition="-20" />
   <widget name="text" position="432,135" size="535,308" font="Regular;30" halign="center" valign="center" foregroundColor="black" backgroundColor="brown2" transparent="1" zPosition="1" />
-  <ePixmap pixmap="DEV/start_atv1.png" position="center,480" size="800,132" alphatest="blend" zPosition="-15" />
-  <ePixmap pixmap="DEV/atv_logo.png" position="1046,26" size="165,75" alphatest="blend" zPosition="3" />
+  <ePixmap pixmap="Steampunk/DEV/start_atv1.png" position="center,480" size="800,132" alphatest="blend" zPosition="-15" />
+  <ePixmap pixmap="Steampunk/DEV/atv_logo.png" position="1046,26" size="165,75" alphatest="blend" zPosition="3" />
 </screen>
 <screen name="TranslationInfo" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
   <eLabel text="openATV" position="460,10" size="200,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
   <eLabel text="https://github.com/openatv" position="770,670" size="350,28" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="lightblue" halign="right" transparent="1" zPosition="1" />
-  <eLabel position="50,70" size="380,30" font="Regular;23" borderColor="black" borderWidth="1" text="Translation:" foregroundColor="selectedFG" transparent="1" />
+  <eLabel position="50,70" size="380,30" font="Regular;23" borderColor="black" borderWidth="1" text="Translation:" foregroundColor="selFG" transparent="1" />
   <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
   <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
   <widget name="key_red" position="52,689" size="164,22" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget source="TranslatorName" render="Label" position="50,105" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selectedFG" transparent="1" />
+  <widget source="TranslatorName" render="Label" position="50,105" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selFG" transparent="1" />
   <widget source="TranslationInfo" render="Label" position="50,140" size="680,490" font="Regular;24" borderColor="black" borderWidth="1" transparent="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icons-Rechts-10-Steampunk.png" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
@@ -53,37 +53,34 @@
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-09-Steampunk.png" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,190" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_title_date" />
-  <panel name="template_name_red_o_yellow" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_exit_1280" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
-
-</screen>
+  </screen>
   <screen name="Devices" position="0,0" size="1280,720" title="SystemInfo" flags="wfNoBorder" backgroundColor="background">
     <ePixmap position="803,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-14-Steampunk.png" alphatest="blend" transparent="1" />
     <!--     <widget source="TunerHeader" render="Label" position="50,70" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" zPosition="1" transparent="1" />
     <widget source="nims" render="Label" position="50,100" size="680,160" font="Regular;22" borderColor="black" borderWidth="1" zPosition="1" enableWrapAround="0" transparent="1" />
-    <widget source="HDDHeader" render="Label" position="50,270" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" zPosition="1" foregroundColor="selectedFG" transparent="1" />
+    <widget source="HDDHeader" render="Label" position="50,270" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" zPosition="1" foregroundColor="selFG" transparent="1" />
     <widget source="hdd" render="Label" position="50,310" size="680,160" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" zPosition="1" enableWrapAround="0" />
-    <widget source="MountsHeader" render="Label" position="50,490" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" zPosition="1" foregroundColor="selectedFG" transparent="1" />
+    <widget source="MountsHeader" render="Label" position="50,490" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" zPosition="1" foregroundColor="selFG" transparent="1" />
     <widget source="mounts" render="Label" position="50,530" size="680,140" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" zPosition="1" enableWrapAround="0" /> -->
-    <widget name="allinonedevices" position="50,70" size="680,570" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="allinonedevices" position="50,70" size="680,570" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <panel name="template_title_date" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-
- </screen>
+  </screen>
   <screen name="SystemMemoryInfo" position="0,0" size="1280,720" title="SystemInfo" flags="wfNoBorder" backgroundColor="background">
-    <widget name="AboutScrollLabel" position="50,150" size="680,490" font="Regular;24" borderColor="black" borderWidth="1" zPosition="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
-    <widget name="AboutScrollLabel" position="50,70" size="680,570" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="AboutScrollLabel" position="50,150" size="680,490" font="Regular;24" borderColor="black" borderWidth="1" zPosition="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
+    <widget name="AboutScrollLabel" position="50,70" size="680,570" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icons-Rechts-08-Steampunk.png" alphatest="blend" transparent="1" />
     <panel name="template_title_date" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-
- </screen>
+  </screen>
   <screen name="SystemNetworkInfo" position="0,0" size="1280,720" title="SystemInfo" flags="wfNoBorder" backgroundColor="background">
     <widget name="AboutScrollLabel" position="50,70" size="680,330" valign="left" font="Regular;22" borderColor="black" borderWidth="1" transparent="1" />
     <widget source="IFtext" render="Label" position="50,460" size="140,30" zPosition="10" font="Regular;22" borderColor="black" borderWidth="1" halign="left" transparent="1" />
@@ -110,11 +107,11 @@
  </screen>
   <screen name="DeviceBrowser" position="center,center" size="1280,720" title="Please select target medium" flags="wfNoBorder" backgroundColor="background">
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-21-Steampunk.png" alphatest="blend" transparent="1" />  <widget source="message" render="Label" position="50,465" size="680,170" font="Regular;16" borderColor="black" borderWidth="1" transparent="1" />
-  <widget name="filelist" position="50,70" size="680,390" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1" />
+  <widget name="filelist" position="50,70" size="680,390" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" transparent="1" />
   <eLabel text="https://github.com/openatv" position="704,670" size="350,28" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="lightblue" halign="right" transparent="1" zPosition="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,460" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_title_date" />
-  <panel name="template_name_red_green" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
@@ -133,9 +130,9 @@
   <screen name="QuickMenu" position="0,0" size="1280,720" title="Quick Launch Menu" flags="wfNoBorder" backgroundColor="background">
     <widget name="list" position="50,70" size="385,570" itemHeight="50" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showNever" transparent="1" backgroundColor="background" />
     <widget name="sublist" position="445,70" size="385,570" itemHeight="50" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showNever" transparent="1" backgroundColor="background" />
-    <widget name="description" position="890,320" size="325,320" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+    <widget name="description" position="890,320" size="325,320" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
     <eLabel text="Quick Launch Menu" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <panel name="template_name_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_pig_smal" />
     <panel name="template_Steampunk_Background_Channel" />  
   </screen>
@@ -165,7 +162,7 @@
     <panel name="template_Steampunk_Background_Setup" />  
   </screen>
   <screen name="dBackupConfiguration" position="0,0" size="1280,720" title="dBackup Configuration" flags="wfNoBorder" backgroundColor="background">
-    <widget name="config" position="50,70" size="680,510" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="config" position="50,70" size="680,510" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_green.png" position="250,667" size="30,30" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_yellow.png" position="460,667" size="30,30" alphatest="blend" transparent="1" />
@@ -182,7 +179,7 @@
     <panel name="template_ok_exit_1280" />
   </screen>
   <screen name="dBackupChecking" position="0,0" size="1280,720" title="choose NAND Flash Check" flags="wfNoBorder" backgroundColor="background">
-    <widget name="menu" position="50,70" size="680,510" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="menu" position="50,70" size="680,510" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_green.png" position="250,667" size="30,30" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_yellow.png" position="460,667" size="30,30" alphatest="blend" transparent="1" />
@@ -220,13 +217,13 @@
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-38-Steampunk.png" transparent="1" alphatest="blend" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_title_date" />
-  <panel name="template_name_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
   </screen>
   <!-- TaskListScreen -->
   <screen name="TaskListScreen" position="0,0" size="1280,720" flags="wfNoBorder" title="Task list" backgroundColor="background">
-    <widget source="tasklist" render="Listbox" position="50,70" size="680,570" itemHeight="90" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" transparent="1">
+    <widget source="tasklist" render="Listbox" position="50,70" size="680,570" itemHeight="90" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  backgroundColor="background" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (5, 1), size = (690, 60), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # name
@@ -249,36 +246,36 @@
   </screen>
   <!-- Multiboot Selector -->
   <screen name="MultiBootSelector" position="0,0" size="1280,720" flags="wfNoBorder" title="Multiboot Image Selector" backgroundColor="background">
-  <widget source="description" render="Label" position="50,70" size="680,110" itemHeight="30" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" halign="center" />
+  <widget source="description" render="Label" position="50,70" size="680,110" itemHeight="30" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" halign="center" />
   <widget name="config" position="50,300" size="680,330" zPosition="1" transparent="1" alphatest="blend" font="Regular;22" borderColor="black" borderWidth="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-27-Steampunk.png" transparent="1" alphatest="blend" />
   <widget source="options" render="Label" position="50,185" size="680,110" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="green" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,180" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,295" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_title_date" />
-  <panel name="template_source_red_green" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
   </screen>
   <!-- MultiBootWizard -->
   <screen name="MultiBootWizard" position="0,0" size="1280,720" flags="wfNoBorder" title="MultiBoot maintenance" backgroundColor="background">
   <eLabel text="Manage your images in the multiboot" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-  <widget source="description" render="Label" position="50,70" size="680,30" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="center" />
+  <widget source="description" render="Label" position="50,70" size="680,30" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" backgroundColor="background" foregroundColor="selFG" transparent="1" halign="center" />
   <widget name="config" position="50,190" size="680,440" zPosition="1" transparent="1" alphatest="blend" font="Regular;22" borderColor="black" borderWidth="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-23-Steampunk.png" transparent="1" alphatest="blend" />
   <widget source="options" render="Label" position="50,120" size="680,60" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="green" halign="left" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,180" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_date" />
-  <panel name="template_source_red_green" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
  </screen>
   <!-- MultiBoot StartupOPT -->
   <screen name="MultiBootStartupOPT" position="0,0" size="1280,720" backgroundColor="black" title="MultiBoot STARTUP Selector" flags="wfNoBorder" zPosition="9">
     <widget source="config" render="Label" position="50,70" size="680,36" itemHeight="40" valign="center" halign="center" font="Regular; 28" enableWrapAround="1" transparent="1" scrollbarMode="showOnDemand" foregroundColor="black" backgroundColor="white" />
-    <eLabel text="Press left/right to select Image" backgroundColor="background" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selectedFG" halign="left" position="120,120" size="600,29" transparent="1" zPosition="3" />
-    <eLabel text="Press up/down to select Bootoption (Standard/Experimental)" backgroundColor="background" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selectedFG" halign="left" position="120,240" size="610,29" transparent="1" zPosition="3" />
+    <eLabel text="Press left/right to select Image" backgroundColor="background" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selFG" halign="left" position="120,120" size="600,29" transparent="1" zPosition="3" />
+    <eLabel text="Press up/down to select Bootoption (Standard/Experimental)" backgroundColor="background" font="Regular;22" borderColor="black" borderWidth="1" foregroundColor="selFG" halign="left" position="120,240" size="610,29" transparent="1" zPosition="3" />
     <widget source="options" render="Label" position="50,160" size="680,36" halign="center" valign="center" font="Regular; 28" backgroundColor="white" foregroundColor="black" transparent="1" />
     <widget name="description" position="50,280" size="680,50" halign="center" valign="center" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="green" transparent="1" />
     <ePixmap position="53,120" size="62,28" zPosition="10" pixmap="buttons/key_leftright.png" transparent="1" alphatest="blend" />
@@ -290,7 +287,7 @@
     <panel name="template_title_date" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
-    <panel name="template_source_red_o_yellow" />
+    <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
   <!-- MultiBoot Startup -->
   <screen name="MultiBootStartup" position="center,200" size="680,265" title="" backgroundColor="background">
@@ -316,27 +313,16 @@
     <widget source="key_yellow" render="Label" position="462,230" size="170,25" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" noWrap="1" />
     <ePixmap pixmap="buttons/key_leftright.png" position="603,170" size="62,28" zPosition="10" transparent="1" alphatest="blend" />
   </screen>
-  <!-- SoftcamSetup -->
-<!--   <screen name="SoftcamSetup" position="0,0" size="1280,720" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
-    <widget name="config" position="50,70" size="680,490" enableWrapAround="1" itemHeight="30" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" zPosition="1" transparent="1" />
-    <widget name="info" position="50,335" size="680,300" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" />
-    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-42-Steampunk.png" transparent="1" alphatest="blend" />
-    <panel name="template_exit_1280" />
-    <panel name="template_title_date" />
-    <panel name="template_source_red_green_blue" />
-    <panel name="template_pig_menu" />
-    <panel name="template_Steampunk_Background_Setup" />  
-  </screen> -->
-  <!-- SoftcamSetup -->
+
   <!-- ATV FlashOnline HD -->
   <screen name="FlashOnline" position="center,center" size="1280,720" title="Flash Online" flags="wfNoBorder" backgroundColor="background">
   <ePixmap position="50,70" size="680,120" pixmap="DEV/Logo_OpenATV.png" alphatest="blend" transparent="1" />
-  <widget name="list" position="50,195" size="680,445" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" valign="top" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="list" position="50,195" size="680,445" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" valign="top" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <widget name="description" position="805,650" zPosition="1" size="415,24" font="Regular;20" borderColor="black" borderWidth="1" halign="left" valign="top" transparent="1" />
   <ePixmap position="805,379" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-20-Steampunk.png" transparent="1" alphatest="blend" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,190" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <panel name="template_title_date" />
-  <panel name="template_source_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
@@ -344,20 +330,152 @@
   <!-- ATV doFlashImage HD  -->
   <screen name="doFlashImage" position="center,center" size="1280,720" title="Flash On the fly (select a image)" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="Flash On the fly (select a image)" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="imageList" position="50,70" size="680,570" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1" />
+    <widget name="imageList" position="50,70" size="680,570" zPosition="1" font="Regular;22" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" transparent="1" />
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-14-Steampunk.png" transparent="1" alphatest="blend" />
     <panel name="template_date" />
-    <panel name="template_name_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
   </screen>
+  <!--ATV New Screens Python3 -->
+    <!-- SoftcamSetup -->
+ <screen name="SoftcamSetup" position="0,0" size="1280,720" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
+    <widget name="info" position="60,160" size="680,300" font="Regular;22" zPosition="2" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="background" transparent="1" />
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-42-Steampunk.png" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="Steampunk/Skinparts/Line_Hor_680.png" position="50,135" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+    <panel name="template_exit_1280" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />
+    <panel name="template_setup_config" />
+  </screen>
+   <!--ATV HelpMenuNew -->
+  <screen name="HelpMenuNew" position="0,0" size="1280,720" title="Menu" flags="wfNoBorder" backgroundColor="background">
+    <widget name="description" position="1360,425" size="550,635" font="Regular;20" halign="center" valign="center" backgroundColor="background" transparent="1" zPosition="2" />
+   <widget source="list" render="Listbox" position="50,70" size="650,520" transparent="0" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" >
+			<convert type="TemplatedMultiContent">
+				{
+					"templates": {
+						# Simple help with no headings ("flat")
+						# data[1:] = [helpText]
+						"default": (56,[
+							MultiContentEntryText(pos=(5, 0), size=(640, 56), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
+							]
+						),
+						# Simple help with headings
+						# data[1:] = [heading, None]  # For heading entries
+						# data[1:] = [None, helpText]  # For help entries
+						"default+headings": (56,[
+							MultiContentEntryText(pos=(5, 0), size=(640, 56), font=0, color=0x0066ccff, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
+							MultiContentEntryText(pos=(28, 0), size=(612, 56), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=2),
+							]
+						),
+						# Extended help with no headings
+						# data[1:] = [helpText, extendedHelpText]
+						"extended": (170,[
+							MultiContentEntryText(pos=(5, 0), size=(640, 79), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
+							MultiContentEntryText(pos=(5, 80), size=(640, 90), color=0x009e9fa4, color_sel=0x009e9fa4, font=3, flags=RT_WRAP | RT_VALIGN_TOP, text=2),
+							],
+						),
+						# Extended help with headings
+						# data[1:] = [heading, None, None]  # For heading entries
+						# data[1:] = [None, helpText, extendedHelpText]  # For help entries
+						"extended+headings": (170,[
+							MultiContentEntryText(pos=(5, 0), size=(640, 170), font=0, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
+							MultiContentEntryText(pos=(28, 0), size=(612, 56), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=2),
+							MultiContentEntryText(pos=(28, 60), size=(612, 90), color=0x009e9fa4, color_sel=0x009e9fa4, font=3, flags=RT_WRAP | RT_VALIGN_TOP, text=3),
+							],
+						),
+					},
+					"fonts": [gFont("Regular", 30), gFont("Regular", 20), gFont("Regular", 24), gFont("Regular", 19)],
+					"itemHeight": 30
+				}
+			</convert>
+		</widget>
+    <widget name="buttonlist" position="50,615" size="780,30" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="2" transparent="1" foregroundColor="selFG" />
+    <ePixmap pixmap="menu/NFR_boot.png" position="971,398" size="150,150" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="Skinparts/Line_Hor.png" position="50,605" zPosition="2" size="780,3" alphatest="blend" transparent="1" />
+	<ePixmap position="1085,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/key_help.png" transparent="1" alphatest="blend" />
+    <panel name="template_title_date" />
+    <panel name="wizard_rc_templateNew" />
+    <panel name="template_pig_smal" />
+    <panel name="template_Steampunk_Background_Channel" />
+  </screen>
   <!--ATV SoftwarePanels HD -->
-  <screen name="SoftwarePanel" position="center,center" size="1280,720" title="SoftwarePanel" flags="wfNoBorder">
+  <screen name="HdmiCECSetup" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background">
+	<eLabel text="HDMI CEC Setup" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+	<widget name="setupimage" position="890,380" size="256,256" alphatest="blend" conditional="setupimage" transparent="1" zPosition="2" />
+	<widget source="current_address" render="Label" position="50,575" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
+	<widget source="fixed_address" render="Label" position="50,610" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
+	<panel name="template_date" />
+	<panel name="TemplateAllColorButtons_Automatic" />
+	<panel name="template_pig_menu" />
+	<panel name="template_Steampunk_Background_Setup" />  
+    <panel name="template_setup_config" /> 
+ </screen>
+ <!-- Icons PACK_AVAILABLE, PACK_INSTALLED, PACK_IN_USE -->
+ <!-- LocaleSelection -->
+ <screen name="LocaleSelection" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background">
+  <widget name="icons" position="0,0" size="49,24" pixmaps="icons/menu_down.png,icons/menu_off.png,icons/menu_on.png" alphatest="blend" />
+  <widget source="locales" render="Listbox" zPosition="3" position="50,70" size="695,570" font="Regular; 20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  backgroundColor="background" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{
+				"template":
+					[
+					MultiContentEntryPixmapAlphaBlend(pos = (3, 3), size = (56, 28), flags = BT_SCALE, png = 0),  # Flag.
+					MultiContentEntryText(pos = (75, 0), size = (255, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),  # Language name (Native).
+					MultiContentEntryText(pos = (330, 0), size = (220, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),  # Lanuage name (English).
+					# MultiContentEntryText(pos = (550, 0), size = (75, 34), font = 0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 3),  # Locale name.
+					MultiContentEntryText(pos = (550, 0), size = (75, 34), font = 0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 4),  # Package name.
+					MultiContentEntryPixmapAlphaBlend(pos = (620, 6), size = (49, 24), flags = BT_SCALE, png = 5)  # Status icon.
+					],
+				"fonts": [gFont("Regular",20)],
+				"itemHeight": 34
+				}
+			</convert>
+		</widget>
+ 
+    <widget source="description" render="Label" position="805,375" size="415,260" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_ok_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />
+  </screen>
+  <screen name="Opkg" position="0,0" size="1280,720" title="Installing Software..." flags="wfNoBorder" backgroundColor="background">
+    <eLabel text="Installing Software..." position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="activityslider" position="50,160" size="680,20" borderColor="grey" foregroundColor="selFG" borderWidth="2" transparent="1" />
+    <widget name="package" position="50,280" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
+    <widget name="status" position="50,330" size="680,30" font="Regular;20" borderColor="black" borderWidth="1" transparent="1" />
+    <widget name="slider" position="50,460" size="680,20" borderColor="grey" foregroundColor="selFG" borderWidth="2" transparent="1" />
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icons-Rechts-09-Steampunk.png" transparent="1" alphatest="blend" />
+    <panel name="template_date" />
+    <panel name="template_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />
+  </screen>
+  <screen name="RunSoftwareUpdate" position="0,0" size="1280,720" title="Software Update..." flags="wfNoBorder" backgroundColor="background">
+    <widget name="activity" position="60,80" size="660,10" borderColor="grey" foregroundColor="selectedFG" borderWidth="2" />
+    <widget name="update" position="50,105" size="680,530" itemHeight="50" font="Regular; 24" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-22-Steampunk.png" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+    <panel name="template_ok_exit_1280" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />
+  </screen>
+	
+	
+	 <!--ATV SoftwarePanels HD -->
+   <screen name="SoftwarePanel" position="center,center" size="1280,720" title="SoftwarePanel" flags="wfNoBorder">
     <eLabel text="Software Panel" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="packagetext" position="70,80" size="350,30" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="right" transparent="1" />
     <widget name="packagenr" position="422,80" size="50,30" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="right" transparent="1" />
-    <widget source="list" render="Listbox" position="50,130" size="680,510" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" backgroundColor="background" transparent="1">
+    <widget source="list" render="Listbox" position="50,130" size="680,510" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" backgroundColor="background" transparent="1">
       <convert type="TemplatedMultiContent">{"template": [
 							MultiContentEntryText(pos = (5, 1), size = (540, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (5, 26), size = (540, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
@@ -372,19 +490,64 @@
     <widget name="a_red" position="850,421" zPosition="1" size="36,97" pixmap="icons/ared.png" alphatest="on" />
     <widget name="a_yellow" position="850,421" zPosition="1" size="36,97" pixmap="icons/ayellow.png" alphatest="on" />
     <widget name="a_green" position="850,421" zPosition="1" size="36,97" pixmap="icons/agreen.png" alphatest="on" />
-    <widget name="feedstatusGREEN" position="900,425" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatusOFF" position="900,455" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatusGREEN" position="900,485" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
     <widget name="feedstatusYELLOW" position="900,455" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
-    <widget name="feedstatusRED" position="900,485" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatusRED" position="900,425" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
     <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-    <widget name="key_green_pic" pixmap="icons/lock_on.png" position="478,80" size="32,31" alphatest="blend" zPosition="1" />
     <panel name="template_date" />
-    <panel name="template_name_red_green" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
   </screen>
+  
+  <screen name="SoftwareUpdate" position="center,center" size="1280,720" title="Software Update" flags="wfNoBorder">
+    <eLabel text="SoftwareUpdate" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="package_text" position="70,80" size="350,30" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="right" transparent="1" />
+    <widget name="package_count" position="422,80" size="50,30" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="right" transparent="1" />
+    <widget source="list" render="Listbox" position="50,150" size="680,490" scrollbarMode="showOnDemand" sliderPixmap="Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" backgroundColor="background" transparent="1">
+      <convert type="TemplatedMultiContent">{"template": [
+							MultiContentEntryText(pos = (5, 1), size = (540, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+							MultiContentEntryText(pos = (5, 26), size = (540, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
+							MultiContentEntryPixmapAlphaTest(pos = (545, 2), size = (48, 48), png = 4), # index 4 is the status pixmap
+							MultiContentEntryPixmapAlphaTest(pos = (5, 50), size = (610, 2), png = 5), # index 4 is the div pixmap
+						],
+					"fonts": [gFont("Regular", 22),gFont("Regular", 14)],
+					"itemHeight": 52
+					}</convert>
+    </widget>
+    <widget name="traffic_off" position="850,401" zPosition="1" size="36,97" pixmap="icons/aoff.png" alphatest="on" />
+    <widget name="traffic_red" position="850,401" zPosition="1" size="36,97" pixmap="icons/ared.png" alphatest="on" />
+    <widget name="traffic_yellow" position="850,401" zPosition="1" size="36,97" pixmap="icons/ayellow.png" alphatest="on" />
+    <widget name="traffic_green" position="850,401" zPosition="1" size="36,97" pixmap="icons/agreen.png" alphatest="on" />
+    <widget name="feedstatus_yellow" position="900,435" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatus_green" position="900,465" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatus_yellow" position="900,435" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <widget name="feedstatus_red" position="900,405" size="200,28" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left" transparent="1" />
+    <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+    <widget name="feedmessage" position="805,510" size="415,130" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
+    <widget name="activity" position="70,120" size="400,10" foregroundColor="selFG" borderWidth="2" borderColor="grey" />
+    <panel name="template_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
+  </screen>
+  <screen name="NetworkSATPI" title="SATPI Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
+    <widget name="lab1" position="100,130" size="150,30" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="left" transparent="1" />
+    <widget name="labactive" position="320,130" size="172,30" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="center" zPosition="2" />
+    <widget name="lab2" position="100,190" size="150,30" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="left" transparent="1" />
+    <widget name="labstop" position="320,190" size="172,30" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="center" backgroundColor="red" zPosition="1" />
+    <widget name="labrun" position="320,190" size="172,30" font="Regular;22" borderColor="black" borderWidth="1" valign="center" halign="center" backgroundColor="selFG" zPosition="2" />
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-19-Steampunk.png" transparent="1" alphatest="blend" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />
+  </screen>
+  <!--END ATV New Screens Python3 -->
   <!--ATV Update Plugin Menu HD -->
   <screen name="UpdatePluginMenu" position="0,0" size="1280,720" title="Softwaremanager..." flags="wfNoBorder" backgroundColor="background">
-  <widget source="menu" render="Listbox" position="50,195" size="680,445" backgroundColor="background" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" transparent="1">
+    <widget source="menu" render="Listbox" position="50,195" size="680,445" backgroundColor="background" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" transparent="1">
     <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (15, 5), size = (700, 34), flags = RT_HALIGN_LEFT, text = 1), # index 0 is the MenuText,
@@ -393,9 +556,9 @@
 				"itemHeight": 42
 				}
 			</convert>
-  </widget>
-  <widget source="menu" render="Listbox" position="805,375" size="415,260" zPosition="3" scrollbarMode="showNever" selectionDisabled="1" backgroundColor="background" foregroundColor="selectedFG" transparent="1">
-  <convert type="TemplatedMultiContent">
+    </widget>
+    <widget source="menu" render="Listbox" position="805,375" size="415,260" zPosition="3" scrollbarMode="showNever" selectionDisabled="1" backgroundColor="background" foregroundColor="selFG" transparent="1">
+    <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (0, 0), size = (415, 260), flags = RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, text = 2), # index 2 is the Description,
 					],
@@ -404,18 +567,18 @@
 				}
 			</convert>
      </widget>
-  <ePixmap position="50,70" size="680,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
-  <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
-  <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" noWrap="1" />
-  <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,190" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_menu_exit_1280" />
-  <panel name="template_title_date" />
-  <panel name="template_pig_menu" />
-  <panel name="template_Steampunk_Background_Setup" />  
+    <ePixmap position="50,70" size="680,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" transparent="1" valign="center" noWrap="1" />
+    <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,190" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+    <panel name="template_menu_exit_1280" />
+    <panel name="template_title_date" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
   </screen>
   <!--ATV HddMount HD -->
   <screen name="HddMount" position="0,0" size="1280,720" title="Mount Manager" flags="wfNoBorder" backgroundColor="background">
-  <widget source="list" render="Listbox" position="50,105" size="680,530" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown">
+    <widget source="list" render="Listbox" position="50,105" size="680,530" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5" >
     <convert type="TemplatedMultiContent">
 				{"template": [
 				 MultiContentEntryText(pos = (90, 0), size = (600, 30), font=0, text = 0),
@@ -426,44 +589,44 @@
 				"itemHeight": 85
 				}
 			</convert>
-  </widget>
-  <widget name="lab1" zPosition="2" position="50,70" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" halign="center" transparent="1" />
-  <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-18-Steampunk.png" transparent="1" alphatest="blend" />
-  <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_title_date" />
-  <panel name="template_source_red_o_blue" />
-  <panel name="template_exit_1280" />
-  <panel name="template_pig_menu" />
-  <panel name="template_Steampunk_Background_Setup" />  
-</screen>
-<screen name="ChoiceBox" position="0,0" size="1280,720" flags="wfNoBorder">
- <widget source="windowtitle" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
- <widget source="Title" render="Label" position="50,70" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1" />
- <widget name="text" position="50,105" size="680,140" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" zPosition="10" foregroundColor="selectedFG" backgroundColor="background" />
- <widget name="list" position="50,250" size="680,380" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" itemHeight="35" enableWrapAround="1" backgroundColor="background" transparent="1" />
- <ePixmap position="805,379" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-32-Steampunk.png" transparent="1" alphatest="blend" />
- <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
- <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,245" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_date" />
-  <panel name="template_menu_ok_exit_1280" />
-  <panel name="template_pig_menu" />
-  <panel name="template_Steampunk_Background_Setup" />  
+    </widget>
+    <widget name="lab1" zPosition="2" position="50,70" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" backgroundColor="background" halign="center" transparent="1" />
+    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-18-Steampunk.png" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_exit_1280" />
+    <panel name="template_pig_menu" />
+    <panel name="template_Steampunk_Background_Setup" />  
+  </screen>
+  <screen name="ChoiceBox" position="0,0" size="1280,720" flags="wfNoBorder">
+   <widget source="windowtitle" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+   <widget source="Title" render="Label" position="50,70" size="680,30" font="Regular;22" borderColor="black" borderWidth="1" halign="left" valign="center" foregroundColor="selFG" backgroundColor="background" transparent="1" zPosition="1" />
+   <widget name="text" position="50,105" size="680,140" font="Regular;22" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" zPosition="10" foregroundColor="selFG" backgroundColor="background" />
+   <widget name="list" position="50,250" size="680,380" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  itemHeight="35" enableWrapAround="1" backgroundColor="background" transparent="1" />
+   <ePixmap position="805,379" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-32-Steampunk.png" transparent="1" alphatest="blend" />
+   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,245" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+   <panel name="template_date" />
+   <panel name="template_menu_ok_exit_1280" />
+   <panel name="template_pig_menu" />
+   <panel name="template_Steampunk_Background_Setup" />  
  </screen>
-  <screen name="PluginBrowser" position="0,0" size="1280,720" title="Plugin browser" flags="wfNoBorder" backgroundColor="background">
-  <widget name="list" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" itemHeight="50" font="Regular;24" borderColor="black" borderWidth="1" enableWrapAround="1" transparent="1" />
+ <screen name="PluginBrowser" position="0,0" size="1280,720" title="Plugin browser" flags="wfNoBorder" backgroundColor="background">
+  <widget name="list" position="50,70" size="680,570" backgroundColor="background" foregroundColor="listboxFG" backgroundColorSelected="selBG" foregroundColorSelected="selFG" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" itemHeight="50" font="Regular;24" borderColor="black" borderWidth="1" enableWrapAround="1" transparent="1" />
   <ePixmap position="805,379" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-26-Steampunk.png" transparent="1" alphatest="blend" />
-  <panel name="template_name_long_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
   <panel name="template_title_date" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
   <panel name="template_menu_ok_exit_1280" />
-</screen>
+ </screen>
   <screen name="SkinSelector" position="0,0" size="1280,720" title="Skin Selector" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="Skin Selector" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="SkinList" position="50,70" size="680,260" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" backgroundColor="background" enableWrapAround="1" transparent="1" />
+    <widget name="SkinList" position="50,70" size="680,260" itemHeight="30" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  backgroundColor="background" enableWrapAround="1" transparent="1" />
     <widget name="Preview" position="165,335" size="447,260" alphatest="blend" />
-    <eLabel text="Skinanpassungen in Menü/Erweiterungen/Steampunk HD Configtool" position="50,600" size="680,45" zPosition="2" font="Regular;18" borderColor="black" borderWidth="1" transparent="1" backgroundColor="black" halign="left" foregroundColor="selectedFG" />
-    <widget source="introduction" render="Label" position="560,667" size="520,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+    <eLabel text="Skinanpassungen in Menü/Erweiterungen/Steampunk HD Configtool" position="50,600" size="680,45" zPosition="2" font="Regular;18" borderColor="black" borderWidth="1" transparent="1" backgroundColor="black" halign="left" foregroundColor="selFG" />
+    <widget source="introduction" render="Label" position="560,667" size="520,30" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
     <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="1" valign="center" font="Regular;20" borderColor="black" borderWidth="1" halign="left" noWrap="1" transparent="1" />
     <widget source="key_yellow" render="Label" position="285,667" size="270,30" zPosition="1" valign="center" font="Regular;20" borderColor="black" borderWidth="1" halign="left" noWrap="1" transparent="1" />
     <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
@@ -480,10 +643,10 @@
   <!--   Weather Location HD  -->
   <screen name="WeatherLocationChoiceList" position="0,0" size="1280,720" title="Location list" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="WeatherLocationChoiceList" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="choicelist" position="50,70" size="680,570" itemHeight="36" font="Regular;24" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1" />
+    <widget name="choicelist" position="50,70" size="680,570" itemHeight="36" font="Regular;24" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" transparent="1" />
     <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-44-Steampunk.png" alphatest="blend" transparent="1" />
     <panel name="template_date" />
-    <panel name="template_source_red_o_blue" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />  
@@ -494,12 +657,12 @@
     <eLabel text="Gelbe Taste Drücken, um die Skinparts auszuwählen" position="95,570" size="630,30" font="Regular;20" borderColor="black" borderWidth="1" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="yellow" />
     <eLabel text="Drücken Sie Menü, um das Wetter einzustellen" position="95,610" size="630,30" font="Regular;20" borderColor="black" borderWidth="1" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="green" />
     <eLabel text="Steampunk Config" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="config" itemHeight="34" font="Regular;22" borderColor="black" borderWidth="1" render="Listbox" position="50,70" size="680,480" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1"  />
+    <widget name="config" itemHeight="34" font="Regular;22" borderColor="black" borderWidth="1" render="Listbox" position="50,70" size="680,480" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1"  />
     <widget name="Picture" position="805,385" size="415,241" alphatest="on" />
     <ePixmap pixmap="buttons/key_yellow.png" position="60,570" size="30,30" alphatest="blend" transparent="1" />
     <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,560" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
     <panel name="template_date" />
-    <panel name="template_name_red_o_yellow" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />
@@ -529,7 +692,7 @@
    <!-- AtileHD_Config HD -->
 <screen name="SteampunkScreens" position="0,0" size="1280,720" title="Steampunk Setup" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="Steampunk Screens" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="menu" render="Listbox" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" enableWrapAround="1" transparent="1">
+    <widget source="menu" render="Listbox" position="50,70" size="680,570" scrollbarMode="showOnDemand" sliderpixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  alphatest="blend" enableWrapAround="1" transparent="1">
       <convert type="TemplatedMultiContent">{"template":
    [
     MultiContentEntryPixmapAlphaTest(pos = (5, 2), size = (30, 30), png = 2),
@@ -541,7 +704,7 @@
     </widget>
     <widget name="Picture" position="805,385" size="415,241" alphatest="on" />
     <panel name="template_date" />
-    <panel name="template_source_red_green" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_Steampunk_Background_Setup" />
@@ -550,11 +713,11 @@
   <screen name="AtileHD_About" position="0,0" size="1280,720" title="AtileHD_About" flags="wfNoBorder" backgroundColor="background">
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icons-Rechts-15-Steampunk.png" transparent="1" alphatest="blend" />
   <ePixmap position="50,70" size="680,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
-  <eLabel position="50,195" size="680,30" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" text="Einstellungen MSN-Wetter" transparent="1" backgroundColor="black" halign="left" valign="top" foregroundColor="selectedFG" />
-  <eLabel text="*Steampunk* HD Skin for ATV Images by stein17" position="50,660" size="480,26" font="Regular;20" borderColor="black" borderWidth="1" align="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1" halign="center" />
+  <eLabel position="50,195" size="680,30" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" text="Einstellungen MSN-Wetter" transparent="1" backgroundColor="black" halign="left" valign="top" foregroundColor="selFG" />
+  <eLabel text="*Steampunk* HD Skin for ATV Images by stein17" position="50,660" size="480,26" font="Regular;20" borderColor="black" borderWidth="1" align="left" valign="center" foregroundColor="selFG" backgroundColor="background" transparent="1" zPosition="1" halign="center" />
   <eLabel position="50,230" size="680,160" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" text="Erweiterungen/Wetterinformationen/Menu, dann Grün Hinzufügen. Wenn ihr den Ort Eingegeben habt, ein mal runter auf Location-Code. Gelb für Code suchen, mit Grün (OK)bestätigen, wichtig wieder OK. Noch wichtiger mit Rot zurück, sonst müsst ihr wieder von vorne anfangen. Jetzt mit Exit beenden, Benutzer Oberfläche neustarten, eventuell kompletter Neustart.." transparent="1" backgroundColor="black" halign="left" valign="top" />
   <eLabel position="50,460" size="680,180" zPosition="0" font="Regular;22" borderColor="black" borderWidth="1" text="Menu/ Einstellungen/ Bedienung und Oberfläche/ OSD, *2nd Infoleiste*  auf *2nd Infoleiste INFO* einstellen. Infotase mit Eventview belegen: Menu/ Einstellungen/ Bedienung und Oberfläche/ Hotkey-Einstellungen/Info Taste drücken,EPG auswählen, in EPG *Sendungs-Details anzeigen* auswählen.  Der Eintrag der vorhanden ist, durch klicken der OK Taste deaktivieren." transparent="1" backgroundColor="black" halign="left" valign="top" />
-  <eLabel position="50,395" size="680,60" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" text="Einstellungen 2te Infobar mit 2x Ok aufrufen, EventView durch Infotaste anzeigen lassen" transparent="1" backgroundColor="black" halign="left" valign="top" foregroundColor="selectedFG" />
+  <eLabel position="50,395" size="680,60" zPosition="2" font="Regular;22" borderColor="black" borderWidth="1" text="Einstellungen 2te Infobar mit 2x Ok aufrufen, EventView durch Infotaste anzeigen lassen" transparent="1" backgroundColor="black" halign="left" valign="top" foregroundColor="selFG" />
   <eLabel text="Steampunk HD About" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,225" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,190" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
@@ -571,23 +734,23 @@
   <widget name="label3" position="123,150" size="300,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
   <widget name="label4" position="123,188" size="357,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
   <widget name="label5" position="123,225" size="357,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
-  <widget name="label6" position="438,98" size="290,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selectedFG" transparent="1" />
-  <widget name="label7" position="438,150" size="290,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selectedFG" transparent="1" />
-  <widget name="label8" position="382,188" size="347,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selectedFG" transparent="1" />
-  <widget name="label9" position="382,225" size="347,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selectedFG" transparent="1" />
+  <widget name="label6" position="438,98" size="290,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selFG" transparent="1" />
+  <widget name="label7" position="438,150" size="290,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selFG" transparent="1" />
+  <widget name="label8" position="382,188" size="347,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selFG" transparent="1" />
+  <widget name="label9" position="382,225" size="347,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selFG" transparent="1" />
   <widget name="label10" position="123,264" size="540,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
-  <widget name="label11" position="627,264" size="103,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selectedFG" transparent="1" />
-  <widget name="label1" position="50,300" size="680,22" zPosition="1" halign="center" font="Regular;18" borderColor="black" borderWidth="1" backgroundColor="selectedFG" transparent="1" foregroundColor="selectedFG" />
+  <widget name="label11" position="627,264" size="103,30" zPosition="1" halign="right" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="green" foregroundColor="selFG" transparent="1" />
+  <widget name="label1" position="50,300" size="680,22" zPosition="1" halign="center" font="Regular;18" borderColor="black" borderWidth="1" backgroundColor="selFG" transparent="1" foregroundColor="selFG" />
   <widget name="device_icon" position="45,98" size="80,80" alphatest="on" />
   <widget name="free_space_progressbar" position="123,132" size="605,13" borderWidth="1" zPosition="3" />
-  <widget name="config" position="50,340" size="680,290" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="config" position="50,340" size="680,290" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <widget name="key_menu" position="920,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" halign="left" backgroundColor="black" transparent="1" />
   <ePixmap position="805,585" zPosition="2" size="412,52" pixmap="DEV/nfr2.png" transparent="1" alphatest="blend" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-44-Steampunk.png" alphatest="blend" transparent="1" />
   <ePixmap position="885,667" size="30,30" zPosition="10" pixmap="buttons/key_menu.png" transparent="1" alphatest="blend" />
   <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/ok.png" transparent="1" alphatest="blend" />
   <panel name="template_date" />
-  <panel name="template_name_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pig_menu" />
   <panel name="template_Steampunk_Background_Setup" />  
  </screen>
@@ -597,7 +760,7 @@
   <ePixmap pixmap="buttons/key_0.png" position="655,12" size="30,30" alphatest="blend" zPosition="1" />
   <ePixmap position="615,12" size="30,30" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
   <ePixmap position="697,12" size="30,30" zPosition="10" pixmap="buttons/right.png" alphatest="on" />
-  <widget source="Event" render="Label" position="121,60" size="550,30" font="Regular;24"  foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1">
+  <widget source="Event" render="Label" position="121,60" size="550,30" font="Regular;24"  foregroundColor="selFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
   <widget source="session.CurrentService" render="MetrixHDXPicon" position="40,51" size="75,42" zPosition="5" alphatest="blend" transparent="1">
@@ -606,25 +769,25 @@
   <widget source="Event" render="SteampunkRunningText" options="movetype=none,startdelay=600,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="40,100" size="1195,70" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="white" transparent="1" valign="top" zPosition="1">
     <convert type="EventName">FullDescription</convert>
   </widget>
-  <widget source="Event" render="Label" position="660,60" size="80,30" font="Regular;24" borderColor="black" borderWidth="1" halign="right" backgroundColor="background" foregroundColor="selectedFG" transparent="1" valign="center">
+  <widget source="Event" render="Label" position="660,60" size="80,30" font="Regular;24" borderColor="black" borderWidth="1" halign="right" backgroundColor="background" foregroundColor="selFG" transparent="1" valign="center">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Format:%H:%M </convert>
   </widget>
-  <widget source="Event" render="Label" position="1030,60" size="80,30" font="Regular;24" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" valign="center">
+  <widget source="Event" render="Label" position="1030,60" size="80,30" font="Regular;24" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="selFG" transparent="1" halign="left" valign="center">
     <convert type="EventTime">EndTime</convert>
     <convert type="ClockToText">Format:%H:%M</convert>
   </widget>
-  <widget source="Event" render="Progress" position="750,68" size="270,12" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="2">
+  <widget source="Event" render="Progress" position="750,68" size="270,12" foregroundColor="selFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="2">
     <convert type="EventTime">Progress</convert>
   </widget>
-  <widget source="Event" render="Label" position="1110,60" size="120,30" font="Regular;24" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="right" valign="center">
+  <widget source="Event" render="Label" position="1110,60" size="120,30" font="Regular;24" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="selFG" transparent="1" halign="right" valign="center">
     <convert type="EventTime">Remaining</convert>
     <convert type="RemainingToText">
     </convert>
   </widget>
   <widget name="lab1" position="40,455" size="1195,35" font="Regular;24" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="white" transparent="1" />
   <eLabel name="epg-service-background" position="40,175" size="1195,30" backgroundColor="background" zPosition="0" transparent="0" />
-  <widget name="bouquetlist" position="40,175" size="1195,30" zPosition="3" itemHeight="30" font="Regular;19"  borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selectedFG" transparent="0" />
+  <widget name="bouquetlist" position="40,175" size="1195,30" zPosition="3" itemHeight="30" font="Regular;19"  borderColor="selFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selFG" transparent="0" />
   <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
   <widget enableWrapAround="0" itemHeight="20" font="Regular;0" name="list" position="0,0" size="0,100" zPosition="-10" />
   <widget font="Regular;19" borderColor="black" borderWidth="1" halign="center" valign="center" name="currCh1" backgroundColor="background" foregroundColor="white" noWrap="1" position="90,175" size="185,30" zPosition="2" transparent="1" />
@@ -652,11 +815,11 @@
   <widget source="piconCh5" render="MetrixHDXPicon" position="1000,175" size="50,30" zPosition="2" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget name="list1" position="40,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="235,445" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list2" position="280,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="235,445" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list3" position="520,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="235,445" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list4" position="760,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="235,445" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list5" position="1000,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="235,445" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list1" position="40,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="235,445" zPosition="1" transparent="0" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list2" position="280,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="235,445" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list3" position="520,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="235,445" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list4" position="760,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="235,445" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list5" position="1000,210" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="235,445" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
   <ePixmap pixmap="Skinparts/Line_Hor.png" position="40,95" zPosition="2" size="1195,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor.png" position="40,205" zPosition="2" size="1195,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor.png" position="40,655" zPosition="2" size="1195,3" alphatest="blend" transparent="1" />
@@ -664,13 +827,13 @@
   <panel name="template_menu_info_1280" />
   <panel name="template_title_date" />
   <panel name="template_Steampunk_Background_EPG" />  
-  <panel name="template_name_long_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
 </screen>
   <screen name="EPGverticalPIG" position="0,0" size="1280,720" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="background" borderWidth="0" borderColor="transpBlack">
   <ePixmap pixmap="buttons/key_0.png" position="655,12" size="30,30" alphatest="blend" zPosition="1" />
   <ePixmap position="615,12" size="30,30" zPosition="10" pixmap="buttons/left.png" alphatest="on" />
   <ePixmap position="697,12" size="30,30" zPosition="10" pixmap="buttons/right.png" alphatest="on" />  
-  <widget source="Event" render="Label" position="50,70" size="580,30" font="Regular;24"  foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1">
+  <widget source="Event" render="Label" position="50,70" size="580,30" font="Regular;24"  foregroundColor="selFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
   <widget source="Event" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="50,105" size="680,115" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" foregroundColor="white" transparent="1" valign="top" zPosition="1">
@@ -678,7 +841,7 @@
   </widget>
   <widget name="lab1" position="50,455" size="680,35" font="Regular;24" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="white" transparent="1" />
   <eLabel name="epg-service-background" position="50,225" size="680,30" backgroundColor="background" zPosition="0" transparent="0" />
-  <widget name="bouquetlist" position="50,225" size="680,30" zPosition="3" itemHeight="30" font="Regular;19"  borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selectedFG" transparent="0" />
+  <widget name="bouquetlist" position="50,225" size="680,30" zPosition="3" itemHeight="30" font="Regular;19"  borderColor="selFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selFG" transparent="0" />
   <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
   <widget enableWrapAround="0" itemHeight="20" font="Regular;0" name="list" position="0,0" size="0,100" zPosition="-10" />
   <widget font="Regular;19" borderColor="black" borderWidth="1" halign="center" valign="center" name="currCh1" backgroundColor="background" foregroundColor="white" noWrap="1" position="100,225" size="170,30" zPosition="2" transparent="1" />
@@ -696,47 +859,47 @@
   <widget source="piconCh3" render="MetrixHDXPicon" position="505,225" size="50,30" zPosition="2" alphatest="blend">
     <convert type="ServiceName">Reference</convert>
   </widget>
-  <widget name="list1" position="50,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="220,380" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list2" position="275,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="225,380" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
-  <widget name="list3" position="505,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" size="225,380" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list1" position="50,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="220,380" zPosition="1" transparent="0" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list2" position="275,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="225,380" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
+  <widget name="list3" position="505,260" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  size="225,380" zPosition="1" TimeforegroundColor="selFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selFG" TimeFontVertical="Regular;19" borderColor="black" borderWidth="1" EventFontVertical="Regular;18"  />
    <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
   <widget enableWrapAround="0" itemHeight="20" font="Regular;0" name="list" position="0,0" size="0,60" zPosition="-10" />
   <widget source="session.CurrentService" render="MetrixHDXPicon" position="895,400" size="234,132" zPosition="2" alphatest="blend" borderWidth="1" borderColor="grey">
     <convert type="MetrixHDServiceName2">Reference</convert>
   </widget>
-  <widget source="session.Event_Now" render="Progress" position="895,545" size="234,12" foregroundColor="selectedFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="2">
+  <widget source="session.Event_Now" render="Progress" position="895,545" size="234,12" foregroundColor="selFG" borderWidth="2" borderColor="grey" transparent="1" zPosition="2">
     <convert type="EventTime">Progress</convert>
   </widget>
-  <widget source="session.Event_Now" render="Label" position="1165,570" size="60,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
+  <widget source="session.Event_Now" render="Label" position="1165,570" size="60,30" foregroundColor="selFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
     <convert type="EventTime">EndTime</convert>
     <convert type="ClockToText">Default</convert>
   </widget>
-  <widget source="session.Event_Now" render="Label" position="800,570" size="55,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
+  <widget source="session.Event_Now" render="Label" position="800,570" size="55,30" foregroundColor="selFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="session.Event_Now" render="Label" position="860,570" size="300,30" foregroundColor="lightblue" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" noWrap="1" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget source="session.Event_Now" render="Label" position="610,70" size="120,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;24" borderColor="black" borderWidth="1" halign="center" transparent="1">
+  <widget source="session.Event_Now" render="Label" position="610,70" size="120,30" foregroundColor="selFG" backgroundColor="background" valign="center" font="Regular;24" borderColor="black" borderWidth="1" halign="center" transparent="1">
     <convert type="EventTime">Remaining</convert>
     <convert type="RemainingToText">InMinutes</convert>
   </widget>
-  <widget source="session.Event_Next" render="Label" position="800,605" size="55,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
+  <widget source="session.Event_Next" render="Label" position="800,605" size="55,30" foregroundColor="selFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="session.Event_Next" render="Label" position="860,605" size="280,30" foregroundColor="lightblue" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" noWrap="1" transparent="1">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget source="session.Event_Next" render="Label" position="1145,605" size="80,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
+  <widget source="session.Event_Next" render="Label" position="1145,605" size="80,30" foregroundColor="selFG" backgroundColor="background" valign="center" font="Regular;18" borderColor="black" borderWidth="1" halign="right" transparent="1">
     <convert type="EventTime">Duration</convert>
     <convert type="ClockToText">InMinutes</convert>
   </widget>
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,220" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,100" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,255" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_name_long_red_o_blue" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
   <panel name="template_title_date" />
   <panel name="template_menu_info_1280" />
   <panel name="template_pig_menu" />
@@ -748,7 +911,7 @@
   <!-- IceTV -->
   <screen name="IceTVUserTypeScreen" position="0,0" size="1280,720" title="IceTV - Account selection" flags="wfNoBorder" backgroundColor="background">
     <widget source="instructions" render="Label" position="50,70" size="680,180" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="white" backgroundColor="background" halign="center" valign="center" transparent="1" />
-    <widget name="menu" position="50,340" size="680,100" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+    <widget name="menu" position="50,340" size="680,100" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
     <ePixmap position="803,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icons-Rechts-28-Steampunk.png" transparent="1" alphatest="blend" />
     <panel name="template_title_date" />
     <panel name="template_ok_exit_1280" />
@@ -757,12 +920,12 @@
   </screen>
   <screen name="IceTVNewUserSetup" position="0,0" size="1280,720" title="IceTV - User Information" flags="wfNoBorder" backgroundColor="background">
   <widget name="instructions" position="50,70" size="680,180" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="white" backgroundColor="background" halign="center" valign="center" transparent="1" />
-  <widget name="config" position="50,270" size="680,150" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="config" position="50,270" size="680,150" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <ePixmap position="805,378" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-22-Steampunk.png" transparent="1" alphatest="blend" />
   <widget name="description" position="50,440" size="680,190" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,425" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,255" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_source_red_green_blue" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
   <panel name="template_okay_exit_1280" />
   <panel name="template_pig_menu" />
@@ -770,13 +933,13 @@
  </screen>
   <screen name="IceTVRegionSetup" position="0,0" size="1280,720" title="IceTV - Region" flags="wfNoBorder" backgroundColor="background">
   <widget name="instructions" position="50,70" size="680,180" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="white" backgroundColor="background" halign="center" valign="center" transparent="1" />
-  <widget name="config" position="50,255" size="680,280" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
-  <widget name="error" position="50,255" size="680,280" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="config" position="50,255" size="680,280" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
+  <widget name="error" position="50,255" size="680,280" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-32-Steampunk.png" transparent="1" alphatest="blend" />
   <widget name="description" position="50,540" size="680,100" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,535" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,250" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_source_red_green" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pig_menu" />
@@ -784,14 +947,14 @@
  </screen>
   <screen name="IceTVCreateLogin" position="0,0" size="1280,720" title="IceTV - Login" flags="wfNoBorder" backgroundColor="background">
   <widget name="instructions" position="50,70" size="680,100" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="white" backgroundColor="background" halign="center" valign="center" transparent="1" />
-  <widget name="message" position="50,375" size="680,170" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="message" position="50,375" size="680,170" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <widget name="qrcode" position="270,180" size="256,256" pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/IceTV/qr_code.png" zPosition="1" transparent="1" />
-  <widget name="error" position="50,180" size="680,300" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="error" position="50,180" size="680,300" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-09-Steampunk.png" transparent="1" alphatest="blend" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,170" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,545" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <widget name="description" position="50,555" size="680,80" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
-  <panel name="template_source_red_green" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pig_menu" />
@@ -799,12 +962,12 @@
  </screen>
   <screen name="IceTVNeedPassword" position="0,0" size="1280,720" title="IceTV - Password required" flags="wfNoBorder" backgroundColor="background">
   <widget name="instructions" position="50,70" size="680,210" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="white" backgroundColor="background" halign="center" valign="center" transparent="1" />
-  <widget name="config" position="50,285" size="680,170" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" transparent="1" />
+  <widget name="config" position="50,285" size="680,170" itemHeight="35" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  transparent="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-33-Steampunk.png" transparent="1" alphatest="blend" />
   <widget name="description" position="50,460" size="680,170" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,455" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,280" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-  <panel name="template_source_red_green_blue" />
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pig_menu" />
@@ -812,8 +975,8 @@
  </screen>
   <screen name="IceTVMain" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
   <widget source="windowtitle" render="Label" position="130,10" size="600,38" font="Regular;30" halign="left" valign="center" foregroundColor="brown" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-  <widget source="Title" render="Label" position="50,70" size="680,30" font="Regular;24"  halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-  <widget name="list" position="50,70" size="680,455" itemHeight="35" font="Regular;20"  scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" backgroundColor="background" foregroundColor="white" transparent="1" />
+  <widget source="Title" render="Label" position="50,70" size="680,30" font="Regular;24"  halign="left" valign="center" foregroundColor="selFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="list" position="50,70" size="680,455" itemHeight="35" font="Regular;20"  scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" backgroundColorSelected="selBG" foregroundColorSelected="selFG" backgroundColor="background" foregroundColor="white" transparent="1" />
   <widget name="text" position="50,530" size="680,110" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
   <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-12-Steampunk.png" transparent="1" alphatest="blend" />
   <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,525" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
@@ -823,260 +986,9 @@
   <panel name="template_Steampunk_Background_Setup" />  
  </screen>
   <!-- NetworkVpnLog -->
-<screen name="NetworkVpnLog" title="OpenVpn Log" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
- <widget name="infotext" position="45,70" size="1185,620" font="Regular;22" borderColor="black" borderWidth="1" zPosition="3" backgroundColor="background" transparent="1" />
- <panel name="template_title_date" />
- <panel name="template_Steampunk_Background_EPG" />
-</screen>
-
-<!-- NEW_Python3_Screens -->  <!-- NEW_Python3_Screens -->  <!-- NEW_Python3_Screens -->
-
-<!-- NEW-Automatic-BUTTONS-ALL -->
-  <screen name="TemplateAllColorButtons_Automatic">
-    <panel name="TemplateButtonRed_Automatic" />
-	<panel name="TemplateButtonGreen_Automatic" />
-	<panel name="TemplateButtonYellow_Automatic" />
-	<panel name="TemplateButtonBlue_Automatic" />
-  </screen>
-<!-- NEW-Automatic-BUTTONS -->
- <screen name="TemplateButtonRed_Automatic">
-  <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_red,Button,Label" />
-  <widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_red,StaticText">
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_red" position="75,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,Button,Label"  />
-  <widget source="key_red" render="Label" position="75,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,StaticText"  />
+ <screen name="NetworkVpnLog" title="OpenVpn Log" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
+	<widget name="infotext" position="45,70" size="1185,620" font="Regular;22" borderColor="black" borderWidth="1" zPosition="3" backgroundColor="background" transparent="1" />
+	<panel name="template_title_date" />
+	<panel name="template_Steampunk_Background_EPG" />
  </screen>
- <screen name="TemplateButtonGreen_Automatic">
-  <ePixmap pixmap="buttons/key_green.png" position="250,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_green,Button,Label" />
-  <widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="250,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_green,StaticText" >
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_green" position="285,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_green,Button,Label" />
-  <widget source="key_green" render="Label" position="285,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_green,StaticText" />
- </screen>
- <screen name="TemplateButtonYellow_Automatic">
-  <ePixmap pixmap="buttons/key_yellow.png" position="460,667" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
-  <widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="460,667" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_yellow" position="495,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_yellow,Button,Label" />
-  <widget source="key_yellow" render="Label" position="495,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_yellow,StaticText" />
- </screen>
- <screen name="TemplateButtonBlue_Automatic">
-  <ePixmap pixmap="buttons/key_blue.png" position="670,667" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
-  <widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="670,667" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_blue" position="705,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_blue,Button,Label" />
-  <widget source="key_blue" render="Label" position="705,667" size="170,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_blue,StaticText" />
- </screen>        
-<!-- NEW-Automatic-BUTTONS -->
-
-<!-- NEW-Automatic-BUTTONS-Long -->
- <screen name="TemplateButtonRed_Automatic_Long">
-  <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_red,Button,Label" />
-  <widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_red,StaticText">
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_red" position="70,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,Button,Label"  />
-  <widget source="key_red" render="Label" position="70,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,StaticText"  />
- </screen>
- <screen name="TemplateButtonGreen_Automatic_Long">
-  <ePixmap pixmap="buttons/key_green.png" position="280,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_green,Button,Label" />
-  <widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="280,667" size="30,30" alphatest="blend" transparent="1" objectTypes="key_green,StaticText" >
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_green" position="310,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_green,Button,Label" />
-  <widget source="key_green" render="Label" position="310,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_green,StaticText" />
- </screen>
- <screen name="TemplateButtonYellow_Automatic_Long">
-  <ePixmap pixmap="buttons/key_yellow.png" position="520,667" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
-  <widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="520,667" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
-	<convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_yellow" position="550,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_yellow,Button,Label" />
-  <widget source="key_yellow" render="Label" position="550,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_yellow,StaticText" />
- </screen>
- <screen name="TemplateButtonBlue_Automatic_Long">
-  <ePixmap pixmap="buttons/key_blue.png" position="760,667" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
-  <widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="760,667" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget name="key_blue" position="790,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_blue,Button,Label" />
-  <widget source="key_blue" render="Label" position="790,667" size="210,30" zPosition="+1" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_blue,StaticText" />
- </screen>        
-<!-- NEW-Automatic-BUTTONS-Long -->
-  <!-- HelpMenu -->
-    <screen name="HelpMenu" position="0,0" size="1280,720" title="Menu" flags="wfNoBorder" backgroundColor="background">
-    <widget source="list" render="Listbox" position="190,70" size="640,530"  borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderpixmap="Steampunk/Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" enableWrapAround="1" backgroundColor="background" transparent="1">
-      <convert type="TemplatedMultiContent">
-				{
-					"templates": {
-						# Simple help with no headings ("flat")
-						# data[1:] = [helpText]
-						"default": (36,[
-							MultiContentEntryText(pos=(5, 0), size=(640, 36), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
-							]
-						),
-						# Simple help with headings
-						# data[1:] = [heading, None]  # For heading entries
-						# data[1:] = [None, helpText]  # For help entries
-						"default+headings": (36,[
-							MultiContentEntryText(pos=(5, 0), size=(640, 36), font=0, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
-							MultiContentEntryText(pos=(28, 6), size=(612, 22), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=2),
-							]
-						),
-						# Extended help with no headings
-						# data[1:] = [helpText, extendedHelpText]
-						"extended": (170,[
-							MultiContentEntryText(pos=(5, 0), size=(640, 79), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
-							MultiContentEntryText(pos=(5, 80), size=(640, 90), color=0x009e9fa4, color_sel=0x009e9fa4, font=3, flags=RT_WRAP | RT_VALIGN_TOP, text=2),
-							],
-						),
-						# Extended help with headings
-						# data[1:] = [heading, None, None]  # For heading entries
-						# data[1:] = [None, helpText, extendedHelpText]  # For help entries
-						"extended+headings": (170,[
-							MultiContentEntryText(pos=(5, 0), size=(640, 170), font=0, flags=RT_WRAP | RT_VALIGN_CENTER, text=1),
-							MultiContentEntryText(pos=(28, 6), size=(612, 22), font=1, flags=RT_WRAP | RT_VALIGN_CENTER, text=2),
-							MultiContentEntryText(pos=(28, 60), size=(612, 90), color=0x009e9fa4, color_sel=0x009e9fa4, font=3, flags=RT_WRAP | RT_VALIGN_TOP, text=3),
-							],
-						),
-					},
-					"fonts": [gFont("Regular", 30), gFont("Regular", 20), gFont("Regular", 24), gFont("Regular", 19)],
-					"itemHeight": 30
-				}
-			</convert>
-		</widget>
-		
-    <widget name="description" position="1360,425" size="550,635" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="2" transparent="1" foregroundColor="selectedFG" />
-    <widget name="buttonlist" position="50,615" size="780,30" font="Regular;24" borderColor="black" borderWidth="1" halign="center" valign="center" zPosition="2" transparent="1" foregroundColor="lightblue" />
-    <ePixmap pixmap="Steampunk/skin_default/icons/Wizard.png" position="900,314" size="350,360" />
-    <ePixmap pixmap="Skinparts/Line_Hor.png" position="50,605" zPosition="2" size="780,3" alphatest="blend" transparent="1" />
-    <ePixmap position="1085,670" size="62,28" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
-    <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/key_help.png" transparent="1" alphatest="blend" />
-    <panel name="wizard_rc_templateNew" />
-    <panel name="template_title_date" />
-    <panel name="template_pig_smal" />
-    <panel name="template_Steampunk_Background_Channel" />
-  </screen>
-	<!-- LocaleSelection -->
- <screen name="LocaleSelection" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background">
- <widget name="icons" position="0,0" size="40,20" pixmaps="icons/menu_download.png,icons/menu_off.png,icons/menu_on.png" alphatest="blend" />
-  <widget source="locales" render="Listbox" position="50,70" size="690,568" zPosition="3" backgroundColor="background" scrollbarMode="showOnDemand" sliderpixmap="Steampunk/Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1">
-			<convert type="TemplatedMultiContent">
-				{
-				"template":
-					[
-					MultiContentEntryPixmapAlphaBlend(pos = (3, 3), size = (56, 28), flags = BT_SCALE, png = 0),  # Flag.
-					MultiContentEntryText(pos = (75, 0), size = (255, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),  # Language name (Native).
-					MultiContentEntryText(pos = (330, 0), size = (220, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),  # Lanuage name (English).
-					# MultiContentEntryText(pos = (550, 0), size = (75, 34), font = 0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 3),  # Locale name.
-					MultiContentEntryText(pos = (550, 0), size = (75, 34), font = 0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 4),  # Package name.
-					MultiContentEntryPixmapAlphaBlend(pos = (630, 10), size = (40, 20), flags = BT_SCALE, png = 5)  # Status icon.
-					],
-				"fonts": [gFont("Regular",20)],
-				"itemHeight": 34
-				}
-			</convert>
-		</widget>
-  <widget source="description" render="Label" position="805,375" size="415,260" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="center" transparent="1" />
-  <ePixmap position="1010,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-  <panel name="template_title_date" />
-  <panel name="template_menu_help_1280" />
-  <panel name="template_Steampunk_Background_Setup" />
-  <panel name="template_pig_menu" />
-  <panel name="TemplateButtonRed_Automatic" />
-  <panel name="TemplateButtonGreen_Automatic" />
-  <panel name="TemplateButtonYellow_Automatic" />
-  <panel name="TemplateButtonBlue_Automatic" />
-</screen>
-  <!-- LocaleWizard -->
-<screen name="LocaleWizard" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background">
- <widget name="icons" position="0,0" size="40,20" pixmaps="icons/menu_off.png,icons/menu_download.png,icons/menu_on.png" alphatest="blend" />
-  <widget source="locales" render="Listbox" position="190,70" size="640,365" zPosition="3" backgroundColor="background" scrollbarMode="showOnDemand" sliderpixmap="Steampunk/Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" alphatest="blend" transparent="1">
-			<convert type="TemplatedMultiContent">
-				{
-				"template":
-					[
-					MultiContentEntryPixmapAlphaBlend(pos = (5, 3), size = (56, 28), flags = BT_SCALE, png = 0),
-					MultiContentEntryText(pos = (80, 0), size = (265, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),
-					MultiContentEntryText(pos = (570, 0), size = (75, 34), font = 0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 3),
-					#MultiContentEntryText(pos = (345, 0), size = (225, 34), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
-					#MultiContentEntryPixmapAlphaBlend(pos = (645, 10), size = (40, 20), flags = BT_SCALE, png = 4)
-					],
-				"fonts": [gFont("Regular",20)],
-				"itemHeight": 34
-				}
-			</convert>
-		</widget>
-  <widget name="text" position="210,440" size="620,200" font="Regular;20" borderColor="black" borderWidth="1" halign="center" valign="bottom" transparent="1" />
-  <ePixmap position="1010,670" size="62,28" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-  <ePixmap pixmap="Steampunk/skin_default/icons/Wizard.png" position="900,314" size="350,360" />
-  <ePixmap pixmap="Skinparts/Line_Hor.png" position="210,435" zPosition="2" size="615,3" alphatest="blend" transparent="1" />
-  <ePixmap position="1085,670" size="62,28" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
-  <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/key_help.png" transparent="1" alphatest="blend" />
-  <panel name="wizard_rc_templateNew" />
-  <panel name="template_title_date" />
-  <panel name="template_pig_smal" />
-  <panel name="template_Steampunk_Background_Channel" />
-  <panel name="TemplateButtonRed_Automatic" />
-  <panel name="TemplateButtonGreen_Automatic" />
-  <panel name="TemplateButtonYellow_Automatic" />
-  <panel name="TemplateButtonBlue_Automatic" />
-</screen>
-<!-- wizard_rc_templateNew  -->
-<screen name="wizard_rc_templateNew">
-        <widget name="rc" position="50,84" size="154,500" pixmaps="skin_default/rc.png,skin_default/rcold.png" zPosition="10" alphatest="blend" />
-		<!-- <widget name="rc" pixmaps="rc.png,rcold.png" position="955,100" zPosition="10" size="154,500" alphatest="blend" transparent="0" /> -->
-		<widget alphatest="blend" name="indicatorU0" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU1" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU2" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU3" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU4" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU5" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU6" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU7" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU8" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU9" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU10" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU11" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU12" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU13" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU14" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorU15" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL0" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL1" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL2" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL3" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL4" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL5" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL6" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL7" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL8" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL9" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL10" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL11" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL12" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL13" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL14" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-		<widget alphatest="blend" name="indicatorL15" pixmap="skin_default/yellow_circle23x23.png" position="950,140" offset="11,11" size="23,23" zPosition="11"/>
-	</screen>
-	  <!-- SoftcamSetup -->
-<screen name="SoftcamSetup" position="0,0" size="1280,720" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
-    <widget name="info" position="50,230" size="680,275" font="Regular;20" borderColor="black" borderWidth="1" backgroundColor="background" transparent="1" foregroundColor="green" />
-    <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-42-Steampunk.png" transparent="1" alphatest="blend" />
-    <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,215" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
-    <panel name="template_title_date" />
-    <panel name="template_ok_exit_1280" />
-    <panel name="template_pig_menu" />
-    <panel name="template_Steampunk_Background_Setup" />  
-    <panel name="template_setup_config" />
-    <panel name="TemplateButtonRed_Automatic" />
-    <panel name="TemplateButtonGreen_Automatic" />
-    <panel name="TemplateButtonYellow_Automatic" />
-    <panel name="TemplateButtonBlue_Automatic" />
-  </screen>
-  <!-- SoftcamSetup -->
 </skin>
