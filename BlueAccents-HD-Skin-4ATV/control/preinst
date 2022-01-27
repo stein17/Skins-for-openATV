@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "                                                                            "
+echo "                                                                            "
+echo "                                                                            "
+echo "                                                                            "
+echo "Check if a previous version of the BlueAccents-HD skin is installed"
+if [ -f /usr/share/enigma2/BlueAccents-HD/skin.xml ]; then
+    cp -R /usr/share/enigma2/BlueAccents-HD/ /tmp
+    rm -rf /usr/share/enigma2/BlueAccents-HD
+    rm -rf /usr/lib/enigma2/python/Components/Converter/BlueA*
+    rm -rf /usr/lib/enigma2/python/Components/Renderer/BlueA*
+	rm -rf /usr/lib/enigma2/python/Plugins/Extensions/BlueAccents*
+    echo "                                                   "
+    echo "Previous BlueAccents-HD skin installation        "
+    echo "    was found and removed successfully!            "
+    echo "                                                   "
+fi
+echo "                                                       "
+echo "BlueAccents-HD skin is now being installed...        "
+echo "                                                       "
+exit 0
