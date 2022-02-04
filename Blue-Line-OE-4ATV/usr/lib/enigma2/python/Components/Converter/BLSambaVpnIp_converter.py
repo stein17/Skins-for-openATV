@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Poll import Poll
+from Components.Converter.Poll import Poll
 import process
 import os
 from time import time
@@ -11,7 +12,7 @@ myipdata = '/tmp/myipdata'
 myipfile = '/tmp/myip.txt'
 myflagfile = '/tmp/myflag.png'
 novpnfile = '/tmp/SambaVpnIp/novpn.txt'
-isvpnfile = '/usr/share/enigma2/Ultimate/skinparts/SambaVpnIp/isvpn.txt'
+isvpnfile = '/usr/share/enigma2/Blue-Line-OE-4ATV/skinparts/SambaVpnIp/isvpn.txt'
 myipdataupdatepause = 300 #in seconds
 
 def del_myipfiles(ip = 1, flag = 1, data = 1):
