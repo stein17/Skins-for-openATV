@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Tools.LoadPixmap import LoadPixmap
-from Poll import Poll
+from Components.Converter.Poll import Poll
 import process
 import os
 from time import time
 import json, urllib
-import urllib2
+from Tools.LoadPixmap import LoadPixmap
 
 myipdata = '/tmp/myipdata'
 myipfile = '/tmp/myip.txt'
 myflagfile = '/tmp/myflag.png'
-novpnfile = '/usr/share/enigma2/Ultimate/skinparts/SambaVpnIp/novpn.txt'
+novpnfile = '/tmp/SambaVpnIp/novpn.txt'
 isvpnfile = '/usr/share/enigma2/Ultimate/skinparts/SambaVpnIp/isvpn.txt'
 myipdataupdatepause = 300 #in seconds
 
