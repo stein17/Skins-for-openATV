@@ -1,4 +1,5 @@
-from Renderer import Renderer
+# -*- coding: utf-8 -*-
+from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 
 class BLSambaVpnIp_renderer(Renderer):
