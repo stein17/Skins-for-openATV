@@ -4195,7 +4195,6 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   </screen>
   <!-- TEMPLATES_Ethernet_Info-->
   <screen name="template_Ethernet_Info_SIB">
-  <ePixmap alphatest="blend" pixmap="Multibox/icons/ethernet_off.png" position="1090,1020" size="96,54" zPosition="2" transparent="1"/>
     <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/icons/wireless_on.png" position="960,1020" zPosition="3" size="96,54"  alphatest="blend">
       <convert type="AMBInternetConnectionInfo">Wifi</convert>
       <convert type="ConditionalShowHide" />
@@ -4207,7 +4206,6 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   </screen> 
   <!-- TEMPLATES_Ethernet_ON_OFF_Info-->
   <screen name="template_Ethernet_ON_OFF_Info_SIB">
-   <!--  <ePixmap alphatest="blend" pixmap="Multibox/icons/ethernet_off.png" position="1090,1020" size="96,54" zPosition="2" transparent="1"/> -->
 <!--     <widget source="session.CurrentService" render="Label" position="1128,1035" valign="center" size="55,24" zPosition="4" font="Regular; 20" halign="center" foregroundColor="bluetitle" transparent="1" backgroundColor="background">
       <convert type="AMBInternetConnectionInfo">Info</convert>
     </widget> -->
@@ -4215,9 +4213,10 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <convert type="AMBNetConnection">216.58.214.142</convert>
     <convert type="ConditionalShowHide" />
     </widget>
-	<widget source="global.CurrentTime" render="Pixmap" pixmap="Multibox/icons/ethernet_off.png" position="1090,1020" size="96,54"  alphatest="blend">
-    <convert type="AMBAlwaysTrue" />
-    <convert type="ConditionalShowHide">Blink</convert>
-  </widget>
+  
+  	<widget source="global.CurrentTime" render="Pixmap" pixmap="Multibox/icons/ethernet_off.png" position="1090,1020" size="96,54"  halign="center" zPosition="2" alphatest="blend" transparent="1">
+      <convert type="AMBBlinkingClock" />
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
    </screen> 
 </skin>
