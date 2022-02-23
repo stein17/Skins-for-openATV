@@ -8,7 +8,7 @@ from Components.Converter.Poll import Poll
 
 class AMBpiconEmu(Renderer, Poll):
 	__module__ = __name__
-	searchPaths = ('/usr/share/enigma2/%s/', '/usr/share/enigma2/multibox/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
+	searchPaths = ('/usr/share/enigma2/%s/', '/usr/share/enigma2/Multibox/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
 	
 	def __init__(self):
 		Poll.__init__(self)

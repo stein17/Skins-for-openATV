@@ -10,12 +10,13 @@ searchPaths = []
 
 def initPiconPaths():
 	global searchPaths
+	searchPaths.append('/usr/share/enigma2/Multibox/%s/')
+	searchPaths.append('/usr/share/enigma2/%s/')
 	if isfile('/proc/mounts'):
 		for line in open('/proc/mounts'):
 			if '/dev/sd' in line or '/dev/disk/by-uuid/' in line or '/dev/mmc' in line:
 				piconPath = line.split()[1].replace('\\040', ' ') + '/%s/'
 				searchPaths.append(piconPath)
-	searchPaths.append('/usr/share/enigma2/%s/')
 	searchPaths.append(resolveFilename(SCOPE_PLUGINS, '%s/'))
 
 class AMBPiconUni(Renderer):
