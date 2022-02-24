@@ -472,7 +472,7 @@
 </screen>
   <!-- ChannelSelection  -->
   <screen name="ChannelSelection" position="0,0" title="Channel Selection" backgroundColor="background" flags="wfNoBorder" size="1920,1080">
-  <widget source="Title" render="Label" position="180,20" size="500,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+  <widget source="Title" render="Label" position="180,20" size="720,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
   <eLabel name="vertikalline" position="1240,804" size="670,2" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
   <eLabel name="vertikalline" position="1240,946" size="670,2" backgroundColor="Line" foregroundColor="Line" zPosition="5" />
   <eLabel name="vertikalline" position="1240,483" size="670,1" backgroundColor="Line" foregroundColor="Line" zPosition="6" />
@@ -3484,13 +3484,16 @@ self['config'].l.setSeperation(int(300*f))
     <panel name="template_pig_setup" />
   </screen>
   <screen name="PluginDownloadBrowser" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="background">
-    <widget name="list" position="10,100" size="1180,895" zPosition="4" itemHeight="85" font="Regular; 40" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="text" position="1223,560" size="670,400" font="Regular; 36" halign="center" valign="center" transparent="1" />
-    <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
-    <panel name="template_fullscreen" />
-    <panel name="template_pixmap_BG" />
-    <panel name="template_pig_setup" />
-    <panel name="template_exit" />
+	<widget name="list" position="10,100" size="1180,895" zPosition="4" itemHeight="85" font="Regular; 40" scrollbarMode="showOnDemand" transparent="1" />
+	<widget name="text" position="1223,560" size="670,380" font="Regular; 36" halign="center" valign="center" transparent="1" />
+	<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+	<widget source="session.CurrentService" render="Label" position="1223,950" size="674,40" zPosition="1" font="Regular; 30" halign="left" valign="center" backgroundColor="background" foregroundColor="Line" transparent="1">
+	<convert type="AMBReceiverInfo">FlashInfo</convert>
+	</widget>
+	<panel name="template_fullscreen" />
+	<panel name="template_pixmap_BG" />
+	<panel name="template_pig_setup" />
+	<panel name="template_exit" />
   </screen>
   <screen name="RassInteractive" position="100,100" size="120,275">
     <ePixmap pixmap="Multibox/skin_default/system/rass_logo.png" position="25,0" size="50,21" transparent="1" alphatest="on" />
