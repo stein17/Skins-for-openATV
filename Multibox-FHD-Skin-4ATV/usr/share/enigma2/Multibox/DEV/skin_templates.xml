@@ -163,10 +163,14 @@
     <convert type="MSNWeather">temperature_current</convert>
   </widget>
   </screen>
-  <!-- TEMPLATES SecondInfoBar Poster-->
-  <screen name="template_SecondInfoBar_Poster">
+    <!-- TEMPLATES SecondInfoBar Poster-->
+  <screen name="template_SIB_Poster">
   <widget source="session.Event_Next" render="AMBPoster" borderColor="Line" borderWidth="3" position="925,662" size="185,279" zPosition="10" />
   <widget source="session.Event_Now" render="AMBPoster" borderColor="Line" borderWidth="3" position="925,224" size="185,279" zPosition="10" />
+  </screen> 
+  <!-- TEMPLATES SecondInfoBar Poster Fake-->
+  <screen name="template_SecondInfoBar_Poster">
+ <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
   </screen> 
   <!-- TEMPLATES-SIB_session_Event_Now_Next-Poster-->
   <screen name="template_SIB_session_Event_Now_Next" >
@@ -3607,9 +3611,48 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="AMBSambaVpnIp_converter">flag</convert>
     </widget>
   </screen>
-    <!-- TEMPLATES_fake_Tuner_Info_SIB-->
+    <!-- TEMPLATES_Tuner_Info_SIB-->
   <screen name="template_Tuner_Info_SIB">
-  <eLabel name="fake" position="0, 0" size="0,0" />
+  <ePixmap position="34,1020" size="120,54" pixmap="Multibox/icons/BG_Tuner.png" zPosition="1" alphatest="blend" />
+   <eLabel text="Tuner:" position="26,1031" size="95,30" font="Regular; 24" halign="center" valign="center" backgroundColor="background" foregroundColor="bluetitle" transparent="1" zPosition="3" />
+    <widget source="session.TunerInfo" position="110,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="110,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="110,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="110,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="AMBFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="130,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="130,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="130,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="130,1036" size="17,20" render="Pixmap" pixmap="Multibox/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="AMBFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
   </screen>
     <!-- 4 TUNER INFO -->
   <screen name="template_4_Tuner_Info_SIB">
@@ -4211,26 +4254,8 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	</widget> -->
   <!--  18 TUNER INFO  End */  -->
   </screen>
-  <!-- TEMPLATES_SNR_AGC_BER -->
-  <screen name="template_SNR_AGC_BER">
-    <!--  SNR -->
-    <eLabel text="SNR:" position="975,1033" size="80,36" font="Regular; 30" halign="left" valign="center" transparent="1" foregroundColor="default" />
-    <widget source="session.FrontendStatus" render="Label" position="1055,1033" size="80,36" font="Regular; 30" valign="center" noWrap="1" transparent="1" halign="left" backgroundColor="background">
-      <convert type="FrontendInfo">SNR</convert>
-    </widget>
-    <!--  AGC -->
-    <eLabel text="AGC:" position="1137,1033" size="80,36" font="Regular; 30" halign="left" valign="center" backgroundColor="background" foregroundColor="default" transparent="1" />
-    <widget source="session.FrontendStatus" render="Label" position="1217,1033" size="80,36" valign="center" font="Regular; 30" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
-      <convert type="FrontendInfo">AGC</convert>
-    </widget>
-    <!--  BER -->
-    <eLabel text="BER:" position="1298,1033" size="80,36" font="Regular; 30" halign="left" valign="center" backgroundColor="background" foregroundColor="default" transparent="1" />
-    <widget source="session.FrontendStatus" render="Label" position="1379,1033" size="80,36" valign="center" font="Regular; 36" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
-      <convert type="FrontendInfo">BER</convert>
-    </widget>
-  </screen>
   <!-- template_SNR_AGC_BER_SIB-->
-  <screen name="template_SNR_AGC_BER_SIB">
+  <screen name="template_SNR_AGC_SIB">
     <ePixmap position="310,1020" size="96,54" pixmap="Multibox/icons/BG_Crypt.png" zPosition="1" alphatest="blend" />
     <ePixmap position="440,1020" size="96,54" pixmap="Multibox/icons/BG_Crypt.png" zPosition="1" alphatest="blend" />
     <!--  SNR -->
@@ -4271,18 +4296,47 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <convert type="ConditionalShowHide" />
   </widget>
   </screen>
-<!-- template_EMU_Prov_Info_SIB-->
-  <screen name="template_EMU_Prov_Info_SIB">
+   <!-- TEMPLATES_Prov_Info_fake-->
+ <screen name="template_Prov_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- TEMPLATES_Prov_Info_SIB-->
+  <screen name="template_Prov_Info_SIB">
   <ePixmap position="570,1020" size="96,54" pixmap="Multibox/icons/BG_Crypt.png" zPosition="1" alphatest="blend" />
     <widget source="session.CurrentService" render="AMBPiconUni" path="piconProv" position="585,1025" size="66,44" zPosition="10" transparent="1" alphatest="on">
     <convert type="AMBServiceName2">Provider</convert>
   </widget>
-   <widget source="session.CurrentService" render="AMBpiconEmu"  path="emu" position="700,1020" size="96,54" transparent="1" alphatest="blend" zPosition="3" />
   </screen>
+     <!-- TEMPLATES_EMU_Info_fake-->
+ <screen name="template_EMU_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- TEMPLATES_EMU_Info_SIB-->
+  <screen name="template_EMU_Info_SIB">
+  <widget source="session.CurrentService" render="AMBpiconEmu"  path="emu" position="700,1020" size="96,54" transparent="1" alphatest="blend" zPosition="3" />
+ </screen>
+    <!-- TEMPLATES ModuleControl_Info_fake-->
+ <screen name="template_ModuleControl_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- template_ModuleControl_Info_SIB-->
+  <screen name="template_ModuleControl_SIB">
+    <widget source="session.CurrentService" render="AMBPiconUni" path="piconCrypt" position="1220,1020" size="96,54" zPosition="2" alphatest="blend" transparent="1">
+    <convert type="AMB_ModuleControl">PiconSlot1</convert>
+    </widget>
+    <widget source="session.CurrentService" render="AMBPiconUni" path="piconCrypt" position="1350,1020" size="96,54" zPosition="2" alphatest="blend" transparent="1">
+    <convert type="AMB_ModuleControl">PiconSlot2</convert>
+    </widget>
+	<widget source="session.CurrentService" render="AMBCicontrol" position="700,1020" size="96,54" zPosition="3"  transparent="1" alphatest="blend" />
+  </screen>
+  <!-- TEMPLATES_Crypt_Info_fake-->
+ <screen name="template_Caid_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
 <!-- template_Crypt_Info_SIB-->
-  <screen name="template_Crypt_Info_SIB">
-   <ePixmap pixmap="Multibox/piconCrypt/Unknown.png" position="830,1020" size="96,54" zPosition="2" alphatest="blend" />
-  <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/piconCrypt/Fta.png" position="830,1020" size="96,54" zPosition="5" backgroundColor="black" alphatest="blend">
+  <screen name="template_Caid_Info_SIB">
+ <ePixmap pixmap="Multibox/piconCrypt/Unknown.png" position="830,1020" size="96,54" zPosition="2" alphatest="blend" />
+  <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/piconCrypt/Fta.png" position="830,1020" size="96,54" zPosition="5" backgroundColor="background" alphatest="blend">
     <convert type="AMBpiconCaidInfo">IsFta</convert>
     <convert type="ConditionalShowHide" />
   </widget>
@@ -4327,6 +4381,10 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <convert type="ConditionalShowHide" />
   </widget>
   </screen>
+    <!-- TEMPLATES_Ethernet_Info_fake-->
+ <screen name="template_Ethernet_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- TEMPLATES_Ethernet_Info-->
   <screen name="template_Ethernet_Info_SIB">
     <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/icons/wireless_on.png" position="960,1020" zPosition="3" size="96,54"  alphatest="blend">
@@ -4338,6 +4396,10 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
       <convert type="ConditionalShowHide" />
     </widget>
   </screen> 
+      <!-- TEMPLATES_Ethernet_ON_OFF_Info_fake-->
+ <screen name="template_Ethernet_ON_OFF_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- TEMPLATES_Ethernet_ON_OFF_Info-->
   <screen name="template_Ethernet_ON_OFF_Info_SIB">
 <!--     <widget source="session.CurrentService" render="Label" position="1128,1035" valign="center" size="55,24" zPosition="4" font="Regular; 20" halign="center" foregroundColor="bluetitle" transparent="1" backgroundColor="background">

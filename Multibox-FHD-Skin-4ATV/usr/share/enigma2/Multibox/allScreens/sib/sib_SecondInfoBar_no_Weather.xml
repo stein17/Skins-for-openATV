@@ -21,7 +21,11 @@
   <widget source="session.CurrentService" render="Label" position="1010,510" size="100,40" font="Regular; 36" halign="left" valign="center" backgroundColor="background" transparent="1" foregroundColor="white">
     <convert type="ServiceInfo">VideoHeight</convert>
   </widget>
-  <eLabel font="Regular; 36" halign="center" noWrap="1" position="230,510" size="25,40" text="-" transparent="1" valign="center" foregroundColor="default" />
+  <eLabel text="SNR:" position="975,1033" size="80,36" font="Regular; 30" halign="left" valign="center" transparent="1" foregroundColor="default" />
+  <widget source="session.FrontendStatus" render="Label" position="1055,1033" size="80,36" font="Regular; 30" valign="center" noWrap="1" transparent="1" halign="left" backgroundColor="background">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+<eLabel font="Regular; 36" halign="center" noWrap="1" position="230,510" size="25,40" text="-" transparent="1" valign="center" foregroundColor="default" />
   <widget source="session.Event_Now" render="Progress" foregroundColor="Line" position="380,520" size="200,16" zPosition="1" transparent="1" borderWidth="2" borderColor="greyblue">
     <convert type="EventTime">Progress</convert>
   </widget>
@@ -132,6 +136,7 @@
     <convert type="ServiceInfo">IsWidescreen</convert>
     <convert type="ConditionalShowHide" />
   </widget>
+  <!--  Caid Info -->
 
   <!--  TUNERTYPE -->
   <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="1285,968" valign="center" size="90,30" font="Regular; 30" backgroundColor="background" foregroundColor="white" transparent="1" halign="left">
@@ -158,7 +163,16 @@
   <widget source="session.CurrentService" render="Label" position="1380,968" zPosition="1" valign="center" size="515,30" font="Regular; 27" backgroundColor="background" transparent="1" halign="left">
     <convert type="AMBSatInfo">ExpertInfo</convert>
   </widget>
-
+  <!--  AGC -->
+  <eLabel text="AGC:" position="1137,1033" size="80,36" font="Regular; 30" halign="left" valign="center" backgroundColor="background" foregroundColor="default" transparent="1" />
+  <widget source="session.FrontendStatus" render="Label" position="1217,1033" size="80,36" valign="center" font="Regular; 30" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+    <convert type="FrontendInfo">AGC</convert>
+  </widget>
+  <!--  BER -->
+  <eLabel text="BER:" position="1298,1033" size="80,36" font="Regular; 30" halign="left" valign="center" backgroundColor="background" foregroundColor="default" transparent="1" />
+  <widget source="session.FrontendStatus" render="Label" position="1379,1033" size="80,36" valign="center" font="Regular; 36" backgroundColor="background" foregroundColor="grey" transparent="1" halign="left">
+    <convert type="FrontendInfo">BER</convert>
+  </widget>
   <!-- Python 2 -->
 <!--  <eLabel text="CPU-Temp:" position="1223,680" size="140,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" />
   <widget source="global.CurrentTime" position="1355,680" size="80,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3" render="AMBSYSTemp" /> -->
@@ -223,21 +237,13 @@
     <convert type="ValueRange">1,1</convert>
     <convert type="ConditionalShowHide" />
   </widget>
- <!--    <panel name="template_crypt_tuner_info" /> -->
+  <panel name="template_crypt_tuner_info" />
   <panel name="template_fullscreen" />
   <panel name="template_pig_setup" />
   <panel name="template_pixmap_BG" />
-  <panel name="template_SecondInfoBar_Poster0" />
+  <panel name="template_SecondInfoBar_Poster" />
   <panel name="template_SIB_session_Event_Now_Next" />
-  <panel name="template_VpnIp_SIF" />
- <!--  <panel name="template_12_Tuner_Info_SIB" /> -->
-  <panel name="template_SNR_AGC_BER0" />
-  <panel name="template_SNR_AGC_BER_SIB" />
-  <panel name="template_SAT_info_SIB" />
-  <panel name="template_EMU_Prov_Info_SIB" />
-  <panel name="template_Crypt_Info_SIB" />
-  <panel name="template_Ethernet_Info_SIB" />
-  <panel name="template_Ethernet_ON_OFF_Info_SIB" />
-  <panel name="template_Tuner_Info_SIB" />
-   </screen>
+  <panel name="template_VpnIp_SIF"/>
+</screen>
+
  </skin>
