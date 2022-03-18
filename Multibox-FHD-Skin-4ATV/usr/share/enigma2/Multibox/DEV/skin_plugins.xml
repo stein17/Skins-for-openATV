@@ -4382,6 +4382,115 @@
   <widget name="data" position="30,560" size="1250,420" font="Regular;32" transparent="1" foregroundColor="foreground" backgroundColor="background" scrollbarSliderBorderWidth="1" scrollbarWidth="12" scrollbarSliderForegroundColor="white" scrollbarSliderBorderColor="Line" />
   <eLabel text="CH +/-" position="1136,1005" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
 </screen>
+	<!-- plugin Partnerbox -->
+	<screen name="CurrentRemoteTV" position="center,center" size="820,400" backgroundColor="background20" title="Remote Player" flags="wfNoBorder">
+	 <widget source="Title" render="Label" position="10,7" size="800,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="text" position="8,62" size="800,325" zPosition="1" font="Regular; 36" halign="center" valign="center" foregroundColor="foreground" backgroundColor="background" transparent="0" />
+
+	</screen>
+	<!-- plugin erster screen -->
+    <screen name="PartnerboxSetup" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Partnerbox Setup">
+	 <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+     <widget name="config" position="10,100" size="1180,870" backgroundColor="background" enableWrapAround="1" itemHeight="50" font="Regular; 36" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
+     <panel name="template_fullscreen" />
+     <panel name="template_name_red_o_blue" />
+     <panel name="template_pixmap_BG" />
+     <panel name="template_pig_setup" />
+    </screen>
+	
+
+	<!-- plugin erster screen hier gelb -->
+	<screen name="PartnerboxEntriesListConfigScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Partnerbox: List of Entries">
+	    <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+	    <widget name="name" position="5,100" size="300,50" font="Regular; 36" halign="left" zPosition="2" foregroundColor="foreground" backgroundColor="background" transparent="0" />
+		<widget name="ip" position="322,100" size="300,50" font="Regular; 36" halign="left" zPosition="2" foregroundColor="foreground" backgroundColor="background" transparent="0" />
+		<widget name="port" position="640,100" size="190,50" font="Regular; 36" halign="left" zPosition="2" foregroundColor="foreground" backgroundColor="background" transparent="0" />
+		<widget name="type" position="850,100" size="340,50" font="Regular; 36" halign="left" zPosition="2" foregroundColor="foreground" backgroundColor="background" transparent="0" />
+		 <widget name="entrylist" position="10,180" size="1180,800" enableWrapAround="1" itemHeight="50" font="Regular; 36" backgroundColor="background" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+	<!-- dann hinzufürgen bearbeiten-->
+	<screen name="PartnerboxEntryConfigScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Partnerbox Config">
+	    <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+	    <widget name="config" position="10,100" size="1180,870" backgroundColor="background" enableWrapAround="1" itemHeight="50" font="Regular; 36" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+    </screen>
+	<!-- auf den partnerbox eintrag ok drücken -->
+	<screen name="RemoteTimer" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="RemoteTimer Timerlist">
+	    <widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="text" position="10,740" size="1200,50" font="Regular;34" halign="center" valign="center" backgroundColor="background" zPosition="1" transparent="1" />
+		<widget name="textok" position="10,790" size="1200,50" font="Regular; 34" halign="center" valign="center" backgroundColor="background" zPosition="1" transparent="1" />
+		<widget name="timerlist" position="10,100" size="1200,600" font="Regular;34" itemHeight="100" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="background" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+	<!-- auf den timer eintag ok drücken -->
+	<screen name="RemoteTimerEntry" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Timer entry">
+		<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="config" font="Regular;34" itemHeight="80" position="10,100" size="1200,860" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="background" transparent="1" />
+		<widget name="canceltext" render="Label" position="61,1005" size="250,70" zPosition="2" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+		<widget name="oktext" render="Label" position="362,1005" size="250,70" zPosition="2" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+		<panel name="template_fullscreen" />
+		<panel name="template_name_red_o_blue" />
+		<panel name="template_pixmap_BG" />
+		<panel name="template_pig_setup" />
+    </screen>
+	<!-- epg auswahl oder bouquets hinzufürgen -->
+	<screen name="RemoteTimerBouquetList" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Choose bouquet">
+		<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="text" position="10,910" size="1200,50" zPosition="1" font="Regular;34" halign="center" valign="center" />
+		<widget name="bouquetlist" position="10,100" size="1200,780" itemHeight="100" font="Regular;34" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="background" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+	<!-- sender hinzufürgen -->
+	<screen name="RemoteTimerChannelList" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Bouquet List">
+		<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="text" position="10,910" size="1200,50" font="Regular;34" halign="center" valign="center" backgroundColor="background" zPosition="1" transparent="1" />
+		<widget name="channellist" position="10,100" size="1200,780" font="Regular;34" itemHeight="100" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="background" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+
+	<screen name="RemoteTimerEPGList" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="EPG Selection">
+		<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="epglist" position="10,100" size="1200,880" font="Regular;34" itemHeight="100" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="background" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+
+	<screen name="RemoteTimerEventView" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="Eventview">
+		<widget source="Title" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+		<widget name="epg_description" position="10,100" size="1200,800" itemHeight="50" font="Regular; 34" zPosition="1" backgroundColor="background" transparent="1" />
+		<widget name="datetime" position="30,920" size="330,50" font="Regular; 34" backgroundColor="background" zPosition="1" transparent="1" />
+		<widget name="duration" position="400,920" size="300,50" font="Regular;34" backgroundColor="background" zPosition="1" transparent="1" />
+		<widget name="channel" position="740,920" size="405,50" font="Regular; 34" halign="right" backgroundColor="background" zPosition="1" transparent="1" />
+        <panel name="template_fullscreen" />
+        <panel name="template_name_red_o_blue" />
+        <panel name="template_pixmap_BG" />
+        <panel name="template_pig_setup" />
+	</screen>
+
+	<screen name="RemotePlayer" position="center,center" size="1020,200" flags="wfNoBorder" title="Partnerbox - RemotePlayer" backgroundColor="#FFFFFFFF">
+		<ePixmap pixmap="Multibox/colors/25Black_000000.png" position="0,0" size="1020,200" zPosition="-1" alphatest="off" transparent="1" />
+		<widget name="ServiceName" zPosition="1" position="10,10" size="1000,120" valign="center" halign="center" font="Regular; 34" foregroundColor="Line" backgroundColor="background" />
+		<widget name="DateTime" zPosition="1" position="10,150" size="670,40" halign="left" font="Regular; 27" foregroundColor="bernstein" backgroundColor="background" transparent="1" />
+		<widget name="IP" zPosition="2" position="710,150" size="300,40" halign="right" font="Regular; 27" foregroundColor="bernstein" backgroundColor="background" transparent="1" />
+	</screen>
   </skin>
 
 
