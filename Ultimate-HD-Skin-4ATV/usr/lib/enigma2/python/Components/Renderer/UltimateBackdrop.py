@@ -3,12 +3,11 @@
 # v5 ; infobar late opening fixed, sometimes spinner work fixed, if there is no internet connection fixed...
 # v6 ; added year support for search,search improved...
 # <widget source="session.Event_Now" render="backdrop" position="0,0" size="185,278" zPosition="1" />
-from Components.Renderer.Renderer import Renderer
+from Renderer import Renderer
 from enigma import ePixmap, ePicLoad, eTimer
 from Components.AVSwitch import AVSwitch
 from Components.Pixmap import Pixmap
-from urllib.request import urlopen
-from urllib.parse import quote
+from urllib2 import urlopen, quote
 import json
 import re
 import os
