@@ -311,6 +311,7 @@
     <ePixmap position="1225,688" size="40,25" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
   </screen>
   <!-- NEW-Automatic-BUTTONS-ALL -->
+ <!--  <panel name="TemplateAllColorButtons_Automatic" /> -->
   <screen name="TemplateAllColorButtons_Automatic">
     <panel name="TemplateButtonRed_Automatic" />
     <panel name="TemplateButtonGreen_Automatic" />
@@ -355,14 +356,23 @@
     <widget source="key_blue" position="620,687" size="170,26" render="Label" zPosition="+1" font="Regular;20" backgroundColor="background" halign="left" valign="center" transparent="1" noWrap="1" objectTypes="key_blue,StaticText" />
   </screen>
   <!-- NEW-Automatic-BUTTONS -->
+  
+  <!-- NEW-Automatic-BUTTONS-ALL-Long -->
+  <screen name="TemplateAllColorButtons_Automatic_Long">
+    <panel name="TemplateButtonRed_Automatic_Long" />
+    <panel name="TemplateButtonGreen_Automatic_Long" />
+    <panel name="TemplateButtonYellow_Automatic_Long" />
+    <panel name="TemplateButtonBlue_Automatic_Long" />
+  </screen>
+  
   <!-- NEW-Automatic-BUTTONS-Long -->
   <screen name="TemplateButtonRed_Automatic_Long">
-    <ePixmap pixmap="buttons/key_red.png" position="10,692" size="16,16" alphatest="blend" transparent="1" objectTypes="key_red,Button,Label" />
+  <ePixmap pixmap="buttons/key_red.png" position="10,692" size="16,16" alphatest="blend" transparent="1" objectTypes="key_red,Button,Label" />
     <widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="10,692" size="16,16" alphatest="blend" transparent="1" objectTypes="key_red,StaticText">
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget name="key_red" position="20,687" size="220,26" zPosition="+1" font="Regular;20" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,Button,Label" />
-    <widget source="key_red" render="Label" position="20,687" size="220,26" zPosition="+1" font="Regular;20" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,StaticText" />
+    <widget name="key_red" position="30,687" size="220,26" zPosition="+1" font="Regular;20" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,Button,Label" />
+    <widget source="key_red" render="Label" position="30,687" size="220,26" zPosition="+1" font="Regular;20" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" objectTypes="key_red,StaticText" />
   </screen>
   <screen name="TemplateButtonGreen_Automatic_Long">
     <ePixmap pixmap="buttons/key_green.png" position="255,692" size="16,16" alphatest="blend" transparent="1" objectTypes="key_green,Button,Label" />
@@ -1229,12 +1239,13 @@
       <convert type="FrontendInfo">AGC</convert>
     </widget>
     <!-- Python 2 -->
-    <eLabel text="CPU-Temp:" position="840,385" size="100,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-    <widget source="global.CurrentTime" position="935,385" size="60,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" />
+   <!--  <eLabel text="CPU-Temp:" position="840,385" size="100,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
+    <widget source="global.CurrentTime" position="935,385" size="60,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" /> -->
     <!-- Python 3 -->
-    <!--  <widget source="global.CurrentTime" render="Label" position="670,375" size="580,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <widget source="global.CurrentTime" render="Label" position="840,385" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
     <convert type="BlueASTBinfo">CPUtemp</convert>
-  </widget> -->
+    </widget> 
+  
     <applet type="onLayoutFinish">
     </applet>
     <eLabel text="VPN:" backgroundColor="background" position="840,360" size="45,25" font="Regular; 18" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
@@ -1359,12 +1370,12 @@
       <convert type="FrontendInfo">AGC</convert>
     </widget>
     <!-- Python 2 -->
-    <eLabel text="CPU-Temp:" position="840,385" size="100,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-    <widget source="global.CurrentTime" position="935,385" size="60,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" />
+  <!--   <eLabel text="CPU-Temp:" position="840,385" size="100,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
+    <widget source="global.CurrentTime" position="935,385" size="60,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" /> -->
     <!-- Python 3 -->
-    <!--  <widget source="global.CurrentTime" render="Label" position="670,375" size="580,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+	<widget source="global.CurrentTime" render="Label" position="840,385" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
     <convert type="BlueASTBinfo">CPUtemp</convert>
-  </widget> -->
+	</widget>
     <applet type="onLayoutFinish">
     </applet>
     <eLabel text="VPN:" backgroundColor="background" position="840,360" size="45,20" font="Regular; 18" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
@@ -1869,6 +1880,1768 @@
     <widget name="arrowup" position="-100,-100" size="37,70" pixmap="skin_default/arrowup.png" zPosition="11" alphatest="blend" />
     <widget name="arrowup2" position="-100,-100" size="37,70" pixmap="skin_default/arrowup.png" zPosition="11" alphatest="blend" />
   </screen>
+    <!--Template_wizard_rc_templateNew  -->
+  <screen name="wizard_rc_templateNew">
+		<widget name="rc" pixmaps="rc.png,rcold.png" position="22,95" zPosition="10" size="154,500" alphatest="blend" transparent="0" />
+		<widget alphatest="blend" name="indicatorU0" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU1" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU2" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU3" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU4" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU5" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU6" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU7" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU8" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU9" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU10" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU11" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU12" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU13" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU14" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorU15" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL0" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL1" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL2" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL3" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL4" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL5" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL6" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL7" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL8" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL9" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL10" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL11" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL12" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL13" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL14" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+		<widget alphatest="blend" name="indicatorL15" pixmap="skin_default/yellow_circle23x23.png" position="85,75" offset="11,11" size="23,23" zPosition="11" />
+	</screen>
   <!-- backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="10" scrollbarSliderForegroundColor="scrollbarcolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" -->
   <!-- TEMPLATES -->
+  <!-- TEMPLATES Fullinfo SIB Picon -->
+   <screen name="template_fullinfo_sib_picon">
+    <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="472,345" size="47,15" zPosition="1" />
+    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="472,345" render="Pixmap" size="47,15" source="session.RecordState" zPosition="2">
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <!-- Python 2 -->
+    <!--   <eLabel text="CPU-Temp:" position="840,385" size="100,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
+    <widget source="global.CurrentTime" position="935,385" size="60,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" /> -->
+    <!-- Python 3 -->
+    <widget source="global.CurrentTime" render="Label" position="840,385" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueASTBinfo">CPUtemp</convert>
+    </widget>
+    <applet type="onLayoutFinish">
+    </applet>
+    <eLabel text="VPN:" backgroundColor="background" position="840,360" size="45,20" font="Regular; 18" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
+    <eLabel backgroundColor="red" position="841,379" size="42,3" zPosition="1" foregroundColor="white" />
+    <widget backgroundColor="green" position="841,379" size="42,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+      <convert type="BlueASambaVpnIp_converter">vpn</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget backgroundColor="background" position="925,360" size="150,20" font="Regular; 18" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
+      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
+    </widget>
+    <widget position="888,360" size="30,20" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
+      <convert type="BlueASambaVpnIp_converter">flag</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,410" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueAReceiverInfo">UsbInfo</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,435" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueAReceiverInfo">SwapFree</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,460" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueAReceiverInfo">MemFree</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,485" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueAReceiverInfo">HddInfo</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,510" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueAReceiverInfo">FlashInfo</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="840,535" size="425,25" zPosition="1" font="Regular;18" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+      <convert type="BlueACPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
+    </widget>
+    <!--   <widget source="session.CurrentService" render="Label" position="905,560" zPosition="1" valign="center" size="360,25" font="Regular;18" foregroundColor="selectedFG" backgroundColor="black" transparent="1" halign="left">
+    <convert type="BlueASatInfo">ExpertInfo</convert>
+  </widget> -->
+    <widget source="session.CurrentService" render="Label" position="905,560" size="360,25" backgroundColor="background" font="Regular; 18" valign="center" halign="left" noWrap="1" transparent="1" zPosition="1" foregroundColor="selectedFG">
+      <convert type="ServiceName2">%S</convert>
+      <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
+      <convert type="ServiceName2">%R</convert>
+      <convert type="ConverterRotator">3</convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="840,560" valign="center" size="65,25" font="Regular;18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-C" position="840,560" valign="center" size="65,25" font="Regular;18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-T" position="840,560" valign="center" size="65,25" font="Regular;18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="FixedLabel" text="ATSC" position="840,560" valign="center" size="65,25" font="Regular;18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Label" text="CCCam2.3.0+Oscam svn11580" position="840,585" valign="center" size="425,25" font="Regular; 18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" noWrap="1">
+      <convert type="BlueACamName">CamName</convert>
+    </widget>
+    <widget font="Regular; 16" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="840,610" render="Label" size="115,25" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+      <convert type="BlueAEmuInfo">Emu</convert>
+    </widget>
+    <widget font="Regular; 16" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="955,610" render="Label" size="310,25" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+      <convert type="BlueAEmuInfo">Address</convert>
+    </widget>
+    <widget font="Regular; 16" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="840,635" render="Label" size="160,25" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+      <convert type="BlueAEmuInfo">Ecmtime</convert>
+    </widget>
+    <widget font="Regular; 16" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1000,635" render="Label" size="185,25" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
+      <convert type="BlueAEmuInfo">Caid</convert>
+    </widget>
+    <widget font="Regular;16" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1185,635" render="Label" size="80,25" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+      <convert type="BlueAEmuInfo">Hops</convert>
+    </widget>
+  </screen>
+  <!-- TEMPLATES_Infobar_Poster_Fake-->
+  <screen name="template_Poster_Infobar">
+ <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen> 
+  <!-- TEMPLATES_Infobar_Poster-->
+  <screen name="template_Infobar_Poster">
+   <widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="15,350" size="123,185" zPosition="10" />
+   <widget source="session.Event_Next" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="1135,350" size="123,185" zPosition="10" />
+  </screen> 
+    <!-- TEMPLATES_Player_Backdrop_Poster_Fake-->
+  <screen name="template_Backdrop_Poster_Player">
+ <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen> 
+    <!-- TEMPLATES_Player_Poster-->
+  <screen name="template_Player_Backdrop_Poster">
+   <widget source="session.Event_Now" render="BlueABackdrop" position="780,390" size="328,185" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
+   <widget source="session.Event_Now" render="BlueAPoster" position="1135,390" size="123,185" borderColor="scrollbarborder" borderWidth="1"  zPosition="10" />
+  </screen>
+  <!-- TEMPLATES SecondInfoBar Poster-->
+  <screen name="template_SIB_Poster">
+  <widget source="session.Event_Next" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="397,425" size="123,185" zPosition="10" />
+  <widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="397,130" size="123,185" zPosition="10" />
+  </screen> 
+  <!-- TEMPLATES SecondInfoBar Poster Fake-->
+  <screen name="template_SecondInfoBar_Poster">
+ <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen> 
+  <!-- TEMPLATES-SIB_session_Event_Now_Next-Poster-->
+  <screen name="template_SIB_session_Event_Now_Next" >
+  <widget source="session.Event_Now" render="BlueARunningText" position="20,120" size="370,205" font="Regular; 22" backgroundColor="background" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" render="BlueARunningText" position="20,420" size="370,195" font="Regular; 22" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  </screen>
+  <!-- TEMPLATES epg_description_ -->
+  <screen name="template_epg_description_EV">
+ <widget name="epg_description" render="BlueARunningText" position="20,120" size="500,440" font="Regular; 22" backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="10" scrollbarSliderForegroundColor="scrollbarcolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="5" />
+  </screen> 
+  <!-- TEMPLATES epg_description_Poster -->
+  <screen name="template_epg_description_Poster_EV">
+  <widget name="epg_description" render="BlueARunningText" position="20,120" size="500,240" font="Regular; 22" backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="10" scrollbarSliderForegroundColor="scrollbarcolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="5" />
+  </screen> 
+    <!-- TEMPLATES-EventView-Backdrop-Poster-->
+  <screen name="template_EventView_Backdrop_Poster">
+   <widget source="Event" render="BlueABackdrop" position="192,375" size="328,185" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
+   <widget source="Event" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="20,375" size="123,185" zPosition="10" />
+  </screen> 
+   <!-- template_SNR_AGC_BER_SIB-->
+  <screen name="template_SNR_AGC_SIB">
+    <eLabel text="SNR:" position="150,679" size="50,20" font="Regular; 16" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <widget source="session.FrontendStatus" render="Label" position="150,700" size="50,20" font="Regular; 16" valign="center" noWrap="1" transparent="1" halign="center" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <eLabel name="" position="150,699" size="50,1" backgroundColor="white" zPosition="3" />
+    <widget source="session.FrontendStatus" position="150,699" size="50,1" render="Progress" zPosition="5" foregroundColor="selectedFG" transparent="1">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <eLabel text="AGC:" position="220,679" size="50,20" halign="center" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.FrontendStatus" render="Label" position="220,700" size="50,20" font="Regular; 16" backgroundColor="background" transparent="1" halign="center" foregroundColor="selectedFG" valign="center" zPosition="3" noWrap="1">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+    <eLabel name="" position="220,699" size="50,1" backgroundColor="white" zPosition="3" />
+    <widget source="session.FrontendStatus" position="220,699" size="50,1" render="Progress" zPosition="5" foregroundColor="selectedFG" transparent="1">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+  </screen>
+  <!-- template_SAT_info_SIB-->
+  <screen name="template_SAT_info_SIB">
+  <widget source="session.CurrentService" render="BlueAPiconUni" path="piconSat" position="290,682" size="50,30" zPosition="2"  alphatest="blend">
+    <convert type="ServiceName2">OrbitalPos</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_C.png" position="290,690" size="50,30" zPosition="2"  alphatest="blend">
+    <convert type="BlueAServiceInfoEX">IsCable</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_T.png" position="290,690" size="50,30" zPosition="2"  alphatest="blend">
+    <convert type="BlueAServiceInfoEX">IsTerrestrial</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_IPTV.png" position="290,690" size="50,30" zPosition="2"  alphatest="blend">
+    <convert type="BlueAServiceInfoEX">IsStreamTV</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+</screen>
+     <!-- TEMPLATES_EMU_Info_fake-->
+ <screen name="template_EMU_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- template_EMU_Info_SIB-->
+  <screen name="template_EMU_Info_SIB">
+    <widget source="session.CurrentService" render="BlueApiconEmu" path="emu" position="430,684" size="50,30" transparent="1" alphatest="blend" zPosition="3" />
+  </screen>
+     <!-- TEMPLATES_Prov_Info_fake-->
+ <screen name="template_Prov_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+    <!-- template_Prov_Info_SIB-->
+  <screen name="template_Prov_Info_SIB">
+    <widget source="session.CurrentService" render="BlueAPiconUni" path="piconProv" position="360,684" size="50,30" zPosition="10" transparent="1" alphatest="on">
+      <convert type="BlueAServiceName2">Provider</convert>
+    </widget>
+  </screen>
+      <!-- TEMPLATES ModuleControl_Info_fake-->
+ <screen name="template_ModuleControl_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- template_ModuleControl_Info_SIB-->
+  <screen name="template_Module_1_Control_SIB">
+	<widget source="session.CurrentService" render="BlueAPiconUni" path="piconCrypt" position="710,684" size="50,30" zPosition="2" alphatest="blend" transparent="1">
+    <convert type="BlueAModuleControl">PiconSlot1</convert>
+	</widget>
+	<widget source="session.CurrentService" render="BlueACicontrol" position="430,684" size="50,30" zPosition="3"  transparent="1" alphatest="blend" />
+  </screen>
+  <!-- template_ModuleControl_Info_SIB-->
+  <screen name="template_Module_2_Control_SIB">
+	<widget source="session.CurrentService" render="BlueAPiconUni" path="piconCrypt" position="780,684" size="50,30" zPosition="2" alphatest="blend" transparent="1">
+	<convert type="BlueAModuleControl">PiconSlot2</convert>
+    </widget>
+	<widget source="session.CurrentService" render="BlueACicontrol" position="430,684" size="50,30" zPosition="3"  transparent="1" alphatest="blend" />
+  </screen>
+  <!-- TEMPLATES_Crypt_Info_fake-->
+ <screen name="template_Caid_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+<!-- template_Crypt_Info_SIB-->
+  <screen name="template_Caid_Info_SIB">
+    <ePixmap pixmap="BlueAccents-HD/piconCrypt/Unknown.png" position="500,684" size="50,30" zPosition="2" transparent="1" alphatest="blend" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Fta.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="black" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">IsFta</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Irdeto.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">IrdEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Seca.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">SecaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Nagravision.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">NagraEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Viaccess.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">ViaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Conax.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">ConaxEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Betacrypt.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">BetaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Cryptoworks.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">CrwEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/DRE-crypt.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="CaidInfo2">DreamEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Videoguard.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">NdsEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Biss.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">BisEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+    <!-- TEMPLATES_Ethernet_Info_fake-->
+ <screen name="template_Ethernet_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES_Ethernet_Info-->
+  <screen name="template_Ethernet_Info_SIB">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/wireless_on.png" position="570,684" zPosition="3" size="50,30" alphatest="blend">
+      <convert type="BlueAInternetConnectionInfo">Wifi</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/lan_on.png" position="570,684" zPosition="3" size="50,30" alphatest="blend">
+      <convert type="BlueAInternetConnectionInfo">Lan</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+      <!-- TEMPLATES_Ethernet_ON_OFF_Info_fake-->
+ <screen name="template_Ethernet_ON_OFF_Info">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <!-- TEMPLATES_Ethernet_ON_OFF_Info-->
+  <screen name="template_Ethernet_ON_OFF_Info_SIB">
+    <!--     <widget source="session.CurrentService" render="Label" position="1128,1035" valign="center" size="55,24" zPosition="4" font="Regular; 20" halign="center" foregroundColor="bluetitle" transparent="1" backgroundColor="background">
+      <convert type="BlueAInternetConnectionInfo">Info</convert>
+    </widget> -->
+    <widget source="session.CurrentService" position="640,684" size="50,30" render="Pixmap" backgroundColor="black" pixmap="BlueAccents-HD/icons/ethernet_on.png" zPosition="3"  alphatest="blend">
+      <convert type="BlueANetConnection">216.58.214.142</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="global.CurrentTime" render="Pixmap" pixmap="BlueAccents-HD/icons/ethernet_off.png" position="640,684" size="50,30" halign="center" zPosition="2" alphatest="blend" transparent="1">
+      <convert type="BlueABlinkingClock" />
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+  </screen>
+   <!-- TEMPLATES Orbital Picon SIB -->
+  <screen name="template_orbital_picon_SIB">
+    <widget source="session.CurrentService" render="Label" position="1145,690" size="80,20" font="Regular; 20" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="ServiceOrbitalPosition" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1230,680" size="35,35" zPosition="2" transparent="1">
+      <convert type="ServiceInfo">IsStream</convert>
+      <convert type="ConditionalShowHide">
+      </convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1230,680" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1230,680" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1230,680" size="35,35" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="855,690" size="120,20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="13" font="Regular; 20" halign="right" valign="center" noWrap="1">
+      <convert type="BlueACodec">VideoSize</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="980,690" size="100,20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="13" font="Regular; 20" halign="left" valign="center" noWrap="1">
+      <convert type="BlueACodec">Fps</convert>
+    </widget>
+  </screen>
+     <!-- TEMPLATES_Tuner_Info_SIB-->
+  <screen name="template_Tuner_Info_SIB">
+<eLabel text="Tuner:" position="20,688" size="74,20" halign="right" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+  <widget source="session.TunerInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">1,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_0</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.TunerInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">2,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_1</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  </screen>
+       <!-- 4 TUNER INFO-->
+  <screen name="template_2_Tuner_Info_SIB">
+<eLabel text="Tuner:" position="20,688" size="74,20" halign="right" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+  <widget source="session.TunerInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">1,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="95,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_0</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.TunerInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">2,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="115,688" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_1</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  </screen>
+  <!-- 4 TUNER INFO -->
+<screen name="template_4_Tuner_Info_SIB">
+  <eLabel text="Tuner:" position="20,679" size="74,20" halign="center" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+  <widget source="session.TunerInfo" position="20,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">1,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="20,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="20,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="20,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_0</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.TunerInfo" position="39,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">2,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="39,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="39,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="39,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_1</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="58,698" size="17,20" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="58,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">3,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="58,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="58,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">4</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="58,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_2</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="77,698" size="17,20" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="77,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">4,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="77,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">3,3</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="77,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">8</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="77,698" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_3</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+</screen>
+  <!--  8 TUNER INFO -->
+<screen name="template_8_Tuner_Info_SIB">
+<eLabel text="Tuner:" position="5,678" size="74,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+  <widget source="session.TunerInfo" position="56,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">1,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="56,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="56,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="56,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_0</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.TunerInfo" position="75,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">2,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="75,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="75,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="75,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_1</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="94,678" size="17,20" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="94,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">3,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="94,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="94,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">4</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="94,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_2</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="113,678" size="17,20" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="113,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">4,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="113,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">3,3</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="113,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">8</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="113,678" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_3</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="56,700" size="17,20" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="56,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">5,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="56,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">4,4</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="56,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">16</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="56,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_4</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="75,700" size="17,20" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="75,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">6,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="75,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">5,5</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="75,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">32</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="75,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_5</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="94,700" size="17,20" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="94,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">7,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="94,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">6,6</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="94,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">64</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="94,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_6</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <ePixmap position="113,700" size="17,20" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="1" alphatest="blend" />
+  <widget source="session.TunerInfo" position="113,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="2" alphatest="blend">
+    <convert type="TunerInfo">TunerAvailable</convert>
+    <convert type="ValueRange">8,18</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="113,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_green.png" zPosition="5" alphatest="blend">
+    <convert type="FrontendInfo">NUMBER</convert>
+    <convert type="ValueRange">7,7</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.TunerInfo" position="113,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_yellow.png" zPosition="3" alphatest="blend">
+    <convert type="TunerInfo">TunerUseMask</convert>
+    <convert type="ValueBitTest">128</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" position="113,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_red.png" zPosition="6" alphatest="blend">
+    <convert type="BlueAFrontendInfo">REC_7</convert>
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+</screen>
+  <!--  12 TUNER INFO -->
+  <screen name="template_12_Tuner_Info_SIB">
+    <widget source="session.TunerInfo" position="20,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="20,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="20,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="20,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="39,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="39,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="39,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="39,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="58,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">3,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="58,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="58,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="58,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_2</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="77,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">4,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="77,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="77,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="77,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_3</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="96,679" size="17,20" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="96,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">5,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="96,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="96,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="96,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_4</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="115,679" size="17,20" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="115,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">6,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="115,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="115,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="115,679" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_5</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="20,700" size="17,20" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="20,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">7,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="20,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="20,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="20,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_6</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="39,700" size="17,20" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="39,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">8,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="39,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="39,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="39,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_7</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="58,700" size="17,20" pixmap="BlueAccents-HD/tunericons/i_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="58,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">9,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="58,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">8,8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="58,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">256</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="58,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_8</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="77,700" size="17,20" pixmap="BlueAccents-HD/tunericons/j_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="77,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">10,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="77,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">9,9</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="77,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">512</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="77,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_9</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="96,700" size="17,20" pixmap="BlueAccents-HD/tunericons/k_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="96,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">11,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="96,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">10,10</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="96,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1024</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="96,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_10</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="115,700" size="17,20" pixmap="BlueAccents-HD/tunericons/l_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="115,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">12,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="115,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">11,11</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="115,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2048</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="115,700" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_11</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <!-- <widget source="session.TunerInfo" position="34,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/m_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">13,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="34,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/m_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">12,12</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="34,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/m_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">4096</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="34,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/m_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_12</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>                
+	<widget source="session.TunerInfo" position="53,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/n_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">14,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="53,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/n_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">13,13</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="53,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/n_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">8192</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="53,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/n_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_13</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>                  
+	<widget source="session.TunerInfo" position="72,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/o_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">15,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="72,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/o_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">14,14</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="72,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/o_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">16384</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="72,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/o_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_14</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>                    
+	<widget source="session.TunerInfo" position="91,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/p_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">16,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="91,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/p_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">15,15</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="91,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/p_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">32768</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="91,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/p_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_15</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>                    
+	<widget source="session.TunerInfo" position="110,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/q_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">17,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="110,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/q_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">16,16</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="110,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/q_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">65536</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="110,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/q_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_16</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>                      
+	<widget source="session.TunerInfo" position="129,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/r_grey.png" zPosition="2" alphatest="blend">
+		<convert type="TunerInfo">TunerAvailable</convert>
+		<convert type="ValueRange">18,18</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.FrontendInfo" position="129,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/r_green.png" zPosition="5" alphatest="blend">
+		<convert type="FrontendInfo">NUMBER</convert>
+		<convert type="ValueRange">17,17</convert>
+		<convert type="ConditionalShowHide" />
+	</widget>
+	<widget source="session.TunerInfo" position="129,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/r_yellow.png" zPosition="3" alphatest="blend">
+		<convert type="TunerInfo">TunerUseMask</convert>
+		<convert type="ValueBitTest">131072</convert>
+		<convert type="ConditionalShowHide" />
+	</widget> -->
+    <!-- 	<widget source="session.FrontendInfo" position="129,947" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/r_red.png" zPosition="6" alphatest="blend">
+		<convert type="BlueAFrontendInfo">REC_17</convert>
+		<convert type="ConditionalShowHide">Blink</convert>
+	</widget> -->
+    <!--  18 TUNER INFO  End */  -->
+	</screen>
+		<!--  TUNER INFO EV Picon-->
+  <screen name="template_Tuner_Info_EV">
+    <eLabel text="Tuner:" position="840,330" size="52,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+	</screen>
+	<!--   2 TUNER INFO EV Picon-->
+  <screen name="template_2_Tuner_Info_EV">
+    <eLabel text="Tuner:" position="840,330" size="52,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+	</screen>
+	<!--  4 TUNER INFO EV Picon-->
+  <screen name="template_4_Tuner_Info_EV">
+    <eLabel text="Tuner:" position="840,330" size="52,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="926,330" size="17,20" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">3,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_2</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="944,330" size="17,20" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">4,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_3</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+</screen>
+<!--  8 TUNER INFO EV Picon-->
+  <screen name="template_8_Tuner_Info_EV">
+    <eLabel text="Tuner:" position="840,330" size="52,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="926,330" size="17,20" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">3,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_2</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="944,330" size="17,20" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">4,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_3</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="962,330" size="17,20" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">5,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_4</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="980,330" size="17,20" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">6,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_5</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="998,330" size="17,20" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">7,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_6</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1016,330" size="17,20" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">8,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_7</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+	</screen>
+  	  <!--  12 TUNER INFO EV Picon-->
+<!--  12 TUNER INFO EV Picon-->
+  <screen name="template_12_Tuner_Info_EV">
+    <eLabel text="Tuner:" position="840,330" size="52,20" halign="left" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">1,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="890,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/a_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_0</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">2,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="908,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/b_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_1</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="926,330" size="17,20" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">3,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="926,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/c_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_2</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="944,330" size="17,20" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">4,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">3,3</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="944,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/d_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_3</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="962,330" size="17,20" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">5,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">4,4</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">16</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="962,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/e_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_4</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="980,330" size="17,20" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">6,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">5,5</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">32</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="980,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/f_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_5</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="998,330" size="17,20" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">7,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">6,6</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">64</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="998,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/g_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_6</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1016,330" size="17,20" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">8,18</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">7,7</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">128</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1016,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/h_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_7</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1034,330" size="17,20" pixmap="BlueAccents-HD/tunericons/i_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1034,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">9,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1034,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">8,8</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1034,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">256</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1034,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/i_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_8</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1052,330" size="17,20" pixmap="BlueAccents-HD/tunericons/j_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1052,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">10,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1052,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">9,9</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1052,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">512</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1052,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/j_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_9</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1070,330" size="17,20" pixmap="BlueAccents-HD/tunericons/k_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1070,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">11,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1070,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">10,10</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1070,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">1024</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1070,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/k_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_10</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap position="1088,330" size="17,20" pixmap="BlueAccents-HD/tunericons/l_grey.png" zPosition="1" alphatest="blend" />
+    <widget source="session.TunerInfo" position="1088,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_grey.png" zPosition="2" alphatest="blend">
+      <convert type="TunerInfo">TunerAvailable</convert>
+      <convert type="ValueRange">12,12</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1088,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_green.png" zPosition="5" alphatest="blend">
+      <convert type="FrontendInfo">NUMBER</convert>
+      <convert type="ValueRange">11,11</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.TunerInfo" position="1088,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_yellow.png" zPosition="3" alphatest="blend">
+      <convert type="TunerInfo">TunerUseMask</convert>
+      <convert type="ValueBitTest">2048</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" position="1088,330" size="17,20" render="Pixmap" pixmap="BlueAccents-HD/tunericons/l_red.png" zPosition="6" alphatest="blend">
+      <convert type="BlueAFrontendInfo">REC_11</convert>
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+  </screen>
+  <!-- template_Crypt_Info_EV -->
+  <screen name="template_Caid_Info_EV">
+    <ePixmap pixmap="BlueAccents-HD/piconCrypt/Unknown.png" position="1110,325" size="50,30" zPosition="2" alphatest="blend" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Fta.png" position="1110,325" size="50,30" zPosition="5" backgroundColor="black" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">IsFta</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Irdeto.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">IrdEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Seca.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">SecaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Nagravision.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">NagraEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Viaccess.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">ViaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Conax.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">ConaxEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Betacrypt.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">BetaEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Cryptoworks.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">CrwEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/DRE-crypt.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="CaidInfo2">DreamEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Videoguard.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">NdsEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Biss.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
+      <convert type="BlueApiconCaidInfo">BisEcm</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+  <!-- template_SNR_AGC_BER_EV -->
+  <screen name="template_SNR_AGC_EV">
+    <!--  SNR -->
+    <eLabel text="SNR:" position="1165,320" size="50,20" font="Regular; 16" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <widget source="session.FrontendStatus" render="Label" position="1165,340" size="50,20" font="Regular; 16" valign="center" noWrap="1" transparent="1" halign="center" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <eLabel name="" position="1170,339" size="40,1" backgroundColor="white" zPosition="3" />
+    <widget source="session.FrontendStatus" position="1170,339" size="40,1" render="Progress" zPosition="5" foregroundColor="selectedFG" transparent="1">
+      <convert type="FrontendInfo">SNR</convert>
+    </widget>
+    <!--  AGC -->
+    <eLabel text="AGC:" position="1215,320" size="50,20" halign="center" font="Regular; 16" backgroundColor="background" transparent="1" valign="center" zPosition="2" noWrap="1" foregroundColor="selectedFG" />
+    <widget source="session.FrontendStatus" render="Label" position="1215,340" size="50,20" font="Regular; 16" backgroundColor="background" transparent="1" halign="center" foregroundColor="selectedFG" valign="center" zPosition="3" noWrap="1">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+    <eLabel name="" position="1220,339" size="40,1" backgroundColor="white" zPosition="3" />
+    <widget source="session.FrontendStatus" position="1220,339" size="40,1" render="Progress" zPosition="5" foregroundColor="selectedFG" transparent="1">
+      <convert type="FrontendInfo">AGC</convert>
+    </widget>
+  </screen>
+  <!-- template_SAT_info_EV-->
+  <screen name="template_SAT_info_EV">
+    <!--   <widget source="session.CurrentService" render="BlueAPiconUni" path="piconSat" position="1110,325" size="50,30" zPosition="2"  alphatest="blend">
+    <convert type="ServiceName2">OrbitalPos</convert>
+  </widget> -->
+    <ePixmap position="1110,361" size="50,30" pixmap="BlueAccents-HD/icons/DVB_S.png" zPosition="2" alphatest="blend" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_C.png" position="1110,361" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsCable</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_T.png" position="1110,361" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsTerrestrial</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_IPTV.png" position="1110,361" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsStreamTV</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <!--   <widget alphatest="blend" transparent="1" position="290,690" render="Picon" size="50,30" source="session.CurrentService"  zPosition="1">
+  <convert type="ServiceName">Reference</convert>
+  </widget> -->
+  </screen>
+    <!-- template_SAT_info_EV-->
+  <screen name="template_SAT_info_EV_2.4.6.8">
+    <ePixmap position="1045,330" size="50,30" pixmap="BlueAccents-HD/icons/DVB_S.png" zPosition="2" alphatest="blend" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_C.png" position="1045,330" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsCable</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_T.png" position="1045,330" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsTerrestrial</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/DVB_IPTV.png" position="1045,330" size="50,30" zPosition="2" alphatest="blend">
+      <convert type="BlueAServiceInfoEX">IsStreamTV</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+   </screen>
+  <!-- template_EMU_Prov_Info_EV -->
+  <screen name="template_EMU_Info_EV">
+<!--     <widget source="session.CurrentService" render="BlueAPiconUni" path="piconProv" position="850,684" size="50,30" zPosition="10" transparent="1" alphatest="on">
+      <convert type="BlueAServiceName2">Provider</convert>
+    </widget> -->
+    <widget source="session.CurrentService" render="BlueApiconEmu" path="emu" position="790,686" size="50,30" transparent="1" alphatest="blend" zPosition="3" />
+  </screen>
+  <!-- template_Ethernet_Info_EV -->
+  <screen name="template_Ethernet_Info_EV">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/wireless_on.png" position="860,686" zPosition="3" size="50,30" alphatest="blend">
+      <convert type="BlueAInternetConnectionInfo">Wifi</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/lan_on.png" position="860,686" zPosition="3" size="50,30" alphatest="blend">
+      <convert type="BlueAInternetConnectionInfo">Lan</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen>
+  <!-- template_Ethernet_ON_OFF_Info_EV -->
+  <screen name="template_Ethernet_ON_OFF_Info_EV">
+    <!--     <widget source="session.CurrentService" render="Label" position="1128,1035" valign="center" size="55,24" zPosition="4" font="Regular; 20" halign="center" foregroundColor="bluetitle" transparent="1" backgroundColor="background">
+      <convert type="BlueAInternetConnectionInfo">Info</convert>
+    </widget> -->
+    <widget source="session.CurrentService" position="930,686" size="50,30" render="Pixmap" backgroundColor="black" pixmap="BlueAccents-HD/icons/ethernet_on.png" zPosition="3" transparent="1" alphatest="blend">
+      <convert type="BlueANetConnection">216.58.214.142</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="global.CurrentTime" render="Pixmap" pixmap="BlueAccents-HD/icons/ethernet_off.png" position="930,686" size="50,30" halign="center" zPosition="2" alphatest="blend" transparent="1">
+      <convert type="BlueABlinkingClock" />
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+  </screen>
+
   </skin>
+
