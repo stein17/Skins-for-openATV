@@ -49,7 +49,7 @@ class AMBPiconUni(Renderer):
 				sname = self.source.text
 				sname = sname.upper().replace('.', '')
 				sname = sname.replace('\xc2\xb0', '') if PY2 else sname.replace('°', '')
-				print(sname)
+				#print(sname)
 				#if sname.startswith('4097'):
 				if not sname.startswith('1'):
 					sname = sname.replace('4097', '1', 1).replace('5001', '1', 1).replace('5002', '1', 1)
