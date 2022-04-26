@@ -4316,19 +4316,27 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   <widget source="session.CurrentService" render="AMBpiconEmu"  path="emu" position="700,1020" size="96,54" transparent="1" alphatest="blend" zPosition="3" />
  </screen>
     <!-- TEMPLATES ModuleControl_Info_fake-->
- <screen name="template_ModuleControl_Info">
+ <screen name="template_Module_1_Control">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <screen name="template_Module_2_Control">
  <eLabel name="fake" position="0, 0" size="0,0" />
  </screen>
 <!-- template_ModuleControl_Info_SIB-->
-  <screen name="template_ModuleControl_SIB">
+ <screen name="template_Module_1_Control_SIB">
     <widget source="session.CurrentService" render="AMBPiconUni" path="piconCrypt" position="1220,1020" size="96,54" zPosition="2" alphatest="blend" transparent="1">
     <convert type="AMB_ModuleControl">PiconSlot1</convert>
     </widget>
-    <widget source="session.CurrentService" render="AMBPiconUni" path="piconCrypt" position="1350,1020" size="96,54" zPosition="2" alphatest="blend" transparent="1">
-    <convert type="AMB_ModuleControl">PiconSlot2</convert>
-    </widget>
 	<widget source="session.CurrentService" render="AMBCicontrol" position="700,1020" size="96,54" zPosition="3"  transparent="1" alphatest="blend" />
   </screen>
+    <!-- template_ModuleControl_Info_SIB-->
+  <screen name="template_Module_2_Control_SIB">
+      <widget source="session.CurrentService" render="AMBPiconUni" path="piconCrypt" position="1350,1020" size="96,54" zPosition="2" alphatest="blend" transparent="1">
+    <convert type="AMB_ModuleControl">PiconSlot2</convert>
+    </widget>
+  	<widget source="session.CurrentService" render="AMBCicontrol" position="700,1020" size="96,54" zPosition="3"  transparent="1" alphatest="blend" />
+  </screen>
+  
   <!-- TEMPLATES_Crypt_Info_fake-->
  <screen name="template_Caid_Info">
  <eLabel name="fake" position="0, 0" size="0,0" />
@@ -4369,7 +4377,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/piconCrypt/DRE-crypt.png" position="830,1020" size="96,54" zPosition="4" backgroundColor="background" alphatest="blend">
-    <convert type="CaidInfo2">DreamEcm</convert>
+    <convert type="AMBpiconCaidInfo">DreamEcm</convert>
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.CurrentService" render="Pixmap" pixmap="Multibox/piconCrypt/Videoguard.png" position="830,1020" size="96,54" zPosition="4" backgroundColor="background" alphatest="blend">
