@@ -2060,7 +2060,7 @@
    <widget source="Event" render="BlueABackdrop" position="192,375" size="328,185" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
    <widget source="Event" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="20,375" size="123,185" zPosition="10" />
   </screen> 
-   <!-- template_SNR_AGC_BER_SIB-->
+  <!-- template_SNR_AGC_BER_SIB-->
   <screen name="template_SNR_AGC_SIB">
     <eLabel text="SNR:" position="150,679" size="50,20" font="Regular; 16" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
     <widget source="session.FrontendStatus" render="Label" position="150,700" size="50,20" font="Regular; 16" valign="center" noWrap="1" transparent="1" halign="center" foregroundColor="selectedFG" backgroundColor="background">
@@ -2115,8 +2115,11 @@
       <convert type="BlueAServiceName2">Provider</convert>
     </widget>
   </screen>
-      <!-- TEMPLATES ModuleControl_Info_fake-->
- <screen name="template_ModuleControl_Info">
+    <!-- TEMPLATES ModuleControl_Info_fake-->
+ <screen name="template_Module_1_Control">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
+  <screen name="template_Module_2_Control">
  <eLabel name="fake" position="0, 0" size="0,0" />
  </screen>
 <!-- template_ModuleControl_Info_SIB-->
@@ -2173,7 +2176,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/DRE-crypt.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
-      <convert type="CaidInfo2">DreamEcm</convert>
+      <convert type="BlueApiconCaidInfo">DreamEcm</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Videoguard.png" position="500,684" size="50,30" zPosition="4" transparent="1" backgroundColor="background" alphatest="blend">
@@ -3503,6 +3506,10 @@
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
   </screen>
+      <!-- TEMPLATES_Crypt_Info_fake-->
+ <screen name="template_Caid_EV">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- template_Crypt_Info_EV -->
   <screen name="template_Caid_Info_EV">
     <ePixmap pixmap="BlueAccents-HD/piconCrypt/Unknown.png" position="1110,325" size="50,30" zPosition="2" alphatest="blend" />
@@ -3539,7 +3546,7 @@
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/DRE-crypt.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
-      <convert type="CaidInfo2">DreamEcm</convert>
+      <convert type="BlueApiconCaidInfo">DreamEcm</convert>
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/piconCrypt/Videoguard.png" position="1110,325" size="50,30" zPosition="4" backgroundColor="background" alphatest="blend">
@@ -3610,6 +3617,11 @@
       <convert type="ConditionalShowHide" />
     </widget>
    </screen>
+   
+           <!-- TEMPLATES_EMU_Info_fake-->
+ <screen name="template_EMU_EV">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- template_EMU_Prov_Info_EV -->
   <screen name="template_EMU_Info_EV">
 <!--     <widget source="session.CurrentService" render="BlueAPiconUni" path="piconProv" position="850,684" size="50,30" zPosition="10" transparent="1" alphatest="on">
@@ -3617,6 +3629,10 @@
     </widget> -->
     <widget source="session.CurrentService" render="BlueApiconEmu" path="emu" position="790,686" size="50,30" transparent="1" alphatest="blend" zPosition="3" />
   </screen>
+        <!-- TEMPLATES_Ethernet_Info_fake-->
+ <screen name="template_Ethernet_EV">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- template_Ethernet_Info_EV -->
   <screen name="template_Ethernet_Info_EV">
     <widget source="session.CurrentService" render="Pixmap" pixmap="BlueAccents-HD/icons/wireless_on.png" position="860,686" zPosition="3" size="50,30" alphatest="blend">
@@ -3628,6 +3644,10 @@
       <convert type="ConditionalShowHide" />
     </widget>
   </screen>
+          <!-- TEMPLATES_Ethernet_ON_OFF_Info_fake-->
+ <screen name="template_Ethernet_ON_OFF_EV">
+ <eLabel name="fake" position="0, 0" size="0,0" />
+ </screen>
   <!-- template_Ethernet_ON_OFF_Info_EV -->
   <screen name="template_Ethernet_ON_OFF_Info_EV">
     <!--     <widget source="session.CurrentService" render="Label" position="1128,1035" valign="center" size="55,24" zPosition="4" font="Regular; 20" halign="center" foregroundColor="bluetitle" transparent="1" backgroundColor="background">
