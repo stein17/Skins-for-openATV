@@ -18,8 +18,8 @@ from datetime import datetime
 myipdata = '/tmp/myipdata.txt'
 myipfile = "/tmp/myip.txt"
 myflagfile = "/tmp/myflag.png"
-novpnfile = '/usr/share/enigma2/BlueAccents-HD/skinparts/novpn.txt'
-isvpnfile = '/usr/share/enigma2/BlueAccents-HD/skinparts/isvpn.txt'
+novpnfile = '/usr/share/enigma2/Multibox/skinparts/novpn.txt'
+isvpnfile = '/usr/share/enigma2/Multibox/skinparts/isvpn.txt'
 myipdataupdatepause = 300
 
 
@@ -75,7 +75,7 @@ del_myflagfile()
 del_myipdata()
 
 
-class BlueASambaVpnIp_converter(Poll, Converter, object):
+class AMBSambaVpnIp_converter(Poll, Converter, object):
 
     def __init__(self, type):
         Converter.__init__(self, type)
