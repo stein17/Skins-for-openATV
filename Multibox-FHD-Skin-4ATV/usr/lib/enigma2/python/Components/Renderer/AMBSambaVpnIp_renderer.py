@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+## -*- coding: utf-8 -*-
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 
@@ -17,3 +17,4 @@ class AMBSambaVpnIp_renderer(Renderer):
 				if self.instance:
 					self.instance.setScale(1)
 					self.instance.setPixmap(self.source.pixmap)
+
