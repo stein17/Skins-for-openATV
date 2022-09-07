@@ -1,15 +1,11 @@
-from __future__ import print_function
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/BlueLineConfig/__init__.py
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-import os, gettext
+import gettext
 PluginLanguageDomain = 'BlueLineConfig'
 PluginLanguagePath = 'Extensions/BlueLineConfig/locale'
 
+
 def localeInit():
-    lang = language.getLanguage()[:2]
-    os.environ['LANGUAGE'] = lang
-    print('[WebInterface] set language to ', lang)
     gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 
