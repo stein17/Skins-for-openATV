@@ -33,7 +33,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.WeatherID import get_woeid_from_yahoo
 from Tools import Notifications
 from Tools.Notifications import AddPopup
-from os import listdir, remove, rename, system, path, symlink, chdir, makedirs, mkdir
+from os import listdir, remove, rename, system, path, symlink, chdir, makedirs, mkdir, readlink
 import shutil
 
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
@@ -694,7 +694,7 @@ class MultiboxScreens(Screen):
         list_dir = sorted(listdir(dir_path), key=str.lower)
         for f in list_dir:
             if f.endswith('.xml') and f.startswith('skin_'):
-                if (not path.islink(dir_path + "/" + f)) or os.path.exists(os.readlink(dir_path + "/" + f)):
+                if (not path.islink(dir_path + "/" + f)) or path.exists(readlink(dir_path + "/" + f)):
                     friendly_name = f.replace("skin_", "")
                     friendly_name = friendly_name.replace(".xml", "")
                     friendly_name = friendly_name.replace("_", " ")
