@@ -4453,6 +4453,29 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
     <panel name="template_menu_ok_exit" />
     <panel name="template_background_725_trans" />
   </screen>
+  <screen name="BirthdayReminder" position="0,0" size="1920,1080" title="BirthdayReminder" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Birthday Reminder" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="name" position="50,108" size="450,45" zPosition="5" valign="center" halign="left" font="Regular;33" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <widget name="birthday" position="600,108" size="300,45" zPosition="5" valign="center" halign="center" font="Regular;33" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <widget name="age" position="965,108" size="80,45" zPosition="5" valign="center" halign="right" font="Regular;33" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <ePixmap pixmap="BlueAccents-FHD/BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,157" zPosition="1" size="1060,4" />
+    <widget source="list" render="Listbox" position="32,180" size="1050,810" backgroundColor="background" scrollbarMode="showOnDemand" transparent="1">
+			<convert type="TemplatedMultiContent">
+					{"template": [
+							MultiContentEntryText(pos = (20, 6), size = (450, 45), font=0, flags = RT_HALIGN_LEFT, text = 0),
+							MultiContentEntryText(pos = (570, 6), size = (300, 45), font=0, flags = RT_HALIGN_CENTER, text = 1),
+							MultiContentEntryText(pos = (920, 6), size = (75, 45), font=0, flags = RT_HALIGN_RIGHT, text = 2),
+						],
+					"fonts": [gFont("Regular", 32)],
+					"itemHeight": 45
+					}
+				</convert>
+			</widget>
+    <panel name="template_ok_exit" />
+    <panel name="template_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_background_725_trans" />
+  </screen>
   <!-- PLUGINS -->
   <!--######################################### -->
     </skin>
