@@ -2479,22 +2479,22 @@
     <widget source="session.FrontendStatus" render="Label" position="1342,502" size="90,37" font="Regular;27" valign="center" noWrap="1" transparent="1" halign="left" foregroundColor="selectedFG" backgroundColor="background">
       <convert type="FrontendInfo">SNR</convert>
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1785,495" size="52,52" zPosition="2" transparent="1">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1785,485" size="52,52" zPosition="2" transparent="1">
       <convert type="ServiceInfo">IsStream</convert>
       <convert type="ConditionalShowHide">
       </convert>
     </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1785,495" size="52,52" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1785,485" size="52,52" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">0,0</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1785,495" size="52,52" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1785,485" size="52,52" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">2,2</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1785,495" size="52,52" zPosition="2" alphatest="blend">
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1785,485" size="52,52" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
       <convert type="ValueRange">1,1</convert>
       <convert type="ConditionalShowHide" />
@@ -2595,6 +2595,10 @@
     <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1777,952" render="Label" size="120,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
       <convert type="BlueAEmuInfo">Hops</convert>
     </widget>
+	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+	<widget source="session.CurrentService" render="Label" position="1715,540" size="180,37" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
+     <convert type="ServiceName">Provider</convert>
+    </widget>
   </screen>
   <!-- TEMPLATES Fullinfo SIB -->
   <screen name="template_fullinfo_sib">
@@ -2653,6 +2657,10 @@
     <widget backgroundColor="green" position="1261,568" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
       <convert type="BlueASambaVpnIp_converter">vpn</convert>
       <convert type="ConditionalShowHide" />
+    </widget>
+	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+	<widget source="session.CurrentService" render="Label" position="1715,540" size="180,30" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
+     <convert type="ServiceName">Provider</convert>
     </widget>
     <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
       <convert type="BlueASambaVpnIp_converter">c+myip</convert>
@@ -3398,6 +3406,10 @@
     <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
       <convert type="BlueASambaVpnIp_converter">flag</convert>
     </widget>
+	<eLabel text="Prov:" backgroundColor="background" position="1650,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+	<widget source="session.CurrentService" render="Label" position="1720,540" size="180,30" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
+     <convert type="ServiceName">Provider</convert>
+    </widget>
     <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueAReceiverInfo">UsbInfo</convert>
     </widget>
@@ -3464,6 +3476,103 @@
       <convert type="BlueAEmuInfo">Hops</convert>
     </widget>
   </screen>
+  <!-- TEMPLATES Fullinfo EV Picon -->
+  <screen name="template_fullinfo_ev_picon">
+  <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="708,517" size="70,22" zPosition="1" />
+  <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="708,517" render="Pixmap" size="70,22" source="session.RecordState" zPosition="2">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <!-- Python 2 -->
+  <!--   <eLabel text="CPU-Temp:" position="1260,577" size="150,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
+    <widget source="global.CurrentTime" position="1402,577" size="90,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" render="BlueASYSTemp" /> -->
+  <!-- Python 3 -->
+  <widget source="global.CurrentTime" render="Label" position="1260,577" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueASTBinfo">CPUtemp</convert>
+  </widget>
+  <applet type="onLayoutFinish">
+  </applet>
+  <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
+  <eLabel backgroundColor="red" position="1261,568" size="63,4" zPosition="1" foregroundColor="white" />
+  <widget backgroundColor="green" position="1261,568" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+    <convert type="BlueASambaVpnIp_converter">vpn</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
+    <convert type="BlueASambaVpnIp_converter">c+myip</convert>
+  </widget>
+  <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
+    <convert type="BlueASambaVpnIp_converter">flag</convert>
+  </widget>
+  <eLabel text="Prov:" backgroundColor="background" position="1660,577" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+  <widget source="session.CurrentService" render="Label" position="1725,577" size="175,37" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
+    <convert type="ServiceName">Provider</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueAReceiverInfo">UsbInfo</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,652" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueAReceiverInfo">SwapFree</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,690" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueAReceiverInfo">MemFree</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,727" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueAReceiverInfo">HddInfo</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,765" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueAReceiverInfo">FlashInfo</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1260,802" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+    <convert type="BlueACPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
+  </widget>
+  <!--   <widget source="session.CurrentService" render="Label" position="1357,840" zPosition="1" valign="center" size="540,37" font="Regular;27" foregroundColor="selectedFG" backgroundColor="black" transparent="1" halign="left">
+    <convert type="BlueASatInfo">ExpertInfo</convert>
+  </widget> -->
+  <widget source="session.CurrentService" render="Label" position="1357,840" size="540,37" backgroundColor="background" font="Regular;27" valign="center" halign="left" noWrap="1" transparent="1" zPosition="1" foregroundColor="selectedFG">
+    <convert type="ServiceName2">%S</convert>
+    <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
+    <convert type="ServiceName2">%R</convert>
+    <convert type="ConverterRotator">3</convert>
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-S" position="1260,840" valign="center" size="97,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">0,0</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-C" position="1260,840" valign="center" size="97,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">1,1</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="DVB-T" position="1260,840" valign="center" size="97,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">2,2</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.FrontendInfo" render="FixedLabel" text="ATSC" position="1260,840" valign="center" size="97,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left">
+    <convert type="FrontendInfo">TYPE</convert>
+    <convert type="ValueRange">3,3</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Label" text="CCCam2.3.0+Oscam svn11580" position="1260,877" valign="center" size="637,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" noWrap="1">
+    <convert type="BlueACamName">CamName</convert>
+  </widget>
+  <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1260,915" render="Label" size="172,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="BlueAEmuInfo">Emu</convert>
+  </widget>
+  <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1432,915" render="Label" size="465,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="BlueAEmuInfo">Address</convert>
+  </widget>
+  <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1260,952" render="Label" size="240,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="BlueAEmuInfo">Ecmtime</convert>
+  </widget>
+  <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1500,952" render="Label" size="277,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1" noWrap="1">
+    <convert type="BlueAEmuInfo">Caid</convert>
+  </widget>
+  <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1777,952" render="Label" size="120,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
+    <convert type="BlueAEmuInfo">Hops</convert>
+  </widget>
+</screen>
    <!-- TEMPLATES_Infobar_Poster_Fake-->
   <screen name="template_Poster_Infobar_Mini">
     <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
