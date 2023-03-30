@@ -3469,7 +3469,28 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
   <!-- Foreca -->
   <screen name="ForecaPreview" position="0,0" size="1920,1080" title="Foreca Weather Forecast" flags="wfNoBorder" backgroundColor="background">
     <ePixmap pixmap="usr/lib/enigma2/python/Plugins/Extensions/Foreca/foreca_logo.png" position="75,112" size="150,64" zPosition="3" transparent="1" alphatest="blend" />
-    <widget name="MainList" position="30,180" size="1050,800" zPosition="3" backgroundColor="background" font0="Regular;22" font1="Regular22" font2="Regular18" font3="Regular;22" itemHeight="120" setTime="10,34,60,24" setPict="70,10,70,70" setPictScale="1" setTemp="145,15,120,24" setTempUnits="145,45,120,24" setWindPict="230,36,28,28" setWindPictScale="1" setWind="265,15,95,24" setWindUnits="265,45,95,24" text1Pos="365,5,335,28" text2Pos="365,33,335,28" text3Pos="365,56,335,28" enableWrapAround="1" scrollbarMode="showOnDemand" />
+    <widget name="MainList" position="30,180" size="1050,800" zPosition="3" backgroundColor="background" 
+	font0="Regular;33" 
+	font1="Regular33" 
+	font2="Regular27" 
+	font3="Regular;33" 
+	itemHeight="150" 
+	setTime="15,51,90,36"
+	setPict="105,15,105,105"
+	setPictScale="1"
+	setTemp="218,23,120,36"
+	setTempUnits="218,68,120,36"
+	setWindPict="345,36,42,42"
+	setWindPictScale="1"
+	setWind="398,23,143,36"
+	setWindUnits="398,68,143,36"
+	text1Pos="548,3,503,42"
+	text2Pos="548,45,503,42"
+	text3Pos="548,75,503,42"
+	text4Pos="548,105,503,42"
+	enableWrapAround="1" 
+	scrollbarMode="showOnDemand" />
+
     <widget source="Titel2" render="Label" position="1125,600" size="765,390" font="Regular;30" halign="center" backgroundColor="background" valign="center" transparent="1" />
     <!--widget source="Titel" render="Label" position="1147,585" size="727,420" font="Regular;30"  halign="center" backgroundColor="background" valign="center" transparent="1"/-->
     <!--widget source="Titel3" render="Label" position="1147,585" size="727,420" font="Regular;30"  halign="center" backgroundColor="background" valign="center" transparent="1"/-->
@@ -3486,12 +3507,10 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
     <widget name="spinner" position="0,0" zPosition="4" size="72,72" alphatest="blend" />
   </screen>
   <screen name="CityPanel" position="0,0" size="1920,1080" title="Select a city" flags="wfNoBorder" backgroundColor="transparent">
-    <widget source="key_blue" render="Label" position="637,1030" size="255,39" zPosition="1" font="Regular;30" halign="left" transparent="1" valign="center" noWrap="1" />
-    <ePixmap pixmap="buttons/key_blue.png" position="607,1038" size="24,24" alphatest="blend" transparent="1" />
     <ePixmap pixmap="usr/lib/enigma2/python/Plugins/Extensions/Foreca/foreca_logo.png" position="75,150" size="150,64" zPosition="3" transparent="1" alphatest="blend" />
     <widget name="Mlist" position="30,225" size="1050,720" itemHeight="45" font="Regular;30" column="10" zPosition="3" backgroundColor="background" enableWrapAround="1" scrollbarMode="showOnDemand" />
     <panel name="template_title_date" />
-   <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit" />
     <panel name="template_background_725_trans" />
   </screen>
@@ -4478,4 +4497,183 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
   </screen>
   <!-- PLUGINS -->
   <!--######################################### -->
+
+  <!-- OAWeatherPlugin_MSN-->
+    <screen name="OAWeatherPlugin" position="0,0" size="1280,720" resolution="1280,720" title="Weather Plugin" flags="wfNoBorder" backgroundColor="#80000000">
+		<ePixmap pixmap="Wettericons/Images/background.png" position="0,0" size="1280,720" zPosition="-2" transparent="1" alphatest="blend" scale="1" />
+		<widget name="current" font="Regular;28" position="60,15" size="240,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" />
+		<widget name="update" font="Regular; 22" position="95,60" size="95,30" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="top" />
+		<widget render="Label" noWrap="1" source="session.OAWeather" font="Regular;22" position="185,60" size="80,30" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="top">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="726,77" size="172,24" source="session.OAWeather" transparent="1" zPosition="10" scale="1">
+			<convert type="OAWeather">logo</convert>
+		</widget>
+		<widget noWrap="1" font="Regular; 40" position="55,225" size="250,50" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_current</convert>
+		</widget>
+		<widget noWrap="1" font="Regular;22" position="55,285" size="250,32" backgroundColor="#363b38" zPosition="3" transparent="1" valign="center" halign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">feelslikefull</convert>
+		</widget>
+		<widget font="Regular; 22" position="55,325" size="250,35" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,current</convert>
+		</widget>
+		<widget font="Regular; 22" position="1003,310" size="230,52" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day1</convert>
+		</widget>
+	 	<ePixmap pixmap="Wettericons/Images/precipitation.png" position="378,159" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget font="Regular; 24" position="434,159" size="230,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,current</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/home.png" position="378,30" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget font="Regular; 27" position="434,30" size="550,34" backgroundColor="#80000000" zPosition="3" transparent="1" halign="left" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">city</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/sunrise.png" position="718,159" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget noWrap="1" font="Regular; 24" position="760,161" size="100,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunrise,_current</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/sunset.png" position="865,161" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget noWrap="1" font="Regular; 24" position="907,161" size="100,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunset,_current</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1055,152" size="128,128" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day1</convert>
+		</widget>
+		<eLabel text="Today" position="1010,79" size="80,32" zPosition="3" font="Regular;22" halign="right" transparent="1" backgroundColor="#363b38" valign="center" />
+		<widget source="session.OAWeather" render="Label" font="Regular; 22" position="1095,79" size="60,32" backgroundColor="#363b38" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">weekshortday,day1</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular; 22" position="1125,79" size="80,32" backgroundColor="#363b38" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">date,day1</convert>
+		</widget>
+		<widget alphatest="blend" position="114,93" size="128,128" zPosition="3" transparent="1" render="OAWeatherPixmap" source="session.OAWeather" scale="1">
+			<convert type="OAWeather">weathericon,current</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/temperature_low.png" position="869,116" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<ePixmap pixmap="Wettericons/Images/temperature_high.png" position="722,116" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget noWrap="1" font="Regular; 24" position="760,116" size="100,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_high,day1</convert>
+		</widget>
+		<widget noWrap="1" render="Label" font="Regular; 24" position="908,116" size="100,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" source="session.OAWeather">
+			<convert type="OAWeather">temperature_low,day1</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/wind.png" position="378,73" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget font="Regular;24" position="435,73" size="230,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">winddisplay</convert>
+		</widget>
+		<ePixmap pixmap="Wettericons/Images/humidity.png" position="378,116" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget font="Regular;24" position="435,116" size="230,32" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">humidityfull</convert>
+		</widget>
+		<!--day2 -->
+		<widget font="Regular; 22" position="50,670" size="260,35" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day2</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="42,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day2</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="114,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day2</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="115,439" size="128,128" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day2</convert>
+		</widget>
+		<widget font="Regular;34" position="55,570" size="250,40" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day2</convert>
+		</widget>
+		<widget font="Regular; 22" position="55,615" size="250,50" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day2</convert>
+		</widget>
+		<!-- day3 -->
+		<widget font="Regular; 22" position="355,670" size="260,35" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day3</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="347,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day3</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="419,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day3</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="420,439" size="128,128" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day3</convert>
+		</widget>
+		<widget font="Regular;34" position="360,570" size="250,40" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day3</convert>
+		</widget>
+		<widget font="Regular; 22" position="360,615" size="250,50" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day3</convert>
+		</widget>
+		<!--day4-->
+		<widget font="Regular; 22" position="660,670" size="260,35" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day4</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="652,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day4</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="724,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day4</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="720,439" size="128,128" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day4</convert>
+		</widget>
+		<widget font="Regular;34" position="665,570" size="250,40" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day4</convert>
+		</widget>
+		<widget font="Regular; 22" position="665,615" size="250,50" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day4</convert>
+		</widget>
+		<!--day5-->
+		<widget font="Regular; 22" position="968,670" size="260,35" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day5</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="959,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day5</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Regular;28" position="1029,390" size="180,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day5</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1030,439" size="128,128" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day5</convert>
+		</widget>
+		<widget font="Regular;34" position="972,570" size="250,40" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day5</convert>
+		</widget>
+		<widget font="Regular; 22" position="972,615" size="250,50" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day5</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" font="global_clock; 50" position="1020,20" size="186,60" noWrap="1" zPosition="2" halign="center" valign="center" backgroundColor="#80000000" foregroundColor="#00ffffff" transparent="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+
+		<!-- Summary -->
+		<ePixmap pixmap="Wettericons/Images/menu.png" position="1228,670" size="50,34" zPosition="3" transparent="1" alphatest="blend" scale="1" /> 
+		<widget source="session.OAWeather" render="Pixmap" pixmap="Wettericons/Images/umbrella.png" position="378,202" size="32,32" zPosition="3" transparent="1" alphatest="blend" scale="1">
+            <convert type="OAWeather">raintext</convert>
+            <convert type="ConditionalShowHide" />
+        </widget>
+		<widget source="session.OAWeather" render="Pixmap" pixmap="Wettericons/Images/day.png" position="378,244" size="32,43" zPosition="3" transparent="1" alphatest="blend" scale="1"> 
+			<convert type="OAWeather">daySummary0,day1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.OAWeather" render="Pixmap" pixmap="Wettericons/Images/night.png" position="378,310" size="32,43" zPosition="3" transparent="1" alphatest="blend" scale="1">
+			<convert type="OAWeather">nightSummary0,day1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget> 
+		<widget position="435,202" size="620,34" backgroundColor="#80000000" foregroundColor="#00ffffff" render="Label" font="Regular; 22" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">raintext</convert>
+		</widget>
+		<widget position="435,335" size="620,32" backgroundColor="#80000000" foregroundColor="#00ffffff" render="Label" font="Regular; 21" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">nightSummary1,day1</convert>
+		</widget>
+		<widget position="435,305" size="620,32" backgroundColor="#80000000" foregroundColor="#00ffffff" render="Label" font="Regular; 21" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">nightSummary0,day1</convert>
+		</widget>
+		<widget position="435,270" size="620,32" backgroundColor="#80000000" foregroundColor="#00ffffff" render="Label" font="Regular; 21" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">daySummary1,day1</convert>
+		</widget>
+		<widget position="435,242" size="620,32" backgroundColor="#80000000" foregroundColor="#00ffffff" render="Label" font="Regular; 21" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">daySummary0,day1</convert>
+		</widget>
+	</screen>
     </skin>
