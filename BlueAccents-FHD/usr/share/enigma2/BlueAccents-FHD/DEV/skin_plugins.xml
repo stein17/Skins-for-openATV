@@ -4496,7 +4496,7 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
   <!-- PLUGINS -->
   <!--######################################### -->
 
-  <!-- OAWeatherPlugin_MSN-->
+    <!-- OAWeatherPlugin_MSN-->
     <screen name="OAWeatherPlugin" position="0,0" size="1280,720" resolution="1280,720" title="Weather Plugin" flags="wfNoBorder" backgroundColor="#80000000">
 		<ePixmap pixmap="Wettericons/Images/background.png" position="0,0" size="1280,720" zPosition="-2" transparent="1" alphatest="blend" scale="1" />
 		<widget name="current" font="Regular;28" position="60,15" size="240,45" backgroundColor="#363b38" zPosition="3" transparent="1" halign="center" valign="center" />
@@ -4674,4 +4674,128 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))
 			<convert type="OAWeather">daySummary0,day1</convert>
 		</widget>
 	</screen>
-    </skin>
+	<!-- Plugin Screens von @endriu * Thanks @endriu, OpenATV User * -->
+	 <!-- j00zek Streamlink -->
+    <screen name="StreamlinkConfiguration" position="0,0" size="1920,1080" title="Streamlink Configuration" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Streamlink Configuration" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+    <!-- j00zek OPKG manager -->
+    <screen name="Jopkg" position="0,0" size="1920,1080" title="Jopkg" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="J00zek opkg" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="list" render="Listbox" position="30,112" size="1050,870" itemHeight="75" font="Regular;36" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" >
+	<convert type="TemplatedMultiContent" > {"template":
+    [
+    MultiContentEntryPixmapAlphaTest(pos = (20, 15), size = (48, 48), png = 4), # index 4 is the status pixmap
+    #MultiContentEntryPixmapAlphaTest(pos = (17, 23), size = (48, 48), png = 5),
+    MultiContentEntryText(pos = (75, 5), size = (1000, 34), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 2 is the description
+    MultiContentEntryText(pos = (75, 45), size = (800, 20), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 2), # index 0 is the name
+    MultiContentEntryText(pos = (635, 45), size = (400, 20), font=1, flags = RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text = 1), # index 2 is the description
+                                        ],
+    "fonts": [gFont("Regular", 30),gFont("Regular", 20)],
+     "itemHeight": 75
+    } </convert>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+    <!-- j00zek MSNWeather Config-->
+    <screen name="MSNWeatherEntriesListConfigScreen" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Location" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget render="Label" source="city" font="Regular;34" position="30,112" size="630,75" backgroundColor="background" halign="left" />
+    <widget render="Label" source="degreetype" font="Regular;34" position="700,112" size="370,75" backgroundColor="background" halign="left" />
+    <widget name="entrylist" position="30,210" size="1050,780" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+   <screen name="MSNWeatherEntryConfigScreen" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Config" position="30,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="35,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+  <!-- ScriptNeo screen -->
+    <screen name="ScriptNeo" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="MultiBoot Manager" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" render="Listbox" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+  <!-- E2iPlayer akka IPTVPLAYER  -->
+    <screen name="ConfigMenu" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Config Menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+</screen>
+    <screen name="ConfigHostsMenu" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Config Hosts Menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+ </screen>
+    <screen name="IPTVUpdateWindow" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="list" position="30,112" size="1050,870" itemHeight="75" font="Regular;36" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+ </screen>
+    <screen name="ConfigExtMoviePlayer" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Config Ext Movie Player" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+ </screen>
+ <screen name="E2iPlayerWidget" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+    <widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" position="30,105" size="1180,805" itemHeight="45" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <!--widget name="sequencer" position="30,199" zPosition="6" size="1040,488" font="Regular;160" halign="center" valign="center" transparent="1" backgroundColor="background" /-->
+    <widget name="headertext" position="90,920" zPosition="1" size="1040,78" font="Regular;30" transparent="1" backgroundColor="background" halign="center" valign="center" />
+    <widget name="statustext" position="1252,106" zPosition="1" size="640,66" font="Regular; 27" halign="center" valign="center" transparent="1" backgroundColor="background" foregroundColor="selectedFG" />
+    <widget name="cover" position="1262,190" size="330,434" zPosition="3" alphatest="blend" />
+    <widget name="playerlogo" zPosition="4" position="1610,320" size="270,90" alphatest="blend" />
+    <widget name="spinner" zPosition="2" position="1676,460" size="16,16" transparent="1" alphatest="blend" />
+    <widget name="spinner_1" zPosition="1" position="1708,460" size="16,16" transparent="1" alphatest="blend" />
+    <widget name="spinner_2" zPosition="1" position="1740,460" size="16,16" transparent="1" alphatest="blend" />
+    <widget name="spinner_3" zPosition="1" position="1772,460" size="16,16" transparent="1" alphatest="blend" />
+    <widget name="spinner_4" zPosition="1" position="1804,460" size="16,16" transparent="1" alphatest="blend" />
+    <widget name="console" position="1260,635" zPosition="1" size="625,350" font="Regular; 24"  transparent="1" backgroundColor="background" halign="center" valign="center" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1220,103" zPosition="10" size="30,891" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,915" zPosition="10" size="1183,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1252,177" zPosition="10" size="640,4" />
+    <ePixmap pixmap="buttons/key_green.png" position="382,1038" size="24,24" alphatest="blend" transparent="1" />
+    <widget name="key_green_ext" position="412,1030" size="330,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_background_full_black" />
+    <panel name="template_menu_ok_exit" />
+</screen>
+<screen name="IPTVDMWidget" position="0,0" size="1920,1080" title=" " flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Downloading" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="titel" position="30,112" zPosition="1" size="1095,70" font="Regular;30" halign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1"/>
+    <widget name="list" position="30,182" size="1050,800" itemHeight="110" font="Regular;28" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_110.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_110_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_date" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="template_background_725_trans" />
+  </screen>
+ </skin>
