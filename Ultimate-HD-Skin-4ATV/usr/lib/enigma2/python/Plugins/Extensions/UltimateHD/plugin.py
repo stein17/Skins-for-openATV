@@ -191,27 +191,29 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
         self.default_font_file = "font_atile_Roboto.xml"
         self.default_color_file = "colors_Original.xml"
-        self.default_sb_file = "sb_Original.xml"
-
+        self.default_infobar_file = "infobar_Original.xml"
+        self.default_in_col_file = "in_col_Original.xml"
+        self.default_in_prog_file = "in_prog_Original.xml"
+        self.default_in_a_c_file = "in_a_c_Original.xml"
         self.default_frame_file = "frame_Original.xml"
         self.default_center_file = "center_Original.xml"
         self.default_lines_file = "lines_Original.xml"
-        self.default_sbar_file = "sbar_Original.xml"
-        self.default_infobar_file = "infobar_Original.xml"
         self.default_wget_file = "wget_Original.xml"
-        self.default_sib_file = "sib_Original.xml"
         self.default_ch_se_file = "ch_se_Original.xml"
+        self.default_ch_se_color_file = "ch_se_color_Original.xml"
+        self.default_sib_file = "sib_Original.xml"
         self.default_ev_file = "ev_Original.xml"
         self.default_emcsel_file = "emcsel_Original.xml"
         self.default_movsel_file = "movsel_Original.xml"
         self.default_volume_file = "volume_Original.xml"
 
         self.color_file = "skin_user_colors.xml"
-        self.sb_file = "skin_user_sb.xml"
+        self.in_col_file = "skin_user_in_col.xml"
+        self.in_prog_file = "skin_user_in_prog.xml"
         self.frame_file = "skin_user_frame.xml"
         self.center_file = "skin_user_center.xml"
         self.lines_file = "skin_user_lines.xml"
-        self.sbar_file = "skin_user_sbar.xml"
+        self.ch_se_color_file = "skin_user_ch_se_color.xml"
         self.infobar_file = "skin_user_infobar.xml"
         self.wget_file = "skin_user_wget.xml"
         self.sib_file = "skin_user_sib.xml"
@@ -220,25 +222,29 @@ class Ultimate_Config(Screen, ConfigListScreen):
         self.emcsel_file = "skin_user_emcsel.xml"
         self.movsel_file = "skin_user_movsel.xml"
         self.volume_file = "skin_user_volume.xml"
+        self.in_a_c_file = "skin_user_in_a_c.xml"
 
         # color
         current, choices = self.getSettings(self.default_color_file, self.color_file)
         self.myAtileHD_color = NoSave(ConfigSelection(default=current, choices = choices))
-        # sb
-        current, choices = self.getSettings(self.default_sb_file, self.sb_file)
-        self.myAtileHD_sb = NoSave(ConfigSelection(default=current, choices = choices))
+        # in_col
+        current, choices = self.getSettings(self.default_in_col_file, self.in_col_file)
+        self.myAtileHD_in_col = NoSave(ConfigSelection(default=current, choices = choices))
+        # in_prog
+        current, choices = self.getSettings(self.default_in_prog_file, self.in_prog_file)
+        self.myAtileHD_in_prog = NoSave(ConfigSelection(default=current, choices = choices))
         # frame
         current, choices = self.getSettings(self.default_frame_file, self.frame_file)
         self.myAtileHD_frame = NoSave(ConfigSelection(default=current, choices = choices))
         # center
         current, choices = self.getSettings(self.default_center_file, self.center_file)
         self.myAtileHD_center = NoSave(ConfigSelection(default=current, choices = choices))
-    # lines
+        # lines
         current, choices = self.getSettings(self.default_lines_file, self.lines_file)
         self.myAtileHD_lines = NoSave(ConfigSelection(default=current, choices = choices))
-        # sbar
-        current, choices = self.getSettings(self.default_sbar_file, self.sbar_file)
-        self.myAtileHD_sbar = NoSave(ConfigSelection(default=current, choices = choices))
+        # ch_se_color
+        current, choices = self.getSettings(self.default_ch_se_color_file, self.ch_se_color_file)
+        self.myAtileHD_ch_se_color = NoSave(ConfigSelection(default=current, choices = choices))
         # infobar
         current, choices = self.getSettings(self.default_infobar_file, self.infobar_file)
         self.myAtileHD_infobar = NoSave(ConfigSelection(default=current, choices = choices))
@@ -263,6 +269,9 @@ class Ultimate_Config(Screen, ConfigListScreen):
         # volume
         current, choices = self.getSettings(self.default_volume_file, self.volume_file)
         self.myAtileHD_volume = NoSave(ConfigSelection(default=current, choices = choices))
+        # in_a_c
+        current, choices = self.getSettings(self.default_in_a_c_file, self.in_a_c_file)
+        self.myAtileHD_in_a_c = NoSave(ConfigSelection(default=current, choices = choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -319,19 +328,21 @@ class Ultimate_Config(Screen, ConfigListScreen):
         return current[0], choices
 
     def createConfigList(self):
-        self.set_color = getConfigListEntry(_("Style:"), self.myAtileHD_color)
-        self.set_sb = getConfigListEntry(_("ColorSelectedBackground:"), self.myAtileHD_sb)
+        self.set_color = getConfigListEntry(_("Foreground Title Color:"), self.myAtileHD_color)
+        self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
+        self.set_in_col = getConfigListEntry(_("Infobar Color:"), self.myAtileHD_in_col)
+        self.set_in_prog = getConfigListEntry(_("Infobar Progress:"), self.myAtileHD_in_prog)
+        self.set_in_a_c = getConfigListEntry(_("Infobar Analogclock Style:"), self.myAtileHD_in_a_c)
         self.set_frame = getConfigListEntry(_("Frame:"), self.myAtileHD_frame)
         self.set_center = getConfigListEntry(_("Center:"), self.myAtileHD_center)
         self.set_lines = getConfigListEntry(_("Lines:"), self.myAtileHD_lines)
-        self.set_sbar = getConfigListEntry(_("Scrollbar:"), self.myAtileHD_sbar)
-        self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
-        self.set_wget = getConfigListEntry(_("Clock_Widget:"), self.myAtileHD_wget)
+        self.set_wget = getConfigListEntry(_("Clock Widget:"), self.myAtileHD_wget)
         self.set_sib = getConfigListEntry(_("Secondinfobar:"), self.myAtileHD_sib)
         self.set_ch_se = getConfigListEntry(_("Channelselection:"), self.myAtileHD_ch_se)
+        self.set_ch_se_color = getConfigListEntry(_("Channelselection Color:"), self.myAtileHD_ch_se_color)
         self.set_ev = getConfigListEntry(_("Eventview:"), self.myAtileHD_ev)
-        self.set_emcsel = getConfigListEntry(_("EMC_Selection:"), self.myAtileHD_emcsel)
-        self.set_movsel = getConfigListEntry(_("Movie_Selection:"), self.myAtileHD_movsel)
+        self.set_emcsel = getConfigListEntry(_("EMC Selection:"), self.myAtileHD_emcsel)
+        self.set_movsel = getConfigListEntry(_("Movie Selection:"), self.myAtileHD_movsel)
         self.set_volume = getConfigListEntry(_("Volume:"), self.myAtileHD_volume)
         self.set_myatile = getConfigListEntry(_("Enable %s pro:") % cur_skin, self.myAtileHD_active)
         self.set_new_skin = getConfigListEntry(_("Change skin"), ConfigNothing())
@@ -341,32 +352,37 @@ class Ultimate_Config(Screen, ConfigListScreen):
         if self.myAtileHD_active.value:
             if len(self.myAtileHD_color.choices)>1:
                 self.list.append(self.set_color)
-            if len(self.myAtileHD_sb.choices)>1:
-                self.list.append(self.set_sb)
+            if len(self.myAtileHD_infobar.choices)>1:
+                self.list.append(self.set_infobar)
+            if len(self.myAtileHD_in_a_c.choices)>1:
+                self.list.append(self.set_in_a_c)
+            if len(self.myAtileHD_in_col.choices)>1:
+                self.list.append(self.set_in_col)
+            if len(self.myAtileHD_in_prog.choices)>1:
+                self.list.append(self.set_in_prog)
             if len(self.myAtileHD_frame.choices)>1:
                 self.list.append(self.set_frame)
             if len(self.myAtileHD_center.choices)>1:
                 self.list.append(self.set_center)
             if len(self.myAtileHD_lines.choices)>1:
                 self.list.append(self.set_lines)
-            if len(self.myAtileHD_sbar.choices)>1:
-                self.list.append(self.set_sbar)
-            if len(self.myAtileHD_infobar.choices)>1:
-                self.list.append(self.set_infobar)
             if len(self.myAtileHD_wget.choices)>1:
                 self.list.append(self.set_wget)
             if len(self.myAtileHD_sib.choices)>1:
                 self.list.append(self.set_sib)
-            if len(self.myAtileHD_ch_se.choices)>1:
-                self.list.append(self.set_ch_se)
             if len(self.myAtileHD_ev.choices)>1:
                 self.list.append(self.set_ev)
+            if len(self.myAtileHD_ch_se.choices)>1:
+                self.list.append(self.set_ch_se)
+            if len(self.myAtileHD_ch_se_color.choices)>1:
+                self.list.append(self.set_ch_se_color)
             if len(self.myAtileHD_emcsel.choices)>1:
                 self.list.append(self.set_emcsel)
             if len(self.myAtileHD_movsel.choices)>1:
                 self.list.append(self.set_movsel)
             if len(self.myAtileHD_volume.choices)>1:
                 self.list.append(self.set_volume)
+
             self.list.append(self.set_new_skin)
         self["config"].list = self.list
         self["config"].l.setList(self.list)
@@ -378,16 +394,18 @@ class Ultimate_Config(Screen, ConfigListScreen):
     def changedEntry(self):
         if self["config"].getCurrent() == self.set_color:
             self.setPicture(self.myAtileHD_color.value)
-        elif self["config"].getCurrent() == self.set_sb:
-            self.setPicture(self.myAtileHD_sb.value)
+        elif self["config"].getCurrent() == self.set_in_col:
+            self.setPicture(self.myAtileHD_in_col.value)
+        elif self["config"].getCurrent() == self.set_in_prog:
+            self.setPicture(self.myAtileHD_in_prog.value)
         elif self["config"].getCurrent() == self.set_frame:
             self.setPicture(self.myAtileHD_frame.value)
         elif self["config"].getCurrent() == self.set_center:
             self.setPicture(self.myAtileHD_center.value)
         elif self["config"].getCurrent() == self.set_lines:
             self.setPicture(self.myAtileHD_lines.value)
-        elif self["config"].getCurrent() == self.set_sbar:
-            self.setPicture(self.myAtileHD_sbar.value)
+        elif self["config"].getCurrent() == self.set_ch_se_color:
+            self.setPicture(self.myAtileHD_ch_se_color.value)
         elif self["config"].getCurrent() == self.set_infobar:
             self.setPicture(self.myAtileHD_infobar.value)
         elif self["config"].getCurrent() == self.set_wget:
@@ -404,6 +422,8 @@ class Ultimate_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_volume:
             self.setPicture(self.myAtileHD_volume.value)
+        elif self["config"].getCurrent() == self.set_in_a_c:
+            self.setPicture(self.myAtileHD_in_a_c.value)
         elif self["config"].getCurrent() == self.set_myatile:
             if self.myAtileHD_active.value:
                 self["key_yellow"].setText("%s pro" % cur_skin)
@@ -414,16 +434,18 @@ class Ultimate_Config(Screen, ConfigListScreen):
     def selectionChanged(self):
         if self["config"].getCurrent() == self.set_color:
             self.setPicture(self.myAtileHD_color.value)
-        elif self["config"].getCurrent() == self.set_sb:
-            self.setPicture(self.myAtileHD_sb.value)
+        elif self["config"].getCurrent() == self.set_in_col:
+            self.setPicture(self.myAtileHD_in_col.value)
+        elif self["config"].getCurrent() == self.set_in_prog:
+            self.setPicture(self.myAtileHD_in_prog.value)
         elif self["config"].getCurrent() == self.set_frame:
             self.setPicture(self.myAtileHD_frame.value)
         elif self["config"].getCurrent() == self.set_center:
             self.setPicture(self.myAtileHD_center.value)
         elif self["config"].getCurrent() == self.set_lines:
             self.setPicture(self.myAtileHD_lines.value)
-        elif self["config"].getCurrent() == self.set_sbar:
-            self.setPicture(self.myAtileHD_sbar.value)
+        elif self["config"].getCurrent() == self.set_ch_se_color:
+            self.setPicture(self.myAtileHD_ch_se_color.value)
         elif self["config"].getCurrent() == self.set_infobar:
             self.setPicture(self.myAtileHD_infobar.value)
         elif self["config"].getCurrent() == self.set_wget:
@@ -440,6 +462,8 @@ class Ultimate_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_volume:
             self.setPicture(self.myAtileHD_volume.value)
+        elif self["config"].getCurrent() == self.set_in_a_c:
+            self.setPicture(self.myAtileHD_in_a_c.value)
         else:
             self["Picture"].hide()
 
@@ -537,16 +561,18 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
             # color
             self.makeSettings(self.myAtileHD_color, self.color_file)
-            # sb
-            self.makeSettings(self.myAtileHD_sb, self.sb_file)
+            # in_col
+            self.makeSettings(self.myAtileHD_in_col, self.in_col_file)
+            # in_prog
+            self.makeSettings(self.myAtileHD_in_prog, self.in_prog_file)
             # frame
             self.makeSettings(self.myAtileHD_frame, self.frame_file)
             # center
             self.makeSettings(self.myAtileHD_center, self.center_file)
             # lines
             self.makeSettings(self.myAtileHD_lines, self.lines_file)
-            # sbar
-            self.makeSettings(self.myAtileHD_sbar, self.sbar_file)
+            # ch_se_color
+            self.makeSettings(self.myAtileHD_ch_se_color, self.ch_se_color_file)
             # infobar
             self.makeSettings(self.myAtileHD_infobar, self.infobar_file)
             # wget
@@ -563,6 +589,8 @@ class Ultimate_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_movsel, self.movsel_file)
             # volume
             self.makeSettings(self.myAtileHD_volume, self.volume_file)
+            # in_a_c
+            self.makeSettings(self.myAtileHD_in_a_c, self.in_a_c_file)
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")

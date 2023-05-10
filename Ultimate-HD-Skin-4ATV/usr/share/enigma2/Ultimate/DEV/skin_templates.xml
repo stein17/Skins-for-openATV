@@ -13,7 +13,7 @@
   --> 
   <!-- TEMPLATES -->
   <screen name="template_title_date" zPosition="1">
-    <widget source="Title" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget source="global.CurrentTime" render="Label" position="930,4" size="240,44" font="Regular;32" halign="right" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
     </widget>
@@ -25,25 +25,39 @@
     </widget>
   </screen>
   <!-- TEMPLATES Clocks-->
-  <screen name="template_pixmap_Clock">
-    <ePixmap pixmap="BG-Pixmaps/Clocks/Clock_F.png" position="1220,4" zPosition="0" size="44,44" alphatest="blend" transparent="1"/>
+ <!-- TEMPLATES clock_default-->
+ <screen name="template_clock_widget_default">
+     <widget source="global.CurrentTime" render="Label" position="1185,3" size="94,44" font="Regular;32" halign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
   </screen>
-  <screen name="template_pixmap_Analogclock_Infobar">
-    <ePixmap pixmap="BG-Pixmaps/Clocks/Analog_Clock_A.png" position="1085,541" zPosition="0"  size="150,150" alphatest="blend" transparent="1"/>
-  </screen>
-
-  <!-- TEMPLATES Userlogos-->
+   <!-- template_analogclock_widget-->
+  <screen name="template_analogclock_widget">
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="4" foregroundColor="blue" alphatest="blend">
+      <convert type="UltimateAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="3" foregroundColor="red" alphatest="blend">
+      <convert type="UltimateAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="UltimateWatches" position="1230,14" size="22,22" zPosition="2" foregroundColor="red" alphatest="blend">
+      <convert type="UltimateAnalogClock">hourHand</convert>
+    </widget>
+</screen> 
+<!-- TEMPLATES Userlogos-->
   <screen name="template_pixmap_Userlogo">
     <ePixmap pixmap="BG-Pixmaps/User_Logos/User_Logo.png" position="5,1" size="150,48" zPosition="1" alphatest="blend" transparent="1" />
   </screen>
-    
+       <!--Poster_Infobar_Now_fake-->
+  <screen name="template_Poster_Infobar_Now_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
     <!-- TEMPLATES-Poster-Infobar-Now-->
   <screen name="template_Poster_Infobar_Now">
  <widget source="session.Event_Now" render="UltimatePoster" borderColor="selectedFG" borderWidth="3" position="1070,240" size="185,278" zPosition="10" />
   </screen>
-  <!-- TEMPLATES-Poster-Background_Infobar-->
-  <screen name="template_Poster-Background_Infobar">
-  <ePixmap position="99,212" zPosition="5" size="215,315" pixmap="Steampunk/Skinparts/InfobarPosterBG.png" transparent="1"/>
+       <!-- SecondInfoBar_Poster_fake-->
+  <screen name="template_SecondInfoBar_Poster_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
   </screen>
   <!-- TEMPLATES-SecondInfoBar-Poster-->
   <screen name="template_SecondInfoBar_Poster">
@@ -59,21 +73,37 @@
   <convert type="EventName">FullDescription</convert>
   </widget>
   </screen>
+       <!-- EventView_Backdrop_fake-->
+  <screen name="template_EventView_Backdrop_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
   <!-- TEMPLATES-EventView-Backdrop-Poster-->
   <screen name="template_EventView_Backdrop">
   <widget source="Event" render="UltimateBackdrop" position="800,400" size="415,234" borderColor="selectedFG" borderWidth="2" zPosition="2" />
   </screen> 
+       <!-- EMCMediaCenter_Backdrop_Poster_fake-->
+  <screen name="template_EMCMediaCenter_Backdrop_Poster_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
   <!-- TEMPLATES-EMCMediaCenter-Poster-->
   <screen name="template_EMCMediaCenter_Backdrop_Poster">
   <widget source="session.Event_Now" render="UltimatePoster" borderColor="selectedFG" borderWidth="3" position="1085,310" size="185,278" zPosition="10" />
   <widget source="session.Event_Now" render="UltimateBackdrop" borderColor="selectedFG" borderWidth="3" position="710,359" size="300,169" zPosition="10" />
   </screen> 
+       <!-- ChannelSelection_Poster_fake-->
+  <screen name="template_ChannelSelection_Poster_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
   <!-- TEMPLATES-ChannelSelection-Poster-Default-->
   <screen name="template_ChannelSelection_Poster">
   <widget source="ServiceEvent" render="UltimatePoster" position="715,250" size="112,169" zPosition="10" borderColor="selectedFG" borderWidth="1"/>
   </screen>
+       <!-- ChannelSelection_Poster_3F_fake-->
+  <screen name="template_ChannelSelection_Poster_3F_fake">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
   <!-- TEMPLATES-ChannelSelection-Poster-Default-3Fields-->
-   <screen name="template_ChannelSelection_Poster">
+   <screen name="template_ChannelSelection_Poster_3F">
   <widget source="ServiceEvent" render="UltimatePoster" position="780,270" size="112,169" zPosition="10" borderColor="selectedFG" borderWidth="1"/>
   </screen>
   <!-- TEMPLATES-EV_session_Event_Now_Next-Poster-->
@@ -115,38 +145,7 @@
   <panel name="template_pixmap_line_hor_765_422" />
  </screen>
  
-  <!-- template_digitalclock_widget-->
-  <screen name="template_digitalclock_widget">
-    <widget source="global.CurrentTime" render="Label" position="1185,3" size="94,44" font="Regular;32" halign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
-      <convert type="ClockToText">Format:%H:%M</convert>
-    </widget>
-  </screen>
-  <!-- template_analogclock_widget-->
-  <screen name="template_analogclock_widget">
-    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="4" foregroundColor="blue" alphatest="blend">
-      <convert type="UltimateAnalogClock">secHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="UltimateWatches" position="1226,10" size="30,30" zPosition="3" foregroundColor="red" alphatest="blend">
-      <convert type="UltimateAnalogClock">minHand</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="UltimateWatches" position="1230,14" size="22,22" zPosition="2" foregroundColor="red" alphatest="blend">
-      <convert type="UltimateAnalogClock">hourHand</convert>
-    </widget>
-	<panel name="template_pixmap_Clock"/>
-  </screen>
-  <!-- Digitalclock-Clock-Infobar -->
-<screen name="template_digitalclock_widget_infobar">
-  <widget  source="global.CurrentTime" transparent="1" font="LCD; 88" noWrap="1" foregroundColor="selectedFG" backgroundColor="background" valign="center" halign="center" position="1050,540" render="Label" size="220,88" >
-    <convert type="ClockToText">Format:%H:%M</convert>
-  </widget>
-  <widget font="Regular; 27" noWrap="1" valign="center" halign="center" position="1050,680" render="Label" size="220,40" backgroundColor="background" source="global.CurrentTime" transparent="1">
-    <convert type="ClockToText">Format:%e. %B</convert>
-  </widget>
-  <widget font="Regular; 27" valign="center" halign="center" noWrap="1" position="1050,640" render="Label" size="220,40" backgroundColor="background" 
-  source="global.CurrentTime" transparent="1">
-    <convert type="ClockToText">Format:%A</convert>
-  </widget>
-</screen>
+
 
   <!-- TEMPLATE Infobar 4Day_Weather-->
   <screen name="template_Infobar_4Day_Weather">
@@ -201,6 +200,19 @@
     <convert type="MSNWeather">city</convert>
   </widget>
 </screen>
+  <!-- Digitalclock-Clock-Infobar -->
+<screen name="template_digitalclock_widget_infobar">
+  <widget  source="global.CurrentTime" transparent="1" font="LCD; 88" noWrap="1" foregroundColor="selectedFG" backgroundColor="background" valign="center" halign="center" position="1050,540" render="Label" size="220,88" >
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget font="Regular; 27" noWrap="1" valign="center" halign="center" position="1050,680" render="Label" size="220,40" backgroundColor="background" source="global.CurrentTime" transparent="1">
+    <convert type="ClockToText">Format:%e. %B</convert>
+  </widget>
+  <widget font="Regular; 27" valign="center" halign="center" noWrap="1" position="1050,640" render="Label" size="220,40" backgroundColor="background" 
+  source="global.CurrentTime" transparent="1">
+    <convert type="ClockToText">Format:%A</convert>
+  </widget>
+</screen>
   <!-- Analog-Clock-Infobar-->
   <screen name="template_analog_clock_widget_infobar">
     <widget source="global.CurrentTime" render="UltimateWatches" position="1110,566" size="100,100" zPosition="4" foregroundColor="red" alphatest="blend">
@@ -216,6 +228,10 @@
       <convert type="ClockToText">Format:%A, %d.%m.%Y</convert>
     </widget>
    </screen>
+     <!-- template_pixmap_Analogclock_Infobar -->
+     <screen name="template_pixmap_Analogclock_Infobar">
+    <ePixmap pixmap="BG-Pixmaps/Clocks/Analog_Clock_A.png" position="1085,541" zPosition="0"  size="150,150" alphatest="blend" transparent="1"/>
+  </screen>
     <!-- TEMPLATES Pixmaps Lines Vertikal -->
   <screen name="template_pixmap_line_vert_881">
     <ePixmap pixmap="BG-Pixmaps/Line_Vert/Line_Vert_Org.png" position="881,53" zPosition="2" size="21,623" alphatest="blend" transparent="1"/>
@@ -343,6 +359,9 @@
   </screen>
   <screen name="template_pixmap_line_hor_603,1220">
     <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" position="30,603" zPosition="2" size="1220,5" alphatest="blend" transparent="1"/>
+  </screen>
+  <screen name="template_pixmap_line_hor_638,1220">
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" position="30,638" zPosition="2" size="1220,5" alphatest="blend" transparent="1"/>
   </screen>
   <!-- TEMPLATES Pixmaps Lines QuitMainloop-->
   <screen name="template_pixmap_line_hor_QuitMainloop">
@@ -677,6 +696,11 @@
     <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
     <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
   </screen>
+    <screen name="template_menu_help_exit_1280">
+    <ePixmap position="1050,691" size="64,26" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="buttons/help.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+  </screen>
   <screen name="template_info_ok_exit_1280">
     <ePixmap position="1050,688" size="64,26" zPosition="10" pixmap="buttons/info.png" transparent="1" alphatest="blend" />
     <ePixmap position="1125,688" size="64,26" zPosition="10" pixmap="buttons/ok.png" transparent="1" alphatest="blend" />
@@ -714,6 +738,10 @@
   <screen name="template_menu_help_1280">
     <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
     <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="buttons/help.png" transparent="1" alphatest="blend" />
+  </screen>
+    <screen name="template_help_exit_1280">
+    <ePixmap position="1125,691" size="64,26" zPosition="10" pixmap="buttons/help.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
   </screen>
   <screen name="template_exit_1280">
     <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
@@ -1489,15 +1517,76 @@
   </screen>
   <!--Template Setup Config  -->
   <screen name="template_setup_config">
-    <widget name="config" position="30,60" size="700,440" itemHeight="36" font="Regular; 22" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png"  alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="config" position="30,60" size="700,440" itemHeight="36" font="Regular; 22"  scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <widget name="description" position="30,520" size="700,100" font="Regular; 22" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
     <widget name="HelpWindow" position="78,300" size="600,200" zPosition="2" transparent="1" alphatest="blend" />
     <widget name="footnote" position="30,640" size="700,30" font="Regular; 22" halign="right" valign="center" transparent="1" />
-	<panel name="ScrollBarTemplate size=700,440" />
-  </screen>
+	<widget name="setupimage" position="870,390" size="280,280" alphatest="blend" conditional="setupimage" transparent="1" zPosition="2" />
+	</screen>
+	
+	
+		<!--Main Menu Icons-->
+<!-- 	<screen name="Menu" position="0,0" size="1280,720" title="Main menu" flags="wfNoBorder" backgroundColor="background">
+	 <widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="menuimage" position="280,490" size="180,180" alphatest="blend" />
+
+				<widget source="menu" render="Listbox" position="30,60" size="440,415" backgroundColor="background" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+				<convert type="TemplatedMultiContent">     
+					{"templates":
+						{"default": (60,[
+							MultiContentEntryText(pos = (2, 4), size = (435, 40), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
+							]),
+						"text": (60,[
+							MultiContentEntryText(pos = (2, 4), size = (435, 40), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3)
+							]),
+						"number": (60,[
+							MultiContentEntryText(pos = (2, 4), size = (30, 40), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (25, 4), size = (410, 40), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"image": (60,[
+							MultiContentEntryPixmapAlphaBlend(pos = (2, 4), size = (32, 32), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (40, 4), size = (395, 40), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"both": (60,[
+							MultiContentEntryPixmapAlphaBlend(pos = (2, 4), size = (32, 32), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (40, 4), size = (30, 40), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (45, 4), size = (390, 40), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							])
+						},
+					"fonts": [gFont("Regular", 24),gFont("Regular", 22),gFont("Regular", 20)],
+					"itemHeight": 40,
+					"scrollbarMode": "showNever"
+					}
+				</convert>
+			</widget>
+				<widget source="menu" render="FixedLabel" text="►" position="460,476" size="20,20" font="Regular;20" foregroundColor="yellow" backgroundColor="background" halign="left" valign="bottom" transparent="1">
+				<convert type="MetrixHDMenuEntryCompare" />
+				<convert type="ValueRange">0,9</convert>
+				<convert type="ConditionalShowHide">Invert</convert>
+			</widget>
+				<widget source="description" render="Label" position="30,490" size="240,180" conditional="description" font="Regular;18" valign="center" halign="center" foregroundColor="selectedFG" backgroundColor="background">
+				<convert type="MetrixMenuDescription" />
+			</widget>
+			<eLabel text="Beschreibung optional" position="30,490" size="240,180" font="Regular;18" transparent="1" zPosition="1" valign="center" halign="center" foregroundColor="selectedFG" backgroundColor="background" />
+	
+    <panel name="template_pig_large" />
+    <panel name="template_pixmap_pig_large" />
+    <panel name="template_title_date" />
+    <panel name="template_info_menu_exit_1280" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+
+		</screen> -->
+	
+	
+	
+	
   <!--Template _menu_listbox_430  -->
   <screen name="template_menu_listbox_430">
-    <widget source="menu" render="Listbox" position="30,60" size="440,610"   scrollbarMode="showOnDemand"   sliderPixmap="menu/Scrollbar.png"  enableWrapAround="1" alphatest="blend" transparent="1">
+    <widget source="menu" render="Listbox" position="30,60" size="440,610"   scrollbarMode="showOnDemand"    enableWrapAround="1"  transparent="1">
 	
       <convert type="TemplatedMultiContent">
 					{"template": [ MultiContentEntryText(pos = (2, 4), size = (440, 40), flags = RT_HALIGN_LEFT, text = 0) ],
@@ -1509,7 +1598,7 @@
   </screen>
   <!--Template _menu_listbox_740  -->
   <screen name="template_menu_listbox_740">  
-    <widget source="menu" render="Listbox" position="30,60" size="740,610"  scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png"  backgroundColor="listboxBG" foregroundColor="foreground"  enableWrapAround="1" transparent="1">
+    <widget source="menu" render="Listbox" position="30,60" size="740,610"  scrollbarMode="showOnDemand"  backgroundColor="listboxBG" foregroundColor="foreground"  enableWrapAround="1" transparent="1">
       <convert type="TemplatedMultiContent">
 					{"template": [ MultiContentEntryText(pos = (6, 4), size = (730, 40), flags = RT_HALIGN_LEFT, text = 0) ],
 					"fonts": [gFont("Regular", 26)],
@@ -1519,14 +1608,14 @@
     </widget>
   </screen>
   <!--Template MessageBox  -->
-  <screen name="MessageBox-template">
-    <widget source="Title" render="Label" position="68,11" size="600,50" valign="bottom" font="Regular;32" />
-    <eLabel name="line1" position="10,69" size="780,1" backgroundColor="selectedFG" zPosition="1" />
-    <widget name="text" position="10,80" size="780,50" font="Regular;22" valign="center" halign="center" />
-    <widget name="ErrorPixmap" pixmap="Ultimate/skin_default/icons/input_error.png" position="8,8" size="53,53" alphatest="blend" />
-    <widget name="QuestionPixmap" pixmap="Ultimate/skin_default/icons/input_question.png" position="8,8" size="53,53" alphatest="blend" />
-    <widget name="InfoPixmap" pixmap="Ultimate/skin_default/icons/input_info.png" position="8,8" size="53,53" alphatest="blend" />
-    <widget name="list" position="10,140" size="780,240" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" />
+ <screen name="MessageBox-template">
+<widget source="Title" render="Label" position="75,20" size="720,83" valign="center" font="Regular; 24" />
+    <eLabel name="line1" position="10,109" size="1280,1" backgroundColor="selectedFG" zPosition="1" />
+    <widget name="text" position="10,120" size="780,60" font="Regular;22" valign="center" halign="center" />
+    <widget name="ErrorPixmap" pixmap="Ultimate/skin_default/icons/input_error.png" position="8,35" size="53,53" alphatest="blend" />
+    <widget name="QuestionPixmap" pixmap="Ultimate/skin_default/icons/input_question.png" position="8,35" size="53,53" alphatest="blend" />
+    <widget name="InfoPixmap" pixmap="Ultimate/skin_default/icons/input_info.png" position="8,35" size="53,53" alphatest="blend" />
+    <widget name="list" position="10,190" size="780,200" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" />
     <applet type="onLayoutFinish">
 # this should be factored out into some helper code,but currently demonstrates applets.
 from enigma import eSize,ePoint, getDesktop
@@ -1743,7 +1832,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	progressInfoFont="Regular;18"
 	transparent="1" 
 	colorServiceRecorded="red" colorServicePseudoRecorded="pink" colorServiceStreamed="orange" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="rosa" 
-	scrollbarMode="showAlways"  progressPercentWidth="100"   sliderPixmap="menu/Scrollbar.png" 
+	scrollbarMode="showOnDemand"  progressPercentWidth="100"   
 	colorServiceDescription="white" 
 	colorServiceDescriptionSelected="selectedFG" 
 	colorEventProgressbarBorder="selectedFG" 
@@ -1757,7 +1846,6 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   <screen name="ChannelSelection_color_stein17">
     <widget name="list" position="30,60" size="820,570" 
 	scrollbarMode="showOnDemand" 
-	sliderPixmap="menu/Scrollbar.png" 
 	listMarginLeft="5" 
     listMarginRight="18" 
 	alphatest="blend" 
@@ -1788,8 +1876,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_color_2.png" />
   </screen>
     <screen name="ChannelSelection_color_Lemon">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways"  progressPercentWidth="100"  
-	sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="30,60" size="820,570" scrollbarMode="showOnDemand"  progressPercentWidth="100"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	alphatest="blend" 
@@ -1820,7 +1907,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_lemon.png" />
   </screen>
   <screen name="ChannelSelection_color_Bernstein">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -1850,7 +1937,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_bernstein.png" />
   </screen>
   <screen name="ChannelSelection_color_Orange">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -1880,7 +1967,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_orange.png" />
   </screen>
   <screen name="ChannelSelection_color_Green">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -1910,7 +1997,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_green.png" />
   </screen>
   <screen name="ChannelSelection_color_Grey">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -1940,7 +2027,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_color.png" />
   </screen>
   <screen name="ChannelSelection_color_Red_White">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -1970,7 +2057,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_red.png" />
   </screen>
     <screen name="ChannelSelection_color_White_Red">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2000,7 +2087,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_red.png" />
   </screen>
   <screen name="ChannelSelection_color_Pink">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2030,7 +2117,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_pink.png" />
 	</screen>
   <screen name="ChannelSelection_color_Cyan">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2060,7 +2147,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_cyan.png" />
 	</screen>
   <screen name="ChannelSelection_color_Black_White">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2090,7 +2177,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_grey.png" />
   </screen>
     <screen name="ChannelSelection_color_Grey_Black">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2120,7 +2207,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_grey.png" />
   </screen>
   <screen name="ChannelSelection_color_Blue">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2150,7 +2237,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_blue.png" />
   </screen>
   <screen name="ChannelSelection_color_White_Blue">
-    <widget name="list" position="30,60" size="820,570" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" 
+    <widget name="list" position="30,60" size="820,570"  scrollbarMode="showOnDemand"   
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2181,11 +2268,11 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   </screen>
   <!--Template List ChannelSelection Eventtime left -->
   <screen name="ChannelSelection_color_eventtime_left">
-    <widget name="list" position="30,60" size="820,610" scrollbarMode="showAlways" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" picServiceEventProgressbar="Ultimate/menu/Progress_CS_color.png" colorEventProgressbarBorder="white" colorEventProgressbarBorderSelected="white" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="lila" foregroundColorSelected="selectedFG" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" />
+    <widget name="list" position="30,60" size="820,610"  scrollbarMode="showOnDemand"  fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" picServiceEventProgressbar="Ultimate/menu/Progress_CS_color.png" colorEventProgressbarBorder="white" colorEventProgressbarBorderSelected="white" foregroundColorServiceNotAvail="lila" foregroundColorMarkedSelected="lila" foregroundColorSelected="selectedFG" serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" />
   </screen>
    <!--Template List ChannelSelection 3 Fields -->
   <screen name="ChannelSelection_3_fields_color_default">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2215,8 +2302,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_color_2.png" />
   </screen>
    <screen name="ChannelSelection_3_fields_color_Lemon">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" 
-    sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2246,7 +2332,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_lemon.png" />
   </screen>
    <screen name="ChannelSelection_3_fields_color_Bernstein">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2276,7 +2362,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_bernstein.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Orange">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2306,7 +2392,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_orange.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Green">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2336,7 +2422,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_green.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Grey">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2366,7 +2452,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_color.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Red_White">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2396,7 +2482,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_red.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_White_Red">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2426,7 +2512,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_red.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Pink">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2456,7 +2542,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_pink.png" />
 	</screen>
     <screen name="ChannelSelection_3_fields_color_Cyan">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2486,7 +2572,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_cyan.png" />
 	</screen>
     <screen name="ChannelSelection_3_fields_color_Black_White">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2516,7 +2602,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_grey.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Grey_Black">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2546,7 +2632,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_grey.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_Blue">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 
@@ -2576,7 +2662,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
 	picServiceEventProgressbar="Ultimate/BG-Pixmaps/Progress/Progress_CS_blue.png" />
   </screen>
     <screen name="ChannelSelection_3_fields_color_White_Blue">
-    <widget name="list" position="360,60" size="550,610" scrollbarMode="showAlways"  sliderPixmap="menu/Scrollbar.png" 
+    <widget name="list" position="360,60" size="550,610"  scrollbarMode="showOnDemand"  
 	listMarginLeft="5" 
     listMarginRight="18" 
 	fieldMargins="5" 

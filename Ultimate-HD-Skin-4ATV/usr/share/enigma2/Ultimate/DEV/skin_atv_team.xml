@@ -4,7 +4,7 @@
   <!--######################################### -->
   <!-- ATV AboutOE HD -->
 <screen name="AboutOE" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
-  <widget name="AboutScrollLabel" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" render="Listbox" position="30,200" size="755,470" font="Regular;22" transparent="1" />
+  <widget name="AboutScrollLabel" scrollbarMode="showOnDemand"  render="Listbox" position="30,200" size="755,470" font="Regular;22" transparent="1" />
   <ePixmap position="30,60" size="700,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
   <eLabel text="https://github.com/openatv" position="513,689" size="400,22" font="Regular; 18" backgroundColor="background" foregroundColor="foreground" halign="right" transparent="1" zPosition="1" />
   <ePixmap position="892,358" size="280,280" pixmap="DEV/Ultimate-Logo.png" alphatest="blend" transparent="1" />
@@ -21,11 +21,28 @@
   <panel name="template_pig_setup" />
   <panel name="template_pixmap_pig_setup" />
   <panel name="template_pixmap_line_ServiceName_pig_setup" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
+
+  <screen name="AboutOE" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="AboutScrollLabel" render="Listbox" position="30,112" size="1050,855" font="Regular;33" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1" />
+    <eLabel text="https://github.com/openatv" position="675,1036" size="375,33" font="Regular;27" backgroundColor="background" foregroundColor="foreground" halign="right" transparent="1" zPosition="1" />
+    <widget source="lab2" render="Label" position="750,6" size="630,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="2" />
+    <ePixmap pixmap="buttons/key_red.png" position="30,1038" size="24,24" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="339,1038" size="24,24" alphatest="blend" transparent="1" />
+    <eLabel text="Close" position="73,1030" size="255,37" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget name="key_green" position="382,1030" size="255,37" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
+    <eLabel text="*BlueAccents-FHD* HD Skin for ATV Images by stein17" position="1059,1039" size="682,30" font="Console;22" align="left" valign="center" foregroundColor="white" backgroundColor="background" transparent="1" zPosition="1" halign="center" />
+    <panel name="template_title_date" />
+    <panel name="template_info_exit" />
+    <panel name="template_background_725_trans" />
+  </screen>
+
+
+
   <screen name="QuitMainloopScreen" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
     <ePixmap pixmap="Ultimate/skin_default/icons/input_info.png" position="276,164" size="53,53" alphatest="blend" zPosition="3" />
     <widget name="text" position="270,250" size="735,310" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -51,20 +68,38 @@
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
-<panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_pixmap_line_ServiceName_pig_menu" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
-  
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
+
+  <screen name="TranslationInfo" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="openATV" position="690,6" size="300,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <eLabel text="https://github.com/openatv" position="1245,1035" size="570,33" font="Regular;27" backgroundColor="background" foregroundColor="foreground" halign="center" transparent="1" zPosition="1" />
+    <eLabel position="30,112" size="570,45" font="Regular;34" text="Translation:" foregroundColor="selectedFG" transparent="1" />
+    <ePixmap position="1837,1032" size="60,36" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+    <widget source="TranslatorName" render="Label" position="30,180" size="1050,45" font="Regular;33" foregroundColor="selectedFG" transparent="1" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,172" zPosition="1" size="1060,4" />
+    <widget source="TranslationInfo" render="Label" position="30,240" size="1050,750" font="Regular;36" transparent="1" />
+    <panel name="template_background_725_trans" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_title_date" />
+    <panel name="template_exit" />
+  </screen>
+
+
+
+
+
   <!--ATV SoftwareUpdateChanges HD -->
   <screen name="SoftwareUpdateChanges" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
   <widget name="text" position="30,215" size="700,460" font="Regular;18" zPosition="3" transparent="1" />
   <ePixmap position="30,60" size="700,120" zPosition="10" pixmap="DEV/Logo_OpenATV.png" transparent="1" alphatest="blend" />
   <eLabel text="https://github.com/openatv" position="818,655" size="380,22" font="Regular; 18" backgroundColor="background" foregroundColor="foreground" halign="center" transparent="1" zPosition="1" />
   <ePixmap position="870,380" size="280,280" pixmap="DEV/openATV-Logo.png" alphatest="blend" transparent="1" />
-  <panel name="ScrollBarTemplate size=700,450_P220" />  
+    
   <panel name="template_pixmap_line_hor_190" />
   <panel name="template_title_date" />
   <panel name="TemplateAllColorButtons_Automatic" />
@@ -73,14 +108,14 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
   <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
 
   <screen name="Opkg" position="0,0" size="1280,720" title="Installing Software..." flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Installing Software..." position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <eLabel text="Installing Software..." position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="activityslider" position="30,160" size="700,20" borderColor="grey" foregroundColor="selectedFG" borderWidth="2" transparent="1" />
     <widget name="package" position="30,280" size="700,30" font="Regular;20" transparent="1" />
     <widget name="status" position="30,330" size="700,30" font="Regular;20" transparent="1" />
@@ -92,7 +127,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -105,32 +140,31 @@
     <widget source="hdd" render="Label" position="30,310" size="700,160" font="Regular; 22" transparent="1" zPosition="1" enableWrapAround="0" />
     <widget source="MountsHeader" render="Label" position="30,490" size="700,30" font="Regular;20" zPosition="1" foregroundColor="selectedFG" transparent="1" />
     <widget source="mounts" render="Label" position="30,530" size="700,140" font="Regular; 22" transparent="1" zPosition="1" enableWrapAround="0" /> -->
-  <widget name="allinonedevices" position="30,60" size="700,610" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
-  <panel name="ScrollBarTemplate size=700,610" />
+  <widget name="allinonedevices" position="30,60" size="700,610" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1"  backgroundColor="background" transparent="1" />
+ 
   <panel name="template_title_date" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
   <screen name="SystemMemoryInfo" position="0,0" size="1280,720" title="SystemInfo" flags="wfNoBorder" backgroundColor="background">
-    <widget name="AboutScrollLabel" position="30,140" size="700,530" font="Regular; 24" zPosition="1" scrollbarMode="showOnDemand" transparent="1" />
-    <widget name="AboutScrollLabel" position="30,60" size="700,610" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="AboutScrollLabel" position="30,60" size="700,610" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1"  backgroundColor="background" transparent="1" />
     <ePixmap pixmap="icons/memory_info.png" position="870,390" size="280,280" alphatest="blend" transparent="1" />
-    <panel name="ScrollBarTemplate size=700,610" />
+   
     <panel name="template_title_date" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -162,7 +196,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -171,9 +205,9 @@
   <screen name="DeviceBrowser" position="center,center" size="1280,720" title="Please select target medium" flags="wfNoBorder" backgroundColor="background">
  <ePixmap position="870,380" size="280,280" pixmap="DEV/openATV-Logo.png" alphatest="blend" transparent="1" />
   <widget source="message" render="Label" position="30,490" size="700,180" font="Regular;16" transparent="1" />
-  <widget name="filelist" position="30,60" size="700,420" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" transparent="1" />
+  <widget name="filelist" position="30,60" size="700,420" scrollbarMode="showOnDemand"  transparent="1" />
   <eLabel text="https://github.com/openatv" position="818,655" size="380,22" font="Regular; 18" backgroundColor="background" foregroundColor="foreground" halign="center" transparent="1" zPosition="1" />
-  <panel name="ScrollBarTemplate size=700,420" />
+  
   <panel name="template_title_date" />
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_ok_exit_1280" />
@@ -182,7 +216,7 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -191,16 +225,16 @@
   <screen name="Infopanel" position="center,center" size="1280,720" title="INFO Panel" flags="wfNoBorder" backgroundColor="background">
     <widget name="Mlist" position="30,60" size="700,560" zPosition="1" scrollbarMode="showOnDemand"  transparent="1" />
     <widget name="label1" position="30,640" size="700,30" font="Regular;20" transparent="1" backgroundColor="background" halign="left" />
-    <widget source="Title" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 	<ePixmap position="870,380" size="280,280" pixmap="icons/atv_info_panel.png" alphatest="blend" transparent="1" />
     <panel name="template_pixmap_line_hor_630" />
-	<!-- <panel name="ScrollBarTemplate size=700,560" /> -->
+	<!--  -->
     <panel name="template_date" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -211,12 +245,12 @@
   <widget name="list" position="25,60" size="415,610" itemHeight="50" font="Regular; 20" scrollbarMode="showNever" transparent="1" backgroundColor="background" />
   <widget name="sublist" position="473,60" size="415,610" itemHeight="50" font="Regular; 20" scrollbarMode="showNever" transparent="1" backgroundColor="background" />
   <widget name="description" position="898,310" size="350,360" zPosition="1" font="Regular;20" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
-  <eLabel text="Quick Launch Menu" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <eLabel text="Quick Launch Menu" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
   <panel name="template_pixmap_vert_line_450" />
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pig_smal" />
   <panel name="template_pixmap_pig_smal" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -233,7 +267,7 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -258,14 +292,14 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
   <screen name="dBackupConfiguration" position="0,0" size="1280,720" title="dBackup Configuration" flags="wfNoBorder" backgroundColor="background">
-  <widget name="config" position="30,60" size="700,540" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+  <widget name="config" position="30,60" size="700,540" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1"  backgroundColor="background" transparent="1" />
   <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
   <ePixmap pixmap="buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
   <ePixmap pixmap="buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
@@ -277,12 +311,12 @@
   <widget name="logo" position="330,610" size="100,60" zPosition="2" alphatest="blend" />
   <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/folders_source.png" transparent="1" alphatest="blend" />
   <panel name="template_title_date" />
-  <panel name="ScrollBarTemplate size=700,540" />
+  
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -290,7 +324,7 @@
   <panel name="template_ok_exit_1280" />
 </screen>
   <screen name="dBackupChecking" position="0,0" size="1280,720" title="choose NAND Flash Check" flags="wfNoBorder" backgroundColor="background">
-  <widget name="menu" position="30,60" size="700,540" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+  <widget name="menu" position="30,60" size="700,540" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1"  backgroundColor="background" transparent="1" />
   <ePixmap pixmap="buttons/key_red.png" position="20,689" size="26,26" alphatest="blend" transparent="1" />
   <ePixmap pixmap="buttons/key_green.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
   <ePixmap pixmap="buttons/key_yellow.png" position="433,689" size="26,26" alphatest="blend" transparent="1" />
@@ -302,12 +336,12 @@
   <widget name="logo" position="330,610" size="100,60" zPosition="2" alphatest="blend" />
   <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/folders_select.png" transparent="1" alphatest="blend" />
   <panel name="template_title_date" />
-  <panel name="ScrollBarTemplate size=700,540" />
+  
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -329,7 +363,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -348,7 +382,7 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -357,7 +391,7 @@
 </screen>
   <!-- TaskListScreen -->
   <screen name="TaskListScreen" position="0,0" size="1280,720" flags="wfNoBorder" title="Task list" backgroundColor="background">
-  <widget source="tasklist" render="Listbox" position="30,60" size="700,610" itemHeight="90" font="Regular; 20" sliderPixmap="menu/Scrollbar.png" alphatest="blend" backgroundColor="background" transparent="1">
+  <widget source="tasklist" render="Listbox" position="30,60" size="700,610" itemHeight="90" font="Regular; 20"  backgroundColor="background" transparent="1">
     <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (5, 1), size = (690, 60), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # name
@@ -378,7 +412,7 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />  
 <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -387,7 +421,8 @@
 </screen>
   <!-- Multiboot Selector -->
   <screen name="MultiBootSelector" position="0,0" size="1280,720" flags="wfNoBorder" title="Multiboot Image Selector" backgroundColor="background">
-    <widget source="description" render="Label" position="30,60" size="700,110" itemHeight="30" font="Regular; 22" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" halign="center" />  <widget name="config" position="30,310" size="700,360" zPosition="1" transparent="1" alphatest="blend" font="Regular; 22" />
+    <widget source="description" render="Label" position="30,60" size="700,110" itemHeight="30" font="Regular; 22" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" foregroundColor="white" transparent="1" halign="center" /> 
+	<widget name="config" position="30,310" size="700,360" zPosition="1" transparent="1" alphatest="blend" font="Regular; 22" />
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/e2image.png" transparent="1" alphatest="blend" />
     <widget source="options" render="Label" position="30,180" size="700,110" font="Regular; 22" foregroundColor="green" halign="center" backgroundColor="background" valign="center" transparent="1" />
     <panel name="template_title_date" />
@@ -396,15 +431,33 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
+  	<!-- MultiBootManager -->
+	<screen name="MultiBootManager" position="0,0" size="1280,720" title="Multiboot Image Manager" flags="wfNoBorder" backgroundColor="background">
+	<widget name="slotlist" position="30,60" size="700,410" itemHeight="35" zPosition="1" font="Regular;20" scrollbarMode="showOnDemand" transparent="1"/>
+	<ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/restore_backups.png" transparent="1" alphatest="blend" />
+	<widget name="description" position="30,500" size="700,170" font="Regular;20" backgroundColor="background" foregroundColor="selectedFG" halign="center" valign="center" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_pixmap_vert_line_738" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />  
+    <panel name="template_pixmap_line_ServiceName_pig_menu" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_ok_exit_1280" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+	<panel name="template_pixmap_line_hor_480" />
+	</screen>
   <!-- MultiBootWizard -->
   <screen name="MultiBootWizard" position="0,0" size="1280,720" flags="wfNoBorder" title="MultiBoot maintenance" backgroundColor="background">
-    <eLabel text="Manage your images in the multiboot" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <eLabel text="Manage your images in the multiboot" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget source="description" render="Label" position="30,60" size="700,30" itemHeight="30" font="Regular; 20" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="center" />
     <widget name="config" position="30,200" size="700,460" zPosition="1" transparent="1" alphatest="blend" font="Regular; 22" />
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/restore_backups.png" transparent="1" alphatest="blend" />
@@ -417,7 +470,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -443,7 +496,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -479,7 +532,7 @@
 </screen>
   <!-- SoftcamSetup -->
 <!--   <screen name="SoftcamSetup" position="0,0" size="1280,720" title="Softcam Setup" flags="wfNoBorder" backgroundColor="background">
-    <widget name="config" position="30,60" size="700,490" enableWrapAround="1" itemHeight="30" font="Regular; 22" sliderPixmap="menu/Scrollbar.png" alphatest="blend" backgroundColor="background" zPosition="1" transparent="1" />
+    <widget name="config" position="30,60" size="700,490" enableWrapAround="1" itemHeight="30" font="Regular; 22"  backgroundColor="background" zPosition="1" transparent="1" />
     <widget name="info" position="50,370" size="700,300" font="Regular; 22" backgroundColor="background" transparent="1"/>
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/softcam_panel.png" transparent="1" alphatest="blend" />
     <panel name="template_exit_1280" />
@@ -489,7 +542,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -498,11 +551,11 @@
   <!-- ATV FlashOnline HD -->
 <screen name="FlashOnline" position="center,center" size="1280,720" title="Flash Online" flags="wfNoBorder" backgroundColor="background">
     <ePixmap position="30,60" size="700,120" pixmap="DEV/Logo_OpenATV.png" alphatest="blend" transparent="1" />
-    <widget name="list" position="30,200" zPosition="1" size="700,470" font="Regular;20" halign="left" valign="top" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" transparent="1" />
+    <widget name="list" position="30,200" zPosition="1" size="700,470" font="Regular;20" halign="left" valign="top"  scrollbarMode="showOnDemand"   transparent="1" />
     <widget name="description" position="765,650" zPosition="1" size="485,24" font="Regular;20" halign="left" valign="top" transparent="1" />
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/e2image.png" transparent="1" alphatest="blend" />
     <panel name="template_pixmap_line_hor_190" />
-    <panel name="ScrollBarTemplate size=700,470_P200" />
+    
     <panel name="template_title_date" />
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
@@ -510,15 +563,15 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
   <!-- ATV doFlashImage HD  -->
   <screen name="doFlashImage" position="center,center" size="1280,720" title="Flash On the fly (select a image)" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Flash On the fly (select a image)" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="imageList" position="30,60" zPosition="1" size="700,610" font="Regular;22" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" transparent="1" />
+    <eLabel text="Flash On the fly (select a image)" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="imageList" position="30,60" zPosition="1" size="700,610" font="Regular;22" scrollbarMode="showOnDemand"  transparent="1" />
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/e2image.png" transparent="1" alphatest="blend" />
     <panel name="template_date" />
     <panel name="TemplateAllColorButtons_Automatic" />
@@ -527,17 +580,17 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
   <!--ATV SoftwarePanels HD -->
 <screen name="SoftwarePanel" position="center,center" size="1280,720" title="SoftwarePanel" flags="wfNoBorder">
-  <eLabel text="Software Panel" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <eLabel text="Software Panel" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
   <widget name="packagetext" position="70,80" size="350,30" zPosition="1" font="Regular;24" halign="right" transparent="1" />
   <widget name="packagenr" position="422,80" size="50,30" zPosition="1" font="Regular;24" halign="right" transparent="1" />
-  <widget source="list" render="Listbox" position="30,130" size="700,540" scrollbarMode="showOnDemand" sliderpixmap="menu/Scrollbar.png" alphatest="blend" backgroundColor="background" transparent="1">
+  <widget source="list" render="Listbox" position="30,130" size="700,540" scrollbarMode="showOnDemand"  backgroundColor="background" transparent="1">
     <convert type="TemplatedMultiContent">{"template": [
 							MultiContentEntryText(pos = (5, 1), size = (540, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (5, 26), size = (540, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
@@ -560,23 +613,23 @@
   <widget name="key_green_pic" pixmap="skin_default/icons/lock_on.png" position="478,78" size="32,31" alphatest="blend" zPosition="1" />
   <panel name="template_pixmap_line_hor_120" />
   <panel name="template_date" />
-  <panel name="ScrollBarTemplate size=700,540_P130" />
+  
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />
   <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
   
   <screen name="SoftwareUpdate" position="center,center" size="1280,720" title="Software Update" flags="wfNoBorder">
-	<eLabel text="Software Panel" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+	<eLabel text="Software Panel" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 	<widget name="package_text" position="70,65" size="350,30" zPosition="1" font="Regular;24" halign="right" transparent="1" />
 	<widget name="package_count" position="422,65" size="50,30" zPosition="1" font="Regular;24" halign="right" transparent="1" />
-	<widget source="list" render="Listbox" position="30,130" size="700,540" scrollbarMode="showOnDemand" sliderpixmap="menu/Scrollbar.png" alphatest="blend" backgroundColor="background" transparent="1">
+	<widget source="list" render="Listbox" position="30,130" size="700,540" scrollbarMode="showOnDemand"  backgroundColor="background" transparent="1">
 		<convert type="TemplatedMultiContent">{"template": [
 							MultiContentEntryText(pos = (5, 1), size = (540, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 							MultiContentEntryText(pos = (5, 26), size = (540, 20), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
@@ -600,29 +653,29 @@
 	<ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
 	<panel name="template_pixmap_line_hor_120" />
 	<panel name="template_date" />
-	<panel name="ScrollBarTemplate size=700,540_P130" />
+	
 	<panel name="TemplateAllColorButtons_Automatic" />
 	<panel name="template_pixmap_vert_line_738" />
 	<panel name="template_pig_menu" />
 	<panel name="template_pixmap_pig_menu" />
 	<panel name="template_pixmap_line_ServiceName_pig_menu" />
-	<panel name="template_digitalclock_widget" />
+	<panel name="template_clock_widget_default" />
 	<panel name="template_pixmap_rahmen" />
 	<panel name="template_pixmap_Userlogo" />
 	<panel name="template_pixmap_center" />
   </screen>
   <screen name="RunSoftwareUpdate" position="0,0" size="1280,720" title="Software Update..." flags="wfNoBorder" backgroundColor="background">
-    <widget name="update" position="30,110" size="700,560" scrollbarMode="showOnDemand" sliderpixmap="menu/Scrollbar.png" alphatest="blend" itemHeight="50" font="Regular; 24" enableWrapAround="1" transparent="1" />
+    <widget name="update" position="30,110" size="700,560" scrollbarMode="showOnDemand"  itemHeight="50" font="Regular; 24" enableWrapAround="1" transparent="1" />
     <widget name="activity" position="30,70" size="700,20" borderColor="grey" foregroundColor="selectedFG" borderWidth="2" transparent="1" />
     <ePixmap position="870,390" size="280,280" pixmap="icons/software_update.png" transparent="1" alphatest="blend" />
     <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="ScrollBarTemplate size=700,560_P110" />
+    
     <panel name="template_title_date" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -640,7 +693,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -649,7 +702,7 @@
   </screen>
   <!--ATV Update Plugin Menu HD -->
   <screen name="UpdatePluginMenu" position="0,0" size="1280,720" title="Softwaremanager..." flags="wfNoBorder" backgroundColor="background">
-    <widget source="menu" render="Listbox" position="30,205" size="700,470" backgroundColor="background" scrollbarMode="showNever" sliderPixmap="menu/Scrollbar.png" enableWrapAround="1" transparent="1">
+    <widget source="menu" render="Listbox" position="30,205" size="700,470" backgroundColor="background" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
       <convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (15, 5), size = (700, 34), flags = RT_HALIGN_LEFT, text = 1), # index 0 is the MenuText,
@@ -674,13 +727,13 @@
     <widget source="key_red" render="Label" position="49,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
 	<panel name="template_pixmap_line_hor_190" />
     <panel name="template_menu_exit_1280" />
-   <!--  <panel name="ScrollBarTemplate size=700,470_P200" /> -->
+   <!--   -->
     <panel name="template_title_date" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -688,7 +741,7 @@
   </screen>
   <!--ATV HddMount HD -->
   <screen name="HddMount" position="0,0" size="1280,720" title="Mount Manager" flags="wfNoBorder" backgroundColor="background">
-    <widget source="list" render="Listbox" position="30,110" size="700,560" scrollbarMode="showOnDemand" transparent="1" backgroundColor="background" sliderPixmap="menu/Scrollbar.png" alphatest="blend">
+    <widget source="list" render="Listbox" position="30,110" size="700,560" scrollbarMode="showOnDemand" transparent="1" backgroundColor="background" >
       <convert type="TemplatedMultiContent">
 				{"template": [
 				 MultiContentEntryText(pos = (90, 0), size = (600, 30), font=0, text = 0),
@@ -703,14 +756,14 @@
     <widget name="lab1" zPosition="2" position="30,60" size="700,40" font="Regular;22" backgroundColor="background" halign="center" transparent="1" />
     <ePixmap position="870,390" size="280,280" zPosition="2" pixmap="icons/mount_manager.png" transparent="1" alphatest="blend" />
     <panel name="template_pixmap_line_hor_100" />
-    <!-- <panel name="ScrollBarTemplate size=700,560_P110" /> -->
+    <!--  -->
     <panel name="template_title_date" />
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_exit_1280" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -729,23 +782,23 @@
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />
   <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
 </screen>
     <screen name="PluginBrowser" position="0,0" size="1280,720" title="Plugin browser" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Plugin browser" position="160,4" size="760,44" font="Regular; 32" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="list" position="30,60" size="700,610" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend"  itemHeight="50" font="Regular; 24"    enableWrapAround="1" transparent="1" />
+    <eLabel text="Plugin browser" position="160,6" size="760,42" font="Regular; 32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" position="30,60" size="700,610" scrollbarMode="showOnDemand"   itemHeight="50" font="Regular; 24"    enableWrapAround="1" transparent="1" />
 	<ePixmap position="870,390" size="280,280" pixmap="icons/paket_manager.png" transparent="1" alphatest="blend" />
     <panel name="TemplateAllColorButtons_Automatic_Long" />
-	<panel name="ScrollBarTemplate size=700,610" />
+	
     <panel name="template_date" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     
     <panel name="template_pixmap_Userlogo" />
@@ -753,8 +806,8 @@
     <panel name="template_menu_ok_exit_1280" />
   </screen>
 <screen name="SkinSelector" position="0,0" size="1280,720" title="Skin Selector" flags="wfNoBorder" backgroundColor="background">
-  <eLabel text="Skin Selector" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-  <widget name="SkinList" position="30,60" size="700,260" itemHeight="30" font="Regular; 20" scrollbarMode="showAlways" sliderPixmap="menu/Scrollbar.png" alphatest="blend" backgroundColor="background" enableWrapAround="1" transparent="1" />
+  <eLabel text="Skin Selector" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="SkinList" position="30,60" size="700,260" itemHeight="30" font="Regular; 20"  scrollbarMode="showOnDemand"   backgroundColor="background" enableWrapAround="1" transparent="1" />
   <widget name="Preview" position="140,350" size="480,280" alphatest="blend" />
   <eLabel text="Skinanpassungen in Menu/Einstellungen/Bedienung und Oberfläche/Setup-Ultimate." position="30,640" size="700,30" zPosition="2" font="Regular; 18" transparent="1" backgroundColor="black" halign="center" foregroundColor="selectedFG" />
   <widget source="introduction" render="Label" position="530,689" size="580,25" font="Regular; 20" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
@@ -764,13 +817,13 @@
   <ePixmap position="870,390" size="280,280" pixmap="icons/skin_selector.png" alphatest="blend" transparent="1" />
   <ePixmap pixmap="buttons/key_yellow.png" position="226,689" size="26,26" alphatest="blend" transparent="1" />
   <panel name="template_date" />
-  <panel name="ScrollBarTemplate size=700,260"/>
+  
   <panel name="template_pixmap_line_hor_330" />
   <panel name="template_ok_exit_1280" />
   <panel name="template_pixmap_vert_line_738" />
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   
   <panel name="template_pixmap_Userlogo" />
@@ -781,25 +834,25 @@
   <!--ATV HddFastRemove HD -->
   <!--   Weather Location HD  -->
   <screen name="WeatherLocationChoiceList" position="0,0" size="1280,720" title="Location list" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="WeatherLocationChoiceList" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="choicelist" position="30,60" size="700,610" itemHeight="36" font="Regular;24" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" transparent="1" />
+    <eLabel text="WeatherLocationChoiceList" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="choicelist" position="30,60" size="700,610" itemHeight="36" font="Regular;24" scrollbarMode="showOnDemand"  transparent="1" />
     <ePixmap position="870,390" size="280,280" pixmap="DEV/openATV-Logo.png" alphatest="blend" transparent="1" />
     <panel name="template_date" />
-    <panel name="ScrollBarTemplate size=700,610" />
+   
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
   <!-- NFR4XBootImageChoose HD -->
   <screen name="NFR4XBootImageChoose" position="0,0" size="1280,720" title="NFR4XBoot - Menu" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="NFR4XBoot - Menu" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <eLabel text="NFR4XBoot - Menu" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="label2" position="123,98" size="300,30" zPosition="1" font="Regular;20" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
     <widget name="label3" position="123,150" size="300,30" zPosition="1" font="Regular;20" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
     <widget name="label4" position="123,188" size="357,30" zPosition="1" font="Regular;20" backgroundColor="yellow" transparent="1" foregroundColor="yellow" />
@@ -824,7 +877,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -897,11 +950,11 @@
     <widget source="piconCh5" render="MetrixHDXPicon" position="1010,180" size="50,30" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget name="list1" position="30,220" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="240,450" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list2" position="275,220" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list3" position="520,220" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list4" position="765,220" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list5" position="1010,220" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list1" position="30,220"   scrollbarMode="showOnDemand"  size="240,450" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list2" position="275,220"   scrollbarMode="showOnDemand"  size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list3" position="520,220"   scrollbarMode="showOnDemand"  size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list4" position="765,220"   scrollbarMode="showOnDemand"  size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list5" position="1010,220"   scrollbarMode="showOnDemand"  size="240,450" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="verydarkgrey" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
 	<panel name="TemplateAllColorButtons_Automatic_Long" />
 	<panel name="template_menu_info_1280" />
 	<panel name="template_pixmap_rahmen" />
@@ -946,9 +999,9 @@
     <widget source="piconCh3" render="MetrixHDXPicon" position="500,235" size="50,30" zPosition="2" alphatest="blend">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget name="list1" position="30,275" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="230,400" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list2" position="265,275" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="230,400" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
-    <widget name="list3" position="500,275" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarMode="showAlways" size="230,400" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list1" position="30,275"   scrollbarMode="showOnDemand"  size="230,400" zPosition="1" transparent="0" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list2" position="265,275"   scrollbarMode="showOnDemand"  size="230,400" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
+    <widget name="list3" position="500,275"   scrollbarMode="showOnDemand"  size="230,400" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntryBackgroundColorSelected="metrixblue" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="metrixblue" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="metrixblue" EntryBorderColor="selectedFG" TimeFontVertical="Regular;19" EventFontVertical="Regular;18" />
     <!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
     <widget enableWrapAround="0" itemHeight="20" font="Regular;0" name="list" position="0,0" size="0,60" zPosition="-10" />
     <widget source="session.CurrentService" render="MetrixHDXPicon" position="870,410" size="234,132" zPosition="2" alphatest="blend" borderWidth="1" borderColor="grey">
@@ -1008,7 +1061,7 @@
     <widget source="global.CurrentTime" render="Label" position="930,4" size="240,44" font="Regular;32" halign="right" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="3">
     <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
     </widget>
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1037,7 +1090,7 @@
 		<widget source="global.CurrentTime" render="Label" position="930,4" size="240,44" font="Regular;32" halign="right" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="3">
 		<convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
 		</widget>
-		<panel name="template_digitalclock_widget" />
+		<panel name="template_clock_widget_default" />
 		<panel name="template_pixmap_rahmen" />
 		<panel name="template_pixmap_Userlogo" />
 		<panel name="template_pixmap_center" />
@@ -1055,7 +1108,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1067,12 +1120,12 @@
     <widget name="description" position="30,480" size="700,190" font="Regular; 20" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_title_date" />
-    <panel name="template_okay_exit_1280" />
+    <panel name="template_ok_exit_1280" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1090,7 +1143,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1109,7 +1162,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1126,13 +1179,13 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
   <screen name="IceTVMain" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background">
-    <widget source="windowtitle" render="Label" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="windowtitle" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget source="Title" render="Label" position="30,60" size="700,34" font="Regular;24" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="list" position="30,100" size="700,455" itemHeight="35" font="Regular; 20" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderForegroundColor="selectedFG" scrollbarSliderBorderColor="selectedFG" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="layer-a-selection-background" foregroundColorSelected="layer-a-selection-foreground" backgroundColor="background" foregroundColor="white" transparent="1" />
     <widget name="text" position="30,560" size="700,110" font="Regular; 20" foregroundColor="grey" halign="center" backgroundColor="background" valign="center" transparent="1" />
@@ -1143,7 +1196,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1153,30 +1206,28 @@
   <!-- UltimateHD Setup -->
 <screen name="Ultimate_Config" position="0,0" size="1280,720" title="UltimateHD Setup" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="/ Speichern" position="259,691" size="160,22" font="Regular; 20" halign="center" backgroundColor="black" transparent="1" valign="center" />
-    <eLabel text="Gelbe Taste Drücken, um die Skinparts auszuwählen" position="100,579" size="630,40" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="yellow" />
-	<eLabel text="Drücken Sie Menü, um das Wetter einzustellen" position="100,636" size="620,40" font="Regular; 24" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="green" />
-    <eLabel text="Ultimate HD Config" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="config" position="30,60" size="700,560" font="Regular; 23" itemHeight="32" render="Listbox" scrollbarMode="showNever" sliderPixmap="menu/Scrollbar.png" alphatest="blend" scrollbarWidth="6" transparent="1"  />
+    <eLabel text="Gelbe Taste Drücken, um die Skinparts auszuwählen" position="100,618" size="630,30" font="Regular; 22" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="yellow" />
+	<eLabel text="Drücken Sie Menü, um das Wetter einzustellen" position="100,648" size="630,30" font="Regular; 22" halign="left" backgroundColor="black" transparent="1" valign="center" foregroundColor="green" />
+    <eLabel text="Ultimate HD Config" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="config" position="30,60" size="700,550" font="Regular; 22" itemHeight="32" render="Listbox" scrollbarMode="showNever" scrollbarWidth="6" transparent="1" />
     <widget name="Picture" position="765,400" size="475,267" alphatest="on" />
-    <ePixmap pixmap="buttons/key_yellow.png" position="40,586" size="26,26" alphatest="blend" transparent="1" />
-	<ePixmap position="30,642" size="64,26" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
-	<!-- <widget source="key_yellow" render="Label" position="462,689" size="170,25" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
- -->    <panel name="template_date" />
+    <panel name="template_date" />
     <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit_1280" />
+    <panel name="template_menu_ok_exit_1280" />
     <panel name="template_pixmap_vert_line_738" />
+	<panel name="template_pixmap_line_hor_610" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
    </screen>
    <!-- Ultimate SetupHD -->
  <screen name="UltimateScreens" position="0,0" size="1280,720" title="Ultimate Setup" flags="wfNoBorder" backgroundColor="background">
-    <eLabel text="Configure Ultimate HD Skin" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="menu" render="Listbox" position="30,60" size="700,610" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" transparent="1">
+    <eLabel text="Configure Ultimate HD Skin" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="menu" render="Listbox" position="30,60" size="700,610" scrollbarMode="showOnDemand"  enableWrapAround="1"  transparent="1">
       <convert type="TemplatedMultiContent">{"template":
    [
     MultiContentEntryPixmapAlphaTest(pos = (2, 2), size = (25, 24), png = 2),
@@ -1188,14 +1239,14 @@
     </widget>
     <widget name="Picture" position="765,400" size="475,267" alphatest="on" />
 	<panel name="template_date" />
-    <panel name="ScrollBarTemplate size=700,610" />
+   
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit_1280" />
     <panel name="template_pixmap_vert_line_738" />
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1231,7 +1282,7 @@
     <eLabel position="30,240" size="700,160" zPosition="2" font="Regular; 22" text="Erweiterungen/Wetterinformationen/Menu, dann Grün Hinzufügen. Wenn ihr den Ort Eingegeben habt, ein mal runter auf Location-Code. Gelb für Code suchen, mit Grün (OK)bestätigen, wichtig wieder OK. Noch wichtiger mit Rot zurück, sonst müsst ihr wieder von vorne anfangen. Jetzt mit Exit beenden, Benutzer Oberfläche neustarten, eventuell kompletter Neustart.." transparent="1" backgroundColor="black" halign="left" valign="top" />
     <eLabel position="29,490" size="700,180" zPosition="2" font="Regular; 22" text="Menu/ Einstellungen/ Bedienung und Oberfläche/ OSD, *2nd Infoleiste*  auf *2nd Infoleiste INFO* einstellen. Infotase mit Eventview belegen: Menu/ Einstellungen/ Bedienung und Oberfläche/ Hotkey-Einstellungen/Info Taste drücken,EPG auswählen, in EPG *Sendungs-Details anzeigen* auswählen.  Der Eintrag der vorhanden ist, durch klicken der OK Taste deaktivieren." transparent="1" backgroundColor="black" halign="left" valign="top" />
     <eLabel position="30,425" size="700,55" zPosition="2" font="Regular; 21" text="Einstellungen 2te Infobar mit 2x Ok aufrufen, EventView durch Infotaste anzeigen lassen" transparent="1" backgroundColor="black" halign="left" valign="top" foregroundColor="selectedFG" />
-    <eLabel text="Ultimate HD About" position="160,4" size="600,44" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <eLabel text="Ultimate HD About" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <panel name="template_pixmap_line_hor_190" />
     <panel name="template_pixmap_line_hor_230" />
     <panel name="template_pixmap_line_hor_480" />
@@ -1240,7 +1291,7 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1345,7 +1396,7 @@
     <screen name="HelpMenu" position="0,0" size="1280,720" title="Menu" flags="wfNoBorder" backgroundColor="background">
 	<widget name="description" position="1360,425" size="550,635" font="Regular; 20" halign="center" valign="center" transparent="1" zPosition="2"/>
     <widget name="buttonlist" position="30,640" size="805,30" font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="center" valign="center" zPosition="2" transparent="1" />
-    <widget source="list" render="Listbox" position="185,60" size="670,570" scrollbarMode="showOnDemand" scrollbarSliderBorderWidth="1" scrollbarWidth="10" sliderPixmap="menu/Scrollbar.png" backgroundColor="background" transparent="1" >
+    <widget source="list" render="Listbox" position="185,60" size="670,570" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" >
       <convert type="TemplatedMultiContent">
 				{
 					"templates": {
@@ -1392,13 +1443,13 @@
     <ePixmap pixmap="skin_default/system/Wizard.png" position="900,314" size="350,360" alphatest="blend" transparent="1" />
     <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="30,632" zPosition="2" size="830,5" />
 	<panel name="wizard_rc_templateNew" />
-    <panel name="ScrollBarTemplate size=860,610" />
+    
     <panel name="template_title_date" />
     <panel name="template_pixmap_line_vert_881" />
     <panel name="template_pig_smal" />
     <panel name="template_pixmap_pig_smal" />
     <panel name="template_pixmap_line_ServiceName_pig_smal " />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
@@ -1406,7 +1457,7 @@
  <!-- LocaleSelection -->
  <screen name="LocaleSelection" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background">
  <widget name="icons" position="0,0" size="49,24" pixmaps="skin_default/icons/menu_down.png,skin_default/icons/menu_off.png,skin_default/icons/menu_on.png" alphatest="blend" />
-  <widget source="locales" render="Listbox" zPosition="3" position="30,60" size="700,610" backgroundColor="background" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="menu/Scrollbar.png" alphatest="blend" transparent="1">
+  <widget source="locales" render="Listbox" zPosition="3" position="30,60" size="700,610" backgroundColor="background" font="Regular; 20" scrollbarMode="showOnDemand"  transparent="1">
 			<convert type="TemplatedMultiContent">
 				{
 				"template":
@@ -1429,11 +1480,11 @@
   <ePixmap position="1200,691" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
-  <panel name="ScrollBarTemplate size=700,610" />
+ 
   <panel name="template_pig_menu" />
   <panel name="template_pixmap_pig_menu" />
   <panel name="template_pixmap_line_ServiceName_pig_menu" />
-  <panel name="template_digitalclock_widget" />
+  <panel name="template_clock_widget_default" />
   <panel name="template_pixmap_rahmen" />
   <panel name="template_pixmap_Userlogo" />
   <panel name="template_pixmap_center" />
@@ -1487,16 +1538,349 @@
     <panel name="template_pig_menu" />
     <panel name="template_pixmap_pig_menu" />  
     <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_digitalclock_widget" />
+    <panel name="template_clock_widget_default" />
     <panel name="template_pixmap_rahmen" />
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
     <panel name="template_pixmap_line_hor_190" />
     <panel name="template_pixmap_line_hor_540" />
-    <widget name="config" position="30,60" size="700,150" itemHeight="36" font="Regular; 22" scrollbarMode="showOnDemand" sliderPixmap="Ultimate/menu/Scrollbar.png" alphatest="blend" enableWrapAround="1" backgroundColor="background" transparent="1" />
+    <widget name="config" position="30,60" size="700,150" itemHeight="36" font="Regular; 22" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="background" transparent="1" />
     <widget name="description" position="30,540" size="700,100" font="Regular; 22" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
     <widget name="HelpWindow" position="78,300" size="600,200" zPosition="2" transparent="1" alphatest="blend" />
     <widget name="footnote" position="30,640" size="700,30" font="Regular; 22" halign="right" valign="center" transparent="1" />
 </screen>
+
+
+
+
+
+<screen name="TaskView" position="0,0" size="1280,720" title="TaskView" flags="wfNoBorder" backgroundColor="background">
+  <eLabel text="TaskView" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+
+
+		<widget source="name" render="Label" position="50,240" size="660,90" font="Regular;22" halign="center" valign="center" backgroundColor="background" transparent="1" />
+		<widget source="task" render="Label" position="50,330" size="660,30" font="Regular;18" backgroundColor="background" transparent="1" />
+		<widget source="progress" render="Progress" position="50,360" size="660,30" borderColor="grey" foregroundColor="selectedFG" borderWidth="2" transparent="1" />
+		<widget source="progress" render="Label" position="50,360" size="660,30" font="Regular;22" backgroundColor="background" zPosition="2" valign="center" halign="center" transparent="1">
+			<convert type="ProgressToText" />
+		</widget>
+		<widget source="status" render="Label" position="50,395" size="660,30" font="Regular;18" backgroundColor="background" foregroundColor="selectedFG" transparent="1" />
+		<widget name="config" position="50,450" size="660,30" itemHeight="30" font="Regular;20" scrollbarMode="showOnDemand" foregroundColor="white" backgroundColor="background" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selectedFG" transparent="1" /> 
+		<widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="11,689" size="26,26" alphatest="blend">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_red" render="Label" position="39,689" size="220,25" zPosition="1" valign="center" font="Regular;20" halign="left" noWrap="1" backgroundColor="background" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="261,689" size="26,26" alphatest="blend">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_green" render="Label" position="289,689" size="220,25" zPosition="1" valign="center" font="Regular;20" halign="left" noWrap="1" backgroundColor="background" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="510,689" size="26,26" alphatest="blend">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_yellow" render="Label" position="538,689" size="220,25" zPosition="1" valign="center" font="Regular;20" halign="left" noWrap="1" backgroundColor="background" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="760,689" size="26,26" alphatest="blend">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_blue" render="Label" position="787,689" size="220,25" zPosition="1" valign="center" font="Regular;20" halign="left" noWrap="1" backgroundColor="background" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<ePixmap position="870,390" size="280,280" zPosition="2" pixmap="Ultimate/icons/setup.png" transparent="1" alphatest="blend" />
+  <panel name="template_date" />
+  <panel name="template_pig_menu" />
+  <panel name="template_pixmap_pig_menu" />
+  <panel name="template_pixmap_line_ServiceName_pig_menu" />
+  <panel name="template_digitalclock_widget" />
+  <panel name="template_pixmap_rahmen" />
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  <panel name="template_pixmap_vert_line_738" />
+	</screen>
+	
+	
+	
+	
+	
+<screen name="DistributionInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+  <eLabel text="OPEN SOURCE" position="926,405" size="380,60" font="Regular; 30" backgroundColor="background" foregroundColor="selectedFG" halign="center" transparent="1" zPosition="1" />
+  <eLabel text="https://github.com/openatv" position="985,506" size="380,30" font="Regular; 18" backgroundColor="background" foregroundColor="selectedFG" halign="left" transparent="1" zPosition="1" />
+  <eLabel text="https://github.com/oe-alliance" position="985,464" size="380,30" font="Regular; 18" backgroundColor="background" foregroundColor="selectedFG" halign="left" transparent="1" zPosition="1" />
+  <widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+  <widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+  <panel name="template_pixmap_line_hor_5200" />
+  <panel name="template_date" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
+  <panel name="template_pig_menu" />
+  <panel name="template_pixmap_pig_menu" />
+  <panel name="template_pixmap_line_ServiceName_pig_menu" />
+  <panel name="template_clock_widget_default" />
+  <panel name="template_pixmap_rahmen" />
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  <panel name="template_pixmap_vert_line_738" />
+  <panel name="template_help_exit_1280" />
+  <ePixmap position="770,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/atv_info_panel.png" transparent="1" alphatest="blend" />
+</screen>
+	
+	<screen name="PictureInformation" position="0,0" size="1280,720" title="Receiver Images" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="description" position="30,530" size="700,140" font="Regular;20" conditional="description" halign="center" backgroundColor="background" valign="center" transparent="1" />
+		<widget name="name" position="30,530" size="700,140" font="Regular;20" conditional="description" halign="center" backgroundColor="background" valign="center" transparent="1" />
+		<widget name="image" position="32,60" size="700,455" alphatest="blend" scaleFlags="scaleCenter" transparent="1" />
+		<panel name="template_pixmap_line_hor_520" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/menu_images_info.png" transparent="1" alphatest="blend" />
+	</screen>
+	
+	<screen name="SystemInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="1220,620" conditional="information" font="Regular;17" backgroundColor="background" transparent="1" />
+		<widget name="description" position="32,645" size="1220,30" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_638,1220" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_menu_help_exit_1280" />
+	</screen>
+
+	<screen name="CommitInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="1220,620" conditional="information" font="Regular;17" backgroundColor="background" transparent="1" />
+		<widget name="description" position="32,645" size="1220,30" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_638,1220" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_menu_help_exit_1280" />
+	</screen>
+
+	<screen name="DebugInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="1220,620" conditional="information" font="Regular;17" backgroundColor="background" transparent="1" />
+		<widget name="description" position="32,645" size="1220,30" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_638,1220" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_menu_help_exit_1280" />
+	</screen>
+
+	<screen name="NetworkInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/wlan_status.png" transparent="1" alphatest="blend" />	
+	</screen>
+
+	<screen name="ReceiverInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/devices.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="TunerInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/menu_service_info.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="StorageInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/menu_information_dmn_info.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="MemoryInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/memory_info.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="MultiBootInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/hardisk_selection.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="StreamingInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="872,389" size="280,280" zPosition="10" pixmap="Ultimate/icons/streaming_clients_info.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="GeolocationInformation" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+		<ePixmap position="870,390" size="280,280" zPosition="10" pixmap="Ultimate/icons/webb.png" transparent="1" alphatest="blend" />
+	</screen>
+
+	<screen name="ServiceInfo" position="0,0" size="1280,720" title="Serviceinfo" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="30,530" size="700,140" font="Regular; 20" foregroundColor="selectedFG" halign="center" backgroundColor="background" valign="center" transparent="1" />
+		<ePixmap position="870,390" size="280,280" zPosition="2" pixmap="Ultimate/icons/service_info.png" transparent="1" alphatest="blend" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_ok_exit_1280" />
+	</screen>
+	
+	<screen name="Information" position="0,0" size="1280,720" title="About" flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="160,6" size="600,42" font="Regular;32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<ePixmap position="870,390" size="280,280" zPosition="2" pixmap="Ultimate/icons/info.png" transparent="1" alphatest="blend" />
+		<widget name="information" position="32,60" size="700,555" colPosition="280" conditional="information" divideChar="|" font="Regular;20" noWrap="1" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="background" transparent="1" />
+		<widget name="description" position="30,630" size="700,40" font="Regular; 20" conditional="description" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+		<!-- <panel name="template_pixmap_line_hor_520" /> -->
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_pig_menu" />
+		<panel name="template_pixmap_pig_menu" />
+		<panel name="template_pixmap_line_ServiceName_pig_menu" />
+		<panel name="template_clock_widget_default" />
+		<panel name="template_pixmap_rahmen" />
+		<panel name="template_pixmap_Userlogo" />
+		<panel name="template_pixmap_center" />
+		<panel name="template_pixmap_vert_line_738" />
+		<panel name="template_help_exit_1280" />
+	</screen>
+  
+  
+  
   
 </skin>
