@@ -173,10 +173,10 @@ class Ultimate_Config(Screen, ConfigListScreen):
 
     def setWeather(self):
         try:
-            from Plugins.Extensions.WeatherPlugin.setup import MSNWeatherPluginEntriesListConfigScreen
-            self.session.open(MSNWeatherPluginEntriesListConfigScreen)
-        except:
-            self.session.open(MessageBox, _("'weatherplugin' is not installed!"), MessageBox.TYPE_INFO)
+            from Plugins.Extensions.OAWeather.plugin import WeatherSettingsView
+            self.session.open(WeatherSettingsView)
+        except ImportError:
+            self.session.open(MessageBox, _("'OAWeather' is not installed!, please install the OAWeather Plugin"), MessageBox.TYPE_INFO)
 
     def getInitConfig(self):
 
