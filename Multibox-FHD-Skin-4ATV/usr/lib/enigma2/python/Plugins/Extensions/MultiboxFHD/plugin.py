@@ -173,10 +173,10 @@ class Multibox_Config(Screen, ConfigListScreen):
 
     def setWeather(self):
         try:
-            from Plugins.Extensions.WeatherPlugin.setup import MSNWeatherPluginEntriesListConfigScreen
-            self.session.open(MSNWeatherPluginEntriesListConfigScreen)
-        except:
-            self.session.open(MessageBox, _("'weatherplugin' is not installed!"), MessageBox.TYPE_INFO)
+            from Plugins.Extensions.OAWeather.plugin import WeatherSettingsView
+            self.session.open(WeatherSettingsView)
+        except ImportError:
+            self.session.open(MessageBox, _("'OAWeather' is not installed!, please install the OAWeather Plugin"), MessageBox.TYPE_INFO)
 
     def getInitConfig(self):
 
@@ -198,10 +198,18 @@ class Multibox_Config(Screen, ConfigListScreen):
         self.default_background_file = "background_Original.xml"
         self.default_sib_file = "sib_Original.xml"
         self.default_ch_se_file = "ch_se_Original.xml"
-        self.default_ev_file = "ev_Original.xml"
-        self.default_emcsel_file = "emcsel_Original.xml"
-        self.default_movsel_file = "movsel_Original.xml"
+        self.default_picon_sib_file = "picon_sib_Original.xml"
+        self.default_video_sel_file = "video_sel_Original.xml"
+        self.default_poster_file = "poster_Original.xml"
         self.default_ul_file = "ul_Original.xml"
+        self.default_infobar_color_file = "infobar_color_Original.xml"
+        self.default_infobar_progress_file = "infobar_progress_Original.xml"
+        self.default_ch_se_color_file = "ch_se_color_Original.xml"
+        self.default_weather_file = "weather_Original.xml"
+        self.default_vpn_file = "vpn_Original.xml"
+        self.default_infobar_weather_file = "infobar_weather_Original.xml"
+        self.default_infobar_ethernet_info_file = "infobar_ethernet_info_Original.xml"
+        self.default_tuner_info_file = "tuner_info_Original.xml"
 
         self.color_file = "skin_user_colors.xml"
         self.sb_file = "skin_user_sb.xml"
@@ -210,10 +218,18 @@ class Multibox_Config(Screen, ConfigListScreen):
         self.background_file = "skin_user_background.xml"
         self.sib_file = "skin_user_sib.xml"
         self.ch_se_file = "skin_user_ch_se.xml"
-        self.ev_file = "skin_user_ev.xml"
-        self.emcsel_file = "skin_user_emcsel.xml"
-        self.movsel_file = "skin_user_movsel.xml"
+        self.picon_sib_file = "skin_user_picon_sib.xml"
+        self.video_sel_file = "skin_user_video_sel.xml"
+        self.poster_file = "skin_user_poster.xml"
         self.ul_file = "skin_user_ul.xml"
+        self.infobar_color_file = "skin_user_infobar_color.xml"
+        self.infobar_progress_file = "skin_user_infobar_progress.xml"
+        self.ch_se_color_file = "skin_user_ch_se_color.xml"
+        self.weather_file = "skin_user_weather.xml"
+        self.vpn_file = "skin_user_vpn.xml"
+        self.infobar_weather_file = "skin_user_infobar_weather.xml"
+        self.infobar_ethernet_info_file = "skin_user_infobar_ethernet_info.xml"
+        self.tuner_info_file = "skin_user_tuner_info.xml"
 
         # color
         current, choices = self.getSettings(self.default_color_file, self.color_file)
@@ -236,18 +252,42 @@ class Multibox_Config(Screen, ConfigListScreen):
         # ch_se
         current, choices = self.getSettings(self.default_ch_se_file, self.ch_se_file)
         self.myAtileHD_ch_se = NoSave(ConfigSelection(default=current, choices = choices))
-        # ev
-        current, choices = self.getSettings(self.default_ev_file, self.ev_file)
-        self.myAtileHD_ev = NoSave(ConfigSelection(default=current, choices = choices))
-        # emcsel
-        current, choices = self.getSettings(self.default_emcsel_file, self.emcsel_file)
-        self.myAtileHD_emcsel = NoSave(ConfigSelection(default=current, choices = choices))
-        # movsel
-        current, choices = self.getSettings(self.default_movsel_file, self.movsel_file)
-        self.myAtileHD_movsel = NoSave(ConfigSelection(default=current, choices = choices))
+        # picon_sib
+        current, choices = self.getSettings(self.default_picon_sib_file, self.picon_sib_file)
+        self.myAtileHD_picon_sib = NoSave(ConfigSelection(default=current, choices = choices))
+        # video_sel
+        current, choices = self.getSettings(self.default_video_sel_file, self.video_sel_file)
+        self.myAtileHD_video_sel = NoSave(ConfigSelection(default=current, choices = choices))
+        # poster
+        current, choices = self.getSettings(self.default_poster_file, self.poster_file)
+        self.myAtileHD_poster = NoSave(ConfigSelection(default=current, choices = choices))
         # ul
         current, choices = self.getSettings(self.default_ul_file, self.ul_file)
         self.myAtileHD_ul = NoSave(ConfigSelection(default=current, choices = choices))
+        # infobar_color
+        current, choices = self.getSettings(self.default_infobar_color_file, self.infobar_color_file)
+        self.myAtileHD_infobar_color = NoSave(ConfigSelection(default=current, choices = choices))
+        # infobar_progress
+        current, choices = self.getSettings(self.default_infobar_progress_file, self.infobar_progress_file)
+        self.myAtileHD_infobar_progress = NoSave(ConfigSelection(default=current, choices = choices))
+        # ch_se_color
+        current, choices = self.getSettings(self.default_ch_se_color_file, self.ch_se_color_file)
+        self.myAtileHD_ch_se_color = NoSave(ConfigSelection(default=current, choices = choices))
+        # weather
+        current, choices = self.getSettings(self.default_weather_file, self.weather_file)
+        self.myAtileHD_weather = NoSave(ConfigSelection(default=current, choices = choices))
+        # vpn
+        current, choices = self.getSettings(self.default_vpn_file, self.vpn_file)
+        self.myAtileHD_vpn = NoSave(ConfigSelection(default=current, choices = choices))
+        # infobar_weather
+        current, choices = self.getSettings(self.default_infobar_weather_file, self.infobar_weather_file)
+        self.myAtileHD_infobar_weather = NoSave(ConfigSelection(default=current, choices = choices))
+        # infobar_ethernet_info
+        current, choices = self.getSettings(self.default_infobar_ethernet_info_file, self.infobar_ethernet_info_file)
+        self.myAtileHD_infobar_ethernet_info = NoSave(ConfigSelection(default=current, choices = choices))
+        # tuner_info
+        current, choices = self.getSettings(self.default_tuner_info_file, self.tuner_info_file)
+        self.myAtileHD_tuner_info = NoSave(ConfigSelection(default=current, choices = choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -304,17 +344,25 @@ class Multibox_Config(Screen, ConfigListScreen):
         return current[0], choices
 
     def createConfigList(self):
-        self.set_color = getConfigListEntry(_("Style:"), self.myAtileHD_color)
-        self.set_sb = getConfigListEntry(_("ColorSelectedBackground:"), self.myAtileHD_sb)
-        self.set_clock = getConfigListEntry(_("Clock:"), self.myAtileHD_clock)
+        self.set_color = getConfigListEntry(_("Selected Foreground Color:"), self.myAtileHD_color)
+        self.set_sb = getConfigListEntry(_("Selected Background Color:"), self.myAtileHD_sb)
+        self.set_clock = getConfigListEntry(_("Clock Widget:"), self.myAtileHD_clock)
         self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
+        self.set_infobar_color = getConfigListEntry(_("Infobar Color:"), self.myAtileHD_infobar_color)
+        self.set_infobar_progress = getConfigListEntry(_("Infobar Progress Color:"), self.myAtileHD_infobar_progress)
         self.set_background = getConfigListEntry(_("Background:"), self.myAtileHD_background)
         self.set_sib = getConfigListEntry(_("Secondinfobar:"), self.myAtileHD_sib)
         self.set_ch_se = getConfigListEntry(_("Channelselection:"), self.myAtileHD_ch_se)
-        self.set_ev = getConfigListEntry(_("Eventview:"), self.myAtileHD_ev)
-        self.set_emcsel = getConfigListEntry(_("EMC_Selection:"), self.myAtileHD_emcsel)
-        self.set_movsel = getConfigListEntry(_("Movie_Selection:"), self.myAtileHD_movsel)
+        self.set_ch_se_color = getConfigListEntry(_("Channelselection Color:"), self.myAtileHD_ch_se_color)
+        self.set_picon_sib = getConfigListEntry(_("Secondinfobar Picon Tuner:"), self.myAtileHD_picon_sib)
+        self.set_weather = getConfigListEntry(_("Weather Secondinfobar/EventView:"), self.myAtileHD_weather)
+        self.set_video_sel = getConfigListEntry(_("EMC/Movie Selection:"), self.myAtileHD_video_sel)
+        self.set_poster = getConfigListEntry(_("Poster:"), self.myAtileHD_poster)
         self.set_ul = getConfigListEntry(_("Userlogo:"), self.myAtileHD_ul)
+        self.set_vpn = getConfigListEntry(_("VPN Flags+IP:"), self.myAtileHD_vpn)
+        self.set_infobar_weather = getConfigListEntry(_("Infobar Weather:"), self.myAtileHD_infobar_weather)
+        self.set_infobar_ethernet_info = getConfigListEntry(_("Infobar Ethernet Info:"), self.myAtileHD_infobar_ethernet_info)
+        self.set_tuner_info = getConfigListEntry(_("Tuner Info Automatic:"), self.myAtileHD_tuner_info)
         self.set_myatile = getConfigListEntry(_("Enable %s Extentions:") % cur_skin, self.myAtileHD_active)
         self.set_new_skin = getConfigListEntry(_("Change skin"), ConfigNothing())
         self.find_woeid = getConfigListEntry(_("Search weather location ID"), ConfigNothing())
@@ -325,29 +373,45 @@ class Multibox_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_color)
             if len(self.myAtileHD_sb.choices)>1:
                 self.list.append(self.set_sb)
+            if len(self.myAtileHD_ul.choices)>1:
+                self.list.append(self.set_ul)
+            if len(self.myAtileHD_background.choices)>1:
+                self.list.append(self.set_background)
             if len(self.myAtileHD_clock.choices)>1:
                 self.list.append(self.set_clock)
             if len(self.myAtileHD_infobar.choices)>1:
                 self.list.append(self.set_infobar)
-            if len(self.myAtileHD_background.choices)>1:
-                self.list.append(self.set_background)
+            if len(self.myAtileHD_infobar_color.choices)>1:
+                self.list.append(self.set_infobar_color)
+            if len(self.myAtileHD_infobar_progress.choices)>1:
+                self.list.append(self.set_infobar_progress)
+            if len(self.myAtileHD_infobar_weather.choices)>1:
+                self.list.append(self.set_infobar_weather)
+            if len(self.myAtileHD_infobar_ethernet_info.choices)>1:
+                self.list.append(self.set_infobar_ethernet_info)
+            if len(self.myAtileHD_tuner_info.choices)>1:
+                self.list.append(self.set_tuner_info)
             if len(self.myAtileHD_sib.choices)>1:
                 self.list.append(self.set_sib)
+            if len(self.myAtileHD_picon_sib.choices)>1:
+                self.list.append(self.set_picon_sib)
+            if len(self.myAtileHD_weather.choices)>1:
+                self.list.append(self.set_weather)
             if len(self.myAtileHD_ch_se.choices)>1:
                 self.list.append(self.set_ch_se)
-            if len(self.myAtileHD_ev.choices)>1:
-                self.list.append(self.set_ev)
-            if len(self.myAtileHD_emcsel.choices)>1:
-                self.list.append(self.set_emcsel)
-            if len(self.myAtileHD_movsel.choices)>1:
-                self.list.append(self.set_movsel)
-            if len(self.myAtileHD_ul.choices)>1:
-                self.list.append(self.set_ul)
+            if len(self.myAtileHD_ch_se_color.choices)>1:
+                self.list.append(self.set_ch_se_color)
+            if len(self.myAtileHD_video_sel.choices)>1:
+                self.list.append(self.set_video_sel)
+            if len(self.myAtileHD_poster.choices)>1:
+                self.list.append(self.set_poster)
+            if len(self.myAtileHD_vpn.choices)>1:
+                self.list.append(self.set_vpn)
             self.list.append(self.set_new_skin)
         self["config"].list = self.list
         self["config"].l.setList(self.list)
         if self.myAtileHD_active.value:
-            self["key_yellow"].setText("%s pro" % cur_skin)
+            self["key_yellow"].setText("%s Extra Settings" % cur_skin)
         else:
             self["key_yellow"].setText("")
 
@@ -366,17 +430,33 @@ class Multibox_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_sib.value)
         elif self["config"].getCurrent() == self.set_ch_se:
             self.setPicture(self.myAtileHD_ch_se.value)
-        elif self["config"].getCurrent() == self.set_ev:
-            self.setPicture(self.myAtileHD_ev.value)
-        elif self["config"].getCurrent() == self.set_emcsel:
-            self.setPicture(self.myAtileHD_emcsel.value)
-        elif self["config"].getCurrent() == self.set_movsel:
-            self.setPicture(self.myAtileHD_movsel.value)
+        elif self["config"].getCurrent() == self.set_picon_sib:
+            self.setPicture(self.myAtileHD_picon_sib.value)
+        elif self["config"].getCurrent() == self.set_video_sel:
+            self.setPicture(self.myAtileHD_video_sel.value)
+        elif self["config"].getCurrent() == self.set_poster:
+            self.setPicture(self.myAtileHD_poster.value)
         elif self["config"].getCurrent() == self.set_ul:
             self.setPicture(self.myAtileHD_ul.value)
+        elif self["config"].getCurrent() == self.set_vpn:
+            self.setPicture(self.myAtileHD_vpn.value)
+        elif self["config"].getCurrent() == self.set_infobar_color:
+            self.setPicture(self.myAtileHD_infobar_color.value)
+        elif self["config"].getCurrent() == self.set_infobar_progress:
+            self.setPicture(self.myAtileHD_infobar_progress.value)
+        elif self["config"].getCurrent() == self.set_ch_se_color:
+            self.setPicture(self.myAtileHD_ch_se_color.value)
+        elif self["config"].getCurrent() == self.set_weather:
+            self.setPicture(self.myAtileHD_weather.value)
+        elif self["config"].getCurrent() == self.set_infobar_weather:
+            self.setPicture(self.myAtileHD_infobar_weather.value)
+        elif self["config"].getCurrent() == self.set_infobar_ethernet_info:
+            self.setPicture(self.myAtileHD_infobar_ethernet_info.value)
+        elif self["config"].getCurrent() == self.set_tuner_info:
+            self.setPicture(self.myAtileHD_tuner_info.value)
         elif self["config"].getCurrent() == self.set_myatile:
             if self.myAtileHD_active.value:
-                self["key_yellow"].setText("%s pro" % cur_skin)
+                self["key_yellow"].setText("%s Extra Settings" % cur_skin)
             else:
                 self["key_yellow"].setText("")
             self.createConfigList()
@@ -388,6 +468,8 @@ class Multibox_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_sb.value)
         elif self["config"].getCurrent() == self.set_clock:
             self.setPicture(self.myAtileHD_clock.value)
+        elif self["config"].getCurrent() == self.set_vpn:
+            self.setPicture(self.myAtileHD_vpn.value)
         elif self["config"].getCurrent() == self.set_infobar:
             self.setPicture(self.myAtileHD_infobar.value)
         elif self["config"].getCurrent() == self.set_background:
@@ -396,14 +478,28 @@ class Multibox_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_sib.value)
         elif self["config"].getCurrent() == self.set_ch_se:
             self.setPicture(self.myAtileHD_ch_se.value)
-        elif self["config"].getCurrent() == self.set_ev:
-            self.setPicture(self.myAtileHD_ev.value)
-        elif self["config"].getCurrent() == self.set_emcsel:
-            self.setPicture(self.myAtileHD_emcsel.value)
-        elif self["config"].getCurrent() == self.set_movsel:
-            self.setPicture(self.myAtileHD_movsel.value)
+        elif self["config"].getCurrent() == self.set_picon_sib:
+            self.setPicture(self.myAtileHD_picon_sib.value)
+        elif self["config"].getCurrent() == self.set_video_sel:
+            self.setPicture(self.myAtileHD_video_sel.value)
+        elif self["config"].getCurrent() == self.set_poster:
+            self.setPicture(self.myAtileHD_poster.value)
         elif self["config"].getCurrent() == self.set_ul:
             self.setPicture(self.myAtileHD_ul.value)
+        elif self["config"].getCurrent() == self.set_infobar_color:
+            self.setPicture(self.myAtileHD_infobar_color.value)
+        elif self["config"].getCurrent() == self.set_infobar_progress:
+            self.setPicture(self.myAtileHD_infobar_progress.value)
+        elif self["config"].getCurrent() == self.set_ch_se_color:
+            self.setPicture(self.myAtileHD_ch_se_color.value)
+        elif self["config"].getCurrent() == self.set_weather:
+            self.setPicture(self.myAtileHD_weather.value)
+        elif self["config"].getCurrent() == self.set_infobar_weather:
+            self.setPicture(self.myAtileHD_infobar_weather.value)
+        elif self["config"].getCurrent() == self.set_infobar_ethernet_info:
+            self.setPicture(self.myAtileHD_infobar_ethernet_info.value)
+        elif self["config"].getCurrent() == self.set_tuner_info:
+            self.setPicture(self.myAtileHD_tuner_info.value)
         else:
             self["Picture"].hide()
 
@@ -507,20 +603,36 @@ class Multibox_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_clock, self.clock_file)
             # infobar
             self.makeSettings(self.myAtileHD_infobar, self.infobar_file)
+            # vpn
+            self.makeSettings(self.myAtileHD_vpn, self.vpn_file)
             # background
             self.makeSettings(self.myAtileHD_background, self.background_file)
             # sib
             self.makeSettings(self.myAtileHD_sib, self.sib_file)
             # ch_se
             self.makeSettings(self.myAtileHD_ch_se, self.ch_se_file)
-            # ev
-            self.makeSettings(self.myAtileHD_ev, self.ev_file)
-            # emcsel
-            self.makeSettings(self.myAtileHD_emcsel, self.emcsel_file)
-            # movsel
-            self.makeSettings(self.myAtileHD_movsel, self.movsel_file)
+            # picon_sib
+            self.makeSettings(self.myAtileHD_picon_sib, self.picon_sib_file)
+            # video_sel
+            self.makeSettings(self.myAtileHD_video_sel, self.video_sel_file)
+            # poster
+            self.makeSettings(self.myAtileHD_poster, self.poster_file)
             # ul
             self.makeSettings(self.myAtileHD_ul, self.ul_file)
+            # infobar_color
+            self.makeSettings(self.myAtileHD_infobar_color, self.infobar_color_file)
+            # infobar_progress
+            self.makeSettings(self.myAtileHD_infobar_progress, self.infobar_progress_file)
+            # ch_se_color
+            self.makeSettings(self.myAtileHD_ch_se_color, self.ch_se_color_file)
+            # weather
+            self.makeSettings(self.myAtileHD_weather, self.weather_file)
+            # tuner_info
+            self.makeSettings(self.myAtileHD_tuner_info, self.tuner_info_file)
+            # infobar_ethernet_info
+            self.makeSettings(self.myAtileHD_infobar_ethernet_info, self.infobar_ethernet_info_file)
+            # infobar_weather
+            self.makeSettings(self.myAtileHD_infobar_weather, self.infobar_weather_file)
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")

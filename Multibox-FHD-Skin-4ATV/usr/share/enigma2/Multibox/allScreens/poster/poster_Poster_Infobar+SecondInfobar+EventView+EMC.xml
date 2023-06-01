@@ -1,0 +1,55 @@
+<skin>
+ <!-- skin_infobar_Poster_Infobar_Now -->
+<screen name="template_InfoBar_Poster_fake">
+ <widget source="session.Event_Now" render="AMBPoster" borderColor="selectedFG" borderWidth="3" position="19,280" size="342,514" zPosition="10" />
+</screen>
+
+
+
+
+<!-- TEMPLATES SecondInfoBar Poster-->
+  <screen name="template_SecondInfoBar_Poster">
+  <widget source="session.Event_Next" render="AMBPoster" borderColor="selectedFG" borderWidth="3" position="925,662" size="185,279" zPosition="10" />
+  <widget source="session.Event_Now" render="AMBPoster" borderColor="selectedFG" borderWidth="3" position="925,224" size="185,279" zPosition="10" />
+  </screen> 
+  <!-- TEMPLATES-SIB_session_Event_Now_Next-Poster-->
+  <screen name="template_SIB_session_Event_Now_Next" >
+  <widget source="session.Event_Next" render="AMBRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="810,310" position="110,635" font="Regular; 36" halign="left" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="session.Event_Now" render="AMBRunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="810,320" position="110,170" font="Regular; 36" halign="left" backgroundColor="background" transparent="1" foregroundColor="white" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  </screen>
+  
+  
+  
+  
+   <!-- EventView_Backdrop-->
+  <!-- TEMPLATES-EV_session_Event_Now_Next-Poster-->
+ <screen name="template_EV_session_Event_Now_Next" >
+	<eLabel text="Next:" position="10,909" size="100,40" font="Regular; 34" halign="left" transparent="1" valign="center" foregroundColor="selectedFG" />
+	<widget name="datetime" position="140,909" size="340,40" font="Regular; 34" halign="center" transparent="1" backgroundColor="background" />
+	<widget name="duration" position="530,909" size="170,40" font="Regular; 34" halign="center" transparent="1" backgroundColor="background" />
+	<widget source="Service" render="Progress"  position="705,921" size="300,16" foregroundColor="scrollbarSlidercolor"  borderColor="scrollbarSliderbordercolor" borderWidth="1" transparent="1" zPosition="1">
+	<convert type="EventTime">Progress</convert>
+	</widget>
+	<widget source="session.Event_Now" render="Label" position="1037,909" size="160,40" transparent="1" zPosition="1" font="Regular; 34" halign="left" backgroundColor="background">
+	<convert type="EventTime">Remaining</convert>
+	<convert type="RemainingToText">InMinutes</convert>
+	</widget>
+	<ePixmap pixmap="Multibox/buttons/key_left.png" position="100,915" size="30,29" alphatest="blend" transparent="1" />
+	<ePixmap pixmap="Multibox/buttons/key_right.png" position="490,915" size="30,29" alphatest="blend" transparent="1" />
+	<widget source="Event" render="AMBBackdrop" position="1235,560" size="650,366" borderColor="selectedFG" borderWidth="2" zPosition="2" />
+ </screen>
+ 
+ 
+ 
+ <!-- TEMPLATES-EMCMediaCenter-Poster-->
+  <screen name="template_EMCMediaCenter_Backdrop_Poster_fake">
+  <widget source="session.Event_Now" render="AMBPoster" borderColor="selectedFG" borderWidth="3" position="1320,610" size="156,234" zPosition="10" />
+  <widget source="session.Event_Now" render="AMBBackdrop" borderColor="selectedFG" borderWidth="3" position="1490,610" size="415,234" zPosition="10" />
+  </screen> 
+  
+
+</skin>
