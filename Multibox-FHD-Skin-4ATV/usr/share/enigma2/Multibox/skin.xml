@@ -286,12 +286,18 @@
 <screen name="Menu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="background">
   <widget source="menu" render="Listbox" position="10,100" size="760,860" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="selectedFG" scrollbarMode="showNever" zPosition="5" enableWrapAround="1" transparent="1">
     <convert type="TemplatedMultiContent">
-				{"template": [ MultiContentEntryText(pos = (5, 8), size = (755, 60), flags = RT_HALIGN_LEFT, text = 0) ],
+				{"template": [ MultiContentEntryText(pos = (5, 16), size = (755, 60), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular", 36)],
-				"itemHeight": 60
-				}
-			</convert>
-  </widget>
+					"itemHeight": 76,
+					"scrollbarMode": "showNever"
+					}
+				</convert>
+			</widget>
+	<widget source="menu" render="FixedLabel" text="&#x25ba;" position="730,962" size="30,30" font="Regular;24" foregroundColor="yellow" backgroundColor="background" halign="right" valign="bottom" transparent="1" zPosition="5">
+		<convert type="MetrixHDMenuEntryCompare" />
+		<convert type="ValueRange">0,9</convert>
+		<convert type="ConditionalShowHide">Invert</convert>
+		</widget>
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_fullscreen_title" />
   <panel name="template_pig_large" />
