@@ -284,25 +284,275 @@
   </windowstyle>
   <!-- Menu FHD -->
 <screen name="Menu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="background">
-  <widget source="menu" render="Listbox" position="10,100" size="760,860" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="selectedFG" scrollbarMode="showNever" zPosition="5" enableWrapAround="1" transparent="1">
+  <widget source="menu" render="Listbox" position="10,98" size="760,780" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="default" scrollbarMode="showOnDemand" scrollbarForegroundColor="default" scrollbarWidth="8" enableWrapAround="1" zPosition="5" transparent="1">
     <convert type="TemplatedMultiContent">
-				{"template": [ MultiContentEntryText(pos = (5, 16), size = (755, 60), flags = RT_HALIGN_LEFT, text = 0) ],
-				"fonts": [gFont("Regular", 36)],
-					"itemHeight": 76,
+					{"templates":
+						{"default": (80,[
+							MultiContentEntryText(pos = (10, 3), size = (750, 80), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
+							]),
+						"text": (80,[
+							MultiContentEntryText(pos = (10, 3), size = (750, 80), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3)
+							]),
+						"number": (80,[
+							MultiContentEntryText(pos = (10, 3), size = (45, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (65, 3), size = (680, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"image": (80,[
+							MultiContentEntryPixmapAlphaBlend(pos = (5, 15), size = (50, 50), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (75, 3), size = (680, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"both": (80,[
+							MultiContentEntryPixmapAlphaBlend(pos = (5, 15), size = (50, 50), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (70, 4), size = (45, 80), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (120, 4), size = (630, 80), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							])
+						},
+					"fonts": [gFont("Regular", 36),gFont("Regular", 34),gFont("Regular", 32)],
+					"itemHeight": 80,
 					"scrollbarMode": "showNever"
 					}
 				</convert>
 			</widget>
-	<widget source="menu" render="FixedLabel" text="&#x25ba;" position="730,962" size="30,30" font="Regular;24" foregroundColor="yellow" backgroundColor="background" halign="right" valign="bottom" transparent="1" zPosition="5">
-		<convert type="MetrixHDMenuEntryCompare" />
-		<convert type="ValueRange">0,9</convert>
-		<convert type="ConditionalShowHide">Invert</convert>
-		</widget>
+  <widget name="menuimage" position="-1,-1" size="1,1" zPosition="6" alphatest="blend" />
+  <widget source="description" render="Label" position="10,878" size="573,130" conditional="description" font="Regular;30" zPosition="2" valign="center" halign="center" backgroundColor="background" foregroundColor="yellow">
+    <convert type="MetrixMenuDescription" />
+  </widget>
+  <eLabel text="No description available" position="10,878" size="573,130" conditional="description" font="Regular;30" zPosition="1" valign="center" halign="center" backgroundColor="background" foregroundColor="yellow" />
   <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_fullscreen_title" />
   <panel name="template_pig_large" />
   <panel name="template_pixmap_BG" />
 </screen>
+
+	<menus>
+		<menu key="default" image="menu_icons/default.png" />
+		<menu key="animation_setup" image="menu_icons/usage_setup.png" />
+		<menu key="audio_menu" image="menu_icons/menu_setup_audio.png" />
+		<menu key="audio_setup" image="menu_icons/menu_setup_audio.png" />
+		<menu key="auto_scan" image="menu_icons/menu_scan_auto_scan.png" />
+		<menu key="autobouquetsmakermaker" image="menu_icons/menu_scan_autobouquetsmakermaker.png" />
+		<menu key="autolanguage_setup" image="menu_icons/menu_system_autolanguage_setup.png" />
+		<menu key="AutomaticVolumeAdjustment" image="menu_icons/menu_system_AutomaticVolumeAdjustment.png" />
+		<menu key="autores_setup" image="menu_icons/menu_system_autores_setup.png" />
+		<menu key="autotimer_setup" image="menu_icons/menu_timermenu_autotimers.png" />
+		<menu key="av_setup" image="menu_icons/menu_system_av_setup.png" />
+		<menu key="blindscan" image="menu_icons/menu_scan_blindscan.png" />
+		<menu key="bluetooth_setup" image="menu_icons/bluetooth.png" />
+		<menu key="build_info_screen" image="menu_icons/menu_information_device.png" />
+		<menu key="buttonsetup_setup" image="menu_icons/menu_osd_menu_buttonsetup.png" />
+		<menu key="cablescan" image="menu_icons/search.png" />
+		<menu key="channelselection_setup" image="menu_icons/menu_system_channelselection_setup.png" />
+		<menu key="Chromium Plugin" image="menu_icons/browser.png" />
+		<menu key="ci_assign" image="menu_icons/menu_setup_ci.png" />
+		<menu key="ci_setup" image="menu_icons/menu_setup_ci.png" />
+		<menu key="crontimer_edit" image="menu_icons/menu_timermenu_crontimers.png" />
+		<menu key="Dazn" image="menu_icons/dazn.png" />
+		<menu key="deep_standby" image="menu_icons/power_off.png" />
+		<menu key="deleteepgcache" image="menu_icons/menu_epgloadsave_menu_deleteepgcache.png" />
+		<menu key="device_screen" image="menu_icons/menu_information_device.png" />
+		<menu key="device_setup" image="menu_icons/menu_network_device_setup.png" />
+		<menu key="Disney Plugin" image="menu_icons/disney.png" />
+		<menu key="display_setup" image="menu_icons/menu_display_display_setup.png" />
+		<menu key="dmc_mainmenu" image="menu_icons/menu_mainmenu_dmc_mainmenu.png" />
+		<menu key="dreamplex" image="menu_icons/plex.png" />
+		<menu key="dual_mode" image="menu_icons/dualmode.png" />
+		<menu key="dvd_player" image="menu_icons/dvd.png" />
+		<menu key="dvdplayer_setup" image="menu_icons/menu_extended_dvdplayer_setup.png" />
+		<menu key="emc" image="menu_icons/emc.png" />
+		<menu key="epg_setup" image="menu_icons/menu_epg_epg_setup.png" />
+		<menu key="epgimporter" image="menu_icons/menu_epgloadsave_menu_loadepgcache.png" />
+		<menu key="epgloadsave_menu" image="menu_icons/menu_epg_epgloadsave_menu.png" />
+		<menu key="epgrefresh" image="menu_icons/menu_epg_refresh.png" />
+		<menu key="factory_reset" image="menu_icons/menu_setup_reset.png" />
+		<menu key="fansetup_config" image="menu_icons/fan.png" />
+		<menu key="fastscan" image="menu_icons/menu_scan_fast_scan.png" />
+		<menu key="FCCSetup" image="menu_icons/fcc.png" />
+		<menu key="filecommand" image="menu_icons/filecom.png" />
+		<menu key="googlemaps" image="menu_icons/google.png" />
+		<menu key="harddisk_check" image="menu_icons/menu_harddisk_harddisk_check.png" />
+		<menu key="harddisk_convert" image="menu_icons/menu_harddisk_harddisk_convert.png" />
+		<menu key="harddisk_init" image="menu_icons/menu_harddisk_harddisk_init.png" />
+		<menu key="harddisk_setup" image="menu_icons/menu_harddisk_harddisk_setup.png" />
+		<menu key="Hardreset" image="menu_icons/restart.png" />
+		<menu key="hdmicec" image="menu_icons/menu_extended_hdmicec.png" />
+		<menu key="hdmirecord_setup" image="menu_icons/menu_extended_hdmirecord_setup.png" />
+		<menu key="Inadyn_setup" image="menu_icons/menu_network_Inadyn_setup.png" />
+		<menu key="Infopanel" image="menu_icons/menu_information_about.png" />
+		<menu key="input_device_setup" image="menu_icons/menu_extended_input_device_setup.png" />
+		<menu key="ipbox_client_Start" image="menu_icons/menu_scan_streamconvert.png" />
+		<menu key="IPTV Bouquet Maker" image="menu_icons/menu_mainmenu_pluginmanager.png" />
+		<menu key="iptv_config" image="menu_icons/setup.png" />
+		<menu key="iptv_main" image="menu_icons/pplayer.png" />
+		<menu key="keyboard" image="menu_icons/menu_extended_keyboard.png" />
+		<menu key="keymap" image="menu_icons/menu_extended_input_device_setup.png" />
+		<menu key="lcd4linux" image="menu_icons/menu_display_lcd_skin_setup.png" />
+		<menu key="lcd_skin_setup" image="menu_icons/menu_display_lcd_skin_setup.png" />
+		<menu key="LED_Giga" image="menu_icons/menu_display_LED_Giga.png" />
+		<menu key="ledManager" image="menu_icons/led.png" />
+		<menu key="loadepgcache" image="menu_icons/menu_epgloadsave_menu_loadepgcache.png" />
+		<menu key="locale_setup" image="menu_icons/menu_system_language_setup.png" />
+		<menu key="logs_setup" image="menu_icons/menu_extended_logs_setup.png" />
+		<menu key="maintenance_mode" image="menu_icons/usage_setup.png" />
+		<menu key="manual_scan" image="menu_icons/menu_scan_manual_scan.png" />
+		<menu key="media_player" image="menu_icons/media.png" />
+		<menu key="merlin_music_player" image="menu_icons/music.png" />
+		<menu key="minidlna_setup" image="menu_icons/menu_network_minidlna_setup.png" />
+		<menu key="mount_manager" image="menu_icons/menu_extended_hardisk_selection.png" />
+		<menu key="moviebrowser" image="menu_icons/service_info.png" />
+		<menu key="multi_quick" image="menu_icons/remotecontrol.png" />
+		<menu key="multiboot" image="menu_icons/restart.png" />
+		<menu key="netafp_setup" image="menu_icons/menu_network_netafp_setup.png" />
+		<menu key="Netflix Plugin" image="menu_icons/menu_mainmenu_netflix.png" />
+		<menu key="netftp_setup" image="menu_icons/menu_network_netftp_setup.png" />
+		<menu key="netmounts_setup" image="menu_icons/menu_network_netmounts_setup.png" />
+		<menu key="netnfs_setup" image="menu_icons/menu_network_netnfs_setup.png" />
+		<menu key="netrts_setup" image="menu_icons/menu_network_netnfs_setup.png" />
+		<menu key="netsabnzbd_setup" image="menu_icons/menu_network_netsabnzbd_setup.png" />
+		<menu key="netsatpi_setup" image="menu_icons/menu_scan_satip.png" />
+		<menu key="netsmba_setup" image="menu_icons/menu_network_netsmba_setup.png" />
+		<menu key="nettelnet_setup" image="menu_icons/menu_network_nettelnet_setup.png" />
+		<menu key="netushare_setup" image="menu_icons/menu_network_netushare_setup.png" />
+		<menu key="netvpn_setup" image="menu_icons/menu_network_netvpn_setup.png" />
+		<menu key="numzapext_setup" image="menu_icons/menu_numzapext_setup.png" />
+		<menu key="OpenStore" image="menu_icons/menu_mainmenu_openstore.png" />
+		<menu key="openwebif" image="menu_icons/menu_network_webif.png" />
+		<menu key="osdsetup" image="menu_icons/menu_osd_menu_osdsetup.png" />
+		<menu key="parental_setup" image="menu_icons/menu_setup_parental.png" />
+		<menu key="password_setup" image="menu_icons/menu_network_passwd_setup.png" />
+		<menu key="permanent_clock" image="menu_icons/menu_extended_time_setup.png" />
+		<menu key="pip_setup" image="menu_icons/setup.png" />
+		<menu key="play_cd" image="menu_icons/dvd.png" />
+		<menu key="playback_setup" image="menu_icons/menu_extended_playback_setup.png" />
+		<menu key="plugin_selection" image="menu_icons/menu_mainmenu_pluginmanager.png" />
+		<menu key="pluginhider_setup" image="menu_icons/menu_mainmenu_pluginhider.png" />
+		<menu key="positioner_setup" image="menu_icons/menu_scan_positioner_setup.png" />
+		<menu key="powertimer_edit" image="menu_icons/menu_timermenu_powertimers.png" />
+		<menu key="PrimeVideo" image="menu_icons/prime.png" />
+		<menu key="pvmc_mainmenu" image="menu_icons/pvmc.png" />
+		<menu key="RCU Select" image="menu_icons/remotecontrol.png" />
+		<menu key="recording_setup" image="menu_icons/menu_extended_recording_setup.png" />
+		<menu key="remote_setup" image="menu_icons/menu_system_remote_setup.png" />
+		<menu key="remotecode" image="menu_icons/menu_extended_remotecode.png" />
+		<menu key="remotecontrolcode" image="menu_icons/remotecontrol.png" />
+		<menu key="remotetimer" image="menu_icons/menu_timermenu_timers.png" />
+		<menu key="restart" image="menu_icons/restart.png" />
+		<menu key="restart_enigma" image="menu_icons/reboot.png" />
+		<menu key="rfmod_setup" image="menu_icons/menu_extended_rfmod_setup.png" />
+		<menu key="run_kodi" image="menu_icons/menu_kodi.png" />
+		<menu key="sat_ip_client" image="menu_icons/menu_scan_satip.png" />
+		<menu key="satellite_equipment_setup" image="menu_icons/setup.png" />
+		<menu key="satfinder" image="menu_icons/menu_scan_satfinder.png" />
+		<menu key="saveepgcache" image="menu_icons/menu_epgloadsave_menu_saveepgcache.png" />
+		<menu key="scart_switch" image="menu_icons/menu_mainmenu_scart.png" />
+		<menu key="script_manager" image="menu_icons/menu_setup_software_manager.png" />
+		<menu key="serviceapp_setup" image="menu_icons/pplayer.png" />
+		<menu key="setup_epgenhanced" image="menu_icons/menu_epg_setup_epgenhanced.png" />
+		<menu key="setup_epggraphical" image="menu_icons/menu_epg_setup_epggraphical.png" />
+		<menu key="setup_epginfobar" image="menu_icons/menu_epg_setup_epginfobar.png" />
+		<menu key="setup_epginfobargraphical" image="menu_icons/menu_epg_setup_epginfobargraphical.png" />
+		<menu key="setup_epgmulti" image="menu_icons/menu_epg_setup_epgmulti.png" />
+		<menu key="setup_epgvertical" image="menu_icons/menu_epg_setup_epgmulti.png" />
+		<menu key="setup_osd3d" image="menu_icons/menu_osd_menu_osd3dsetup.png" />
+		<menu key="shutdown" image="menu_icons/power_off.png" />
+		<menu key="skin_setup" image="menu_icons/menu_osd_menu_skin_setup.png" />
+		<menu key="sleep" image="menu_icons/power_timer.png" />
+		<menu key="specialfeatures_menu" image="menu_icons/menu_extended_specialfeatures_menu.png" />
+		<menu key="Stalker Plugin" image="menu_icons/portal.png" />
+		<menu key="standby" image="menu_icons/power.png" />
+		<menu key="start_kodi" image="menu_icons/menu_kodi.png" />
+		<menu key="startimport" image="menu_icons/iptvimport.png" />
+		<menu key="startsetup" image="menu_icons/alexa.png" />
+		<menu key="streamconvert" image="menu_icons/menu_scan_streamconvert.png" />
+		<menu key="subtitle_selection" image="menu_icons/sub.png" />
+		<menu key="subtitle_setup" image="menu_icons/menu_extended_subtitle_setup.png" />
+		<menu key="sundtek_control_enter" image="menu_icons/menu_mainmenu_pluginmanager.png" />
+		<menu key="supportchannel_YTChannel" image="menu_icons/menu_information_supportchannel.png" />
+		<menu key="swap_manager" image="menu_icons/menu_harddisk_ram.png" />
+		<menu key="tempfancontrol" image="menu_icons/fan.png" />
+		<menu key="time_setup" image="menu_icons/menu_extended_time_setup.png" />
+		<menu key="timer_edit" image="menu_icons/menu_timermenu_timers.png" />
+		<menu key="timshift_setup" image="menu_icons/menu_extended_timshift_setup.png" />
+		<menu key="tuner_screen" image="menu_icons/menu_information_device.png" />
+		<menu key="tuner_setup" image="menu_icons/menu_scan_tuner_setup.png" />
+		<menu key="usage_setup" image="menu_icons/menu_system_usage_setup.png" />
+		<menu key="user_interface" image="menu_icons/menu_osd_menu_user_interface.png" />
+		<menu key="vfd_ew" image="menu_icons/menu_system_VFD_INI.png" />
+		<menu key="VFD_INI" image="menu_icons/menu_system_VFD_INI.png" />
+		<menu key="video_clipping" image="menu_icons/service_info.png" />
+		<menu key="video_finetune" image="menu_icons/menu_system_videofinetune_setup.png" />
+		<menu key="video_menu" image="menu_icons/service_info.png" />
+		<menu key="video_setup" image="menu_icons/service_info.png" />
+		<menu key="videoenhancement_setup" image="menu_icons/menu_system_videoenhancement_setup.png" />
+		<menu key="vmc_init_setup" image="menu_icons/menu_setup_vmc_setup.png" />
+		<menu key="vmc_init_startvmc" image="menu_icons/menu_mainmenu_vmc.png" />
+		<menu key="volume_adjust" image="menu_icons/menu_system_AutomaticVolumeAdjustment.png" />
+		<menu key="vps" image="menu_icons/menu_scan_streamconvert.png" />
+		<menu key="Weather_MSN" image="menu_icons/weather.png" />
+		<menu key="webradioFS" image="menu_icons/webradioFS.png" />
+		<menu key="wol_standby" image="menu_icons/power_off.png" />
+		<menu key="XCplugin" image="menu_icons/menu_mainmenu_pluginmanager.png" />
+		<menu key="XStreamity" image="menu_icons/menu_mainmenu_pluginmanager.png" />
+		<menu key="youtubetv" image="menu_icons/youtube.png" />
+
+		<menu key="software_manager" image="menu_icons/menu_setup_software_manager.png" />
+		<menu key="manage_extensions" image="menu_icons/menu_manage_extensions.png" />
+		<menu key="software_update" image="menu_icons/menu_software_update.png" />
+		<menu key="software_restore" image="menu_icons/menu_software_restore.png" />
+		<menu key="flash_online" image="menu_icons/menu_flash_online.png" />
+		<menu key="backup_image_dflash" image="menu_icons/menu_backup_image.png" />
+		<menu key="backup_image_dbackup" image="menu_icons/menu_backup_image.png" />
+		<menu key="backup_image" image="menu_icons/menu_backup_image.png" />
+		<menu key="multiboot" image="menu_icons/menu_multiboot.png" />
+		<menu key="backup_system" image="menu_icons/menu_backup_system.png" />
+		<menu key="restore_system" image="menu_icons/menu_restore_system.png" />
+		<menu key="install_local" image="menu_icons/menu_install_local.png" />
+		<menu key="advanced_software" image="menu_icons/menu_advanced_software.png" />
+		<menu key="advanced_restore" image="menu_icons/menu_advanced_restore.png" />
+		<menu key="backup_location" image="menu_icons/menu_backup_location.png" />
+		<menu key="backup_default" image="menu_icons/menu_backup_default.png" />
+		<menu key="backup_additional" image="menu_icons/menu_backup_additional.png" />
+		<menu key="backup_excluded" image="menu_icons/menu_backup_excluded.png" />
+		<menu key="package_manager" image="menu_icons/menu_package_manager.png" />
+		<menu key="upgrade_source" image="menu_icons/menu_upgrade_source.png" />
+
+		<menu key="timermenu" image="menu_icons/menu_mainmenu_timer.png" />
+		<menu key="setup" image="menu_icons/setup.png" />
+		<menu key="rec" image="menu_icons/menu_extended_recording_setup.png" />
+		<menu key="display" image="menu_icons/menu_extended_display_selection.png" />
+		<menu key="osd_menu" image="menu_icons/menu_extended_osd_setup.png" />
+		<menu key="scan" image="menu_icons/menu_setup_tuner.png" />
+		<menu key="cam" image="menu_icons/menu_setup_ci.png" />
+		<menu key="extended" image="menu_icons/menu_system_extended_selection.png" />
+		<menu key="harddisk" image="menu_icons/menu_extended_hardisk_selection.png" />
+		<menu key="network" image="menu_icons/menu_system_network_menu.png" />
+		<menu key="shutdown" image="menu_icons/reset.png" />
+		<menu key="epg" image="menu_icons/menu_epg_epg_setup.png" />
+		<menu key="system" image="menu_icons/menu_setup_setup.png" />
+
+		<!--<menu key="information" image="menu_icons/menu_information.png" />-->
+		<menu key="information" image="menu_icons/info.png" />
+		<menu key="distribution_info_screen" image="menu_icons/menu_information_about.png" />
+		<menu key="receiver_info_screen" image="menu_icons/menu_receiver_info.png" />
+		<menu key="images_info_screen" image="menu_icons/menu_images_info.png" />
+		<menu key="tuner_info_screen" image="menu_icons/menu_tuner_info.png" />
+		<menu key="network_info_screen" image="menu_icons/menu_network_info.png" />
+		<menu key="storage_info_screen" image="menu_icons/menu_storage_info.png" />
+		<menu key="memory_info_screen" image="menu_icons/menu_memory_info.png" />
+		<menu key="multiboot_info_screen" image="menu_icons/menu_multiboot_info.png" />
+		<menu key="streaming_info_screen" image="menu_icons/menu_streaming_clients_info.png" />
+		<menu key="geolocation_info_screen" image="menu_icons/menu_geolocation_info.png" />
+		<menu key="service_info_screen" image="menu_icons/menu_service_info.png" />
+
+		<menu key="softcam_settings" image="menu_icons/menu_softcam_settings.png" />
+		<menu key="oscam_info" image="menu_icons/menu_oscam_info.png" />
+		<menu key="cccam_info" image="menu_icons/menu_cccam_info.png" />
+
+		<menu key="ci_settings" image="menu_icons/menu_ci_settings.png" />
+		<menu key="ci_selection" image="menu_icons/menu_ci_selection.png" />
+		<menu key="tuner_basic_settings" image="menu_icons/menu_tuner_basic_settings.png" />
+
+	</menus>
+
      <!-- Infobar_Default -->
 <screen name="InfoBar" flags="wfNoBorder" position="0,0" size="1920,1080" title="InfoBar" backgroundColor="transparent">
   <widget source="session.CurrentService" render="Label" position="1829,1028" size="100,24" font="Regular; 24" halign="left" text="DVB-T" backgroundColor="background" transparent="1" zPosition="1">
