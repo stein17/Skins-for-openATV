@@ -810,15 +810,17 @@
     <panel name="template_pig_setup" />
      <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
-  <screen name="MSNWeatherPluginEntryConfigScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
+<screen name="MSNWeatherPluginEntryConfigScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="MSN WeatherPlugin" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
     <eLabel text="Search" font="Regular; 36" position="10,100" size="600,75" backgroundColor="background" foregroundColor="selectedFG" halign="left" />
     <eLabel position="10,179" size="1180,2" backgroundColor="selectedFG" />
     <widget name="config" position="10,200" size="1180,770" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="selectedFG" zPosition="3" itemHeight="85" font="Regular;36" scrollbarMode="showOnDemand" transparent="1" />
+	<ePixmap pixmap="Multibox/buttons/key_board.png" position="1555,1022" size="103,35" zPosition="10" transparent="1" />
+	<eLabel text="Press Text-Button" position="1297,1005" size="250,70" zPosition="1" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
     <panel name="template_fullscreen" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
-     <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
   <screen name="MSNWeatherPluginSearch" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="MSN WeatherPlugin" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -831,134 +833,25 @@
      <panel name="TemplateAllColorButtons_Automatic" />
   </screen>
  <screen name="MSNWeatherPlugin" position="0,0" size="1920,1080" title="Weather Plugin" flags="wfNoBorder" backgroundColor="background">
-  <ePixmap pixmap="Wettericons/background.png" position="0,0" size="1920,1080" zPosition="-20" transparent="1" alphatest="blend" />
-  <!--   day1 -->
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="20,20" size="150,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top">
-    <convert type="MSNWeather">weekshortday,current</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="130,20" size="150,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top">
-    <convert type="MSNWeather">date,current</convert>
-  </widget>
-  <widget render="Label" source="observationtime" font="Regular; 42" position="290,20" size="360,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
-  <widget render="Label" source="currentTemp" font="Regular;75" position="140,330" size="400,80" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="yellow" />
-  <widget render="Label" source="feelsliketemp" font="Regular;33" position="165,420" size="360,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
-  <widget render="Label" source="condition" font="Regular;36" position="165,480" size="360,53" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-  <widget render="Label" source="caption" font="Regular;42" position="587,20" size="555,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
-  <widget render="Label" source="observationpoint" font="Regular;33" position="585,90" size="555,83" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
-  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="185,49" size="320,320" zPosition="1" transparent="1" alphatest="blend">
-    <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-  </widget>
-  <ePixmap pixmap="Wettericons/temp.png" position="145,337" size="22,67" zPosition="4" transparent="1" alphatest="blend" />
-  <ePixmap pixmap="Wettericons/temp_high_low.png" position="1048,216" size="28,70" zPosition="3" transparent="1" alphatest="blend" />
-  <widget source="session.MSNWeather" render="Label" font="Regular;53" position="638,189" size="450,60" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center">
-    <convert type="MSNWeather">temperature_high,current</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;53" position="638,254" size="450,60" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center">
-    <convert type="MSNWeather">temperature_low,current</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="638,321" size="450,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">temperature_text,day1</convert>
-  </widget>
-  <ePixmap pixmap="Wettericons/wind.png" position="589,413" size="60,60" zPosition="3" transparent="1" alphatest="blend" />
-  <widget render="Label" source="wind_condition" font="Regular;36" position="638,420" size="450,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
-  <ePixmap pixmap="Wettericons/umbrella.png" position="594,478" size="50,54" zPosition="3" transparent="1" alphatest="blend" />
-  <widget render="Label" source="humidity" font="Regular;36" position="642,480" size="450,53" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
-  <!--   day2 -->
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="98,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">weekshortday,day2</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="206,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">date,day2</convert>
-  </widget>
-  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="148,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
-    <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-  </widget>
-  <widget render="Label" source="weekday2_temp" font="Regular;51" position="128,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-  <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="128,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">temperature_text,day2</convert>
-  </widget>
-  <!--    day3 -->
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="533,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">weekshortday,day3</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="641,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">date,day3</convert>
-  </widget>
-  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="583,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
-    <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-  </widget>
-  <widget render="Label" source="weekday3_temp" font="Regular;51" position="563,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-  <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="563,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">temperature_text,day3</convert>
-  </widget>
-  <!--  day4 -->
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="968,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">weekshortday,day4</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1076,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">date,day4</convert>
-  </widget>
-  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1018,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
-    <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-  </widget>
-  <widget render="Label" source="weekday4_temp" font="Regular;51" position="998,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-  <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="998,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">temperature_text,day4</convert>
-  </widget>
-  <!--   day5 -->
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1403,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">weekshortday,day5</convert>
-  </widget>
-  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1511,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">date,day5</convert>
-  </widget>
-  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1453,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
-    <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
-  </widget>
-  <widget render="Label" source="weekday5_temp" font="Regular;51" position="1433,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-  <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="1433,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
-    <convert type="MSNWeather">temperature_text,day5</convert>
-  </widget>
-  <panel name="template_pig_setup" />
-  <!--   Analog Clock -->
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
-    <convert type="AMBAnalogClock">secHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">minHand</convert>
-  </widget>
-  <widget source="global.CurrentTime" render="AMBWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
-    <convert type="AMBAnalogClock">hourHand</convert>
-  </widget>
-  <ePixmap pixmap="icons/Clock.png" position="1812,3" zPosition="1" size="90,90" transparent="1" alphatest="on" />
-  <widget source="global.CurrentTime" render="Label" position="1500,20" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="Multiboxlabel" transparent="1">
-    <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
-  </widget>
-  <ePixmap pixmap="buttons/key_menu.png" position="1193,27" size="103,35" zPosition="10" transparent="1" />
-  <eLabel text="add location" position="1310,27" size="200,40" zPosition="1" valign="center" font="Regular; 32" halign="left" backgroundColor="background" transparent="1" noWrap="1" />
-<eLabel name="" position="0,76" size="1920,2" backgroundColor="selectedFG" />
-</screen>
-  <!-- MSNWeatherPlugin *-->
-  <!-- screen name="MSNWeatherPlugin" position="0,0" size="1920,1080" title="Weather Plugin" flags="wfNoBorder" backgroundColor="background">
-    <ePixmap pixmap="Wettericons/background.png" position="0,0" size="1920,1080" zPosition="-20" transparent="1" alphatest="blend" /> -->
-  <!--day1-->
-  <!-- <widget source="session.MSNWeather" render="Label" font="Regular; 40" position="132,20" size="270,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <ePixmap pixmap="Wettericons/background.png" position="0,0" size="1920,1080" zPosition="-20" transparent="1" alphatest="blend" />
+    <!--   day1 -->
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="20,20" size="150,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top">
       <convert type="MSNWeather">weekshortday,current</convert>
     </widget>
-    <widget source="session.MSNWeather" render="Label" font="Regular; 40" position="240,20" size="270,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="130,20" size="150,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top">
       <convert type="MSNWeather">date,current</convert>
     </widget>
-    <widget render="Label" source="observationtime" font="Regular;33" position="165,113" size="360,83" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
-    <widget render="Label" source="currentTemp" font="Regular;75" position="46,255" size="600,180" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget render="Label" source="feelsliketemp" font="Regular;33" position="165,387" size="360,60" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
-    <widget render="Label" source="condition" font="Regular;36" position="165,460" size="360,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget render="Label" source="caption" font="Regular; 40" position="585,20" size="800,50" backgroundColor="background" zPosition="3" transparent="1" halign="left" valign="top" />
-    <widget render="Label" source="observationpoint" font="Regular;33" position="585,113" size="555,83" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" /> -->
-  <!--   <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/overlay.png" position="165,29" size="360,480" zPosition="2" transparent="1" alphatest="blend" /> -->
-  <!--  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="222,160" size="256,256" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="MSNWeather">weathericon,current,/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/,gif</convert>
+    <widget render="Label" source="observationtime" font="Regular; 42" position="290,20" size="360,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
+    <widget render="Label" source="currentTemp" font="Regular;75" position="140,330" size="400,80" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" foregroundColor="yellow" />
+    <widget render="Label" source="feelsliketemp" font="Regular;33" position="165,420" size="360,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
+    <widget render="Label" source="condition" font="Regular;36" position="165,480" size="360,53" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
+    <widget render="Label" source="caption" font="Regular;42" position="587,20" size="555,50" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
+    <widget render="Label" source="observationpoint" font="Regular;33" position="585,90" size="555,83" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="top" />
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="185,49" size="320,320" zPosition="1" transparent="1" alphatest="blend">
+      <convert type="MSNWeather">weathericon,current,/usr/share/enigma2/Multibox/Wettericons/Real/,png</convert>
     </widget>
-    <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/temp_high_low.png" position="1099,205" size="42,105" zPosition="3" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/Wettericons/temp.png" position="143,345" size="48,48" zPosition="4" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="Multibox/Wettericons/temp_high_low.png" position="1035,204" size="48,98" zPosition="5" transparent="1" alphatest="blend" />
     <widget source="session.MSNWeather" render="Label" font="Regular;53" position="638,189" size="450,60" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center">
       <convert type="MSNWeather">temperature_high,current</convert>
     </widget>
@@ -968,74 +861,87 @@
     <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="638,321" size="450,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">temperature_text,day1</convert>
     </widget>
-    <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/wind.png" position="1090,357" size="90,90" zPosition="3" transparent="1" alphatest="blend" />
-    <widget render="Label" source="wind_condition" font="Regular;36" position="638,390" size="450,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
-    <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/umbrella.png" position="1096,441" size="75,81" zPosition="3" transparent="1" alphatest="blend" />
-    <widget render="Label" source="humidity" font="Regular;36" position="642,460" size="450,53" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" /> -->
-  <!--day2 -->
-  <!--  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="98,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <ePixmap pixmap="Multibox/Wettericons/wind.png" position="588,417" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+    <widget render="Label" source="wind_condition" font="Regular;36" position="638,420" size="450,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
+    <ePixmap pixmap="Multibox/Wettericons/Humidity.png" position="589,479" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+    <widget render="Label" source="humidity" font="Regular;36" position="638,480" size="450,45" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="center" />
+    <!--   day2 -->
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="98,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">weekshortday,day2</convert>
     </widget>
     <widget source="session.MSNWeather" render="Label" font="Regular;42" position="206,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">date,day2</convert>
-    </widget> -->
-  <!--     <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/overlay.png" position="128,570" size="360,480" zPosition="2" transparent="1" alphatest="blend" /> -->
-  <!--  <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="179,645" size="256,256" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="MSNWeather">weathericon,day2,/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/,gif</convert>
+    </widget>
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="148,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
+      <convert type="MSNWeather">weathericon,day2,/usr/share/enigma2/Multibox/Wettericons/Real/,png</convert>
     </widget>
     <widget render="Label" source="weekday2_temp" font="Regular;51" position="128,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="128,1010" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="128,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">temperature_text,day2</convert>
-    </widget> -->
-  <!-- day3 -->
-  <!--   <widget source="session.MSNWeather" render="Label" font="Regular;42" position="533,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    </widget>
+    <!--    day3 -->
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="533,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">weekshortday,day3</convert>
     </widget>
     <widget source="session.MSNWeather" render="Label" font="Regular;42" position="641,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">date,day3</convert>
-    </widget> -->
-  <!--     <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/overlay.png" position="563,570" size="360,480" zPosition="2" transparent="1" alphatest="blend" /> -->
-  <!--    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="613,645" size="256,256" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="MSNWeather">weathericon,day3,/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/,gif</convert>
+    </widget>
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="583,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
+      <convert type="MSNWeather">weathericon,day3,/usr/share/enigma2/Multibox/Wettericons/Real/,png</convert>
     </widget>
     <widget render="Label" source="weekday3_temp" font="Regular;51" position="563,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="563,1010" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="563,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">temperature_text,day3</convert>
-    </widget> -->
-  <!--day4-->
-  <!--  <widget source="session.MSNWeather" render="Label" font="Regular;42" position="968,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    </widget>
+    <!--  day4 -->
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="968,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">weekshortday,day4</convert>
     </widget>
     <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1076,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">date,day4</convert>
-    </widget> -->
-  <!--    <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/overlay.png" position="998,570" size="360,480" zPosition="2" transparent="1" alphatest="blend" /> -->
-  <!--   <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1043,645" size="256,256" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="MSNWeather">weathericon,day4,/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/,gif</convert>
+    </widget>
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1018,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
+      <convert type="MSNWeather">weathericon,day4,/usr/share/enigma2/Multibox/Wettericons/Real/,png</convert>
     </widget>
     <widget render="Label" source="weekday4_temp" font="Regular;51" position="998,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="998,1010" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="998,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">temperature_text,day4</convert>
-    </widget> -->
-  <!--day5-->
-  <!-- <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1403,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    </widget>
+    <!--   day5 -->
+    <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1403,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">weekshortday,day5</convert>
     </widget>
     <widget source="session.MSNWeather" render="Label" font="Regular;42" position="1511,564" size="270,68" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">date,day5</convert>
-    </widget> -->
-  <!-- <ePixmap pixmap="MetrixHD/FHD/msn_weather_icons/overlay.png" position="1433,570" size="360,480" zPosition="2" transparent="1" alphatest="blend" /> -->
-  <!--   <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1482,645" size="256,256" zPosition="1" transparent="1" alphatest="blend">
-      <convert type="MSNWeather">weathericon,day5,/usr/lib/enigma2/python/Plugins/Extensions/WeatherPlugin/icons/,gif</convert>
+    </widget>
+    <widget render="MSNWeatherPixmap" source="session.MSNWeather" position="1453,590" size="320,320" zPosition="1" transparent="1" alphatest="blend">
+      <convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/Multibox/Wettericons/Real/,png</convert>
     </widget>
     <widget render="Label" source="weekday5_temp" font="Regular;51" position="1433,908" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center" />
-    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="1433,1010" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
+    <widget source="session.MSNWeather" render="Label" font="Regular;35" noWrap="1" position="1433,983" size="360,60" backgroundColor="background" zPosition="3" transparent="1" halign="center" valign="center">
       <convert type="MSNWeather">temperature_text,day5</convert>
     </widget>
-	<panel name="template_pig_setup" />
-    <panel name="template_fullscreen" />
-    <panel name="template_pixmap_BG" />
-  </screen> -->
+    <panel name="template_pig_setup" />
+    <!--   Analog Clock -->
+    <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="4" foregroundColor="bluetitle" alphatest="blend">
+      <convert type="AMBAnalogClock">secHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AMBWatches" position="1822,12" size="69,69" zPosition="3" foregroundColor="red" alphatest="blend">
+      <convert type="AMBAnalogClock">minHand</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="AMBWatches" position="1832,22" size="50,50" zPosition="2" foregroundColor="red" alphatest="blend">
+      <convert type="AMBAnalogClock">hourHand</convert>
+    </widget>
+    <ePixmap pixmap="Multibox/icons/Clock.png" position="1812,3" zPosition="1" size="90,90" transparent="1" alphatest="on" />
+    <widget source="global.CurrentTime" render="Label" position="1500,20" size="300,50" font="Italic; 40" halign="right" foregroundColor="white" backgroundColor="Multiboxlabel" transparent="1">
+      <convert type="ClockToText">Format:%a, %d.%m.%Y</convert>
+    </widget>
+    <ePixmap pixmap="Multibox/buttons/key_menu.png" position="1193,27" size="103,35" zPosition="10" transparent="1" />
+    <eLabel text="add location" position="1310,27" size="200,40" zPosition="1" valign="center" font="Regular; 32" halign="left" backgroundColor="background" transparent="1" noWrap="1" />
+    <eLabel name="" position="0,76" size="1920,2" backgroundColor="selectedFG" />
+  </screen>
+  <!-- MSNWeatherPlugin *-->
+  
   <!-- MyMetrix Lite -->
   <screen name="MainSettingsView" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
     <widget source="titleText" render="Label" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
@@ -1434,70 +1340,75 @@
   </screen>
   <!-- FullBackup -->
   <!-- Serienrecorder -->
-  <screen name="SerienRecorder3.0" position="0,0" size="1920,1080" title="Serien Recorder">
-    <widget name="headdefault" position="10,145" size="1180,45" font="Italic; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" transparent="1" zPosition="1" />
-    <widget name="title" size="1180,45" font="Italic; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" position="10,100" />
-    <widget name="path" position="10,100" size="1180,90" foregroundColor="white" backgroundColor="background" transparent="1" font="Regular; 36" valign="center" halign="left" zPosition="1" />
-    <widget name="version" position="180,20" size="1300,50" font="Italic; 40" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
-    <widget name="info" font="Regular; 30" position="10,240" size="1180,750" backgroundColor="background" foregroundColor="white" transparent="0" zPosition="1" />
-    <widget name="config" font="Regular; 30" itemHeight="45" position="10,240" size="1180,750" scrollbarMode="showAlways" transparent="0" zPosition="1" />
-    <widget name="menu_list" position="10,240" size="1180,750" scrollbarMode="showAlways" transparent="0" zPosition="1" />
-    <widget name="log" font="Regular; 30" itemHeight="45" position="10,240" size="1180,750" scrollbarMode="showAlways" transparent="0" zPosition="1" />
-    <widget name="list" font="Regular; 30" itemHeight="45" position="10,240" size="1180,750" scrollbarMode="showAlways" transparent="0" zPosition="1" />
-    <widget name="popup_list" font="Regular; 30" itemHeight="45" position="10,240" size="1180,750" scrollbarMode="showAlways" transparent="0" zPosition="2" />
-    <!--   
-  <widget name="popup_bg" position="10,240" size="1180,750" backgroundColor="background" transparent="0" zPosition="5" font="Regular; 28" /> -->
-    <widget name="popup_list2" position="10,240" size="1180,750" font="Regular; 30" itemHeight="45" scrollbarMode="showAlways" transparent="0" zPosition="3" />
+<screen name="SerienRecorder3.0" position="0,0" size="1920,1080" title="Serien Recorder" backgroundColor="transpWhite">
+    <widget name="headline" position="50,135" size="1000,45" font="Regular; 36" halign="left" valign="center" foregroundColor="red" backgroundColor="background" transparent="1" zPosition="1" />
+    <widget name="title" position="180,20" size="1200,50" font="Italic; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="path" position="12,80" size="1160,90" foregroundColor="white" backgroundColor="background" transparent="1" font="Regular; 36" valign="center" halign="left" zPosition="1" />
+    <widget name="version" position="1370,20" size="430,50" font="Italic; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" borderColor="Multiboxlabel" borderWidth="3" transparent="1" zPosition="1" />
+    <widget name="info" font="Regular; 32" position="10,240" size="1180,710" backgroundColor="background" foregroundColor="white" transparent="0" zPosition="1" />
+    <widget name="config" font="Regular; 32" itemHeight="45" position="10,240" size="1180,710" scrollbarMode="showAlways" transparent="0" zPosition="1" />
+    <widget name="menu_list" font="Regular; 32" itemHeight="78" position="10,240" size="1180,710" foregroundColor="yellow" foregroundColorSelected="selectedFG" scrollbarMode="showAlways" transparent="0" zPosition="1" />
+    <widget name="log" font="Regular; 32" itemHeight="45" position="10,240" size="1180,710" scrollbarMode="showAlways" transparent="0" zPosition="1" />
+    <widget name="list" font="Regular; 32" itemHeight="45" position="10,240" size="1180,710" scrollbarMode="showAlways" transparent="0" zPosition="1" />
+    <widget name="popup_list" font="Regular; 32" itemHeight="45" position="10,240" size="1180,710" scrollbarMode="showAlways" transparent="0" zPosition="2" />
+    <widget name="popup_bg" position="10,240" size="1180,710" backgroundColor="background" transparent="1" zPosition="4" />
+    <widget name="popup_list2" position="10,240" size="1180,710" font="Regular; 32" itemHeight="45" scrollbarMode="showAlways" transparent="0" zPosition="3" />
     <widget zPosition="1" name="Web_Channel" position="10,190" size="380,40" font="Regular; 34" halign="center" backgroundColor="background" foregroundColor="selectedFG" />
     <widget zPosition="1" name="STB_Channel" position="410,190" size="380,40" font="Regular; 34" halign="center" backgroundColor="background" foregroundColor="selectedFG" />
     <widget zPosition="1" name="alt_STB_Channel" position="810,190" size="380,40" font="Regular; 34" halign="center" backgroundColor="background" foregroundColor="selectedFG" />
     <widget zPosition="1" name="separator" position="10,236" size="1180,2" backgroundColor="selectedFG" />
-    <widget name="config_information_text" font="Regular;30" position="1223,535" size="670,480" foregroundColor="white" backgroundColor="background" zPosition="1" />
-    <!--   <widget name="config_information" position="1223,535" size="670,480"  backgroundColor="background" foregroundColor="white" zPosition="1" /> -->
-    <widget name="cover" pixmap="mmp/no_coverArt2.png" position="1320,535" size="480,480" alphatest="blend" />
-    <ePixmap pixmap="buttons/key_red.png" position="18,1022" size="35,35" />
-    <ePixmap pixmap="buttons/key_green.png" position="440,1022" size="35,35" />
-    <ePixmap pixmap="buttons/key_yellow.png" position="860,1022" size="35,35" />
-    <ePixmap pixmap="buttons/key_blue.png" position="1280,1022" size="35,35" />
-    <widget name="text_red" position="60,1022" size="370,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
-    <widget name="text_green" position="480,1022" size="370,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
-    <widget name="text_yellow" position="900,1022" size="370,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
-    <widget name="text_blue" position="1320,1022" size="370,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
-    <widget name="bt_exit" position="1230,670" size="35,35" pixmap="Multibox/skin_default/buttons/button_exit.png" />
-    <widget name="bt_0" position="1230,670" size="35,35" pixmap="Multibox/skin_default/buttons/key_0.png" />
-    <widget name="bt_5" position="1230,670" size="35,35" pixmap="Multibox/skin_default/buttons/key_5.png" />
-    <widget name="bt_1" position="1230,720" size="35,35" pixmap="Multibox/skin_default/buttons/key_1.png" />
-    <widget name="bt_6" position="1230,720" size="35,35" pixmap="Multibox/skin_default/buttons/key_6.png" />
-    <widget name="bt_text" position="1230,720" size="35,35" pixmap="Multibox/skin_default/buttons/button_text.png" />
-    <widget name="bt_epg" position="1230,770" size="35,35" pixmap="Multibox/skin_default/buttons/button_info.png" />
-    <widget name="bt_7" position="1230,770" size="35,35" pixmap="Multibox/skin_default/buttons/key_7.png" />
-    <widget name="bt_2" position="1230,770" size="35,35" pixmap="Multibox/skin_default/buttons/key_2.png" />
-    <widget name="bt_info" position="1230,820" size="35,35" pixmap="Multibox/skin_default/buttons/button_help.png" />
-    <widget name="bt_8" position="1230,820" size="35,35" pixmap="Multibox/skin_default/buttons/key_8.png" />
-    <widget name="bt_3" position="1230,820" size="35,35" pixmap="Multibox/skin_default/buttons/key_3.png" />
-    <widget name="bt_menu" position="1230,870" size="35,35" pixmap="Multibox/skin_default/buttons/button_menu.png" />
-    <widget name="bt_9" position="1230,870" size="35,35" pixmap="Multibox/skin_default/buttons/key_9.png" />
-    <widget name="bt_4" position="1230,870" size="35,35" pixmap="Multibox/skin_default/buttons/key_4.png" />
-    <widget name="bt_ok" position="1230,920" size="35,35" pixmap="Multibox/skin_default/buttons/button_ok.png" />
-    <widget name="text_5" position="1275,670" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_0" position="1275,670" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_exit" position="1275,670" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_1" position="1275,720" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_6" position="1275,720" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_text" position="1275,720" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_2" position="1275,770" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_7" position="1275,770" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_epg" position="1275,770" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_3" position="1275,820" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_8" position="1275,820" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_info" position="1275,820" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_9" position="1275,870" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_4" position="1275,870" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_menu" position="1275,870" size="560,35" font="Regular;30" transparent="1" />
-    <widget name="text_ok" position="1275,920" size="560,35" font="Regular;30" />
-    <panel name="template_fullscreen" />
+    <widget name="config_information_text" font="Regular;30" position="1223,535" size="670,415" foregroundColor="white" backgroundColor="background" zPosition="1" />
+    <widget name="config_information" font="Regular;30" position="1223,535" size="670,415" backgroundColor="background" foregroundColor="white" zPosition="1" /> 
+    <widget name="cover" pixmap="Multibox/mmp/no_coverArt2.png" position="1320,535" size="480,410" alphatest="blend" />
+    <ePixmap pixmap="Multibox/buttons/key_red.png" position="20,1022" size="35,35" />
+    <ePixmap pixmap="Multibox/buttons/key_green.png" position="400,1022" size="35,35" />
+    <ePixmap pixmap="Multibox/buttons/key_yellow.png" position="780,1022" size="35,35" />
+    <ePixmap pixmap="Multibox/buttons/key_blue.png" position="1160,1022" size="35,35" />
+    <widget name="text_red" position="60,1022" size="330,35" valign="center" font="Regular; 24" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="text_green" position="440,1022" size="330,35" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="text_yellow" position="820,1022" size="330,35" valign="center" font="Regular; 27" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="text_blue" position="1200,1022" size="330,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
+    <widget name="bt_exit" position="20,970" size="35,35" pixmap="Multibox/skin_default/buttons/button_exit.png" />
+    <widget name="bt_0" position="20,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_0.png" />
+    <widget name="bt_5" position="20,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_5.png" />
+    <widget name="bt_1" position="400,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_1.png" />
+    <widget name="bt_6" position="400,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_6.png" />
+    <widget name="bt_text" position="400,970" size="35,35" pixmap="Multibox/skin_default/buttons/button_text.png" />
+    <widget name="bt_epg" position="780,970" size="35,35" pixmap="Multibox/skin_default/buttons/button_epg.png" />
+    <widget name="bt_7" position="780,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_7.png" />
+    <widget name="bt_2" position="780,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_2.png" />
+    <widget name="bt_info" position="1160,970" size="35,35" pixmap="Multibox/skin_default/buttons/button_help.png" />
+    <widget name="bt_8" position="1160,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_8.png" />
+    <widget name="bt_3" position="1160,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_3.png" />
+    <widget name="bt_menu" position="1540,970" size="35,35" pixmap="Multibox/skin_default/buttons/button_menu.png" />
+    <widget name="bt_9" position="1540,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_9.png" />
+    <widget name="bt_4" position="1540,970" size="35,35" pixmap="Multibox/skin_default/buttons/key_4.png" />
+    <widget name="bt_ok" position="1540,1022" size="35,35" pixmap="Multibox/skin_default/buttons/button_ok.png" />
+    <widget name="text_5" position="60,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_0" position="60,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_exit" position="60,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_1" position="440,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_6" position="440,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_text" position="440,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_2" position="820,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_7" position="820,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_epg" position="820,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_3" position="1200,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_8" position="1200,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_info" position="1200,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_9" position="1580,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_4" position="1580,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_menu" position="1580,970" size="330,35" font="Regular;30" transparent="1" />
+    <widget name="text_ok" position="1580,1022" size="330,35" valign="center" font="Regular; 30" halign="left" backgroundColor="background" transparent="1" />
+    <eLabel name="vertikaldefault" position="0,950" size="1920,2" foregroundColor="selectedFG" backgroundColor="selectedFG" zPosition="5" />
+	<eLabel name="vertikaldefault" position="10,232" size="1180,2" foregroundColor="selectedFG" backgroundColor="selectedFG" zPosition="1" />
+    <!--   <panel name="template_fullscreen" /> -->
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
+    <panel name="template_analogclock_widget" />
+    <!--   <panel name="template_vertikaldefault" /> -->
+    <panel name="template_pixmap_Clock" />
+    <panel name="template_pixmap_Userlogo" />
   </screen>
   <!-- Serienrecorder -->
   <!-- RemoteChannelStreamConverter -->
@@ -4558,6 +4469,7 @@
     "fonts": [gFont("Regular", 30),gFont("Regular", 20)],
      "itemHeight": 75 }
 	</convert>
+	 </widget>
     <widget name="whatUPDATED" position="12,210" size="1180,780" font="Regular; 30" transparent="1"/>
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
@@ -4572,6 +4484,7 @@
     <panel name="template_ok_exit" />
     <panel name="template_pig_setup" />
   </screen>
+  
 <!-- j00zek MSNWeather Config-->	
 	<screen name="MSNWeatherEntriesListConfigScreen" position="0,0" size="1920,1080" title="Location" flags="wfNoBorder" backgroundColor="background">
     <widget render="Label" source="city" font="Regular;34" position="30,100" size="630,75" backgroundColor="background" halign="left" />
@@ -5016,16 +4929,16 @@
 </screen>
 
 <!--NetSpeedTestScreen-->
-    <screen name="NetSpeedTestScreen" position="0,0" size="1920,1080" title="Net Speed Test" flags="wfNoBorder" backgroundColor="background">
-    <ePixmap position="20,150"  size="1250,770" pixmap="Multibox/DEV/spedtest.png" zPosition="1" transparent="1" alphatest="blend" />
-	<widget name="ping" position="276,193" zPosition="4" size="226,36" font="Regular;27" backgroundColor="background" foregroundColor="#0000ff00" transparent="1" halign="center" valign="center" />
-	<widget name="download" position="562,193" zPosition="4" size="226,36" font="Regular;27" backgroundColor="background" foregroundColor="#00ff0000" transparent="1" halign="center" valign="center" />
-    <widget name="upload" position="850,193" zPosition="4" size="226,36" font="Regular;27" backgroundColor="background" foregroundColor="#00ffff00" transparent="1" halign="center" valign="center" />
+<screen name="NetSpeedTestScreen" position="0,0" size="1920,1080" title="Net Speed Test" flags="wfNoBorder" backgroundColor="background">
+    <ePixmap position="20,150" size="1250,780" pixmap="Multibox/DEV/speedtest.png" zPosition="1" transparent="1" alphatest="blend" />
+	<widget name="ping" position="286,194" zPosition="4" size="216,36" font="Regular;27" backgroundColor="background" foregroundColor="cyan" transparent="1" halign="center" valign="center" />
+	<widget name="download" position="568,194" zPosition="4" size="216,36" font="Regular;27" backgroundColor="background" foregroundColor="green" transparent="1" halign="center" valign="center" />
+    <widget name="upload" position="850,194" zPosition="4" size="216,36" font="Regular;27" backgroundColor="background" foregroundColor="lila" transparent="1" halign="center" valign="center" />
 	<widget name="data" position="235,250" zPosition="4" size="826,345" font="Regular;30" backgroundColor="background" transparent="1" halign="center" valign="center" />
-    <widget name="host" position="952,834" zPosition="4" size="272,74" font="Regular;23" backgroundColor="background" transparent="1" halign="center" valign="center" />
-    <widget name="ip" position="64,834" zPosition="4" size="272,74" font="Regular;23" backgroundColor="background" transparent="1" halign="center" valign="center" />
-    <ePixmap pixmap="buttons/key_green.png" position="390,1022" size="35,35" alphatest="blend" transparent="1" />
-	<eLabel text="Start test" position="437,1005" size="270,70" zPosition="1" font="Regular;27" halign="left" valign="center" backgroundColor="background" /> 
+    <widget name="host" position="922,801" zPosition="4" size="222,84" font="Regular; 20" backgroundColor="background" transparent="1" halign="center" valign="center" />
+    <widget name="ip" position="152,801" zPosition="4" size="222,84" font="Regular; 20" backgroundColor="background" transparent="1" halign="center" valign="center" />
+    <ePixmap pixmap="buttons/key_green.png" position="390,1122" size="35,35" alphatest="blend" transparent="1" />
+	<eLabel text="Start test" position="437,1105" size="270,70" zPosition="1" font="Regular;27" halign="left" valign="center" backgroundColor="background" /> 
 	<panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_exit" />
@@ -5086,7 +4999,7 @@
 </screen>
 
 <!--FlashOnline-->
-    <screen name="FlashOnline" position="0,0" size="1920,1080" title="Flash Online" flags="wfNoBorder" backgroundColor="background">
+<!--     <screen name="FlashOnline" position="0,0" size="1920,1080" title="Flash Online" flags="wfNoBorder" backgroundColor="background">
 	<widget name="list" position="12,100" size="1180,795"  backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="selectedFG" itemHeight="45" font="Regular; 30" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 	<eLabel text="OPEN SOURCE" position="1310,585" size="525,60" font="Regular; 50" halign="center" zPosition="1" />
 	<ePixmap position="1450,700"  size="256,256" pixmap="Multibox/DEV/atv_icon.png" zPosition="1" transparent="1" alphatest="blend" />
@@ -5106,7 +5019,7 @@
 	<panel name="template_pixmap_BG" />
     <panel name="template_exit" />
     <panel name="template_pig_setup" />
-</screen>
+</screen> -->
   </skin>
 
 
