@@ -283,47 +283,60 @@
 	<color name="ScrollbarBorder" color="scrollbarborder" />
   </windowstyle>
   <!-- Menu FHD -->
-<screen name="Menu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="background">
-  <widget source="menu" render="Listbox" position="10,98" size="760,780" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="default" scrollbarMode="showOnDemand" scrollbarForegroundColor="default" scrollbarWidth="8" enableWrapAround="1" zPosition="5" transparent="1">
-    <convert type="TemplatedMultiContent">
+	<screen name="Menu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="background">
+			<widget source="menu" render="Listbox" position="10,98" size="870,820" backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="default" scrollbarMode="showOnDemand" scrollbarForegroundColor="default" scrollbarWidth="12" enableWrapAround="1" zPosition="5" transparent="1">
+				<convert type="TemplatedMultiContent">
 					{"templates":
-						{"default": (80,[
-							MultiContentEntryText(pos = (10, 3), size = (750, 80), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
+						{"default": (90,[
+							MultiContentEntryText(pos = (20, 8), size = (850, 75), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
 							]),
-						"text": (80,[
-							MultiContentEntryText(pos = (10, 3), size = (750, 80), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3)
+						"text": (90,[
+							MultiContentEntryText(pos = (20, 8), size = (850, 75), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3)
 							]),
-						"number": (80,[
-							MultiContentEntryText(pos = (10, 3), size = (45, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
-							MultiContentEntryText(pos = (65, 3), size = (680, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+						"number": (90,[
+							MultiContentEntryText(pos = (10, 8), size = (48, 75), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (68, 8), size = (798, 75), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
 							]),
-						"image": (80,[
-							MultiContentEntryPixmapAlphaBlend(pos = (5, 15), size = (50, 50), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
-							MultiContentEntryText(pos = (75, 3), size = (680, 80), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+						"image": (90,[
+							MultiContentEntryPixmapAlphaBlend(pos = (10, 6), size = (75, 75), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (98, 8), size = (768, 75), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
 							]),
-						"both": (80,[
-							MultiContentEntryPixmapAlphaBlend(pos = (5, 15), size = (50, 50), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
-							MultiContentEntryText(pos = (70, 4), size = (45, 80), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
-							MultiContentEntryText(pos = (120, 4), size = (630, 80), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+						"both": (90,[
+							MultiContentEntryPixmapAlphaBlend(pos = (10, 6), size = (75, 75), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (98, 8), size = (45, 75), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (150, 8), size = (720, 75), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
 							])
 						},
-					"fonts": [gFont("Regular", 36),gFont("Regular", 34),gFont("Regular", 32)],
-					"itemHeight": 80,
-					"scrollbarMode": "showNever"
+					"fonts": [gFont("Regular", 45),gFont("Regular", 44),gFont("Regular", 42)],
+					"itemHeight": 90,
+					"scrollbarMode": "showOnDemand"
 					}
 				</convert>
 			</widget>
-  <widget name="menuimage" position="-1,-1" size="1,1" zPosition="6" alphatest="blend" />
-  <widget source="description" render="Label" position="10,878" size="573,130" conditional="description" font="Regular;30" zPosition="2" valign="center" halign="center" backgroundColor="background" foregroundColor="yellow">
-    <convert type="MetrixMenuDescription" />
-  </widget>
-  <eLabel text="No description available" position="10,878" size="573,130" conditional="description" font="Regular;30" zPosition="1" valign="center" halign="center" backgroundColor="background" foregroundColor="yellow" />
-  <panel name="TemplateAllColorButtons_Automatic" />
-  <panel name="template_fullscreen_title" />
-  <panel name="template_pig_large" />
-  <panel name="template_pixmap_BG" />
-</screen>
-
+			<!-- <widget source="menu" render="FixedLabel" text="►" position="849,921" size="30,30" font="Regular;24" foregroundColor="white" backgroundColor="background" halign="right" valign="bottom" transparent="1" zPosition="10">
+				<convert type="MetrixHDMenuEntryCompare" />
+				<convert type="ValueRange">0,9</convert>
+				<convert type="ConditionalShowHide">Invert</convert>
+			</widget> -->
+			<widget source="description" render="Label" position="30,935" size="870,74" conditional="description" font="Regular;30" zPosition="2" valign="center" halign="lrft" backgroundColor="background" foregroundColor="yellow">
+				<convert type="MetrixMenuDescription" />
+			</widget>
+			<eLabel text="No description available" position="30,935" size="870,74" conditional="description" font="Regular;30" zPosition="1" valign="center" halign="left" backgroundColor="background" foregroundColor="yellow" />
+			<!-- <widget name="menuimage" position="458,120" size="4,4" alphatest="blend" /> -->
+			<eLabel name="" foregroundColor="selectedFG" backgroundColor="selectedFG" position="898,212" size="1004,566" zPosition="-15" />
+			<eLabel backgroundColor="background" position="900,214" size="1000,562" zPosition="-10" />
+			<widget position="900,214" size="1000,562" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+			<widget position="900,150" size="1000,50" source="session.CurrentService" render="Label" font="Regular; 40" foregroundColor="selectedFG" backgroundColor="background" transparent="1" valign="center" halign="left" noWrap="1" zPosition="5">
+			<convert type="ServiceName">Name</convert>
+			</widget>
+			<widget source="session.Event_Now" render="Label" position="900,795" size="1000,50" font="Regular; 40" halign="left" valign="center" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1">
+			<convert type="EventName">Name</convert>
+			</widget>
+			<panel name="TemplateAllColorButtons_Automatic" />
+			<panel name="template_fullscreen_title" />
+			<panel name="template_pixmap_BG" />
+			<!-- <panel name="template_pig_large" /> -->
+	</screen>
 	<menus>
 		<menu key="default" image="menu_icons/default.png" />
 		<menu key="animation_setup" image="menu_icons/usage_setup.png" />
@@ -3788,22 +3801,24 @@ self['config'].l.setSeperation(int(300*f))
 </screen>
   <screen name="HistoryZapSelector" position="0,0" size="1920,1080">
     <widget source="menu" render="Listbox" position="0,100" size="1210,870"  backgroundColor="background" foregroundColor="white" backgroundColorSelected="defaultselBG" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" transparent="1" zPosition="0">
-      <convert type="TemplatedMultiContent">{"template": [
-						MultiContentEntryText(pos = (120, 5), size = (650, 50), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2, ),
-                        MultiContentEntryText(pos = (120, 65), size = (650, 40), font = 3, flags = RT_HALIGN_LEFT, text = 5, ),
-                        MultiContentEntryText(pos = (100, 12), size = (20, 30), font = 2, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1),
-						MultiContentEntryText(pos = (480, 5), size = (970, 50), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3, ),
-						MultiContentEntryText(pos = (480, 65), size = (970, 40), font = 3, flags = RT_HALIGN_LEFT, text = 4, ),
-						MultiContentEntryPixmapAlphaBlend(pos=(2, 30), size=(100, 60), png=6, flags = BT_SCALE)
+			<convert type="TemplatedMultiContent">
+				{"template": [
+						MultiContentEntryText(pos = (192, 33), size = (15, 33), font = 1, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 1), # Current Service
+						MultiContentEntryText(pos = (225, 3), size = (555, 46), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_TOP, text = 2), # Servicename
+						MultiContentEntryText(pos = (225, 36), size = (555, 38), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text = 3), # Eventname
+						MultiContentEntryText(pos = (225, 69), size = (555, 36), font = 3, flags = RT_HALIGN_LEFT, text = 5), # Eventtime
+						MultiContentEntryPixmapAlphaBlend(pos=(45, 14), size=(128, 77), png=6, flags = BT_SCALE) # picon
 					],
-				 "fonts": [gFont("Regular", 36), gFont("Regular", 36), gFont("Regular", 32), gFont("Regular", 32)],
-				 "itemHeight":110
-				}</convert>
-    </widget>
+				 "fonts": [gFont("Regular",36), gFont("Regular",34), gFont("Regular",32), gFont("Regular",30)],
+				 "itemHeight": 135
+				}
+			</convert>
+		</widget>
     <panel name="template_fullscreen_title" />
     <panel name="template_pixmap_BG" />
     <panel name="template_pig_setup" />
   </screen>
+  
   <screen name="NumericalTextInputHelpDialog" position="1280,50" size="635,186" backgroundColor="transparent" flags="wfNoBorder" zPosition="8">
     <eLabel name="b" position="1,0" size="633,185" backgroundColor="white" zPosition="-10" />
     <eLabel name="a" position="4,3" size="630,181" backgroundColor="background" zPosition="-9" />
