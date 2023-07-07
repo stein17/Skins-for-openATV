@@ -140,7 +140,7 @@
   </parameters>
   <windowstyle id="0" type="skinned">
     <title offset="20,10" font="Regular;20" />
-    <configList entryFont="Regular;20" valueFont="Regular;18" />
+    <configList entryFont="Regular;20" valueFont="sRegular;18" />
     <color name="Background" color="background" />
     <color name="LabelForeground" color="foreground" />
     <color name="ListboxBackground" color="background" />
@@ -213,7 +213,7 @@
   </screen>
   <screen name="PlayerTemplate">
     <panel name="PlayerTemplateBasic" />
-    <widget source="session.RecordState" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" position="1160,53" size="20,20" zPosition="3" alphatest="on">
+    <widget source="session.RecordState" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" position="1160,53" size="20,20" zPosition="3" alphatest="on">
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="global.CurrentTime" render="Label" borderWidth="2" position="1052,3" size="100,25" backgroundColor="transparent" noWrap="1" zPosition="1" foregroundColor="foreground" font="Regular;22" valign="center" halign="right">
@@ -515,7 +515,7 @@
     <widget source="global.CurrentTime" render="Label" borderWidth="2" position="89,583" size="37,29" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;20" valign="bottom">
       <convert type="ClockToText">Format::%S</convert>
     </widget>
-    <widget source="session.RecordState" render="Pixmap" position="148,663" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" zPosition="2" alphatest="blend">
+    <widget source="session.RecordState" render="Pixmap" position="148,663" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="2" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="455,550" size="640,30" font="Regular;16" valign="center" halign="right" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" zPosition="2">
@@ -609,10 +609,139 @@
       <convert type="ServiceOrbitalPosition" />
     </widget>
   </screen>
+ <!--  OA_Weather_Infobar-->
+    <screen name="template_OA_weather_default">
+    <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
+ <screen name="template_OA_weather">
+  <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/infobar/Background_Weather2.png" position="0,0" zPosition="-1" size="1280,720" alphatest="blend" />
+  
+	<!--   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="25,16" size="144,100" font="Regular; 54" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+		<convert type="OAWeather">temperature_current</convert>
+	</widget> -->
+  
+  <widget source="global.CurrentTime" render="Label" position="25,12" size="140,62" font="Regular; 40" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="center" transparent="1" zPosition="5" valign="center">
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="23,75" size="140,30" font="Regular; 20" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="center" transparent="1" zPosition="5">
+    <convert type="ClockToText">Format:%a.%d.%b</convert>
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="390,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="2">
+    <convert type="OAWeather">weathericon,current,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="440,86" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+    <convert type="OAWeather">observationtime</convert>
+  </widget>
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="195,17" size="145,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+    <convert type="OAWeather">city</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="195,67" size="142,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="OAWeather">humidityfull</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="195,42" size="142,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+    <convert type="OAWeather">winddisplay</convert>
+  </widget>
+  <eLabel font="Regular; 14" halign="center" valign="center" position="353,15" size="127,20" text="Aktuelles Wetter" transparent="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="4" />
+  <widget alphatest="blend" render="OAWeatherPixmap" position="175,116" size="124,18" source="session.OAWeather" transparent="1">
+    <convert type="OAWeather">logo</convert>
+  </widget>
+  <widget source="session.OAWeather" render="Label" position="195,92" size="145,18" font="Regular; 14" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" halign="left" valign="center" transparent="1">
+    <convert type="OAWeather">precipitationfull,current</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="white" render="Label" position="507,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+    <convert type="OAWeather">weekday,current</convert>                                                                    
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="370,86" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="OAWeather">temperature_current</convert>
+  </widget>
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="353,103" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
+    <convert type="OAWeather">temperature_text,current</convert>                                                                                          
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="543,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
+    <convert type="OAWeather">weathericon,day1,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="507,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
+    <convert type="OAWeather">temperature_text,day1</convert>                                                                                                     
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="524,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="OAWeather">temperature_high,day1</convert>                                                                                                                      
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="595,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="OAWeather">temperature_low,day1</convert>                                                                                                         
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="660,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+    <convert type="OAWeather">weekday,day2</convert>
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="697,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
+    <convert type="OAWeather">weathericon,day2,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="678,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_high,day2</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="749,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+    <convert type="OAWeather">temperature_low,day2</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="660,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+    <convert type="OAWeather">temperature_text,day2</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="813,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+    <convert type="OAWeather">weekday,day3</convert>
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="850,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
+    <convert type="OAWeather">weathericon,day3,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="831,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_high,day3</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="901,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_low,day3</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="813,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+    <convert type="OAWeather">temperature_text,day3</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="967,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+    <convert type="OAWeather">weekday,day4</convert>
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="1003,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
+    <convert type="OAWeather">weathericon,day4,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="985,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_high,day4</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1055,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_low,day4</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="967,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+    <convert type="OAWeather">temperature_text,day4</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1120,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+    <convert type="OAWeather">weekday,day5</convert>
+  </widget>
+  <widget alphatest="blend" render="OAWeatherPixmap" position="1157,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
+    <convert type="OAWeather">weathericon,day5,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1138,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_high,day5</convert>
+  </widget>
+  <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1208,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+    <convert type="OAWeather">temperature_low,day5</convert>
+  </widget>
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="1120,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+    <convert type="OAWeather">temperature_text,day5</convert>
+  </widget>
+  <widget noWrap="1" font="Regular; 14" position="53,117" size="40,16" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+    <convert type="OAWeather">sunrise,_current</convert>
+  </widget>
+  <widget noWrap="1" font="Regular; 14" position="120,117" size="40,16" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+     <convert type="OAWeather">sunset,_current</convert>
+  </widget>
+</screen>
+  
   <!-- InfoBars -->
   <screen name="InfoBar" title="InfoBar" position="fill" backgroundColor="transparent" flags="wfNoBorder">
     <ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd.png" position="0,510" size="1280,220" zPosition="-1" />
     <panel name="InfoBarTemplate" />
+	<panel name="template_OA_weather_default" />
   </screen>
   <!--  Second InfoBar -->
   <screen name="SecondInfoBar" title="Second InfoBar" position="fill" flags="wfNoBorder" backgroundColor="transparent">
@@ -707,7 +836,7 @@
   </screen>
   <screen name="PlayerTemplate">
     <panel name="PlayerTemplateBasic" />
-    <widget source="session.RecordState" render="Pixmap" position="146,628" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" alphatest="blend">
+    <widget source="session.RecordState" render="Pixmap" position="146,628" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="global.CurrentTime" render="Label" position="1155,24" size="120,35" noWrap="1" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 32" valign="center" halign="center">
@@ -754,7 +883,7 @@
       <convert type="MetrixHDServiceTime">EndTime</convert>
     </widget>
     <widget name="Cover" position="1173,572" size="100,140" alphatest="blend" zPosition="2" />
-    <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" zPosition="5" alphatest="blend">
+    <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="5" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_16-9.png" position="1100,685" size="48,28" zPosition="2" alphatest="blend">
@@ -1566,7 +1695,7 @@
     <widget source="global.CurrentTime" render="Label" borderWidth="2" position="89,75" size="37,29" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;20" valign="bottom">
       <convert type="ClockToText">Format::%S</convert>
     </widget>
-    <widget source="session.RecordState" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" position="145,80" size="20,20" zPosition="3" alphatest="on">
+    <widget source="session.RecordState" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" position="145,80" size="20,20" zPosition="3" alphatest="on">
       <convert type="ConditionalShowHide" />
     </widget>
     <widget source="session.Event_Now" render="Label" position="195,120" size="70,30" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" haligh="left">
@@ -1776,6 +1905,15 @@
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_exit" />
   </screen>
+  <!--   Processing -->
+  <screen name="Processing" title="Processing" position="530,center" size="600,220" backgroundColor="background_PliFullNight" zPosition="+99" flags="wfNoBorder">
+	<widget source="Title" render="Label" position="10,5" foregroundColor="foreground" size="518,50" noWrap="1" valign="bottom" font="Regular;34" backgroundColor="background" transparent="1" />
+	<widget name="progress" position="10,80" size="580,25" transparent="1" backgroundColor="SliderForeground" foregroundColor="darkgrey" borderWidth="1" borderColor="blue" />
+	<widget name="description" position="10,120" size="580,25" font="Regular;20" halign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<eLabel name="" position="0, 0" size="600, 60" backgroundColor="SliderForeground" zPosition="-1" />
+	<eLabel name="" position="0,60" size="600,1" backgroundColor="grey" />
+  </screen>
+ <!--  PluginActionLog -->
   <screen name="PluginActionLog" position="0,0" size="1280,720" title="Plugin Action Log" flags="wfNoBorder" backgroundColor="background_Pig_template">
     <widget name="log" position="70,100" size="1140,525" font="Regular;20" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" conditional="log" />
     <panel name="TemplateAllColorButtons_Automatic" />
@@ -1791,6 +1929,78 @@
     </widget>
     <panel name="Template_Title_Date_Pig" />
     <panel name="template_exit" />
+  </screen>
+<!--   PluginManager -->
+    <screen name="PluginManager" title="Plugin manager" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="TemplatedMultiContent">{"templates":
+				{"default": (60,[
+						MultiContentEntryPixmapAlphaBlend(pos = (18, 6), size = (48, 48), png = 5, flags = BT_SCALE), # index 5 is the status pixmap
+						MultiContentEntryText(pos = (90, 5), size = (565, 36), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (90, 30), size = (555, 25), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
+					]),
+				"category": (60,[
+						MultiContentEntryText(pos = (15, 5), size = (565, 36), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (15, 30), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the description
+					])
+				},
+				"fonts": [gFont("Regular",22),gFont("Regular",16)],
+				"itemHeight": 60
+			}</convert>
+    </widget>
+    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" halign="center" backgroundColor="blue" valign="center" transparent="1" />
+    <panel name="Template_Title_Date_Pig" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_ok_exit" />
+  </screen>
+<!--   PluginManagerInfo -->
+  <screen name="PluginManagerInfo" title="Plugin manager activity" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <eLabel text="Plugin manager activity information" position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
+    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="TemplatedMultiContent">{"template": [
+						MultiContentEntryPixmapAlphaBlend(pos = (18, 6), size = (48, 48), png = 2, flags = BT_SCALE), # index 2 is the status pixmap
+						MultiContentEntryText(pos = (90, 5), size = (565, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (90, 30), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
+					],
+				"fonts": [gFont("Regular",22),gFont("Regular",16)],
+				"itemHeight": 60
+				}</convert>
+    </widget>
+    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" halign="center" valign="center" />
+    <panel name="Template_Date_Pig" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_ok_exit" />
+  </screen>
+<!--   PluginManagerHelp -->
+  <screen name="PluginManagerHelp" title="Plugin manager help" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <eLabel text="Plugin manager help" position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
+    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="TemplatedMultiContent">{"template": [
+						MultiContentEntryText(pos = (90, 5), size = (565, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
+						MultiContentEntryText(pos = (90, 32), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
+						MultiContentEntryPixmapAlphaBlend(pos = (15, 6), size = (48, 48), png = 2, flags = BT_SCALE), # index 2 is the status pixmap
+					],
+				"fonts": [gFont("Regular",22),gFont("Regular",16)],
+				"itemHeight": 60
+				}</convert>
+    </widget>
+    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" halign="center" valign="center" />
+    <panel name="Template_Date_Pig" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_ok_exit" />
+  </screen>
+<!--   PluginDetails -->
+  <screen name="PluginDetails" title="Plugin details" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <eLabel text="Plugin details" position="525,30" foregroundColor="blue" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
+    <widget name="statuspic" position="530,120" size="48,48" alphatest="blend" />
+    <widget source="author" render="Label" position="590,125" size="540,40" font="Regular;27" backgroundColor="background" transparent="1" />
+    <eLabel position="530,180" size="700,2" backgroundColor="foreground" />
+    <widget name="screenshot" position="530,210" size="320,230" zPosition="10" alphatest="blend" />
+    <widget name="detailtext" position="860,210" size="370,420" font="Regular;22" backgroundColor="background" transparent="1" />
+    <panel name="Template_Title_Date_Pig" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_ok_exit" />
+    <widget name="divpic" position="0,0" size="0,0" />
   </screen>
   <!-- Softwaremanager -->
   <screen name="SoftwareManagerSetup" title="SoftwareManager setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
@@ -1851,74 +2061,6 @@
     <panel name="Template_Date_Pig" />
     <panel name="TemplateAllColorButtons_Automatic" />
     <panel name="template_ok_exit" />
-  </screen>
-  <screen name="PluginManager" title="Plugin manager" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
-    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
-      <convert type="TemplatedMultiContent">{"templates":
-				{"default": (60,[
-						MultiContentEntryPixmapAlphaBlend(pos = (18, 6), size = (48, 48), png = 5, flags = BT_SCALE), # index 5 is the status pixmap
-						MultiContentEntryText(pos = (90, 5), size = (565, 36), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (90, 30), size = (555, 25), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is the description
-					]),
-				"category": (60,[
-						MultiContentEntryText(pos = (15, 5), size = (565, 36), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (15, 30), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the description
-					])
-				},
-				"fonts": [gFont("Regular",22),gFont("Regular",16)],
-				"itemHeight": 60
-			}</convert>
-    </widget>
-    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" halign="center" backgroundColor="blue" valign="center" transparent="1" />
-    <panel name="Template_Title_Date_Pig" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-  </screen>
-  <screen name="PluginManagerInfo" title="Plugin manager activity" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
-    <eLabel text="Plugin manager activity information" position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
-    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
-      <convert type="TemplatedMultiContent">{"template": [
-						MultiContentEntryPixmapAlphaBlend(pos = (18, 6), size = (48, 48), png = 2, flags = BT_SCALE), # index 2 is the status pixmap
-						MultiContentEntryText(pos = (90, 5), size = (565, 26), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (90, 30), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-					],
-				"fonts": [gFont("Regular",22),gFont("Regular",16)],
-				"itemHeight": 60
-				}</convert>
-    </widget>
-    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" halign="center" valign="center" />
-    <panel name="Template_Date_Pig" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-  </screen>
-  <screen name="PluginManagerHelp" title="Plugin manager help" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
-    <eLabel text="Plugin manager help" position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
-    <widget source="list" render="Listbox" position="530,100" size="700,480" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
-      <convert type="TemplatedMultiContent">{"template": [
-						MultiContentEntryText(pos = (90, 5), size = (565, 28), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
-						MultiContentEntryText(pos = (90, 32), size = (565, 25), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
-						MultiContentEntryPixmapAlphaBlend(pos = (15, 6), size = (48, 48), png = 2, flags = BT_SCALE), # index 2 is the status pixmap
-					],
-				"fonts": [gFont("Regular",22),gFont("Regular",16)],
-				"itemHeight": 60
-				}</convert>
-    </widget>
-    <widget source="status" render="Label" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" halign="center" valign="center" />
-    <panel name="Template_Date_Pig" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-  </screen>
-  <screen name="PluginDetails" title="Plugin details" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
-    <eLabel text="Plugin details" position="525,30" foregroundColor="blue" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
-    <widget name="statuspic" position="530,120" size="48,48" alphatest="blend" />
-    <widget source="author" render="Label" position="590,125" size="540,40" font="Regular;27" backgroundColor="background" transparent="1" />
-    <eLabel position="530,180" size="700,2" backgroundColor="foreground" />
-    <widget name="screenshot" position="530,210" size="320,230" zPosition="10" alphatest="blend" />
-    <widget name="detailtext" position="860,210" size="370,420" font="Regular;22" backgroundColor="background" transparent="1" />
-    <panel name="Template_Title_Date_Pig" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-    <widget name="divpic" position="0,0" size="0,0" />
   </screen>
   <!-- Restore screen -->
   <screen name="RestoreScreen" title="Restore is running" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
@@ -2505,13 +2647,6 @@
     <panel name="Template_Title_Date_Pig" />
     <widget name="text" position="25,110" size="1230,500" font="Regular;24" />
     <eLabel text="'Exit' = Leave message" backgroundColor="secondBG" font="Regular;22" position="105,684" size="220,26" transparent="1" zPosition="1" />
-  </screen>
-  <screen name="Processing" title="Processing" position="530,center" size="600,220" backgroundColor="background_PliFullNight" zPosition="+99" flags="wfNoBorder">
-	<widget source="Title" render="Label" position="10,5" foregroundColor="foreground" size="518,50" noWrap="1" valign="bottom" font="Regular;34" backgroundColor="background" transparent="1" />
-	<widget name="progress" position="10,80" size="580,25" transparent="1" backgroundColor="SliderForeground" foregroundColor="darkgrey" borderWidth="1" borderColor="blue" />
-	<widget name="description" position="10,120" size="580,25" font="Regular;20" halign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
-	<eLabel name="" position="0, 0" size="600, 60" backgroundColor="SliderForeground" zPosition="-1" />
-	<eLabel name="" position="0,60" size="600,1" backgroundColor="grey" />
   </screen>
   <!-- MessageBox -->
   <screen name="MessageBox-template">
@@ -4565,10 +4700,10 @@ if len(listitems.list) &gt; 2:
   </screen>
   <screen name="PLiHDFullNightMod_Config" title="PLiHDFullNightMod Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
     <eLabel text="/ Speichern" position="480,688" size="160,26" font="Regular; 20" halign="center" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" valign="center" />
-    <!-- <eLabel text="Gelbe Taste Drücken, um die Skinparts auszuwählen" position="581,639" size="645,30" font="Regular; 24" halign="left" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" valign="center" foregroundColor="yellow" /> -->
+    <eLabel text="Press Menu to set OA weather" position="30,624" size="430,34" font="Regular; 24" halign="center" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" valign="center" />
     <eLabel text="Configure stein17 Mod    *PLi-HD-FullNight* " position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
-    <widget name="config" position="530,100" size="720,120" itemHeight="30" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="Picture" position="530,220" size="720,405" alphatest="on" />
+    <widget name="config" position="530,100" size="720,120" itemHeight="30" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showNever" enableWrapAround="1" />
+    <widget name="Picture" position="530,255" size="720,405" alphatest="on" />
     <ePixmap pixmap="buttons/key_red.png" position="225,688" size="24,24" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_green.png" position="440,688" size="24,24" alphatest="blend" transparent="1" />
     <!--  <ePixmap pixmap="buttons/key_yellow.png" position="655,688" size="24,24" alphatest="blend" transparent="1" /> -->
@@ -5849,15 +5984,12 @@ if len(listitems.list) &gt; 2:
   </screen>
   <!-- PiconManager -->
   <!-- Infobar Tunerstate IBTS -->
-  <screen name="ibts_icons">
-    <widget name="Background" pixmap="ibts/background.png" position="0,0" size="1280,32" zPosition="-1" transparent="1" alphatest="off" />
-    <widget name="Type" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/record.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/stream.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/finished.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/info.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/live.png,/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/unknown.png" position="0,0" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
-    <widget name="Progress" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/InfoBarTunerState/progress.png" position="0,00" size="80,10" zPosition="1" borderWidth="1" borderColor="background" backgroundColor="background" transparent="1" />
-  </screen>
-  <screen name="TunerState" title="Tuner State" flags="wfNoBorder" position="0,50" size="1000,32" zPosition="5" padding="20" spacing="15" backgroundColor="transparent">
-    <panel name="ibts_icons" />
+<screen name="TunerState" title="Tuner State" flags="wfNoBorder" position="0,500" size="1000,32" zPosition="5" padding="20" spacing="15" backgroundColor="transparent">
     <!-- Field information -->
     <!-- nowrap=1 is essential for calculateSize -->
+	<widget name="Background" pixmap="PLi-HD-FullNight_stein17_Mod/icons/colorgradient_imageviewer.png" position="0,0" size="1280,32" zPosition="-1" transparent="1" alphatest="off" />
+    <widget name="Type" pixmaps="PLi-HD-FullNight_stein17_Mod/icons/rec.png,PLi-HD-FullNight_stein17_Mod/icons/stream.png,PLi-HD-FullNight_stein17_Mod/icons/finished.png,PLi-HD-FullNight_stein17_Mod/icons/info.png,PLi-HD-FullNight_stein17_Mod/icons/live.png,PLi-HD-FullNight_stein17_Mod/icons/unknown.png" position="0,0" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
+    <widget name="Progress" pixmap="PLi-HD-FullNight_stein17_Mod/icons/progress.png" position="0,00" size="80,10" zPosition="1" borderWidth="1" borderColor="background" backgroundColor="background" transparent="1" />
     <!-- Default field: Tuner -->
     <widget name="Field0" font="Regular;22" noWrap="1" halign="left" valign="bottom" foregroundColor="white" backgroundColor="transparent" borderColor="background" borderWidth="1" transparent="1" zPosition="1" />
     <!-- Default field: Channel Number -->
@@ -7594,8 +7726,8 @@ if len(listitems.list) &gt; 2:
   <gstyle>
     <gstyles filename="PLi-HD-FullNight_stein17_Mod/window/separator.png#cached" />
   </gstyle>
-  <screen name="UnhandledKey" title="UnhandledKey" position="1100,50" size="34,45" backgroundColor="transparent" zPosition="100" flags="wfNoBorder">
-    <widget name="UnhandledKeyPixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/unhandled-key.png" position="0,0" size="34,45" alphatest="off" />
+  <screen name="UnhandledKey" title="UnhandledKey" position="100,50" size="34,45" backgroundColor="transparent" zPosition="100" flags="wfNoBorder">
+    <widget name="UnhandledKeyPixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/unhandled-key.png" position="0,0" size="34,45" alphatest="blend" />
   </screen>
   <!-- PiP -->
   <screen name="PictureInPictureZapping" flags="wfNoBorder" backgroundColor="transparent" position="580,60" size="120,26" title="PiPZap" zPosition="2">
@@ -8226,7 +8358,7 @@ if len(listitems.list) &gt; 2:
   </screen>
   <!-- Record Info Bar -->
   <screen name="RecInfoBar" position="40,40" size="1280,30" zPosition="1" backgroundColor="transparent" title="Records Info" flags="wfNoBorder">
-    <widget source="session.RecordState" render="Pixmap" pixmap="skin_default/icons/record.png" position="5,5" zPosition="1" size="14,14" alphatest="on">
+    <widget source="session.RecordState" render="Pixmap" pixmap="icons/rec.png" position="5,2" zPosition="1" size="20,20" alphatest="on">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget name="chTuner" position="25,2" size="20,18" zPosition="1" font="Regular;18" transparent="1" noWrap="1" foregroundColor="blue" backgroundColor="transparent" borderColor="black" borderWidth="3" />
@@ -8392,7 +8524,7 @@ if len(listitems.list) &gt; 2:
       <convert type="MetrixHDServiceTime">EndTime</convert>
     </widget>
     <widget name="Cover" position="1173,572" size="100,140" alphatest="blend" zPosition="2" />
-    <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/buttons/rec.png" zPosition="5" alphatest="blend">
+    <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="5" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
     <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_16-9.png" position="1100,685" size="48,28" zPosition="2" alphatest="blend">
