@@ -682,7 +682,25 @@
   <screen name="template_exit">
     <ePixmap pixmap="buttons/key_exit.png" position="1795,1022" size="103,35" zPosition="10" transparent="1" />
   </screen>
-  
+      <!--  TransponderInfo_fake-->
+  <screen name="template_transponder_info_fake">
+  <eLabel name="tpansponder_info" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
+  <screen name="template_transponder_info"> 
+<widget source="session.CurrentService" render="Label" position="965,794" size="585,35" font="Regular; 24" valign="center" halign="right" foregroundColor="grey" backgroundColor="background40" borderWidth="1" borderColor="black" zPosition="1">
+  <convert type="ServiceName2">TpansponderInfo</convert>
+</widget>
+ </screen>
+ <!--  Extra_Info_All_fake -->
+   <screen name="template_extra_info_all_fake">
+  <eLabel name="tpansponder_info" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+  </screen>
+<!--  Extra_Info_All -->
+   <screen name="template_extra_info_all"> 
+<widget source="session.CurrentService" render="Label" position="370,740" size="1180,89" zPosition="1" foregroundColor="foreground" backgroundColor="background40" borderWidth="1" borderColor="black" font="Regular; 24" valign="top">
+  <convert type="PliExtraInfo">All</convert>
+</widget>
+ </screen>
     <!--  Caminfo_fake-->
   <screen name="template_cam_info_fake">
   <eLabel name="cam_info" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
@@ -1586,12 +1604,12 @@
 <!-- template_infobar_weather_oben_default-->
 <screen name="template_weather_oben_default">
  <ePixmap pixmap="Multibox/Wettericons/BG_top.png" position="0,0" zPosition="-1" size="1920,1080" alphatest="blend" />
-  <widget source="global.CurrentTime" render="Label" position="10,70" size="160,48" font="Regular; 42" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="center" transparent="1" zPosition="5">
+<!--   <widget source="global.CurrentTime" render="Label" position="10,70" size="160,48" font="Regular; 42" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="center" transparent="1" zPosition="5">
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="10,117" size="160,24" font="Regular; 20" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" halign="center" transparent="1" zPosition="5">
     <convert type="ClockToText">Format:%a.%d.%b</convert>
-  </widget>
+  </widget> -->
 <!--   <widget alphatest="blend" render="OAWeatherPixmap" position="194,18" size="160,160" source="session.OAWeather" transparent="1" zPosition="2">
     <convert type="OAWeather">weathericon,current,/usr/share/enigma2/Multibox/Wettericons/,png</convert>
   </widget> -->
@@ -1620,9 +1638,12 @@
   <widget backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="white" render="Label" position="785,24" size="180,30" font="Regular; 22" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
     <convert type="OAWeather">weekday,current</convert>
   </widget>
-  <widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="white" render="Label" position="194,141" size="160,48" font="Regular; 42" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+<!--   <widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="white" render="Label" position="194,141" size="160,48" font="Regular; 42" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
     <convert type="OAWeather">temperature_current</convert>
-  </widget>
+  </widget> -->
+  <widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="white" render="Label" position="30,75" size="160,68" font="Regular; 48" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+  <convert type="OAWeather">temperature_current</convert>
+</widget>
   <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="25,194" size="330,30" font="Regular; 22" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
     <convert type="OAWeather">temperature_text,current</convert>
   </widget>
@@ -1703,12 +1724,12 @@
 <!-- template_weather_oben_ondock -->
 <screen name="template_weather_oben_ondock">
   <ePixmap pixmap="Multibox/Wettericons/BG_weather_ondock.png" position="0,0" zPosition="-1" size="1920,1080" alphatest="blend" />
-  <widget source="global.CurrentTime" render="Label" position="20,47" size="120,48" font="Regular; 42" backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="cyan" halign="center" transparent="1" zPosition="5">
+<!--   <widget source="global.CurrentTime" render="Label" position="20,47" size="120,48" font="Regular; 42" backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="cyan" halign="center" transparent="1" zPosition="5">
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="25,97" size="110,22" font="Regular; 18" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" halign="center" transparent="1" zPosition="5">
     <convert type="ClockToText">Format:%a.%d.%b</convert>
-  </widget>
+  </widget> -->
 <!--   <widget alphatest="blend" render="OAWeatherPixmap" position="134,11" size="166,166" source="session.OAWeather" transparent="1" zPosition="2">
     <convert type="OAWeather">weathericon,current,/usr/share/enigma2/Multibox/weather_ondock/,png</convert>
   </widget> -->
@@ -1737,9 +1758,12 @@
   <widget alphatest="blend" render="OAWeatherPixmap" position="22,166" size="186,26" source="session.OAWeather" transparent="1" zPosition="3">
     <convert type="OAWeather">logo</convert>
   </widget>
-  <widget backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="green" shadowColor="black" shadowOffset="-2,-2" render="Label" position="23,124" size="110,40" font="Regular; 32" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+<!--   <widget backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="green" shadowColor="black" shadowOffset="-2,-2" render="Label" position="23,124" size="110,40" font="Regular; 32" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
     <convert type="OAWeather">temperature_current</convert>
-  </widget>
+  </widget> -->
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="green" shadowColor="black" shadowOffset="-2,-2" render="Label" position="20,66" size="110,60" font="Regular; 42" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+  <convert type="OAWeather">temperature_current</convert>
+</widget>
   <widget foregroundColor="black" backgroundColor="grey" transparent="1" render="Label" position="361,165" size="270,30" font="Regular; 22" source="session.OAWeather" zPosition="3" halign="left" valign="center">
     <convert type="OAWeather">temperature_text,day1</convert>
   </widget>
@@ -1826,12 +1850,12 @@
 	    <!-- TEMPLATES weather_righ-->
  <screen name="template_weather_right_default">
  <ePixmap pixmap="Multibox/Wettericons/BG_right.png" position="0,0" zPosition="-1" size="1920,1080" alphatest="blend" />
-<widget source="global.CurrentTime" render="Label" position="1605,56" size="130,48" font="Regular; 42" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="left" transparent="1" zPosition="5">
+<!-- <widget source="global.CurrentTime" render="Label" position="1605,56" size="130,48" font="Regular; 42" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="left" transparent="1" zPosition="5">
   <convert type="ClockToText">Default</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1610,111" size="120,24" font="Regular; 20" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="left" transparent="1" zPosition="5">
   <convert type="ClockToText">Format:%a.%d.%b</convert>
-</widget>
+</widget> -->
 <widget alphatest="blend" render="OAWeatherPixmap" position="1584,194" size="186,26" source="session.OAWeather" transparent="1">
         <convert type="OAWeather">logo</convert>
     </widget>
@@ -1862,9 +1886,13 @@
   <widget  backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="white" render="Label" position="1570,351" size="100,24" font="Regular; 18" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
     <convert type="OAWeather">weekday,current</convert>
   </widget>
-  <widget  backgroundColor="grey" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="1775,150" size="110,40" font="Regular; 36" source="session.OAWeather" zPosition="3" halign="right" transparent="1">
+<!--   <widget  backgroundColor="grey" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="1775,150" size="110,40" font="Regular; 36" source="session.OAWeather" zPosition="3" halign="right" transparent="1">
     <convert type="OAWeather">temperature_current</convert>
-  </widget>
+  </widget> -->
+  
+  <widget backgroundColor="grey" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="1600,58" size="140,80" font="Regular; 46" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+  <convert type="OAWeather">temperature_current</convert>
+</widget>
   <widget  backgroundColor="grey" borderWidth="1" borderColor="white" shadowColor="white" shadowOffset="-2,-2" foregroundColor="black" render="Label" position="1600,148" size="240,24" font="Regular; 18" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
     <convert type="OAWeather">temperature_text,current</convert>
   </widget>
@@ -4130,8 +4158,11 @@ self.instance.move(ePoint(int(deskwidth - newwidth)/2,int(deskheight - newheight
   </widget>
   <!--  SERVICEINFO -->
   <widget source="session.CurrentService" render="Label" position="1380,968" zPosition="1" valign="center" size="515,30" font="Regular; 27" backgroundColor="background" transparent="1" halign="left">
-    <convert type="AMBSatInfo">ExpertInfo</convert>
-  </widget>
+  <convert type="ServiceName2">%S</convert>
+  <convert type="ServiceName2">%F %p %Y %f %M %s</convert>
+  <convert type="ServiceName2">%R</convert>
+  <convert type="ConverterRotator">3</convert>
+</widget>
   <widget source="global.CurrentTime" render="Label" position="1223,680" size="240,30" font="Regular; 27" halign="left" valign="center" backgroundColor="background" noWrap="1" transparent="1" zPosition="3">
    <convert type="AMBSTBinfo">CPUtemp</convert>
   </widget>
