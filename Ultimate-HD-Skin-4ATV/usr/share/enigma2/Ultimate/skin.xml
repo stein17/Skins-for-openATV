@@ -2786,6 +2786,159 @@
     <panel name="template_pixmap_Userlogo" />
     <panel name="template_pixmap_center" />
   </screen>
+  
+  
+  
+  
+  
+  
+
+  <screen name="PluginBrowser" position="0,0" size="1280,720" title="Plugin browser" flags="wfNoBorder" backgroundColor="background">
+    <eLabel text="Plugin browser" position="160,6" size="760,42" font="Regular; 32" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" position="30,60" size="700,610" scrollbarMode="showOnDemand" itemHeight="50" font="Regular; 24" enableWrapAround="1" transparent="1" />
+	
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
+	<panel name="template_date" />
+    <panel name="template_pixmap_vert_line_738" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />  
+    <panel name="template_pixmap_line_ServiceName_pig_menu" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="template_menu_ok_exit_1280" />
+  </screen>
+  
+  
+   <!--  PluginBrowserGrid -->
+<screen name="PluginBrowserGrid" title="Plugin browser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_PliFullNight">
+    <widget name="description" position="30,60" size="1000,50" font="Regular;20" valign="center" transparent="1" />
+    <widget source="pluginGrid" render="Listbox" position="30,110" size="1220,550" itemSpacing="10,10" selectionZoom="10" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C" transparent="1">
+      <convert type="TemplatedMultiContent">{
+					"template": [
+						MultiContentEntryText(pos = (0, 0), size = (200, 110), font=0, backcolor = 0x505050),
+						MultiContentEntryText(pos = (5, 50), size = (190, 50), font=0, flags = RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP, text = 1),
+						MultiContentEntryPixmapAlphaBlend(pos=(50, 10), size=(100, 40), png=3, flags=BT_SCALE)
+					],
+					"fonts": [gFont("Regular", 18),gFont("Regular", 14)],
+					"itemWidth": 200,
+					"itemHeight": 110
+				}</convert>
+    </widget>
+    <widget name="quickselect" position="30,110" size="760,550" backgroundColor="selectedBG" foregroundColor="grey" font="Regular;24" halign="center" transparent="1" valign="center" zPosition="+1" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
+  <panel name="template_ok_exit_1280" />
+  <panel name="template_title_date" />
+  <panel name="template_clock_widget_default" />
+  <panel name="template_pixmap_rahmen" />
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  </screen>
+  <!--   PluginBrowserList -->
+  <screen name="PluginBrowserList" title="Plugin browser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <widget source="pluginList" render="Listbox" position="30,60" size="700,610" listOrientation="vertical" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
+      <convert type="TemplatedMultiContent">{
+					"template": [
+						MultiContentEntryText(pos = (120, 5), size = (560, 25), font=0, flags = RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (120, 26), size = (560, 17), font=1, flags = RT_HALIGN_LEFT, text = 2),
+						MultiContentEntryPixmapAlphaBlend(pos=(10, 5), size=(100, 40), png=3, flags=BT_SCALE)
+					],
+					"fonts": [gFont("Regular", 18),gFont("Regular", 14)],
+					"itemHeight" : 50
+				}</convert>
+    </widget>
+	<panel name="TemplateAllColorButtons_Automatic_Long" />
+    <panel name="template_title_date" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />
+    <panel name="template_pixmap_line_ServiceName_pig_menu" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="template_pixmap_vert_line_738" />
+    <widget name="quickselect" position="30,60" size="700,610" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;100" halign="center" valign="center" zPosition="+1" />
+  </screen>
+  <!--  PluginAction -->
+  <screen name="PluginAction" position="0,0" size="1280,720" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <widget source="plugins" render="Listbox" position="30,120" size="700,550" zPosition="4" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="foreground" transparent="1">
+      <convert type="TemplatedMultiContent">{
+				"template":
+					[
+					MultiContentEntryPixmapAlphaBlend(pos=(5, 0), size=(60, 50), png=6, flags=BT_SCALE),
+					MultiContentEntryText(pos=(70, 0), size=(580, 50), font=0, flags=RT_VALIGN_CENTER, text=2), # Category
+					MultiContentEntryText(pos=(70, 1), size=(580, 25), font=1, flags=RT_VALIGN_CENTER, text=11), # Name + Version
+					# MultiContentEntryText(pos=(70, 1), size=(430, 25), font=1, flags=RT_VALIGN_CENTER, text=3), Name
+					# MultiContentEntryText(pos=(480, 1), size=(160, 25), font=1, flags=RT_VALIGN_CENTER, text=5), Version
+					MultiContentEntryText(pos=(70, 28), size=(560, 20), font=2, flags=RT_VALIGN_CENTER, text=4, color=0x00b0b0b0), # Description
+					MultiContentEntryPixmapAlphaBlend(pos=(640, 1), size=(48, 48), png=7, flags=BT_SCALE)
+					],
+				"fonts": [gFont("Regular", 25),gFont("Regular", 18),gFont("Regular", 16)],
+				"itemHeight": 50
+				}</convert>
+    </widget>
+    <widget name="description" position="31,60" size="700,60" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" shadowColor="black" shadowOffset="-2,-2" conditional="description" />
+    <widget source="global.CurrentTime" render="Label" position="765,634" size="485,30" font="Regular;20" foregroundColor="foreground" halign="center" backgroundColor="background" valign="center" transparent="1">
+      <convert type="MetrixHDSTBinfo">FLASHfree</convert>
+    </widget>
+    <widget name="quickselect" position="30,120" size="700,550" backgroundColor="selectedBG" foregroundColor="grey" font="Regular;24" halign="center" transparent="1" valign="center" zPosition="5" />
+    <panel name="template_title_date" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />
+    <panel name="template_pixmap_line_ServiceName_pig_menu" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="template_pixmap_vert_line_738" />
+	<panel name="TemplateAllColorButtons_Automatic_Long" />
+  </screen>
+  <!--   Processing -->
+  <screen name="Processing" title="Processing" position="530,center" size="600,220" backgroundColor="background_PliFullNight" zPosition="+99" flags="wfNoBorder">
+	<widget source="Title" render="Label" position="10,5" foregroundColor="foreground" size="518,50" noWrap="1" valign="bottom" font="Regular;34" backgroundColor="background" transparent="1" />
+	<widget name="progress" position="10,80" size="580,25" transparent="1" backgroundColor="SliderForeground" foregroundColor="darkgrey" borderWidth="1" borderColor="blue" />
+	<widget name="description" position="10,120" size="580,25" font="Regular;20" halign="center" backgroundColor="background" foregroundColor="foreground" transparent="1" />
+	<eLabel name="" position="0, 0" size="600, 60" backgroundColor="SliderForeground" zPosition="-1" />
+	<eLabel name="" position="0,60" size="600,1" backgroundColor="grey" />
+  </screen>
+ <!--  PluginActionLog -->
+  <screen name="PluginActionLog" position="0,0" size="1280,720" title="Plugin Action Log" flags="wfNoBorder" backgroundColor="background_Pig_template">
+    <widget name="log" position="70,100" size="1140,525" font="Regular;20" scrollbarMode="showOnDemand" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" conditional="log" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
+  <panel name="template_ok_exit_1280" />
+  <panel name="template_date" />
+  <panel name="template_clock_widget_default" />
+  <panel name="template_pixmap_rahmen" />
+  <panel name="template_pixmap_Userlogo" />
+  <panel name="template_pixmap_center" />
+  </screen>
+  <!--  PluginDownloadBrowser -->
+   <screen name="PluginDownloadBrowser" position="0,0" size="1280,720" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="background">
+    <widget name="list" position="30,60" size="700,610" zPosition="4" itemHeight="50" font="Regular; 20" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" />
+    <widget name="text" position="765,390" size="485,240" font="Regular; 20" halign="center" valign="center" transparent="1" />
+    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+	<widget source="global.CurrentTime" render="Label" position="765,640" size="485,30" font="Regular;20" foregroundColor="foreground" halign="center" backgroundColor="background" valign="center" transparent="1">
+      <convert type="MetrixHDSTBinfo">FLASHfree</convert>
+    </widget>
+    <panel name="template_title_date" />
+    <panel name="template_pig_menu" />
+    <panel name="template_pixmap_pig_menu" />
+    <panel name="template_pixmap_line_ServiceName_pig_menu" />
+    <panel name="template_clock_widget_default" />
+    <panel name="template_pixmap_rahmen" />
+    <panel name="template_pixmap_Userlogo" />
+    <panel name="template_pixmap_center" />
+    <panel name="template_pixmap_vert_line_738" />
+  </screen>
+  
+  
+  
+  
+  
+  
+  
+  
   <screen name="PluginDetails" position="0,0" size="1280,720" title="Plugin details" flags="wfNoBorder" backgroundColor="background">
     <eLabel text="Plugin details" position="160,10" size="760,36" font="Regular;30" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="statuspic" position="30,79" size=" 48, 48" alphatest="blend" />
@@ -5011,21 +5164,6 @@ self['config'].l.setSeperation(int(300*f))
     <eLabel text="PiPSetup" position="1,5" size="600,50" valign="bottom" font="Regular;34" halign="center" zPosition="1" transparent="1" />
     <widget name="text" position="30,78" size="550,150" halign="left" font="Regular; 20" zPosition="1" transparent="1" />
     <ePixmap pixmap="BG-Pixmaps/Line_Hor/Line_Hor_Org.png" alphatest="blend" transparent="1" position="0,60" zPosition="3" size="600,5" />
-  </screen>
-  <screen name="PluginDownloadBrowser" position="0,0" size="1280,720" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="background">
-    <widget name="list" position="30,60" size="700,610" zPosition="4" itemHeight="50" font="Regular; 20" scrollbarMode="showOnDemand"  backgroundColor="background" transparent="1" />
-    <widget name="text" position="765,390" size="485,280" font="Regular; 20" halign="center" valign="center" transparent="1" />
-    <ePixmap position="1200,688" size="64,26" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-    <panel name="template_title_date" />
-   
-    <panel name="template_pig_menu" />
-    <panel name="template_pixmap_pig_menu" />
-    <panel name="template_pixmap_line_ServiceName_pig_menu" />
-    <panel name="template_clock_widget_default" />
-    <panel name="template_pixmap_rahmen" />
-    <panel name="template_pixmap_Userlogo" />
-    <panel name="template_pixmap_center" />
-    <panel name="template_pixmap_vert_line_738" />
   </screen>
   <screen name="RassInteractive" position="100,100" size="120,275">
     <ePixmap pixmap="Ultimate/skin_default/system/rass_logo.png" position="30,0" size="50,21" transparent="1" alphatest="on" />
