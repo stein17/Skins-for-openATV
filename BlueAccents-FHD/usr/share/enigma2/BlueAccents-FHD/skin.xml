@@ -2202,22 +2202,164 @@
     <panel name="template_ok_exit" />
     <panel name="template_background_725_trans" />
   </screen>
-  <screen name="PluginDetails" position="0,0" size="1920,1080" title="Plugin details" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Plugin details" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="statuspic" position="45,118" size=" 72,72" alphatest="blend" />
-    <widget source="author" render="Label" position="144,126" size="900,60" font="Regular;40" transparent="1" />
-    <widget name="screenshot" position="610,420" size="480,345" zPosition="10" alphatest="blend" />
-    <widget name="detailtext" position="30,225" size="555,765" font="Regular;33" transparent="1" />
-    <widget name="divpic" position="0,0" size="0,0" />
+<!--   PluginBrowser -->
+    <screen name="PluginBrowser" position="0,0" size="1920,1080" title="Plugin browser" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Plugin browser" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget name="list" position="30,112" size="1050,870" itemHeight="75" font="Regular;36" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic_Long" />
     <panel name="template_date" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
+    <panel name="template_menu_ok_exit" />
     <panel name="template_background_725_trans" />
   </screen>
-  <screen name="PluginManager" position="0,0" size="1920,1080" title="Plugin manager" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Plugin manager" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="list" render="Listbox" position="30,112" size="1050,810" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
-      <convert type="TemplatedMultiContent">
+  
+  
+  
+  
+   
+
+
+
+
+  <!-- PluginDownloadBrowser -->
+  <screen name="PluginDownloadBrowser" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="list" position="30,112" size="1075,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" zPosition="4" />
+    <widget name="text" position="1125,615" size="765,330" font="Regular;30" halign="center" valign="center" transparent="1" />
+    <ePixmap position="1837,1032" size="60,36" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+	<widget source="global.CurrentTime" render="Label" position="1237,940" size="570,45" font="Regular;30" halign="center" backgroundColor="background" valign="center" transparent="1">
+		<convert type="MetrixHDSTBinfo">FLASHfree</convert>
+	</widget>
+    <panel name="template_title_date" />
+    <panel name="template_VideoPicture_Large" />
+    <panel name="template_background_full_black" />
+    <panel name="template_Line_Vert_Big_725" />
+  </screen>
+	<!--  PluginBrowserGrid -->
+  <screen name="PluginBrowserGrid" position="0,0" size="1920,1080" title="Plugin browser" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="description" position="30,112" size="1860,80" font="Regular;30" valign="center" />
+		<widget source="pluginGrid" render="Listbox" position="30,205" size="1860,780" itemSpacing="15,15" selectionZoom="10" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C">
+			<convert type="TemplatedMultiContent">
+				{
+					"template": [
+						MultiContentEntryText(pos = (0, 0), size = (300, 165), font=0, backcolor = 0x505050),
+						MultiContentEntryText(pos = (7, 75), size = (285, 75), font=0, flags = RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP, text = 1),
+						MultiContentEntryPixmapAlphaBlend(pos = (75, 15), size = (150, 60), png=3, flags=BT_SCALE)
+					],
+					"fonts": [gFont("Regular", 27),gFont("Regular", 21)],
+					"itemWidth": 300,
+					"itemHeight": 165
+				}
+			</convert>
+		</widget>
+		
+		<widget name="quickselect" position="30,112" size="1140,870" backgroundColor="background" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_menu_ok_exit" />
+		<panel name="template_background_full_black" />
+	</screen>
+	<!--   PluginBrowserList -->
+	<screen name="PluginBrowserList" position="0,0" size="1920,1080" title="Plugin browser" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget source="pluginList" render="Listbox" position="30,112" size="1050,870" listOrientation="vertical" backgroundColor="background" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG">
+			<convert type="TemplatedMultiContent">
+				{
+					"template": [
+						MultiContentEntryText(pos = (180, 7), size = (840, 37), font=0, flags = RT_HALIGN_LEFT, text = 1),
+						MultiContentEntryText(pos = (180, 39), size = (840, 28), font=1, flags = RT_HALIGN_LEFT, text = 2),
+						MultiContentEntryPixmapAlphaBlend(pos = (15, 7), size = (150, 60), png=3, flags=BT_SCALE)
+					],
+					"fonts": [gFont("Regular", 27),gFont("Regular", 24)],
+					"itemHeight": 75
+				}
+			</convert>
+		</widget>
+		
+		<widget name="quickselect" position="30,112" size="1050,870" backgroundColor="background" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_ok_exit" />
+		<panel name="template_VideoPicture_Large" />
+		<panel name="template_background_full_black" />
+		<panel name="template_Line_Vert_Big_725" />
+	</screen>
+	<!--  PluginAction -->
+  	<screen name="PluginAction" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget source="plugins" render="Listbox" position="30,112" size="1050,870" zPosition="4" scrollbarMode="showOnDemand" backgroundColor="background" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{
+				"template":
+					[
+					MultiContentEntryPixmapAlphaBlend(pos = (7, 0), size = (90, 75), png=6, flags=BT_SCALE),
+					MultiContentEntryText(pos = (105, 0), size = (870, 75), font=0, flags=RT_VALIGN_CENTER, text=2), # Category
+					MultiContentEntryText(pos = (105, 1), size = (870, 37), font=1, flags=RT_VALIGN_CENTER, text=11), # Name + Version
+					# MultiContentEntryText(pos=(70, 1), size=(430, 25), font=1, flags=RT_VALIGN_CENTER, text=3), Name
+					# MultiContentEntryText(pos=(480, 1), size=(160, 25), font=1, flags=RT_VALIGN_CENTER, text=5), Version
+					MultiContentEntryText(pos = (105, 42), size = (840, 30), font=2, flags=RT_VALIGN_CENTER, text=4, color=0x00b0b0b0), # Description
+					MultiContentEntryPixmapAlphaBlend(pos = (960, 1), size = (72, 72), png=7, flags=BT_SCALE)
+					],
+				"fonts": [gFont("Regular", 37),gFont("Regular", 27),gFont("Regular", 24)],
+				"itemHeight": 75
+				}
+			</convert>
+		</widget>
+		<widget name="description" position="1125,615" size="765,330" font="Regular;30" halign="center" backgroundColor="background" valign="center" transparent="1" conditional="description" />
+		<widget source="global.CurrentTime" render="Label" position="1237,940" size="570,45" font="Regular;30" halign="center" backgroundColor="background" valign="center" transparent="1">
+			<convert type="MetrixHDSTBinfo">FLASHfree</convert>
+		</widget>
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_exit" />
+		<panel name="template_VideoPicture_Large" />
+		<panel name="template_background_full_black" />
+		<panel name="template_Line_Vert_Big_725" />
+		<widget name="quickselect" position="30,112" size="1050,870" backgroundColor="background" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5" />
+	</screen>
+	<!--   Processing -->
+  	<screen name="Processing" title="Processing" position="center,center" size="900,330" backgroundColor="#111111" zPosition="+99" flags="wfNoBorder">
+		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<panel name="ul-messagebox" />
+		<widget name="progress" position="15,120" size="870,37" transparent="1" />
+		<widget name="description" position="15,180" size="870,37" font="Regular;30" halign="center" backgroundColor="background" transparent="1" />
+	</screen>
+	<!--  PluginActionLog -->
+	<screen name="PluginActionLog" position="0,0" size="1920,1080" title="Plugin Action Log" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="log" position="30,112" size="1860,870" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="background" transparent="1" conditional="log" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic_Long" />
+		<panel name="template_ok_exit" />
+		<panel name="template_background_full_black" />
+	</screen>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- PluginDetails -->
+	<screen name="PluginDetails" position="0,0" size="1920,1080" title="Plugin details" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel text="Plugin details" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget name="statuspic" position="45,118" size=" 72,72" alphatest="blend" />
+		<widget source="author" render="Label" position="144,126" size="900,60" font="Regular;40" transparent="1" />
+		<widget name="screenshot" position="610,420" size="480,345" zPosition="10" alphatest="blend" />
+		<widget name="detailtext" position="30,225" size="555,765" font="Regular;33" transparent="1" />
+		<widget name="divpic" position="0,0" size="0,0" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_ok_exit" />
+		<panel name="template_background_725_trans" />
+	</screen>
+	<!-- PluginManager -->
+	<screen name="PluginManager" position="0,0" size="1920,1080" title="Plugin manager" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel text="Plugin manager" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget source="list" render="Listbox" position="30,112" size="1050,810" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
+			<convert type="TemplatedMultiContent">
 			{"templates":
 				{"default": (90,[
 						MultiContentEntryPixmapAlphaBlend(pos = (27, 9), size = (72, 72), png = 5, flags = BT_SCALE), # index 5 is the status pixmap
@@ -2233,18 +2375,19 @@
 				"itemHeight": 90
 			}
 			</convert>
-    </widget>
-    <widget source="status" render="Label" position="30,945" size="1050,45" font="Regular;30" halign="center" valign="center" transparent="1" />
-    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-    <panel name="template_date" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-    <panel name="template_background_725_trans" />
-  </screen>
-  <screen name="PluginManagerInfo" position="0,0" size="1920,1080" title="Plugin manager activity" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Plugin manager activity information" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="list" render="Listbox" position="30,112" size="1050,870" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
-      <convert type="TemplatedMultiContent">
+		</widget>
+		<widget source="status" render="Label" position="30,945" size="1050,45" font="Regular;30" halign="center" valign="center" transparent="1" />
+		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_ok_exit" />
+		<panel name="template_background_725_trans" />
+	</screen>
+	<!--  PluginManagerInfo -->
+	<screen name="PluginManagerInfo" position="0,0" size="1920,1080" title="Plugin manager activity" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel text="Plugin manager activity information" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget source="list" render="Listbox" position="30,112" size="1050,870" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
+			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryPixmapAlphaBlend(pos = (27, 9), size = (72, 72), png = 2, flags = BT_SCALE), # index 2 is the status pixmap
 						MultiContentEntryText(pos = (135, 8), size = (848, 39), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
@@ -2254,19 +2397,20 @@
 				"itemHeight": 90
 				}
 			</convert>
-    </widget>
-    <widget source="status" render="Label" position="1125,615" size="765,375" font="Regular;30" halign="center" valign="center" transparent="1" />
-    <panel name="template_date" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_ok_exit" />
-    <panel name="template_VideoPicture_Large" />
-    <panel name="template_background_full_black" />
-    <panel name="template_Line_Vert_Big_725" />
-  </screen>
-  <screen name="PluginManagerHelp" position="0,0" size="1920,1080" title="Plugin manager help" flags="wfNoBorder" backgroundColor="transparent">
-    <eLabel text="Plugin manager help" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget source="list" render="Listbox" position="30,112" size="1050,870" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
-      <convert type="TemplatedMultiContent">
+		</widget>
+		<widget source="status" render="Label" position="1125,615" size="765,375" font="Regular;30" halign="center" valign="center" transparent="1" />
+		<panel name="template_date" />
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_ok_exit" />
+		<panel name="template_VideoPicture_Large" />
+		<panel name="template_background_full_black" />
+		<panel name="template_Line_Vert_Big_725" />
+	</screen>
+	<!--  PluginManagerHelp -->
+	<screen name="PluginManagerHelp" position="0,0" size="1920,1080" title="Plugin manager help" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel text="Plugin manager help" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+		<widget source="list" render="Listbox" position="30,112" size="1050,870" backgroundColor="background" scrollbarMode="showOnDemand"  transparent="1">
+			<convert type="TemplatedMultiContent">
 				{"template": [
 						MultiContentEntryText(pos = (135, 8), size = (848, 42), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is the name
 						MultiContentEntryText(pos = (135, 48), size = (848, 38), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the state
@@ -2276,14 +2420,21 @@
 				"itemHeight": 90
 				}
 			</convert>
-    </widget>
-    <widget source="status" render="Label" position="1125,615" size="765,375" font="Regular;30" halign="center" valign="center" transparent="1" />
-    <panel name="template_date" />
-    <panel name="template_ok_exit" />
-    <panel name="template_VideoPicture_Large" />
-    <panel name="template_background_full_black" />
-    <panel name="template_Line_Vert_Big_725" />
+		</widget>
+		<widget source="status" render="Label" position="1125,615" size="765,375" font="Regular;30" halign="center" valign="center" transparent="1" />
+		<panel name="template_date" />
+		<panel name="template_ok_exit" />
+		<panel name="template_VideoPicture_Large" />
+		<panel name="template_background_full_black" />
+		<panel name="template_Line_Vert_Big_725" />
   </screen>
+  
+
+  
+  
+  
+  
+  
   <screen name="RestoreMenu" position="0,0" size="1920,1080" title="Restore Backups" flags="wfNoBorder" backgroundColor="transparent">
     <eLabel text="Restore backups" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
     <widget name="filelist" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" />
@@ -3748,15 +3899,7 @@ self['config'].l.setSeperation(int(300*f))
     <widget name="text" position="30,117" size="825,225" halign="left" font="Regular;30" zPosition="1" transparent="1" />
     <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" alphatest="blend" transparent="1" position="0,90" zPosition="3" size="900,7" />
   </screen>
-  <screen name="PluginDownloadBrowser" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="list" position="30,112" size="1075,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" zPosition="4" />
-    <widget name="text" position="1125,615" size="765,375" font="Regular;30" halign="center" valign="center" transparent="1" />
-    <ePixmap position="1837,1032" size="60,36" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
-    <panel name="template_title_date" />
-    <panel name="template_VideoPicture_Large" />
-    <panel name="template_background_full_black" />
-    <panel name="template_Line_Vert_Big_725" />
-  </screen>
+
   <screen name="RassInteractive" position="150,150" size="180,412">
     <ePixmap pixmap="icons/rass_logo.png" position="30,0" size="75,31" transparent="1" alphatest="on" />
     <eLabel text="Index" position="54,37" size="120,37" font="Regular;31" />
