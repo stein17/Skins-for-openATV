@@ -191,36 +191,7 @@
     <color name="ScrollbarBorder" color="ScrollbarBorder" />
   </windowstyle>
   <!-- Templates -->
-  <!-- Templates -->
-  <screen name="PlayerTemplateBasic">
-    <widget source="session.CurrentService" render="Label" position="c-416,4" size="832,52" backgroundColor="transparent" zPosition="1" foregroundColor="foreground" borderWidth="2" font="Regular;24" borderColor="black" valign="center" halign="center">
-      <convert type="ServiceName">Name</convert>
-    </widget>
-    <eLabel backgroundColor="infobarBG" position="120,56" size="1040,14" zPosition="0" />
-    <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/dvr/scale1024.png" position="128,61" size="1024,4" zPosition="1" />
-    <widget source="session.CurrentService" render="PositionGauge" position="128,57" size="1024,12" transparent="1" zPosition="4" pointer="PLi-HD-FullNight_stein17_Mod/dvr/position_pointer1024.png:1012,0">
-      <convert type="ServicePosition">Gauge</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="128,31" size="90,25" backgroundColor="transparent" zPosition="4" foregroundColor="foreground" borderWidth="2" font="Regular;22" borderColor="black" valign="center">
-      <convert type="ServicePosition">Position,ShowHours</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1035,31" size="117,25" backgroundColor="transparent" zPosition="4" foregroundColor="foreground" borderWidth="2" font="Regular;22" borderColor="black" valign="center" halign="right">
-      <convert type="ServicePosition">Remaining,Plus,ShowHours</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="100,70" size="200,25" zPosition="2" backgroundColor="transparent" foregroundColor="foreground" font="Regular;20" borderWidth="2" halign="center">
-      <convert type="PliExtraInfo">ResolutionString</convert>
-    </widget>
-  </screen>
-  <screen name="PlayerTemplate">
-    <panel name="PlayerTemplateBasic" />
-    <widget source="session.RecordState" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" position="1160,53" size="20,20" zPosition="3" alphatest="on">
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="global.CurrentTime" render="Label" borderWidth="2" position="1052,3" size="100,25" backgroundColor="transparent" noWrap="1" zPosition="1" foregroundColor="foreground" font="Regular;22" valign="center" halign="right">
-      <convert type="ClockToText">Format:%-H:%M</convert>
-    </widget>
-    <eLabel position="128,70" size="150,130" backgroundColor="transparent" borderWidth="2" font="Regular;25" borderColor="black" text="&gt;" zPosition="1" />
-  </screen>
+
   <!--  Template_Date -->
   <screen name="Template_Date">
     <eLabel position="0,0" size="1280,88" backgroundColor="backgroundtop" zPosition="-1" />
@@ -811,125 +782,128 @@
     </widget>
     <panel name="InfoBarTemplate" />
   </screen>
+
+  <!-- Movie Player Infobar -->
+    <screen name="MoviePlayer" title="InfoBar" position="fill" backgroundColor="transparent" flags="wfNoBorder">
+ <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/dvr/scale1024.png" position="center,666" size="1024,4" zPosition="1" alphatest="blend" />
+  <widget source="session.CurrentService" render="PositionGauge" position="center,661" size="1024,12" transparent="1" zPosition="4" pointer="PLi-HD-FullNight_stein17_Mod/dvr/position_pointer.png:1012,0">
+    <convert type="ServicePosition">Gauge</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="138,625" size="90,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="left">
+    <convert type="ServicePosition">Position</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="460,684" size="80,30" halign="right" valign="center" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
+    <convert type="ServicePosition">Length</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="1027,625" size="117,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="right">
+    <convert type="ServicePosition">Remaining,Negate</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="160,685" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="right">
+    <convert type="ServiceInfo">VideoWidth</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="270,685" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="left">
+    <convert type="ServiceInfo">VideoHeight</convert>
+  </widget>
+  <eLabel text="x" position="240,685" size="30,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="center" />
+  <widget source="global.CurrentTime" render="Label" borderWidth="1" position="15,587" size="360,30" backgroundColor="background" noWrap="1" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;16" valign="center">
+    <convert type="ClockToText">Date</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" borderWidth="2" position="15,621" size="69,30" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;25" valign="bottom">
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" borderWidth="2" position="79,621" size="37,29" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;20" valign="bottom">
+    <convert type="ClockToText">Format::%S</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" halign="right" position="545,685" size="80,30" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
+    <convert type="MetrixHDServiceTime">StartTime</convert>
+  </widget>
+  <eLabel halign="center" position="center,685" size="30,30" text="-" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" />
+  <widget source="session.CurrentService" render="Label" halign="left" position="655,685" size="80,30" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
+    <convert type="MetrixHDServiceTime">EndTime</convert>
+  </widget>
+  <widget name="Cover" position="1173,572" size="100,140" alphatest="blend" zPosition="2" />
+  <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="5" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_16-9.png" position="1100,685" size="48,28" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_4-3.png" position="1100,685" size="47,28" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsNotWidescreen</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_sd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">0,719</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_hd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">720,1079</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_fhd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">721,1080</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_4k.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
+    <convert type="ServiceInfo">VideoHeight</convert>
+    <convert type="ValueRange">1081,5000</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_on.png" position="980,685" size="46,28" zPosition="2" alphatest="blend">
+    <convert type="ServiceInfo">IsMultichannel</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_off.png" position="980,685" size="46,28" zPosition="1" alphatest="blend">
+    <convert type="ServiceInfo">IsStereo</convert>
+    <convert type="ConditionalShowHide" />
+  </widget>
+  <widget source="session.CurrentService" render="MetrixHDRunningText" options="movetype=running,startdelay=1800,steptime=60,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="230,620" size="820,32" font="Regular;25" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" valign="center" halign="center">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Picon" position="15,656" zPosition="4" size="100,60" transparent="12" alphatest="blend">
+    <convert type="MovieReference" />
+  </widget>
+  <widget name="Cover" position="1173,572" size="100,140" zPosition="4" alphatest="blend" valign="top" halign="center" />
+  <ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd.png" position="0,540" size="1280,220" zPosition="-1" />
+</screen>
+  <!-- Player Templates -->
   <screen name="PlayerTemplateBasic">
-    <widget source="session.CurrentService" render="Label" position="230,25" size="820,32" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular;24" valign="center" halign="center">
+    <widget source="session.CurrentService" render="Label" position="230,605" size="820,32" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular;24" valign="center" halign="center">
       <convert type="ServiceName">Name</convert>
     </widget>
-    <eLabel backgroundColor="infobarBG" position="120,56" size="1040,14" zPosition="0" />
-    <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/dvr/scale1024.png" position="128,61" size="1024,4" zPosition="1" />
-    <widget source="session.CurrentService" render="PositionGauge" position="122,57" size="1034,12" transparent="1" zPosition="4" pointer="PLi-HD-FullNight_stein17_Mod/dvr/position_pointer1024.png:1012,0">
+    <eLabel backgroundColor="infobarBG" position="120,636" size="1040,14" zPosition="0" />
+    <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/dvr/scale1024.png" position="128,641" size="1024,4" zPosition="1" />
+    <widget source="session.CurrentService" render="PositionGauge" position="122,637" size="1034,12" transparent="1" zPosition="4" pointer="PLi-HD-FullNight_stein17_Mod/dvr/position_pointer1024.png:1012,0">
       <convert type="ServicePosition">Gauge</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="128,30" size="90,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center">
+    <widget source="session.CurrentService" render="Label" position="128,610" size="90,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center">
       <convert type="ServicePosition">Position,ShowHours</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="1035,30" size="117,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="right">
+    <widget source="session.CurrentService" render="Label" position="1035,610" size="117,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="right">
       <convert type="ServicePosition">Remaining,Plus,ShowHours</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="542,75" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="right">
+    <widget source="session.CurrentService" render="Label" position="1024,655" size="60,22" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 22" halign="right">
       <convert type="ServiceInfo">VideoWidth</convert>
     </widget>
-    <widget source="session.CurrentService" render="Label" position="657,75" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="left">
+    <widget source="session.CurrentService" render="Label" position="1111,655" size="60,22" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 22" halign="left">
       <convert type="ServiceInfo">VideoHeight</convert>
     </widget>
-    <eLabel text="x" position="625,75" size="30,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="center" />
+    <eLabel text="x" position="1086,655" size="22,22" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 22" halign="center" />
   </screen>
   <screen name="PlayerTemplate">
     <panel name="PlayerTemplateBasic" />
-    <widget source="session.RecordState" render="Pixmap" position="146,628" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" alphatest="blend">
+    <widget source="session.RecordState" render="Pixmap" position="98,633" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" alphatest="blend">
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="1155,24" size="120,35" noWrap="1" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 32" valign="center" halign="center">
+    <widget source="global.CurrentTime" render="Label" position="1157,623" size="120,35" noWrap="1" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 32" valign="center" halign="center">
       <convert type="ClockToText">Format:%-H:%M</convert>
     </widget>
-    <eLabel position="128,75" size="150,30" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" text="&gt;" zPosition="1" />
-  </screen>
-  <!-- Movie Player Infobar -->
-  <screen name="MoviePlayer" title="InfoBar" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder">
-    <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/dvr/scale1024.png" position="center,666" size="1024,4" zPosition="1" alphatest="blend" />
-    <widget source="session.CurrentService" render="PositionGauge" position="center,661" size="1024,12" transparent="1" zPosition="4" pointer="PLi-HD-FullNight_stein17_Mod/dvr/position_pointer.png:1012,0">
-      <convert type="ServicePosition">Gauge</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="138,625" size="90,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="left">
-      <convert type="ServicePosition">Position</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="460,684" size="80,30" halign="right" valign="center" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
-      <convert type="ServicePosition">Length</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1027,625" size="117,25" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" zPosition="4" font="Regular;22" valign="center" halign="right">
-      <convert type="ServicePosition">Remaining,Negate</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="160,685" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="right">
-      <convert type="ServiceInfo">VideoWidth</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="270,685" size="80,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="left">
-      <convert type="ServiceInfo">VideoHeight</convert>
-    </widget>
-    <eLabel text="x" position="240,685" size="30,30" zPosition="2" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" halign="center" />
-    <widget source="global.CurrentTime" render="Label" borderWidth="1" position="15,587" size="360,30" backgroundColor="background" noWrap="1" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;16" valign="center">
-      <convert type="ClockToText">Date</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" borderWidth="2" position="15,621" size="69,30" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;25" valign="bottom">
-      <convert type="ClockToText">Format:%H:%M</convert>
-    </widget>
-    <widget source="global.CurrentTime" render="Label" borderWidth="2" position="79,621" size="37,29" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;20" valign="bottom">
-      <convert type="ClockToText">Format::%S</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" halign="right" position="545,685" size="80,30" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
-      <convert type="MetrixHDServiceTime">StartTime</convert>
-    </widget>
-    <eLabel halign="center" position="center,685" size="30,30" text="-" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24" />
-    <widget source="session.CurrentService" render="Label" halign="left" position="655,685" size="80,30" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" font="Regular; 24">
-      <convert type="MetrixHDServiceTime">EndTime</convert>
-    </widget>
-    <widget name="Cover" position="1173,572" size="100,140" alphatest="blend" zPosition="2" />
-    <widget source="session.RecordState" render="Pixmap" position="128,689" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="5" alphatest="blend">
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_16-9.png" position="1100,685" size="48,28" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_4-3.png" position="1100,685" size="47,28" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsNotWidescreen</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_sd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">0,719</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_hd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">720,1079</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_fhd.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">721,1080</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_4k.png" position="1040,685" size="46,28" zPosition="4" alphatest="blend">
-      <convert type="ServiceInfo">VideoHeight</convert>
-      <convert type="ValueRange">1081,5000</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_on.png" position="980,685" size="46,28" zPosition="2" alphatest="blend">
-      <convert type="ServiceInfo">IsMultichannel</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_off.png" position="980,685" size="46,28" zPosition="1" alphatest="blend">
-      <convert type="ServiceInfo">IsStereo</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="session.CurrentService" render="MetrixHDRunningText" options="movetype=running,startdelay=1800,steptime=60,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="230,620" size="820,32" font="Regular;25" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" valign="center" halign="center">
-      <convert type="ServiceName">Name</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Picon" position="15,656" zPosition="4" size="100,60" transparent="12" alphatest="blend">
-      <convert type="MovieReference" />
-    </widget>
-    <widget name="Cover" position="1173,572" size="100,140" zPosition="4" alphatest="blend" valign="top" halign="center" />
-    <ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd.png" position="0,540" size="1280,220" zPosition="-1" />
+<!--     <eLabel position="128,115" size="150,30" backgroundColor="transparent" borderWidth="2" font="Regular;25" borderColor="black" text="&gt;" zPosition="1" /> -->
+	<ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_player.png" position="120,657" size="152,18" alphatest="blend" zPosition="1" transparent="1" />
   </screen>
   <!-- DVD Player Infobar -->
   <screen name="DVDPlayer" title="InfoBar" position="0,45" size="1280,235" backgroundColor="transparent" flags="wfNoBorder">
@@ -1841,25 +1815,25 @@
     <panel name="template_menu_exit" />
   </screen>
   <!--  PluginBrowserGrid -->
-  <screen name="PluginBrowserGrid" title="Plugin browser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_PliFullNight">
-    <widget name="description" position="30,100" size="1000,50" font="Regular;20" valign="center" transparent="1" />
-    <widget source="pluginGrid" render="Listbox" position="30,160" size="1220,490" itemSpacing="10,10" selectionZoom="10" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C" transparent="1">
-      <convert type="TemplatedMultiContent">{
+<screen name="PluginBrowserGrid" title="Plugin browser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_PliFullNight">
+  <widget name="description" position="30,100" size="1220,30" font="Regular; 22" valign="center" transparent="1" />
+  <widget source="pluginGrid" render="Listbox" position="30,140" size="1220,535" itemSpacing="5,5" selectionZoom="5" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C" transparent="1">
+    <convert type="TemplatedMultiContent">{
 					"template": [
-						MultiContentEntryText(pos = (0, 0), size = (200, 110), font=0, backcolor = 0x505050),
-						MultiContentEntryText(pos = (5, 50), size = (190, 50), font=0, flags = RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP, text = 1),
+						MultiContentEntryText(pos = (0, 0), size = (190, 100), font=0, backcolor = 0x505050),
+						MultiContentEntryText(pos = (5, 50), size = (180, 50), font=0, flags = RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP, text = 1),
 						MultiContentEntryPixmapAlphaBlend(pos=(50, 10), size=(100, 40), png=3, flags=BT_SCALE)
 					],
 					"fonts": [gFont("Regular", 18),gFont("Regular", 14)],
-					"itemWidth": 200,
-					"itemHeight": 110
+					"itemWidth": 190,
+					"itemHeight": 100
 				}</convert>
-    </widget>
-    <widget name="quickselect" position="30,100" size="760,550" backgroundColor="selectedBG" foregroundColor="grey" font="Regular;24" halign="center" transparent="1" valign="center" zPosition="+1" />
-    <panel name="Template_Title_Date" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_menu_exit" />
-  </screen>
+  </widget>
+  <widget name="quickselect" position="30,90" size="760,570" backgroundColor="selectedBG" foregroundColor="grey" font="Regular;24" halign="center" transparent="1" valign="center" zPosition="+1" />
+  <panel name="Template_Title_Date" />
+  <panel name="TemplateAllColorButtons_Automatic" />
+  <panel name="template_menu_exit" />
+</screen>
   <!--   PluginBrowserList -->
   <screen name="PluginBrowserList" title="Plugin browser" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
     <widget source="pluginList" render="Listbox" position="530,100" size="720,520" listOrientation="vertical" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1">
@@ -4702,7 +4676,7 @@ if len(listitems.list) &gt; 2:
     <eLabel text="/ Speichern" position="480,688" size="160,26" font="Regular; 20" halign="center" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" valign="center" />
     <eLabel text="Press Menu to set OA weather" position="30,624" size="430,34" font="Regular; 24" halign="center" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" valign="center" />
     <eLabel text="Configure stein17 Mod    *PLi-HD-FullNight* " position="25,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" />
-    <widget name="config" position="530,100" size="720,120" itemHeight="30" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showNever" enableWrapAround="1" />
+    <widget name="config" position="530,100" size="720,150" itemHeight="30" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showNever" enableWrapAround="1" />
     <widget name="Picture" position="530,255" size="720,405" alphatest="on" />
     <ePixmap pixmap="buttons/key_red.png" position="225,688" size="24,24" alphatest="blend" transparent="1" />
     <ePixmap pixmap="buttons/key_green.png" position="440,688" size="24,24" alphatest="blend" transparent="1" />
