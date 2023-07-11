@@ -207,7 +207,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.default_emcsel_file = "emcsel_Original.xml"
         self.default_movsel_file = "movsel_Original.xml"
         self.default_mini_tv_file = "mini_tv_Original.xml"
-        self.default_volume_file = "volume_Original.xml"
+        self.default_player_file = "player_Original.xml"
         self.default_weather_file = "weather_Original.xml"
         self.default_a_clock_file = "a_clock_Original.xml"
 
@@ -224,7 +224,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.movsel_file = "skin_user_movsel.xml"
         self.poster_infobar_file = "skin_user_poster_infobar.xml"
         self.mini_tv_file = "skin_user_mini_tv.xml"
-        self.volume_file = "skin_user_volume.xml"
+        self.player_file = "skin_user_player.xml"
         self.weather_file = "skin_user_weather.xml"
         self.a_clock_file = "skin_user_a_clock.xml"
 
@@ -267,9 +267,9 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         # poster_infobar
         current, choices = self.getSettings(self.default_poster_infobar_file, self.poster_infobar_file)
         self.myAtileHD_poster_infobar = NoSave(ConfigSelection(default=current, choices=choices))
-        # volume
-        current, choices = self.getSettings(self.default_volume_file, self.volume_file)
-        self.myAtileHD_volume = NoSave(ConfigSelection(default=current, choices=choices))
+        # player
+        current, choices = self.getSettings(self.default_player_file, self.player_file)
+        self.myAtileHD_player = NoSave(ConfigSelection(default=current, choices=choices))
         # weather
         current, choices = self.getSettings(self.default_weather_file, self.weather_file)
         self.myAtileHD_weather = NoSave(ConfigSelection(default=current, choices=choices))
@@ -347,7 +347,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.set_emcsel = getConfigListEntry(_("EMC Selection:"), self.myAtileHD_emcsel)
         self.set_movsel = getConfigListEntry(_("Movie Selection:"), self.myAtileHD_movsel)
         self.set_mini_tv = getConfigListEntry(_("all Screens with Mini TV:"), self.myAtileHD_mini_tv)
-        self.set_volume = getConfigListEntry(_("Volume Style:"), self.myAtileHD_volume)
+        self.set_player = getConfigListEntry(_("Movie Player:"), self.myAtileHD_player)
         self.set_myatile = getConfigListEntry(_("Enable %s Extentions:") % cur_skin, self.myAtileHD_active)
         self.set_new_skin = getConfigListEntry(_("Change skin"), ConfigNothing())
         self.find_woeid = getConfigListEntry(_("Search weather location ID"), ConfigNothing())
@@ -384,8 +384,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_movsel)
             if len(self.myAtileHD_mini_tv.choices) > 1:
                 self.list.append(self.set_mini_tv)
-            if len(self.myAtileHD_volume.choices) > 1:
-                self.list.append(self.set_volume)
+            if len(self.myAtileHD_player.choices) > 1:
+                self.list.append(self.set_player)
             self.list.append(self.set_new_skin)
         self["config"].list = self.list
         self["config"].l.setList(self.list)
@@ -421,8 +421,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_mini_tv:
             self.setPicture(self.myAtileHD_mini_tv.value)
-        elif self["config"].getCurrent() == self.set_volume:
-            self.setPicture(self.myAtileHD_volume.value)
+        elif self["config"].getCurrent() == self.set_player:
+            self.setPicture(self.myAtileHD_player.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
         elif self["config"].getCurrent() == self.set_a_clock:
@@ -461,8 +461,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_mini_tv:
             self.setPicture(self.myAtileHD_mini_tv.value)
-        elif self["config"].getCurrent() == self.set_volume:
-            self.setPicture(self.myAtileHD_volume.value)
+        elif self["config"].getCurrent() == self.set_player:
+            self.setPicture(self.myAtileHD_player.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
         elif self["config"].getCurrent() == self.set_a_clock:
@@ -586,8 +586,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_movsel, self.movsel_file)
             # mini_tv
             self.makeSettings(self.myAtileHD_mini_tv, self.mini_tv_file)
-            # volume
-            self.makeSettings(self.myAtileHD_volume, self.volume_file)
+            # player
+            self.makeSettings(self.myAtileHD_player, self.player_file)
             # poster_infobar
             self.makeSettings(self.myAtileHD_poster_infobar, self.poster_infobar_file)
             # weather
