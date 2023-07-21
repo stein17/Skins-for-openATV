@@ -198,7 +198,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
 
         self.default_infobar_file = "infobar_Original.xml"
         self.default_pig_file = "pig_Original.xml"
-        self.default_clock_file = "clock_Original.xml"
+        self.default_caid_file = "caid_Original.xml"
         self.default_sib_file = "sib_Original.xml"
         self.default_ch_se_file = "ch_se_Original.xml"
         self.default_ch_se_color_file = "ch_se_color_Original.xml"
@@ -214,7 +214,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.background_file = "skin_user_background.xml"
         self.infobar_file = "skin_user_infobar.xml"
         self.pig_file = "skin_user_pig.xml"
-        self.clock_file = "skin_user_clock.xml"
+        self.caid_file = "skin_user_caid.xml"
         self.sib_file = "skin_user_sib.xml"
         self.ch_se_file = "skin_user_ch_se.xml"
         self.ch_se_color_file = "skin_user_ch_se_color.xml"
@@ -237,9 +237,9 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         # pig
         current, choices = self.getSettings(self.default_pig_file, self.pig_file)
         self.myAtileHD_pig = NoSave(ConfigSelection(default=current, choices=choices))
-        # clock
-        current, choices = self.getSettings(self.default_clock_file, self.clock_file)
-        self.myAtileHD_clock = NoSave(ConfigSelection(default=current, choices=choices))
+        # caid
+        current, choices = self.getSettings(self.default_caid_file, self.caid_file)
+        self.myAtileHD_caid = NoSave(ConfigSelection(default=current, choices=choices))
         # sib
         current, choices = self.getSettings(self.default_sib_file, self.sib_file)
         self.myAtileHD_sib = NoSave(ConfigSelection(default=current, choices=choices))
@@ -335,7 +335,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.set_background = getConfigListEntry(_("Set background transparency:"), self.myAtileHD_background)
         self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
         self.set_pig = getConfigListEntry(_("Switch Mini TV on/off:"), self.myAtileHD_pig)
-        self.set_clock = getConfigListEntry(_("Clock Widget Infobar:"), self.myAtileHD_clock)
+        self.set_caid = getConfigListEntry(_("Caid Display Infobar:"), self.myAtileHD_caid)
         self.set_weather = getConfigListEntry(_("Weather Info:"), self.myAtileHD_weather)
         self.set_a_clock = getConfigListEntry(_("Color Analog-Clock:"), self.myAtileHD_a_clock)
         self.set_poster_infobar = getConfigListEntry(_("Poster Infobar:"), self.myAtileHD_poster_infobar)
@@ -360,8 +360,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_infobar)
             if len(self.myAtileHD_pig.choices) > 1:
                 self.list.append(self.set_pig)
-            if len(self.myAtileHD_clock.choices) > 1:
-                self.list.append(self.set_clock)
+            if len(self.myAtileHD_caid.choices) > 1:
+                self.list.append(self.set_caid)
             if len(self.myAtileHD_a_clock.choices) > 1:
                 self.list.append(self.set_a_clock)
             if len(self.myAtileHD_weather.choices) > 1:
@@ -403,8 +403,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_infobar.value)
         elif self["config"].getCurrent() == self.set_pig:
             self.setPicture(self.myAtileHD_pig.value)
-        elif self["config"].getCurrent() == self.set_clock:
-            self.setPicture(self.myAtileHD_clock.value)
+        elif self["config"].getCurrent() == self.set_caid:
+            self.setPicture(self.myAtileHD_caid.value)
         elif self["config"].getCurrent() == self.set_sib:
             self.setPicture(self.myAtileHD_sib.value)
         elif self["config"].getCurrent() == self.set_ch_se:
@@ -443,8 +443,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_infobar.value)
         elif self["config"].getCurrent() == self.set_pig:
             self.setPicture(self.myAtileHD_pig.value)
-        elif self["config"].getCurrent() == self.set_clock:
-            self.setPicture(self.myAtileHD_clock.value)
+        elif self["config"].getCurrent() == self.set_caid:
+            self.setPicture(self.myAtileHD_caid.value)
         elif self["config"].getCurrent() == self.set_sib:
             self.setPicture(self.myAtileHD_sib.value)
         elif self["config"].getCurrent() == self.set_ch_se:
@@ -568,8 +568,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_infobar, self.infobar_file)
             # pig
             self.makeSettings(self.myAtileHD_pig, self.pig_file)
-            # clock
-            self.makeSettings(self.myAtileHD_clock, self.clock_file)
+            # caid
+            self.makeSettings(self.myAtileHD_caid, self.caid_file)
             # sib
             self.makeSettings(self.myAtileHD_sib, self.sib_file)
             # ch_se
