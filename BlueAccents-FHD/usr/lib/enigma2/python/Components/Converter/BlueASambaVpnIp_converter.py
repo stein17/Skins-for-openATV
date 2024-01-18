@@ -10,7 +10,8 @@ import os
 import glob
 from time import time
 # import time
-import json, urllib
+import json
+import urllib
 from Tools.LoadPixmap import LoadPixmap
 from os import system, path, popen, remove
 from datetime import datetime
@@ -51,7 +52,7 @@ def get_myipdata():
     try:
         if not os.path.exists(myipdata) or time() - os.path.getmtime(r"%s" % myipdata) > myipdataupdatepause:
             url = "http://ip-api.com/json/"
-            data = json.load(urllib.request.urlopen(url))
+            data = json.load(urllib.request.urlopen(url, timeout=5))
             json.dump(data, open(myipdata, 'w'))
             #write_log("json url ip contry")
         # hier in logfile schreiben
@@ -61,7 +62,6 @@ def get_myipdata():
 
         country = data['countryCode']
         ip = data['query']
-
 
     except:
 
