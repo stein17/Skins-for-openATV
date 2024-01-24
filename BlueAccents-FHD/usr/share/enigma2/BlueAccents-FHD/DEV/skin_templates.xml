@@ -572,7 +572,7 @@
       <convert type="ClockToText">Format:%d.%b.%Y</convert>
     </widget>
     <ePixmap position="1650,897" zPosition="-5" size="270,90" pixmap="BG-Pixmaps/Clocks/Infobar_Digital_Clock.png" alphatest="blend" />
-  <ePixmap position="1692,932" zPosition="10" size="204,1" pixmap="BG-Pixmaps/Clocks/Line_Infobar_Digital_Clock_more.png" transparent="1" alphatest="blend" />
+  <ePixmap position="1692,944" zPosition="10" size="204,1" pixmap="BG-Pixmaps/Clocks/Line_Infobar_Digital_Clock_more.png" transparent="1" alphatest="blend" />
   </screen>
     <!-- Digitalclock-Clock-Infobar default-->
   <screen name="template_digitalclock_widget_infobar_default">
@@ -1764,6 +1764,58 @@
       <convert type="EventTime">Progress</convert>
     </widget>
   </screen>
+  
+  
+  
+  <!--Template Progress ChannelSelection 3 Fields-->
+  <screen name="template_progress_channelselection_3Fields">
+<widget source="ServiceEvent" render="Progress" position="945,169" size="172,15" pixmap="BG-Pixmaps/Progress/progress_EPG_blue.png" alphatest="blend" transparent="1" zPosition="1" borderWidth="2" borderColor="scrollbarborder">
+    <convert type="EventTime">Progress</convert>
+</widget>
+  </screen>
+  <!-- TEMPLATES Channel_Selection_default 3 Fields-->
+  <screen name="Channel_Selection_List_Color_3Fields">
+	<widget name="list" zPosition="12" position="30,112" size="810,825" 
+	listMarginLeft="8" 
+	listMarginRight="27" 
+	alphatest="blend" 
+	fieldMargins="8" 
+	itemsDistances="8" 
+	progressbarHeight="12" 
+	progressBarWidth="75" 
+	progressbarBorderWidth="2" 
+	serviceItemHeight="30" 
+	serviceNumberFont="Regular;27" 
+	serviceNameFont="Regular;30" 
+	serviceInfoFont="Regular;27" 
+	progressInfoFont="Regular;27" 
+	transparent="1" 
+	colorServiceRecorded="red" 
+	colorServicePseudoRecorded="pink" 
+	colorServiceStreamed="orange" 
+	foregroundColorServiceNotAvail="lila" 
+	foregroundColorMarkedSelected="rosa" 
+	scrollbarBorderWidth="2" 
+	scrollbarWidth="14" 
+	scrollbarForegroundColor="scrollbarSlidercolor" 
+	scrollbarBorderColor="scrollbarborder" 
+	scrollbarMode="showOnDemand" 
+	progressPercentWidth="150" 
+	colorServiceDescription="white" 
+	colorServiceDescriptionSelected="cyan" 
+	colorEventProgressbarBorder="scrollbarborder" 
+	colorEventProgressbarBorderSelected="scrollbarSlidercolor" 
+	backgroundColor="background" 
+	backgroundColorSelected="black" 
+	foregroundColor="selectedFG" 
+	foregroundColorSelected="white" 
+	picServiceEventProgressbar="BlueAccents-FHD/BG-Pixmaps/Progress/progress_CS_blue.png" />
+
+    </screen>
+  
+  
+  
+  
   <!--Template Progress ChannelSelection -->
   <screen name="template_progress_channelselection">
     <widget source="ServiceEvent" render="Progress" position="1365,457" size="270,15" pixmap="BG-Pixmaps/Progress/progress_EPG_blue.png" alphatest="blend" transparent="1" zPosition="1" borderWidth="2" borderColor="scrollbarborder">
@@ -2594,21 +2646,7 @@
     <widget source="global.CurrentTime" render="Label" position="1260,577" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueASTBinfo">CPUtemp</convert>
     </widget>
-    <applet type="onLayoutFinish">
-    </applet>
-    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-    <eLabel backgroundColor="red" position="1261,571" size="63,4" zPosition="1" foregroundColor="white" />
-    <widget backgroundColor="green" position="1261,571" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-      <convert type="BlueASambaVpnIp_converter">vpn</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget backgroundColor="background" position="1387,540" size="270,37" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
-    </widget>
-    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-      <convert type="BlueASambaVpnIp_converter">flag</convert>
-    </widget>
-    <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
+	<widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueAReceiverInfo">UsbInfo</convert>
     </widget>
     <widget source="session.CurrentService" render="Label" position="1260,652" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
@@ -2673,10 +2711,37 @@
     <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1777,952" render="Label" size="120,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
       <convert type="BlueAEmuInfo">Hops</convert>
     </widget>
-	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+<!-- 	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
 	<widget source="session.CurrentService" render="Label" position="1715,540" size="180,37" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
      <convert type="ServiceName">Provider</convert>
+    </widget> -->
+	 <panel name="template_VPN_IP_ev"/>
+  </screen>
+   <!--  template_VPN_IP_sib fake -->
+    <screen name="template_VPN_IP_sib">
+    <eLabel name="fake" position="0, 0" size="0,0" />
+  </screen>
+  
+  <!--  template_VPN_IP_sib  -->
+      <screen name="template_SambaVpnIp_sib">
+    <applet type="onLayoutFinish">
+    </applet>
+    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
+    <eLabel backgroundColor="red" position="1261,568" size="63,3" zPosition="1"  />
+    <widget backgroundColor="green" position="1261,568" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+      <convert type="BlueASambaVpnIp_converter">vpn</convert>
+      <convert type="ConditionalShowHide" />
     </widget>
+    <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
+      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
+    </widget>
+    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
+      <convert type="BlueASambaVpnIp_converter">flag</convert>
+    </widget>
+	<eLabel name="IP" position="1640,540" size="40,30" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" />
+	<widget source="session.CurrentService" position="1680,540" size="270,30" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
+		<convert type="BlueA_myIP">Iplocal</convert>
+	</widget>
   </screen>
   <!-- TEMPLATES Fullinfo SIB -->
   <screen name="template_fullinfo_sib">
@@ -2728,24 +2793,10 @@
     <widget source="global.CurrentTime" render="Label" position="1260,577" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueASTBinfo">CPUtemp</convert>
     </widget>
-    <applet type="onLayoutFinish">
-    </applet>
-    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-    <eLabel backgroundColor="red" position="1261,568" size="63,4" zPosition="1" foregroundColor="white" />
-    <widget backgroundColor="green" position="1261,568" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-      <convert type="BlueASambaVpnIp_converter">vpn</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+<!-- 	<eLabel text="Prov:" backgroundColor="background" position="1645,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
 	<widget source="session.CurrentService" render="Label" position="1715,540" size="180,30" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
      <convert type="ServiceName">Provider</convert>
-    </widget>
-    <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
-    </widget>
-    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-      <convert type="BlueASambaVpnIp_converter">flag</convert>
-    </widget>
+    </widget> -->
     <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueAReceiverInfo">UsbInfo</convert>
     </widget>
@@ -2813,6 +2864,7 @@
     </widget>
     <panel name="template_sib_crypt_info" />
     <panel name="template_sib_tuner_info" />
+	 <panel name="template_VPN_IP_sib"/>
   </screen>
   <screen name="template_ethernet_infobar">
     <eLabel name="fake" position="0, 0" size="0,0" />
@@ -3465,6 +3517,7 @@
   </screen>
   <!-- backgroundColor="background"  scrollbarMode="showOnDemand" -->
   <!-- TEMPLATES -->
+  
   <!-- TEMPLATES Fullinfo SIB Picon -->
   <screen name="template_fullinfo_sib_picon">
     <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="708,517" size="70,22" zPosition="1" />
@@ -3478,24 +3531,10 @@
     <widget source="global.CurrentTime" render="Label" position="1260,577" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueASTBinfo">CPUtemp</convert>
     </widget>
-    <applet type="onLayoutFinish">
-    </applet>
-    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-    <eLabel backgroundColor="red" position="1261,568" size="63,4" zPosition="1" foregroundColor="white" />
-    <widget backgroundColor="green" position="1261,568" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-      <convert type="BlueASambaVpnIp_converter">vpn</convert>
-      <convert type="ConditionalShowHide" />
-    </widget>
-    <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
-    </widget>
-    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-      <convert type="BlueASambaVpnIp_converter">flag</convert>
-    </widget>
-	<eLabel text="Prov:" backgroundColor="background" position="1650,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+<!-- 	<eLabel text="Prov:" backgroundColor="background" position="1650,540" size="65,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
 	<widget source="session.CurrentService" render="Label" position="1720,540" size="180,30" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
      <convert type="ServiceName">Provider</convert>
-    </widget>
+    </widget> -->
     <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
       <convert type="BlueAReceiverInfo">UsbInfo</convert>
     </widget>
@@ -3561,7 +3600,59 @@
     <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1777,952" render="Label" size="120,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
       <convert type="BlueAEmuInfo">Hops</convert>
     </widget>
+	<panel name="template_VPN_IP_sib"/>
   </screen>
+  
+  
+     <!--  template_VPN_IP_sib fake -->
+    <screen name="template_VPN_IP_ev">
+    <eLabel name="fake" position="0, 0" size="0,0" />
+  </screen>
+  
+  <!--  template_VPN_IP_ev  -->
+      <screen name="template_SambaVpnIp_ev">
+    <applet type="onLayoutFinish">
+    </applet>
+    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
+    <eLabel backgroundColor="red" position="1261,571" size="63,3" zPosition="1" foregroundColor="white" />
+    <widget backgroundColor="green" position="1261,571" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+      <convert type="BlueASambaVpnIp_converter">vpn</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget backgroundColor="background" position="1387,540" size="270,37" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
+      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
+    </widget>
+    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
+      <convert type="BlueASambaVpnIp_converter">flag</convert>
+    </widget>
+	<eLabel name="IP" position="1650,540" size="40,37" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" borderWidth="1" borderColor="black"/>
+	<widget source="session.CurrentService" position="1690,540" size="240,37" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
+		<convert type="BlueA_myIP">Iplocal</convert>
+	</widget>
+  </screen>
+
+    <!--  template_VPN_IP_ev_picon  -->
+      <screen name="template_SambaVpnIp_ev_picon">
+    <applet type="onLayoutFinish">
+    </applet>
+    <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
+    <eLabel backgroundColor="red" position="1261,571" size="63,3" zPosition="1" foregroundColor="white" />
+    <widget backgroundColor="green" position="1261,571" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+      <convert type="BlueASambaVpnIp_converter">vpn</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget backgroundColor="background" position="1387,540" size="270,37" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
+      <convert type="BlueASambaVpnIp_converter">c+myip</convert>
+    </widget>
+    <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
+      <convert type="BlueASambaVpnIp_converter">flag</convert>
+    </widget>
+	<eLabel name="IP" position="1650,540" size="40,37" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" borderWidth="1" borderColor="black"/>
+	<widget source="session.CurrentService" position="1690,540" size="240,37" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
+		<convert type="BlueA_myIP">Iplocal</convert>
+	</widget>
+  </screen>
+  
   <!-- TEMPLATES Fullinfo EV Picon -->
   <screen name="template_fullinfo_ev_picon">
   <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="708,517" size="70,22" zPosition="1" />
@@ -3575,24 +3666,10 @@
   <widget source="global.CurrentTime" render="Label" position="1260,577" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
     <convert type="BlueASTBinfo">CPUtemp</convert>
   </widget>
-  <applet type="onLayoutFinish">
-  </applet>
-  <eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-  <eLabel backgroundColor="red" position="1261,568" size="63,4" zPosition="1" foregroundColor="white" />
-  <widget backgroundColor="green" position="1261,568" size="63,4" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-    <convert type="BlueASambaVpnIp_converter">vpn</convert>
-    <convert type="ConditionalShowHide" />
-  </widget>
-  <widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-    <convert type="BlueASambaVpnIp_converter">c+myip</convert>
-  </widget>
-  <widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-    <convert type="BlueASambaVpnIp_converter">flag</convert>
-  </widget>
-  <eLabel text="Prov:" backgroundColor="background" position="1660,577" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+<!--   <eLabel text="Prov:" backgroundColor="background" position="1660,577" size="65,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" />
   <widget source="session.CurrentService" render="Label" position="1725,577" size="175,37" font="Regular; 27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="1">
     <convert type="ServiceName">Provider</convert>
-  </widget>
+  </widget> -->
   <widget source="session.CurrentService" render="Label" position="1260,615" size="637,37" zPosition="1" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1">
     <convert type="BlueAReceiverInfo">UsbInfo</convert>
   </widget>
@@ -3640,7 +3717,7 @@
     <convert type="ValueRange">3,3</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.CurrentService" render="Label" text="CCCam2.3.0+Oscam svn11580" position="1260,877" valign="center" size="637,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" noWrap="1">
+  <widget source="session.CurrentService" render="Label" text="CCCam2.3.0+Oscam svn11580" position="1260,877" valign="center" size="637,37" font="Regular;27" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" zPosition="1" noWrap="1">
     <convert type="BlueACamName">CamName</convert>
   </widget>
   <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1260,915" render="Label" size="172,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
@@ -3658,6 +3735,7 @@
   <widget font="Regular;24" foregroundColor="selectedFG" backgroundColor="background" halign="left" position="1777,952" render="Label" size="120,37" source="session.CurrentService" transparent="1" valign="center" zPosition="1">
     <convert type="BlueAEmuInfo">Hops</convert>
   </widget>
+  <panel name="template_VPN_IP_ev"/>
 </screen>
    <!-- TEMPLATES_Infobar_Poster_Fake-->
   <screen name="template_Poster_Infobar_Mini">
@@ -3852,6 +3930,12 @@
 	<widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="339,575" size="184,277" zPosition="10" />
 	<widget source="session.Event_Next" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="1465,575" size="184,277" zPosition="10" />
   </screen>
+    <!-- TEMPLATES_Infobar_ECM_Mini_Poster_androidweather_widget_infobar_more -->
+  <screen name="template_Mini_Poster_Infobar_ECM_Weather_Android">
+  	<widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="1260,575" size="184,277" zPosition="10" />
+	<widget source="session.Event_Next" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="1465,575" size="184,277" zPosition="10" />
+   </screen>
+  
   <!-- TEMPLATES_Infobar_default_Mini_Poster_digitalclock_widget_infobar_more -->
   <screen name="template_Mini_Poster_Infobar_Default_Digiclock_more">
 	<widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="339,575" size="184,277" zPosition="10" />
@@ -4171,6 +4255,8 @@
     </widget>
     <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1845,1020" size="52,52" zPosition="2" alphatest="blend">
       <convert type="FrontendInfo">TYPE</convert>
+	  
+	  
       <convert type="ValueRange">1,1</convert>
       <convert type="ConditionalShowHide" />
     </widget>
@@ -4510,7 +4596,8 @@
     </widget>
   </screen>
   <!--  12 TUNER INFO -->
-  <screen name="template_12_Tuner_Info_SIB">
+<screen name="template_12_Tuner_Info_SIB">
+   <ePixmap position="30,1019" size="25,28" pixmap="tunericons/a_grey.png" zPosition="1" alphatest="blend" />
     <widget source="session.TunerInfo" position="30,1019" size="25,28" render="Pixmap" pixmap="tunericons/a_grey.png" zPosition="2" alphatest="blend">
       <convert type="TunerInfo">TunerAvailable</convert>
       <convert type="ValueRange">1,12</convert>
@@ -4530,6 +4617,7 @@
       <convert type="BlueAFrontendInfo">REC_0</convert>
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
+	<ePixmap position="58,1019" size="25,28" pixmap="tunericons/b_grey.png" zPosition="1" alphatest="blend" />
     <widget source="session.TunerInfo" position="58,1019" size="25,28" render="Pixmap" pixmap="tunericons/b_grey.png" zPosition="2" alphatest="blend">
       <convert type="TunerInfo">TunerAvailable</convert>
       <convert type="ValueRange">2,12</convert>
@@ -4549,6 +4637,7 @@
       <convert type="BlueAFrontendInfo">REC_1</convert>
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
+	<ePixmap position="87,1019" size="25,28" pixmap="tunericons/c_grey.png" zPosition="1" alphatest="blend" />
     <widget source="session.TunerInfo" position="87,1019" size="25,28" render="Pixmap" pixmap="tunericons/c_grey.png" zPosition="2" alphatest="blend">
       <convert type="TunerInfo">TunerAvailable</convert>
       <convert type="ValueRange">3,12</convert>
@@ -4568,6 +4657,7 @@
       <convert type="BlueAFrontendInfo">REC_2</convert>
       <convert type="ConditionalShowHide">Blink</convert>
     </widget>
+	<ePixmap position="115,1019" size="25,28" pixmap="tunericons/d_grey.png" zPosition="1" alphatest="blend" />
     <widget source="session.TunerInfo" position="115,1019" size="25,28" render="Pixmap" pixmap="tunericons/d_grey.png" zPosition="2" alphatest="blend">
       <convert type="TunerInfo">TunerAvailable</convert>
       <convert type="ValueRange">4,12</convert>
@@ -5512,16 +5602,16 @@
     <!--   <widget source="session.CurrentService" render="BlueAPiconUni" path="piconSat" position="1665,487" size="75,45" zPosition="2"  alphatest="blend">
     <convert type="ServiceName2">OrbitalPos</convert>
   </widget> -->
-    <ePixmap position="1665,541" size="75,45" pixmap="icons/DVB_S.png" zPosition="2" alphatest="blend" />
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_C.png" position="1665,541" size="75,45" zPosition="2" alphatest="blend">
+    <ePixmap position="1665,575" size="75,45" pixmap="icons/DVB_S.png" zPosition="2" alphatest="blend" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_C.png" position="1665,575" size="75,45" zPosition="2" alphatest="blend">
       <convert type="BlueAServiceInfoEX">IsCable</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_T.png" position="1665,541" size="75,45" zPosition="2" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_T.png" position="1665,575" size="75,45" zPosition="2" alphatest="blend">
       <convert type="BlueAServiceInfoEX">IsTerrestrial</convert>
       <convert type="ConditionalShowHide" />
     </widget>
-    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_IPTV.png" position="1665,541" size="75,45" zPosition="2" alphatest="blend">
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/DVB_IPTV.png" position="1665,575" size="75,45" zPosition="2" alphatest="blend">
       <convert type="BlueAServiceInfoEX">IsStreamTV</convert>
       <convert type="ConditionalShowHide" />
     </widget>
@@ -5593,5 +5683,6 @@
       <convert type="ConditionalShowHide" />
     </widget>
   </screen>
+
   </skin>
 
