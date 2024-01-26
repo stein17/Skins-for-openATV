@@ -193,7 +193,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         self.skin_base_dir = "/usr/share/enigma2/%s/" % cur_skin
 
         self.default_font_file = "font_atile_Roboto.xml"
-        self.default_poster_infobar_file = "poster_infobar_Original.xml"
+        self.default_poster_i_next_file = "poster_i_next_Original.xml"
         self.default_background_file = "background_Original.xml"
 
         self.default_infobar_file = "infobar_Original.xml"
@@ -209,7 +209,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         self.default_mini_tv_file = "mini_tv_Original.xml"
         self.default_volume_file = "volume_Original.xml"
         self.default_weather_file = "weather_Original.xml"
-        self.default_a_clock_file = "a_clock_Original.xml"
+        self.default_poster_i_now_file = "poster_i_now_Original.xml"
 
         self.background_file = "skin_user_background.xml"
         self.infobar_file = "skin_user_infobar.xml"
@@ -222,11 +222,11 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         self.progress_file = "skin_user_progress.xml"
         self.emcsel_file = "skin_user_emcsel.xml"
         self.movsel_file = "skin_user_movsel.xml"
-        self.poster_infobar_file = "skin_user_poster_infobar.xml"
+        self.poster_i_next_file = "skin_user_poster_i_next.xml"
         self.mini_tv_file = "skin_user_mini_tv.xml"
         self.volume_file = "skin_user_volume.xml"
         self.weather_file = "skin_user_weather.xml"
-        self.a_clock_file = "skin_user_a_clock.xml"
+        self.poster_i_now_file = "skin_user_poster_i_now.xml"
 
         # background
         current, choices = self.getSettings(self.default_background_file, self.background_file)
@@ -264,18 +264,18 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         # mini_tv
         current, choices = self.getSettings(self.default_mini_tv_file, self.mini_tv_file)
         self.myAtileHD_mini_tv = NoSave(ConfigSelection(default=current, choices=choices))
-        # poster_infobar
-        current, choices = self.getSettings(self.default_poster_infobar_file, self.poster_infobar_file)
-        self.myAtileHD_poster_infobar = NoSave(ConfigSelection(default=current, choices=choices))
+        # poster_i_next
+        current, choices = self.getSettings(self.default_poster_i_next_file, self.poster_i_next_file)
+        self.myAtileHD_poster_i_next = NoSave(ConfigSelection(default=current, choices=choices))
         # volume
         current, choices = self.getSettings(self.default_volume_file, self.volume_file)
         self.myAtileHD_volume = NoSave(ConfigSelection(default=current, choices=choices))
         # weather
         current, choices = self.getSettings(self.default_weather_file, self.weather_file)
         self.myAtileHD_weather = NoSave(ConfigSelection(default=current, choices=choices))
-        # a_clock
-        current, choices = self.getSettings(self.default_a_clock_file, self.a_clock_file)
-        self.myAtileHD_a_clock = NoSave(ConfigSelection(default=current, choices=choices))
+        # poster_i_now
+        current, choices = self.getSettings(self.default_poster_i_now_file, self.poster_i_now_file)
+        self.myAtileHD_poster_i_now = NoSave(ConfigSelection(default=current, choices=choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -336,9 +336,9 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
         self.set_tuner = getConfigListEntry(_("Number of Tuners in the Infobar:"), self.myAtileHD_tuner)
         self.set_clock = getConfigListEntry(_("Clock Widget Infobar:"), self.myAtileHD_clock)
-        self.set_weather = getConfigListEntry(_("Weather Info:"), self.myAtileHD_weather)
-        self.set_a_clock = getConfigListEntry(_("Color Analog-Clock:"), self.myAtileHD_a_clock)
-        self.set_poster_infobar = getConfigListEntry(_("Poster Infobar:"), self.myAtileHD_poster_infobar)
+        self.set_weather = getConfigListEntry(_("Weather Info Infobar:"), self.myAtileHD_weather)
+        self.set_poster_i_now = getConfigListEntry(_("Poster Infobar Now:"), self.myAtileHD_poster_i_now)
+        self.set_poster_i_next = getConfigListEntry(_("Poster Infobar Next:"), self.myAtileHD_poster_i_next)
         self.set_sib = getConfigListEntry(_("Secondinfobar:"), self.myAtileHD_sib)
         self.set_ch_se = getConfigListEntry(_("Channelselection:"), self.myAtileHD_ch_se)
         self.set_ch_se_color = getConfigListEntry(_("Channel/ EMC-Selection Color:"), self.myAtileHD_ch_se_color)
@@ -362,12 +362,13 @@ class BlueAccents_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_tuner)
             if len(self.myAtileHD_clock.choices) > 1:
                 self.list.append(self.set_clock)
-            if len(self.myAtileHD_a_clock.choices) > 1:
-                self.list.append(self.set_a_clock)
+            if len(self.myAtileHD_poster_i_now.choices) > 1:
+                self.list.append(self.set_poster_i_now)
+            if len(self.myAtileHD_poster_i_next.choices) > 1:
+                self.list.append(self.set_poster_i_next)
             if len(self.myAtileHD_weather.choices) > 1:
                 self.list.append(self.set_weather)
-            if len(self.myAtileHD_poster_infobar.choices) > 1:
-                self.list.append(self.set_poster_infobar)
+ 
             if len(self.myAtileHD_sib.choices) > 1:
                 self.list.append(self.set_sib)
             if len(self.myAtileHD_ch_se.choices) > 1:
@@ -395,8 +396,8 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self["key_yellow"].setText("")
 
     def changedEntry(self):
-        if self["config"].getCurrent() == self.set_poster_infobar:
-            self.setPicture(self.myAtileHD_poster_infobar.value)
+        if self["config"].getCurrent() == self.set_poster_i_next:
+            self.setPicture(self.myAtileHD_poster_i_next.value)
         elif self["config"].getCurrent() == self.set_background:
             self.setPicture(self.myAtileHD_background.value)
         elif self["config"].getCurrent() == self.set_infobar:
@@ -425,8 +426,8 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_volume.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
-        elif self["config"].getCurrent() == self.set_a_clock:
-            self.setPicture(self.myAtileHD_a_clock.value)
+        elif self["config"].getCurrent() == self.set_poster_i_now:
+            self.setPicture(self.myAtileHD_poster_i_now.value)
         elif self["config"].getCurrent() == self.set_myatile:
             if self.myAtileHD_active.value:
                 self["key_yellow"].setText("%s Config" % cur_skin)
@@ -435,8 +436,8 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self.createConfigList()
 
     def selectionChanged(self):
-        if self["config"].getCurrent() == self.set_poster_infobar:
-            self.setPicture(self.myAtileHD_poster_infobar.value)
+        if self["config"].getCurrent() == self.set_poster_i_next:
+            self.setPicture(self.myAtileHD_poster_i_next.value)
         elif self["config"].getCurrent() == self.set_background:
             self.setPicture(self.myAtileHD_background.value)
         elif self["config"].getCurrent() == self.set_infobar:
@@ -465,8 +466,8 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_volume.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
-        elif self["config"].getCurrent() == self.set_a_clock:
-            self.setPicture(self.myAtileHD_a_clock.value)
+        elif self["config"].getCurrent() == self.set_poster_i_now:
+            self.setPicture(self.myAtileHD_poster_i_now.value)
         else:
             self["Picture"].hide()
 
@@ -588,12 +589,12 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_mini_tv, self.mini_tv_file)
             # volume
             self.makeSettings(self.myAtileHD_volume, self.volume_file)
-            # poster_infobar
-            self.makeSettings(self.myAtileHD_poster_infobar, self.poster_infobar_file)
+            # poster_i_next
+            self.makeSettings(self.myAtileHD_poster_i_next, self.poster_i_next_file)
             # weather
             self.makeSettings(self.myAtileHD_weather, self.weather_file)
-            # a_clock
-            self.makeSettings(self.myAtileHD_a_clock, self.a_clock_file)
+            # poster_i_now
+            self.makeSettings(self.myAtileHD_poster_i_now, self.poster_i_now_file)
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")

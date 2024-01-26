@@ -1,0 +1,72 @@
+<skin>
+  <!-- SecondInfoBar Full-->
+  <screen name="SecondInfoBar" flags="wfNoBorder" position="0,0" size="1920,1080" title="SecondInfoBar" backgroundColor="background">
+    <widget source="Title" render="Label" position="195,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget alphatest="blend" position="31,0" render="Picon" size="135,76" source="session.CurrentService" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <eLabel text="Now:" position="30,112" size="150,45" zPosition="1" font="Regular;36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" transparent="1" />
+    <widget source="session.Event_Now" position="135,112" size="645,45" font="Regular;36" halign="left" noWrap="1" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=10,repeat=5,startdelay=900,always=0" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventName">Name</convert>
+    </widget>
+<!--     <widget source="session.Event_Now" render="BlueARunningText" position="30,180" size="750,307" font="Regular;33" backgroundColor="background" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="1">
+      <convert type="EventName">FullDescription</convert>
+    </widget> -->
+    <eLabel text="Next:" position="30,562" size="150,45" font="Regular;36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" zPosition="1" transparent="1" />
+    <widget source="session.Event_Next" render="BlueARunningText" position="142,562" size="637,45" font="Regular;36" options="movetype=running,startpoint=0,direction=left,steptime=10,repeat=5,startdelay=900,always=0" halign="left" noWrap="1" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventName">Name</convert>
+    </widget>
+<!--     <widget source="session.Event_Next" render="BlueARunningText" position="30,630" size="750,292" font="Regular;33" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="1">
+      <convert type="EventName">FullDescription</convert>
+    </widget> -->
+    <widget font="Regular;30" halign="right" position="30,510" render="Label" size="90,30" source="session.Event_Now" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <eLabel font="Regular;30" halign="center" position="127,510" size="22,30" text="-" transparent="1" foregroundColor="selectedFG" backgroundColor="background" />
+    <widget font="Regular;30" halign="left" position="157,510" render="Label" size="90,30" source="session.Event_Now" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget font="Regular;30" halign="left" position="540,510" render="Label" size="150,30" source="session.Event_Now" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">InMinutes</convert>
+    </widget>
+    <widget font="Regular;30" halign="left"  position="202,945" render="Label" size="105,36" source="session.Event_Next" transparent="1" valign="center" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget font="Regular;30" halign="left"  position="487,945" render="Label" size="105,36" source="session.Event_Next" transparent="1" valign="center" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <eLabel text="End Time :" position="322,945" size="165,36" font="Regular;30" backgroundColor="background" transparent="1" zPosition="1" foregroundColor="selectedFG" />
+    <eLabel text="Start Time :" position="30,945" size="172,36" font="Regular;30" halign="left" backgroundColor="background" foregroundColor="selectedFG" transparent="1" zPosition="1" />
+    <widget font="Regular;30" halign="center" position="615,945" render="Label" size="165,36" source="session.Event_Next" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
+      <convert type="EventTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+    <ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="708,517" size="70,22" zPosition="1" />
+    <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="708,517" render="Pixmap" size="70,22" source="session.RecordState" zPosition="2">
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1222,103" zPosition="10" size="30,891" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="787,103" zPosition="10" size="30,892" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,165" zPosition="10" size="757,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,612" zPosition="10" size="757,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,495" zPosition="10" size="757,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,930" zPosition="10" size="757,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,550" zPosition="10" size="757,4" />
+    <panel name="template_weather_Secondinfobar_default" />
+    <panel name="template_fullinfo_sib" />
+	<panel name="template_SecondInfoBar_Poster" />
+    <panel name="template_SIB_session_Event_Now_Next" />
+    <panel name="template_date" />
+    <panel name="template_background_full_black" />
+    <panel name="template_VideoPicture_Secondinfobar" />
+    <panel name="template_sib_crypt_info" />
+    <panel name="template_sib_tuner_info" />
+    <panel name="template_progress_secondinfobar" />
+	<panel name="template_VPN_IP_sib" />
+  </screen>
+ </skin>
