@@ -1,0 +1,49 @@
+<skin>
+ <!-- skin_Movie_Selection_Poster_Cover_Mini_TV -->
+
+<screen name="MovieSelection" position="0,0" size="1920,1080" title="Select a movie" flags="wfNoBorder" backgroundColor="transparent">
+  <eLabel text="Select a movie" position="957,6" size="450,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="list" position="45,165" size="1050,825" itemHeight="45" font="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand"  scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" enableWrapAround="1" alphatest="blend" transparent="1" />
+  <widget name="waitingtext" position="150,450" size="810,150" zPosition="1" font="Regular;32" halign="center" valign="center" transparent="1" />
+  <widget name="freeDiskSpace" position="30,112" size="1050,45" font="Regular;33" valign="center" halign="left" transparent="1" />
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,157" zPosition="1" size="1060,4" />
+  <widget source="Service" render="Label" position="1125,585" size="765,45" font="Regular;33" zPosition="2" transparent="1" foregroundColor="selectedFG">
+    <convert type="MovieInfo">ShortDescription</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1125,637" size="420,45" font="Regular;33" zPosition="2" transparent="1" foregroundColor="selectedFG">
+    <convert type="MovieInfo">RecordServiceName</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1545,637" size="150,45" font="Regular;33" halign="right" zPosition="2" transparent="1">
+    <convert type="ServiceTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget source="Service" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1363,690" size="525,292" font="Regular;33" zPosition="2" transparent="1" valign="top">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="Service" render="Picon" position="1773,304" zPosition="10" size="112,63" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <convert type="MovieInfo">RecordServiceRef</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1695,637" size="195,45" font="Regular;33" halign="center" backgroundColor="black" transparent="1" zPosition="2">
+    <convert type="MovieInfo">FileSize</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1125,532" size="765,45" font="Regular;33" transparent="1" halign="left">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="Service" render="Cover" position="1129,693" size="185,278" zPosition="2" transparent="1" alphatest="blend" />
+  <panel name="template_background_full_black" />
+  <panel name="template_Line_Vert_Big_1087" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
+  <panel name="template_title_date" />
+  <panel name="template_info_menu_exit" />
+  <widget source="session.VideoPicture" render="Pig" position="1125,165" size="633,355" zPosition="3" backgroundColor="background-pig" />
+  <widget source="session.CurrentService" render="Label" position="1125,112" size="630,45" font="Regular;33" transparent="1" valign="center" halign="center" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1119,157" zPosition="10" size="774,4" />
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1119,525" zPosition="10" size="774,4" />
+  <!-- xtraEvent plugin -->
+ <!--  <widget source="Service" render="xtraBackdrop" delayPic="500" position="0,0" size="1920,1080" zPosition="-24" alphatest="off" /> -->
+  <widget source="Service" render="xtraPoster" delayPic="200" position="1129,693" size="185,278" zPosition="2" borderWidth="1" borderColor="grey" alphatest="blend" transparent="1"/>
+  <widget source="Service" render="xtraParental" position="1254,910" size="60,60" alphatest="blend" zPosition="12" transparent="1" />
+</screen>
+  </skin>

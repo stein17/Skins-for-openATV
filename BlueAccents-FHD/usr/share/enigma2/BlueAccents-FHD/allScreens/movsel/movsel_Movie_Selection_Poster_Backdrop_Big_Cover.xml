@@ -1,0 +1,55 @@
+<skin>
+ <!-- skin_Movie_Selection_Poster_Big_Cover_Backdrop -->
+
+<screen name="MovieSelection" position="0,0" size="1920,1080" title="Select a movie" flags="wfNoBorder" backgroundColor="background">
+  <eLabel text="Select a movie" position="960,6" size="450,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="list" position="25,105" size="1205,645" itemHeight="45" font="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand"  scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" enableWrapAround="1" alphatest="blend" transparent="1" />
+  <widget name="waitingtext" position="68,586" size="1100,150" zPosition="1" font="Regular;32" halign="center" valign="center" transparent="1" />
+  <widget name="freeDiskSpace" position="1260,952" size="630,37" font="Regular;30" valign="center" halign="left" transparent="1" />
+  <widget source="Service" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" foregroundColor="selectedFG" backgroundColor="background" position="1260,905" noWrap="1" size="630,37" valign="top" halign="left" font="Regular;32" transparent="1">
+    <convert type="MovieInfo">ShortDescription</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1490,760" size="405,37" font="Regular; 30" transparent="1" halign="left">
+    <convert type="MovieInfo">RecordServiceName</convert>
+  </widget>
+  <widget source="Service" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="35,760" size="1192,230" font="Regular;32" transparent="1" valign="top">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1595,809" size="120,36" font="Regular;28" halign="left" zPosition="2" transparent="1">
+    <convert type="ServiceTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1595,855" size="292,36" font="Regular;28" halign="left" transparent="1">
+    <convert type="MovieInfo">FileSize</convert>
+  </widget>
+  <eLabel text="Grösse:" position="1490,855" size="120,36" font="Regular;28" transparent="1" zPosition="2" foregroundColor="selectedFG" />
+  <eLabel text="Zeit:" position="1490,809" size="75,36" font="Regular;28" transparent="1" zPosition="2" foregroundColor="selectedFG" />
+  <widget source="Service" render="BlueARunningText" foregroundColor="selectedFG" backgroundColor="background" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="1260,112" size="630,37" valign="top" halign="center" font="Regular;32" transparent="1">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="Service" render="Picon" position="1260,760" zPosition="10" size="220,132" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+    <convert type="MovieInfo">RecordServiceRef</convert>
+  </widget>
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1252,948" zPosition="1" size="640,4" />
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1252,157" zPosition="1" size="640,4" />
+  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,750" zPosition="1" size="1195,4" />
+  <widget source="Service" render="Cover" position="1360,170" size="379,570" zPosition="2" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="BG-Pixmaps/Background/Background_EMC_Backdrop.png" position="0,0" zPosition="-20" size="1920,1080" alphatest="blend" transparent="1" />
+  <panel name="template_Line_Vert_Big_1222" />
+  <panel name="TemplateAllColorButtons_Automatic_Long" />
+  <panel name="template_title_date" />
+  <panel name="template_info_menu_exit" />
+  <!-- xtraEvent plugin -->
+  <widget source="Service" render="xtraBackdrop" delayPic="500" position="0,0" size="1920,1080" zPosition="-24" alphatest="off" />
+  <widget source="Service" render="xtraPoster" delayPic="200" position="1360,170" size="379,570" zPosition="2" borderWidth="1" borderColor="grey" alphatest="blend" transparent="1"/>
+  <widget source="Service" render="xtraParental" position="1671,673" size="60,60" alphatest="blend" zPosition="12" transparent="1" />
+<!--   <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent/pic/star/star_b.png" position="1633,188" size="200,20" alphatest="blend" zPosition="12" transparent="1" />
+  <widget source="Service" render="Progress" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent/pic/star/star.png" position="1634,188" size="200,20" alphatest="blend" transparent="1" zPosition="12" backgroundColor="background">
+    <convert type="xtraInfo">imdbRatingValue</convert>
+  </widget>
+  <widget source="Service" render="Label" position="1633,226" size="200,40" font="Regular; 30" halign="center" transparent="1" zPosition="12" backgroundColor="background" valign="center">
+    <convert type="xtraInfo">imdbRating</convert>
+  </widget> -->
+
+</screen>
+  </skin>

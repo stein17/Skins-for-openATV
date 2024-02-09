@@ -24,7 +24,6 @@
 		<pixmap name="menu_off" filename="BlueAccents-FHD/icons/menu_off.png" backgroundColor="background" alphatest="blend" />
 	</switchpixmap>
 	<colors>
-		<color name="backColSelect" value="#0000020f" />
 		<color name="background" value="#20000000" />
 		<color name="background10" value="#10000000" />
 		<color name="background20" value="#20000000" />
@@ -47,7 +46,8 @@
 		<color name="cyan2" value="#0000d2ff" />
 		<color name="dark" value="#00031324" />
 		<color name="darkgreen" value="#00002200" />
-		<color name="DarkShadowBlue" value="#00000933" />
+		<color name="selectedBG" value="#00000933" />
+		<color name="selectedBG_Channellist" value="#00000933" />
 		<color name="default" value="#009bbfdd" />
 		<color name="foreground" value="#00ffffff" />
 		<color name="green" value="#0000ff00" />
@@ -71,7 +71,6 @@
 		<color name="rose" value="#00ff4a3c" />
 		<color name="scrollbarborder" value="#00002b66" />
 		<color name="scrollbarSlidercolor" value="#0000a2f3" />
-		<color name="selectedBG" value="#00000000" />
 		<color name="selectedFG" value="#0065c4ff" />
 		<color name="steelblue" value="#007e93ae" />
 		<color name="transparent" value="#ff000000" />
@@ -165,11 +164,11 @@
 		<color name="LabelForeground" color="foreground" />
 		<color name="ListboxBackground" color="background" />
 		<color name="ListboxForeground" color="foreground" />
-		<color name="ListboxSelectedBackground" color="backColSelect" />
+		<color name="ListboxSelectedBackground" color="selectedBG" />
 		<color name="ListboxSelectedForeground" color="selectedFG" />
-		<color name="ListboxMarkedBackground" color="backColSelect" />
+		<color name="ListboxMarkedBackground" color="selectedBG" />
 		<color name="ListboxMarkedForeground" color="selectedFG" />
-		<color name="ListboxMarkedAndSelectedBackground" color="backColSelect" />
+		<color name="ListboxMarkedAndSelectedBackground" color="selectedBG" />
 		<color name="ListboxMarkedAndSelectedForeground" color="selectedFG" />
 		<color name="WindowTitleForeground" color="foreground" />
 		<color name="WindowTitleBackground" color="background" />
@@ -206,11 +205,11 @@
 		<color name="LabelForeground" color="foreground" />
 		<color name="ListboxBackground" color="background" />
 		<color name="ListboxForeground" color="foreground" />
-		<color name="ListboxSelectedBackground" color="DarkShadowBlue" />
+		<color name="ListboxSelectedBackground" color="selectedBG" />
 		<color name="ListboxSelectedForeground" color="selectedFG" />
-		<color name="ListboxMarkedBackground" color="DarkShadowBlue" />
+		<color name="ListboxMarkedBackground" color="selectedBG" />
 		<color name="ListboxMarkedForeground" color="selectedFG" />
-		<color name="ListboxMarkedAndSelectedBackground" color="DarkShadowBlue" />
+		<color name="ListboxMarkedAndSelectedBackground" color="selectedBG" />
 		<color name="ListboxMarkedAndSelectedForeground" color="selectedFG" />
 		<color name="WindowTitleForeground" color="foreground" />
 		<color name="WindowTitleBackground" color="background" />
@@ -239,7 +238,7 @@
 	<screen name="Menu" position="0,0" size="1920,1080" title="Main menu" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Menu OpenATV" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 		<widget source="Title" render="Label" position="27,133" size="555,54" font="Regular;45" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="3" />
-		<widget source="menu" render="Listbox" position="26,215" size="760,662" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+		<widget source="menu" render="Listbox" position="26,215" size="760,662" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor780_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
 			<convert type="TemplatedMultiContent">{"templates":
 						{"default": (60,[
 							MultiContentEntryText(pos = (30, 5), size = (710, 50), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
@@ -563,7 +562,7 @@
 		<eLabel text="Title:" position="1125,112" size="97,37" font="Regular;33" transparent="1" zPosition="2" foregroundColor="selectedFG" valign="top" />
 		<widget source="Service" render="Cover" position="1132,157" size="229,304" zPosition="5" transparent="1" alphatest="blend" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="TemplateAllColorButtons_Automatic_Long" />
 		<panel name="template_title_date" />
 		<panel name="template_info_menu_exit" />
@@ -598,7 +597,7 @@
 		</widget>
 		<widget source="Service" render="Cover" position="1129,693" size="225,289" zPosition="5" transparent="1" alphatest="blend" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="TemplateAllColorButtons_Automatic_Long" />
 		<panel name="template_title_date" />
 		<panel name="template_info_menu_exit" />
@@ -675,7 +674,7 @@
 		<ePixmap pixmap="buttons/key_yellow.png" position="669,1038" size="24,24" alphatest="blend" transparent="1" />
 		<panel name="template_VideoPicture_Large0" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_title_date" />
 		<panel name="template_menu_ok_exit" />
 	</screen>
@@ -688,7 +687,7 @@
 		<widget name="info" position="1147,705" size="727,285" zPosition="0" font="Regular;30" halign="center" valign="center" transparent="1" />
 		<panel name="template_VideoPicture_Large0" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_title_date" />
 		<panel name="template_menu_ok_exit" />
 	</screen>
@@ -705,7 +704,7 @@
 		<ePixmap position="777,1032" size="60,36" zPosition="10" pixmap="buttons/info.png" transparent="1" alphatest="blend" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_title_date" />
 		<panel name="template_exit" />
 	</screen>
@@ -839,7 +838,7 @@
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_date" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_815" />
+		<panel name="template_Line_Vert_Big_1222" />
 		<panel name="template_VideoPicture_EMCSelection" />
 		<panel name="EMC_Selection_List_Color_default" />
 	</screen>
@@ -951,7 +950,7 @@
 		<panel name="template_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_ok_exit" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1119,157" zPosition="1" size="774,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1119,600" zPosition="1" size="774,4" />
@@ -1337,12 +1336,12 @@
 		<panel name="template_menu_help" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_630" />
+		<panel name="template_Line_Vert_Big_945" />
 		<panel name="template_title_date" />
 	</screen>
 	<!-- Timer Screens -->
 	<screen name="TimerOverviewBase" position="0,0" size="1920,1080" title="Timer Editor" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="backColSelect" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="selectedBG" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,777" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,785" size="1050,210" font="Regular;33" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="bluelabeltranzp" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -1351,7 +1350,7 @@
 		<panel name="template_info_ok_exit" />
 	</screen>
 	<screen name="TimerSelection" position="0,0" size="1920,1080" title="Timer selection" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="backColSelect" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="selectedBG" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,777" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,785" size="1050,210" font="Regular;33" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="bluelabeltranzp" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -1360,7 +1359,7 @@
 		<panel name="template_ok_exit" />
 	</screen>
 	<screen name="PowerTimerOverview" position="0,0" size="1920,1080" title="Timer Editor" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="backColSelect" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="selectedBG" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,777" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,785" size="1050,210" font="Regular;33" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="bluelabeltranzp" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -1369,7 +1368,7 @@
 		<panel name="template_info_ok_exit" />
 	</screen>
 	<screen name="RecordTimerOverview" position="0,0" size="1920,1080" title="Timer Editor" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="backColSelect" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="selectedBG" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,777" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,785" size="1050,210" font="Regular;33" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="bluelabeltranzp" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -1378,7 +1377,7 @@
 		<panel name="template_info_ok_exit" />
 	</screen>
 	<screen name="ConflictTimerOverview" position="0,0" size="1920,1080" title="Timer Editor" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="backColSelect" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="timerlist" position="27,112" size="1059,660" backgroundColor="background" backgroundColorSelected="selectedBGt" bottomHeight="30" detailFont="Regular;24" foregroundColor="foreground" foregroundColorSelected="selectedFG" iconMargin="15" indent="22" itemHeight="83" showSeparator="1" statusFont="Regular;27" statusOffset="0" satPosLeft="300" timerNameFont="Regular;30" topHeight="45" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,777" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,785" size="1050,210" font="Regular;33" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="bluelabeltranzp" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -1421,7 +1420,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="TimerLog" position="0,0" size="1920,1080" title="Timer log" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Timer log" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1432,7 +1431,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="TimerSelection" position="0,0" size="1920,1080" title="Timer selection" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Timer selection" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1519,7 +1518,7 @@
 		<panel name="template_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoTimerFilterEditor" position="0,0" size="1920,1080" title="Edit AutoTimer Filters" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
@@ -1528,7 +1527,7 @@
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoTimerServiceEditor" position="0,0" size="1920,1080" title="Edit AutoTimer Services" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
@@ -1544,7 +1543,7 @@
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoTimerFAQ" position="0,0" size="1920,1080" title="AutoTimer FAQ" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="detailtext" position="30,112" size="1050,870" font="Regular;30" transparent="1" />
@@ -1867,7 +1866,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="UserDialog" position="0,0" size="1920,1080" title="UserDialog" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="UserDialog" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1881,7 +1880,7 @@
 		<panel name="template_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="UserManager" position="0,0" size="1920,1080" title="UserManager" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="UserManager" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1901,7 +1900,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!-- HddMount Screens -->
 	<screen name="DevicePanelConf" position="0,0" size="1920,1080" title="UserManager" flags="wfNoBorder" backgroundColor="transparent">
@@ -1953,7 +1952,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoMountEdit" position="0,0" size="1920,1080" title="MountEdit" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="MountEdit" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1966,7 +1965,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoMountView" position="0,0" size="1920,1080" title="MountView" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="MountView" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -1993,7 +1992,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="BouquetSelector" position="0,0" size="1920,1080" title="Choose bouquet" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Channel selection" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -2018,7 +2017,7 @@
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="MMIDialog" position="0,0" size="1920,1080" title="Common Interface" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="title" position="30,112" size="1050,45" font="Regular;36" transparent="1" />
@@ -2086,7 +2085,7 @@
     <widget name="list" position="285,112" size="1035,810" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1" />
     <widget name="long_key" position="30,945" size="1290,45" font="Regular;36" halign="center" valign="center" zPosition="2" transparent="1" foregroundColor="selectedFG" />
     <ePixmap pixmap="icons/Wizard.png" position="1365,450" size="525,540" />
-    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1327,103" zPosition="1" size="30,891" />
+    <panel name="template_Line_Vert_Big_1327" />
     <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Smal.png" position="270,112" zPosition="0" size="4,810" />
     <ePixmap pixmap="icons/Wizard.png" position="1380,165" size="487,273" zPosition="3" alphatest="blend" />
     <widget position="1380,165" size="487,273" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
@@ -2100,7 +2099,7 @@
     <panel name="template_title_date" />
     <panel name="template_wizardrc" />
     <panel name="template_background_full_black" />
-    <panel name="template_Line_Vert_Big_7250" />
+    <panel name="template_Line_Vert_Big_10870" />
   </screen> -->
 	<screen name="InputBox" position="center,center" size="1800,150" title="" zPosition="1">
 		<eLabel name="b" position="0,0" size="1800,150" zPosition="-10" />
@@ -2176,14 +2175,15 @@
 		<panel name="template_title_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!--  PluginBrowserGrid -->
 	<screen name="PluginBrowserGrid" position="0,0" size="1920,1080" title="Plugin browser" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="description" position="120,150" size="1800,90" font="Regular;36" valign="center" />
-		<widget source="pluginGrid" render="Listbox" position="120,265" size="1680,640" itemSpacing="15,15" selectionZoom="10" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C">
-			<convert type="TemplatedMultiContent">{
+		<widget name="description" position="120,112" size="1680,90" font="Regular;30" valign="center" transparent="1" />
+		<widget source="pluginGrid" render="Listbox" position="120,265" size="1680,640" itemSpacing="15,15" selectionZoom="10" scrollbarMode="showAlways" listOrientation="grid" moveBackgroundColor="#00DC143C" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{
 					"template": [
 						MultiContentEntryText(pos = (0, 0), size = (300, 165), font=0, backcolor = 0x505050),
 						MultiContentEntryText(pos = (7, 75), size = (285, 75), font=0, flags = RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP, text = 1),
@@ -2192,7 +2192,8 @@
 					"fonts": [gFont("Regular", 27),gFont("Regular", 21)],
 					"itemWidth": 300,
 					"itemHeight": 165
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<widget name="quickselect" position="30,112" size="1140,870" backgroundColor="background" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5" />
 		<panel name="template_date" />
@@ -2203,7 +2204,7 @@
 	<!--   PluginBrowserList -->
 	<screen name="PluginBrowserList" position="0,0" size="1920,1080" title="Plugin browser" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget source="pluginList" render="Listbox" position="30,112" size="1050,870" listOrientation="vertical" backgroundColor="background" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG">
+		<widget source="pluginList" render="Listbox" position="30,112" size="1050,870" listOrientation="vertical" backgroundColor="background" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1">
 			<convert type="TemplatedMultiContent">{
 					"template": [
 						MultiContentEntryText(pos = (180, 7), size = (840, 37), font=0, flags = RT_HALIGN_LEFT, text = 1),
@@ -2220,7 +2221,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!--  PluginAction -->
 	<screen name="PluginAction" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="transparent">
@@ -2250,7 +2251,7 @@
 		<panel name="template_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<widget name="quickselect" position="30,112" size="1050,870" backgroundColor="background" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5" />
 	</screen>
 	<!--   Processing -->
@@ -2326,7 +2327,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!--  PluginManagerHelp -->
 	<screen name="PluginManagerHelp" position="0,0" size="1920,1080" title="Plugin manager help" flags="wfNoBorder" backgroundColor="transparent">
@@ -2346,7 +2347,7 @@
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="RestoreMenu" position="0,0" size="1920,1080" title="Restore Backups" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Restore backups" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -2424,7 +2425,7 @@
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="QuickMenuDevices" position="0,0" size="1920,1080" title="Devices" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Devices" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -2488,7 +2489,7 @@
 	<!--Setup Screens-->
 	<screen name="Setup" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Setup" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="config" position="25,112" size="1065,672" itemHeight="45" font="Regular; 32" enableWrapAround="1" backgroundColor="background" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="config" position="25,112" size="1065,672" itemHeight="45" font="Regular; 32" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" enableWrapAround="1" backgroundColor="background" scrollbarMode="showOnDemand" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,792" zPosition="1" size="1060,4" />
 		<widget name="description" position="30,800" size="1050,190" font="Regular; 32" halign="center" valign="center" transparent="1" backgroundColor="bluelabeltranzp" foregroundColor="selectedFG" />
 		<widget name="HelpWindow" position="1020,817" size="900,210" zPosition="2" transparent="1" backgroundColor="bluelabeltranzp" foregroundColor="selectedFG" alphatest="blend" />
@@ -2509,7 +2510,7 @@
 	</screen>
 	<screen name="AutoResSetupMenu" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Auto Res Setup Menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<panel name="template_date" />
 		<panel name="template_ok_exit" />
 		<panel name="TemplateAllColorButtons_Automatic" />
@@ -2533,7 +2534,6 @@
 	</screen>
 	<screen name="AudioSetup" position="0,0" size="1920,1080" title="Audio Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="Audio Setup" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<!--   -->
 		<panel name="template_setup_config" />
 		<panel name="template_date" />
 		<panel name="template_ok_exit" />
@@ -2677,7 +2677,7 @@
 		<panel name="template_background_725_trans" />
 	</screen>
 	<screen name="LED_GigaSetup" position="0,0" size="1920,1080" title="GigaBlue Setup" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<panel name="template_title_date" />
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_background_725_trans" />
@@ -2733,7 +2733,7 @@
 		<panel name="template_background_725_trans" />
 	</screen>
 	<screen name="VideoEnhancementSetup" position="0,0" size="1920,1080" title="VideoEnhancementSetup" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="config" position="30,112" size="1050,825" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="30,112" size="1050,825" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<widget name="introduction" position="30,945" size="1050,45" font="Regular;33" halign="center" backgroundColor="black" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
 		<panel name="template_title_date" />
@@ -2742,7 +2742,7 @@
 		<panel name="template_background_725_trans" />
 	</screen>
 	<screen name="VideoEnhancementPreview" position="510,795" size="900,255" title="">
-		<widget name="config" position="15,15" size="870,90" zPosition="2" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="15,15" size="870,90" zPosition="2" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<eLabel position="15,112" size="870,1" backgroundColor="selectedFG" zPosition="2" />
 		<widget source="introduction" render="Label" position="15,135" size="870,45" font="Regular;30" halign="center" valign="center" transparent="1" zPosition="2" />
 		<ePixmap pixmap="buttons/key_red.png" position="22,199" size="24,24" zPosition="2" alphatest="blend" />
@@ -2794,7 +2794,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_background_725_trans" />
 	</screen>
 	<screen name="InputDeviceSetup" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="config" position="30,112" size="1050,600" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="30,112" size="1050,600" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<widget source="introduction" render="Label" position="30,735" size="1050,255" font="Regular;30" halign="center" valign="center" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,727" zPosition="1" size="1060,4" />
 		<panel name="template_title_date" />
@@ -2803,7 +2803,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 	</screen>
 	<screen name="HdmiCECSetupScreen" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<eLabel text="HDMI CEC Setup" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="config" position="30,112" size="1050,765" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="config" position="30,112" size="1050,765" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor_setup_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
 		<widget source="current_address" render="Label" position="30,885" size="1050,45" font="Regular;30" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
 		<widget source="fixed_address" render="Label" position="30,945" size="1050,45" font="Regular;30" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,877" zPosition="1" size="1060,4" />
@@ -2934,8 +2934,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="708,517" render="Pixmap" size="70,22" source="session.RecordState" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1222,103" zPosition="10" size="30,891" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="787,103" zPosition="10" size="30,892" />
+		<panel name="template_Line_Vert_Big_1222" />
+		<panel name="template_Line_Vert_Big_787" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,165" zPosition="10" size="757,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,612" zPosition="10" size="757,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,495" zPosition="10" size="757,4" />
@@ -3001,7 +3001,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<ePixmap pixmap="buttons/key_green.png" position="270,1038" size="24,24" alphatest="blend" transparent="1" />
 		<ePixmap pixmap="buttons/key_yellow.png" position="577,1038" size="24,24" alphatest="blend" transparent="1" />
 		<ePixmap pixmap="buttons/key_blue.png" position="840,1038" size="24,24" alphatest="blend" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1222,103" zPosition="10" size="30,891" />
+		<panel name="template_Line_Vert_Big_1222" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,937" zPosition="10" size="1195,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1252,157" zPosition="10" size="640,4" />
 		<widget name="key_red" position="52,1030" size="210,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
@@ -3037,7 +3037,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!--Radio Channel Selection -->
 	<screen name="ChannelSelectionRadio" position="0,0" size="1920,1080" title="Radio Channel Selection" zPosition="-10" flags="wfNoBorder" backgroundColor="transparent">
@@ -3052,7 +3052,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!-- EPG Screens -->
 	<screen name="EPGSelection" position="0,0" size="1920,1080" title="EPG Selection" flags="wfNoBorder" backgroundColor="transparent">
@@ -3064,7 +3064,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget name="bouquetlist" position="375,90" size="720,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="list" position="30,345" size="1050,660" itemHeight="45" EventFontSingle="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+		<widget name="list" position="30,345" size="1078,660" itemHeight="45" EventFontSingle="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
 		<widget source="Event" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1125,615" size="765,375" font="Regular;30" foregroundColor="selectedFG" transparent="1" valign="top">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
@@ -3085,7 +3085,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_menu_info" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_progress_EPG_Selection" />
 		<panel name="TemplateAllColorButtons_Automatic_Long" />
 	</screen>
@@ -3125,7 +3125,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_menu_info" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_progress_EPGSelectionMulti" />
 	</screen>
 	<screen name="GraphicalEPG" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transparent">
@@ -3151,7 +3151,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<widget name="lab1" position="30,945" size="1860,45" font="Regular;36" halign="center" valign="center" zPosition="20" transparent="1" />
 		<widget name="timeline_text" position="30,187" size="1860,45" itemHeight="45" TimelineFont="Regular;32" borderColor="scrollbarSlidercolor" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" TimelineAlignment="left" zPosition="1" transparent="1" font="Regular;45" />
 		<widget name="bouquetlist" position="45,9" size="870,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="list" position="30,240" size="1860,750" itemHeight="750" ServiceFontGraphical="Regular;30" EntryFontGraphical="Regular;28" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" ServiceForegroundColor="selectedFG" ServiceForegroundColorNow="white" ServiceBackgroundColor="blackblue" ServiceBackgroundColorNow="scrollbarborder" EntryForegroundColor="selectedFG" EntryForegroundColorSelected="white" EntryBackgroundColor="backColSelect" EntryBackgroundColorSelected="scrollbarborder" EntryBackgroundColorNow="black" EntryBackgroundColorNowSelected="DarkShadowBlue" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="green" ServiceBorderColor="scrollbarSlidercolor" EntryBorderColor="scrollbarSlidercolor" RecordForegroundColor="selectedFG" RecordForegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="backColSelect" ZapForegroundColor="selectedFG" ZapBackgroundColor="verydarkgrey" ZapForegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" />
+		<widget name="list" position="30,240" size="1860,750" itemHeight="750" ServiceFontGraphical="Regular;30" EntryFontGraphical="Regular;28" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" ServiceForegroundColor="selectedFG" ServiceForegroundColorNow="white" ServiceBackgroundColor="blackblue" ServiceBackgroundColorNow="scrollbarborder" EntryForegroundColor="selectedFG" EntryForegroundColorSelected="white" EntryBackgroundColor="selectedBG" EntryBackgroundColorSelected="scrollbarborder" EntryBackgroundColorNow="black" EntryBackgroundColorNowSelected="selectedBG" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="green" ServiceBorderColor="scrollbarSlidercolor" EntryBorderColor="scrollbarSlidercolor" RecordForegroundColor="selectedFG" RecordForegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="selectedBG" ZapForegroundColor="selectedFG" ZapBackgroundColor="verydarkgrey" ZapForegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" />
 		<widget alphatest="blend" name="timeline_now" pixmap="epg/timeline-now-l.png" position="30,240" zPosition="3" size="18,750" />
 		<eLabel text="Favoriten" position="1012,18" size="150,37" backgroundColor="black" foregroundColor="selectedFG" font="Regular;27" transparent="1" halign="left" valign="center" name="#" />
 		<ePixmap pixmap="buttons/key_9.png" position="1507,1032" size="37,37" alphatest="blend" zPosition="1" />
@@ -3219,7 +3219,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<widget name="lab1" position="30,945" size="1860,45" font="Regular;36" halign="center" valign="center" zPosition="20" transparent="1" />
 		<widget name="timeline_text" position="30,525" size="1860,45" itemHeight="45" TimelineFont="Regular;32" borderColor="scrollbarSlidercolor" borderWidth="1" foregroundColor="selectedFG" TimelineAlignment="left" zPosition="1" transparent="1" />
 		<widget name="bouquetlist" position="45,9" size="540,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="list" position="30,577" size="1860,412" backgroundColor="background" scrollbarMode="showOnDemand" itemHeight="412" ServiceFontGraphical="Regular;30" EntryFontGraphical="Regular;28" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" enableWrapAround="1" transparent="1" ServiceForegroundColor="selectedFG" ServiceForegroundColorNow="white" ServiceBackgroundColor="blackblue" ServiceBackgroundColorNow="scrollbarborder" EntryForegroundColor="selectedFG" EntryForegroundColorSelected="white" EntryBackgroundColor="backColSelect" EntryBackgroundColorSelected="scrollbarborder" EntryBackgroundColorNow="black" EntryBackgroundColorNowSelected="DarkShadowBlue" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="green" ServiceBorderColor="scrollbarSlidercolor" EntryBorderColor="scrollbarSlidercolor" RecordForegroundColor="selectedFG" RecordForegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="backColSelect" ZapForegroundColor="selectedFG" ZapBackgroundColor="verydarkgrey" ZapForegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" />
+		<widget name="list" position="30,577" size="1860,412" backgroundColor="background" scrollbarMode="showOnDemand" itemHeight="412" ServiceFontGraphical="Regular;30" EntryFontGraphical="Regular;28" ServiceBorderWidth="1" ServiceNamePadding="3" EventBorderWidth="1" EventNamePadding="3" enableWrapAround="1" transparent="1" ServiceForegroundColor="selectedFG" ServiceForegroundColorNow="white" ServiceBackgroundColor="blackblue" ServiceBackgroundColorNow="scrollbarborder" EntryForegroundColor="selectedFG" EntryForegroundColorSelected="white" EntryBackgroundColor="selectedBG" EntryBackgroundColorSelected="scrollbarborder" EntryBackgroundColorNow="black" EntryBackgroundColorNowSelected="selectedBG" EntryForegroundColorNow="white" EntryForegroundColorNowSelected="green" ServiceBorderColor="scrollbarSlidercolor" EntryBorderColor="scrollbarSlidercolor" RecordForegroundColor="selectedFG" RecordForegroundColorSelected="selectedFG" RecordBackgroundColor="red" RecordBackgroundColorSelected="selectedBG" ZapForegroundColor="selectedFG" ZapBackgroundColor="verydarkgrey" ZapForegroundColorSelected="selectedFG" ZapBackgroundColorSelected="lila" />
 		<panel name="template_menu_info" />
 		<panel name="template_background_full_black" />
 		<panel name="template_VideoPicture_Secondinfobar" />
@@ -3257,7 +3257,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		</widget>
 		<widget name="lab1" position="30,682" size="1830,52" font="Regular;36" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="white" transparent="1" />
 		<eLabel name="epg-service-background" position="30,277" size="1830,37" backgroundColor="background" zPosition="0" transparent="0" />
-		<widget name="bouquetlist" position="30,277" size="1845,37" zPosition="3" itemHeight="45" font="Regular;28" borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="backColSelect" foregroundColorSelected="selectedFG" transparent="0" />
+		<widget name="bouquetlist" position="30,277" size="1845,37" zPosition="3" itemHeight="45" font="Regular;28" borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="0" />
 		<!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
 		<widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,150" zPosition="-10" />
 		<widget font="Regular;28" halign="center" valign="center" name="currCh1" backgroundColor="background" foregroundColor="white" noWrap="1" position="120,277" size="285,37" zPosition="2" transparent="1" />
@@ -3285,11 +3285,11 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<widget source="piconCh5" render="MetrixHDXPicon" position="1515,277" size="75,37" zPosition="2" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget name="list1" position="30,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="backColSelect" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
-		<widget name="list2" position="412,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="backColSelect" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
-		<widget name="list3" position="780,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="backColSelect" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
-		<widget name="list4" position="1147,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="backColSelect" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
-		<widget name="list5" position="1515,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="backColSelect" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
+		<widget name="list1" position="30,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="selectedBG" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
+		<widget name="list2" position="412,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="selectedBG" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
+		<widget name="list3" position="780,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="selectedBG" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
+		<widget name="list4" position="1147,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="selectedBG" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
+		<widget name="list5" position="1515,330" alphatest="blend" scrollbarMode="showAlways" size="360,675" zPosition="1" TimeforegroundColor="selectedFG" TimeBackgroundColor="background" PrimeTimeForegroundColor="green" PrimeTimeBackgroundColor="black" EntryforegroundColor="white" EntryBackgroundColor="background" EntryForegroundColorSelected="white" EntrybackgroundColorSelected="selectedBG" EntryForegroundColorNow="white" EntryBackgroundColorNow="black" EntryForegroundColorNowSelected="white" EntryBackgroundColorNowSelected="verydarkgrey" EntryForegroundColorPast="darkgrey" EntryBackgroundColorPast="background" EntryForegroundColorPastSelected="white" EntryBackgroundColorPastSelected="verydarkgrey" EntryBorderColor="selectedFG" TimeFontVertical="Regular;28" EventFontVertical="Regular;26" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,157" zPosition="10" size="1867,4" />
 		<panel name="template_date" />
 		<panel name="template_menu_info" />
@@ -3312,7 +3312,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,675" zPosition="1" size="1060,4" />
 		<eLabel name="epg-service-background" position="30,345" size="1050,45" backgroundColor="background" zPosition="0" transparent="0" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,337" zPosition="1" size="1060,4" />
-		<widget name="bouquetlist" position="30,345" size="1050,45" zPosition="3" itemHeight="45" font="Regular;28" borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="backColSelect" foregroundColorSelected="selectedFG" transparent="0" />
+		<widget name="bouquetlist" position="30,345" size="1050,45" zPosition="3" itemHeight="45" font="Regular;28" borderColor="selectedFG" borderWidth="1" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="0" />
 		<!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
 		<widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,150" zPosition="-10" />
 		<widget font="Regular;28" halign="center" valign="center" name="currCh1" backgroundColor="background" foregroundColor="white" noWrap="1" position="105,345" size="270,45" zPosition="2" transparent="1" />
@@ -3367,7 +3367,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,157" zPosition="10" size="1057,4" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_date" />
 		<panel name="template_menu_info" />
 		<panel name="TemplateAllColorButtons_Automatic_Long" />
@@ -3496,8 +3496,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_background_full_black" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,166" zPosition="1" size="757,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,855" zPosition="1" size="757,4" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="787,103" zPosition="1" size="30,891" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1222,103" zPosition="1" size="30,891" />
+		<panel name="template_Line_Vert_Big_787" />
+		<panel name="template_Line_Vert_Big_1222" />
 	</screen>
 	<screen name="EventViewSimple" position="0,0" size="1920,1080" title="EventviewSimple" flags="wfNoBorder" backgroundColor="transparent">
 		<!--eLabel text="Eventview" position="87,54" size="787,75" valign="bottom" font="Regular;51"      transparent="1" /-->
@@ -3576,7 +3576,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_info_menu_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_progress_Eventview_Simple" />
 	</screen>
 	<!-- Eventview Contextmenu -->
@@ -3906,7 +3906,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!-- Positioner setup -->
 	<screen name="PositionerSetup" position="0,0" size="1920,1080" title="Positioner setup..." flags="wfNoBorder" backgroundColor="transparent">
@@ -3977,7 +3977,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="SundtekControlCenter" title="SundtekControlCenter" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="ok" position="30,765" zPosition="1" size="825,45" font="Regular;30" halign="left" valign="center" transparent="1" />
@@ -4008,7 +4008,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="VideoFinetune" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="black">
 		<widget source="Canvas" render="Canvas" position="0,0" size="1920,1080" />
@@ -4026,7 +4026,7 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		<!-- icons TYPE_YESNO, TYPE_INFO, TYPE_WARNING, TYPE_ERROR, TYPE_MESSAGE -->
 		<widget name="icon" position="12,12" size="79,79" pixmaps="icons/input_question.png,icons/input_info.png,icons/input_message.png,icons/input_error.png,icons/input_warning.png" alphatest="blend" conditional="icon" scale="1" transparent="1" />
 		<widget name="text" position="15,120" size="1170,75" font="Regular;33" valign="center" halign="center" backgroundColor="background" foregroundColor="selectedFG" />
-		<widget name="list" position="15,210" size="1170,360" itemHeight="45" font="Regular;32" foregroundColor="foreground" backgroundColor="background" scrollbarMode="showOnDemand" backgroundColorSelected="backColSelect" foregroundColorSelected="selectedFG" transparent="1" />
+		<widget name="list" position="15,210" size="1170,360" itemHeight="45" font="Regular;32" foregroundColor="foreground" backgroundColor="background" scrollbarMode="showOnDemand" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
 		<applet type="onLayoutFinish"># this should be factored out into some helper code,but currently demonstrates applets.
 from __future__ import division
 from enigma import eSize, ePoint, getDesktop
@@ -4564,7 +4564,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="CCcamInfoSubMenu" position="0,0" size="1920,1080" title="CCcamInfo SubMenu" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="list" position="30,112" size="1050,870" enableWrapAround="1" itemHeight="90" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" zPosition="1" transparent="1" />
@@ -4573,7 +4573,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="CCcamInfoServerMenu" position="0,0" size="1920,1080" title="CCcam Server Info" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="list" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" zPosition="1" />
@@ -4582,7 +4582,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="CCcamInfoConfigMenu" position="0,0" size="1920,1080" title="CCcam Info Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="config" position="30,112" size="1050,870" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" zPosition="1" />
@@ -4735,7 +4735,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_title_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 		<panel name="template_menu_exit" />
 	</screen>
 	<screen name="Change_volume" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -4757,7 +4757,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!--Log-Manager /-->
 	<screen name="LogManager" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
@@ -4771,7 +4771,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="LogManagerViewLog" position="0,0" size="1920,1080" title="Log-Manager - View Log" flags="wfNoBorder">
 		<widget name="list" position="30,112" size="1860,870" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
@@ -5046,7 +5046,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_title_date" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="NetworkuShare" title="uShare Setup" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="autostart" position="105,120" size="225,45" font="Regular;33" valign="center" transparent="1" />
@@ -5154,7 +5154,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="AutoVideoModeLabel" position="555,90" size="495,82">
 		<widget name="content" position="10,7" size="480,33" font="Regular;30" transparent="1" />
@@ -5180,7 +5180,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!-- Button Setup -->
 	<screen name="ButtonSetup" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -5211,7 +5211,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="BluetoothRCUSetup" position="0,0" size="1920,1080" title="Vu+ Bluetooth RCU Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="deviceList" render="Listbox" position="30,112" size="1050,870" enableWrapAround="1" backgroundColor="background" scrollbarMode="showOnDemand" transparent="1">
@@ -5230,7 +5230,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<screen name="BluetoothSetupConfig" position="0,0" size="1920,1080" title="Bluetooth Setup Options" flags="wfNoBorder" backgroundColor="transparent">
 		<panel name="template_title_date" />
@@ -5256,7 +5256,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
 		<panel name="template_menu_ok_exit" />
 		<panel name="template_VideoPicture_Large" />
 		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_725" />
+		<panel name="template_Line_Vert_Big_1087" />
 	</screen>
 	<!-- RemoteControlCode -->
 	<!--   <screen name="RemoteControlCode" position="0,0" size="1920,1080" title=" position Setup" flags="wfNoBorder" backgroundColor="transparent">
@@ -5266,7 +5266,7 @@ self.instance.move(ePoint(int(deskwidth - newwidth)//2,int(deskheight - newheigh
        <panel name="template_date" />
        <panel name="template_VideoPicture_Secondinfobar" />
        <panel name="template_background_full_black" />  
-       <panel name="template_Line_Vert_Big_815" />
+       <panel name="template_Line_Vert_Big_1222" />
 </screen> -->
 	<screen name="ButtonSetupSelect" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="list" position="30,112" size="1050,592" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />

@@ -154,7 +154,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         self["key_green"] = Label(_("OK"))
         self["key_yellow"] = Label()
         self["key_blue"] = Label(_("About"))
-        self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
+        self["setupActions"] = ActionMap(["SetupActions", "ColorActions", "ChannelSelectEPGActions"],
                 {
                         "green": self.keyGreen,
                         "red": self.cancel,
@@ -163,6 +163,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
                         "cancel": self.cancel,
                         "ok": self.keyOk,
                         "menu": self.setWeather,
+                        "showEPGList": self.setXtraEvent
                 }, -2)
 
         self["Picture"] = Pixmap()
@@ -174,6 +175,13 @@ class BlueAccents_Config(Screen, ConfigListScreen):
             self.onLayoutFinish.append(self.openSkinSelectorDelayed)
         else:
             self.createConfigList()
+
+    def setXtraEvent(self):
+        try:
+            from Plugins.Extensions.xtraEvent.plugin import main
+            main(self.session)
+        except ImportError:
+            self.session.open(MessageBox, _("'xtraEvent' is not installed!, please install the xtraEvent Plugin"), MessageBox.TYPE_INFO)
 
     def setWeather(self):
         try:
@@ -368,7 +376,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_poster_i_next)
             if len(self.myAtileHD_weather.choices) > 1:
                 self.list.append(self.set_weather)
- 
+
             if len(self.myAtileHD_sib.choices) > 1:
                 self.list.append(self.set_sib)
             if len(self.myAtileHD_ch_se.choices) > 1:
