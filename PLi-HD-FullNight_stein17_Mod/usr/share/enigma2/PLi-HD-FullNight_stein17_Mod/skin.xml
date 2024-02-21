@@ -7046,21 +7046,11 @@ if len(listitems.list) &gt; 2:
   <!-- Fan Control 2 -->
   <!-- File Commander -->
   <screen name="FileCommanderContextMenu" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
-    <widget source="menu" render="Listbox" position="500,98" size="770,540" font="Regular;24" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand">
-      <convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (40, 4), size = (455, 30), flags = RT_HALIGN_LEFT, text = 0) ],
-				"fonts": [gFont("Regular", 20)],
-				"itemHeight": 36
-				}</convert>
-    </widget>
-    <widget source="menu" render="FixedLabel" text="►" position="450,469" size="20,20" font="Regular;20" foregroundColor="yellow" backgroundColor="background" halign="left" valign="bottom" transparent="1">
-      <convert type="MetrixHDMenuEntryCompare" />
-      <convert type="ValueRange">0,9</convert>
-      <convert type="ConditionalShowHide">Invert</convert>
-    </widget>
-    <panel name="Template_Title_Date_Pig" />
-    <!-- <eLabel name="menu_next_side_marker" text="&#x25ba;" position="1107,596" size="20,20" font="Regular;16" foregroundColor="menufont" backgroundColor="menubackground" halign="right" valign="bottom" transparent="1"/>-->
-    <widget name="description" position="35,390" size="417,230" font="Regular;20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" shadowColor="black" shadowOffset="-2,-2" />
-    <eLabel position="20,385" size="455,250" backgroundColor="infobarBG" zPosition="-1" />
+    <widget name="menu" position="500,98" size="770,540" font="Regular;24" itemHeight="32"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand"/>
+	<eLabel name="Title" text="File Commander menu" position="25,30" size="1085,55" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" zPosition="1" font="Regular;24" valign="center" />
+    <eLabel name="menu_next_side_marker" text="►" position="450,469" size="20,20" font="Regular;20" foregroundColor="yellow" backgroundColor="background" halign="left" valign="bottom" transparent="1"/>
+	<eLabel position="20,385" size="455,250" backgroundColor="infobarBG" zPosition="-1" />
+	<panel name="Template_Date_Pig" />
   </screen>
   <screen name="setup_filecommander" position="0,0" size="1280,720" title="Setup" flags="wfNoBorder" backgroundColor="background_Pig_template">
     <widget name="config" position="530,100" size="720,515" itemHeight="30" font="Regular;20" enableWrapAround="1" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" scrollbarMode="showOnDemand" transparent="1" />
