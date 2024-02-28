@@ -315,6 +315,11 @@
 		<ePixmap position="1762,1032" size="60,36" zPosition="10" pixmap="buttons/ok.png" transparent="1" alphatest="blend" />
 		<ePixmap position="1837,1032" size="60,36" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
 	</screen>
+	<screen name="template_info_epg_exit">
+		<ePixmap position="1687,1032" size="60,36" zPosition="10" pixmap="buttons/info.png" transparent="1" alphatest="blend" />
+		<ePixmap position="1762,1032" size="60,36" zPosition="10" pixmap="buttons/button_epg.png" transparent="1" alphatest="blend" />
+		<ePixmap position="1837,1032" size="60,36" zPosition="10" pixmap="buttons/exit.png" transparent="1" alphatest="blend" />
+	</screen>
 	<screen name="template_menu_ok_exit">
 		<ePixmap position="1687,1032" size="60,36" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
 		<ePixmap position="1762,1032" size="60,36" zPosition="10" pixmap="buttons/ok.png" transparent="1" alphatest="blend" />
@@ -610,7 +615,7 @@
 		</widget>
 		<ePixmap position="1650,897" zPosition="-5" size="270,90" pixmap="BG-Pixmaps/Clocks/Infobar_Digital_Clock.png" alphatest="blend" />
 		<ePixmap position="1692,944" zPosition="10" size="204,1" pixmap="BG-Pixmaps/Clocks/Line_Infobar_Digital_Clock_more.png" transparent="1" alphatest="blend" />
-			<panel name="template_ethernet_infobar_android" />
+			<!-- <panel name="template_infobar_ethernet" /> -->
 	</screen>
 	<!-- Digitalclock-Clock-Infobar default-->
 	<screen name="template_digitalclock_widget_infobar_default">
@@ -672,7 +677,7 @@
 		</widget>
 		<eLabel name="" position="1788,963" size="4,9" zPosition="5" backgroundColor="black" />
 		<eLabel name="" position="1788,996" size="4,9" zPosition="5" backgroundColor="black" />
-		<panel name="template_ethernet_infobar_android" />
+		<!-- <panel name="template_infobar_ethernet" /> -->
 	</screen>
 	<!-- TEMPLATES digitalclock default-->
 	<!-- TEMPLATES analogclock-->
@@ -716,23 +721,23 @@
 	</screen>
 	<!-- TEMPLATES Android Clock weather-->
 	<screen name="template_androidweather_widget_infobar_more">
-		<ePixmap pixmap="BlueAccents-FHD/Wettericons/Wettericons_MIUI/BG_androidweather.png" position="1665,770" size="254,168" zPosition="1" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="BlueAccents-FHD/Wettericons/Wettericons_MIUI/BG_androidweather.png" position="1665,770" size="254,168" zPosition="2" alphatest="blend" transparent="1" />
 		<widget noWrap="1" backgroundColor="background20" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" font="Regular; 27" render="Label" position="1815,871" size="80,30" source="session.OAWeather" transparent="1" zPosition="8" halign="right" borderWidth="1" borderColor="black">
 			<convert type="OAWeather">temperature_current</convert>
 		</widget>
-		<widget render="OAWeatherPixmap" position="1665,770" size="254,168" source="session.OAWeather" zPosition="2" alphatest="blend" transparent="1">
+		<widget render="OAWeatherPixmap" position="1665,770" size="254,168" source="session.OAWeather" zPosition="3" alphatest="blend" transparent="1">
 			<convert type="OAWeather">weathericon,current,/usr/share/enigma2/BlueAccents-FHD/Wettericons/Wettericons_MIUI/,png</convert>
 		</widget>
-		<widget font="Regular; 16" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="1777,908" size="130,20" source="session.OAWeather" zPosition="3" halign="right" transparent="1" valign="center">
+		<widget font="Regular; 16" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="1777,908" size="130,20" source="session.OAWeather" zPosition="4" halign="right" transparent="1" valign="center">
 			<convert type="OAWeather">temperature_high_low,current</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="1699,795" size="88,67" font="Regular; 44" backgroundColor="grey" borderWidth="2" borderColor="white" shadowColor="white" shadowOffset="-3,-3" foregroundColor="black" halign="center" transparent="1" zPosition="5">
+		<widget source="global.CurrentTime" render="Label" position="1699,795" size="88,67" font="Regular; 44" backgroundColor="grey" borderWidth="2" borderColor="white" shadowColor="white" shadowOffset="-3,-3" foregroundColor="black" halign="center" transparent="1" zPosition="6">
 			<convert type="ClockToText">Format:%H</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="1799,795" size="88,67" font="Regular; 44" backgroundColor="grey" borderWidth="2" borderColor="white" shadowColor="white" shadowOffset="-3,-3" foregroundColor="black" halign="center" transparent="1" zPosition="5">
+		<widget source="global.CurrentTime" render="Label" position="1799,795" size="88,67" font="Regular; 44" backgroundColor="grey" borderWidth="2" borderColor="white" shadowColor="white" shadowOffset="-3,-3" foregroundColor="black" halign="center" transparent="1" zPosition="6">
 			<convert type="ClockToText">Format:%M</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="1678,907" size="80,20" font="Regular; 16" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="left" transparent="1" zPosition="5">
+		<widget source="global.CurrentTime" render="Label" position="1678,907" size="80,20" font="Regular; 16" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="left" transparent="1" zPosition="6">
 			<convert type="ClockToText">Format:%a.%d.%b</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="1672,1017" size="105,24" font="Regular;24" foregroundColor="grey" backgroundColor="black" halign="left" valign="center" transparent="1">
@@ -778,7 +783,7 @@
 		</widget>
 		<eLabel name="" position="1788,963" size="4,9" zPosition="5" backgroundColor="black" />
 		<eLabel name="" position="1788,996" size="4,9" zPosition="5" backgroundColor="black" />
-		<panel name="template_ethernet_infobar_android" />
+		<panel name="template_infobar_ethernet" />
 	</screen>
 	<screen name="template_Weather_Infobar">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
@@ -2770,11 +2775,11 @@
 	</screen>
 	<!-- TEMPLATES Infobar Ethernet-->
 	<screen name="template_infobar_ethernet">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="3" size="75,45" alphatest="blend" transparent="1">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="1" size="75,45" alphatest="blend" transparent="1">
 			<convert type="BlueARouteInfo">Wifi</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="3" size="75,45" alphatest="blend" transparent="1">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="1" size="75,45" alphatest="blend" transparent="1">
 			<convert type="BlueARouteInfo">Lan</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
@@ -2783,11 +2788,11 @@
       <convert type="BlueABlinkingClock" />
       <convert type="ConditionalShowHide">Blink</convert>
     </widget> -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="1815,887" zPosition="3" size="75,45" alphatest="blend" transparent="1">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="1815,887" zPosition="1" size="75,45" alphatest="blend" transparent="1">
 			<convert type="BlueARouteInfo">Wifi</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="1815,887" zPosition="3" size="75,45" alphatest="blend" transparent="1">
+		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="1815,887" zPosition="1" size="75,45" alphatest="blend" transparent="1">
 			<convert type="BlueARouteInfo">Lan</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
@@ -3753,12 +3758,21 @@
 	<!-- TEMPLATES_Player_Poster-->
 	<screen name="template_Player_Backdrop_Poster">
 		<widget source="session.Event_Now" render="xtraBackdrop" position="1170,585" size="492,277" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
-		<widget source="session.Event_Now" render="xtraPoster" position="1702,585" size="184,277" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
+		<widget source="session.Event_Now" render="xtraPoster" position="1702,585" size="185,278" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
+		<widget source="session.Event_Now" render="xtraParental" position="216,828" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+		<ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="20,870" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
+		<widget render="xtraStar" source="session.Event_Now" pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" position="20,870" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
 	</screen>
 	<!-- TEMPLATES SecondInfoBar Poster-->
 	<screen name="template_SIB_Poster">
-		<widget source="session.Event_Next" render="xtraPoster" borderColor="scrollbarborder" borderWidth="1" position="595,637" size="184,277" zPosition="10" />
-		<widget source="session.Event_Now" render="xtraPoster" borderColor="scrollbarborder" borderWidth="1" position="595,195" size="184,277" zPosition="10" />
+	<widget source="session.Event_Now" render="xtraParental" position="713,394" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+	<widget source="session.Event_Next" render="xtraParental" position="715,831" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+    <widget source="session.Event_Next" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="595,620" size="184,277" zPosition="3" />
+    <widget source="session.Event_Now" render="BlueAPoster" borderColor="scrollbarborder" borderWidth="1" position="595,185" size="184,277" zPosition="3" />
+	<ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="594,467" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
+	<widget render="xtraStar" source="session.Event_Now" pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" position="594,467" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
+	<ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="594,903" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
+	<widget render="xtraStar" source="session.Event_Next" pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" position="594,903" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
 	</screen>
 	<!-- TEMPLATES SecondInfoBar Poster Fake-->
 	<screen name="template_SecondInfoBar_Poster">
@@ -3783,8 +3797,11 @@
 	</screen>
 	<!-- TEMPLATES-EventView-Backdrop-Poster-->
 	<screen name="template_EventView_Backdrop_Poster">
-		<widget source="Event" render="xtraBackdrop" position="288,562" size="492,277" borderColor="scrollbarborder" borderWidth="1" zPosition="10" />
-		<widget source="Event" render="xtraPoster" borderColor="scrollbarborder" borderWidth="1" position="30,562" size="184,277" zPosition="10" />
+		<widget source="Event" render="xtraBackdrop" position="240,550" size="533,300" borderColor="scrollbarborder" borderWidth="1" zPosition="2" />
+		<widget source="Event" render="xtraPoster" borderColor="scrollbarborder" borderWidth="1" position="30,550" size="184,277" zPosition="2" />
+		<widget source="Event" render="xtraParental" position="151,763" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+		<ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="30,832" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
+		<widget render="xtraStar" source="Event" pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" position="30,832" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
 	</screen>
 	<!-- template_SNR_AGC_BER_SIB-->
 	<screen name="template_SNR_AGC_SIB">

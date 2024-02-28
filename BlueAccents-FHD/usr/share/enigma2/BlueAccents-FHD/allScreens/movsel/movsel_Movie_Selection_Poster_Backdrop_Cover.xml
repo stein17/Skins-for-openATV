@@ -2,13 +2,13 @@
  <!-- skin_Movie_Selection_Poster_Cover_Backdrop_Picon -->
 <screen name="MovieSelection" position="0,0" size="1920,1080" title="Select a movie" flags="wfNoBorder" backgroundColor="background">
   <eLabel text="Select a movie" position="960,6" size="450,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-  <widget name="list" position="45,112" size="1050,870" itemHeight="45" font="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand"  scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" enableWrapAround="1" alphatest="blend" transparent="1" />
+  <widget name="list" position="45,112" size="1050,870" itemHeight="45" font="Regular;32" backgroundColor="background" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" enableWrapAround="1" alphatest="blend" transparent="1" />
   <widget name="waitingtext" position="93,664" size="960,150" zPosition="1" font="Regular;32" halign="center" valign="center" transparent="1" />
   <widget name="freeDiskSpace" position="1125,952" size="765,37" font="Regular;30" valign="center" halign="left" transparent="1" />
   <widget source="Service" render="Label" position="1125,480" noWrap="1" size="765,37" font="Regular;33" transparent="1" foregroundColor="selectedFG">
     <convert type="MovieInfo">ShortDescription</convert>
   </widget>
-  <widget source="Service" render="Label" position="1380,405" size="495,37" font="Regular;33" transparent="1" halign="center">
+  <widget source="Service" render="Label" position="1380,420" size="495,37" font="Regular;33" transparent="1" halign="center">
     <convert type="MovieInfo">RecordServiceName</convert>
   </widget>
   <widget source="Service" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1125,532" size="765,345" font="Regular;33" transparent="1" valign="top">
@@ -26,7 +26,7 @@
   <widget source="Service" font="Regular;33" position="1230,112" render="Label" size="660,37" transparent="1" zPosition="1" halign="left">
     <convert type="EventName">Name</convert>
   </widget>
-  <widget source="Service" render="Picon" position="1479,195" zPosition="10" size="330,198" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
+  <widget source="Service" render="Picon" position="1461,189" zPosition="10" size="330,198" transparent="1" alphatest="blend" borderWidth="1" borderColor="grey">
     <convert type="MovieInfo">RecordServiceRef</convert>
   </widget>
   <eLabel text="Title:" position="1125,112" size="97,37" font="Regular;33" transparent="1" zPosition="2" foregroundColor="selectedFG" valign="top" />
@@ -40,13 +40,9 @@
   <widget source="Service" render="xtraBackdrop" delayPic="500" position="0,0" size="1920,1080" zPosition="-24" alphatest="off" />
   <widget source="Service" render="xtraPoster" delayPic="200" position="1132,157" size="185,278" zPosition="2" borderWidth="1" alphatest="blend" transparent="1" borderColor="grey" />
   <widget source="Service" render="xtraParental" position="1257,375" size="60,60" alphatest="blend" zPosition="3" transparent="1" />
-<!--   <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent/pic/star/star_b.png" position="1130,440" size="200,20" alphatest="blend" zPosition="2" transparent="1" /> -->
-  <widget source="Service" render="Progress" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/xtraEvent/pic/star/star.png" position="1131,439" size="200,20" alphatest="blend" transparent="1" zPosition="2" backgroundColor="background">
-  <convert type="xtraInfo">imdbRatingValue</convert>
-</widget>
-<!--   <widget source="Service" render="Label" position="1325,159" size="200,40" font="Regular; 30" halign="center" transparent="1" zPosition="2" backgroundColor="background" valign="center">
-    <convert type="xtraInfo">imdbRating</convert>
-  </widget> -->
+ <ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="1132,438" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
+  <widget pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" render="xtraStar" source="Service" position="1132,438" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
+
 
 </screen>
   </skin>
