@@ -3376,29 +3376,99 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 	</screen>
 	<!-- Foreca -->
 	<!-- Youtube -->
-	<screen name="YoutubeTVSettings" position="center,center" size="1920,1080" title="Preference" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="config" position="30,112" size="1050,877" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
-		<panel name="template_title_date" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_exit_1280" />
+  
+  <screen name="YouTubeMain" position="0,0" size="1920,1080" flags="wfNoBorder" title="YouTube" backgroundColor="transparent">
+  <widget source="list" render="Listbox" position="30,112" size="1050,825" backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="12" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" transparent="1">
+    <convert type="TemplatedMultiContent">
+	           {"template": [
+		   MultiContentEntryPixmapAlphaTest(pos=(0,0), size=(150,108), png=2), # Thumbnail
+		   MultiContentEntryText(pos=(165,1), size=(1060,78), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=3), # Title
+		   MultiContentEntryText(pos=(180, 73), size=(400,34), font=1, flags=RT_HALIGN_LEFT, text=4), # Views
+		   MultiContentEntryText(pos=(680,73), size=(400,34), font=1, flags=RT_HALIGN_LEFT, text=5), # Duration
+		   ],
+		   "fonts": [gFont("Regular",32), gFont("Regular",27)],
+		   "itemHeight": 108}
+	</convert>
+  </widget>
+  <widget name="thumbnail" position="1572,580" size="150,108" zPosition="1" />
+ <panel name="template_background_725_trans" />
+  <panel name="template_info_menu_exit" />
+  <panel name="template_source_red_green" />
+  <panel name="template_title_date" />
+</screen>
+  
+ <screen name="YouTubeSearch" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
+  <eLabel text="YouTube Search"  position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="config" position="30,112" size="1050,90" zPosition="2" scrollbarMode="showNever" itemHeight="45" font="Regular; 34" />
+  <widget source="list" render="Listbox" position="30,220" size="1050,760" ackgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="12" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" transparent="1">
+    <convert type="TemplatedMultiContent">
+                                    {"template": [MultiContentEntryText(pos=(15,1), size=(1050,45),
+									font=0, flags=RT_HALIGN_LEFT, text=0)],"fonts": [gFont("Regular",32)],
+                                    "itemHeight": 45}
+         </convert>
+  </widget>
+  <widget name="HelpWindow" pixmap="buttons/key_board.png" position="1837,1032" zPosition="1" size="60,36" transparent="1" alphatest="blend" />
+<panel name="template_background_725_trans" />
+  <panel name="template_source_red_o_yellow" />
+</screen> 
+  
+  <screen name="YoutubeTVSettings" position="center,center" size="1920,1080" title="Preference" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="config" position="30,112" size="1050,877" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="12" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+    <panel name="template_title_date" />
+    <panel name="template_background_725_trans" />
+    <panel name="template_source_red_green" />
+    <panel name="template_exit_1280" />
+  </screen>
+  <screen name="YoutubeTVWindow" position="center,center" size="1920,1080" title="Preference" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="infomation" position="30,150" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
+    <widget name="startdesc" position="30,212" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
+    <widget name="helpdesc" position="30,315" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,262" zPosition="1" size="1060,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,367" zPosition="1" size="1060,4" />
+    <ePixmap pixmap="buttons/key_green.png" position="22,1038" size="24,24" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="315,1038" size="24,24" alphatest="blend" transparent="1" />
+    <widget source="key_green" render="Label" position="52,1030" size="255,39" zPosition="1" font="Regular;30" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="345,1030" size="255,39" zPosition="1" font="Regular;30" halign="left" transparent="1" valign="center" noWrap="1" />
+    <panel name="template_exit" />
+    <panel name="template_title_date" />
+    <panel name="template_background_725_trans" />
+  </screen>
+  <!-- Youtube -->
+  		<!-- E2iPlayer Player -->
+<screen name="E2iPlayerWidget" position="0,0" size="1920,1080" title="E2iPlayer" backgroundColor="transparent">
+		<widget name="list" position="540,122" zPosition="2" size="1350,525" itemHeight="53" font="Regular;32" backgroundColor="background" scrollbarSliderBorderWidth="2" scrollbarWidth="12" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarSliderBorderColor="scrollbarborder" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
+		<widget name="console" position="30,675" zPosition="1" size="1860,308" font="Regular;32" transparent="1" backgroundColor="background" />
+		<widget name="cover" zPosition="2" position="30,120" size="495,495" alphatest="blend" />
+		<widget name="playerlogo" zPosition="1" position="1222,9" size="180,60" alphatest="blend" />
+
+		<ePixmap pixmap="BlueAccents-FHD/BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,660" zPosition="1" size="1870,4" />
+		<widget name="spinner" zPosition="2" position="237,630" size="24,24" transparent="1" alphatest="blend" />
+		<widget name="spinner_1" zPosition="1" position="237,630" size="24,24" transparent="1" alphatest="blend" />
+		<widget name="spinner_2" zPosition="1" position="261,630" size="24,24" transparent="1" alphatest="blend" />
+		<widget name="spinner_3" zPosition="1" position="285,630" size="24,24" transparent="1" alphatest="blend" />
+		<widget name="spinner_4" zPosition="1" position="309,630" size="24,24" transparent="1" alphatest="blend" />
+	<ePixmap pixmap="buttons/key_green.png" position="315,1038" size="24,24" alphatest="blend" transparent="1" />
+	<widget name="key_green_ext" position="345,1030" size="255,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
+
+    <panel name="template_title_date" />
+    <panel name="template_ok_exit" />
+    <panel name="template_background_full_black" />
+	  <panel name="template_name_red_o_blue" />
+	    <panel name="template_source_red_o_blue" />
 	</screen>
-	<screen name="YoutubeTVWindow" position="center,center" size="1920,1080" title="Preference" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="infomation" position="30,150" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
-		<widget name="startdesc" position="30,212" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
-		<widget name="helpdesc" position="30,315" size="1050,45" font="Regular;36" backgroundColor="background" valign="center" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,262" zPosition="1" size="1060,4" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,367" zPosition="1" size="1060,4" />
-		<ePixmap pixmap="buttons/key_green.png" position="22,1038" size="24,24" alphatest="blend" transparent="1" />
-		<ePixmap pixmap="buttons/key_yellow.png" position="315,1038" size="24,24" alphatest="blend" transparent="1" />
-		<widget source="key_green" render="Label" position="52,1030" size="255,39" zPosition="1" font="Regular;30" halign="left" transparent="1" valign="center" noWrap="1" />
-		<widget source="key_yellow" render="Label" position="345,1030" size="255,39" zPosition="1" font="Regular;30" halign="left" transparent="1" valign="center" noWrap="1" />
-		<panel name="template_exit" />
-		<panel name="template_title_date" />
-		<panel name="template_background_725_trans" />
+<screen name="IPTVDMWidget" position="0,0" title="E2iPlayer Download Manager" size="1920,1080" backgroundColor="transparent">
+		<widget name="list" position="30,112" zPosition="2" size="1860,870" scrollbarMode="showOnDemand" transparent="1" backgroundColor="background" enableWrapAround="1" />
+		<widget name="titel" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <panel name="template_date" />
+    <panel name="template_ok_exit" />
+       <panel name="template_background_full_black" />
+	  <panel name="template_name_red_o_blue" />
+	    <panel name="template_source_red_o_blue" />
 	</screen>
-	<!-- Youtube -->
+<screen name="IPTVDMNotificationWidget" position="center,105" zPosition="10" size="825,90" title="IPTVPlayer downloader" backgroundColor="background" flags="wfNoBorder">
+		<widget name="message_label" font="Regular;33" position="0,0" zPosition="2" valign="center" halign="center" size="825,90" backgroundColor="background" transparent="1" />
+	</screen>
 	<!-- PermanentVfdClock -->
 	<screen name="PermanentVfdClockMenu" position="center,center" size="1920,1080" title="Permanent VFD clock config" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="config" position="30,112" size="1050,877" itemHeight="45" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_45_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1" />
@@ -4695,21 +4765,41 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
   </screen>
 
 <screen name="downloads" position="0,0" size="1920,1080" title="downloads..." flags="wfNoBorder" backgroundColor="transparent">
-<widget source="Title" render="Label" position="30,112" size="1050,106" font="Regular; 42" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-<eLabel text="downloads..." position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-    <widget name="progress" position="81,243" size="1000,20" foregroundColor="scrollbarSlidercolor" borderColor="scrollbarborder" borderWidth="2" backgroundColor="background" />
-    <widget name="status" position="30,280" size="1050,44" transparent="1" font="Regular;30" foregroundColor="selectedFG" backgroundColor="background" />
-    <widget name="info" position="30,380" size="1050,84" transparent="1" font="Regular;30" backgroundColor="background" valign="top" />
-    <widget name="info2" position="30,480" size="1050,500" transparent="1" font="Regular; 32" foregroundColor="white" backgroundColor="background" />
-    <widget name="Picture" position="484,702" size="596,278" zPosition="2" transparent="1" />
-    <widget name="Picture2" position="760,748" size="320,232" zPosition="1" transparent="1" alphatest="blend" />
-    <widget name="int_statu" font="Regular; 30" position="35,230" size="40,40" foregroundColor="#1edb76" backgroundColor="{0}" zPosition="2" transparent="1" />
-    <eLabel name="int_statu_off" font="Regular; 30" position="35,230" size="40,40" foregroundColor="#555555" backgroundColor="{0}" zPosition="1" transparent="1" />
-    <panel name="template_date" />
-    <panel name="TemplateAllColorButtons_Automatic" />
-    <panel name="template_background_725_trans" />
-    <panel name="template_info_menu_exit" />
-  </screen>
+  <widget source="Title" render="Label" position="35,112" size="1050,106" font="Regular; 42" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <eLabel text="downloads..." position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+  <widget name="progress" position="35,235" size="1000,20" foregroundColor="scrollbarSlidercolor" borderColor="scrollbarborder" borderWidth="2" backgroundColor="background" />
+  <widget name="status" position="35,270" size="1050,44" transparent="1" font="Regular;30" foregroundColor="selectedFG" backgroundColor="background" />
+  <widget name="Picture" position="1250,690" size="596,278" zPosition="2" transparent="1" />
+  <widget name="Picture2" position="1390,420" size="320,232" zPosition="1" transparent="1" alphatest="blend" />
+<!--   <ePixmap pixmap="BlueAccents-FHD/icons/keypad_fHD.png" position="1630,705" zPosition="2" size="53,38" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="BlueAccents-FHD/icons/keypad_fHD.png" position="1630,756" zPosition="2" size="53,38" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="BlueAccents-FHD/icons/keypad_fHD.png" position="1630,807" zPosition="2" size="53,38" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="BlueAccents-FHD/icons/keypad_fHD.png" position="1630,857" zPosition="2" size="53,38" transparent="1" alphatest="blend" /> -->
+  <widget name="info" position="35,330" size="1050,94" transparent="1" font="Regular;30" foregroundColor="white" backgroundColor="background" valign="center" />
+  <widget name="info2" position="35,430" size="1050,550" transparent="1" font="Regular; 33" foregroundColor="white" backgroundColor="background" />
+  <widget name="int_statu" font="Regular; 30" position="1045,222" size="40,40" foregroundColor="#1edb76" backgroundColor="{0}" zPosition="2" transparent="1" />
+  <eLabel name="int_statu_off" font="Regular; 30" position="1045,222" size="40,40" foregroundColor="#555555" backgroundColor="{0}" zPosition="1" transparent="1" />
+<!--   <widget source="key_1" render="Label" font="Regular;35" foregroundColor="white" backgroundColor="background" position="1300,700" size="375,50" halign="left" transparent="1" zPosition="1" />
+  <widget source="key_2" render="Label" font="Regular;35" foregroundColor="white" backgroundColor="background" position="1300,750" size="375,50" halign="left" transparent="1" zPosition="1" />
+  <widget source="key_3" render="Label" font="Regular;35" foregroundColor="white" backgroundColor="background" position="1300,800" size="375,50" halign="left" transparent="1" zPosition="1" />
+  <widget source="key_4" render="Label" font="Regular;35" foregroundColor="white" backgroundColor="background" position="1300,850" size="375,50" halign="left" transparent="1" zPosition="1" />
+  <eLabel name="" position="1300,910" size="250,50" text="Anzahl" font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" /> -->
+  <eLabel name="" position="1300,180" size="250,50" text="Poster :     " font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" />
+  <widget name="infoposter" position="1600,180" size="100,50" transparent="1" font="Regular;35" foregroundColor="white" backgroundColor="background" halign="right" valign="top" />
+  <eLabel name="" position="1300,230" size="250,50" text="Backdrop :     " font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" />
+  <widget name="infobackdrop" position="1600,230" size="100,50" transparent="1" font="Regular;35" foregroundColor="white" backgroundColor="background" halign="right" valign="top" />
+  <eLabel name="" position="1300,280" size="250,50" text="Banner :     " font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" />
+  <widget name="infobanner" position="1600,280" size="100,50" transparent="1" font="Regular;35" foregroundColor="white" backgroundColor="background" halign="right" valign="top" />
+  <eLabel name="" position="1300,330" size="250,50" text="Infos :     " font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" />
+  <widget name="infoinfos" position="1600,330" size="100,50" transparent="1" font="Regular;35" foregroundColor="white" backgroundColor="background" halign="right" valign="top" />
+<!--   <eLabel name="" position="1634,910" size="50,50" text="10" font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" /> -->
+  <eLabel name="" position="1300,120" size="250,50" text="Anzahl" font="Regular; 35" halign="left" backgroundColor="background" foregroundColor="green" />
+  <panel name="template_date" />
+  <panel name="template_source_long_red_o_blue" />
+  <panel name="template_background_full_black" />
+  <panel name="template_info_menu_exit" />
+  <panel name="template_Line_Vert_Big_1087" />
+</screen>
   
   <screen name="manuelSearch" position="center,center" size="1920,1080" title="Manuel Search..." flags="wfNoBorder" backgroundColor="transparent">
 	<widget source="session.CurrentService" render="Label" position="30,112" size="1050,60" zPosition="2" font="Regular; 45" transparent="1" backgroundColor="#23262e" valign="center">
