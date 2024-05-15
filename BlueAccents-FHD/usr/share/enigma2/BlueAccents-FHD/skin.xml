@@ -2,6 +2,10 @@
 <skin>
 	<!-- BlueAccents-FHD -->
 	<!-- BlueAccents-FHD Skin  for ATV image, by stein17 -->
+
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
+				
 	<!-- Support https://www.opena.tv/ -->
 	<!-- Recommended to use with XPicons (220x132) -->
 	<!-- You can not modify and redistribute  -->
@@ -1222,8 +1226,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Next" render="Label" position="1440,957" size="157,57" font="Regular;37" halign="right" transparent="1" noWrap="1">
-			<convert type="EventTime">Duration</convert>
-			<convert type="ClockToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget alphatest="blend" position="37,888" size="195,117" render="Picon" source="session.CurrentService" transparent="1" zPosition="2">
 			<convert type="ServiceName">Reference</convert>
@@ -1235,8 +1239,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;37" halign="right" noWrap="1" position="1410,870" render="Label" size="187,57" source="session.Event_Now" transparent="1" zPosition="1">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget source="RdsDecoder" render="Label" position="129,1035" size="1477,45" font="LCD;33" halign="center" transparent="1" zPosition="1">
 			<convert type="RdsInfo">RadioText</convert>
@@ -1279,8 +1283,8 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget source="Event" render="Label" position="1522,307" size="180,37" font="Regular;30" foregroundColor="selectedFG" transparent="1" halign="right" valign="center">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+					<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget name="list" position="30,172" size="930,120" itemHeight="60" EventFontInfobar="Regular;30" backgroundColor="background" transparent="1" />
 		<ePixmap pixmap="buttons/key_red.png" position="37,313" size="24,24" alphatest="blend" />
@@ -2913,8 +2917,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget font="Regular;30" halign="left" position="540,510" render="Label" size="150,30" source="session.Event_Now" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget font="Regular;30" halign="left" position="202,945" render="Label" size="105,36" source="session.Event_Next" transparent="1" valign="center" foregroundColor="selectedFG" backgroundColor="background">
 			<convert type="EventTime">StartTime</convert>
@@ -2967,8 +2971,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="ServiceEvent" render="Label" position="1755,450" size="135,30" font="Regular;27" borderColor="black" borderWidth="1" halign="right" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<!--     <widget name="list" position="30,105" size="1200,828" scrollbarMode="showOnDemand" fieldMargins="5" itemsDistances="5" progressbarHeight="8" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="selectedFG" colorServiceDescriptionSelected="white" colorEventProgressbar="selectedFG" colorEventProgressbarBorder="verygrey" colorEventProgressbarBorderSelected="selectedFG" foregroundColorServiceNotAvail="lila" foregroundColorSelected="selectedFG"  serviceItemHeight="30" serviceNumberFont="Regular;22" serviceNameFont="Regular;24" serviceInfoFont="Regular;22" transparent="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" /> -->
 		<widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1260,502" size="630,210" font="Regular;30" foregroundColor="white" transparent="1" halign="left" valign="top">
@@ -3003,17 +3007,11 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		</widget>
 		<ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="37,948" size="37,37" />
 		<widget source="ServiceEvent" render="BlueAFrontend" position="1152,1030" zPosition="1" valign="center" size="525,39" font="Regular;30" backgroundColor="black" transparent="1" halign="left" />
-		<ePixmap pixmap="buttons/key_red.png" position="22,1038" size="24,24" alphatest="blend" transparent="1" />
-		<ePixmap pixmap="buttons/key_green.png" position="270,1038" size="24,24" alphatest="blend" transparent="1" />
-		<ePixmap pixmap="buttons/key_yellow.png" position="577,1038" size="24,24" alphatest="blend" transparent="1" />
-		<ePixmap pixmap="buttons/key_blue.png" position="840,1038" size="24,24" alphatest="blend" transparent="1" />
+
 		<panel name="template_Line_Vert_Big_1222" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,937" zPosition="10" size="1195,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1252,157" zPosition="10" size="640,4" />
-		<widget name="key_red" position="52,1030" size="210,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-		<widget name="key_green" position="300,1030" size="270,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-		<widget name="key_yellow" position="607,1030" size="225,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-		<widget name="key_blue" position="870,1030" size="225,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
+<panel name="TemplateAllColorButtons_Automatic" />
 		<panel name="template_VideoPicture_ChannelSel" />
 		<panel name="template_title_date" />
 		<panel name="template_background_full_black" />
@@ -3031,8 +3029,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		</widget>
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
 		<widget source="ServiceEvent" render="Label" position="1695,945" size="180,45" font="Regular;30" transparent="1" halign="right" valign="center">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget name="list" position="30,112" size="1050,810" backgroundColor="background" scrollbarMode="showOnDemand" fieldMargins="8" itemsDistances="8" progressbarHeight="12" progressBarWidth="75" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="rosa" colorServiceStreamed="orange" colorServiceDescription="grey" colorServiceDescriptionSelected="white" colorEventProgressbarBorder="green" colorEventProgressbarBorderSelected="white" foregroundColorServiceNotAvail="dark" serviceItemHeight="45" serviceNumberFont="Regular;32" serviceNameFont="Regular;32" serviceInfoFont="Regular;30" transparent="1" />
 		<widget source="ServiceEvent" render="BlueARunningText" options="movetype=none,startdelay=600,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1125,660" size="757,270" font="Regular;27" zPosition="2" transparent="1" halign="left" valign="top">
@@ -3169,8 +3167,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="Event" render="Label" position="1170,126" size="150,37" font="Regular;30" backgroundColor="background" transparent="1" halign="left" valign="center">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget name="lab1" position="30,945" size="1860,45" font="Regular;36" halign="center" valign="center" zPosition="20" transparent="1" />
 		<widget name="timeline_text" position="30,187" size="1860,45" itemHeight="45" TimelineFont="Regular;32" borderColor="scrollbarSlidercolor" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" TimelineAlignment="left" zPosition="1" transparent="1" font="Regular;45" />
@@ -3233,8 +3231,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="Event" render="Label" position="523,480" size="142,30" font="Regular;30" foregroundColor="selectedFG" transparent="1" halign="left" valign="center">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget alphatest="blend" name="timeline_now" pixmap="epg/timeline_s.png" position="37,525" zPosition="6" size="4,48" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,519" zPosition="10" size="1224,4" />
@@ -3388,8 +3386,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Label" position="900,112" size="180,45" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;36" halign="center" transparent="1">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget source="session.Event_Next" render="Label" position="1125,937" size="90,45" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;30" halign="right" transparent="1">
 			<convert type="EventTime">StartTime</convert>
@@ -3420,8 +3418,8 @@ self['config'].l.setSeperation(int(300*f))</applet>
 			<convert type="ServiceName">Name</convert>
 		</widget>
 		<widget source="Event" render="Label" position="1365,1033" size="180,39" font="Regular;30" foregroundColor="selectedFG" backgroundColor="background" transparent="1" halign="right" valign="center">
-			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
 		</widget>
 		<widget name="lab1" position="30,885" size="1860,45" font="Regular;36" halign="center" valign="center" zPosition="20" backgroundColor="background" transparent="1" />
 		<widget name="timeline_text" position="30,840" size="1860,45" itemHeight="45" TimelineFont="Regular;36" borderColor="grey" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" TimelineAlignment="left" zPosition="1" transparent="1" />
