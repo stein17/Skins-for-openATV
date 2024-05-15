@@ -25,15 +25,7 @@
   </widget>
   <ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="1175,954" size="37,37" />
   <widget source="ServiceEvent" render="BlueAFrontend" position="1152,1030" zPosition="1" valign="center" size="525,39" font="Regular;30" backgroundColor="black" transparent="1" halign="left" />
-  <ePixmap pixmap="buttons/key_red.png" position="22,1038" size="24,24" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_green.png" position="270,1038" size="24,24" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_yellow.png" position="577,1038" size="24,24" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_blue.png" position="840,1038" size="24,24" alphatest="blend" transparent="1" />
 
-  <widget name="key_red" position="52,1030" size="210,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_green" position="300,1030" size="270,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_yellow" position="607,1030" size="225,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_blue" position="870,1030" size="225,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
   <widget position="1467,110" size="420,236" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" borderWidth="2" borderColor="scrollbarborder" />
 
   <widget source="ServiceEvent" render="Label" position="1340,365" size="550,215" font="Regular; 29" halign="left" valign="center" transparent="1" zPosition="2" backgroundColor="background" foregroundColor="white">
@@ -48,8 +40,8 @@
     <convert type="ClockToText">Format:-  %H:%M</convert>
   </widget>
   <widget source="ServiceEvent" render="Label" position="1178,310" size="270,40" font="Regular; 36" borderColor="black" borderWidth="1" halign="center" transparent="1" foregroundColor="selectedFG" backgroundColor="background">
-    <convert type="EventTime">Remaining</convert>
-    <convert type="RemainingToText">InMinutes</convert>
+			<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
   </widget>
   <widget source="ServiceEvent" render="Picon" position="1205,110" size="220,132" zPosition="5" alphatest="blend" transparent="1">
     <convert type="BlueARefString">ServicelistRef</convert>
@@ -69,7 +61,7 @@
     </widget>
   <!-- imdb rating star progress -->
   
-  
+  <panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_title_date" />
   <panel name="template_background_full_black" />
   <panel name="template_info_epg_exit" />
