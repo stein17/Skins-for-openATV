@@ -477,7 +477,7 @@
 <ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd_weather.png" position="0,430" size="1280,300" zPosition="-1" />
 <eLabel name="" text="Today" backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="white" position="190,460" size="127,16" font="Regular; 14" zPosition="3" halign="center" transparent="1" />
    
-<!--     <widget source="global.CurrentTime" render="Label" position="573,242" size="140,62" font="Regular; 40" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="center" transparent="1" zPosition="5" valign="center">
+<!--     <widget source="global.CurrentTime" render="Label" position="573,242" size="140,62" font="Regular; 40" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="foreground" halign="center" transparent="1" zPosition="5" valign="center">
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="629,314" size="140,30" font="Regular; 24" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="center" transparent="1" zPosition="5">
@@ -498,13 +498,13 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="102,511" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
     <convert type="OAWeather">temperature_current</convert>
   </widget>
-  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="18,535" size="128,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" render="Label" position="18,535" size="128,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
     <convert type="OAWeather">temperature_text,current</convert>
   </widget>
   <widget alphatest="blend" render="OAWeatherPixmap" position="195,480" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
     <convert type="OAWeather">weathericon,day1,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="190,535" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" render="Label" position="190,535" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day1</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="274,511" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
@@ -543,8 +543,8 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="975,642" size="120,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" halign="right">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="185,672" size="70,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="grey" font="Regular;24">
       <convert type="EventTime">StartTime</convert>
@@ -658,8 +658,8 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="975,642" size="120,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" halign="right">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="185,672" size="70,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="grey" font="Regular;24">
       <convert type="EventTime">StartTime</convert>
@@ -759,7 +759,7 @@
 		<convert type="OAWeather">temperature_current</convert>
 	</widget> -->
   
-  <widget source="global.CurrentTime" render="Label" position="25,12" size="140,62" font="Regular; 40" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="cyan" halign="center" transparent="1" zPosition="5" valign="center">
+  <widget source="global.CurrentTime" render="Label" position="25,12" size="140,62" font="Regular; 40" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="foreground" halign="center" transparent="1" zPosition="5" valign="center">
     <convert type="ClockToText">Default</convert>
   </widget>
   <widget source="global.CurrentTime" render="Label" position="23,75" size="140,30" font="Regular; 20" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" halign="center" transparent="1" zPosition="5">
@@ -793,13 +793,13 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="370,86" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
     <convert type="OAWeather">temperature_current</convert>
   </widget>
-  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="353,103" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
+  <widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" render="Label" position="353,103" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
     <convert type="OAWeather">temperature_text,current</convert>                                                                                          
   </widget>
   <widget alphatest="blend" render="OAWeatherPixmap" position="543,32" size="52,52" source="session.OAWeather" transparent="1" zPosition="5">
     <convert type="OAWeather">weathericon,day1,/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Icons/,png</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="507,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" render="Label" position="507,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day1</convert>                                                                                                     
   </widget>
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="524,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
@@ -820,7 +820,7 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="749,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
     <convert type="OAWeather">temperature_low,day2</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="660,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" transparent="1" render="Label" position="660,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day2</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="813,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
@@ -835,7 +835,7 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="901,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
     <convert type="OAWeather">temperature_low,day3</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="813,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" transparent="1" render="Label" position="813,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day3</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="967,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
@@ -850,7 +850,7 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1055,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
     <convert type="OAWeather">temperature_low,day4</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="967,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" transparent="1" render="Label" position="967,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day4</convert>
   </widget>
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1120,15" size="127,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
@@ -865,7 +865,7 @@
   <widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1208,85" size="44,16" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
     <convert type="OAWeather">temperature_low,day5</convert>
   </widget>
-  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="1120,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+  <widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="foreground" transparent="1" render="Label" position="1120,104" size="127,35" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
     <convert type="OAWeather">temperature_text,day5</convert>
   </widget>
   <widget noWrap="1" font="Regular; 14" position="53,117" size="40,16" backgroundColor="background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
@@ -1383,8 +1383,8 @@
     </widget>
     <eLabel text="-" position="755,125" size="20,24" valign="center" font="Regular;20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="center" />
     <widget source="Event" render="Label" position="505,125" size="110,24" font="Regular;20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" valign="center">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText" />
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget name="lab1" position="60,455" size="1160,35" font="Regular;24" halign="center" valign="center" zPosition="20" backgroundColor="background" foregroundColor="foreground" transparent="1" />
     <eLabel name="timeline_background" position="25,355" size="1230,28" backgroundColor="selectedBG" transparent="0" />
@@ -1435,8 +1435,8 @@
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
     <widget source="Event" render="Label" position="900,125" size="110,24" font="Regular; 20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" valign="center" zPosition="3">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText" />
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="Event" render="Progress" position="185,132" size="685,9" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/pbargmepg.png" transparent="1" zPosition="2">
       <convert type="EventTime">Progress</convert>
@@ -1503,8 +1503,8 @@
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
     <widget source="Event" render="Label" position="900,125" size="110,24" font="Regular; 20" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" valign="center" zPosition="3">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText" />
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="Event" render="Progress" position="185,132" size="685,9" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/pbargmepg.png" transparent="1" zPosition="2">
       <convert type="EventTime">Progress</convert>
@@ -1583,8 +1583,8 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1120,560" size="80,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;19" halign="right" transparent="1">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="761,590" size="60,30" foregroundColor="selectedFG" backgroundColor="background" valign="center" font="Regular;19" halign="right">
       <convert type="EventTime">StartTime</convert>
@@ -1668,8 +1668,8 @@
       <convert type="EventName">FullDescription</convert>
     </widget>
     <widget source="Event" render="Label" position="910,193" size="120,30" font="Regular;20" backgroundColor="background" foregroundColor="secondFG" transparent="1" halign="right" valign="center">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText" />
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget name="list" position="10,100" size="630,80" itemHeight="40" EventFontInfobar="Regular;20" backgroundColor="background" foregroundColor="foreground" transparent="1" />
     <panel name="TemplateAllColorButtons_Automatic" />
@@ -1860,8 +1860,8 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="975,120" size="130,30" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" halign="right">
-      <convert type="EventTime">Remaining</convert>
-      <convert type="RemainingToText">InMinutes</convert>
+				<convert type="EventTime">Duration</convert>
+				<convert type="ClockToText">InMinutes</convert>
     </widget>
     <widget source="session.Event_Next" render="Label" position="195,150" size="70,30" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" haligh="left">
       <convert type="EventTime">StartTime</convert>
