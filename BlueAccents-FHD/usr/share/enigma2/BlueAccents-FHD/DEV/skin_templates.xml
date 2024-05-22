@@ -3181,8 +3181,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" halign="right" position="1470,945" render="Label" size="172,45" source="session.Event_Now" transparent="1" backgroundColor="background">
-			<convert type="EventTime">Duration</convert>
-				<convert type="ClockToText">InMinutes</convert>
+		<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="steelblue" backgroundColor="background" halign="right" noWrap="1" position="229,1021" render="Label" size="105,45" source="session.Event_Next" transparent="1" valign="top">
 			<convert type="EventTime">StartTime</convert>
@@ -3197,8 +3197,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="steelblue" backgroundColor="background" halign="right" position="1470,1021" render="Label" size="172,45" source="session.Event_Next" transparent="1">
-			<convert type="EventTime">Duration</convert>
-			<convert type="ClockToText">InMinutes</convert>
+	<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 	</screen>
 	<!-- template_event_infobar_light -->
@@ -3222,8 +3222,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" halign="right" position="1470,954" render="Label" size="172,45" source="session.Event_Now" transparent="1" backgroundColor="background">
-			<convert type="EventTime">Duration</convert>
-				<convert type="ClockToText">InMinutes</convert>
+	<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="steelblue" backgroundColor="background" halign="right" noWrap="1" position="229,1026" render="Label" size="105,45" source="session.Event_Next" transparent="1" valign="top">
 			<convert type="EventTime">StartTime</convert>
@@ -3238,8 +3238,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="steelblue" backgroundColor="background" halign="right" position="1470,1026" render="Label" size="172,45" source="session.Event_Next" transparent="1">
-			<convert type="EventTime">Duration</convert>
-			<convert type="ClockToText">InMinutes</convert>
+	<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="13,1035" size="82,30" font="Regular;30" halign="right" valign="center" transparent="1" backgroundColor="background">
 			<convert type="ServiceInfo">VideoWidth</convert>
@@ -3270,8 +3270,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" halign="right" position="1470,954" render="Label" size="172,45" source="session.Event_Now" transparent="1" backgroundColor="background">
-			<convert type="EventTime">Duration</convert>
-				<convert type="ClockToText">InMinutes</convert>
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="grey" backgroundColor="background" halign="right" noWrap="1" position="229,1026" render="Label" size="105,45" source="session.Event_Next" transparent="1" valign="top">
 			<convert type="EventTime">StartTime</convert>
@@ -3286,8 +3286,8 @@
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget font="Regular;36" foregroundColor="grey" backgroundColor="background" halign="right" position="1470,1026" render="Label" size="172,45" source="session.Event_Next" transparent="1">
-			<convert type="EventTime">Duration</convert>
-			<convert type="ClockToText">InMinutes</convert>
+		<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
 		</widget>
 		<widget source="session.CurrentService" render="Label" position="6,960" size="82,30" font="Regular;30" halign="right" valign="center" transparent="1" backgroundColor="background">
 			<convert type="ServiceInfo">VideoWidth</convert>
@@ -3385,7 +3385,7 @@
 	<screen name="template_menu_listbox">
 		<eLabel text="Menu OpenATV" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 		<widget source="Title" render="Label" position="27,133" size="555,54" font="Regular;45" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="3" />
-		<widget source="menu" render="Listbox" position="25,259" size="615,735" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1">
+		<widget source="menu" render="Listbox" position="25,259" size="615,735" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1"  transparent="1">
 			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (45, 12), size = (505, 75), flags = RT_HALIGN_LEFT, text = 0) ],
 					"fonts": [gFont("Regular", 36)],
 					"itemHeight": 90
@@ -3401,7 +3401,7 @@
 	<screen name="template_menu_listbox_430">
 		<eLabel text="Main menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
 		<widget source="Title" render="Label" position="48,133" size="540,51" font="Regular;45" halign="center" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="3" />
-		<widget source="menu" render="Listbox" position="25,240" size="615,750" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1">
+		<widget source="menu" render="Listbox" position="25,240" size="615,750" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_60_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1"  transparent="1">
 			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (25, 6), size = (600, 40), flags = RT_HALIGN_LEFT, text = 0) ],
 					"fonts": [gFont("Regular", 34)],
 					"itemHeight": 60

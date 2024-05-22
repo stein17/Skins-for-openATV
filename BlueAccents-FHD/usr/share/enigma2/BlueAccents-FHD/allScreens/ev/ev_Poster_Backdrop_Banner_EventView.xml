@@ -57,7 +57,13 @@
   <ePixmap position="45,937" size="37,37" zPosition="10" pixmap="buttons/left.png" transparent="1" alphatest="blend" />
   <ePixmap position="382,937" size="37,37" zPosition="10" pixmap="buttons/right.png" transparent="1" alphatest="blend" />
   <widget name="datetime" position="442,937" size="337,37" font="Regular;30" halign="center" transparent="1" foregroundColor="white" />
-  <widget name="duration" position="789,937" size="240,37" font="Regular; 30" halign="center" transparent="1" foregroundColor="selectedFG" />
+<!--   <widget name="duration" position="789,937" size="240,37" font="Regular; 30" halign="center" transparent="1" foregroundColor="selectedFG" /> -->
+  
+  	<widget source="Event" render="Label" position="789,937" size="240,37" font="Regular; 30" halign="center" transparent="1" foregroundColor="selectedFG" >
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
+		</widget>
+  
 <widget source="session.CurrentService" render="Label" position="30,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1">
     <convert type="ServiceName">Name</convert>
   </widget>
