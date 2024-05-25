@@ -198,34 +198,34 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.default_infobar_file = "infobar_Original.xml"
         self.default_pig_file = "pig_Original.xml"
         self.default_caid_file = "caid_Original.xml"
-        self.default_sib_file = "sib_Original.xml"
+        self.default_colors_file = "colors_Original.xml"
         self.default_ch_se_file = "ch_se_Original.xml"
         self.default_ch_se_color_file = "ch_se_color_Original.xml"
         self.default_ev_file = "ev_Original.xml"
         self.default_progress_file = "progress_Original.xml"
-        self.default_emcsel_file = "emcsel_Original.xml"
-        self.default_movsel_file = "movsel_Original.xml"
+        self.default_emc_mov_sel_file = "emc_mov_sel_Original.xml"
+        self.default_vpnip_file = "vpnip_Original.xml"
         self.default_mini_tv_file = "mini_tv_Original.xml"
         self.default_player_file = "player_Original.xml"
         self.default_weather_file = "weather_Original.xml"
-        self.default_a_clock_file = "a_clock_Original.xml"
+        self.default_weather_icons_file = "weather_icons_Original.xml"
 
         self.background_file = "skin_user_background.xml"
         self.infobar_file = "skin_user_infobar.xml"
         self.pig_file = "skin_user_pig.xml"
         self.caid_file = "skin_user_caid.xml"
-        self.sib_file = "skin_user_sib.xml"
+        self.colors_file = "skin_user_colors.xml"
         self.ch_se_file = "skin_user_ch_se.xml"
         self.ch_se_color_file = "skin_user_ch_se_color.xml"
         self.ev_file = "skin_user_ev.xml"
         self.progress_file = "skin_user_progress.xml"
-        self.emcsel_file = "skin_user_emcsel.xml"
-        self.movsel_file = "skin_user_movsel.xml"
+        self.emc_mov_sel_file = "skin_user_emc_mov_sel.xml"
+        self.vpnip_file = "skin_user_vpnip.xml"
         self.poster_infobar_file = "skin_user_poster_infobar.xml"
         self.mini_tv_file = "skin_user_mini_tv.xml"
         self.player_file = "skin_user_player.xml"
         self.weather_file = "skin_user_weather.xml"
-        self.a_clock_file = "skin_user_a_clock.xml"
+        self.weather_icons_file = "skin_user_weather_icons.xml"
 
         # background
         current, choices = self.getSettings(self.default_background_file, self.background_file)
@@ -239,9 +239,9 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         # caid
         current, choices = self.getSettings(self.default_caid_file, self.caid_file)
         self.myAtileHD_caid = NoSave(ConfigSelection(default=current, choices=choices))
-        # sib
-        current, choices = self.getSettings(self.default_sib_file, self.sib_file)
-        self.myAtileHD_sib = NoSave(ConfigSelection(default=current, choices=choices))
+        # colors
+        current, choices = self.getSettings(self.default_colors_file, self.colors_file)
+        self.myAtileHD_colors = NoSave(ConfigSelection(default=current, choices=choices))
         # ch_se
         current, choices = self.getSettings(self.default_ch_se_file, self.ch_se_file)
         self.myAtileHD_ch_se = NoSave(ConfigSelection(default=current, choices=choices))
@@ -254,12 +254,12 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         # progress
         current, choices = self.getSettings(self.default_progress_file, self.progress_file)
         self.myAtileHD_progress = NoSave(ConfigSelection(default=current, choices=choices))
-        # emcsel
-        current, choices = self.getSettings(self.default_emcsel_file, self.emcsel_file)
-        self.myAtileHD_emcsel = NoSave(ConfigSelection(default=current, choices=choices))
-        # movsel
-        current, choices = self.getSettings(self.default_movsel_file, self.movsel_file)
-        self.myAtileHD_movsel = NoSave(ConfigSelection(default=current, choices=choices))
+        # emc_mov_sel
+        current, choices = self.getSettings(self.default_emc_mov_sel_file, self.emc_mov_sel_file)
+        self.myAtileHD_emc_mov_sel = NoSave(ConfigSelection(default=current, choices=choices))
+        # vpnip
+        current, choices = self.getSettings(self.default_vpnip_file, self.vpnip_file)
+        self.myAtileHD_vpnip = NoSave(ConfigSelection(default=current, choices=choices))
         # mini_tv
         current, choices = self.getSettings(self.default_mini_tv_file, self.mini_tv_file)
         self.myAtileHD_mini_tv = NoSave(ConfigSelection(default=current, choices=choices))
@@ -272,9 +272,9 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         # weather
         current, choices = self.getSettings(self.default_weather_file, self.weather_file)
         self.myAtileHD_weather = NoSave(ConfigSelection(default=current, choices=choices))
-        # a_clock
-        current, choices = self.getSettings(self.default_a_clock_file, self.a_clock_file)
-        self.myAtileHD_a_clock = NoSave(ConfigSelection(default=current, choices=choices))
+        # weather_icons
+        current, choices = self.getSettings(self.default_weather_icons_file, self.weather_icons_file)
+        self.myAtileHD_weather_icons = NoSave(ConfigSelection(default=current, choices=choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -334,17 +334,17 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.set_background = getConfigListEntry(_("Set background transparency:"), self.myAtileHD_background)
         self.set_infobar = getConfigListEntry(_("Infobar:"), self.myAtileHD_infobar)
         self.set_pig = getConfigListEntry(_("Switch Mini TV on/off:"), self.myAtileHD_pig)
-        self.set_caid = getConfigListEntry(_("Caid Display Infobar:"), self.myAtileHD_caid)
+        self.set_caid = getConfigListEntry(_("Caid Info Infobar:"), self.myAtileHD_caid)
         self.set_weather = getConfigListEntry(_("Weather Info:"), self.myAtileHD_weather)
-        self.set_a_clock = getConfigListEntry(_("Color Analog-Clock:"), self.myAtileHD_a_clock)
+        self.set_weather_icons = getConfigListEntry(_("Weather Icons style:"), self.myAtileHD_weather_icons)
         self.set_poster_infobar = getConfigListEntry(_("Poster Infobar:"), self.myAtileHD_poster_infobar)
-        self.set_sib = getConfigListEntry(_("Secondinfobar:"), self.myAtileHD_sib)
+        self.set_colors = getConfigListEntry(_("Selected_Foreground_Color:"), self.myAtileHD_colors)
         self.set_ch_se = getConfigListEntry(_("Channelselection:"), self.myAtileHD_ch_se)
         self.set_ch_se_color = getConfigListEntry(_("Channel/ EMC-Selection Color:"), self.myAtileHD_ch_se_color)
         self.set_ev = getConfigListEntry(_("Eventview:"), self.myAtileHD_ev)
         self.set_progress = getConfigListEntry(_("Progress Color:"), self.myAtileHD_progress)
-        self.set_emcsel = getConfigListEntry(_("EMC Selection:"), self.myAtileHD_emcsel)
-        self.set_movsel = getConfigListEntry(_("Movie Selection:"), self.myAtileHD_movsel)
+        self.set_emc_mov_sel = getConfigListEntry(_("EMC/Movie Selection:"), self.myAtileHD_emc_mov_sel)
+        self.set_vpnip = getConfigListEntry(_("VPN-IP Address:"), self.myAtileHD_vpnip)
         self.set_mini_tv = getConfigListEntry(_("all Screens with Mini TV:"), self.myAtileHD_mini_tv)
         self.set_player = getConfigListEntry(_("Movie Player:"), self.myAtileHD_player)
         self.set_myatile = getConfigListEntry(_("Enable %s Extentions:") % cur_skin, self.myAtileHD_active)
@@ -361,26 +361,26 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_pig)
             if len(self.myAtileHD_caid.choices) > 1:
                 self.list.append(self.set_caid)
-            if len(self.myAtileHD_a_clock.choices) > 1:
-                self.list.append(self.set_a_clock)
+            if len(self.myAtileHD_vpnip.choices) > 1:
+                self.list.append(self.set_vpnip)    
+            if len(self.myAtileHD_colors.choices) > 1:
+                self.list.append(self.set_colors)
+            if len(self.myAtileHD_ch_se.choices) > 1:
+                self.list.append(self.set_ch_se) 
             if len(self.myAtileHD_weather.choices) > 1:
                 self.list.append(self.set_weather)
+            if len(self.myAtileHD_weather_icons.choices) > 1:
+                self.list.append(self.set_weather_icons)
             if len(self.myAtileHD_poster_infobar.choices) > 1:
                 self.list.append(self.set_poster_infobar)
-            if len(self.myAtileHD_sib.choices) > 1:
-                self.list.append(self.set_sib)
-            if len(self.myAtileHD_ch_se.choices) > 1:
-                self.list.append(self.set_ch_se)
             if len(self.myAtileHD_ch_se_color.choices) > 1:
                 self.list.append(self.set_ch_se_color)
             if len(self.myAtileHD_ev.choices) > 1:
                 self.list.append(self.set_ev)
             if len(self.myAtileHD_progress.choices) > 1:
                 self.list.append(self.set_progress)
-            if len(self.myAtileHD_emcsel.choices) > 1:
-                self.list.append(self.set_emcsel)
-            if len(self.myAtileHD_movsel.choices) > 1:
-                self.list.append(self.set_movsel)
+            if len(self.myAtileHD_emc_mov_sel.choices) > 1:
+                self.list.append(self.set_emc_mov_sel)
             if len(self.myAtileHD_mini_tv.choices) > 1:
                 self.list.append(self.set_mini_tv)
             if len(self.myAtileHD_player.choices) > 1:
@@ -404,8 +404,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_pig.value)
         elif self["config"].getCurrent() == self.set_caid:
             self.setPicture(self.myAtileHD_caid.value)
-        elif self["config"].getCurrent() == self.set_sib:
-            self.setPicture(self.myAtileHD_sib.value)
+        elif self["config"].getCurrent() == self.set_colors:
+            self.setPicture(self.myAtileHD_colors.value)
         elif self["config"].getCurrent() == self.set_ch_se:
             self.setPicture(self.myAtileHD_ch_se.value)
         elif self["config"].getCurrent() == self.set_ch_se_color:
@@ -414,18 +414,18 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_ev.value)
         elif self["config"].getCurrent() == self.set_progress:
             self.setPicture(self.myAtileHD_progress.value)
-        elif self["config"].getCurrent() == self.set_emcsel:
-            self.setPicture(self.myAtileHD_emcsel.value)
-        elif self["config"].getCurrent() == self.set_movsel:
-            self.setPicture(self.myAtileHD_movsel.value)
+        elif self["config"].getCurrent() == self.set_emc_mov_sel:
+            self.setPicture(self.myAtileHD_emc_mov_sel.value)
+        elif self["config"].getCurrent() == self.set_vpnip:
+            self.setPicture(self.myAtileHD_vpnip.value)
         elif self["config"].getCurrent() == self.set_mini_tv:
             self.setPicture(self.myAtileHD_mini_tv.value)
         elif self["config"].getCurrent() == self.set_player:
             self.setPicture(self.myAtileHD_player.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
-        elif self["config"].getCurrent() == self.set_a_clock:
-            self.setPicture(self.myAtileHD_a_clock.value)
+        elif self["config"].getCurrent() == self.set_weather_icons:
+            self.setPicture(self.myAtileHD_weather_icons.value)
         elif self["config"].getCurrent() == self.set_myatile:
             if self.myAtileHD_active.value:
                 self["key_yellow"].setText("%s Config" % cur_skin)
@@ -444,8 +444,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_pig.value)
         elif self["config"].getCurrent() == self.set_caid:
             self.setPicture(self.myAtileHD_caid.value)
-        elif self["config"].getCurrent() == self.set_sib:
-            self.setPicture(self.myAtileHD_sib.value)
+        elif self["config"].getCurrent() == self.set_colors:
+            self.setPicture(self.myAtileHD_colors.value)
         elif self["config"].getCurrent() == self.set_ch_se:
             self.setPicture(self.myAtileHD_ch_se.value)
         elif self["config"].getCurrent() == self.set_ch_se_color:
@@ -454,18 +454,18 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_ev.value)
         elif self["config"].getCurrent() == self.set_progress:
             self.setPicture(self.myAtileHD_progress.value)
-        elif self["config"].getCurrent() == self.set_emcsel:
-            self.setPicture(self.myAtileHD_emcsel.value)
-        elif self["config"].getCurrent() == self.set_movsel:
-            self.setPicture(self.myAtileHD_movsel.value)
+        elif self["config"].getCurrent() == self.set_emc_mov_sel:
+            self.setPicture(self.myAtileHD_emc_mov_sel.value)
+        elif self["config"].getCurrent() == self.set_vpnip:
+            self.setPicture(self.myAtileHD_vpnip.value)
         elif self["config"].getCurrent() == self.set_mini_tv:
             self.setPicture(self.myAtileHD_mini_tv.value)
         elif self["config"].getCurrent() == self.set_player:
             self.setPicture(self.myAtileHD_player.value)
         elif self["config"].getCurrent() == self.set_weather:
             self.setPicture(self.myAtileHD_weather.value)
-        elif self["config"].getCurrent() == self.set_a_clock:
-            self.setPicture(self.myAtileHD_a_clock.value)
+        elif self["config"].getCurrent() == self.set_weather_icons:
+            self.setPicture(self.myAtileHD_weather_icons.value)
         else:
             self["Picture"].hide()
 
@@ -569,8 +569,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_pig, self.pig_file)
             # caid
             self.makeSettings(self.myAtileHD_caid, self.caid_file)
-            # sib
-            self.makeSettings(self.myAtileHD_sib, self.sib_file)
+            # colors
+            self.makeSettings(self.myAtileHD_colors, self.colors_file)
             # ch_se
             self.makeSettings(self.myAtileHD_ch_se, self.ch_se_file)
             # ch_se_color
@@ -579,10 +579,10 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_ev, self.ev_file)
             # progress
             self.makeSettings(self.myAtileHD_progress, self.progress_file)
-            # emcsel
-            self.makeSettings(self.myAtileHD_emcsel, self.emcsel_file)
-            # movsel
-            self.makeSettings(self.myAtileHD_movsel, self.movsel_file)
+            # emc_mov_sel
+            self.makeSettings(self.myAtileHD_emc_mov_sel, self.emc_mov_sel_file)
+            # vpnip
+            self.makeSettings(self.myAtileHD_vpnip, self.vpnip_file)
             # mini_tv
             self.makeSettings(self.myAtileHD_mini_tv, self.mini_tv_file)
             # player
@@ -591,8 +591,8 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_poster_infobar, self.poster_infobar_file)
             # weather
             self.makeSettings(self.myAtileHD_weather, self.weather_file)
-            # a_clock
-            self.makeSettings(self.myAtileHD_a_clock, self.a_clock_file)
+            # weather_icons
+            self.makeSettings(self.myAtileHD_weather_icons, self.weather_icons_file)
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")
