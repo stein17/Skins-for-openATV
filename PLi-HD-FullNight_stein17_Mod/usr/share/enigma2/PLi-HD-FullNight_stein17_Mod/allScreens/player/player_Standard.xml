@@ -77,13 +77,19 @@
 			<convert type="ServiceInfo">IsStereo</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="session.CurrentService" render="PliModRunningText" options="movetype=running,startdelay=1800,steptime=60,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="230,620" size="820,32" font="Regular;25" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" valign="center" halign="center">
+		<widget source="session.CurrentService" render="PliModRunningText" options="movetype=running,startdelay=1800,steptime=90,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="230,620" size="820,32" font="Regular;25" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="2" borderColor="black" transparent="1" valign="center" halign="center">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Picon" position="15,656" zPosition="4" size="100,60" transparent="12" alphatest="blend">
+		<widget source="session.CurrentService" render="Picon" position="15,656" zPosition="4" size="100,60" transparent="1" alphatest="blend">
 			<convert type="MovieReference" />
 		</widget>
-		<widget render="Cover" source="session.CurrentService" zPosition="4" alphatest="on" position="1173,572" size="100,140" />
+		
+		<widget name="Cover" position="1173,572" size="100,140" zPosition="4" alphatest="blend"  transparent="1"/>
 		<ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd.png" position="0,540" size="1280,220" zPosition="-1" />
+			<widget source="Event" render="PliModPosterX" position="1100,280" cornerRadius="6" size="170,255" zPosition="100" />
+	<widget source="Event" render="PliModBackdropX" position="10,380" cornerRadius="6" size="290,164" zPosition="98" />
+
+	<widget source="Event" render="xtraPoster" position="1100,280" cornerRadius="6" size="170,255" zPosition="101" />
+	<widget source="Event" render="xtraBackdrop" position="10,380" cornerRadius="6" size="290,164" zPosition="99" />
 	</screen>
 </skin>
