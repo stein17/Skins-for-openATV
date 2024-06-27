@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<!-- ChannelSelection_4_nächste_Sendungen_Big_Poster_backdrop_ohne_Mini-TV-->
+<screen name="ChannelSelection" title="Channel Selection" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transpBlack">
+  <ePixmap position="125,687" size="45,26" zPosition="10" pixmap="buttons/epg.png" transparent="1" alphatest="blend" />
+  <panel name="TemplateAllColorButtons_Automatic" />
+  <panel name="template_menu_info" />
+  <panel name="Template_Title_Date" />
+    <widget name="list" position="0,94" size="480,554" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarBorderWidth="1" scrollbarSliderForegroundColor="ScrollbarForeground" scrollbarSliderBorderColor="ScrollbarBorder" transparent="1" borderWidth="1" borderColor="black" picServiceEventProgressbar="PLi-HD-FullNight_stein17_Mod/window/progress.png" serviceItemHeight="28" serviceNumberFont="Regular;22" serviceNameFont="Regular;22" serviceInfoFont="Regular;0" progressInfoFont="Regular;18" listMarginLeft="5" listMarginRight="22" fieldMargins="5" itemsDistances="5" progressbarHeight="10" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" backgroundColor="background" backgroundColorSelected="SliderForeground" foregroundColor="foreground" foregroundColorSelected="selectedFG" colorServiceDescription="background" colorServiceDescriptionSelected="SliderForeground" colorEventProgressbarBorder="darkgrey" colorEventProgressbarBorderSelected="darkgrey" foregroundColorMarkedSelected="green" foregroundColorServiceNotAvail="#00555555" />
+  <widget source="ServiceEvent" render="Label" position="650,135" size="62,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText" />
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="850,135" size="62,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19" halign="right">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText" />
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="915,135" size="92,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19" halign="right">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">InMinutes</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Progress" pixmap="PLi-HD-FullNight_stein17_Mod/window/progress.png" position="720,140" size="120,10" transparent="1" borderWidth="1" borderColor="darkgrey">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=80,repeat=5,startdelay=900,always=0" position="640,95" size="630,40" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" foregroundColor="selectedFG" noWrap="1" font="Regular; 27" halign="left">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startdelay=1600,steptime=100,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="813,165" size="460,214" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular; 22" halign="left" zPosition="1">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="55,645" size="740,26" font="Regular; 20" foregroundColor="green" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" zPosition="5" noWrap="1">
+    <convert type="PliModPrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+
+<widget source="ServiceEvent" render="Picon" position="495,95" size="133,80" zPosition="5" alphatest="blend" transparent="1">
+  <convert type="BlueARefString">ServicelistRef</convert>
+</widget>
+<widget source="session.CurrentService" render="Label" position="600,40" size="400,24" zPosition="1" font="Regular; 18" halign="right" valign="center" foregroundColor="foreground" backgroundColor="background" transparent="1">
+	<convert type="PliModCPUInfo">CPU Auslastung:$0 Core 1:$1  Core 2:$2</convert>
+  </widget>
+  <ePixmap position="20,644" size="24,24" zPosition="10" pixmap="PLi-HD-FullNight_stein17_Mod/icons/PTclock.png" transparent="1" alphatest="blend" />
+  <ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/border/line_m.png" position="15,640" size="720,2" zPosition="2" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="495,180"  usedImage="poster" cornerRadius="6" size="306,450" zPosition="101" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="1" position="804,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="101" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="2" position="962,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="101" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="3" position="1120,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="101" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="495,195"  usedImage="backdrop" cornerRadius="6" size="306,173" zPosition="99" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="1" position="804,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="99" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="2" position="962,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="99" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="3" position="1120,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="99" />
+  
+  <widget source="ServiceEvent" render="PliModPosterX" nexts="0" position="495,180"  usedImage="poster" cornerRadius="6" size="306,450" zPosition="100" />
+  <widget source="ServiceEvent" render="PliModPosterX" nexts="1" position="804,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="100" />
+  <widget source="ServiceEvent" render="PliModPosterX" nexts="2" position="962,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="100" />
+  <widget source="ServiceEvent" render="PliModPosterX" nexts="3" position="1120,384"  usedImage="poster" cornerRadius="6" size="154,231" zPosition="100" />
+  <widget source="ServiceEvent" render="PliModBackdropX" nexts="0" position="495,195"  usedImage="backdrop" cornerRadius="6" size="306,173" zPosition="98" />
+  <widget source="ServiceEvent" render="PliModBackdropX" nexts="1" position="804,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="98" />
+  <widget source="ServiceEvent" render="PliModBackdropX" nexts="2" position="962,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="98" />
+  <widget source="ServiceEvent" render="PliModBackdropX" nexts="3" position="1120,520"  usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="98" />
+  
+  <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="1" font="Regular; 14" position="804,620" size="154,48" valign="center" halign="left" zPosition="5" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1"  Wrap="1" />
+  <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="2" font="Regular; 14" position="962,620" size="154,48" valign="center" halign="left" zPosition="5" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1"  Wrap="1" />
+  <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="3" font="Regular; 14" position="1120,620" size="154,48" valign="center" halign="left" zPosition="5" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1"  Wrap="1" />
+</screen>
+</skin>
