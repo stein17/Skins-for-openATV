@@ -191,7 +191,7 @@ class BlueAEmuInfo(Converter, object):
                 if using == 'CCcam-s2s':
                     using2 = 'CCcam'
             if x[0] == 'ecm time':
-                ecmtime = x[1].strip()
+                ecmtime = x[1].strip().replace(',', '.')
                 ecmtime2 = ''
             if x[0] == 'hops':
                 hops = x[1].strip()
@@ -205,7 +205,7 @@ class BlueAEmuInfo(Converter, object):
                 x = line.split('--', 1)
                 msecIndex = x[0].find('msec')
                 if msecIndex != -1:
-                    ecmtime = x[0].strip()
+                    ecmtime = x[0].strip().replace(',', '.')
             ecmtime2 = ecmtime
             emun = 'Unknown EMU'
             if protocol != '' and reader != '':
