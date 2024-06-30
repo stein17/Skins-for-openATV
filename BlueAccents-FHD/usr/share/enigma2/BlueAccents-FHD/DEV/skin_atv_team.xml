@@ -155,23 +155,42 @@
     <panel name="template_title_date" />
     <panel name="template_ok_exit" />
   </screen> -->
-	<screen name="QuickMenu" position="0,0" size="1920,1080" title="Quick Launch Menu" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list" position="33,112" size="625,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor630_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1"  transparent="1" />
-		<widget name="sublist" position="700,112" size="625,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor630_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1"  transparent="1" />
-		<widget name="description" position="1365,465" size="525,525" zPosition="1" font="Regular;30" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
-		<eLabel text="Quick Launch Menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<panel name="template_Line_Vert_Big_1327" />
-		<panel name="template_Line_Vert_Big_664" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1362,157" zPosition="1" size="531,4" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1362,448" zPosition="1" size="531,4" />
-		<widget position="1383,165" size="487,273" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
-		<widget position="1365,112" size="525,45" source="session.CurrentService" render="Label" font="Regular;30" transparent="1" valign="center" halign="left" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
-			<convert type="ServiceName">Name</convert>
+		<screen name="QuickMenu" position="0,0" size="1920,1080" title="Quick Launch Menu" flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="mainlist" render="Listbox" position="33,112" size="625,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1">
+			<templates>
+				<template name="Default" fonts="Regular;29,Regular;24" itemWidth="625" itemHeight="75">
+					<mode name="default">
+						<text index="0" position="90,3" size="e-90,42" font="0" />
+						<text index="1" position="90,38" size="e-90,33" font="1" />
+						<pixmap index="2" position="15,8" size="60,60" alpha="blend" scale="centerScaled" />
+					</mode>
+				</template>
+			</templates>
 		</widget>
-		<panel name="template_background_full_black" />
-		<panel name="template_title_date" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-	</screen>
+    <widget source="sublist" render="Listbox" position="700,112" size="625,870" itemHeight="75" font="Regular;30" selectionPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75.png" backgroundPixmap="BG-Pixmaps/Line_Hor_Vert/selektor1280_75_BG.png" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" alphatest="blend" transparent="1">
+			<templates>
+				<template name="Default" fonts="Regular;29,Regular;24" itemWidth="625" itemHeight="75">
+					<mode name="default">
+						<text index="0" position="15,3" size="e-15,42" font="0" />
+						<text index="1" position="15,38" size="e-15,33" font="1" />
+					</mode>
+				</template>
+			</templates>
+		</widget>
+    <widget name="description" position="1365,465" size="525,525" zPosition="1" font="Regular;30" halign="center" valign="center" transparent="1" foregroundColor="selectedFG" />
+    <eLabel text="Quick Launch Menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1330,103" zPosition="10" size="30,892" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="664,103" zPosition="10" size="30,892" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1362,157" zPosition="1" size="531,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1362,448" zPosition="1" size="531,4" />
+    <widget position="1383,165" size="487,273" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" />
+    <widget position="1365,112" size="525,45" source="session.CurrentService" render="Label" font="Regular;30" transparent="1" valign="center" halign="left" noWrap="1" zPosition="5" backgroundColor="background" foregroundColor="selectedFG">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <panel name="template_background_full_black" />
+    <panel name="template_title_date" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+  </screen>
 	<!-- RemoteControlCode -->
 	<screen name="RemoteControlCode" position="0,0" size="1920,1080" title=" Position Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<panel name="template_background_725_trans" />
