@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-# by digiteng...07.2020 - 08.2020 - 10.2021
-# <widget source="Service" render="xtraEmcPoster" delayPic="500" position="0,0" size="185,278" zPosition="0"
+# by digiteng...06.2020 - 08.2020 - 11.2021
+# <widget source="session.Event_Now" render="xtraBanner" position="0,0" size="762,141" zPosition="1" />
 from __future__ import absolute_import
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, loadJPG
-import os
-from Components.Sources.ServiceEvent import ServiceEvent
-from Components.Sources.CurrentService import CurrentService
+from enigma import ePixmap, ePicLoad, eEPGCache
+from Components.AVSwitch import AVSwitch
+from Components.Pixmap import Pixmap
 from Components.config import config
+import os
 import re
 
 try:
 	pathLoc = config.plugins.xtrafmEvent.loc.value
-	
 except:
 	pathLoc = ""
 	
@@ -40,12 +39,11 @@ REGEX = re.compile(
 		r'\.\s\d{1,3}\s(ч|ч\.|с\.|с)\s.+|'
 		r'\s(ч|ч\.|с\.|с)\s\d{1,3}.+|'
 		r'\d{1,3}(-я|-й|\sс-н).+|', re.DOTALL)
-		
-class xtrafmEmcPoster(Renderer):
+
+class xtrafmBanner(Renderer):
 
 	def __init__(self):
 		Renderer.__init__(self)
-		self.piconsize = (0,0)
 
 	GUI_WIDGET = ePixmap
 	def changed(self, what):
@@ -53,19 +51,28 @@ class xtrafmEmcPoster(Renderer):
 			return
 		else:
 			if what[0] != self.CHANGED_CLEAR:
-				
-				movieNm = ""
+				evnt = ''
+				pstrNm = ''
+				evntNm = ''
 				try:
-					service = self.source.getCurrentService()
-					if service:
-						evnt = service.getPath()
-						movieNm = evnt.split('-')[-1].split(".")[0].strip()
-						movieNm = REGEX.sub('', movieNm).strip()
-						pstrNm = "{}xtrafmEvent/EMC/{}-poster.jpg".format(pathLoc, movieNm.strip())
+					event = self.source.event
+					if event:
+						evnt = event.getEventName()
+						evntNm = REGEX.sub('', evnt).strip()
+						pstrNm = "{}xtrafmEvent/banner/{}.jpg".format(pathLoc, evntNm)
 						if os.path.exists(pstrNm):
-							self.instance.setScale(1)
-							self.instance.setPixmap(loadJPG(pstrNm))
-							self.instance.show()
+							size = self.instance.size()
+							self.picload = ePicLoad()
+							sc = AVSwitch().getFramebufferScale()
+							if self.picload:
+								self.picload.setPara((size.width(), size.height(),  sc[0], sc[1], False, 1, '#00000000'))
+							result = self.picload.startDecode(pstrNm, 0, 0, False)
+							if result == 0:
+								ptr = self.picload.getData()
+								if ptr != None:
+									self.instance.setPixmap(ptr)
+									self.instance.show()
+							del self.picload
 						else:
 							self.instance.hide()
 					else:
@@ -75,4 +82,3 @@ class xtrafmEmcPoster(Renderer):
 			else:
 				self.instance.hide()
 				return
-					
