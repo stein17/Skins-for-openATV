@@ -14,13 +14,21 @@
 		<widget name="next_text" position="295,111" size="255,45" zPosition="3" text="NEXT" font="Regular;36" halign="center" transparent="1" foregroundColor="foreground" backgroundColor="blue" />
 		<widget name="more_text" position="558,111" size="255,45" zPosition="3" text="MORE" font="Regular;36" halign="center" transparent="1" foregroundColor="foreground" backgroundColor="blue" />
 		<widget name="date" position="819,111" size="262,45" zPosition="0" font="Regular;36" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="bluelabeltranzp" foregroundColorSelected="selectedFG" valign="center" halign="center" transparent="1" />
-		<widget name="list" position="30,165" size="1078,825" itemHeight="42" EventFontMulti="Regular;30" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="background" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" zPosition="1"/>
+		<widget name="list" position="30,165" size="1078,780" itemHeight="42" EventFontMulti="Regular;30" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="background" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" zPosition="1" />
 		<widget name="lab1" position="50,445" size="1000,120" font="Regular;36" halign="center" valign="center" zPosition="20" transparent="1" />		
         <widget name="bouquetlist" position="30,112" size="1050,51" zPosition="5" itemHeight="51" font="Regular;36" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="bluelabeltranzp" foregroundColorSelected="selectedFG" transparent="0" />
 	<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1087,103" zPosition="0" size="30,891" />
-	<widget source="Event" render="xtraBackdrop" position="1125,559" size="765,430" zPosition="10" />
+
+	
+
+		<widget source="Event" render="BlueABackdropX" position="1125,559" cornerRadius="6" size="765,430" zPosition="98" />
+		<widget source="Event" render="xtrafmBackdrop" position="1125,559" cornerRadius="6" size="765,430" zPosition="99" />
+	    <widget source="Event" render="BlueAPosterX" position="1125,360" cornerRadius="6" size="123,185" zPosition="100" />
+    <widget source="Event" render="xtrafmPoster" position="1125,360" cornerRadius="6" size="123,185" zPosition="101" />
+    <widget source="Event" render="xtrafmParental" position="1133,567" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+	
   <widget position="1467,110" size="420,236" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" borderWidth="2" borderColor="scrollbarborder" />
-<widget source="Event" render="RunningText" options="movetype=running,startdelay=5000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="760,185" position="1125,360" font="Regular; 31" halign="left" transparent="1" zPosition="2" backgroundColor="background" valign="top">
+<widget source="Event" render="RunningText" options="movetype=running,startdelay=5000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="630,185" position="1255,360" font="Regular; 31" halign="left" transparent="1" zPosition="2" backgroundColor="background" valign="top">
      <convert type="EventName">FullDescription</convert>
   </widget>
  <!--  <widget source="Event" render="xtraPoster" position="1122,110" size="185,236" zPosition="2" borderWidth="2" borderColor="scrollbarborder" /> -->
@@ -42,7 +50,11 @@
 <widget source="Event" render="Progress" position="1158,290" size="270,15" pixmap="BG-Pixmaps/Progress/progress_EPG_blue.png" alphatest="blend" transparent="1" zPosition="1" borderWidth="2" borderColor="scrollbarborder">
   <convert type="EventTime">Progress</convert>
 </widget>
-
+<widget source="Service" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="80,946" size="1000,45" font="Regular;33" foregroundColor="green" zPosition="15" noWrap="1" transparent="1" backgroundColor="black">
+			<convert type="BlueAPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="10" size="1060,4" />
+			<ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="37,946" size="37,37" />
   <panel name="template_date" />
   <panel name="template_menu_info" />
 <panel name="template_background_full_black" />

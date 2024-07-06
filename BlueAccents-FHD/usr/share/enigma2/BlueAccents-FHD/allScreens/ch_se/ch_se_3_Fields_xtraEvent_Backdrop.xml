@@ -1,0 +1,80 @@
+<skin>
+   <!-- ChannelSelection_3 Fields_Backdrop -->
+<screen name="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
+    <widget source="ServiceEvent" render="Label" position="862,165" size="82,30" font="Regular;27" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" halign="left" valign="center">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1117,165" size="82,30" font="Regular;27" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" valign="center" halign="right">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget font="Regular;27" borderColor="black" borderWidth="1" halign="right" position="1192,165" render="Label" size="135,30" source="ServiceEvent" transparent="1" foregroundColor="lightblue" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">
+      </convert>
+    </widget>
+    <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="862,205" size="465,205" font="Regular; 29" foregroundColor="white" transparent="1" halign="left" valign="top">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" render="BlueASingleEpgListFull" position="1365,457" size="525,532" noWrap="1" font="Regular;28" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="black" transparent="1" zPosition="5" />
+    <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="187,948" size="1140,45" font="Regular;33" foregroundColor="green" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
+      <convert type="BlueAPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/iptv.png" alphatest="blend" position="1095,1021" size="52,52" zPosition="2" transparent="1">
+      <convert type="ServiceInfo">IsStream</convert>
+      <convert type="ConditionalShowHide">
+      </convert>
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="1095,1021" size="52,52" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">0,0</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="1095,1021" size="52,52" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">2,2</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="1095,1021" size="52,52" zPosition="2" alphatest="blend">
+      <convert type="FrontendInfo">TYPE</convert>
+      <convert type="ValueRange">1,1</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="37,948" size="37,37" />
+    <widget source="ServiceEvent" render="BlueAFrontend" position="1152,1030" zPosition="1" valign="center" size="525,39" font="Regular;30" backgroundColor="black" transparent="1" halign="left" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1327,103" zPosition="10" size="30,891" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="831,103" zPosition="10" size="30,834" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="27,937" zPosition="10" size="1297,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="862,195" zPosition="10" size="466,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="862,680" zPosition="10" size="466,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="862,157" zPosition="10" size="466,4" />
+    <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="862,722" zPosition="10" size="466,4" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_VideoPicture_wizard" />
+    <panel name="template_title_date" />
+    <panel name="template_background_full_black" />
+    <panel name="template_menu_ok_exit" />
+    <panel name="Channel_Selection_List_Color_3Fields" />
+    <panel name="template_progress_channelselection_3Fields" />
+    <widget source="ServiceEvent" render="Picon" position="85,942" size="91,51" zPosition="5" alphatest="blend" transparent="1">
+      <convert type="BlueARefString">ServicelistRef</convert>
+    </widget>
+    <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=60,repeat=5,startdelay=1000,always=0" position="952,685" zPosition="1" size="375,36" font="Regular;30" halign="left" valign="center" backgroundColor="black" transparent="1" foregroundColor="selectedFG">
+      <convert type="BlueAServiceNameEventNobile">NextEvent</convert>
+    </widget>
+    <widget source="ServiceEvent" render="RunningText" options="movetype=running,startdelay=900,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="862,112" size="465,48" font="Regular;33" foregroundColor="selectedFG" backgroundColor="black" halign="left" valign="center" noWrap="1" transparent="1" zPosition="6">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="ServiceEvent" render="BlueARunningText" options=" movetype=running,startdelay=8000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="862,728" size="465,205" font="Regular; 29" foregroundColor="white" transparent="1" halign="left" valign="top">
+      <convert type="BlueAServiceNameEventNobile">ExtendedDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" position="862,685" zPosition="1" size="90,36" font="Regular;30" borderColor="black" borderWidth="1" render="Label" halign="center" backgroundColor="background" transparent="1" foregroundColor="lightblue">
+      <convert type="BlueAServiceNameEventNobile">StartTime</convert>
+    </widget>
+<widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="865,417" usedImage="backdrop" cornerRadius="6" size="460,259" zPosition="99" />
+<widget source="ServiceEvent" render="BlueABackdropX" nexts="0" position="865,417" usedImage="backdrop" cornerRadius="6" size="460,259" zPosition="98" />
+<widget source="ServiceEvent" render="xtrafmParental" position="1264,615" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+  </screen>
+ </skin>

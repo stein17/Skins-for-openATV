@@ -1,5 +1,5 @@
 <skin>
-  <!-- ChannelSelection_xtraEvent_Poster_xtraInfo -->
+  <!-- ChannelSelection_xtraEvent_Backdrop_Poster -->
 <screen name="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
 
   <widget source="Title" render="Label" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -23,14 +23,16 @@
     <convert type="ValueRange">1,1</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <ePixmap name="PrimeTimeClock" pixmap="icons/Primetime.png" position="1175,954" size="37,37" />
+ 
   <widget source="ServiceEvent" render="BlueAFrontend" position="1152,1030" zPosition="1" valign="center" size="525,39" font="Regular;30" backgroundColor="black" transparent="1" halign="left" />
-
   <widget position="1467,110" size="420,236" source="session.VideoPicture" render="Pig" zPosition="3" backgroundColor="background-pig" borderWidth="2" borderColor="scrollbarborder" />
 
-  <widget source="ServiceEvent" render="Label" position="1340,365" size="550,215" font="Regular; 29" halign="left" valign="center" transparent="1" zPosition="2" backgroundColor="background" foregroundColor="white">
-  <convert type="xtraInfo">Title,Year,Rated,Genre,Type,Country,Duration,SE</convert>
-</widget>
+  <widget source="ServiceEvent" render="RunningText" options="movetype=running,startdelay=5000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" size="515,270" position="1377,370" font="Regular; 32" halign="left" transparent="1" zPosition="2" backgroundColor="background" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+
+
+
   <widget source="ServiceEvent" render="Label" position="1170,245" size="120,40" font="Regular; 36" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" halign="right" valign="center">
     <convert type="EventTime">StartTime</convert>
     <convert type="ClockToText">Format:%H:%M</convert>
@@ -47,31 +49,58 @@
     <convert type="BlueARefString">ServicelistRef</convert>
   </widget>
 
-  <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1176,360" zPosition="10" size="715,4" />
+  
   <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Vert_Big.png" position="1145,103" zPosition="10" size="30,891" />
-<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="1176,947" zPosition="10" size="715,4" />
+  
   <!-- xtraEvent -->
-    <ePixmap pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star_back.png" position="1342,571" size="185,19" alphatest="blend" zPosition="3" transparent="1" />
-<widget render="xtraStar" source="ServiceEvent" pixmap="/usr/share/enigma2/BlueAccents-FHD/star/star.png" position="1342,571" size="185,19" alphatest="blend" transparent="1" zPosition="4" />
-  <widget source="ServiceEvent" render="xtraNextEvents" nextEvent="0" usedImage="poster" delayPic="200" position="1184,370" size="146,220" zPosition="2" borderWidth="2" borderColor="scrollbarborder" />
-<widget source="ServiceEvent" render="xtraParental" position="1263,523" size="60,60" alphatest="blend" zPosition="12" transparent="1" />
-    <widget source="ServiceEvent" render="BlueASingleEpgListFull" position="1180,595" size="710,355" noWrap="1" itemHeight="33" font="Regular;27" borderColor="black" borderWidth="1" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="2" />
-    <widget source="ServiceEvent" position="1220,952" size="670,40" font="Regular;32" render="RunningText" options="movetype=running,direction=left,startpoint=0,steptime=25,startdelay=600,wrap=1,always=0,repeat=2,oneshot=1" foregroundColor="green" zPosition="5" transparent="1" backgroundColor="black" noWrap="1">
+  
+   <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="1184,355" usedImage="poster" cornerRadius="12" size="185,278" zPosition="101" />
+
+  <widget source="ServiceEvent" render="BlueAPosterX" nexts="0" position="1184,355" usedImage="poster" cornerRadius="12" size="185,278" zPosition="100" />
+  
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="1" position="1195,660" usedImage="backdrop" cornerRadius="6" size="163,90" zPosition="99" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="2" position="1195,755" usedImage="backdrop" cornerRadius="6" size="163,90" zPosition="99" />
+  <widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="3" position="1195,850" usedImage="backdrop" cornerRadius="6" size="163,90" zPosition="99" />
+  
+
+
+
+  <widget source="ServiceEvent" render="BlueABackdropX" nexts="1" position="1195,660" usedImage="backdrop" cornerRadius="6" size="163,90" zPosition="98" />
+  <widget source="ServiceEvent" render="BlueABackdropX" nexts="2" position="1195,755"  usedImage="backdrop"  cornerRadius="6"  size="163,90" zPosition="98" />
+  <widget source="ServiceEvent" render="BlueABackdropX" nexts="3" position="1195,850" usedImage="backdrop" cornerRadius="6" size="163,90" zPosition="98" />
+  
+  
+   <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="3" font="Regular; 32" position="1377,855" size="515,80" zPosition="5" backgroundColor="background" transparent="1" valign="center" />
+  
+  <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="2" font="Regular; 32" position="1377,760" size="515,80" zPosition="5" backgroundColor="background" transparent="1" valign="center" />
+  
+  <widget source="ServiceEvent" render="xtrafmNxtEvnt" nxtEvents="" snglEvent="1" font="Regular; 32" position="1377,665" size="515,80" zPosition="5" backgroundColor="background" transparent="1" valign="center" />
+
+  
+  
+    
+  
+      <widget source="ServiceEvent" render="BlueARunningText" options="movetype=running,startpoint=0,direction=left,steptime=5,repeat=50,startdelay=900,always=0" position="1184,950" size="710,45" font="Regular;33" foregroundColor="green" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
       <convert type="BlueAPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-  <!-- imdb rating star progress -->
   
-  <panel name="TemplateAllColorButtons_Automatic" />
+ 	
+	
+	
+	
+	
+	
+<widget source="ServiceEvent" render="xtrafmParental" position="1308,572" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+
+
+
   <panel name="template_title_date" />
   <panel name="template_background_full_black" />
   <panel name="template_info_epg_exit" />
-
+<panel name="TemplateAllColorButtons_Automatic" />
   <panel name="template_progress_channelselection_xtraEvent" />
-  <panel name="Channel_Selection_List_Color_xtraEvent_2" />
-</screen>
-   
+ <panel name="Channel_Selection_List_Color_xtraEvent_2" />
+ </screen>
  </skin>
-
-
 
 

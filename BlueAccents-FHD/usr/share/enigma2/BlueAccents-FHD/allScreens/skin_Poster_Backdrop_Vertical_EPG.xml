@@ -1,5 +1,5 @@
 <skin>
-<!-- TEMPLATES Vertical_EPG_Backdrop-->
+<!-- TEMPLATES Vertical_EPG_Poster_Backdrop-->
 	<!-- EPGvertical -->
 <screen name="EPGvertical" position="0,0" size="1920,1080" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transparent">
  <eLabel text="Electronic Program Guide" position="10,6" size="725,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
@@ -9,7 +9,7 @@
 		<widget source="Event" render="Label" position="120,108" size="975,45" font="Regular;36" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="Event" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="350,165" size="1538,175" font="Regular;32" backgroundColor="background" foregroundColor="white" transparent="1" valign="top" zPosition="1">
+		<widget source="Event" render="BlueARunningText" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="470,165" size="1418,175" font="Regular;32" backgroundColor="background" foregroundColor="white" transparent="1" valign="top" zPosition="1">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 
@@ -68,8 +68,8 @@
 
 		<!-- DO NOT CHANGE THIS LINE !!!!!!!!!!!!!!! -->
 		<widget enableWrapAround="0" itemHeight="30" font="Regular;0" name="list" position="0,0" size="0,90" zPosition="-10" />
-		<widget source="Service" render="MetrixHDXPicon" position="30,108" size="79,45" zPosition="2" alphatest="blend" borderWidth="1" borderColor="grey">
-		<convert type="MetrixHDServiceName2">Reference</convert>
+		<widget source="Service" render="Picon" position="30,108" size="79,45" zPosition="2" alphatest="blend" borderWidth="1" borderColor="grey">
+		<convert type="ServiceName">Reference</convert>
 		</widget>
 		
 <!-- 				<widget position="25,88" render="Picon" size="127,72" source="Service" zPosition="5">
@@ -78,7 +78,21 @@
 		<ePixmap pixmap="buttons/key_9.png" position="1507,1032" size="37,37" alphatest="blend" zPosition="1" />
 		<eLabel text="primetime" position="1552,1030" size="180,39" zPosition="1" font="Regular;27" halign="left" transparent="1" valign="center" noWrap="1" />
   <ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="28,157" zPosition="10" size="1867,4" />
-<widget source="Event" render="xtraBackdrop" position="30,165" size="311,175" zPosition="10" />
+  
+		<widget source="Event" render="BlueABackdropX" position="30,165" cornerRadius="6" size="311,175" zPosition="98" />
+		<widget source="Event" render="xtrafmBackdrop" position="30,165" cornerRadius="6" size="311,175" zPosition="99" />
+
+
+		<widget source="Event" render="BlueAPosterX" position="347,165" cornerRadius="6" size="116,175" zPosition="100" />
+
+		<widget source="Event" render="xtrafmPoster" position="347,165" cornerRadius="6" size="116,175" zPosition="101" />
+
+		
+
+
+<widget source="Event" render="xtrafmParental" position="280,279" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+  
+
   <panel name="template_date" />
   <panel name="template_menu_info" />
   <panel name="template_background_full_black" />
