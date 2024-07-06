@@ -1,0 +1,42 @@
+<skin>
+ <!-- TEMPLATES-EventView-Backdrop-Poster -->
+<screen name="EventView" title="Eventview" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transpBlack">
+		<!--     <eLabel text="Eventview" position="58,20" size="375,55" valign="bottom" font="Regular; 24" backgroundColor="background" foregroundColor="foreground" transparent="1" /> -->
+		<ePixmap position="35,46" size="46,26" zPosition="10" pixmap="buttons/key_prev.png" alphatest="on" />
+		<ePixmap position="90,46" size="46,26" zPosition="10" pixmap="buttons/key_ok.png" alphatest="on" />
+		<ePixmap position="145,46" size="46,26" zPosition="10" pixmap="buttons/key_next.png" alphatest="on" />
+		<widget source="Title" render="Label" position="200,20" foregroundColor="selectedFG" size="920,55" noWrap="1" halign="left" valign="bottom" font="Regular; 24" backgroundColor="background" transparent="1" />
+		<!--     <widget source="session.VideoPicture" render="Pig" position="25,98" size="440,248" backgroundColor="transparent" zPosition="2" />
+       <widget source="session.CurrentService" render="Label" position="25,98" size="440,20" zPosition="3" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;18" noWrap="1" valign="center" halign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget> -->
+		<widget name="datetime" position="530,98" size="220,30" font="Regular;21" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" />
+		<widget name="channel" position="920,98" size="360,30" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;21" halign="left" />
+		<widget source="Event" render="Label" position="750,98" size="100,30" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;21" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText" />
+		</widget>
+		<widget name="epg_description" position="530,145" size="740,520" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;22" />
+		<widget source="Event" render="Label" position="20,355" size="450,30" transparent="1" zPosition="1" foregroundColor="blue" font="Regular;21">
+			<convert type="EventName">Genre</convert>
+		</widget>
+		<widget source="Event" render="Label" position="20,385" size="450,30" transparent="1" zPosition="1" foregroundColor="blue" font="Regular;21">
+			<convert type="EventName">Rating</convert>
+		</widget>
+		<widget source="Service" render="Picon" position="860,96" size="50,30" zPosition="2" alphatest="blend">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_menu_info" />
+		<panel name="Template_Date_Pig" />
+
+	<widget source="Event" render="PliModPosterX" position="310,415" cornerRadius="6" size="170,255" zPosition="100" />
+	<widget source="Event" render="PliModBackdropX" position="10,465" cornerRadius="6" size="290,164" zPosition="98" />
+
+	<widget source="Event" render="xtrafmPoster" position="310,415" cornerRadius="6" size="170,255" zPosition="101" />
+	<widget source="Event" render="xtrafmBackdrop" position="10,465" cornerRadius="6" size="290,164" zPosition="99" />
+
+
+
+	</screen>
+</skin>

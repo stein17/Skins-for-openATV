@@ -201,11 +201,11 @@ class xtrafmInfo(Converter, object):
 							try:
 								Plot = read_json["Plot"]
 								if Plot:
-									evnt.append("Description : {}".format(Plot))
+									evnt.append("{}".format(Plot))
 								else:
-									evnt.append("Description : {}".format(fd))
+									evnt.append("{}".format(fd))
 							except:
-								evnt.append("Description : {}".format(fd))
+								evnt.append("{}".format(fd))
 								
 						elif type == self.Language:
 							try:

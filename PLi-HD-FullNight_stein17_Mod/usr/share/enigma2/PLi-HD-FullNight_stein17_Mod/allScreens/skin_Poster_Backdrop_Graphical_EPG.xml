@@ -1,0 +1,76 @@
+<skin>
+ <!-- TEMPLATES-GraphicalEPG_Backdrop-Poster -->
+<screen name="GraphicalEPG" position="0,0" size="1280,720" title="Electronic Program Guide" flags="wfNoBorder" backgroundColor="transpBlack">
+<eLabel name="timeline_background" position="19,245" size="1242,26" backgroundColor="selectedBG" transparent="1" borderColor="blue" borderWidth="1"/>
+<widget name="timeline_text" position="20,247" size="1240,24" itemHeight="24" TimelineFont="Regular;19" borderColor="black" borderWidth="1" foregroundColor="green" backgroundColor="bluetransparent" TimelineAlignment="left" zPosition="2" transparent="1" />
+<widget name="bouquetlist" position="20,247" size="1240,24" zPosition="3" itemHeight="24" font="Regular;19" borderColor="black" borderWidth="1" backgroundColor="bluetransparent" foregroundColor="foreground" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
+<widget name="list" position="20,275" size="1240,404" itemHeight="404" ServiceFontGraphical="Regular;20" EntryFontGraphical="Regular;19" ServiceForegroundColor="foreground" ServiceForegroundColorNow="foreground" ServiceBackgroundColor="background" ServiceBackgroundColorNow="blue" EntryForegroundColor="foreground" EntryForegroundColorSelected="selectedFG" EntryBackgroundColor="background" EntryBackgroundColorSelected="selectedBG" EntryBackgroundColorNow="background" EntryBackgroundColorNowSelected="selectedBG" EntryForegroundColorNow="foreground" EntryForegroundColorNowSelected="selectedFG" ServiceBorderColor="ScrollbarBorder" ServiceBorderWidth="1" ServiceNamePadding="3" EntryBorderColor="ScrollbarBorder" EventBorderWidth="1" EventNamePadding="3" RecordForegroundColor="foreground" RecordForegroundColorSelected="selectedFG" RecordBackgroundColor="#00d13333" RecordBackgroundColorSelected="#009e2626" ZapForegroundColor="foreground" ZapBackgroundColor="#00669466" ZapForegroundColorSelected="selectedFG" ZapBackgroundColorSelected="#00436143" enableWrapAround="1" scrollbarMode="showNever" transparent="0" />
+<eLabel text="Electronic Program Guide" position="58,20" size="375,55" valign="bottom" font="Regular; 24" backgroundColor="selectedBG" foregroundColor="foreground" transparent="1" />
+    <ePixmap position="435,46" size="45,26" zPosition="10" pixmap="buttons/key_left.png" alphatest="on" />
+    <ePixmap position="940,46" size="46,26" zPosition="10" pixmap="buttons/key_right.png" alphatest="on" />
+    <widget source="Title" render="Label" position="500,20" foregroundColor="selectedFG" size="420,55" noWrap="1" halign="center" valign="bottom" font="Regular; 24" backgroundColor="background" transparent="1" />
+    <widget source="Event" position="235,90" size="530,30" font="Regular; 22" render="PliModRunningText" options="movetype=running,direction=left,startpoint=0,startdelay=15000,steptime=90,wrap=1,always=0,repeat=2,oneshot=1" backgroundColor="background" foregroundColor="foreground" transparent="1" valign="center">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Picon" position="15,88" size="60,34" zPosition="5" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <ePixmap pixmap="buttons/key_red.png" position="315,688" size="24,24" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_green.png" position="550,688" size="24,24" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_yellow.png" position="785,688" size="24,24" alphatest="blend" transparent="1" />
+    <ePixmap pixmap="buttons/key_blue.png" position="990,688" size="24,24" alphatest="blend" transparent="1" />
+    <widget source="key_red" render="Label" position="345,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_green" render="Label" position="580,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_yellow" render="Label" position="815,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="key_blue" render="Label" position="1020,688" size="250,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <ePixmap pixmap="buttons/key_9.png" position="125,687" size="45,26" alphatest="blend" transparent="1" />
+    <eLabel name="PT" text="PrimeTime" position="175,688" size="140,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+    <widget source="Event" render="Label" position="995,93" size="273,24" foregroundColor="blue" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular; 108" halign="center" zPosition="102">
+      <convert type="EventName">GenreList</convert>
+    </widget>
+    
+    <eLabel position="15,126" size="858,116" backgroundColor="selectedBG" transparent="0" zPosition="2" />
+    <eLabel position="14,125" size="860,118" backgroundColor="grey" transparent="0" zPosition="1" />
+    <eLabel position="185,1036" size="685,1" backgroundColor="grey" zPosition="1" />
+    <widget source="Event" render="PliModRunningText" options="movetype=running,direction=top,startpoint=0,startdelay=15000,steptime=90,wrap=1,always=0,repeat=2,oneshot=1" position="17,127" size="855,113" font="Regular;20" backgroundColor="bluetransparent" foregroundColor="foreground" transparent="1" valign="top" zPosition="3">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <widget source="Event" render="Label" position="60,90" size="80,30" font="Regular; 22" halign="right" backgroundColor="background" foregroundColor="selectedFG" transparent="1" valign="center">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <eLabel text="-" position="140,90" size="20,30" valign="center" font="Regular; 22" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="center" />
+    <widget source="Event" render="Label" position="160,90" size="80,30" font="Regular; 22" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="left" valign="center">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="Event" render="Label" position="765,90" size="110,30" font="Regular; 22" backgroundColor="background" foregroundColor="selectedFG" transparent="1" halign="right" valign="center" zPosition="3">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">
+      </convert>
+    </widget>
+    <widget name="timeline_now" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline-now.png" position="4,273" size="19,402" zPosition="2" alphatest="blend" />
+		<widget name="timeline0" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<widget name="timeline1" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<widget name="timeline2" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<widget name="timeline3" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<widget name="timeline4" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<widget name="timeline5" pixmap="PLi-HD-FullNight_stein17_Mod/window/timeline.png" position="0,274" size="1,402" zPosition="1" />
+		<ePixmap pixmap="buttons/key_red.png" position="315,688" size="24,24" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="buttons/key_green.png" position="550,688" size="24,24" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="buttons/key_yellow.png" position="785,688" size="24,24" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="buttons/key_blue.png" position="990,688" size="24,24" alphatest="blend" transparent="1" />
+		<widget source="key_red" render="Label" position="345,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+		<widget source="key_green" render="Label" position="580,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+		<widget source="key_yellow" render="Label" position="815,688" size="200,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+		<widget source="key_blue" render="Label" position="1020,688" size="250,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+		<ePixmap pixmap="buttons/key_9.png" position="125,687" size="45,26" alphatest="blend" transparent="1" />
+		<eLabel name="PT" text="PrimeTime" position="175,688" size="140,26" zPosition="1" font="Regular;20" halign="left" transparent="1" valign="center" noWrap="1" />
+	<widget source="Event" render="PliModPosterX" position="885,91" cornerRadius="6" size="103,154" zPosition="100" />
+	<widget source="Event" render="PliModBackdropX" position="995,91" cornerRadius="6" size="273,154" zPosition="98" />
+	<widget source="Event" render="xtrafmPoster" position="885,91" cornerRadius="6" size="103,154" zPosition="101" />
+	<widget source="Event" render="xtrafmBackdrop" position="995,91" cornerRadius="6" size="273,154" zPosition="99" />
+		<panel name="template_menu_info" />
+		<panel name="Template_Date" />
+	</screen>
+</skin>
