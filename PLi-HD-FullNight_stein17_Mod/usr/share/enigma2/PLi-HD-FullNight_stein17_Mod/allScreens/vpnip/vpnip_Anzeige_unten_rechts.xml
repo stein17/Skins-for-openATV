@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<!-- CaidDisplay_Infobar -->
+	<screen name="template_VpnIp_IF">
+		<eLabel text="VPN:" backgroundColor="background" position="1010,550" size="44,30" font="Regular;16" halign="center" valign="center" foregroundColor="foreground" transparent="1" zPosition="1" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="1,1" />
+		<eLabel backgroundColor="red" position="1012,573" size="37,3" zPosition="1" foregroundColor="white" />
+		<widget backgroundColor="green" position="1012,573" size="37,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+			<convert type="PliModSambaVpnIp_converter">vpn</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget backgroundColor="background" position="1100,550" size="200,30" font="Regular; 16" noWrap="1" halign="left" valign="center" foregroundColor="foreground" transparent="1" zPosition="10" render="Label" source="session.CurrentService" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="1,1">
+			<convert type="PliModSambaVpnIp_converter">c+myip</convert>
+		</widget>
+		<widget position="1060,555" size="30,20" zPosition="10" render="PliModSambaVpnIp_renderer" source="session.CurrentService" alphatest="blend" borderWidth="1" borderColor="foreground">
+			<convert type="PliModSambaVpnIp_converter">flag</convert>
+		</widget>
+		<eLabel name="" position="1004,550" size="270,30" backgroundColor="#84111112" transparent="1" cornerRadius="6" />
+	</screen>
+	<screen name="template_VpnIp_Sib">
+		<eLabel text="VPN:" backgroundColor="background" position="1010,550" size="44,30" font="Regular;16" halign="center" valign="center" foregroundColor="foreground" transparent="1" zPosition="1" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="1,1" />
+		<eLabel backgroundColor="red" position="1012,573" size="37,3" zPosition="1" foregroundColor="white" />
+		<widget backgroundColor="green" position="1012,573" size="37,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
+			<convert type="PliModSambaVpnIp_converter">vpn</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget backgroundColor="background" position="1100,550" size="200,30" font="Regular; 16" noWrap="1" halign="left" valign="center" foregroundColor="foreground" transparent="1" zPosition="10" render="Label" source="session.CurrentService" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="1,1">
+			<convert type="PliModSambaVpnIp_converter">c+myip</convert>
+		</widget>
+		<widget position="1060,555" size="30,20" zPosition="10" render="PliModSambaVpnIp_renderer" source="session.CurrentService" alphatest="blend" borderWidth="1" borderColor="foreground">
+			<convert type="PliModSambaVpnIp_converter">flag</convert>
+		</widget>
+		<eLabel name="" position="1004,550" size="270,30" backgroundColor="#84111112" transparent="1" cornerRadius="6" />
+	</screen>
+</skin>
