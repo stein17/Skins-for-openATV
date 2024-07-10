@@ -121,7 +121,7 @@ class PliModReceiverInfo(Poll, Converter):
         textvalue = 'No info'
         info = '0'
         try:
-            out_line = popen('hddtemp -n -q /dev/sda').readline()
+            out_line = popen('hddtemp -n -q /dev/sda').readline().strip()
             SIGN = u'\N{DEGREE SIGN}'
             info = f'Hdd-Temp: {out_line[:4]}{SIGN}C'
             textvalue = info
