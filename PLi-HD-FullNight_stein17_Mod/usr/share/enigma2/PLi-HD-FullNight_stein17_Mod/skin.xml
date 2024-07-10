@@ -2116,9 +2116,21 @@
 		<widget name="state" position="0,0" size="150,30" backgroundColor="transparent" borderWidth="2" font="Regular;25" borderColor="black" />
 	</screen>
 	<!-- Timeshift state -->
-	<screen name="TimeshiftState" position="0,45" zPosition="0" size="1280,100" backgroundColor="transparent" flags="wfNoBorder">
-		<panel name="PlayerTemplateBasic" />
-		<widget name="state" position="128,70" size="150,30" zPosition="3" backgroundColor="transparent" borderWidth="2" font="Regular;25" borderColor="black" />
+	<screen name="TimeshiftState" position="center,20" size="772,60" backgroundColor="background" flags="wfNoBorder">
+		<widget name="state" position="7,0" size="105,33" font="Regular; 24" foregroundColor="selectedFG" halign="center" backgroundColor="background" transparent="1" zPosition="15" valign="center" />
+		<widget source="session.CurrentService" render="Label" position="615,0" size="90,33" font="Regular; 24" halign="right" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="15" valign="center">
+			<convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<eLabel text="to live:" position="510,0" size="105,33" font="Regular; 24" halign="right" backgroundColor="background" transparent="1" zPosition="15" valign="center" foregroundColor="selectedFG" />
+		<eLabel text="min" position="712,0" size="60,33" font="Regular; 24" foregroundColor="selectedFG" halign="left" backgroundColor="background" transparent="1" zPosition="15" valign="center" />
+		<widget source="session.CurrentService" render="Label" position="112,0" size="90,33" font="Regular; 24" halign="right" foregroundColor="selectedFG" backgroundColor="background" transparent="1" zPosition="15" valign="center">
+			<convert type="ServicePosition">Length</convert>
+		</widget>
+		<eLabel text="min" position="210,0" size="60,33" font="Regular; 24" halign="left" backgroundColor="background" transparent="1" zPosition="15" valign="center" foregroundColor="selectedFG" />
+		<eLabel position="277,0" size="225,33" text="timeshift active" font="Regular; 24" backgroundColor="background" transparent="1" zPosition="10" valign="center" foregroundColor="red" halign="center" />
+		<widget source="session.CurrentService" render="Progress" position="20,37" size="740,10" backgroundColor="SliderForeground" foregroundColor="darkgrey" borderWidth="1" borderColor="blue"  zPosition="20" transparent="1" >
+			<convert type="ServicePosition">Position</convert>
+		</widget>
 	</screen>
 	<screen name="TimeshiftLive" position="70,70" zPosition="2" size="300,30" backgroundColor="transparent" flags="wfNoBorder">
 		<eLabel position="0,0" size="300,30" text="Timeshift Live" backgroundColor="transparent" borderWidth="2" font="Regular;25" borderColor="black" />
