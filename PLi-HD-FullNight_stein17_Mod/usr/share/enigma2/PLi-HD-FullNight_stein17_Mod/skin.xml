@@ -370,6 +370,67 @@
 		<panel name="Template_Title_Date_Pig" />
 		<!--  <panel name="Template_Title_Date_Pig_noPig" /> -->
 	</screen>
+		<screen name="menu_information" title="Main menu" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">	
+		<widget name="menuimage" position="1,1" size="1,1" alphatest="blend" />
+		<widget source="menu" render="Listbox" position="502,98" size="770,540" font="Regular;24" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand">
+			<convert type="TemplatedMultiContent">{"templates":
+						{"default": (48,[
+							MultiContentEntryText(pos = (15, 1), size = (640, 48), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0)
+							]),
+						"text": (48,[
+							MultiContentEntryText(pos = (15, 1), size = (640, 48), flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3)
+							]),
+						"number": (48,[
+							MultiContentEntryText(pos = (15, 1), size = (30, 48), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (60, 1), size = (615, 48), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"image": (48,[
+							MultiContentEntryPixmapAlphaBlend(pos = (15, 4), size = (40, 40), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (75, 1), size = (585, 40), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							]),
+						"both": (48,[
+							MultiContentEntryPixmapAlphaBlend(pos = (15, 4), size = (40, 40), png = 1, flags = BT_SCALE | BT_KEEP_ASPECT_RATIO),
+							MultiContentEntryText(pos = (75, 1), size = (30, 48), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),
+							MultiContentEntryText(pos = (130, 1), size = (565, 48), font = 2, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),
+							])
+						},
+					"fonts": [gFont("Regular", 27),gFont("Regular", 27),gFont("Regular", 27)],
+					"itemHeight": 48,
+					"scrollbarMode": "showOnDemand"
+					}</convert>
+		</widget>
+		<widget source="menu" render="FixedLabel" text="►" position="520,624" size="20,20" font="Regular;20" foregroundColor="yellow" backgroundColor="background" halign="left" valign="bottom" transparent="1" zPosition="1">
+			<convert type="MetrixHDMenuEntryCompare" />
+			<convert type="ValueRange">0,9</convert>
+			<convert type="ConditionalShowHide">Invert</convert>
+		</widget>
+		<widget source="description" render="Label" position="25,360" size="440,140" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" zPosition="2" transparent="1" conditional="description" font="Regular;20" valign="center" halign="center">
+			<convert type="MetrixMenuDescription" />
+		</widget>
+		<!-- <eLabel text="Beschreibung optional" position="30,490" size="240,180" font="Regular;18" transparent="1" zPosition="2" valign="center" halign="center" foregroundColor="foreground" backgroundColor="background" /> -->
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_menu_help_exit" />
+		<panel name="Template_Title_Date_Pig" />
+		<!--  <panel name="Template_Title_Date_Pig_noPig" /> -->
+		<widget source="session.CurrentService" render="Label" position="25,538" size="440,24" zPosition="1" font="Regular; 18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueAReceiverInfo">UsbInfo</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="25,566" size="440,24" zPosition="1" font="Regular; 18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueAReceiverInfo">MemFree</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="25,594" size="440,24" zPosition="1" font="Regular; 18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueAReceiverInfo">HddInfo</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="25,622" size="440,24" zPosition="1" font="Regular; 18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueAReceiverInfo">FlashInfo</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="25,510" size="440,24" zPosition="1" font="Regular;18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueASTBinfo">CPUtemp</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="25,480" size="440,24" zPosition="1" font="Regular;18" halign="left" valign="center"  foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2"  transparent="1">
+			<convert type="BlueAReceiverInfo">HddTemp</convert>
+		</widget>
+	</screen>
 	<!-- TEMPLATES Color Keys Name-->
 	<screen name="template_name_red_o_blue">
 		<ePixmap pixmap="buttons/key_red.png" position="225,688" size="24,24" alphatest="blend" transparent="1" />
