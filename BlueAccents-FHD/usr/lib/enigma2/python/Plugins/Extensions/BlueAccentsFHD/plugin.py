@@ -162,7 +162,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
                         "cancel": self.cancel,
                         "ok": self.keyOk,
                         "menu": self.setWeather,
-                        "showEPGList": self.setXtraEvent
+                        "showEPGList": self.setXtrafmEvent
                 }, -2)
 
         self["Picture"] = Pixmap()
@@ -177,10 +177,10 @@ class BlueAccents_Config(Screen, ConfigListScreen):
 
     def setXtraEvent(self):
         try:
-            from Plugins.Extensions.xtraEvent.plugin import main
+            from Plugins.Extensions.xtrafmEvent.plugin import main
             main(self.session)
         except ImportError:
-            self.session.open(MessageBox, _("'xtraEvent' is not installed!, please install the xtraEvent Plugin"), MessageBox.TYPE_INFO)
+            self.session.open(MessageBox, _("'xtrafmEvent' is not installed!, please install the xtrafmEvent Plugin"), MessageBox.TYPE_INFO)
 
     def setWeather(self):
         try:
