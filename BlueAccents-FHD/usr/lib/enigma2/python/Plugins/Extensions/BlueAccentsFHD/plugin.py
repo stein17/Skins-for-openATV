@@ -175,7 +175,7 @@ class BlueAccents_Config(Screen, ConfigListScreen):
         else:
             self.createConfigList()
 
-    def setXtraEvent(self):
+    def setXtrafmEvent(self):
         try:
             from Plugins.Extensions.xtrafmEvent.plugin import main
             main(self.session)
