@@ -97,19 +97,70 @@
     <ePixmap position="981,699" size="256,256" zPosition="2" pixmap="icons/info.png" transparent="1" />
     <eLabel name="vertikalline" position="929,120" size="2,840" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
   </screen>
-  <!-- QuickMenu FHD  -->
+  <!-- QuickMenu ATV 7.4 -->
   <screen name="QuickMenu" position="0,0" size="1920,1080" title="Quick Launch Menu" flags="wfNoBorder" backgroundColor="transparent" borderWidth="0" borderColor="transparent">
     <widget source="Title" render="Label" position="10,25" size="900,50" font="Regular; 36" halign="left" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="1" />
     <widget source="global.CurrentTime" render="Label" position="508,23" size="600,40" font="Regular; 32" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
       <convert type="ClockToText">Format:%a, %d.%m.%Y   %H:%M</convert>
     </widget>
-  <panel name="TemplateAllColorButtons_Automatic" />
-    <widget name="list" position="28,100" size="600,730" itemHeight="75" font="Regular; 34" scrollbarMode="showNever" transparent="1" />
-    <widget name="sublist" position="650,100" size="600,730" itemHeight="75" font="Regular;32" scrollbarMode="showNever" transparent="1" />
-    <widget name="description" position="28,850" size="1220,128" font="Regular; 32" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2" />
-
-    <ePixmap pixmap="menu/bg1280.png" position="0,0" zPosition="-20" size="1280,1080" />
+      <widget source="mainlist" render="Listbox" position="28,100" size="600,730" itemHeight="75" font="Regular;34"  scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+			<templates>
+				<template name="Default" fonts="Regular;29,Regular;24" itemWidth="625" itemHeight="75">
+					<mode name="default">
+						<text index="0" position="90,3" size="e-90,42" font="0" />
+						<text index="1" position="90,38" size="e-90,33" font="1" />
+						<pixmap index="2" position="15,8" size="60,60" alpha="blend" scale="centerScaled" />
+					</mode>
+				</template>
+			</templates>
+		</widget>
+    <widget source="sublist" render="Listbox" position="650,100" size="600,730" itemHeight="75" font="Regular;34" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+			<templates>
+				<template name="Default" fonts="Regular;29,Regular;24" itemWidth="625" itemHeight="75">
+					<mode name="default">
+						<text index="0" position="15,3" size="e-15,42" font="0" />
+						<text index="1" position="15,38" size="e-15,33" font="1" />
+					</mode>
+				</template>
+			</templates>
+		</widget>
+	<widget name="description" position="28,850" size="1220,128" font="Regular; 32" halign="center" foregroundColor="white" backgroundColor="black" transparent="1" zPosition="2" />
+	<ePixmap pixmap="menu/bg1280.png" position="0,0" zPosition="-20" size="1280,1080" />
     <eLabel name="vertikalline" position="28,840" size="1220,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+	<panel name="TemplateAllColorButtons_Automatic" />
+  </screen>
+  <!--  SkinSelection ATV 7.4 -->
+   <screen name="SkinSelection" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel text="Skin Selector" position="10,25" size="900,50" noWrap="1" valign="center" font="Regular; 36" halign="left" transparent="1" zPosition="1" />
+    <widget name="config" position="30,100" size="900,180" itemHeight="45" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+    <widget name="preview" position="1275,232" size="620,350" alphatest="blend" zPosition="2" />
+	<widget name="description" position="30,300" size="900,220" font="Regular; 32" halign="center" valign="center" transparent="1" backgroundColor="bluelabeltranzp" foregroundColor="selectedFG" zPosition="5" />
+	<widget name="HelpWindow" position="1000,775" size="900,210" zPosition="2" transparent="1" backgroundColor="bluelabeltranzp" foregroundColor="selectedFG" alphatest="blend" />
+	<widget name="footnote" position="680,1000" size="600,70" font="Regular; 27" foregroundColor="white" halign="left" backgroundColor="background" valign="center" transparent="1" />
+    <widget source="global.CurrentTime" render="Label" position="1088,23" size="600,40" font="Regular; 32" halign="right" foregroundColor="white" backgroundColor="black" transparent="1">
+      <convert type="ClockToText">Format:%A, %d.%m.%Y   %H:%M</convert>
+    </widget>
+	<eLabel text="Skinanpassungen " position="30,573" size="600,40" zPosition="2" font="Regular; 34" transparent="1" backgroundColor="black" halign="left" foregroundColor="cyan1" />
+    <ePixmap position="1275,600" size="300,169" zPosition="2" pixmap="DEV/Channel-Selection-2-Felder.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1275,800" size="300,169" zPosition="2" pixmap="DEV/Infobar-FlipClock.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1593,600" size="300,169" zPosition="2" pixmap="DEV/Channel-Selection-3-Felder.png" transparent="1" alphatest="blend" />
+    <ePixmap position="1591,800" size="300,169" zPosition="2" pixmap="DEV/SecondInfoBar-Horizontal.png" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="DEV/Blue_Line_logo_mini.png" position="1262,130" size="124,74" zPosition="10" transparent="1" alphatest="blend" />
+    <eLabel position="1275,232" size="620,350" backgroundColor="background" zPosition="1" />
+    <eLabel text="Für weniger Transparenz in der Benutzeroberfläche, in /usr/share/enigma2/Blue-Line-OE-4ATV/DEV/ diePixmaps: bg1280.png und bg1920.png kopieren und in /usr/share/enigma2/Blue-Line-OE-4ATV/menu einfügen. -  Benutzer Oberfläche neustarten." position="30,807" size="1190,160" zPosition="2" font="Regular; 30" transparent="1" backgroundColor="black" halign="left" foregroundColor="foregroundClock" valign="center" />
+    <eLabel text="Preview" position="1413,130" size="480,70" font="Regular;40" halign="left" valign="center" backgroundColor="bluelabel" transparent="1" zPosition="2" />
+    <ePixmap pixmap="menu/bg1920.png" position="0,1" zPosition="-20" size="1920,1080" />
+	<eLabel name="vertikalline" position="30,619" size="400,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />   
+	<eLabel name="vertikalline" position="31,532" size="1200,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+    <eLabel name="vertikalline" position="30,800" size="400,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+    <eLabel name="vertikalline" position="1251,120" size="2,840" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+    <eLabel name="vertikalline" position="1262,220" size="649,2" foregroundColor="backgroundBlue" backgroundColor="backgroundBlue" />
+    <ePixmap pixmap="buttons/key_ok.png" position="1805,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+    <ePixmap pixmap="buttons/key_exit.png" position="1723,1011" size="60,50" zPosition="10" transparent="1" alphatest="blend" />
+    <ePixmap position="961,203" size="256,256" zPosition="2" pixmap="icons/menu_osd_menu_skin_setup.png" transparent="1" alphatest="blend" />
+    <eLabel text="Ändern der Transparenz " position="30,754" size="600,40" zPosition="2" font="Regular; 34" transparent="1" backgroundColor="black" halign="left" foregroundColor="cyan1" />
+	<eLabel text="Dieser Skin kann in   Menü -&gt; Einstellungen -&gt; Bedienung und Oberfläche, angepasst werden. Dort findet ihr auch Infos zum Einstellen Des Wetters in der 2en Infobar." position="30,635" size="1220,100" zPosition="2" font="Regular; 30" transparent="1" backgroundColor="black" halign="left" foregroundColor="foregroundClock" />
+	<panel name="TemplateAllColorButtons_Automatic" />
   </screen>
   <!-- ATV QuickMenuDevices FHD  -->
   <screen name="QuickMenuDevices" position="0,0" size="1920,1080" title="Devices" backgroundColor="transparent" flags="wfNoBorder">
