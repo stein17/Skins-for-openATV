@@ -1,0 +1,121 @@
+<skin>
+ <!-- TEMPLATES-InfoBar_Poster -->
+<screen name="InfoBar" title="InfoBar" position="fill" backgroundColor="transparent" flags="wfNoBorder">
+		<ePixmap alphatest="off" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/hd.png" position="0,510" size="1280,220" zPosition="-1" />
+		<widget source="session.CurrentService" render="Picon" position="25,635" size="100,60" alphatest="blend" backgroundColor="secondBG" transparent="1" zPosition="1">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" borderWidth="2" position="185,573" size="570,50" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;25" valign="center">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" borderWidth="1" position="25,550" size="360,30" backgroundColor="background" noWrap="1" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;16" valign="center">
+			<convert type="ClockToText">Date</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" borderWidth="2" position="25,583" size="69,30" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;25" valign="bottom">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" borderWidth="2" position="89,583" size="37,29" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular;20" valign="bottom">
+			<convert type="ClockToText">Format::%S</convert>
+		</widget>
+		<widget source="session.RecordState" render="Pixmap" position="148,663" size="20,20" pixmap="PLi-HD-FullNight_stein17_Mod/icons/rec.png" zPosition="2" alphatest="blend">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="185,642" size="70,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default;Proportional</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="270,642" size="690,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" noWrap="1" font="Regular;24">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="975,642" size="120,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;24" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText" />
+		</widget>
+		<widget source="session.Event_Next" render="Label" position="185,672" size="70,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="grey" font="Regular;24">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText">Default;Proportional</convert>
+		</widget>
+		<widget source="session.Event_Next" render="Label" position="270,672" size="690,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="grey" noWrap="1" font="Regular;24">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="session.Event_Next" render="Label" position="975,672" size="120,30" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="grey" font="Regular;24" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText" />
+		</widget>
+		<widget source="session.Event_Now" render="Progress" pixmap="PLi-HD-FullNight_stein17_Mod/infobar/pbar.png" position="185,625" size="910,8" backgroundColor="darkgrey" transparent="0" zPosition="2" borderWidth="0">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_16-9.png" position="1048,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">IsWidescreen</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_format_4-3.png" position="1048,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">IsNotWidescreen</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_sd.png" position="990,590" size="46,28" zPosition="4" alphatest="blend">
+			<convert type="ServiceInfo">VideoHeight</convert>
+			<convert type="ValueRange">0,719</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_hd.png" position="990,590" size="46,28" zPosition="4" alphatest="blend">
+			<convert type="ServiceInfo">VideoHeight</convert>
+			<convert type="ValueRange">720,1079</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_fhd.png" position="990,590" size="46,28" zPosition="4" alphatest="blend">
+			<convert type="ServiceInfo">VideoHeight</convert>
+			<convert type="ValueRange">721,1080</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_resolution_4k.png" position="990,590" size="46,28" zPosition="4" alphatest="blend">
+			<convert type="ServiceInfo">VideoHeight</convert>
+			<convert type="ValueRange">1081,5000</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_txt_on.png" position="874,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">HasTelext</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_on.png" position="932,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">IsMultichannel</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_dolby_off.png" position="932,590" size="46,28" zPosition="1" alphatest="blend">
+			<convert type="ServiceInfo">IsStereo</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_crypt_on.png" position="700,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">IsCrypted</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_hbbtv_on.png" position="816,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">HasHBBTV</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="PLi-HD-FullNight_stein17_Mod/icons/ico_sub_on.png" position="758,590" size="46,28" zPosition="2" alphatest="blend">
+			<convert type="ServiceInfo">SubservicesAvailable</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget render="VideoSize" source="session.CurrentService" position="1135,619" size="110,20" backgroundColor="secondBG" font="Regular;19" foregroundColor="foreground" transparent="1" zPosition="1" />
+		<widget source="session.FrontendStatus" render="Label" position="1135,647" size="75,22" backgroundColor="secondBG" transparent="1" zPosition="1" foregroundColor="foreground" font="Regular;19">
+			<convert type="FrontendInfo">SNR</convert>
+		</widget>
+		<widget source="session.FrontendInfo" render="Label" position="1135,590" size="137,20" borderWidth="1" borderColor="black" zPosition="1" backgroundColor="transpBlack" transparent="1" font="Regular;20">
+			<convert type="FrontendInfo">STRING</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="1135,675" size="110,22" backgroundColor="secondBG" transparent="1" zPosition="1" text="DVB-S" font="Regular;19">
+			<convert type="ServiceOrbitalPosition" />
+		</widget>
+		<panel name="template_OA_weather_default" />
+		<panel name="template_CaidDisplay" />
+		<panel name="template_VpnIp_IF" />
+
+	<widget  source="session.Event_Now" nexts="0" render="PliModPosterX" position="10,285" cornerRadius="6" size="170,255" zPosition="100" />
+	<widget source="session.Event_Now" render="xtrafmPoster" position="10,285" cornerRadius="6" size="170,255" zPosition="101" />
+	<widget source="session.CurrentService" render="PliModPosterX" nexts="1" position="1100,285" cornerRadius="6" size="170,255" zPosition="100" />
+	<widget source="session.Event_Next" render="xtrafmPoster" position="1100,285" cornerRadius="6" size="170,255" zPosition="101" />
+<widget source="session.Event_Now" render="xtrafmParental" position="1203,473" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+<widget source="session.Event_Next" render="xtrafmParental" position="114,473" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+	</screen>
+</skin>

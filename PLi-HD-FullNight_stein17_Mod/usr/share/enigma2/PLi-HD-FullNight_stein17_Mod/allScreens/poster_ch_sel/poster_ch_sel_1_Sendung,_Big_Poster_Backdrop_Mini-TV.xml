@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<!-- ChannelSelection_1_Sendungen_Poster_backdrop_Mini-TV-->
+<screen name="ChannelSelection" title="Channel Selection" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="transpBlack">
+		<ePixmap position="125,687" size="45,26" zPosition="10" pixmap="buttons/epg.png" transparent="1" alphatest="blend" />
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_menu_info" />
+		<panel name="Template_Title_Date" />
+		<widget source="session.VideoPicture" render="Pig" position="790,90" size="440,248" backgroundColor="transparent" zPosition="2" />
+		<widget name="list" position="0,90" size="730,585" scrollbarMode="showOnDemand" scrollbarWidth="10" scrollbarBorderWidth="1" scrollbarSliderForegroundColor="ScrollbarForeground" scrollbarSliderBorderColor="ScrollbarBorder" transparent="1" borderWidth="1" borderColor="black" picServiceEventProgressbar="PLi-HD-FullNight_stein17_Mod/window/progress.png" serviceItemHeight="28" serviceNumberFont="Regular;22" serviceNameFont="Regular;22" serviceInfoFont="Regular;20" progressInfoFont="Regular;18" listMarginLeft="5" listMarginRight="22" fieldMargins="5" itemsDistances="5" progressbarHeight="10" progressBarWidth="50" progressbarBorderWidth="1" colorServiceRecorded="red" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" backgroundColor="background" backgroundColorSelected="SliderForeground" foregroundColor="foreground" foregroundColorSelected="selectedFG" colorServiceDescription="yellowsoft" colorServiceDescriptionSelected="grey" colorEventProgressbarBorder="darkgrey" colorEventProgressbarBorderSelected="darkgrey" foregroundColorMarkedSelected="green" foregroundColorServiceNotAvail="#00555555" />
+		<widget source="ServiceEvent" render="Label" position="750,375" size="62,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText" />
+		</widget>
+		<widget source="ServiceEvent" render="Label" position="1108,375" size="62,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19" halign="right">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText" />
+		</widget>
+		<widget source="ServiceEvent" render="Label" position="1178,375" size="92,20" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular;19" halign="right">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText"></convert>
+		</widget>
+		<widget source="ServiceEvent" render="Progress" pixmap="PLi-HD-FullNight_stein17_Mod/window/progress.png" position="820,382" size="280,10" transparent="1" borderWidth="1" borderColor="darkgrey">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+		<widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startdelay=900,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="750,345" size="520,24" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" foregroundColor="yellowsoft" noWrap="1" font="Regular;20" halign="left">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="780,647" size="495,26" font="Regular; 20" foregroundColor="green" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" zPosition="5" noWrap="1">
+			<convert type="PliModPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+
+
+ 
+    <widget source="ServiceEvent" render="PliModRunningText" options="movetype=running,startdelay=1600,steptime=100,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="910,400" size="365,135" foregroundColor="foreground" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" font="Regular; 19" halign="left" zPosition="1">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" render="PliModSingleEpgList" position="910,535" size="365,106" backgroundColor="background" borderWidth="1" borderColor="black" transparent="1" foregroundColor="greenlight" noWrap="1" font="Regular;18" />
+ 
+
+		<ePixmap position="750,647" size="24,24" zPosition="10" pixmap="PLi-HD-FullNight_stein17_Mod/icons/PTclock.png" transparent="1" alphatest="blend" />
+		<ePixmap pixmap="PLi-HD-FullNight_stein17_Mod/border/line_m.png" position="750,643" size="525,2" zPosition="2" />
+		<widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="750,405" usedImage="poster" cornerRadius="6" size="154,231" zPosition="101" />
+	
+		<widget source="ServiceEvent" render="xtrafmNextEvents" nextEvent="0" position="750,545" usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="99" />
+	
+		
+		<widget source="ServiceEvent" render="PliModPosterX" nexts="0" position="750,405" usedImage="poster" cornerRadius="6" size="154,231" zPosition="100" />
+
+		<widget source="ServiceEvent" render="PliModBackdropX" nexts="0" position="750,545" usedImage="backdrop" cornerRadius="6" size="154,87" zPosition="98" />
+<widget source="ServiceEvent" render="xtrafmParental" position="844,576" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+		
+		</screen>
+</skin>
