@@ -221,7 +221,8 @@
 	</parameters>
 	<windowstyle id="0" type="skinned">
 		<title offset="20,10" font="Regular;20" />
-		<configList entryFont="Regular;20" valueFont="Regular;18" />
+		<!-- <configList entryFont="Regular;20" valueFont="Regular;18" /> -->
+		<configList entryLeftOffset="15" headerLeftOffset="5" headerFont="Regular;20" entryFont="Regular;20" valueFont="Regular;18" />
 		<color name="Background" color="background" />
 		<color name="LabelForeground" color="foreground" />
 		<color name="ListboxBackground" color="background" />
@@ -3156,6 +3157,27 @@
 					"itemHeight": 50
 				}</convert>
 		</widget>
+	</screen>
+	<!-- DeviceManager -->
+	<screen name="DeviceManager" title="Device Manager" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
+		<widget source="devicelist" render="Listbox" position="500,100" size="770,485" scrollbarMode="showNever">
+		<templates>
+			<template name="Default" fonts="Regular;20,Regular;24" itemHeight="36">
+				<mode name="default">
+					<text index="Device" position="44,6" size="120,32" font="0" />
+					<text index="DeviceIndent" position="110,6" size="120,32" font="0" />
+					<text index="Description" position="210,6" size="380,32" font="0" verticalAlignment="top" horizontalAlignment="left" />
+					<text index="Size" position="600,6" size="160,32" font="0" verticalAlignment="top" horizontalAlignment="right" />
+					<text index="PartitionSeparator" position="6,6" size="32,32" font="1" verticalAlignment="center" />
+					<pixmap index="Image" position="0,0" size="32,32" alpha="blend" scale="centerScaled" />
+				</mode>
+			</template>
+		</templates>
+		</widget>
+		<widget name="description" position="480,592" size="780,80" font="Regular;20" verticalAlignment="top" horizontalAlignment="left" backgroundColor="background" />
+		<panel name="Template_Title_Date_Pig" />
+		<panel name="TemplateAllColorButtons_Automatic" />
+		<panel name="template_menu_help_exit" />
 	</screen>
 	<!-- PPanel -->
 	<screen name="ToplevelPPanel" title="Toplevel PPanel" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="background_Pig_template">
