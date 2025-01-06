@@ -3897,13 +3897,13 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 		<panel name="template_background_725_trans" />
 	</screen>
 	<!-- IceTV -->
-	<!-- File Commander new Screens-->
+<!-- File Commander new Screens-->
 	<screen name="FileCommander" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="Title" render="Label" position="240,6" size="1125,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<!--<widget name="list_left_head1" position="105,135" size="848,75" font="Regular;29" valign="center" foregroundColor="grey" backgroundColor="background" transparent="1"/>-->
 		<widget source="headleft" render="Listbox" position="30,112" size="907,120" foregroundColor="selectedFG" selectionDisabled="1" backgroundColor="background" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					MultiContentEntryText(pos= (20, 0), size=(848, 75), font = 1, flags = RT_HALIGN_LEFT | RT_WRAP, text = 17),  # Index 17 is the path.
+			<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryText(pos= (20, 0), size=(848, 75), font = 1, flags = RT_HALIGN_LEFT | RT_WRAP, text = 26), # Index 26 is the current directory + the current file.
 					MultiContentEntryText(pos = (20, 75), size = (150, 45), font = 0, flags = RT_HALIGN_LEFT, text = 16), # index 16 is the sort
 					MultiContentEntryText(pos = (210, 75), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
 					MultiContentEntryText(pos = (330, 75), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
@@ -3912,12 +3912,13 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 					"fonts": [gFont("Regular", 27),gFont("Regular", 29)],
 					"itemHeight": 120,
 					"selectionEnabled": False
-				}</convert>
+				}
+			</convert>
 		</widget>
-		<!--<widget name="list_right_head1" position="968,135" size="848,75" font="Regular;29" valign="center" foregroundColor="grey" backgroundColor="background" transparent="1"/>-->
 		<widget source="headright" render="Listbox" position="982,112" size="907,120" foregroundColor="selectedFG" backgroundColor="background" selectionDisabled="1" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					MultiContentEntryText(pos= (20, 0), size=(848, 75), font = 1, flags = RT_HALIGN_LEFT | RT_WRAP, text = 17),  # Index 17 is the path.
+					<convert type="TemplatedMultiContent">
+				{"template": [
+					MultiContentEntryText(pos= (20, 0), size=(848, 75), font = 1, flags = RT_HALIGN_LEFT | RT_WRAP, text = 26), # Index 26 is the current directory + the current file.
 					MultiContentEntryText(pos = (20, 75), size = (150, 45), font = 0, flags = RT_HALIGN_LEFT, text = 16), # index 16 is the sort
 					MultiContentEntryText(pos = (210, 75), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
 					MultiContentEntryText(pos = (330, 75), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
@@ -3926,14 +3927,13 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 					"fonts": [gFont("Regular", 27),gFont("Regular", 29)],
 					"itemHeight": 120,
 					"selectionEnabled": False
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<widget name="sortleft" position="113,213" size="0,0" font="Regular;27" halign="left" foregroundColor="grey" backgroundColor="background" transparent="1" />
 		<widget name="sortright" position="975,213" size="0,0" font="Regular;27" halign="left" foregroundColor="grey" backgroundColor="background" transparent="1" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,242" zPosition="1" size="920,4" />
 		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="974,242" zPosition="1" size="920,4" />
-		<widget name="multileft" position="30,255" size="907,680" itemHeight="45" font="Regular;30" scrollbarSliderBorderWidth="0" scrollbarWidth="5" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarborder="scrollbarborder" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
-		<widget name="multiright" position="982,255" size="907,680" itemHeight="45" font="Regular;30" scrollbarSliderBorderWidth="0" scrollbarWidth="5" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarborder="scrollbarborder" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
 		<widget name="listleft" position="30,255" size="907,680" itemHeight="45" font="Regular;30" scrollbarSliderBorderWidth="0" scrollbarWidth="5" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarborder="scrollbarborder" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
 		<widget name="listright" position="982,255" size="907,680" itemHeight="45" font="Regular;30" scrollbarSliderBorderWidth="0" scrollbarWidth="5" scrollbarSliderForegroundColor="scrollbarSlidercolor" scrollbarborder="scrollbarborder" scrollbarMode="showOnDemand" backgroundColor="background" foregroundColor="white" backgroundColorSelected="selectedBG" foregroundColorSelected="selectedFG" transparent="1" />
 		<widget name="quickselect" position="26,106" size="1867,885" backgroundColor="metrixtranzp" foregroundColor="white" font="Regular;100" halign="center" transparent="1" valign="center" zPosition="+1" />
@@ -3970,7 +3970,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 			<convert type="ClockToText">Format:%M</convert>
 		</widget>
 		<eLabel text=":" font="Regular;36" position="1810,12" size="7,45" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="1" halign="center" zPosition="1" valign="center" transparent="1"/>
-
 		<widget name="image" position="0,0" size="1920,1080" zPosition="1" alphatest="on" />
 		<widget name="status" position="7,1" size="72,72" zPosition="2" pixmap="icons/record.png" alphatest="blend" />
 		<widget name="icon" position="90,7" size="244,60" zPosition="2" pixmap="mmp/dvr.png" alphatest="blend" />
@@ -3978,16 +3977,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 		<widget name="infolabels" position="29,108" size="375,880" backgroundColor="background" borderWidth="2" font="Regular;30" foregroundColor="selectedFG" halign="right" transparent="1" zPosition="+3" />
 		<widget name="infodata" position="410,109" size="1480,880" backgroundColor="background" borderWidth="2" font="Regular;30" foregroundColor="selectedFG" halign="left" transparent="1" zPosition="+3" />
 		<panel name="template_background_full_black" />
-	</screen>
-	<screen name="ArchiverMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
 	</screen>
 	<screen name="FileCommanderFileViewer" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="path" position="30,112" size="1860,75" font="Regular;27" valign="center" foregroundColor="grey" backgroundColor="background" transparent="1" />
@@ -3997,231 +3986,6 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth)//2, orgpos.y()))</a
 		<panel name="template_background_full_black" />
 		<panel name="template_ok_exit" />
 		<panel name="template_title_date" />
-	</screen>
-	<!-- File Commander Old -->
-	<screen name="FileCommanderScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget source="Title" render="Label" position="240,6" size="1125,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="list_left_head1" position="30,112" size="907,75" font="Regular;28" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget source="list_left_head2" render="Listbox" position="30,195" size="907,45" foregroundColor="selectedFG" selectionDisabled="1" backgroundColor="background" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					MultiContentEntryText(pos = (210, 0), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
-					MultiContentEntryText(pos = (330, 0), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
-					MultiContentEntryText(pos = (480, 0), size = (360, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
-					],
-					"fonts": [gFont("Regular", 27)],
-					"itemHeight": 45,
-					"selectionEnabled": False
-				}</convert>
-		</widget>
-		<widget name="list_right_head1" position="982,112" size="907,75" font="Regular;28" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget source="list_right_head2" render="Listbox" position="982,195" size="907,45" foregroundColor="selectedFG" backgroundColor="background" selectionDisabled="1" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					MultiContentEntryText(pos = (210, 0), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
-					MultiContentEntryText(pos = (330, 0), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
-					MultiContentEntryText(pos = (480, 0), size = (360, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
-					],
-					"fonts": [gFont("Regular", 27)],
-					"itemHeight": 45,
-					"selectionEnabled": False
-				}</convert>
-		</widget>
-		<widget name="sort_left" position="30,195" size="150,45" font="Regular;27" halign="left" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="sort_right" position="982,195" size="150,45" font="Regular;27" halign="left" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="list_left" position="30,255" size="907,735" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="list_right" position="982,255" size="907,735" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<panel name="template_menu_ok_exit" />
-		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_945" />
-		<panel name="template_date" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-	</screen>
-	<screen name="FileCommanderScreenFileSelect" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget source="Title" render="Label" position="240,6" size="1125,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="list_left_head1" position="30,112" size="907,75" font="Regular;28" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget source="list_left_head2" render="Listbox" position="30,195" size="907,45" foregroundColor="selectedFG" selectionDisabled="1" backgroundColor="background" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-				MultiContentEntryText(pos = (210, 0), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
-				MultiContentEntryText(pos = (330, 0), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
-				MultiContentEntryText(pos = (480, 0), size = (360, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
-				],
-				"fonts": [gFont("Regular", 27)],
-				"itemHeight": 45,
-				"selectionEnabled": False
-			}</convert>
-		</widget>
-		<widget name="list_right_head1" position="982,112" size="907,75" font="Regular;28" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget source="list_right_head2" render="Listbox" position="982,195" size="907,45" foregroundColor="selectedFG" backgroundColor="background" selectionDisabled="1" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					MultiContentEntryText(pos = (210, 0), size = (120, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is a symbolic mode
-					MultiContentEntryText(pos = (330, 0), size = (150, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 11), # index 11 is the scaled size
-					MultiContentEntryText(pos = (480, 0), size = (360, 45), font = 0, flags = RT_HALIGN_RIGHT, text = 13), # index 13 is the modification time
-					],
-					"fonts": [gFont("Regular", 27)],
-					"itemHeight": 45,
-					"selectionEnabled": False
-				}</convert>
-		</widget>
-		<widget name="sort_left" position="30,195" size="150,45" font="Regular;27" halign="left" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="sort_right" position="982,195" size="150,45" font="Regular;27" halign="left" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="list_left" position="30,255" size="907,735" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="list_right" position="982,255" size="907,735" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<panel name="template_menu_ok_exit" />
-		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_945" />
-		<panel name="template_date" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-	</screen>
-	<screen name="FileCommanderContextMenu" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background">
-		<widget name="menu" position="30,112" size="1050,877" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<eLabel text="File Commander menu" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<eLabel name="menu_next_side_marker" text="►" position="1039,946" size="45,45" font="Regular;40" backgroundColor="background" halign="right" valign="center" transparent="1" foregroundColor="selectedFG" zPosition="10" />
-		<panel name="template_background_725_trans" />
-		<panel name="template_date" />
-	</screen>
-	<screen name="FileCommanderFileStatInfo" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="background" title="File/Directory Status Information">
-		<widget source="Title" render="Label" position="240,6" size="1125,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="filename" position="30,112" size="1050,90" font="Regular;30" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget source="list" render="Listbox" position="30,225" size="1050,645" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
-			<convert type="TemplatedMultiContent">{"template": [
-					# 0   100 200 300 400 500
-					# |   |   |   |   |   |
-					# 00000000 1111111111111
-					MultiContentEntryText(pos = (0, 0), size = (450, 45), font = 0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is a label
-					MultiContentEntryText(pos = (480, 0), size = (570, 45), font = 0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is the information
-					],
-					"fonts": [gFont("Regular", 30)],
-					"itemHeight": 45,
-					"selectionEnabled": False
-				}</convert>
-		</widget>
-		<widget name="link_sep" position="30,900" size="1050,3" backgroundColor="selectedFG" />
-		<widget name="link_label" position="30,945" size="450,45" font="Regular;30" transparent="1" backgroundColor="background" />
-		<widget name="link_value" position="510,945" size="570,45" font="Regular;30" transparent="1" backgroundColor="background" />
-		<panel name="template_background_725_trans" />
-		<panel name="template_date" />
-		<panel name="template_ok_exit" />
-	</screen>
-	<screen name="setup_filecommander" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="background">
-		<panel name="template_background_full_black" />
-		<panel name="template_Line_Vert_Big_1087" />
-		<panel name="template_setup_config" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit0" />
-		<panel name="template_title_date" />
-		<panel name="template_VideoPicture_Large" />
-		<widget name="labelInfo" position="1125,600" size="765,390" font="Regular;30" halign="center" backgroundColor="background" valign="center" transparent="1" />
-	</screen>
-	<screen name="InputBoxWide" position="0,0" size="1920,1080" flags="wfNoBorder" title="Input..." backgroundColor="transparent">
-		<eLabel text="Input Box" position="45,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget source="Title" render="Label" position="30,112" size="1050,90" font="Regular;36" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="text" position="30,210" size="1050,675" font="Regular;30" backgroundColor="background" transparent="1" />
-		<widget name="input" position="30,900" size="1050,90" font="Regular;30" transparent="1" backgroundColor="background" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,892" zPosition="1" size="1060,4" />
-		<panel name="template_ok_exit" />
-		<panel name="template_background_725_trans" />
-		<panel name="template_date" />
-	</screen>
-	<screen name="vEditorScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_head" position="30,112" size="1860,90" font="Regular;30" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="filedata" position="30,210" size="1860,780" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<panel name="template_ok_exit" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_title_date" />
-		<panel name="template_background_full_black" />
-	</screen>
-	<screen name="ArchiverInfoScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1860,90" font="Regular;30" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,210" size="1860,780" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<panel name="template_ok_exit" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_title_date" />
-		<panel name="template_background_full_black" />
-	</screen>
-	<screen name="ArchiverMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-	</screen>
-	<screen name="RarMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-	</screen>
-	<screen name="UnzipMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-	</screen>
-	<screen name="TarMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_background_725_trans" />
-		<panel name="template_title_date" />
-	</screen>
-	<screen name="ipkMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="template_background_725_trans" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-	</screen>
-	<screen name="GunzipMenuScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-		<panel name="template_background_725_trans" />
-	</screen>
-	<screen name="UnpackInfoScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<widget name="list_left_head" position="30,112" size="1050,90" font="Regular;30" noWrap="1" valign="center" foregroundColor="selectedFG" backgroundColor="background" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,202" zPosition="1" size="1060,4" />
-		<widget name="list_left" position="30,225" size="1050,705" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<widget name="unpacking" position="30,945" size="1050,45" itemHeight="45" font="Regular;30" backgroundColor="background" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
-		<ePixmap pixmap="BG-Pixmaps/Line_Hor_Vert/Line_Hor_Big.png" position="25,937" zPosition="1" size="1060,4" />
-		<panel name="TemplateAllColorButtons_Automatic" />
-		<panel name="template_ok_exit" />
-		<panel name="template_title_date" />
-		<panel name="template_background_725_trans" />
-	</screen>
-	<screen name="ImageViewer" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent">
-		<eLabel position="0,0" zPosition="0" size="1920,1080" backgroundColor="background" />
-		<widget name="image" position="0,0" size="1920,1080" zPosition="1" alphatest="on" />
-		<widget name="status" position="7,1" size="72,72" zPosition="2" pixmap="icons/record.png" alphatest="blend" />
-		<widget name="icon" position="90,7" size="244,60" zPosition="2" pixmap="mmp/dvr.png" alphatest="blend" />
-		<widget source="message" render="Label" position="319,7" size="1590,60" font="Regular;30" halign="left" foregroundColor="selectedFG" backgroundColor="background" zPosition="2" noWrap="1" transparent="1" />
 	</screen>
 	<!-- File Commander -->
 	<!-- dBackup -->
