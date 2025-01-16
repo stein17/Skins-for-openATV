@@ -204,6 +204,7 @@ class Steampunk_Config(Screen, ConfigListScreen):
         self.default_emcsel_file = "emcsel_Original.xml"
         self.default_movsel_file = "movsel_Original.xml"
         self.default_ch_se_color_file = "ch_se_color_Original.xml"
+        self.default_weather_file = "weather_Original.xml"
 
         self.color_file = "skin_user_colors.xml"
         self.sb_file = "skin_user_sb.xml"
@@ -219,6 +220,7 @@ class Steampunk_Config(Screen, ConfigListScreen):
         self.emcsel_file = "skin_user_emcsel.xml"
         self.movsel_file = "skin_user_movsel.xml"
         self.ch_se_color_file = "skin_user_ch_se_color.xml"
+        self.weather_file = "skin_user_weather.xml"
 
         # color
         current, choices = self.getSettings(self.default_color_file, self.color_file)
@@ -262,6 +264,9 @@ class Steampunk_Config(Screen, ConfigListScreen):
         # ch_se_color
         current, choices = self.getSettings(self.default_ch_se_color_file, self.ch_se_color_file)
         self.myAtileHD_ch_se_color = NoSave(ConfigSelection(default=current, choices = choices))
+        # weather
+        current, choices = self.getSettings(self.default_weather_file, self.weather_file)
+        self.myAtileHD_weather = NoSave(ConfigSelection(default=current, choices = choices))
         # myatile
         myatile_active = self.getmyAtileState()
         self.myAtileHD_active = NoSave(ConfigYesNo(default=myatile_active))
@@ -332,6 +337,7 @@ class Steampunk_Config(Screen, ConfigListScreen):
         self.set_emcsel = getConfigListEntry(_("EMC_Selection:"), self.myAtileHD_emcsel)
         self.set_movsel = getConfigListEntry(_("Movie_Selection:"), self.myAtileHD_movsel)
         self.set_ch_se_color = getConfigListEntry(_("Channelselection_Color:"), self.myAtileHD_ch_se_color)
+        self.set_weather = getConfigListEntry(_("Weather_Infobar:"), self.myAtileHD_weather)
         self.set_myatile = getConfigListEntry(_("Enable %s pro:") % cur_skin, self.myAtileHD_active)
         self.set_new_skin = getConfigListEntry(_("Change skin"), ConfigNothing())
         self.find_woeid = getConfigListEntry(_("Search weather location ID"), ConfigNothing())
@@ -366,6 +372,8 @@ class Steampunk_Config(Screen, ConfigListScreen):
                 self.list.append(self.set_movsel)
             if len(self.myAtileHD_ch_se_color.choices)>1:
                 self.list.append(self.set_ch_se_color)
+            if len(self.myAtileHD_weather.choices)>1:
+                self.list.append(self.set_weather)
             self.list.append(self.set_new_skin)
         self["config"].list = self.list
         self["config"].l.setList(self.list)
@@ -403,6 +411,8 @@ class Steampunk_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_ch_se_color:
             self.setPicture(self.myAtileHD_ch_se_color.value)
+        elif self["config"].getCurrent() == self.set_weather:
+            self.setPicture(self.myAtileHD_weather.value)
         elif self["config"].getCurrent() == self.set_myatile:
             if self.myAtileHD_active.value:
                 self["key_yellow"].setText("%s pro" % cur_skin)
@@ -439,6 +449,8 @@ class Steampunk_Config(Screen, ConfigListScreen):
             self.setPicture(self.myAtileHD_movsel.value)
         elif self["config"].getCurrent() == self.set_ch_se_color:
             self.setPicture(self.myAtileHD_ch_se_color.value)
+        elif self["config"].getCurrent() == self.set_weather:
+            self.setPicture(self.myAtileHD_weather.value)
         else:
             self["Picture"].hide()
 
@@ -562,6 +574,8 @@ class Steampunk_Config(Screen, ConfigListScreen):
             self.makeSettings(self.myAtileHD_movsel, self.movsel_file)
             # ch_se_color
             self.makeSettings(self.myAtileHD_ch_se_color, self.ch_se_color_file)
+            # weather
+            self.makeSettings(self.myAtileHD_weather, self.weather_file)
 
             if not path.exists("mySkin_off"):
                 mkdir("mySkin_off")

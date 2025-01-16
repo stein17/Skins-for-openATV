@@ -1,5 +1,5 @@
 <skin>
- <!-- skin_ChannelSelection_2_Fields_Poster -->
+ <!-- skin_ChannelSelection_2_Fields -->
 <!-- ChannelSelection */ -->
 <screen name="ChannelSelection" position="0,0" size="1280,720" title="Channel Selection" flags="wfNoBorder" backgroundColor="background">
   <widget source="ServiceEvent" render="Label" position="972,283" size="60,20" font="Regular;18" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="background" transparent="1" halign="right" valign="center">
@@ -19,32 +19,24 @@
   <widget source="ServiceEvent" render="SteampunkRunningText" options="movetype=running,startdelay=6000,steptime=70,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="892,320" size="330,135" font="Regular;19" borderColor="black" borderWidth="1" foregroundColor="selFG" backgroundColor="background" transparent="1" halign="left" valign="top">
   <convert type="EventName">FullDescription</convert>
   </widget>
-  <widget source="ServiceEvent" render="SteampunkSingleEpgListFull" position="890,463" size="330,175" noWrap="1" itemHeight="24" font="Regular;19" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="black" transparent="1" zPosition="5"/>
+  <widget source="ServiceEvent" render="SteampunkSingleEpgListFull" position="890,463" size="330,175" noWrap="1" itemHeight="24" font="Regular;19" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="black" transparent="1" zPosition="5" />
   <widget source="ServiceEvent" render="SteampunkRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=900,always=0" position="174,613" size="550,30" font="Regular;24" borderColor="black" borderWidth="1" foregroundColor="lightblue" zPosition="5" noWrap="1" transparent="1" backgroundColor="black">
     <convert type="SteampunkPrimeTime">PrimeTime,noDuration</convert>
   </widget>
   <widget source="ServiceEvent" render="Picon" position="50,606" size="75,42" zPosition="5" alphatest="blend" transparent="1">
     <convert type="SteampunkRefString">ServicelistRef</convert>
   </widget>
-  <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_green.png" position="167,667" size="30,30" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_yellow.png" position="372,667" size="30,30" alphatest="blend" transparent="1" />
-  <ePixmap pixmap="buttons/key_blue.png" position="530,667" size="30,30" alphatest="blend" transparent="1" />
-  <widget name="key_red" position="77,667" size="90,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_green" position="202,667" size="170,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_yellow" position="409,667" size="120,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget name="key_blue" position="565,667" size="120,30" zPosition="1" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="brown" backgroundColor="background" halign="left" transparent="1" valign="center" noWrap="1" />
-  <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+   <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/sat.png" position="820,664" size="35,35" zPosition="2" alphatest="blend">
     <convert type="FrontendInfo">TYPE</convert>
     <convert type="ValueRange">0,0</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/dvbt.png" position="820,664" size="35,35" zPosition="2" alphatest="blend">
     <convert type="FrontendInfo">TYPE</convert>
     <convert type="ValueRange">2,2</convert>
     <convert type="ConditionalShowHide" />
   </widget>
-  <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="683,664" size="35,35" zPosition="2" alphatest="blend">
+  <widget source="session.FrontendInfo" render="Pixmap" pixmap="icons/kabel.png" position="820,664" size="35,35" zPosition="2" alphatest="blend">
     <convert type="FrontendInfo">TYPE</convert>
     <convert type="ValueRange">1,1</convert>
     <convert type="ConditionalShowHide" />
@@ -52,12 +44,14 @@
   <ePixmap pixmap="Skinparts/Line_Hor.png" position="890,456" size="330,3" alphatest="blend" transparent="1" />
   <ePixmap pixmap="Skinparts/Line_Hor.png" position="50,606" size="760,3" alphatest="blend" transparent="1" zPosition="2" />
   <ePixmap name="PrimeTimeClock" pixmap="Skinparts/PTClock.png" position="142,612" size="32,32" alphatest="blend" />
-  <widget source="ServiceEvent" render="SteampunkFrontend" position="720,667" zPosition="1" valign="center" size="300,30" font="Regular;20" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="black" transparent="1" halign="left" />
+  <widget source="ServiceEvent" render="SteampunkFrontend" position="865,664" zPosition="1" valign="center" size="210,36" font="Regular;16" borderColor="black" borderWidth="1" foregroundColor="lightblue" backgroundColor="black" transparent="1" halign="left" />
+  <ePixmap position="1085,670" size="62,28" zPosition="10" pixmap="buttons/menu.png" transparent="1" alphatest="blend" />
+  <ePixmap position="1160,670" size="62,28" zPosition="10" pixmap="buttons/key_epg.png" transparent="1" alphatest="blend" />
   <panel name="ChannelSelection_color_default" />
-  <panel name="template_menu_ok_exit_1280" />
+  <panel name="template_menu_ok_exit_12800" />
   <panel name="template_pig_smal" />
   <panel name="template_Steampunk_Background_Channel" />
   <panel name="template_title_date" />
-  <panel name="template_ChannelSelection_Poster0" />
+  <panel name="TemplateAllColorButtons_Automatic" />
 </screen>
   </skin>

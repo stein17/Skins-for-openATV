@@ -34,16 +34,7 @@
     <convert type="ClockToText">Format:%A</convert>
   </widget>
 </screen>
-<!-- TEMPLATE Infobar 4Day_Weather-->
-<screen name="template_Infobar_4Day_Weather">
-  <ePixmap position="0,0" zPosition="-5" size="1280,54" pixmap="Skinparts/4_Day_Back.png"/>
-  <eLabel name="" position="1066,3" size="1,45" backgroundColor="selFG" />
-  <eLabel name="" position="848,3" size="1,45" backgroundColor="selFG" />
-  <eLabel name="" position="629,3" size="1,45" backgroundColor="selFG" />
-  <eLabel name="" position="409,3" size="1,45" backgroundColor="selFG" />
-  <eLabel name="" position="0,52" size="1280,1" backgroundColor="selFG" />
-  <panel name="template_weather" />
-</screen>
+
 <!-- Android-Clock-Infobar -->
 <screen name="template_androidclock_widget_infobar">
   <widget font="Regular; 24" noWrap="1" valign="center" halign="center" position="1078,687" render="Label" size="200,30" backgroundColor="background" source="global.CurrentTime" transparent="1" foregroundColor="brown2">
@@ -86,6 +77,11 @@
   </widget>
   </screen>
 <!-- TEMPLATES-Pixmaps-Clocks-->
+
+<screen name="template_Clock_Infobar">
+ <eLabel  name="fake" position="0,0" size="0,0"    />
+</screen>
+
 <screen name="template_pixmap_Analogclock_Infobar">
  <ePixmap pixmap="Skinparts/Clocks/Steampunk_Clock_E.png" position="1100,545" zPosition="0" size="150,150" alphatest="blend" transparent="1" />
 </screen>
@@ -154,6 +150,10 @@
 <convert type="ClockToText">Format:%d.%b.%Y</convert>
 </widget>
   </screen>
+   <!-- TEMPLATES-Poster-Infobar-Now-->
+  <screen name="template_Poster_Infobar">
+  <eLabel  name="fake" position="0,0" size="0,0"    />
+  </screen>
  <!-- TEMPLATES-Poster-Infobar-Now-->
   <screen name="template_Poster_Infobar_Now">
   <widget source="session.Event_Now" render="SteampunkPoster"  borderColor="brown4" borderWidth="3" position="114,240" size="185,278" zPosition="10" />
@@ -162,15 +162,25 @@
   <screen name="template_Poster-Background_Infobar">
   <ePixmap position="99,212" zPosition="5" size="215,315" pixmap="Skinparts/InfobarPosterBG.png" transparent="1"/>
   </screen>
+  
+    <screen name="template_Poster_SecondInfoBar">
+  <eLabel  name="fake" position="0,0" size="0,0"    />
+  </screen>
   <!-- TEMPLATES-SecondInfoBar-Poster-->
   <screen name="template_SecondInfoBar_Poster">
   <widget source="session.Event_Next" render="SteampunkPoster" borderColor="brown3" borderWidth="3" position="582,391" size="146,220" zPosition="10" />
   <widget source="session.Event_Now" render="SteampunkPoster" borderColor="brown3" borderWidth="3" position="582,102" size="146,220" zPosition="10" />
   </screen> 
+      <screen name="template_Poster_EventView">
+  <eLabel  name="fake" position="0,0" size="0,0"    />
+  </screen>
   <!-- TEMPLATES-EventView-Backdrop-Poster-->
   <screen name="template_EventView_Backdrop">
   <widget source="Event" render="SteampunkBackdrop" position="805,390" size="415,234" borderColor="brown" borderWidth="2" zPosition="2" />
   </screen> 
+        <screen name="template_Poster_EMCMediaCenter">
+  <eLabel  name="fake" position="0,0" size="0,0"    />
+  </screen>
   <!-- TEMPLATES-EMCMediaCenter-Poster-->
   <screen name="template_EMCMediaCenter_Backdrop_Poster">
   <widget source="session.Event_Now" render="SteampunkPoster" borderColor="brown4" borderWidth="3" position="1085,310" size="185,278" zPosition="10" />
@@ -639,6 +649,126 @@
   <eLabel name="Rahmem_crypt" backgroundColor="selFG" zPosition="1" position="461,669" size="18, 22" />
   <eLabel name="Rahmem_crypt" backgroundColor="selFG" zPosition="1" position="481,669" size="18, 22" />
 </screen>
+<!-- TEMPLATE Infobar 4Day_Weather-->
+<screen name="template_Infobar_4Day_Weather">
+  <ePixmap position="0,0" zPosition="-5" size="1280,54" pixmap="Skinparts/4_Day_Back.png"/>
+  <eLabel name="" position="1066,3" size="1,45" backgroundColor="selFG" />
+  <eLabel name="" position="848,3" size="1,45" backgroundColor="selFG" />
+  <eLabel name="" position="629,3" size="1,45" backgroundColor="selFG" />
+  <eLabel name="" position="409,3" size="1,45" backgroundColor="selFG" />
+  <eLabel name="" position="0,52" size="1280,1" backgroundColor="selFG" />
+  <panel name="template_weather" />
+</screen>
+<screen name="template_Weather_Infobar">
+  <eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+<!-- Infobar_OA_Weather -->
+<screen name="template_Infobar_OA_Weather">
+		<ePixmap pixmap="Wettericons_Steampunk/wether_top_steampunk.png" position="0,0" zPosition="-1" size="1280,156" alphatest="blend" />
+		
+		<widget alphatest="blend" render="OAWeatherPixmap" position="178,25" size="96,96" source="session.OAWeather" transparent="1" zPosition="2">
+			 <convert type="OAWeather">weathericon,current,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="442,124" size="54,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="98,23" size="190,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">city</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="334,15" size="186,20" font="Regular; 14" source="session.OAWeather" zPosition="4" halign="left" transparent="1">
+			<convert type="OAWeather">humidityfull</convert>
+		</widget>
+		<!--  <eLabel font="Regular; 14" halign="left" position="495,28" size="30,30" text="%" transparent="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="4" /> -->
+		<widget backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="335,53" size="186,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">winddisplay</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" position="335,90" size="186,20" font="Regular; 14" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">precipitationfull,current</convert>
+		</widget>
+		
+		
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" foregroundColor="white" render="Label" position="540,12" size="120,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+			<convert type="OAWeather">weekday,current</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-3,-3" foregroundColor="brown2" render="Label" position="60,44" size="116,80" font="Regular; 40" source="session.OAWeather" zPosition="3" halign="center" valign="center" transparent="1">
+			<convert type="OAWeather">temperature_current</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="68,124" size="204,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+			<convert type="OAWeather">temperature_text,current</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="571,28" size="60,60" source="session.OAWeather" transparent="1" zPosition="2">
+			 <convert type="OAWeather">weathericon,day1,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" render="Label" position="538,110" size="126,36" font="Regular; 14" source="session.OAWeather" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day1</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="557,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_high,day1</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="618,86" size="44,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_low,day1</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="680,12" size="120,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day2</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="711,28" size="60,60" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,day2,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="697,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day2</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="758,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_low,day2</convert>
+		</widget>
+		<widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="678,110" size="126,36" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day2</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="820,12" size="120,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day3</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="851,28" size="60,60" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,day3,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="837,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day3</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="898,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day3</convert>
+		</widget>
+		<widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="818,110" size="126,36" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day3</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="960,12" size="120,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day4</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="991,28" size="60,60" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,day4,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="977,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day4</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1038,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day4</convert>
+		</widget>
+		<widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="958,110" size="126,36" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day4</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1100,12" size="120,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day5</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1131,28" size="60,60" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,day5,/usr/share/enigma2/Steampunk/Wettericons_Steampunk/,png</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1117,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day5</convert>
+		</widget>
+		<widget noWrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1178,86" size="43,20" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day5</convert>
+		</widget>
+		<widget Wrap="1" backgroundColor="background" borderWidth="1" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="cyan" transparent="1" render="Label" position="1098,110" size="126,36" font="Regular; 14" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day5</convert>
+		</widget>
+		</screen>
  <!--Template MSN Weather  -->
 <screen name="template_weather">
   <widget noWrap="1" foregroundColor="yellow" backgroundColor="background" font="Regular; 18" render="Label" position="295,3" size="60,20" source="session.MSNWeather" transparent="1" zPosition="8" halign="center">
@@ -713,16 +843,24 @@
 </screen>
 <!--Template Setup Config  -->
 <screen name="template_setup_config">
-  <widget name="config" position="50,70" size="680,420" backgroundColor="background" foregroundColor="listboxFG" backgroundColorSelected="selBG" foregroundColorSelected="selFG" itemHeight="32" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1"  transparent="1" />
+  <widget name="config" position="50,70" size="680,420" backgroundColor="background" foregroundColor="listboxFG" backgroundColorSelected="selBG" foregroundColorSelected="selFG" itemHeight="32" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1"  transparent="1" />
   <widget name="description" position="50,500" size="680,100" font="Regular; 20" borderColor="black" borderWidth="1" backgroundColor="background" halign="center" valign="center" transparent="1" foregroundColor="selFG" />
   <widget name="HelpWindow" position="615,515" size="600,200" zPosition="2" transparent="1" alphatest="blend" />
   <widget name="footnote" position="50,605" size="680,30" font="Regular; 20" borderColor="black" borderWidth="1" backgroundColor="background" halign="right" valign="center" transparent="1" />
 	<ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,495" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
  <ePixmap pixmap="Skinparts/Line_Hor_680.png" position="50,605" zPosition="2" size="680,3" alphatest="blend" transparent="1" />
+ <widget name="Image" position="805,380" size="415,255" alphatest="blend" conditional="Image" transparent="1" zPosition="3" />
+
+ <ePixmap position="805,380" size="415,255" zPosition="2" pixmap="Icons-Steampunk/Icon-01-Steampunk.png" transparent="1" alphatest="blend" />
+ <panel name="template_title_date" />
+ <panel name="template_ok_exit_1280" />
+<panel name="TemplateAllColorButtons_Automatic" />
+<panel name="template_pig_menu" />
+<panel name="template_Steampunk_Background_Setup" /> 
 </screen>
 <!--Template _menu_listbox_430  -->
-<screen name="template_menu_listbox_430">
-  <widget source="menu" render="Listbox" position="52,72" size="430,570" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" alphatest="blend" transparent="1">
+<!-- <screen name="template_menu_listbox_430">
+  <widget source="menu" render="Listbox" position="52,72" size="430,570" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand"  enableWrapAround="1" alphatest="blend" transparent="1">
     <convert type="TemplatedMultiContent">
 					{"template": [ MultiContentEntryText(pos = (2, 4), size = (430, 36), flags = RT_HALIGN_LEFT, text = 0) ],
 					"fonts": [gFont("Regular", 24)],
@@ -730,10 +868,36 @@
 					}
 				</convert>
   </widget>
+</screen> -->
+<screen name="template_menu_listbox_430">
+  <widget source="menu" render="Listbox" position="52,72" size="430,400" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" transparent="1">
+    <templates>
+				
+      <template name="Default" fonts="Regular;24" itemHeight="36" itemWidth="430">
+        <mode name="default">
+          <text index="0" position="5,0" size="420,36" font="0" horizontalAlignment="left" verticalAlignment="center" />
+        </mode>
+        <mode name="text">
+          <text index="3" position="5,0" size="420,36" font="0" horizontalAlignment="left" verticalAlignment="center" />
+        </mode>
+        <mode name="number">
+          <text index="2" position="5,0" size="36,36" font="0" horizontalAlignment="right" verticalAlignment="center" />
+          <text index="3" position="60,0" size="365,36" font="0" horizontalAlignment="left" verticalAlignment="center" />
+        </mode>
+        <mode name="image">
+          <text index="3" position="5,0" size="420,36" font="0" horizontalAlignment="left" verticalAlignment="center" />
+        </mode>
+        <mode name="both">
+          <text index="2" position="5,0" size="36,36" font="0" horizontalAlignment="right" verticalAlignment="center" />
+          <text index="3" position="60,0" size="365,36" font="0" horizontalAlignment="left" verticalAlignment="center" />
+        </mode>
+      </template>
+    </templates>
+  </widget>
 </screen>
 <!--Template _menu_listbox_740  -->
 <screen name="template_menu_listbox_740">
-  <widget source="menu" render="Listbox" position="50,70" size="680,570" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  backgroundColor="listboxBG" foregroundColor="foreground" enableWrapAround="1" transparent="1">
+  <widget source="menu" render="Listbox" position="50,70" size="680,570" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand"  backgroundColor="listboxBG" foregroundColor="foreground" enableWrapAround="1" transparent="1">
     <convert type="TemplatedMultiContent">
 					{"template": [ MultiContentEntryText(pos = (6, 4), size = (680, 40), flags = RT_HALIGN_LEFT, text = 0) ],
 					"fonts": [gFont("Regular", 24)],
@@ -747,7 +911,7 @@
 <screen name="template_wizard">
   <widget name="text" position="220,70" size="600,365" font="Regular;20" valign="bottom" transparent="1" />
   
-  <widget source="list" render="Listbox" position="220,440" size="600,190" zPosition="13" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" backgroundColor="background" transparent="1">
+  <widget source="list" render="Listbox" position="220,440" size="600,190" zPosition="13" borderColor="black" borderWidth="1" scrollbarMode="showOnDemand"  enableWrapAround="1" backgroundColor="background" transparent="1">
     <convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (5, 0), size = (680, 30), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular",20)],
@@ -755,7 +919,7 @@
 				}
 			</convert>
   </widget>
-  <widget name="config" position="220,439" size="600,190" itemHeight="30" zPosition="14" font="Regular; 20" scrollbarMode="showOnDemand" sliderPixmap="Skinparts/Scrollbar.png" scrollbarSliderBorderWidth="1" scrollbarWidth="10" scrollbarSliderBorderColor="brown" scrollbarSliderForegroundColor="red5"  enableWrapAround="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selFG" transparent="1" />
+  <widget name="config" position="220,439" size="600,190" itemHeight="30" zPosition="14" font="Regular; 20" scrollbarMode="showOnDemand"  enableWrapAround="1" backgroundColor="background" backgroundColorSelected="verydarkgrey" foregroundColorSelected="selFG" transparent="1" />
   <widget name="HelpWindow" position="330,180" size="402,128" zPosition="1" transparent="1" alphatest="blend" />
   <ePixmap pixmap="buttons/key_red.png" position="40,667" size="30,30" alphatest="blend" transparent="1" />
   <widget name="languagetext" position="75,667" size="170,30" noWrap="1" zPosition="1" valign="center" font="Regular; 20" halign="left" transparent="1" />
@@ -823,10 +987,7 @@
   serviceItemHeight="30" 
   progressPercentWidth="100" 
   transparent="1" 
-  sliderPixmap="Skinparts/Scrollbar.png" 
   scrollbarMode="showOnDemand" 
-  scrollbarSliderBorderWidth="1" 
-  scrollbarWidth="10" 
   serviceNumberFont="Regular;20" 
   serviceNameFont="Regular;22" 
   serviceInfoFont="Regular;20" 
@@ -835,7 +996,6 @@
   colorServiceStreamed="orange" 
   foregroundColorServiceNotAvail="lila" 
   foregroundColorMarkedSelected="rosa" 
-  scrollbarSliderBorderColor="brown" 
   colorServiceDescription="brown2" 
   colorServiceDescriptionSelected="lightblue" 
   colorEventProgressbarBorder="brown" 
@@ -866,11 +1026,7 @@
   foregroundColorMarkedSelected="rosa" 
   progressPercentWidth="100" 
   transparent="1" 
-  sliderpixmap="Skinparts/Scrollbar.png" 
   scrollbarMode="showOnDemand" 
-  scrollbarSliderBorderWidth="1" 
-  scrollbarWidth="10" 
-  scrollbarSliderBorderColor="brown" 
   colorServiceDescription="brown2" 
   colorServiceDescriptionSelected="lightblue" 
   colorEventProgressbarBorder="brown" 
