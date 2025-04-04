@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Copyright (C) 2023 jbleyel, Stein17
+#
+# OAWeather is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# dogtag is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with OAWeather.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<skin>
+	<!-- skin.xml for MSN -->
+	<!-- PLUGINS */-->
+	<screen name="OAWeatherOverview" position="0,0" size="1920,1080" title="Weather Overview" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="Line_Fullscreen" position="24,570" size="1872,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="24,135" size="1872,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="version" render="Label" position="center,15" size="410,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="center" valign="center" transparent="1" zPosition="1" />
+		<widget name="current" font="Gradient_Font; 36" position="70,80" size="360,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" cornerRadius="0" />
+		<widget name="update" font="Gradient_Font; 33" position="120,140" size="201,45" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="top" />
+		<widget render="Label" noWrap="1" source="session.OAWeather" font="Gradient_Font;33" position="270,140" size="120,45" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="top">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1530,90" size="258,36" source="session.OAWeather" transparent="1" zPosition="10">
+			<convert type="OAWeather">logo</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/update.png" position="115,135" size="46,46" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget noWrap="1" font="Gradient_Font; 60" position="81,350" size="375,90" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_current</convert>
+		</widget>
+		<widget noWrap="1" font="Gradient_Font;33" position="81,440" size="375,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">feelslikefull</convert>
+		</widget>
+		<widget font="Gradient_Font; 33" position="81,490" size="375,78" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,current</convert>
+		</widget>
+		<widget font="Gradient_Font; 33" position="1503,490" size="345,78" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day1</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/precipitation.png" position="500,258" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget font="Gradient_Font; 36" position="570,260" size="345,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,current</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/home.png" position="500,83" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget font="Gradient_Font; 36" position="570,80" size="950,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="left" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">city</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunrise.png" position="1512,425" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget noWrap="1" font="Gradient_Font; 33" position="1575,425" size="105,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunrise</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunset.png" position="1680,425" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget noWrap="1" font="Gradient_Font; 33" position="1743,425" size="105,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunset</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1590,180" size="177,177" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day1</convert>
+		</widget>
+		<widget name="today" position="1450,135" size="120,45" zPosition="3" font="Gradient_Font;33" halign="right" transparent="1" backgroundColor="gradient_background" valign="center" />
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 33" position="1580,135" size="90,45" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">weekshortday,day1</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 33" position="1645,135" size="120,45" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">date,day1</convert>
+		</widget>
+		<widget alphatest="blend" position="171,165" size="192,192" zPosition="3" transparent="1" render="OAWeatherPixmap" source="session.OAWeather" scale="1">
+			<convert type="OAWeather">weathericon,current</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/temperature_low.png" position="1686,360" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/temperature_high.png" position="1518,360" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget noWrap="1" font="Gradient_Font; 33" position="1575,360" size="105,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_high,day1</convert>
+		</widget>
+		<widget noWrap="1" render="Label" font="Gradient_Font; 33" position="1743,360" size="105,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" source="session.OAWeather">
+			<convert type="OAWeather">temperature_low,day1</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/wind.png" position="500,140" size="48,48" zPosition="3" transparent="1" alphatest="blend" />
+		<widget font="Gradient_Font;36" position="570,140" size="450,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">winddisplay</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/hygrometer.png" position="500,200" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font;36" position="570,200" size="345,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">humidityfull</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/windgust.png" position="1020,140" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font;36" position="1090,140" size="300,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">windgusts</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/binoculars.png" position="1020,200" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font;36" position="1090,200" size="230,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">visibility</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/uv_index.png" position="1020,258" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font;36" position="1090,260" size="230,50" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">uvindex</convert>
+		</widget>
+		<!--day2 -->
+		<widget font="Gradient_Font; 32" position="75,935" size="390,40" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day2</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 40" position="72,580" size="270,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day2</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 40" position="171,580" size="270,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day2</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="186,640" size="162,162" source="session.OAWeather" transparent="1" zPosition="3">
+			<convert type="OAWeather">weathericon,day2</convert>
+		</widget>
+		<widget font="Gradient_Font; 40" position="81,815" size="375,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day2</convert>
+		</widget>
+		<widget font="Gradient_Font; 32" position="83,865" size="375,70" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day2</convert>
+		</widget>
+		<!-- day3 -->
+		<widget font="Gradient_Font; 32" position="533,935" size="390,40" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day3</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 40" position="531,580" size="270,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day3</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 40" position="629,580" size="270,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day3</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="645,640" size="162,162" source="session.OAWeather" transparent="1" zPosition="3">
+			<convert type="OAWeather">weathericon,day3</convert>
+		</widget>
+		<widget font="Gradient_Font; 40" position="540,815" size="375,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day3</convert>
+		</widget>
+		<widget font="Gradient_Font; 32" position="540,865" size="375,70" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day3</convert>
+		</widget>
+		<!--day4-->
+		<widget font="Gradient_Font; 32" position="990,935" size="390,40" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day4</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 34" position="990,580" size="270,40" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day4</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 34" position="1086,580" size="270,40" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day4</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1103,640" size="162,162" source="session.OAWeather" transparent="1" zPosition="3">
+			<convert type="OAWeather">weathericon,day4</convert>
+		</widget>
+		<widget font="Gradient_Font; 40" position="999,815" size="375,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day4</convert>
+		</widget>
+		<widget font="Gradient_Font; 32" position="998,865" size="375,70" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day4</convert>
+		</widget>
+		<!--day5-->
+		<widget font="Gradient_Font; 32" position="1452,935" size="390,40" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="center" noWrap="1" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitationfull,day5</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 34" position="1449,580" size="270,40" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">weekshortday,day5</convert>
+		</widget>
+		<widget source="session.OAWeather" render="Label" font="Gradient_Font; 34" position="1544,580" size="270,40" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center">
+			<convert type="OAWeather">date,day5</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1563,640" size="162,162" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">weathericon,day5</convert>
+		</widget>
+		<widget font="Gradient_Font; 40" position="1458,815" size="375,50" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather" noWrap="1">
+			<convert type="OAWeather">temperature_high_low,day5</convert>
+		</widget>
+		<widget font="Gradient_Font; 32" position="1458,865" size="375,70" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">temperature_text,day5</convert>
+		</widget>
+		<!-- Summary -->
+		<widget source="session.OAWeather" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/umbrella.png" position="500,317" size="48,48" zPosition="3" transparent="1" alphatest="blend">
+			<convert type="OAWeather">raintext</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.OAWeather" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/day.png" position="500,385" size="48,65" zPosition="3" transparent="1" alphatest="blend">
+			<convert type="OAWeather">daySummary0,day1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="session.OAWeather" render="Pixmap" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/night.png" position="500,485" size="48,65" zPosition="3" transparent="1" alphatest="blend">
+			<convert type="OAWeather">nightSummary0,day1</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget position="570,320" size="930,45" backgroundColor="gradient_background" foregroundColor="white" render="Label" font="Gradient_Font; 32" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">raintext</convert>
+		</widget>
+		<widget position="570,520" size="930,45" backgroundColor="gradient_background" foregroundColor="white" render="Label" font="Gradient_Font; 32" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">nightSummary1,day1</convert>
+		</widget>
+		<widget position="570,475" size="930,45" backgroundColor="gradient_background" foregroundColor="white" render="Label" font="Gradient_Font; 32" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">nightSummary0,day1</convert>
+		</widget>
+		<widget position="570,420" size="930,45" backgroundColor="gradient_background" foregroundColor="white" render="Label" font="Gradient_Font; 32" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">daySummary1,day1</convert>
+		</widget>
+		<widget position="570,375" size="930,45" backgroundColor="gradient_background" foregroundColor="white" render="Label" font="Gradient_Font; 32" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">daySummary0,day1</convert>
+		</widget>
+		<ePixmap pixmap="buttons/ok.png" position="1200,996" size="60,38" zPosition="3" transparent="1" alphatest="blend" />
+		<ePixmap pixmap="buttons/key_red.png" position="25,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_red" render="Label" position="70,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_green.png" position="315,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_green" render="Label" position="360,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_yellow.png" position="605,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_yellow" render="Label" position="650,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_blue.png" position="895,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_blue" render="Label" position="940,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/menu.png" position="1550,996" size="60,38" zPosition="3" transparent="1" alphatest="blend" />
+		<widget source="key_menu" render="Label" position="1620,996" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<widget source="key_ok" render="Label" position="1270,996" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<panel name="Fullscreen_Title_TopPanel" />
+	</screen>
+	<screen name="OAWeatherDetailview" position="0,0" size="1920,1080" title="Weather Detailview" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="version" render="Label" position="center,15" size="410,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="center" valign="center" transparent="1" zPosition="1" />
+		<widget name="currdatetime" font="Gradient_Font; 38" position="35,110" size="260,48" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="center" />
+		<widget name="update" font="Gradient_Font; 38" position="385,110" size="140,48" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="top" />
+		<widget render="Label" source="session.OAWeather" font="Gradient_Font; 38" position="500,110" size="140,48" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="center" valign="top">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/update.png" position="336,105" size="46,46" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/home.png" position="700,110" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font; 38" position="760,110" size="825,48" backgroundColor="#80000000" zPosition="3" transparent="1" halign="left" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">observationPoint</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1545,116" size="260,36" source="session.OAWeather" transparent="1" zPosition="10" scale="1">
+			<convert type="OAWeather">logo</convert>
+		</widget>
+		<widget source="detailList" render="Listbox" position="30,200" size="1440,760" enableWrapAround="1" transparent="1" scrollbarMode="showNever">
+			<convert type="TemplatedMultiContent">{"template": [  # timestr, temp, feels, humid, precip, windSpd, windDir, shortDesc, longDesc, iconpix
+				MultiContentEntryText				(pos=(6,3), 	size=(172,96), 	font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # timestr
+				MultiContentEntryPixmapAlphaBlend	(pos=(130,2),	size=(106,106), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=12),  # weathericon
+				MultiContentEntryPixmapAlphaBlend	(pos=(258,6), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=13), # icon temp
+				MultiContentEntryText				(pos=(318,3), 	size=(225,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1),  # value temp
+				MultiContentEntryPixmapAlphaBlend	(pos=(258,56), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=14), # icon feels
+				MultiContentEntryText				(pos=(318,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # value feels
+				MultiContentEntryPixmapAlphaBlend	(pos=(450,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=15), # icon humid
+				MultiContentEntryText				(pos=(510,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=3),  # value humid
+				MultiContentEntryPixmapAlphaBlend	(pos=(452,54), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=16), # icon precip
+				MultiContentEntryText				(pos=(510,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=4),  # value precip
+				MultiContentEntryPixmapAlphaBlend	(pos=(645,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=17), # icon windSpd
+				MultiContentEntryText				(pos=(705,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=5),  # value windSpd
+				MultiContentEntryPixmapAlphaBlend	(pos=(645,56), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=18), # windDirIcon
+				MultiContentEntryText				(pos=(705,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6),  # value windDir
+				MultiContentEntryPixmapAlphaBlend	(pos=(870,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=19), # windGustIcon
+				MultiContentEntryText				(pos=(930,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # windGust
+				MultiContentEntryPixmapAlphaBlend	(pos=(870,54), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=20), # uvIcon
+				MultiContentEntryText				(pos=(933,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # uvIndex
+				MultiContentEntryPixmapAlphaBlend	(pos=(1110,56), size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=21), # visibilityIcon
+				MultiContentEntryText				(pos=(1173,56), size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=9),  # visibility
+				MultiContentEntryText				(pos=(1110,6), 	size=(270,93), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=10),  # shortDesc (text=11 is longDesc)
+				],
+				"fonts": [gFont("Gradient_Font",30),gFont("Gradient_Font",36)],
+				"itemHeight":108
+				}</convert>
+		</widget>
+		<ePixmap pixmap="buttons/key_red.png" position="25,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_red" render="Label" position="70,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_green.png" position="315,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_green" render="Label" position="360,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_yellow.png" position="605,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_yellow" render="Label" position="650,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_blue.png" position="895,1000" size="30,30" alphatest="blend" transparent="1" />
+		<widget source="key_blue" render="Label" position="940,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/menu.png" position="1560,996" size="60,38" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget source="key_menu" render="Label" position="1640,996" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" transparent="1" valign="center" zPosition="10" />
+		<widget source="key_channel" render="Label" position="1270,996" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_updown.png" position="1200,996" size="60,38" zPosition="3" transparent="1" alphatest="blend" />
+		<ePixmap pixmap="weather/OA_AnalogClock.png" position="1540,210" size="276,276" zPosition="1" transparent="1" alphatest="blend" scale="1" />
+		<ePixmap pixmap="weather/OA_AnalogClock_Center.png" position="1540,210" size="276,276" zPosition="10" transparent="1" alphatest="blend" scale="1" />
+		<!-- 				<widget source="global.CurrentTime" render="AnalogClockLCD" position="1578,248" size="200,200" hColor="#c0c0c0" positionwidth="200" positionheight="200" linewidth="6" linesize="100" zPosition="3" alphatest="blend">
+			<convert type="AnalogClock">Hours</convert>
+		</widget> -->
+		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1575,248" size="200,200" hColor="grey" positionwidth="200" positionheight="200" linewidth="6" linesize="100" zPosition="3" alphatest="blend">
+			<convert type="AnalogClock">Hours</convert>
+		</widget>
+		<!-- 		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1558,228" size="240,240" mColor="#c0c0c0" positionwidth="240" positionheight="240" linewidth="5" linesize="120" zPosition="4" alphatest="blend">
+			<convert type="AnalogClock">Minutes</convert>
+		</widget> -->
+		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1556,228" size="240,240" mColor="grey" positionwidth="240" positionheight="240" linewidth="5" linesize="120" zPosition="4" alphatest="blend">
+			<convert type="AnalogClock">Minutes</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1558,228" size="240,240" sColor="#ff520b" positionwidth="240" positionheight="240" linewidth="2" linesize="120" zPosition="5" alphatest="blend">
+			<convert type="AnalogClock">Seconds</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunrise.png" position="1610,540" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font; 32" position="1670,540" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunrise</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunset.png" position="1610,615" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget font="Gradient_Font; 32" position="1670,615" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">sunset</convert>
+		</widget>
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/moonrise.png" position="1610,690" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget source="moonrise" render="Label" font="Gradient_Font; 32" position="1670,690" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" />
+		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/moonset.png" position="1610,765" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
+		<widget source="moonset" render="Label" font="Gradient_Font; 32" position="1670,765" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" />
+		<eLabel text="by Mr.Servo &amp; jbleyel" font="Gradient_Font; 20" position="1540,900" size="276,30" foregroundColor="#656565" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" />
+		<eLabel text="design by stein17" font="Gradient_Font; 20" position="1540,924" size="276,30" foregroundColor="#656565" backgroundColor="#00000000" zPosition="3" transparent="1" valign="center" halign="center" />
+		<panel name="Fullscreen_Title_TopPanel" />
+		<!-- 	 <panel name="Template_Color_Buttons_Label" /> -->
+	</screen>
+</skin>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+  <!-- SNR_ASR -->
+	<screen name="progress_Default_SNR_ASR">
+		<widget source="session.FrontendStatus" render="Progress" zPosition="2" foregroundColor="gradient_Line" position="1440,980" size="150,9"  transparent="1">
+			<convert type="FrontendInfo">SNR</convert>
+		</widget>
+		<widget source="session.FrontendStatus" render="Progress" zPosition="2" foregroundColor="gradient_Line" position="1644,980" size="150,9"  transparent="1">
+			<convert type="FrontendInfo">AGC</convert>
+		</widget>
+	</screen>
+	<!-- Infobar -->
+	<screen name="progress_Default_Infobar">
+		<widget source="session.Event_Now" render="Progress" position="354,901" size="1034,12" foregroundColor="gradient_Line"  zPosition="2"  transparent="1" >
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	
+	<!-- EMCMediaCenter -->
+	<screen name="progress_Default_EMCMediaCenter">
+		<widget source="Service" render="Progress" size="1125,15" position="240,183" foregroundColor="gradient_Line" zPosition="6" transparent="1">
+			<convert type="EMCServicePosition">Position</convert>
+		</widget>
+		<widget source="Service" render="PositionGauge" size="1125,15" position="240,183" transparent="1" zPosition="6">
+			<convert type="EMCServicePosition">Gauge</convert>
+		</widget>
+		<widget source="Service" render="PositionGauge" pointer="infobar/CoolPointerRec.png:1464,0" size="1125,9" position="240,189" zPosition="4" transparent="1">
+			<convert type="EMCRecordPosition">Position</convert>
+		</widget>
+	</screen>
+	
+	<!-- MoviePlayer -->
+	<screen name="progress_Default_MoviePlayer">
+		<widget source="session.CurrentService" render="Progress" size="1125,15" position="240,183" foregroundColor="gradient_Line" zPosition="6" transparent="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="PositionGauge" size="1125,15" position="240,183" transparent="1" zPosition="6">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+	</screen>
+	
+	
+	<!-- RadioInfoBar -->
+	<screen name="progress_Default_RadioInfoBar">
+		<widget render="Progress" position="300,87" size="1412,9" source="session.Event_Now" foregroundColor="gradient_Line"  transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPG -->
+	<screen name="progress_Default_GraphicalEPG">
+		<widget source="Event" render="Progress" position="1254,114" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPGPic -->
+	<screen name="progress_Default_GraphicalEPGPic">
+		<widget source="Event" render="Progress" position="195,105" size="460,10"  foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EventView -->
+	<screen name="progress_Default_EventView">
+		<widget source="Service" render="Progress" position="955,417" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGverticalPIG -->
+	<screen name="progress_Default_EPGverticalPIG">
+		<widget source="session.Event_Now" render="Progress" position="1164,525" size="720,16" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EventViewSimple -->
+	<screen name="progress_Default_EventView_Simple">
+		<widget source="Service" render="Progress" position="950,420" size="450,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGSelectionMulti -->
+	<screen name="progress_Default_EPGSelectionMulti">
+		<widget source="Event" render="Progress" position="1266,570" size="330,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGSelection -->
+	<screen name="progress_Default_EPGSelection">
+		<widget source="Event" render="Progress" position="1260,564" size="330,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- ChannelSelection -->
+	<screen name="progress_Default_ChannelSelection">
+		<widget source="ServiceEvent" render="Progress" position="1320,186" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+		<!-- ChannelSelectionPic -->
+	<screen name="progress_Default_ChannelSelection_Pic">
+	    <widget source="ServiceEvent" render="Progress" position="1310,462" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	
+	<!-- List_ChannelSelection -->
+	<!-- List_ChannelSelection_Color -->
+    <screen name="progress_Default_List_ChannelSelection">
+		<widget name="list" position="39,90" size="1110,873" 
+		serviceItemHeight="32" 
+		serviceNumberFont="Gradient_Font;32" 
+		serviceNameFont="Italic;32" 
+		serviceInfoFont="Gradient_Font;32" 
+		progressInfoFont="Gradient_Font;27" 
+		listMarginLeft="7" 
+		listMarginRight="28" 
+		fieldMargins="8" 
+		itemsDistances="8" 
+		progressbarHeight="14" 
+		progressBarWidth="106" 
+		progressbarBorderWidth="1" 
+		backgroundColor="gradient_background" 
+		foregroundColor="foregroundColor_Channel" 
+		backgroundColorSelected="Channel_Selected" 
+		foregroundColorSelected="foregroundColor_Channel_Selected" 
+		colorServiceRecorded="red" 
+		colorServicePseudoRecorded="lightblue" 
+		colorServiceStreamed="infobar_tuner_rec" 
+		colorServiceDescription="foregroundColor_Event" 
+		colorServiceDescriptionSelected="foregroundColor_Event_Selected" 
+		colorEventProgressbar="scrollbarSliderColor" 
+		colorEventProgressbarBorder="ProgressbarColorBorder_ChannelSelection" 
+		colorEventProgressbarBorderSelected="ProgressbarColorBorder_ChannelSelection" 
+		foregroundColorServiceNotAvail="#00555555" 
+		scrollbarMode="showOnDemand" 
+		transparent="1" />
+     </screen>
+</skin>

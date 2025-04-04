@@ -1,0 +1,21 @@
+#!/bin/sh
+echo "                                                                            "
+echo "                                                                            "
+echo "                                                                            "
+echo "                                                                            "
+echo "Check if a previous version of the GradientFHD skin is installed"
+if [ -f /usr/share/enigma2/GradientFHD/skin.xml ]; then
+    cp -R /usr/share/enigma2/GradientFHD/ /tmp
+    rm -rf /usr/share/enigma2/GradientFHD
+    rm -rf /usr/lib/enigma2/python/Components/Converter/Gradient*
+    rm -rf /usr/lib/enigma2/python/Components/Renderer/Gradient*
+	rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Gradient*
+    echo "                                                   "
+    echo "Previous GradientsFHD skin installation        "
+    echo "    was found and removed successfully!            "
+    echo "                                                   "
+fi
+echo "                                                       "
+echo "GradientFHD skin is now being installed...        "
+echo "                                                       "
+exit 0

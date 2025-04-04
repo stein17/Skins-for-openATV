@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<!--	Skin: GradientFHD-open ATV skin stein17 addition Vs 0.01	-->
+	<!--	BUT DO NOT REMOVE OR CHANGE THIS HEADER !!!	-->
+	<copyright>
+		<!-- DONT REMOVE THIS DISCLAIMER
+	    > ### - GradientFHD (c) 2025 - skinned by stein17 @OpenATV  - ### <
+		##################################################################
+		> Do not remove this disclaimer!
+		> GradientFHD Skin @OpenATV (c) 2025 - skinned by stein17 @OpenATV
+		> You may modify this skin for PERSONAL USE ONLY.
+		> Do not publish this skin without my permission.
+		> I created most of the pixmaps included,
+		> my permission and mention required for insertion in other skins.
+		> For any other use or modification my permission is also required. -->
+		<!--Entfernen Sie diesen Haftungsausschluss nicht!
+		GradientFHD Skin @OpenATV (c) 2025 - skinned by stein17 @OpenATV
+		Sie dürfen diesen Skin nur für den PERSÖNLICHEN GEBRAUCH verändern.
+		Veröffentlichen Sie diesen Skin nicht ohne meine Erlaubnis.
+		Die enthaltenen Buttons, Icons habe ich größtenteils alleine erstellt,
+		für das Einfügen in anderen Skins meine Erlaubnis und Erwähnung erforderlich.
+		Für jegliche andere Verwendung oder Modifizierung ist ebenfalls meine Erlaubnis erforderlich. -->
+	</copyright>
+	<!-- ##### skin_GradientFHD templates #####-->
+	<screen name="Infobar_OscamInfo,_Reader,_Time,_Caid,_Hops">
+		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Gradient_Font; 27" valign="center" backgroundColor="gradient_background" halign="left" transparent="1">
+			<convert type="GradientCaidInfo">Server: %S * CAID: %C * ECM: %T ms. * HOPS: %H</convert>
+		</widget>
+	</screen>
+	<screen name="Infobar_OscamInfo_Time,_Caid,_Hops">
+		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Gradient_Font; 27" valign="center" backgroundColor="gradient_background" halign="left" transparent="1">
+			<convert type="GradientCaidInfo">CAID: %C * ECM: %T ms. * HOPS: %H</convert>
+		</widget>
+	</screen>
+	<screen name="OscamInfo">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+	</screen>
+	<!-- SNR_ASR -->
+	<screen name="progress_Default_SNR_ASR">
+		<widget source="session.FrontendStatus" render="Progress" zPosition="2" foregroundColor="gradient_Line" position="1440,980" size="150,9" transparent="1">
+			<convert type="FrontendInfo">SNR</convert>
+		</widget>
+		<widget source="session.FrontendStatus" render="Progress" zPosition="2" foregroundColor="gradient_Line" position="1644,980" size="150,9" transparent="1">
+			<convert type="FrontendInfo">AGC</convert>
+		</widget>
+	</screen>
+	<!-- Infobar -->
+	<screen name="progress_Default_Infobar">
+		<widget source="session.Event_Now" render="Progress" position="354,911" size="1034,12" foregroundColor="gradient_Line" zPosition="2" transparent="1">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EMCMediaCenter -->
+	<screen name="progress_Default_EMCMediaCenter">
+		<widget source="Service" render="Progress" size="1125,15" position="240,183" foregroundColor="gradient_Line" zPosition="6" transparent="1">
+			<convert type="EMCServicePosition">Position</convert>
+		</widget>
+		<widget source="Service" render="PositionGauge" size="1125,15" position="240,183" transparent="1" zPosition="6">
+			<convert type="EMCServicePosition">Gauge</convert>
+		</widget>
+		<widget source="Service" render="PositionGauge" pointer="infobar/CoolPointerRec.png:1464,0" size="1125,9" position="240,189" zPosition="4" transparent="1">
+			<convert type="EMCRecordPosition">Position</convert>
+		</widget>
+	</screen>
+	<!-- MoviePlayer -->
+	<screen name="progress_Default_MoviePlayer">
+		<widget source="session.CurrentService" render="Progress" size="1125,15" position="240,183" foregroundColor="gradient_Line" zPosition="6" transparent="1">
+			<convert type="ServicePosition">Position</convert>
+		</widget>
+		<widget source="session.CurrentService" render="PositionGauge" size="1125,15" position="240,183" transparent="1" zPosition="6">
+			<convert type="ServicePosition">Gauge</convert>
+		</widget>
+	</screen>
+	<!-- RadioInfoBar -->
+	<screen name="progress_Default_RadioInfoBar">
+		<widget render="Progress" position="300,87" size="1412,9" source="session.Event_Now" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPG -->
+	<screen name="progress_Default_GraphicalEPG">
+		<widget source="Event" render="Progress" position="1254,114" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPGPic -->
+	<screen name="progress_Default_GraphicalEPGPic">
+		<widget source="Event" render="Progress" position="195,105" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EventView -->
+	<screen name="progress_Default_EventView">
+		<widget source="Service" render="Progress" position="955,417" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGverticalPIG -->
+	<screen name="progress_Default_EPGverticalPIG">
+		<widget source="session.Event_Now" render="Progress" position="1164,525" size="720,16" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EventViewSimple -->
+	<screen name="progress_Default_EventView_Simple">
+		<widget source="Service" render="Progress" position="950,420" size="450,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGSelectionMulti -->
+	<screen name="progress_Default_EPGSelectionMulti">
+		<widget source="Event" render="Progress" position="1266,570" size="330,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- EPGSelection -->
+	<screen name="progress_Default_EPGSelection">
+		<widget source="Event" render="Progress" position="1260,564" size="330,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- ChannelSelection -->
+	<screen name="progress_Default_ChannelSelection">
+		<widget source="ServiceEvent" render="Progress" position="1320,186" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- ChannelSelectionPic -->
+	<screen name="progress_Default_ChannelSelection_Pic">
+		<widget source="ServiceEvent" render="Progress" position="1310,462" size="250,9" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+			<convert type="EventTime">Progress</convert>
+		</widget>
+	</screen>
+	<!-- List_ChannelSelection -->
+	<!-- List_ChannelSelection_Color -->
+	<screen name="progress_Default_List_ChannelSelection">
+		<widget name="list" position="39,90" size="1110,873" serviceItemHeight="32" serviceNumberFont="Gradient_Font;32" serviceNameFont="Italic;32" serviceInfoFont="Gradient_Font;32" progressInfoFont="Gradient_Font;27" listMarginLeft="7" listMarginRight="28" fieldMargins="8" itemsDistances="8" progressbarHeight="14" progressBarWidth="106" progressbarBorderWidth="1" backgroundColor="gradient_background" foregroundColor="foregroundColor_Channel" backgroundColorSelected="Channel_Selected" foregroundColorSelected="foregroundColor_Channel_Selected" colorServiceRecorded="red" colorServicePseudoRecorded="lightblue" colorServiceStreamed="infobar_tuner_rec" colorServiceDescription="foregroundColor_Event" colorServiceDescriptionSelected="foregroundColor_Event_Selected" colorEventProgressbar="ProgressbarColor_ChannelSelection" colorEventProgressbarBorder="ProgressbarColorBorder_ChannelSelection" colorEventProgressbarBorderSelected="ProgressbarColorBorder_ChannelSelection" foregroundColorServiceNotAvail="#00555555" scrollbarMode="showOnDemand" transparent="1" />
+	</screen>
+	<screen name="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<panel name="ChannelSelection" />
+	</screen>
+	<screen name="ChannelSelectionDefault" label="Default" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="ServiceEvent" position="1305,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1305,85" size="585,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" backgroundColor="gradient_background" foregroundColor="bernstein2" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="EventInfo">NowName</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1305,135" size="585,260" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1305,405" size="585,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1" halign="left" valign="center">
+			<convert type="EventInfo">NextName</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1305,455" size="585,260" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+			<convert type="EventName">NextDescription</convert>
+		</widget>
+		<eLabel position="1305,400" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1305,720" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1305,930" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="ServiceEvent" render="SingleEpgList" maxEvents="10" minEvent="2" position="1305,732" size="585,192" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="Label" position="1549,1001" size="90,22" font="Gradient_Font; 21" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget>
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,147" size="330,57">
+			<panel name="Template_Text_Buttons_M_I_EPG_ORB" />
+		</panel>
+		<widget name="list" position="30,84" size="1260,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+		<!-- <widget source="ServiceEvent" render="BlueABackdropX" position="30,165" cornerRadius="6" size="311,175" zPosition="98" /> -->
+	</screen>
+	<screen name="ChannelSelectionPIG" label="With Live TV" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="session.VideoPicture" render="Pig" position="1290,90" size="585,330" zPosition="3" backgroundColor="Pic" />
+		<widget source="ServiceEvent" position="1290,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1290,430" size="585,260" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="4" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<eLabel position="1290,690" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1290,930" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="ServiceEvent" render="SingleEpgList" maxEvents="10" minEvent="3" position="1290,700" size="585,226" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="Label" position="1549,1001" size="90,22" font="Gradient_Font; 21" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget>
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,147" size="330,57">
+			<panel name="Template_Text_Buttons_M_I_EPG_ORB" />
+		</panel>
+		<widget name="list" position="30,84" size="1260,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+	</screen>
+	<screen name="ChannelSelection" label="Grid_Vertical" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="session.VideoPicture" render="Pig" position="1290,90" size="585,330" zPosition="3" backgroundColor="Pic" />
+		<widget source="ServiceEvent" position="1290,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1290,430" size="585,323" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="4" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="0" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<eLabel position="1290,761" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1290,930" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="ServiceEvent" render="SingleEpgList" maxEvents="14" minEvent="8" position="1290,769" size="585,156" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="Label" position="1549,1001" size="90,22" font="Gradient_Font; 21" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget>
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,147" size="330,57">
+			<panel name="Template_Text_Buttons_M_I_EPG_ORB" />
+		</panel>
+		<widget name="list" position="30,84" size="1260,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+	</screen>
+	<screen name="ChannelSelection" label="Grid_Backdrop" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="session.VideoPicture" render="Pig" position="1290,90" size="585,330" zPosition="3" backgroundColor="Pic" />
+		<widget source="ServiceEvent" position="1290,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<widget source="ServiceEvent" position="1290,430" size="585,323" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="4" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="0" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<eLabel position="1290,761" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1290,930" size="585,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="ServiceEvent" render="SingleEpgList" maxEvents="12" minEvent="1" position="1290,769" size="585,156" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="Label" position="1549,1001" size="90,22" font="Gradient_Font; 21" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget>
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,147" size="330,57">
+			<panel name="Template_Text_Buttons_M_I_EPG_ORB" />
+		</panel>
+		<widget name="list" position="30,84" size="1260,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+	</screen>
+	<screen name="ChannelSelectionFull" label="Full Screen" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<panel name="Fullscreen_Title_TopPanel" />
+		<panel position="25,147" size="1140,57">
+			<panel name="TemplateButton_Automatic_all" />
+		</panel>
+		<panel position="440,147" size="440,57">
+			<panel name="Template_Text_Buttons_M_I_EPG_ORB" />
+		</panel>
+		<widget source="ServiceEvent" render="Label" position="1528,1001" size="90,22" font="Gradient_Font; 21" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget>
+		<widget name="list" position="30,84" size="1860,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+	</screen>
+	<screen name="Gradient_Fullscreen_BLUE">
+		<eLabel name="fullscreen_bg" position="15,79" size="1890,963" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="15,15" size="1890,70" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+		<eLabel name="title_line" position="15,75" size="1890,4" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="24,978" size="1872,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+	</screen>
+	<screen name="Gradient_SecondInfobar_BLUE">
+		<eLabel name="fullscreen_bg" position="15,79" size="1890,974" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="15,15" size="1890,70" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+		<eLabel name="title_bg" position="30,765" size="1860,70" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-7" cornerRadius="12" />
+		<eLabel name="title_line" position="15,78" size="1890,4" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="40,763" size="1842,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Infobar" position="394,998" size="1035,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="6" />
+		<eLabel name="Line_vertical" position="1450,845" size="3,201" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,vertical" zPosition="6" />
+	</screen>
+	<screen name="Gradient_Setup_BLUE">
+		<eLabel name="setup_bg" position="0,64" size="1450,834" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="0,0" size="1450,70" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+		<eLabel name="title_line" position="0,60" size="1450,4" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<eLabel name="Line_Setup" position="15,831" size="1420,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+	</screen>
+	<screen name="Gradient_Menu_BLUE">
+		<eLabel name="menu_bg" position="0,64" size="1100,837" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="0,0" size="1100,70" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+		<eLabel name="title_line" position="0,60" size="1100,4" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<eLabel name="Line_Menu" position="15,831" size="1070,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+	</screen>
+	<screen name="Gradient_Infobar_BLUE">
+		<eLabel name="infobar_bg" position="0,830" size="1830,225" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
+		<eLabel name="title_bg" position="0,770" size="1830,60" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />
+		<eLabel name="title_line" position="0,830" size="1830,3" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="6" />
+		<eLabel name="Line_Infobar" position="354,998" size="1035,2" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="6" />
+		<eLabel name="Line_vertical" position="1410,845" size="3,201" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,vertical" zPosition="6" />
+	</screen>
+	<screen name="Fullscreen_Title_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1125,15" size="510,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Date</convert>
+		</widget>
+		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+		<panel name="Gradient_Fullscreen_BLUE" />
+	</screen>
+	<screen name="Fullscreen_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1125,15" size="510,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Date</convert>
+		</widget>
+		<panel name="Gradient_Fullscreen_BLUE" />
+	</screen>
+	<screen name="FullscreenTitlePanel">
+		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+	</screen>
+	<screen name="FullscreenPIGPanel">
+		<eLabel position="1020,39" size="861,489" zPosition="2" backgroundColor="darkgrey" foregroundColor="gradient_background" />
+		<widget source="session.VideoPicture" render="Pig" position="1023,41" size="855,482" zPosition="3" backgroundColor="Pic" />
+		<widget source="session.CurrentService" render="Label" position="1023,39" size="855,39" font="Boldit;33" foregroundColor="bernstein" borderWidth="3" backgroundColor="Pic" transparent="1" valign="center" halign="center" zPosition="6">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+	</screen>
+	<!-- Line_Fullscreen -->
+	<screen name="Line_Fullscreen">
+		<eLabel name="Line_Fullscreen" position="24,978" size="1872,2" zPosition="10" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	</screen>
+	<!--   Fullscreen_SecondInfoBar -->
+	<screen name="Fullscreen_SecondInfoBar">
+		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1125,15" size="510,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Date</convert>
+		</widget>
+		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+		<panel name="Gradient_SecondInfobar_BLUE" />
+	</screen>
+	<!-- ##########-Templates Setup-########## -->
+	<!-- Setup  position="center,center" size="1449,900" backgroundColor="transparent" flags="wfNoBorder" -->
+	<screen name="Setup_Title_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="1170,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="960,0" size="225,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">ShortFullDate</convert>
+		</widget>
+		<widget source="Title" render="Label" position="30,0" size="930,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" wrap="ellipsis" />
+		<panel name="Gradient_Setup_BLUE" />
+	</screen>
+	<screen name="Setup_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="1170,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="960,0" size="225,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">ShortFullDate</convert>
+		</widget>
+		<panel name="Gradient_Setup_BLUE" />
+	</screen>
+	<screen name="Setup_TitlePanel">
+		<widget source="Title" render="Label" position="30,0" size="930,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" wrap="ellipsis" />
+	</screen>
+	<!-- Line_Setup -->
+	<screen name="Line_Setup">
+		<eLabel name="Line_Setup" position="15,831" size="1419,2" zPosition="10" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	</screen>
+	<!-- Template_Line_Setup_description -->
+	<screen name="Template_Line_Setup_description">
+		<eLabel name="Line_description" position="12,702" size="1425,2" zPosition="10" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	</screen>
+	<!-- ##########-Templates Menu-########## -->
+	<!-- Menu  position="center,center" size="1101,900" flags="wfNoBorder" backgroundColor="transparent" -->
+	<screen name="Menu_Title_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="825,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="Title" render="Label" position="30,0" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+		<panel name="Gradient_Menu_BLUE" />
+	</screen>
+	<screen name="Menu_TopPanel">
+		<widget source="global.CurrentTime" render="Label" position="825,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<panel name="Gradient_Menu_BLUE" />
+	</screen>
+	<screen name="Menu_TitlePanel">
+		<widget source="Title" render="Label" position="30,0" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+	</screen>
+	<!-- Line_Menu -->
+	<screen name="Line_Menu">
+		<eLabel name="Line_Menu" position="15,831" size="1071,2" zPosition="10" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	</screen>
+	<!-- Dummy for COLOR-BUTTONS Full_Screen -->
+	<!-- <panel position="459,147" size="1140,57">
+			<panel name="Template_All_Color_Buttons_Gradient" />
+		</panel> -->
+	<!-- SKIN-DESIGN-COLOR-BUTTONS-FULLSCREEN/SETUP/MENU -->
+	<screen name="TemplateButton_Automatic_all">
+		<panel name="TemplateButton_Red_Automatic_all" />
+		<panel name="TemplateButton_Green_Automatic_all" />
+		<panel name="TemplateButton_Yellow_Automatic_all" />
+		<panel name="TemplateButton_Blue_Automatic_all" />
+	</screen>
+	<screen name="TemplateButton_Red_Automatic_all">
+		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_red" position="60,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Label" position="60,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,StaticText" transparent="1" />
+	</screen>
+	<!--     <screen name="TemplateButton_Red_Automatic_all_label">
+		<eLabel position="40,850" size="10,30" cornerRadius="2" backgroundColor="#00ee657a,#00f80000,#005f0a18,vertical"  zPosition="10" />
+		<widget source="key_red" render="Label" position="40,850" size="10,30" cornerRadius="2" foregroundColor="#00ee657a,#00f80000,#005f0a18,vertical" backgroundColor="#00ee657a,#00f80000,#005f0a18,vertical" zPosition="10">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_red" position="60,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Label" position="60,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_red,StaticText" transparent="1" >
+		    <convert type="ConditionalShowHide" />
+  </widget>
+	</screen> -->
+	<!-- 	  <screen name="Template_Color_Buttons_Fullscreen_Red">
+    <eLabel position="10,645" size="180,3" backgroundColor="ButtonRed" objectTypes="key_red,Button,Label" zPosition="10" />
+    <widget source="key_red" render="Label" position="10,645" size="180,3" backgroundColor="ButtonRed" foregroundColor="ButtonRed" objectTypes="key_red,StaticText" zPosition="10">
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="key_red" position="5,615" size="190,30" backgroundColor="ButtonBack" font="Gradient_Font;20" foregroundColor="ButtonText" halign="center"  objectTypes="key_red,Button,Label" transparent="1" valign="center" zPosition="10" />
+    <widget source="key_red" render="Label" position="5,615" size="190,30" backgroundColor="ButtonBack" font="Gradient_Font;20" foregroundColor="ButtonText" halign="center"  objectTypes="key_red,StaticText" transparent="1" valign="center" zPosition="10">
+      <convert type="ConditionalShowHide" />
+    </widget>
+  </screen> -->
+	<screen name="TemplateButton_Green_Automatic_all">
+		<ePixmap pixmap="buttons/key_green.png" position="320,850" size="30,30" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="320,850" size="30,30" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_green" position="355,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Label" position="355,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,StaticText" transparent="1" />
+	</screen>
+	<!--     <screen name="TemplateButton_Green_Automatic_label">
+    <eLabel  position="330,850" size="10,30" cornerRadius="2" backgroundGradient="#0080ff80,#0000b100,#00003b00,vertical"  zPosition="10" />
+    <widget source="key_green" render="Label" position="330,850" size="10,30" cornerRadius="2" backgroundGradient="#0080ff80,#0000b100,#00003b00,vertical"  zPosition="10" >
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="key_green" position="355,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_green,Button,Label" transparent="1" />
+    <widget source="key_green" render="Label" position="355,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_green,StaticText" transparent="1" />
+  </screen> -->
+	<screen name="TemplateButton_Yellow_Automatic_all">
+		<ePixmap pixmap="buttons/key_yellow.png" position="625,850" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="625,850" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_yellow" position="660,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Label" position="660,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,StaticText" transparent="1" />
+	</screen>
+	<!--     <screen name="TemplateButton_Yellow_Automatic_label">
+   <eLabel  position="635,850" size="10,30" cornerRadius="2" backgroundColor="#ffff00,#e6c619,#7a6213,vertical"  zPosition="10" />
+    <widget source="key_yellow"  render="Label" position="635,850" size="10,30" cornerRadius="2" backgroundColor="#ffff00,#e6c619,#7a6213,vertical"  zPosition="10" >
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="key_yellow" position="660,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,Button,Label" transparent="1" />
+    <widget source="key_yellow" render="Label" position="660,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,StaticText" transparent="1" />
+  </screen> -->
+	<screen name="TemplateButton_Blue_Automatic_all">
+		<ePixmap pixmap="buttons/key_blue.png" position="930,850" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="930,850" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_blue" position="965,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Label" position="965,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
+	</screen>
+	<!--    <screen name="TemplateButton_Blue_Automatic_label">
+    <eLabel position="940,850" size="10,30" cornerRadius="2" backgroundGradient="#007676ff,#000000ff,#000000b0,vertical"  zPosition="10" />
+    <widget source="key_blue" render="Label" position="940,850" size="10,30" cornerRadius="2" backgroundGradient="#007676ff,#000000ff,#000000b0,vertical"  zPosition="10" >
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget name="key_blue" position="965,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
+    <widget source="key_blue" render="Label" position="965,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText"  zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
+  </screen> -->
+	<!-- SKIN-DESIGN-COLOR-BUTTONS-MENU -->
+	<screen name="TemplateButton_Automatic_all_Menu">
+		<panel name="TemplateButton_Red_Automatic_all_Menu" />
+		<panel name="TemplateButton_Green_Automatic_all_Menu" />
+		<panel name="TemplateButton_Yellow_Automatic_all_Menu" />
+		<panel name="TemplateButton_Blue_Automatic_all_Menu" />
+	</screen>
+	<screen name="TemplateButton_Red_Automatic_all_Menu">
+		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_red" position="60,846" size="155,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Label" position="60,846" size="155,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,StaticText" transparent="1" />
+	</screen>
+	<screen name="TemplateButton_Green_Automatic_all_Menu">
+		<ePixmap pixmap="buttons/key_green.png" position="200,850" size="30,30" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="200,850" size="30,30" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_green" position="235,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Label" position="235,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,StaticText" transparent="1" />
+	</screen>
+	<screen name="TemplateButton_Yellow_Automatic_all_Menu">
+		<ePixmap pixmap="buttons/key_yellow.png" position="505,850" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="505,850" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_yellow" position="540,846" size="165,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Label" position="540,846" size="165,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,StaticText" transparent="1" />
+	</screen>
+	<screen name="TemplateButton_Blue_Automatic_all_Menu">
+		<ePixmap pixmap="buttons/key_blue.png" position="700,850" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="700,850" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget name="key_blue" position="735,846" size="200,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Label" position="735,846" size="200,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
+	</screen>
+	<!-- SKIN-DESIGN-COLOR-BUTTONS-Name -->
+	<screen name="Template_Color_Buttons_Name">
+		<panel name="Template_Color_Buttons_Name_Red" />
+		<panel name="Template_Color_Buttons_Name_Green" />
+		<panel name="Template_Color_Buttons_Name_Yellow" />
+		<panel name="Template_Color_Buttons_Name_Blue" />
+	</screen>
+	<screen name="Template_Color_Buttons_Name_Red">
+		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" transparent="1" />
+		<widget name="buttonred" position="18,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" objectTypes="key_red,Button,Label" transparent="1" valign="center" zPosition="10" />
+	</screen>
+	<screen name="Template_Color_Buttons_Name_Green">
+		<ePixmap pixmap="buttons/key_green.png" position="320,850" size="30,30" alphatest="blend" transparent="1" />
+		<widget name="buttongreen" position="288,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" objectTypes="key_green,Button,Label" transparent="1" valign="center" zPosition="10" />
+	</screen>
+	<screen name="Template_Color_Buttons_Name_Yellow">
+		<ePixmap pixmap="buttons/key_yellow.png" position="625,850" size="30,30" alphatest="blend" transparent="1" />
+		<widget name="buttonyellow" position="558,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" objectTypes="key_yellow,Button,Label" transparent="1" valign="center" zPosition="10" />
+	</screen>
+	<screen name="Template_Color_Buttons_Name_Blue">
+		<ePixmap pixmap="buttons/key_blue.png" position="930,850" size="30,30" alphatest="blend" transparent="1" />
+		<widget name="buttonblue" position="828,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" objectTypes="key_blue,Button,Label" transparent="1" valign="center" zPosition="10" />
+	</screen>
+	<!-- SKIN-DESIGN-Template_Color_Buttons_Label -->
+	<screen name="Template_Color_Buttons_Label">
+		<panel name="Template_Color_Buttons_Label_Red" />
+		<panel name="Template_Color_Buttons_Label_Green" />
+		<panel name="Template_Color_Buttons_Label_Yellow" />
+		<panel name="Template_Color_Buttons_Label_Blue" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Red_Green">
+		<panel name="Template_Color_Buttons_Label_Red" />
+		<panel name="Template_Color_Buttons_Label_Green" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Red_Green_Yellow">
+		<panel name="Template_Color_Buttons_Label_Red" />
+		<panel name="Template_Color_Buttons_Label_Green" />
+		<panel name="Template_Color_Buttons_Label_Yellow" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Red">
+		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" zPosition="10" transparent="1" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Green">
+		<ePixmap pixmap="buttons/key_green.png" position="320,850" size="30,30" alphatest="blend" zPosition="10" transparent="1" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Yellow">
+		<ePixmap pixmap="buttons/key_yellow.png" position="625,850" size="30,30" alphatest="blend" zPosition="10" transparent="1" />
+	</screen>
+	<screen name="Template_Color_Buttons_Label_Blue">
+		<ePixmap pixmap="buttons/key_blue.png" position="930,850" size="30,30" alphatest="blend" zPosition="10" transparent="1" />
+	</screen>
+	<!-- SKIN-DESIGN-Template_Label_text_Save_Exit -->
+	<screen name="Template_Label_text_Save_Exit">
+		<eLabel text="Cancel" position="18,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" transparent="1" valign="center" zPosition="10" />
+		<eLabel text="Save" position="288,840" size="255,45" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="center" transparent="1" valign="center" zPosition="10" />
+		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="buttons/key_green.png" position="320,850" size="30,30" alphatest="blend" transparent="1" />
+	</screen>
+	<!-- Dummy für TEXT-BUTTONS Full_Screen -->
+	<!-- <panel position="459,147" size="330,57">
+			<panel name="Template_Text_Buttons_?_?_?" />
+		</panel> -->
+	<screen name="Template_Setup_Base">
+		<panel name="TemplateButton_Automatic_all" />
+		<panel name="Setup_Title_TopPanel" />
+	</screen>
+	<screen name="Template_FullScreen_Color_Buttons">
+		<panel position="21,150" size="1140,57">
+			<panel name="TemplateButton_Automatic_all" />
+		</panel>
+	</screen>
+	<screen name="Template_FullScreen_Base">
+		<panel name="Template_FullScreen_Color_Buttons" />
+		<panel name="Fullscreen_Title_TopPanel" />
+	</screen>
+	<screen name="Template_FullScreen_Base2">
+		<panel name="Template_FullScreen_Color_Buttons" />
+		<panel name="Fullscreen_TopPanel" />
+	</screen>
+	<!-- SKIN-DESIGN-TEXT-BUTTONS -->
+	<screen name="Template_Text_Buttons_VKI">
+		<widget name="VKeyIcon" pixmap="buttons/text.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_E">
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_O">
+		<ePixmap pixmap="buttons/ok.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_O_E">
+		<ePixmap pixmap="buttons/ok.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_E">
+		<ePixmap pixmap="buttons/menu.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_I_E">
+		<ePixmap pixmap="buttons/info.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_H_E">
+		<ePixmap pixmap="buttons/key_help.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_H_I">
+		<ePixmap pixmap="buttons/key_help.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/info.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_I_M_E">
+		<ePixmap pixmap="buttons/info.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/menu.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_I_O_E">
+		<ePixmap pixmap="buttons/info.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/ok.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_H_E">
+		<ePixmap pixmap="buttons/menu.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/key_help.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_O_E">
+		<ePixmap pixmap="buttons/menu.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/ok.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_T_I_E">
+		<ePixmap pixmap="buttons/text.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/info.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_T_O_E">
+		<ePixmap pixmap="buttons/text.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/ok.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_I_EPG">
+		<ePixmap pixmap="buttons/menu.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/info.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/key_epg.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_I_EPG_ORB">
+		<ePixmap pixmap="buttons/button_orb.png" position="1090,846" size="90,38" alphatest="blend" transparent="1" />
+		<ePixmap pixmap="buttons/menu.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/info.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/key_epg.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_M_I_H">
+		<ePixmap pixmap="buttons/menu.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/info.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/key_help.png" position="1785,990" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Text_Buttons_O_E_H">
+		<ePixmap pixmap="buttons/ok.png" position="1200,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1280,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/key_help.png" position="1360,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<!--   KEY_TEXT_BUTTONS MENU  -->
+	<screen name="Template_Menu_Text_Button_O_E">
+		<ePixmap pixmap="buttons/ok.png" position="940,846" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="1020,846" size="60,38" alphatest="blend" zPosition="1" />
+	</screen>
+	<screen name="Template_Menu_Text_Button_O_E_470">
+		<ePixmap pixmap="buttons/ok.png" position="855,705" size="60,38" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="buttons/exit.png" position="960,705" size="60,38" alphatest="blend" zPosition="1" />
+		<eLabel name="Line_Menu" position="0,692" size="1080,2" zPosition="10" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	</screen>
+	<!--  OA_Weather_Infobar-->
+	<screen name="template_OA_weather_default">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+	</screen>
+	<screen name="template_OA_weather_Background">
+		<ePixmap pixmap="weather/Weather_5_Days.png" position="0,20" zPosition="-1" size="1832,210" alphatest="blend" />
+	</screen>
+	<screen name="template_OA_weather">
+		<!-- DAY 1 -->
+		<!-- <ePixmap pixmap="weather/Weather_5_Days.png" position="0,20" zPosition="-1" size="1832,210" alphatest="blend" /> -->
+		<eLabel name="day_1_bg" position="0,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="90,194" size="30,30" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">uvindex</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="55,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" foregroundColor="white" render="Label" position="12,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="center" transparent="1">
+			<convert type="OAWeather">weekday,current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="40,60" size="140,60" font="Gradient_Font; 50" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" render="Label" position="4,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="center" transparent="1" valign="center">
+			<convert type="OAWeather">temperature_text,current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="34,118" size="90,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_high,day1</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="153,118" size="90,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_low,day1</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="190,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,current</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="264,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">winddisplay</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="163,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,current</convert>
+		</widget>
+		<!-- DAY 2 -->
+		<eLabel name="day_2_bg" position="370,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget font="Gradient_Font; 24" position="460,194" size="30,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">uvindex_max,day2</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="425,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="382,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day2</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="444,70" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day2</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="444,118" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_low,day2</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" transparent="1" render="Label" position="374,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day2</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="560,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="5">
+			<convert type="OAWeather">weathericon,day2</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="634,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">windspeed_max,day2</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="533,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,day2</convert>
+		</widget>
+		<!-- DAY 3 -->
+		<eLabel name="day_3_bg" position="740,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget font="Gradient_Font; 24" position="830,194" size="30,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">uvindex_max,day3</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="795,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="752,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day3</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="814,70" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day3</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="814,118" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day3</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" transparent="1" render="Label" position="744,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day3</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="930,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="5">
+			<convert type="OAWeather">weathericon,day3</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="1004,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">windspeed_max,day3</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="903,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,day3</convert>
+		</widget>
+		<!-- DAY 4 -->
+		<eLabel name="day_4_bg" position="1110,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget font="Gradient_Font; 24" position="1200,194" size="30,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">uvindex_max,day4</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="1165,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1122,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day4</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1184,70" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day4</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1184,118" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day4</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" transparent="1" render="Label" position="1114,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day4</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1300,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="5">
+			<convert type="OAWeather">weathericon,day4</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="1374,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">windspeed_max,day4</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="1273,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,day4</convert>
+		</widget>
+		<!-- DAY 5 -->
+		<eLabel name="day_5_bg" position="1480,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget font="Gradient_Font; 24" position="1570,194" size="30,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">uvindex_max,day5</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="1535,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1492,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="center">
+			<convert type="OAWeather">weekday,day5</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1554,70" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_high,day5</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" transparent="1" render="Label" position="1554,118" size="100,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left">
+			<convert type="OAWeather">temperature_low,day5</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" transparent="1" render="Label" position="1484,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="center" valign="center">
+			<convert type="OAWeather">temperature_text,day5</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1670,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="5">
+			<convert type="OAWeather">weathericon,day5</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="1744,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">windspeed_max,day5</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="1643,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,day5</convert>
+		</widget>
+		<panel name="template_OA_weather_Background" />
+	</screen>
+	<screen name="template_OA_weather_details_Background">
+		<ePixmap pixmap="weather/Weather_Details.png" position="0,20" zPosition="-1" size="720,252" alphatest="blend" />
+	</screen>
+	<!--  OA_Weather_Infobar-->
+	<screen name="template_OA_weather_details">
+		<!-- <ePixmap pixmap="weather/Weather_Details.png" position="0,20" zPosition="-1" size="720,252" alphatest="blend" /> -->
+		<eLabel name="day_1_bg" position="0,20" size="720,252" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel text="update" font="Gradient_Font; 27" position="60,64" size="100,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget render="Label" source="session.OAWeather" font="Gradient_Font; 27" position="160,64" size="120,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="60,24" size="660,34" font="Gradient_Font; 27" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">observationPoint</convert>
+		</widget>
+		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
+    <convert type="OAWeather">logo</convert>
+  </widget> -->
+		<widget position="60,110" size="660,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">raintext</convert>
+		</widget>
+		<widget position="55,240" size="665,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1" valign="top">
+			<convert type="OAWeather">nightSummary1,day1</convert>
+		</widget>
+		<widget position="60,212" size="660,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1" valign="bottom">
+			<convert type="OAWeather">nightSummary0,day1</convert>
+		</widget>
+		<widget position="55,176" size="665,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1" valign="top">
+			<convert type="OAWeather">daySummary1,day1</convert>
+		</widget>
+		<widget position="60,148" size="660,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1" valign="bottom">
+			<convert type="OAWeather">daySummary0,day1</convert>
+		</widget>
+		<panel name="template_OA_weather_details_Background" />
+	</screen>
+	<screen name="template_weather_details_compact_Background">
+		<ePixmap pixmap="weather/Weather_1Day_Details.png" position="0,30" zPosition="-1" size="350,190" alphatest="blend" />
+	</screen>
+	<screen name="template_weather_details_compact">
+		<!-- <ePixmap pixmap="weather/Weather_1Day_Details.png" position="0,30" zPosition="-1" size="350,190" alphatest="blend" /> -->
+		<!-- <ePixmap pixmap="weather/Weather_1Day_Details.png" position="0,30" zPosition="-1" size="350,190" alphatest="blend" /> -->
+		<eLabel name="day_1_bg" position="0,30" size="350,190" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel text="update" font="Gradient_Font; 27" position="55,109" size="100,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget render="Label" source="session.OAWeather" font="Gradient_Font; 27" position="145,109" size="120,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="55,35" size="300,64" font="Gradient_Font; 27" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">observationPoint</convert>
+		</widget>
+		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
+    <convert type="OAWeather">logo</convert>
+  </widget> -->
+		<widget position="55,160" size="300,64" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">raintext</convert>
+		</widget>
+		<panel name="template_weather_details_compact_Background" />
+	</screen>
+	<!--  OA_Weather_Infobar-->
+	<screen name="template_weather_compact_Background">
+		<ePixmap pixmap="weather/Weather_5_Days.png" position="370,20" zPosition="-1" size="352,210" alphatest="blend" />
+		<ePixmap pixmap="weather/Weather_1Day_Details.png" position="0,30" zPosition="-1" size="350,190" alphatest="blend" />
+	</screen>
+	<screen name="template_weather_compact">
+		<!-- DAY 1 -->
+		<eLabel name="day_1_bg" position="370,20" size="350,210" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="460,194" size="30,30" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">uvindex</convert>
+		</widget>
+		<eLabel text="UV" font="Gradient_Font; 24" position="425,194" size="40,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" foregroundColor="white" render="Label" position="382,25" size="200,36" font="Gradient_Font; 30" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">weekday,current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="410,60" size="140,60" font="Gradient_Font; 50" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="ButtonText" render="Label" position="374,162" size="340,28" font="Gradient_Font; 24" source="session.OAWeather" zPosition="3" halign="left" transparent="1" valign="center">
+			<convert type="OAWeather">temperature_text,current</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="404,118" size="90,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_high,day1</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="523,118" size="90,30" font="Gradient_Font; 28" source="session.OAWeather" zPosition="3" halign="left" transparent="1">
+			<convert type="OAWeather">temperature_low,day1</convert>
+		</widget>
+		<widget alphatest="blend" render="OAWeatherPixmap" position="560,40" size="134,134" source="session.OAWeather" transparent="1" zPosition="2">
+			<convert type="OAWeather">weathericon,current</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="634,194" size="80,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">winddisplay</convert>
+		</widget>
+		<widget font="Gradient_Font; 24" position="533,194" size="70,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">precipitation,current</convert>
+		</widget>
+		<eLabel name="day_1_bg" position="0,30" size="350,190" cornerRadius="16" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel text="update" font="Gradient_Font; 27" position="55,109" size="100,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center" />
+		<widget render="Label" source="session.OAWeather" font="Gradient_Font; 27" position="145,109" size="120,34" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="OAWeather">observationtime</convert>
+		</widget>
+		<widget backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" position="55,35" size="300,64" font="Gradient_Font; 27" source="session.OAWeather" zPosition="3" halign="left" valign="center" transparent="1">
+			<convert type="OAWeather">observationPoint</convert>
+		</widget>
+		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
+    <convert type="OAWeather">logo</convert>
+  </widget> -->
+		<widget position="55,160" size="300,64" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
+			<convert type="OAWeather">raintext</convert>
+		</widget>
+		<panel name="template_weather_compact_Background" />
+	</screen>
+</skin>
