@@ -930,7 +930,7 @@
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="1260,949" size="70,22" zPosition="1" />
-		<widget name="Cover" position="9,760" size="205,267" zPosition="4" valign="top" halign="center" borderWidth="1" borderColor="scrollbarSliderbordercolor" />
+		<widget name="Cover" position="9,760" size="205,267" zPosition="4" borderWidth="1" borderColor="scrollbarborder" />
 		<ePixmap pixmap="icons/EMC_Time.png" position="250,1039" size="30,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/resicon.png" position="1390,1017" size="45,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/clockend.png" position="1140,1039" size="30,30" zPosition="1" alphatest="blend" />
@@ -1047,7 +1047,7 @@
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<ePixmap alphatest="blend" pixmap="icons/ico_rec_off.png" position="1260,949" size="70,22" zPosition="1" />
-		<widget name="Cover" position="9,760" size="205,267" zPosition="4" alphatest="blend" valign="top" halign="center" borderWidth="1" borderColor="scrollbarSliderbordercolor" />
+		<widget name="Cover" position="9,760" size="205,267" zPosition="4" alphatest="blend" borderWidth="1" borderColor="scrollbarborder" />
 		<ePixmap pixmap="icons/EMC_Time.png" position="250,1039" size="30,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/resicon.png" position="1390,1017" size="45,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/clockend.png" position="1140,1039" size="30,30" zPosition="1" alphatest="blend" />
@@ -1157,7 +1157,7 @@
 		<widget source="session.CurrentService" render="Label" position="501,918" size="90,36" backgroundColor="black" transparent="1" font="Regular;36" halign="left">
 			<convert type="ServiceInfo">VideoHeight</convert>
 		</widget>
-		<widget name="Cover" position="16,763" size="219,289" zPosition="4" alphatest="blend" valign="top" halign="center" />
+		<widget name="Cover" position="16,763" size="219,289" zPosition="4" alphatest="blend" />
 		<ePixmap pixmap="icons/clock.png" position="1567,921" size="30,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/resicon.png" position="313,921" size="45,30" zPosition="1" alphatest="blend" />
 		<ePixmap pixmap="icons/clockend.png" position="1725,918" size="36,36" zPosition="1" alphatest="blend" />
@@ -3531,11 +3531,12 @@ self['config'].l.setSeperation(int(300*f))</applet>
 		</widget>
 		<eLabel text="Now:" position="30,112" size="150,45" zPosition="1" font="Regular;36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" transparent="1" />
 		<widget name="channel" position="195,9" size="1140,66" font="Regular;48" halign="left" valign="center" foregroundColor="selectedFG" backgroundColor="background" borderColor="black" borderWidth="2" transparent="1" zPosition="1" />
-		<widget name="epg_description" render="BlueARunningText" position="30,180" size="750,660" font="Regular;33" backgroundColor="background" scrollbarMode="showOnDemand" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="5" />
+		<!-- <widget name="epg_description" render="BlueARunningText" position="30,180" size="750,660" font="Regular;33" backgroundColor="background" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" zPosition="5" /> -->
 		<eLabel text="Next:" position="30,870" size="150,45" font="Regular;36" halign="left" valign="center" foregroundColor="white" backgroundColor="background" zPosition="1" transparent="1" />
-		<widget source="session.Event_Next" render="BlueARunningText" position="135,870" size="525,45" font="Regular;33" options="movetype=running,startpoint=0,direction=left,steptime=10,repeat=5,startdelay=900,always=0" halign="left" noWrap="1" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="background">
+		<widget source="session.Event_Next" render="BlueARunningText" position="135,870" size="525,45" font="Regular;33" options="movetype=running,startdelay=6000,steptime=80,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" halign="left" transparent="1" valign="center" zPosition="2" foregroundColor="selectedFG" backgroundColor="background">
 			<convert type="EventName">Name</convert>
 		</widget>
+		<panel name="template_epg_description_EV" />
 		<panel name="template_progress_Eventview" />
 		<panel name="template_fullinfo_ev" />
 		<panel name="template_weather_Secondinfobar" />
