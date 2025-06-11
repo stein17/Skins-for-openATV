@@ -233,34 +233,61 @@
 		<widget alphatest="blend" render="OAWeatherPixmap" position="1545,116" size="260,36" source="session.OAWeather" transparent="1" zPosition="10" scale="1">
 			<convert type="OAWeather">logo</convert>
 		</widget>
-		<widget source="detailList" render="Listbox" position="30,200" size="1440,760" enableWrapAround="1" transparent="1" scrollbarMode="showNever">
-			<convert type="TemplatedMultiContent">{"template": [  # timestr, temp, feels, humid, precip, windSpd, windDir, shortDesc, longDesc, iconpix
-				MultiContentEntryText				(pos=(6,3), 	size=(172,96), 	font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # timestr
-				MultiContentEntryPixmapAlphaBlend	(pos=(130,2),	size=(106,106), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=12),  # weathericon
-				MultiContentEntryPixmapAlphaBlend	(pos=(258,6), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=13), # icon temp
-				MultiContentEntryText				(pos=(318,3), 	size=(225,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1),  # value temp
-				MultiContentEntryPixmapAlphaBlend	(pos=(258,56), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=14), # icon feels
-				MultiContentEntryText				(pos=(318,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # value feels
-				MultiContentEntryPixmapAlphaBlend	(pos=(450,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=15), # icon humid
-				MultiContentEntryText				(pos=(510,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=3),  # value humid
-				MultiContentEntryPixmapAlphaBlend	(pos=(452,54), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=16), # icon precip
-				MultiContentEntryText				(pos=(510,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=4),  # value precip
-				MultiContentEntryPixmapAlphaBlend	(pos=(645,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=17), # icon windSpd
-				MultiContentEntryText				(pos=(705,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=5),  # value windSpd
-				MultiContentEntryPixmapAlphaBlend	(pos=(645,56), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=18), # windDirIcon
-				MultiContentEntryText				(pos=(705,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6),  # value windDir
-				MultiContentEntryPixmapAlphaBlend	(pos=(870,3), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=19), # windGustIcon
-				MultiContentEntryText				(pos=(930,3), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # windGust
-				MultiContentEntryPixmapAlphaBlend	(pos=(870,54), 	size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=20), # uvIcon
-				MultiContentEntryText				(pos=(933,54), 	size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # uvIndex
-				MultiContentEntryPixmapAlphaBlend	(pos=(1110,56), size=(48,48), 	flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=21), # visibilityIcon
-				MultiContentEntryText				(pos=(1173,56), size=(150,48), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=9),  # visibility
-				MultiContentEntryText				(pos=(1110,6), 	size=(270,93), 	font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=10),  # shortDesc (text=11 is longDesc)
-				],
-				"fonts": [gFont("Gradient_Font",30),gFont("Gradient_Font",36)],
-				"itemHeight":108
+		<widget source="detailList" render="Listbox" position="30,200" size="1440,770" enableWrapAround="1" transparent="1" scrollbarMode="showNever">
+			<convert type="TemplatedMultiContent">
+				{"templates": # timestr, press, temp, feels, humid, precip, windSpd, windDir, shortDesc, longDesc, iconpix
+					{"default": (110,[
+						MultiContentEntryText(pos=(6,6), size=(171,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), # timestr
+						MultiContentEntryPixmapAlphaBlend(pos=(150,9), size=(96,96), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=13), # weathericon
+						MultiContentEntryPixmapAlphaBlend(pos=(258,3), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=15), # icon temp
+						MultiContentEntryText(pos=(318,3), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2), # value temp
+						MultiContentEntryPixmapAlphaBlend(pos=(258,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=17), # icon humid
+						MultiContentEntryText(pos=(318,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=4), # value humid
+						MultiContentEntryPixmapAlphaBlend(pos=(450,3), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=16), # icon feels
+						MultiContentEntryText(pos=(510,3), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=3), # value feels
+						MultiContentEntryPixmapAlphaBlend(pos=(453,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=18), # icon precip
+						MultiContentEntryText(pos=(510,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=5), # value precip
+						MultiContentEntryPixmapAlphaBlend(pos=(645,3), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=19), # icon windSpd
+						MultiContentEntryText(pos=(705,3), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6), # value windSpd
+						MultiContentEntryPixmapAlphaBlend(pos=(645,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=20), # windDirIcon
+						MultiContentEntryText(pos=(705,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7), # value windDir
+						MultiContentEntryPixmapAlphaBlend(pos=(870,3), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=21), # windGustIcon
+						MultiContentEntryText(pos=(930,3), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8), # windGust
+						MultiContentEntryPixmapAlphaBlend(pos=(873,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=23), # visibilityIcon
+						MultiContentEntryText(pos=(930,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=10), # visibility
+						MultiContentEntryText(pos=(1110,9), size=(405,90), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_TOP|RT_WRAP, text=11), # shortDesc(text=12 is longDesc)
+						MultiContentEntryPixmapAlphaBlend(pos=(1110,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=14), # icon pressure
+						MultiContentEntryText(pos=(1170,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1), # pressure
+						MultiContentEntryPixmapAlphaBlend(pos=(1350,60), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=22), # uvIcon
+						MultiContentEntryText(pos=(1410,63), size=(150,48), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=9), # uvIndex
+						]),
+						"reduced": (110, [
+						MultiContentEntryText(pos=(6,3), size=(171,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), # timestr
+						MultiContentEntryPixmapAlphaBlend(pos=(150,3), size=(96,96), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=13), # weathericon
+						MultiContentEntryText(pos=(255,3), size=(150,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2), # value temp
+						MultiContentEntryPixmapAlphaBlend(pos=(375,27), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=17), # icon humid
+						MultiContentEntryText(pos=(435,3), size=(150,96), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=4), # value humid
+						MultiContentEntryPixmapAlphaBlend(pos=(525,27), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=19), # icon windSpd
+						MultiContentEntryText(pos=(585,3), size=(150,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6), # value windSpd
+						MultiContentEntryText(pos=(735,3), size=(150,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7), # value windDir
+						MultiContentEntryText(pos=(855,3), size=(180,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1), # pressure
+						MultiContentEntryPixmapAlphaBlend(pos=(1050,27), size=(48,48), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=22), # uvIcon
+						MultiContentEntryText(pos=(1110,3), size=(90,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=9), # uvIndex
+						MultiContentEntryText(pos=(1155,3), size=(285,96), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text=11), # shortDesc(text=12 is longDesc)
+						],True)
+					},
+			"fonts": [gFont("Gradient_Font",30),gFont("Gradient_Font",36)],
+				"itemHeight":110
 				}</convert>
 		</widget>
+		<eLabel name="Line_Fullscreen" position="30,200" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,310" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,420" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,530" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,640" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,750" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="30,860" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<!-- <eLabel name="Line_Fullscreen" position="30,970" size="1440,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" /> -->
 		<ePixmap pixmap="buttons/key_red.png" position="25,1000" size="30,30" alphatest="blend" transparent="1" />
 		<widget source="key_red" render="Label" position="70,996" size="240,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" halign="left" noWrap="1" transparent="1" valign="center" zPosition="10" />
 		<ePixmap pixmap="buttons/key_green.png" position="315,1000" size="30,30" alphatest="blend" transparent="1" />
@@ -275,13 +302,13 @@
 		<ePixmap pixmap="buttons/key_updown.png" position="1200,996" size="60,38" zPosition="3" transparent="1" alphatest="blend" />
 		<ePixmap pixmap="weather/OA_AnalogClock.png" position="1540,210" size="276,276" zPosition="1" transparent="1" alphatest="blend" scale="1" />
 		<ePixmap pixmap="weather/OA_AnalogClock_Center.png" position="1540,210" size="276,276" zPosition="10" transparent="1" alphatest="blend" scale="1" />
-		<!-- 				<widget source="global.CurrentTime" render="AnalogClockLCD" position="1578,248" size="200,200" hColor="#c0c0c0" positionwidth="200" positionheight="200" linewidth="6" linesize="100" zPosition="3" alphatest="blend">
+		<!-- 	<widget source="global.CurrentTime" render="AnalogClockLCD" position="1578,248" size="200,200" hColor="#c0c0c0" positionwidth="200" positionheight="200" linewidth="6" linesize="100" zPosition="3" alphatest="blend">
 			<convert type="AnalogClock">Hours</convert>
 		</widget> -->
 		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1575,248" size="200,200" hColor="grey" positionwidth="200" positionheight="200" linewidth="6" linesize="100" zPosition="3" alphatest="blend">
 			<convert type="AnalogClock">Hours</convert>
 		</widget>
-		<!-- 		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1558,228" size="240,240" mColor="#c0c0c0" positionwidth="240" positionheight="240" linewidth="5" linesize="120" zPosition="4" alphatest="blend">
+		<!-- 	<widget source="global.CurrentTime" render="AnalogClockLCD" position="1558,228" size="240,240" mColor="#c0c0c0" positionwidth="240" positionheight="240" linewidth="5" linesize="120" zPosition="4" alphatest="blend">
 			<convert type="AnalogClock">Minutes</convert>
 		</widget> -->
 		<widget source="global.CurrentTime" render="AnalogClockLCD" position="1556,228" size="240,240" mColor="grey" positionwidth="240" positionheight="240" linewidth="5" linesize="120" zPosition="4" alphatest="blend">
@@ -291,23 +318,27 @@
 			<convert type="AnalogClock">Seconds</convert>
 		</widget>
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunrise.png" position="1610,500" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
-		<widget font="Gradient_Font; 32" position="1670,500" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
-			<convert type="OAWeather">sunrise</convert>
-		</widget>
+		<widget font="Gradient_Font; 32" position="1670,500" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="sunrise"/>
+
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/sunset.png" position="1610,565" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
-		<widget font="Gradient_Font; 32" position="1670,565" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="session.OAWeather">
-			<convert type="OAWeather">sunset</convert>
-		</widget>
+		<widget font="Gradient_Font; 32" position="1670,565" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" render="Label" source="sunset"/>
+
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/moonrise.png" position="1610,630" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
 		<widget source="moonrise" render="Label" font="Gradient_Font; 32" position="1670,630" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" />
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/moonset.png" position="1610,695" size="48,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
 		<widget source="moonset" render="Label" font="Gradient_Font; 32" position="1670,695" size="110,48" backgroundColor="gradient_background" zPosition="3" transparent="1" valign="center" halign="left" />
-		<widget name="moonphase" position="1608,757" size="54,54" zPosition="3" transparent="1" alphatest="blend" scale="1" />
-		<widget source="moonillum" render="Label" position="1670,760" size="110,48" font="Gradient_Font;32" backgroundColor="gradient_background" transparent="1" zPosition="3" halign="left" valign="center" />
+		<widget alphatest="blend" render="OAWeatherPixmap" position="1608,757" size="54,54" source="session.OAWeather" transparent="1" zPosition="3" scale="1">
+			<convert type="OAWeather">moonphaseicon</convert>
+		</widget>
+		<widget noWrap="1" font="OAWeatherFont;30" position="1670,760" size="150,48" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="left" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">moonillumination</convert>
+		</widget>
 		<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/OAWeather/Images/moondist.png" position="1612,825" size="144,48" zPosition="3" transparent="1" alphatest="blend" scale="1" />
-		<widget source="moondist" render="Label" position="1615,866" size="184,48" font="Gradient_Font; 27" backgroundColor="gradient_background" transparent="1" zPosition="3" halign="left" valign="center" />
-		<eLabel text="by Mr.Servo &amp; jbleyel" font="Gradient_Font; 20" position="1540,920" size="276,30" foregroundColor="#656565" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" />
-		<eLabel text="design by stein17" font="Gradient_Font; 20" position="1540,944" size="276,30" foregroundColor="#656565" backgroundColor="#00000000" zPosition="3" transparent="1" valign="center" halign="center" />
+		<widget noWrap="1" font="OAWeatherFont;24" position="1630,866" size="184,48" backgroundColor="gradient_background" zPosition="3" transparent="1" halign="left" valign="center" render="Label" source="session.OAWeather">
+			<convert type="OAWeather">moondistance</convert>
+		</widget>
+		<eLabel text="by Mr.Servo &amp; jbleyel" font="Gradient_Font; 20" position="1550,920" size="276,30" foregroundColor="#656565" backgroundColor="#80000000" zPosition="3" transparent="1" valign="center" halign="center" />
+		<eLabel text="design by stein17" font="Gradient_Font; 20" position="1550,944" size="276,30" foregroundColor="#656565" backgroundColor="#00000000" zPosition="3" transparent="1" valign="center" halign="center" />
 		<panel name="Fullscreen_Title_TopPanel" />
 		<!-- 	 <panel name="Template_Color_Buttons_Label" /> -->
 	</screen>
