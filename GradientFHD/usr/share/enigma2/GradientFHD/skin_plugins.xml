@@ -617,25 +617,32 @@
 		<panel name="Template_Text_Buttons_I_O_E" />
 	</screen>
 	<screen name="EPGRefreshConfigurationFunctionContextMenu" position="0,0" size="1920,1080" title="Menu EPGRefresh" flags="wfNoBorder" backgroundColor="transparent">
-		<widget source="menu" render="Listbox" position="954,90" size="750,810" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+		<widget source="menu" render="Listbox" position="1170,90" size="720,600" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
 			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (60, 6), size = (681, 45), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Gradient_Font", 30)],
 				"itemHeight": 54
 				}</convert>
 		</widget>
+		<eLabel name="menu_bg" position="1154,10" size="750,700" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="1154,10" size="750,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-6" cornerRadius="12" />
+		<eLabel name="title_line" position="1154,80" size="750,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<widget source="Title" render="Label" position="1170,20" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 	</screen>
 	<screen name="EPGRefreshConfigurationHelpContextMenu" position="0,0" size="1920,1080" title="Menu EPGRefresh" flags="wfNoBorder" backgroundColor="transparent">
-		<widget source="menu" render="Listbox" position="954,90" size="750,810" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+		<widget source="menu" render="Listbox" position="1170,90" size="720,600" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
 			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (60, 6), size = (681, 45), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Gradient_Font", 30)],
 				"itemHeight": 54
 				}</convert>
 		</widget>
+		<eLabel name="menu_bg" position="1154,10" size="750,700" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="1154,10" size="750,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-6" cornerRadius="12" />
+		<eLabel name="title_line" position="1154,80" size="750,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<widget source="Title" render="Label" position="1170,20" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 	</screen>
 	<!-- EPGRefresh -->
 	<!-- Cutlist Editor -->
 	<screen name="CutListEditor" position="0,0" size="1920,1080" title="Cutlist editor" flags="wfNoBorder" backgroundColor="transparent">
-		<panel name="Fullscreen_Title_TopPanel" />
 		<eLabel position="105,195" zPosition="1" size="1050,570" backgroundColor="gradient_foreground" />
 		<eLabel position="108,198" zPosition="3" size="1044,564" backgroundColor="Pic" />
 		<widget name="Video" position="108,198" zPosition="-10" size="1044,564" />
@@ -657,15 +664,30 @@
 				 "itemHeight": 45
 				}</convert>
 		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Default</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1125,15" size="510,60" font="Italic; 30" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+			<convert type="ClockToText">Date</convert>
+		</widget>
+		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 		<ePixmap pixmap="buttons/mp_buttons.png" position="1320,888" size="390,48" alphatest="blend" />
+		<eLabel name="fullscreen_bg" position="15,79" size="1890,963" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="15,15" size="1890,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+		<eLabel name="title_line" position="15,75" size="1890,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<eLabel name="Line_Fullscreen" position="24,978" size="1872,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 	</screen>
 	<screen name="CutListContextMenu" position="0,0" size="1920,1080" title="Menu Cutlisteditor" flags="wfNoBorder" backgroundColor="transparent">
-		<widget source="menu" render="Listbox" position="954,90" size="750,810" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+		<widget source="menu" render="Listbox" position="1170,90" size="720,600" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" foregroundColor="gradient_foreground" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
 			<convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (60, 6), size = (681, 45), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Gradient_Font", 30)],
 				"itemHeight": 54
 				}</convert>
 		</widget>
+		<eLabel name="menu_bg" position="1154,10" size="750,700" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+		<eLabel name="title_bg" position="1154,10" size="750,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-6" cornerRadius="12" />
+		<eLabel name="title_line" position="1154,80" size="750,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+		<widget source="Title" render="Label" position="1170,20" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 	</screen>
 	<!-- Cutlist Editor -->
 	<!-- EnhancedPowerSave -->
