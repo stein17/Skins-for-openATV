@@ -1510,27 +1510,21 @@ for x in self.additionalWidgets:
 		<eLabel name="new eLabel" position="150,282" size="1050,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="1" />
 		<eLabel name="new eLabel" position="0,240" size="1350,87" zPosition="-1" backgroundColor="gradient_background" />
 	</screen>
-	<screen name="PVRState" position="center,500" zPosition="12" size="1250,100" backgroundColor="transparent" flags="wfNoBorder">
-		<widget name="state" position="420,0" size="830,100" font="Gradient_Font;60" halign="left" transparent="1" valign="center" />
-		<widget source="session.CurrentService" render="Label" position="11,25" size="175,50" font="Gradient_Font; 44" halign="right" transparent="1" valign="center">
+		<!-- Player PVRState -->
+	<screen name="PVRState" position="center,20" zPosition="12" size="1300,50" backgroundColor="transparent" flags="wfNoBorder">
+		<eLabel name="title_bg" position="0,0" size="1300,50" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" borderWidth="2" borderColor="darkgrey"/>
+		<eLabel text="Speed" backgroundColor="background" position="0,0" size="320,50" font="Gradient_Font; 40" halign="right" transparent="1" valign="center"/>
+		<eLabel text="Playback Time:" backgroundColor="background" font="Gradient_Font; 40" halign="left" position="800,0" size="180,50" transparent="1" zPosition="10"/>
+		<widget name="state" position="600,0" size="200,50" font="Gradient_Font; 40" halign="center" transparent="1" valign="center" foregroundColor="bernstein"/>
+		<widget source="session.CurrentService" render="Label" position="980,0" size="140,50" font="Gradient_Font; 40" halign="right" transparent="1" valign="center">
 			<convert type="MetrixHDServiceTime">StartTime</convert>
 		</widget>
-		<eLabel text="-" font="Gradient_Font; 40" halign="center" valign="center" position="185,26" size="30,50" transparent="1" />
-		<widget source="session.CurrentService" render="Label" position="213,26" size="150,50" font="Gradient_Font; 40" halign="right" transparent="1" valign="center">
+		<eLabel text="-" font="Gradient_Font; 40" halign="center" valign="center" position="1120,0" size="30,50" transparent="1"/>
+		<widget source="session.CurrentService" render="Label" position="1150,0" size="140,50" font="Gradient_Font; 40" halign="left" transparent="1" valign="center">
 			<convert type="MetrixHDServiceTime">EndTime</convert>
 		</widget>
+		<ePixmap pixmap="emc/ico_player.png" position="350,11" size="228,28" alphatest="blend"/>
 	</screen>
-	<!-- Player PVRState -->
-	<!-- 	<screen name="PVRState" position="center,780" zPosition="12" size="1250,100" backgroundColor="transparent" flags="wfNoBorder">
-		<widget name="state" position="420,0" size="830,100" font="Gradient_Font;60" halign="left" transparent="1" valign="center" />
-		<widget source="session.CurrentService" render="Label" position="11,25" size="175,50" font="Gradient_Font; 44" halign="right" transparent="1" valign="center">
-		<convert type="MetrixHDServiceTime">StartTime</convert>
-		</widget>
-		<eLabel text="-" font="Gradient_Font; 40" halign="center" valign="center" position="185,26" size="30,50" transparent="1" />
-		<widget source="session.CurrentService" render="Label" position="213,26" size="150,50" font="Gradient_Font; 40" halign="right" transparent="1" valign="center">
-			<convert type="MetrixHDServiceTime">EndTime</convert>
-		</widget>
-	</screen> -->
 	<screen name="Volume" position="60,60" size="300,189" title="Volume" flags="wfNoBorder" backgroundColor="transparent" zPosition="99">
 		<widget name="Volume" position="30,138" size="240,27" zPosition="0" transparent="1" foregroundColor="gradient_BGLM" />
 		<ePixmap position="0,0" size="300,189" zPosition="1" pixmap="icons/volume_background.png" transparent="1" alphatest="blend" />
