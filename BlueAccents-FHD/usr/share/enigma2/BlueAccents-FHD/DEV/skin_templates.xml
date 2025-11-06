@@ -541,7 +541,28 @@
 		<eLabel name="" position="1788,963" size="4,9" zPosition="5" backgroundColor="black" />
 		<eLabel name="" position="1788,996" size="4,9" zPosition="5" backgroundColor="black" />
 		<panel name="template_infobar_ethernet" />
-	</screen>
+		</screen>
+		
+		<screen name="template_infobar_vpn_clock">
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="1695,877" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1838,880" size="56,26" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1675,914" size="240,26" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="center" valign="center">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1765,877" size="70,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="center" valign="center">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+</screen>
+
+	
 	<!-- widget_infobar_weather_right-->
 	<screen name="template_widget_infobar_weather_right">
 		<widget source="session.CurrentService" render="Label" position="1672,1017" size="105,24" font="Regular;24" foregroundColor="grey" backgroundColor="black" halign="left" valign="center" transparent="1">
@@ -729,6 +750,95 @@
 		<!-- CaidDisplay -->
 	<screen name="template_CaidDisplay">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+		<!-- Infobar VPN -->
+	<screen name="template_Infobar_VPN">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+<!-- TEMPLATES Infobar VPN  left-->
+<screen name="template_Infobar_VPN_left"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="20,290" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap" position="20,250" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="24,331" size="60,30" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="100,290" size="460,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="100,250" size="460,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="100,330" size="460,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryLabel</convert>
+</widget>
+
+
+
+</screen>
+
+<!-- TEMPLATES Infobar VPN  right-->
+<screen name="template_Infobar_VPN_right"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="1590,290" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap" position="1590,250" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BlueAFHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="1590,330" size="68,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1670,290" size="270,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1670,250" size="270,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1670,331" size="280,32" font="Regular;26" transparent="1" backgroundColor="background" foregroundColor="grey" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryLabel</convert>
+</widget>
+</screen>
+
+<!-- TEMPLATES Infobar VPN  Center-->
+<screen name="template_Infobar_VPN_center"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="896,752" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="1210,749" size="68,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="970,751" size="240,32" font="Regular;26" transparent="1" borderWidth="1" backgroundColor="background" foregroundColor="grey" borderColor="black" halign="center" valign="center">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1285,750" size="60,32" font="Regular;26" transparent="1" borderWidth="1" backgroundColor="background" foregroundColor="grey" borderColor="black" halign="center" valign="center">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+
+<ePixmap position="580,750" size="68,32" zPosition="5" pixmap="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_proto.png" alphatest="blend" />
+<!-- Optional: VPN-Protokoll anzeigen (kürzel) -->
+<widget source="session.CurrentService" render="Label" position="655,750" size="240,32" font="Regular;26" transparent="1" borderWidth="1" backgroundColor="background" foregroundColor="grey" borderColor="black">
+    <convert type="BlueAVPNInfo">VpnProto</convert>
+</widget>
+<eLabel name="vpnBG" position="576,745" size="768,41" zPosition="-1" backgroundColor="#30000933" />
 </screen>
 	
 	
@@ -2275,23 +2385,30 @@
 	</screen>
 	<!--  template_VPN_IP_sib  -->
 	<screen name="template_SambaVpnIp_sib">
-		<applet type="onLayoutFinish" />
-		<eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,30" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-		<eLabel backgroundColor="red" position="1261,568" size="63,3" zPosition="1" />
-		<widget backgroundColor="green" position="1261,568" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-			<convert type="BlueASambaVpnIp_converter">vpn</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget backgroundColor="background" position="1387,540" size="270,30" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-			<convert type="BlueASambaVpnIp_converter">c+myip</convert>
-		</widget>
-		<widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-			<convert type="BlueASambaVpnIp_converter">flag</convert>
-		</widget>
-		<eLabel name="IP" position="1640,540" size="40,30" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" />
-		<widget source="session.CurrentService" position="1680,540" size="270,30" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
-			<convert type="BlueA_myIP">Iplocal</convert>
-		</widget>
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="1260,540" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap" position="1650,540" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="1540,541" size="48,30" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1335,540" size="270,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1720,540" size="270,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1595,540" size="40,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
 	</screen>
 	<!-- TEMPLATES Fullinfo SIB -->
 	<screen name="template_fullinfo_sib">
@@ -2420,27 +2537,22 @@
 	</screen>
 	<!-- TEMPLATES Infobar Ethernet-->
 	<screen name="template_infobar_ethernet">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="1" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1700,885" zPosition="1" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<!-- <ePixmap pixmap="icons/ethernet_off.png" position="1700,885" size="75,45" zPosition="2" alphatest="blend" /> -->
-		<!-- 	<widget source="global.CurrentTime" render="Pixmap" pixmap="icons/ethernet_off.png" position="1700,887" size="75,45"  zPosition="2" alphatest="blend" >
-      <convert type="BlueABlinkingClock" />
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget> -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="1815,887" zPosition="1" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="1815,887" zPosition="1" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
+
+<!-- NET-Status-Symbol (an/aus) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1700,885" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.net_on="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">NetActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1815,887" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/icons/lan_on.png"
+    pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/icons/wireless_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
 	</screen>
 	
 		<screen name="template_ethernet_infobar_android">
@@ -2448,27 +2560,25 @@
 	</screen>
 	<!-- TEMPLATES Infobar Ethernet-->
 <screen name="template_infobar_ethernet_android">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1917,1077" zPosition="3" size="1,1" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1917,1077" zPosition="3" size="1,1" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<!-- <ePixmap pixmap="icons/ethernet_off.png" position="1700,885" size="75,45" zPosition="2" alphatest="blend" /> -->
-		<!-- 	<widget source="global.CurrentTime" render="Pixmap" pixmap="icons/ethernet_off.png" position="1700,887" size="75,45"  zPosition="2" alphatest="blend" >
-      <convert type="BlueABlinkingClock" />
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget> -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="1919,1079" zPosition="3" size="1,1" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="1919,1079" zPosition="3" size="1,1" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfo">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
+
+
+
+<!-- NET-Status-Symbol (an/aus) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1917,1077" size="1,1" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.net_on="/usr/share/enigma2/BlueAccents-FHD/vpn/net_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">NetActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1919,1079" size="1,1" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png"
+    pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+
 	</screen>
 	
 	
@@ -3074,43 +3184,62 @@
 	</screen>
 	<!--  template_VPN_IP_ev  -->
 	<screen name="template_SambaVpnIp_ev">
-		<applet type="onLayoutFinish" />
-		<eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-		<eLabel backgroundColor="red" position="1261,571" size="63,3" zPosition="1" foregroundColor="white" />
-		<widget backgroundColor="green" position="1261,571" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-			<convert type="BlueASambaVpnIp_converter">vpn</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget backgroundColor="background" position="1387,540" size="270,37" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-			<convert type="BlueASambaVpnIp_converter">c+myip</convert>
-		</widget>
-		<widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-			<convert type="BlueASambaVpnIp_converter">flag</convert>
-		</widget>
-		<eLabel name="IP" position="1650,540" size="40,37" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" borderWidth="1" borderColor="black" />
-		<widget source="session.CurrentService" position="1690,540" size="240,37" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
-			<convert type="BlueA_myIP">Iplocal</convert>
-		</widget>
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="1260,540" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap" position="1650,540" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="1540,541" size="48,30" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1335,540" size="270,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1720,540" size="270,32" font="Regular;24" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1595,540" size="40,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
 	</screen>
 	<!--  template_VPN_IP_ev_picon  -->
 	<screen name="template_SambaVpnIp_ev_picon">
-		<applet type="onLayoutFinish" />
-		<eLabel text="VPN:" backgroundColor="background" position="1260,540" size="67,37" font="Regular;27" halign="center" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="1" borderWidth="1" borderColor="black" />
-		<eLabel backgroundColor="red" position="1261,571" size="63,3" zPosition="1" foregroundColor="white" />
-		<widget backgroundColor="green" position="1261,571" size="63,3" zPosition="2" render="FixedLabel" source="session.CurrentService" foregroundColor="white">
-			<convert type="BlueASambaVpnIp_converter">vpn</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget backgroundColor="background" position="1387,540" size="270,37" font="Regular;27" noWrap="1" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="10" render="Label" source="session.CurrentService">
-			<convert type="BlueASambaVpnIp_converter">c+myip</convert>
-		</widget>
-		<widget position="1332,540" size="45,30" zPosition="10" render="BlueASambaVpnIp_renderer" source="session.CurrentService" alphatest="blend">
-			<convert type="BlueASambaVpnIp_converter">flag</convert>
-		</widget>
-		<eLabel name="IP" position="1650,540" size="40,37" font="Regular; 27" backgroundColor="background" foregroundColor="selectedFG" text="IP:" zPosition="13" transparent="1" halign="center" borderWidth="1" borderColor="black" />
-		<widget source="session.CurrentService" position="1690,540" size="240,37" render="Label" font="Regular;27" halign="left" valign="center" foregroundColor="selectedFG" transparent="1" zPosition="13">
-			<convert type="BlueA_myIP">Iplocal</convert>
-		</widget>
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="BlueABooleanPixmap" position="1260,540" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/BlueAccents-FHD/vpn/vpn_status_off.png">
+    <convert type="BlueAVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap" position="1650,540" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/vpn/net_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="BlueACountryFlagPixmap" position="1540,541" size="48,30" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1335,540" size="270,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1720,540" size="270,32" font="Regular;24" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- CountryCode statt CountryLabel im Converter. Dann bekommst du nur den 2-Buchstaben-ISO-Code (DE, US, TR). -->
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<!-- <widget source="session.CurrentService" render="Label" position="1570,320" size="460,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryLabel</convert>
+</widget> -->
+<!-- Ländertext (z. B. "DE") -->
+<widget source="session.CurrentService" render="Label" position="1595,540" size="40,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="BlueAVPNInfo">CountryCode</convert>
+</widget>
 	</screen>
 	<!-- TEMPLATES Fullinfo EV Picon -->
 	<screen name="template_fullinfo_ev_picon">
@@ -3529,30 +3658,36 @@
 	</screen>
 	<!-- TEMPLATES_Ethernet_Info-->
 	<screen name="template_Ethernet_Info_SIB">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="960,1026" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="960,1026" zPosition="3" size="75,45" alphatest="blend" transparent="1" >
-			<convert type="BlueARouteInfoSIB">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-<!-- 		<ePixmap pixmap="icons/ethernet_off.png" position="960,1026" size="75,45" zPosition="2" alphatest="blend" transparent="1" /> -->
+
+<!-- NET-Status-Symbol (an/aus) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="960,1026" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.net_on="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">NetActive</convert>
+</widget>
 	</screen>
+	
+
+	
+	
+	
 	<!-- TEMPLATES_Ethernet_ON_OFF_Info_fake-->
 	<screen name="template_Ethernet_ON_OFF_Info">
 		<eLabel name="fake" position="0, 0" size="0,0" />
 	</screen>
 	<!-- TEMPLATES_Ethernet_ON_OFF_Info-->
 	<screen name="template_Ethernet_ON_OFF_Info_SIB">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="855,1026" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="855,1026" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
+		
+		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="855,1026" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/icons/lan_on.png"
+    pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/icons/wireless_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+		
 	</screen>
 	<!-- TEMPLATES Orbital Picon SIB -->
 	<screen name="template_orbital_picon_SIB">
@@ -5005,33 +5140,37 @@
 	</screen>
 	<!-- template_Ethernet_Info_EV -->
 	<screen name="template_Ethernet_Info_EV">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1290,1029" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ethernet_on.png" position="1290,1029" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<!-- <ePixmap pixmap="icons/ethernet_off.png" position="1290,1029" size="75,45" zPosition="2" alphatest="blend" /> -->
-		<!-- 	<widget source="global.CurrentTime" render="Pixmap" pixmap="icons/ethernet_off.png" position="1290,1029" size="75,45"  zPosition="2" alphatest="blend" >
-      <convert type="BlueABlinkingClock" />
-      <convert type="ConditionalShowHide">Blink</convert>
-    </widget> -->
+
+
+<!-- NET-Status-Symbol (an/aus) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1290,1029" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.net_on="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">NetActive</convert>
+</widget>
 	</screen>
+	
+
+	
+	
+	
 	<!-- TEMPLATES_Ethernet_ON_OFF_Info_fake-->
 	<screen name="template_Ethernet_ON_OFF_EV">
 		<eLabel name="fake" position="0, 0" size="0,0" />
 	</screen>
 	<!-- template_Ethernet_ON_OFF_Info_EV -->
 	<screen name="template_Ethernet_ON_OFF_Info_EV">
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/wireless_on.png" position="1395,1029" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Wifi</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="icons/lan_on.png" position="1395,1029" zPosition="3" size="75,45" alphatest="blend" transparent="1">
-			<convert type="BlueARouteInfoSIB">Lan</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
+
+		
+	<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
+<widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1395,1029" size="75,45" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.lan="/usr/share/enigma2/BlueAccents-FHD/icons/lan_on.png"
+    pixmap.wlan="/usr/share/enigma2/BlueAccents-FHD/icons/wireless_on.png"
+    pixmap.net_off="/usr/share/enigma2/BlueAccents-FHD/icons/ethernet_off.png">
+    <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>	
+		
 	</screen>
 </skin>
