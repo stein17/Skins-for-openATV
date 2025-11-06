@@ -1896,12 +1896,13 @@ if len(listitems.list) &gt; 2:
 			<convert type="ConditionalShowHide" />
 		</widget>
 	</screen>
-	<screen name="InfoBar" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
+<screen name="InfoBar" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
 		<panel name="template_OA_weather_default" />
 		<panel name="Gradient_Infobar_BLUE" />
 		<panel name="Fullscreen_InfoBar" />
 		<panel name="template_Poster_Infobar" />
 		<panel name="template_TunerInfo" />
+		<panel name="template_Infobar_VPN"/>
 	</screen>
 	<!-- SecondInfoBar -->
 	<screen name="SecondInfoBar" position="center,center" size="1920,1080" title="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder">
@@ -1924,6 +1925,7 @@ if len(listitems.list) &gt; 2:
 		</panel>
 		<panel name="Fullscreen_SecondInfoBar" />
 		<panel name="template_Poster_SecondInfobar" />
+		<panel name="template_VPN_SecondInfoBar" />
 	</screen>
 	<!--Radio Channel Selection -->
 	<screen name="ChannelSelectionRadio" position="center,center" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="Radio Channel Selection" zPosition="-10">
@@ -2442,23 +2444,19 @@ if len(listitems.list) &gt; 2:
 		</panel>
 		<panel name="progress_Default_EPGSelection" />
 	</screen>
-	<screen name="EventView" position="center,center" size="1450,900" backgroundColor="transparent" flags="wfNoBorder" title="Eventview">
+<screen name="EventView" position="center,center" size="1450,900" backgroundColor="transparent" flags="wfNoBorder" title="Eventview">
 		<widget source="Service" render="Picon" position="1005,90" size="330,198" zPosition="0" transparent="1" alphatest="blend">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<widget name="epg_description" position="27,87" size="900,735" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="120" textBorderColor="black" textBorderWidth="2" />
-		<widget name="channel" position="945,300" size="480,105" font="Gradient_Font;39" halign="center" valign="bottom" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
-		<!-- <widget source="Service" render="Progress" position="945,417" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
-  <convert type="EventTime">Progress</convert>
-</widget> -->
-		<eLabel position="955,421" size="460,2" backgroundColor="gradient_foreground_title" zPosition="1" />
-		<widget name="datetime" position="975,447" size="420,81" font="Gradient_Font;36" halign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="center" />
-		<eLabel text="&lt;" position="945,456" size="30,60" halign="center" valign="center" font="Gradient_Font;39" transparent="1" />
-		<eLabel text="&gt;" position="1395,456" size="30,60" halign="center" valign="center" font="Gradient_Font;39" transparent="1" />
-		<widget source="session.CurrentService" render="Label" position="945,735" size="450,57" font="Gradient_Font;27" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" halign="left">
-			<convert type="PliExtraInfo">TransponderInfo2line</convert>
-		</widget>
-		<widget name="duration" position="975,540" size="420,60" font="Gradient_Font;36" halign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+	  <widget name="channel" position="945,300" size="480,85" font="Gradient_Font;39" halign="center" valign="bottom" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+  <eLabel position="955,401" size="460,2" backgroundColor="gradient_foreground_title" zPosition="1" />
+  <widget name="datetime" position="975,417" size="420,45" font="Gradient_Font;36" halign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="center" />
+  <eLabel text="&lt;" position="945,417" size="30,45" halign="center" valign="center" font="Gradient_Font;39" transparent="1" />
+  <eLabel text="&gt;" position="1395,417" size="30,45" halign="center" valign="center" font="Gradient_Font;39" transparent="1" />
+  <widget source="session.CurrentService" render="Label" position="945,735" size="450,57" font="Gradient_Font;27" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" halign="left">
+    <convert type="PliExtraInfo">TransponderInfo2line</convert>
+  </widget>
+  <widget name="duration" position="975,470" size="420,45" font="Gradient_Font;36" halign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
 		<widget source="session.RecordState" render="Pixmap" pixmap="infobar/icon_record.png" position="984,675" size="72,45" zPosition="1" alphatest="blend">
 			<convert type="ConditionalShowHide">Blink,2000</convert>
 		</widget>
@@ -2570,6 +2568,9 @@ if len(listitems.list) &gt; 2:
 		<panel name="Template_Text_Buttons_I_M_E" />
 		<panel name="progress_Default_EventView" />
 		<panel name="template_Poster_Eventwiew" />
+		<panel name="epg_description_eventview" />
+		<panel name="template_VPN_Eventview" />
+
 	</screen>
 	<!-- EventViewSimple , optimized for MovieInfo (EMC)-->
 	<screen name="EventViewSimple" position="center,center" size="1450,900" backgroundColor="transparent" flags="wfNoBorder" title="EventviewSimple">

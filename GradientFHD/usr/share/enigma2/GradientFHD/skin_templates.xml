@@ -89,12 +89,15 @@
 			<convert type="EventTime">Progress</convert>
 		</widget>
 	</screen>
-	<!-- EventView -->
+
+		<!-- EventView -->
 	<screen name="progress_Default_EventView">
-		<widget source="Service" render="Progress" position="955,417" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+		<widget source="Service" render="Progress" position="955,397" size="460,10" foregroundColor="gradient_Line" transparent="1" zPosition="2">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 	</screen>
+	
+	
 	<!-- EPGverticalPIG -->
 	<screen name="progress_Default_EPGverticalPIG">
 		<widget source="session.Event_Now" render="Progress" position="1164,525" size="720,16" foregroundColor="gradient_Line" transparent="1" zPosition="2">
@@ -481,6 +484,18 @@
 		</widget>
 	</screen>
 	
+	
+
+	
+
+	<screen name="epg_description_eventview_Poster">
+		<widget name="epg_description" position="27,87" size="900,435" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="120" textBorderColor="black" textBorderWidth="2" />
+		</screen>	
+	<screen name="epg_description_eventview">
+		<widget name="epg_description" position="27,87" size="900,735" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="10" borderWidth="1" borderColor="black" />
+	</screen>	
+	
+	
 	<screen name="template_Poster_Eventwiew">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
 	</screen>
@@ -522,7 +537,183 @@
 		<widget source="session.Event_Now" render="xtrafmBackdrop" position="1100,485" cornerRadius="6" size="492,277" zPosition="1" /> 
 	</screen>
 	
-	
+			<!-- Infobar VPN -->		
+<screen name="template_Infobar_VPN">
+	<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+
+<!-- TEMPLATES Infobar VPN  left-->
+<screen name="template_Infobar_VPN_left"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="20,280" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="GradientMapPixmap" position="20,240" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="20,320" size="68,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="100,280" size="460,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="100,240" size="460,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="100,321" size="460,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">CountryLabel</convert>
+</widget>
+</screen>
+
+
+<!-- TEMPLATES Infobar VPN  right-->
+<screen name="template_Infobar_VPN_right"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="1550,290" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="GradientMapPixmap" position="1550,250" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1550,330" size="68,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1630,290" size="270,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1630,250" size="270,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1630,331" size="280,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">CountryLabel</convert>
+</widget>
+</screen>
+<!-- TEMPLATES Infobar VPN  Center-->
+<screen name="template_Infobar_VPN_center"> 
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="850,734" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1162,733" size="68,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="920,734" size="240,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="center" valign="center">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<widget source="session.CurrentService" render="Label" position="1235,734" size="60,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="center" valign="center">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+
+<ePixmap position="538,734" size="68,32" zPosition="5" pixmap="/usr/share/enigma2/GradientFHD/vpn/vpn_proto.png" alphatest="blend" />
+<!-- Optional: VPN-Protokoll anzeigen (kürzel) -->
+<widget source="session.CurrentService" render="Label" position="618,735" size="230,32" font="Regular;26" transparent="1" borderWidth="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" borderColor="black">
+    <convert type="GradientVPNInfo">VpnProto</convert>
+</widget>
+<eLabel name="title_bg" position="534,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
+<eLabel name="title_line" position="538,769" size="758,1" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
+</screen>
+
+
+
+
+<!-- NET-Status-Symbol (an/aus) -->
+<!-- <widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1260,440" size="68,32" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png"
+    pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">NetActive</convert>
+</widget> -->
+<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
+<!-- <widget source="session.CurrentService" render="BlueAMapPixmap"
+    position="1650,480" size="68,32" zPosition="5" alphatest="blend" scaled="1"
+    pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png"
+    pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png"
+    pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">ConnType</convert>
+</widget> -->
+
+
+		<!-- SecondInfoBar VPN -->
+	<screen name="template_VPN_SecondInfoBar">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+<!-- TEMPLATES SecondInfoBar VPN -->
+<screen name="template_SecondInfoBar_VPN"> 
+		<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="1480,1010" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1560,1012" size="270,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1760,1011" size="48,30" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Ländertext (z. B. "DE") -->
+<widget source="session.CurrentService" render="Label" position="1820,1012" size="50,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+     <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- CountryCode statt CountryLabel im Converter. Dann bekommst du nur den 2-Buchstaben-ISO-Code (DE, US, TR). -->
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<!-- <widget source="session.CurrentService" render="Label" position="1570,320" size="460,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">CountryLabel</convert>
+</widget> -->
+</screen>
+<!-- Eventview VPN -->
+<screen name="template_VPN_Eventview">
+	<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
+</screen>
+<screen name="template_Eventview_VPN">
+<!--  VPN-Status-Symbol (EIN/AUS) -->
+<widget source="session.CurrentService" render="GradientBooleanPixmap" position="970,525" size="68,32" zPosition="5" alphatest="blend" pixmapOn="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmapOff="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnActive</convert>
+</widget>
+<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+<widget source="session.CurrentService" render="GradientMapPixmap" position="970,565" size="68,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">ConnType</convert>
+</widget>
+<!-- Länderflagge -->
+<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1258,527" size="52,28" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/skin_default/countries">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<!-- Öffentliche IP -->
+<widget source="session.CurrentService" render="Label" position="1045,525" size="200,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">IP</convert>
+</widget>
+<!-- Empfänger-IP -->
+<widget source="session.CurrentService" render="Label" position="1045,565" size="200,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">ReceiverIP</convert>
+</widget>
+<!-- CountryCode statt CountryLabel im Converter. Dann bekommst du nur den 2-Buchstaben-ISO-Code (DE, US, TR). -->
+<!-- Ländertext (z. B. "DE – Deutschland") -->
+<!-- <widget source="session.CurrentService" render="Label" position="1570,320" size="460,32" font="Regular;26" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">CountryLabel</convert>
+</widget> -->
+<!-- Ländertext (z. B. "DE") -->
+<widget source="session.CurrentService" render="Label" position="1325,525" size="140,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+</widget>
+<ePixmap position="1250,565" size="68,32" zPosition="5" pixmap="/usr/share/enigma2/GradientFHD/vpn/vpn_proto.png" alphatest="blend" />
+<!-- Optional: VPN-Protokoll anzeigen (kürzel) -->
+<widget source="session.CurrentService" render="Label" position="1325,565" size="230,32" font="Regular;26" transparent="1" borderWidth="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" borderColor="black">
+    <convert type="GradientVPNInfo">VpnProto</convert>
+</widget>
+</screen>
 	
 	
 	<screen name="EMCSelection_List_default">
