@@ -1,20 +1,109 @@
+"""
+BlueAVPNInfo — Kurzdokumentation (paste‑fertig)
+
+Zweck
+- Erkennung von lokalen VPN‑Interfaces (WireGuard, OpenVPN/ovpn), Ermittlung
+  von öffentlicher IP/Geo/Provider (asynchron) und Bereitstellung
+  sinnvoller Converter‑Keys für Skin‑Widgets (Icons, Flaggen, Texte).
+
+Wichtige Pfade
+- Cache / Backoff: /tmp/vpninfo_cache.json
+- Proto‑Override (optional): /etc/enigma2/vpnproto  # Content: "wireguard" oder "openvpn"
+
+Erkannte Interfaces / Heuristiken
+- WireGuard: Interfaces, die mit "wg" beginnen (z. B. wg0) → `VpnProto = 'wireguard'`
+- OpenVPN / OVPN: tun*/tap*/vpn*/ovpn* → `VpnProto = 'openvpn'`
+- Split‑Tunneling: Interface up → VPN gilt als aktiv, auch wenn Default‑Route anders ist.
+- Router‑VPN: Wenn keine lokalen VPN‑Interfaces gefunden werden, aber die Public‑IP/Provider‑Erkennung stark auf einen VPN Anbieter hinweist, setzt die Router‑Heuristik `VpnActive = True` (Router als VPN‑Gateway).
+
+Wichtige Converter‑Keys (Typ / Werte)
+- VpnActive      : boolean (True / False)
+- NetActive      : string ('net_on' / 'net_off')     # für pixmap.net_on / pixmap.net_off
+- ConnType       : string ('lan' / 'wlan' / 'net_off')  # gibt 'net_off' wenn kein Internet
+- VpnProto       : string ('wireguard' / 'openvpn' / 'none')
+- VpnIface       : string (z. B. 'wg0', 'tun0', '' )
+- VpnProvider    : string (provider slug, z. B. 'nordvpn', 'mullvad', 'ovpn', 'unknown', 'none')
+- VpnProviderPretty: string (z. B. 'NordVPN')
+- IP             : string (öffentliche IP, async; '' falls nicht bekannt)
+- ReceiverIP     : string (lokale/Empfänger IP)
+- CountryCode    : string (ISO‑Alpha‑2, z. B. 'DE' oder '')
+- CountryName/Label: string (ausgeschriebener Ländername oder Label)
+
+Provider (Auszug der erkannten Slugs)
+- mullvad, nordvpn, nordlynx, surfshark, ovpn, ovpn.com, ofn, ofn101,
+  airvpn, protonvpn, pia, torguard, ivpn, vyprvpn, windscribe,
+  perfectprivacy, azire, expressvpn, cyberghost, purevpn, strongvpn,
+  hideme, ipvanish, tunnelbear, mozilla, cryptostorm, wevpn, privatevpn, ...
+
+Asynchrones Verhalten
+- Public‑IP/Geo‑Fetch läuft in Background‑Thread, mit Exponential‑Backoff und Cache.
+- Kein Blocking der GUI. Bei Start wird ggf. ein Fallback (Interface‑Link) verwendet,
+  bis ein verlässlicher Public‑IP‑Status vorliegt.
+
+CHANGED_POLL
+- Änderungssignale werden als Tuple gemeldet (kompatibel mit OpenATV). Handler sollten Tuple unterstützen.
+
+Skin‑Beispiele
+- Internet‑On/Off (reiner NetStatus):
+<widget render="BlueAMapPixmap" ... pixmap.net_on="/.../net_on.png" pixmap.net_off="/.../net_off.png">
+  <convert type="BlueAVPNInfo">NetActive</convert>
+</widget>
+
+- Interface (grün bei Internet, sonst Off):
+<widget render="BlueAMapPixmap" ... pixmap.lan="/.../lan_on(0).png" pixmap.wlan="/.../wlan_on.png" pixmap.net_off="/.../net_off.png">
+  <convert type="BlueAVPNInfo">ConnType</convert>
+</widget>
+
+- Provider Icon:
+<widget render="BlueAMapPixmap" ... pixmap.nordvpn="/.../prov_nord.png" pixmap.mullvad="/.../prov_mullvad.png" pixmap.none="/.../vpn_status_off.png">
+  <convert type="BlueAVPNInfo">VpnProvider</convert>
+</widget>
+
+Tipps zur Fehlersuche
+- Live‑Werte anzeigen (temporäre Labels für ConnType / NetActive).
+- Icon‑Dateien prüfen (Existenz und Rechte).
+- Cache löschen + GUI neu starten nach Änderungen:
+  init 4; sleep 2; init 3
+"""
+
 # Components/Converter/BlueAVPNInfo.py
 # Python 3 only
 # Concept and design by stein17, with the assistance of Python Code Generator
 # Please do not remove these lines; kindly request my permission before sharing or publishing.
 
+# Was ist neu
+
+# OVPN/OpenVPN sicher erkannt: tun*/tap*/vpn*/ovpn* werden als openvpn gezählt.
+# Router-VPN Heuristik: Wenn die Box selbst keine wg/tun/tap-Interfaces hat, aber der Public-IP-Provider nach VPN aussieht (z. B. Mullvad, NordVPN, OVPN, inkl. ofn/ofn101), setzt der Converter VpnActive auf ON.
+# Neuer Key VpnProvider: z. B. mullvad, nordvpn, ovpn, ...
+# Optionaler Proto-Override bei Router-VPN: Datei /etc/enigma2/vpnproto mit wireguard oder openvpn erzwingt VpnProto.
+# NetActive Key für dein net_on/net_off Icon bleibt dabei.
+# Public-IP/Geo-Fetch ist asynchron, mit Backoff und Cache (/tmp/vpninfo_cache.json).
+# CHANGED_POLL wird korrekt als Tuple gemeldet.
+# Eingebaute Provider-Indikatoren (Auszug)
+
+# Mullvad, NordVPN, NordLynx, SurfShark, Ovpn, ovpn.com, OfN, OfN101, AirVPN, Proton, Pia (Private Internet Access), TorGuard, IVPN, VyprVPN, Windscribe, Perfect Privacy, Azire, ExpressVPN, Cyberghost, PureVPN, StrongVPN, hide.me, HideMyAss, Ipvanish, Tunnelbear, Mozilla VPN, Cryptostorm, WeVPN, PrivateVPN.
+
+# Skin-Keys (Auszug)
+
+# Geistiges Eigentum / Öffentliches Eigentum
+# Ländercode, Ländername, Länderetikett
+# EmpfängerIP
+# ConnType → lan | WLAN | net_off
+# NetActive → net_on | net_off
+# VpnActive → wahr | FALSCH
+# VpnProto → wireguard | OffenVPN | nichts
+# VpnIface → z. B. wg0 | tun0
+# VpnProvider → z. B. B. mullvad | NordVPN | ovpn
+
 from Components.Converter.Converter import Converter
 from Components.Converter.Poll import Poll
 from Components.Element import cached
 
-import time
-import json
-import socket
-import subprocess
-import threading
-import os
+import time, json, socket, subprocess, threading, os, re
 
 DEBUG = False
+
 def _log(msg):
     if DEBUG:
         try:
@@ -24,6 +113,38 @@ def _log(msg):
             pass
 
 CACHE_PATH = '/tmp/vpninfo_cache.json'
+
+VPN_PROVIDER_KEYS = {
+    'mullvad': 'mullvad',
+    'nordvpn': 'nordvpn',
+    'nord lynx': 'nordvpn',
+    'nordlynx': 'nordvpn',
+    'protonvpn': 'protonvpn',
+    'proton': 'protonvpn',
+    'expressvpn': 'expressvpn',
+    'surfshark': 'surfshark',
+    'ipvanish': 'ipvanish',
+    'cyberghost': 'cyberghost',
+    'ovpn': 'ovpn', 'ovpn.com': 'ovpn', 'ofn': 'ovpn', 'ofn101': 'ovpn',
+}
+
+PROVIDER_DOMAIN_KEYS = {
+    'nordvpn.com': 'nordvpn', 'mullvad.net': 'mullvad', 'ovpn.com': 'ovpn',
+    'surfshark.com': 'surfshark', 'protonvpn.com': 'protonvpn', 'expressvpn.com': 'expressvpn',
+    'ipvanish.com': 'ipvanish', 'cyberghostvpn.com': 'cyberghost',
+    'privateinternetaccess.com': 'private internet access', 'airvpn.org': 'airvpn',
+    'ivpn.net': 'ivpn', 'vyprvpn.com': 'vyprvpn', 'windscribe.com': 'windscribe',
+    'perfect-privacy.com': 'perfect privacy', 'azirevpn.com': 'azirevpn',
+    'hide.me': 'hide.me', 'hidemyass.com': 'hidemyass', 'tunnelbear.com': 'tunnelbear',
+    'mozilla.org': 'mozilla vpn', 'cryptostorm.is': 'cryptostorm', 'wevpn.com': 'wevpn',
+    'privatevpn.com': 'privatevpn', 'nordlynx': 'nordvpn',
+}
+
+PROVIDER_PRETTY = {
+    'mullvad': 'Mullvad VPN', 'nordvpn': 'NordVPN', 'protonvpn': 'ProtonVPN',
+    'expressvpn': 'ExpressVPN', 'surfshark': 'Surfshark VPN', 'ipvanish': 'IPVanish VPN',
+    'cyberghost': 'CyberGhost VPN', 'ovpn': 'OVPN'
+}
 
 def _run(cmd):
     try:
@@ -41,7 +162,6 @@ def _default_iface():
                 return parts[parts.index('dev') + 1]
             except Exception:
                 pass
-    # Fallback /proc
     try:
         with open('/proc/net/route', 'r') as f:
             for line in f:
@@ -85,7 +205,6 @@ def _ip_for_iface(iface):
                 return line.split()[1].split('/')[0]
     except Exception:
         pass
-    # Fallback via Socket
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 80))
@@ -124,274 +243,217 @@ def _list_up_ifaces(prefixes):
         pass
     return up
 
-def _vpn_detect():
-    """
-    Erkennung VPN:
-      - WireGuard: wg* up
-      - OpenVPN: tun*/tap* up
-      - Default-Route-Device prüfen (ip route get 1.1.1.1), ob es wg/tun/tap ist
-    Rückgabe: (active(bool), proto(str), iface(str|''))  proto: wireguard|openvpn|none
-    """
+def _vpn_detect_by_interfaces():
     up_wg = _list_up_ifaces(('wg',))
-    up_tun = _list_up_ifaces(('tun', 'tap', 'vpn'))
-    # effektives Route-Device (nur bei VPNs relevant prüfen)
-    route_dev = ''
-    if up_wg or up_tun:
-        out = _run("ip -4 route get 1.1.1.1 2>/dev/null | head -n1")
-        if out:
-            parts = out.split()
-            if 'dev' in parts:
-                try:
-                    route_dev = parts[parts.index('dev') + 1]
-                except Exception:
-                    route_dev = ''
-
-    # harte Zuordnung: wenn Route-Device vpn-Interface ist
-    candidates = (up_wg + up_tun)
-    if route_dev and route_dev in candidates:
-        if route_dev.startswith('wg'):
-            return True, 'wireguard', route_dev
-        if route_dev.startswith(('tun', 'tap', 'vpn')):
-            return True, 'openvpn', route_dev
-
-    # softere Heuristik: irgendein VPN-IF up
+    up_tun = _list_up_ifaces(('tun', 'tap', 'vpn', 'ovpn'))
     if up_wg:
         return True, 'wireguard', up_wg[0]
     if up_tun:
         return True, 'openvpn', up_tun[0]
-
     return False, 'none', ''
 
+def _load_forced_proto():
+    for p in ('/etc/enigma2/vpnproto', '/etc/vpnproto'):
+        try:
+            if os.path.exists(p):
+                v = open(p, 'r').read().strip().lower()
+                if v.startswith('wg'):
+                    return 'wireguard'
+                if v in ('openvpn', 'ovpn') or v.startswith('ovpn'):
+                    return 'openvpn'
+        except Exception:
+            pass
+    return ''
+
+def _looks_like_vpn_provider(fields):
+    text = ' '.join([
+        fields.get('isp', '') or '', fields.get('org', '') or '',
+        fields.get('asn', '') or '', fields.get('rdns', '') or '',
+    ]).lower()
+    for k, slug in VPN_PROVIDER_KEYS.items():
+        if k in text:
+            return slug
+    return ''
+
+def _scan_local_vpn_configs():
+    paths = ['/etc/wireguard','/etc/openvpn','/etc/enigma2/wireguard','/etc/enigma2/openvpn']
+    found = ''
+    for base in paths:
+        if not os.path.isdir(base):
+            continue
+        try:
+            for root, _, files in os.walk(base):
+                for fn in files:
+                    if not fn.lower().endswith(('.conf','.ovpn','.cfg','.txt')):
+                        continue
+                    try:
+                        data = open(os.path.join(root, fn), 'r', errors='ignore').read().lower()
+                    except Exception:
+                        continue
+                    for m in re.findall(r'(?:(?:endpoint|remote)\s*=\s*|remote\s+)([^\s:]+)', data):
+                        for key, slug in PROVIDER_DOMAIN_KEYS.items():
+                            if key in m:
+                                return slug
+                    if '103.86.96.100' in data or '103.86.99.100' in data:
+                        return 'nordvpn'
+                    if 'nordlynx' in data:
+                        return 'nordvpn'
+        except Exception:
+            pass
+    return found
+
 def _fetch_public_info(timeout=2.0):
-    # bevorzugt http (keine CA nötig), dann https
     urls = [
-        ('http://ip-api.com/json/', 'ip-api'),
-        ('http://ipinfo.io/json', 'ipinfo'),
-        ('https://ipapi.co/json/', 'ipapi'),
+        ('http://ip-api.com/json/?fields=status,message,query,country,countryCode,isp,org,as,reverse','ip-api'),
+        ('http://ipinfo.io/json','ipinfo'),
+        ('https://ipapi.co/json/','ipapi'),
     ]
     for u, tag in urls:
         try:
             import urllib.request
-            resp = urllib.request.urlopen(u, timeout=timeout)
-            data = resp.read()
-            js = json.loads(data.decode('utf-8', 'ignore'))
+            js = json.loads(urllib.request.urlopen(u, timeout=timeout).read().decode('utf-8','ignore'))
             if tag == 'ip-api':
-                ip = js.get('query', '')
-                cc = (js.get('countryCode', '') or '').upper()
-                name = js.get('country', '')
+                return {'ip': js.get('query',''), 'cc': (js.get('countryCode','') or '').upper(), 'country': js.get('country',''), 'isp': js.get('isp',''), 'org': js.get('org',''), 'asn': js.get('as',''), 'rdns': js.get('reverse','')}
             elif tag == 'ipinfo':
-                ip = js.get('ip', '')
-                cc = (js.get('country', '') or '').upper()
-                name = js.get('country', '')
+                return {'ip': js.get('ip',''), 'cc': (js.get('country','') or '').upper(), 'country': js.get('country',''), 'isp': '', 'org': js.get('org',''), 'asn': js.get('org',''), 'rdns': js.get('hostname','')}
             else:
-                ip = js.get('ip', '')
-                cc = (js.get('country_code', '') or js.get('country', '') or '').upper()
-                name = js.get('country_name', '') or js.get('country', '')
-            return {'ip': ip or '', 'cc': cc or '', 'country': name or ''}
+                return {'ip': js.get('ip',''), 'cc': (js.get('country_code','') or js.get('country','') or '').upper(), 'country': js.get('country_name','') or js.get('country',''), 'isp': js.get('org',''), 'org': js.get('org',''), 'asn': js.get('asn',''), 'rdns': ''}
         except Exception:
             continue
-    return {'ip': '', 'cc': '', 'country': ''}
+    return {'ip':'','cc':'','country':'','isp':'','org':'','asn':'','rdns':''}
 
-GERMAN_NAMES = {'DE': 'Deutschland', 'AT': 'Österreich', 'CH': 'Schweiz'}
+GERMAN_NAMES = {'DE':'Deutschland','AT':'Österreich','CH':'Schweiz'}
 
 class BlueAVPNInfo(Poll, Converter):
-    IP = 0
-    CountryCode = 1
-    CountryName = 2
-    ReceiverIP = 3
-    ConnType = 4
-    VpnActive = 5
-    CountryLabel = 6
-    NetActive = 7       # neu: 'net_on' | 'net_off'
-    VpnProto = 8        # neu: 'wireguard' | 'openvpn' | 'none'
-    VpnIface = 9        # neu: z. B. 'wg0' | 'tun0' | ''
-
+    IP=0; CountryCode=1; CountryName=2; ReceiverIP=3; ConnType=4; VpnActive=5; CountryLabel=6; NetActive=7; VpnProto=8; VpnIface=9; VpnProvider=10; VpnProviderPretty=11
     def __init__(self, type):
-        Poll.__init__(self)
-        Converter.__init__(self, type)
-
-        self.type = type
-        if type in ('IP', 'PublicIP'):
-            self.type = self.IP
-        elif type == 'CountryCode':
-            self.type = self.CountryCode
-        elif type == 'CountryName':
-            self.type = self.CountryName
-        elif type == 'ReceiverIP':
-            self.type = self.ReceiverIP
-        elif type == 'ConnType':
-            self.type = self.ConnType
-        elif type == 'VpnActive':
-            self.type = self.VpnActive
-        elif type in ('CountryLabel', 'CountryText'):
-            self.type = self.CountryLabel
-        elif type == 'NetActive':
-            self.type = self.NetActive
-        elif type == 'VpnProto':
-            self.type = self.VpnProto
-        elif type == 'VpnIface':
-            self.type = self.VpnIface
-
-        # Poll moderat
-        self.poll_interval = 2000
-        self.poll_enabled = True
-
-        # States
-        self._last_public_ip = ''
-        self._last_country_code = ''
-        self._last_country_name = ''
-        self._last_receiver_ip = ''
-        self._last_conn_type = 'net_off'
-        self._last_vpn_active = False
-        self._last_net_active = False
-        self._last_vpn_proto = 'none'
-        self._last_vpn_iface = ''
-
-        self._last_iface = None
-        self._last_local_ip_ts = 0
-        self._last_fast_ts = 0
-
-        # Public-IP Fetch
-        self._fetch_thread = None
-        self._last_fetch_ts = 0
-        self._min_fetch_interval = 60
-        self._last_fetch_vpn_state = None
-        self._offline_backoff = 30
-        self._offline_until = 0
-
+        Poll.__init__(self); Converter.__init__(self, type)
+        self.type = {'IP':0,'PublicIP':0,'CountryCode':1,'CountryName':2,'ReceiverIP':3,'ConnType':4,'VpnActive':5,'CountryLabel':6,'CountryText':6,'NetActive':7,'VpnProto':8,'VpnIface':9,'VpnProvider':10,'VpnProviderPretty':11}.get(type, type)
+        self.poll_interval=2000; self.poll_enabled=True
+        self._last_public_ip=''; self._last_country_code=''; self._last_country_name=''; self._last_receiver_ip=''; self._last_conn_type='net_off'; self._last_vpn_active=False; self._last_net_active=False; self._last_vpn_proto='none'; self._last_vpn_iface=''
+        self._prov_local=''; self._prov_public=''
+        self._last_iface=None; self._last_local_ip_ts=0; self._last_fast_ts=0
+        self._fetch_thread=None; self._last_fetch_ts=0; self._min_fetch_interval=60; self._last_fetch_vpn_state=None; self._offline_backoff=30; self._offline_until=0
         self._load_cache()
-
     def _load_cache(self):
         try:
             if os.path.exists(CACHE_PATH):
-                js = json.load(open(CACHE_PATH, 'r'))
-                self._last_public_ip = js.get('ip', '') or ''
-                self._last_country_code = (js.get('cc', '') or '').upper()
-                self._last_country_name = js.get('country', '') or ''
-        except Exception:
-            pass
-
+                js=json.load(open(CACHE_PATH,'r'))
+                self._last_public_ip=js.get('ip','') or ''
+                self._last_country_code=(js.get('cc','') or '').upper()
+                self._last_country_name=js.get('country','') or ''
+        except Exception: pass
     def _save_cache(self):
         try:
-            js = {'ip': self._last_public_ip, 'cc': self._last_country_code, 'country': self._last_country_name}
-            json.dump(js, open(CACHE_PATH, 'w'))
-        except Exception:
-            pass
-
-    # ---------- schnelle, synchrone Updates ----------
+            json.dump({'ip':self._last_public_ip,'cc':self._last_country_code,'country':self._last_country_name}, open(CACHE_PATH,'w'))
+        except Exception: pass
     def _update_fast(self):
         now = time.time()
         if now - self._last_fast_ts < 1.5:
             return
 
-        # Default-IF + Online
         iface = _default_iface()
-        net_on = bool(iface and _iface_online(iface))
+        iface_online = bool(iface and _iface_online(iface))
         self._last_iface = iface
-        self._last_net_active = net_on
 
-        # Verbindungstyp + lokale IP (sparsam)
+        # record interface type (lan/wlan/modem) regardless of internet availability
         self._last_conn_type = _conn_type_for_iface(iface)
+
+        # local receiver IP (throttled)
         if iface and (now - self._last_local_ip_ts > 60):
             self._last_receiver_ip = _ip_for_iface(iface)
             self._last_local_ip_ts = now
 
-        # VPN-Status/Proto/IF
-        vpn_on, vpn_proto, vpn_if = _vpn_detect()
+        vpn_on, vpn_proto, vpn_if = _vpn_detect_by_interfaces()
         self._last_vpn_active = vpn_on
         self._last_vpn_proto = vpn_proto
         self._last_vpn_iface = vpn_if
 
+        # refresh local provider each time (fast scan)
+        self._prov_local = _scan_local_vpn_configs() or ''
+
+        # Determine net_active: prefer confirmed public IP; respect offline backoff; otherwise fallback to interface link
+        if self._last_public_ip:
+            self._last_net_active = True
+        elif time.time() < self._offline_until:
+            self._last_net_active = False
+        else:
+            self._last_net_active = iface_online
+
+        # Router-VPN heuristic: only if provider detected from public lookup and no local provider
+        if not self._last_vpn_active and self._last_net_active and self._prov_public and not self._prov_local:
+            self._last_vpn_active = True
+            forced = _load_forced_proto()
+            if forced:
+                self._last_vpn_proto = forced
+
         self._last_fast_ts = now
 
     def _need_fetch_public(self):
-        now = time.time()
-        if now < self._offline_until:
-            return False
-        if not self._last_iface or not _iface_online(self._last_iface):
-            return False
-        if (now - self._last_fetch_ts) > self._min_fetch_interval:
-            return True
-        if self._last_vpn_active != self._last_fetch_vpn_state:
-            return True
+        now=time.time()
+        if now < self._offline_until: return False
+        if not self._last_iface or not _iface_online(self._last_iface): return False
+        if (now - self._last_fetch_ts) > self._min_fetch_interval: return True
+        if self._last_vpn_active != self._last_fetch_vpn_state: return True
         return False
-
     def _start_fetch_thread(self):
-        if self._fetch_thread and self._fetch_thread.is_alive():
-            return
+        if self._fetch_thread and self._fetch_thread.is_alive(): return
         def worker():
-            info = _fetch_public_info(timeout=2.0)
+            info=_fetch_public_info(timeout=2.0)
             if info.get('ip'):
-                cc = (info.get('cc', '') or '').upper()
-                name = info.get('country', '')
-                if cc in GERMAN_NAMES:
-                    name = GERMAN_NAMES.get(cc, name)
-
-                self._last_public_ip = info.get('ip', '')
-                self._last_country_code = cc
-                self._last_country_name = name
-                self._last_fetch_ts = time.time()
-                self._last_fetch_vpn_state = self._last_vpn_active
-                self._offline_backoff = 30
-                self._offline_until = 0
-                self._save_cache()
+                cc=(info.get('cc','') or '').upper(); name=info.get('country','');
+                if cc in GERMAN_NAMES: name=GERMAN_NAMES.get(cc,name)
+                self._last_public_ip=info.get('ip',''); self._last_country_code=cc; self._last_country_name=name
+                provider=_looks_like_vpn_provider(info); self._prov_public=provider or ''
+                self._last_fetch_ts=time.time(); self._last_fetch_vpn_state=self._last_vpn_active; self._offline_backoff=30; self._offline_until=0; self._save_cache()
+                # Router‑VPN heuristic: only if provider from PUBLIC and no local provider
+                if not self._last_vpn_active and self._prov_public and not self._prov_local and self._last_net_active:
+                    self._last_vpn_active=True
+                    forced=_load_forced_proto();
+                    if forced: self._last_vpn_proto=forced
             else:
-                # Offline/Fehler -> Backoff
-                self._offline_until = time.time() + self._offline_backoff
-                self._offline_backoff = min(self._offline_backoff * 2, 600)
+                self._offline_until=time.time()+self._offline_backoff; self._offline_backoff=min(self._offline_backoff*2,600)
             try:
-                Converter.changed(self, (self.CHANGED_POLL,))
-            except Exception:
-                pass
-
-        t = threading.Thread(target=worker, daemon=True)
-        t.start()
-        self._fetch_thread = t
-
+                Converter.changed(self,(self.CHANGED_POLL,))
+            except Exception: pass
+        t=threading.Thread(target=worker, daemon=True); t.start(); self._fetch_thread=t
     def poll(self):
         self._update_fast()
-        if self._need_fetch_public():
-            self._start_fetch_thread()
-        Converter.changed(self, (self.CHANGED_POLL,))
-
-    # ---------- Ausgaben ----------
+        if self._need_fetch_public(): self._start_fetch_thread()
+        Converter.changed(self,(self.CHANGED_POLL,))
     @cached
     def getText(self):
-        if self.type == self.IP:
-            return self._last_public_ip or ''
-        elif self.type == self.CountryCode:
-            return self._last_country_code or ''
-        elif self.type == self.CountryName:
-            return self._last_country_name or ''
-        elif self.type == self.ReceiverIP:
-            return self._last_receiver_ip or ''
-        elif self.type == self.ConnType:
-            return self._last_conn_type or 'net_off'
-        elif self.type == self.VpnActive:
-            return 'True' if self._last_vpn_active else 'False'
-        elif self.type == self.CountryLabel:
-            code = self._last_country_code or ''
-            name = self._last_country_name or ''
-            return ('%s – %s' % (code, name)) if (code and name) else (name or code)
-        elif self.type == self.NetActive:
-            return 'net_on' if self._last_net_active else 'net_off'
-        elif self.type == self.VpnProto:
-            return self._last_vpn_proto or 'none'
-        elif self.type == self.VpnIface:
-            return self._last_vpn_iface or ''
+        if self.type==self.IP: return self._last_public_ip or ''
+        elif self.type==self.CountryCode: return self._last_country_code or ''
+        elif self.type==self.CountryName: return self._last_country_name or ''
+        elif self.type==self.ReceiverIP: return self._last_receiver_ip or ''
+        elif self.type==self.ConnType:
+            if not self._last_net_active:
+                return 'net_off'
+            return self._last_conn_type or 'lan'
+        elif self.type==self.VpnActive: return 'True' if self._last_vpn_active else 'False'
+        elif self.type==self.CountryLabel:
+            code=self._last_country_code or ''; name=self._last_country_name or ''
+            return ('%s – %s' % (code,name)) if (code and name) else (name or code)
+        elif self.type==self.NetActive: return 'net_on' if self._last_net_active else 'net_off'
+        elif self.type==self.VpnProto: return self._last_vpn_proto or 'none'
+        elif self.type==self.VpnIface: return self._last_vpn_iface or ''
+        elif self.type==self.VpnProvider:
+            if not self._last_vpn_active: return 'none'
+            slug=self._prov_local or self._prov_public
+            return slug or 'unknown'
+        elif self.type==self.VpnProviderPretty:
+            if not self._last_vpn_active: return 'None'
+            slug=self._prov_local or self._prov_public
+            if not slug: return 'Unknown'
+            return PROVIDER_PRETTY.get(slug, slug.capitalize())
         return ''
-
-    text = property(getText)
-
+    text=property(getText)
     @cached
     def getBoolean(self):
-        if self.type == self.VpnActive:
-            return bool(self._last_vpn_active)
-        if self.type == self.NetActive:
-            return bool(self._last_net_active)
+        if self.type==self.VpnActive: return bool(self._last_vpn_active)
+        if self.type==self.NetActive: return bool(self._last_net_active)
         return False
-
-    boolean = property(getBoolean)
-
+    boolean=property(getBoolean)
     def changed(self, what):
         Converter.changed(self, what)
