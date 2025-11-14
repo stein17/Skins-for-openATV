@@ -1,7 +1,5 @@
 # Components/Renderer/GradientMapPixmap.py
 # Python 3 only
-# Concept and design by stein17, with the assistance of Python Code Generator
-# Please do not remove these lines; kindly request my permission before sharing or publishing.
 
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
