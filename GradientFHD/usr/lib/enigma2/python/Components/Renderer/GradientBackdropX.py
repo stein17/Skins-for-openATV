@@ -12,22 +12,20 @@
 # by beber...03.2022,
 # 03.2022 several enhancements : several renders with one queue thread, google search (incl. molotov for france) + autosearch & autoclean thread ...
 # for infobar,
-# <widget source="session.Event_Now" render="GradientzPoster" position="100,100" size="185,278" />
-# <widget source="session.Event_Next" render="GradientzPoster" position="100,100" size="100,150" />
-# <widget source="session.Event_Now" render="GradientzPoster" position="100,100" size="185,278" nexts="2" />
-# <widget source="session.CurrentService" render="GradientzPoster" position="100,100" size="185,278" nexts="3" />
-
+# <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" />
+# <widget source="session.Event_Next" render="GradientBackdropX" position="100,100" size="680,1000" />
+# <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
+# <widget source="session.CurrentService" render="GradientBackdropX" position="100,100" size="680,1000" nexts="3" />
 # for ch,
-# <widget source="ServiceEvent" render="GradientzPoster" position="100,100" size="185,278" />
-# <widget source="ServiceEvent" render="GradientzPoster" position="100,100" size="185,278" nexts="2" />
-
+# <widget source="ServiceEvent" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
+# <widget source="ServiceEvent" render="GradientBackdropX" position="100,100" size="185,278" nexts="2" />
 # for epg, event
-# <widget source="Event" render="GradientzPoster" position="100,100" size="185,278" />
-# <widget source="Event" render="GradientzPoster" position="100,100" size="185,278" nexts="2" />
-# or put tag -->  path="/media/hdd/poster"
+# <widget source="Event" render="GradientBackdropX" position="100,100" size="680,1000" />
+# <widget source="Event" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
+# or put tag -->  path="/media/hdd/backdrop"
 from __future__ import print_function
 from Components.Renderer.Renderer import Renderer
-from Components.Renderer.GradientzPosterXDownloadThread import GradientzPosterXDownloadThread
+from .GradientBackdropXDownloadThread import GradientBackdropXDownloadThread
 from Components.Sources.CurrentService import CurrentService
 from Components.Sources.Event import Event
 from Components.Sources.EventInfo import EventInfo
@@ -62,6 +60,7 @@ if sys.version_info[0] >= 3:
     from urllib.request import urlopen
     from urllib.parse import quote_plus
 else:
+    pass
     import Queue
     from thread import start_new_thread
     from urllib2 import HTTPError, URLError
@@ -74,6 +73,7 @@ else:
 try:
     from urllib import unquote, quote
 except ImportError:
+    pass
     from urllib.parse import unquote, quote
 
 
@@ -81,7 +81,8 @@ epgcache = eEPGCache.getInstance()
 if PY3:
     pdb = queue.LifoQueue()
 else:
-    pdb = Queue.LifoQueue()
+    pass
+    pdb = queue.LifoQueue()
 
 
 def isMountedInRW(mount_point):
@@ -95,16 +96,16 @@ def isMountedInRW(mount_point):
 
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 noposter = "/usr/share/enigma2/%s/main/noposter.jpg" % cur_skin
-path_folder = "/tmp/poster"
+path_folder = "/tmp/backdrop"
 if os.path.exists("/media/hdd"):
     if isMountedInRW("/media/hdd"):
-        path_folder = "/media/hdd/xtra/poster"
+        path_folder = "/media/hdd/xtra/backdrop/"
 elif os.path.exists("/media/usb"):
     if isMountedInRW("/media/usb"):
-        path_folder = "/media/usb/xtra/poster"
+        path_folder = "/media/usb/xtra/backdrop/"
 elif os.path.exists("/media/mmc"):
     if isMountedInRW("/media/mmc"):
-        path_folder = "/media/mmc/xtra/poster"
+        path_folder = "/media/mmc/xtra/backdrop/"
 
 if not os.path.exists(path_folder):
     os.makedirs(path_folder)
@@ -118,13 +119,14 @@ try:
     lng = config.osd.language.value
     lng = lng[:-3]
 except:
+    pass
     lng = 'en'
     pass
 
 
-# SET YOUR PREFERRED BOUQUET FOR AUTOMATIC POSTER GENERATION
+# SET YOUR PREFERRED BOUQUET FOR AUTOMATIC BACKDROP GENERATION
 # WITH THE NUMBER OF ITEMS EXPECTED (BLANK LINE IN BOUQUET CONSIDERED)
-# IF NOT SET OR WRONG FILE THE AUTOMATIC POSTER GENERATION WILL WORK FOR
+# IF NOT SET OR WRONG FILE THE AUTOMATIC BACKDROP GENERATION WILL WORK FOR
 # THE CHANNELS THAT YOU ARE VIEWING IN THE ENIGMA SESSION
 
 # add lululla
@@ -145,6 +147,7 @@ def SearchBouquetTerrestrial():
 if SearchBouquetTerrestrial():
     autobouquet_file = SearchBouquetTerrestrial()
 else:
+    pass
     autobouquet_file = '/etc/enigma2/userbouquet.favourites.tv'
 # print('autobouquet_file = ', autobouquet_file)
 autobouquet_count = 70
@@ -153,6 +156,7 @@ if not os.path.exists(autobouquet_file):
     autobouquet_file = None
     autobouquet_count = 0
 else:
+    pass
     with open(autobouquet_file, 'r') as f:
         lines = f.readlines()
     if autobouquet_count > len(lines):
@@ -169,8 +173,8 @@ else:
 
 # try:
     # folder_size = sum([sum(map(lambda fname: os.path.getsize(os.path.join(path_folder, fname)), files)) for folder_p, folders, files in os.walk(path_folder)])
-    # oGradientzPoster = "%0.f" % (folder_size / (1024 * 1024.0))
-    # if oGradientzPoster >= "5":
+    # ozposter = "%0.f" % (folder_size / (1024 * 1024.0))
+    # if ozposter >= "5":
         # shutil.rmtree(path_folder)
 # except:
     # pass
@@ -184,12 +188,14 @@ def OnclearMem():
         os.system('echo 3 > /proc/sys/vm/drop_caches')
     except:
         pass
+        pass
 
 
 def quoteEventName(eventName):
     try:
         text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
     except:
+        pass
         text = eventName
     return quote_plus(text, safe="+")
 
@@ -223,10 +229,13 @@ def intCheck():
         response = urlopen("http://google.com", None, 5)
         response.close()
     except HTTPError:
+        pass
         return False
     except URLError:
+        pass
         return False
     except socket.timeout:
+        pass
         return False
     return True
 
@@ -286,6 +295,7 @@ def dataenc(data):
     if PY3:
         data = data.decode("utf-8")
     else:
+        pass
         data = data.encode("utf-8")
     return data
 
@@ -301,15 +311,12 @@ def sanitize_filename(filename):
 def convtext(text=''):
     try:
         if text is None:
-###             print('return None original text: ' + str(type(text)))
             return
         if text == '':
-            # print('text is an empty string')
-                pass
+            return
         else:
-###             print('original text:' + text)
+            pass
             text = text.lower()
-###             print('lowercased text:' + text)
             text = text.lstrip()
             
             # text = cutName(text)
@@ -348,7 +355,7 @@ def convtext(text=''):
             if 'alessandro borghese - 4 ristoranti' in text:
                 text = 'alessandroborgheseristoranti'
             if 'alessandro borghese: 4 ristoranti' in text:
-                text = 'alessandroborgheseristoranti'
+                text = 'alessandroborgheseristoranti' 
 
             cutlist = ['x264', '720p', '1080p', '1080i', 'pal', 'german', 'english', 'ws', 'dvdrip', 'unrated',
                        'retail', 'web-dl', 'dl', 'ld', 'mic', 'md', 'dvdr', 'bdrip', 'bluray', 'dts', 'uncut', 'anime',
@@ -357,13 +364,12 @@ def convtext(text=''):
                        'webhdtv', 'webhd', 'hdtvrip', 'hdrip', 'hdtv', 'ituneshd', 'repack', 'sync', '1^tv', '1^ tv',
                        '1^ visione rai', '1^ visione', ' - prima tv', ' - primatv', 'prima visione',
                        'film -', 'de filippi', 'first screening',
-                       'live:', 'new:', 'film:', 'première diffusion', 'nouveau:', 'en direct:',
+                       'live:', 'new:', 'film:', 'première diffusion', 'nouveau:', 'en direct:', 
                        'premiere:', 'estreno:', 'nueva emisión:', 'en vivo:'
                        ]
             for word in cutlist:
                 text = text.replace(word, '')
             text = ' '.join(text.split())
-            # print(text)
 
             text = cutName(text)
             text = getCleanTitle(text)
@@ -387,7 +393,6 @@ def convtext(text=''):
 
             # Rimuovi accenti e normalizza
             text = remove_accents(text)
-###             print('remove_accents text: ' + text)
 
             # Forzature finali
             text = text.replace('XXXXXX', '60')
@@ -400,13 +405,11 @@ def convtext(text=''):
             return text.capitalize()
     except Exception as e:
         pass
-###         print('convtext error: ' + str(e))
         pass
 
 
 def convtextPAUSED(text=''):
     text = text.lower()
-    # print('text lower init=', text)
     text = text.lstrip()
     text = text.replace("\xe2\x80\x93", "").replace('\xc2\x86', '').replace('\xc2\x87', '')  # replace special
     if 'bruno barbieri' in text:
@@ -495,7 +498,6 @@ def convtextPAUSED(text=''):
     text = text.partition("-")[0]
 
     text = remove_accents(text)
-###     print('remove_accents text:', text)
 
     text = text + 'FIN'
     text = re.sub(r'(odc.\s\d+)+.*?FIN', '', text)
@@ -506,29 +508,24 @@ def convtextPAUSED(text=''):
     text = re.sub('FIN', '', text)
 
     text = sanitize_filename(text)
-###     print('sanitize_filename text:', text)
 
     # forced
     text = text.replace('XXXXXX', '60')
     text = text.replace('brunobarbierix', 'bruno barbieri - 4 hotel')
 
     text = quote(text, safe="")
-###     print('text final:', text)
     return unquote(text).capitalize()
 
 
 def convtextxx(text=''):
     try:
         if text is None:
-###             print('return None original text: ', type(text))
             return  # Esci dalla funzione se text è None
         if text == '':
-            # print('text is an empty string')
-                pass
+            return
         else:
-###             print('original text: ', text)
+            pass
             text = text.lower()
-###             print('lowercased text: ', text)
             text = text.lstrip()
             # #
             text = cutName(text)
@@ -654,23 +651,20 @@ def convtextxx(text=''):
             text = text.strip(' -')
 
             text = remove_accents(text)
-###             print('remove_accents text: ', text)
 
             # forced
             text = text.replace('XXXXXX', '60')
             text = text.replace('brunobarbierix', 'bruno barbieri - 4 hotel')
             text = quote(text, safe="")
-###             print('text safe: ', text)
         return unquote(text).capitalize()
     except Exception as e:
         pass
-###         print('convtext error: ', e)
         pass
 
 
-class PosterDB(GradientzPosterXDownloadThread):
+class BackdropDB(GradientBackdropXDownloadThread):
     def __init__(self):
-        GradientzPosterXDownloadThread.__init__(self)
+        GradientBackdropXDownloadThread.__init__(self)
         self.logdbg = None
         self.pstcanal = None
 
@@ -680,57 +674,56 @@ class PosterDB(GradientzPosterXDownloadThread):
             canal = pdb.get()
             self.logDB("[QUEUE] : {} : {}-{} ({})".format(canal[0], canal[1], canal[2], canal[5]))
             self.pstcanal = convtext(canal[5])
-            if self.pstcanal != 'None' or self.pstcanal is not None:
-                dwn_poster = path_folder + '/' + self.pstcanal + ".jpg"
+            if self.pstcanal is not None:
+                dwn_backdrop = path_folder + '/' + self.pstcanal + ".jpg"
             else:
-                # print('none type xxxxxxxxxx- posterx')
+                pass
                 return
-            if os.path.exists(dwn_poster):
-                os.utime(dwn_poster, (time.time(), time.time()))
+            if os.path.exists(dwn_backdrop):
+                os.utime(dwn_backdrop, (time.time(), time.time()))
             '''
             # if lng == "fr":
-                # if not os.path.exists(dwn_poster):
-                    # val, log = self.search_molotov_google(dwn_poster, canal[5], canal[4], canal[3], canal[0])
+                # if not os.path.exists(dwn_backdrop):
+                    # val, log = self.search_molotov_google(dwn_backdrop, canal[5], canal[4], canal[3], canal[0])
                     # self.logDB(log)
-                # if not os.path.exists(dwn_poster):
-                    # val, log = self.search_programmetv_google(dwn_poster, canal[5], canal[4], canal[3], canal[0])
+                # if not os.path.exists(dwn_backdrop):
+                    # val, log = self.search_programmetv_google(dwn_backdrop, canal[5], canal[4], canal[3], canal[0])
                     # self.logDB(log)
             '''
-            if not os.path.exists(dwn_poster):
-                val, log = self.search_tmdb(dwn_poster, self.pstcanal, canal[4], canal[3])
+            if not os.path.exists(dwn_backdrop):
+                val, log = self.search_tmdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
                 self.logDB(log)
-            elif not os.path.exists(dwn_poster):
-                val, log = self.search_tvdb(dwn_poster, self.pstcanal, canal[4], canal[3])
+            elif not os.path.exists(dwn_backdrop):
+                val, log = self.search_tvdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
                 self.logDB(log)
-            elif not os.path.exists(dwn_poster):
-                val, log = self.search_fanart(dwn_poster, self.pstcanal, canal[4], canal[3])
+            elif not os.path.exists(dwn_backdrop):
+                val, log = self.search_fanart(dwn_backdrop, self.pstcanal, canal[4], canal[3])
                 self.logDB(log)
-            elif not os.path.exists(dwn_poster):
-                val, log = self.search_imdb(dwn_poster, self.pstcanal, canal[4], canal[3])
+            elif not os.path.exists(dwn_backdrop):
+                val, log = self.search_imdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
                 self.logDB(log)
-            elif not os.path.exists(dwn_poster):
-                val, log = self.search_google(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+            elif not os.path.exists(dwn_backdrop):
+                val, log = self.search_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                 self.logDB(log)
             pdb.task_done()
 
     def logDB(self, logmsg):
         import traceback
         try:
-            with open("/tmp/PosterDB.log", "a") as w:
+            with open("/tmp/BackdropDB.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
             pass
-            # print('logDB error:', str(e))
             traceback.print_exc()
 
 
-threadDB = PosterDB()
+threadDB = BackdropDB()
 threadDB.start()
 
 
-class PosterAutoDB(GradientzPosterXDownloadThread):
+class BackdropAutoDB(GradientBackdropXDownloadThread):
     def __init__(self):
-        GradientzPosterXDownloadThread.__init__(self)
+        GradientBackdropXDownloadThread.__init__(self)
         self.logdbg = None
 
     def run(self):
@@ -754,10 +747,12 @@ class PosterAutoDB(GradientzPosterXDownloadThread):
                         if PY3:
                             canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
                         else:
+                            pass
                             canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
                         if evt[1] is None or evt[4] is None or evt[5] is None or evt[6] is None:
                             self.logAutoDB("[AutoDB] *** missing epg for {}".format(canal[0]))
                         else:
+                            pass
                             canal[1] = evt[1]
                             canal[2] = evt[4]
                             canal[3] = evt[5]
@@ -765,45 +760,45 @@ class PosterAutoDB(GradientzPosterXDownloadThread):
                             canal[5] = canal[2]
                             self.pstcanal = convtext(canal[5]) if canal[5] else None
                             if not self.pstcanal:
-                                # print('none type xxxxxxxxxx- posterx')
                                 return
-                            dwn_poster = os.path.join(path_folder, self.pstcanal + ".jpg")
-                            if os.path.exists(dwn_poster):
-                                os.utime(dwn_poster, (time.time(), time.time()))
+                            dwn_backdrop = os.path.join(path_folder, self.pstcanal + ".jpg")
+                            if os.path.exists(dwn_backdrop):
+                                os.utime(dwn_backdrop, (time.time(), time.time()))
                             '''
                             # if lng == "fr":
-                                # if not os.path.exists(dwn_poster):
-                                    # val, log = self.search_molotov_google(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                                # if not os.path.exists(dwn_backdrop):
+                                    # val, log = self.search_molotov_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                     # if val and log.find("SUCCESS"):
                                         # newfd += 1
-                                # if not os.path.exists(dwn_poster):
-                                    # val, log = self.search_programmetv_google(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                                # if not os.path.exists(dwn_backdrop):
+                                    # val, log = self.search_programmetv_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                     # if val and log.find("SUCCESS"):
                                         # newfd += 1
                             '''
-                            if not os.path.exists(dwn_poster):
-                                val, log = self.search_tmdb(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                            if not os.path.exists(dwn_backdrop):
+                                val, log = self.search_tmdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                 if val and log.find("SUCCESS"):
                                     newfd += 1
-                            elif not os.path.exists(dwn_poster):
-                                val, log = self.search_tvdb(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                            elif not os.path.exists(dwn_backdrop):
+                                val, log = self.search_tvdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                 if val and log.find("SUCCESS"):
                                     newfd += 1
-                            elif not os.path.exists(dwn_poster):
-                                val, log = self.search_fanart(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                            elif not os.path.exists(dwn_backdrop):
+                                val, log = self.search_fanart(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                 if val and log.find("SUCCESS"):
                                     newfd += 1
-                            elif not os.path.exists(dwn_poster):
-                                val, log = self.search_imdb(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                            elif not os.path.exists(dwn_backdrop):
+                                val, log = self.search_imdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                 if val and log.find("SUCCESS"):
                                     newfd += 1
-                            elif not os.path.exists(dwn_poster):
-                                val, log = self.search_google(dwn_poster, self.pstcanal, canal[4], canal[3], canal[0])
+                            elif not os.path.exists(dwn_backdrop):
+                                val, log = self.search_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
                                 if val and log.find("SUCCESS"):
                                     newfd += 1
                             newcn = canal[0]
                         self.logAutoDB("[AutoDB] {} new file(s) added ({})".format(newfd, newcn))
                 except Exception as e:
+                    pass
                     self.logAutoDB("[AutoDB] *** service error ({})".format(e))
             # AUTO REMOVE OLD FILES
             now_tm = time.time()
@@ -824,19 +819,18 @@ class PosterAutoDB(GradientzPosterXDownloadThread):
     def logAutoDB(self, logmsg):
         import traceback
         try:
-            with open("/tmp/PosterAutoDB.log", "a") as w:
+            with open("/tmp/BackdropAutoDB.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
             pass
-            # print('logAutoDB error', str(e))
             traceback.print_exc()
 
 
-threadAutoDB = PosterAutoDB()
+threadAutoDB = BackdropAutoDB()
 threadAutoDB.start()
 
 
-class GradientzPosterX(Renderer):
+class GradientBackdropX(Renderer):
     def __init__(self):
         adsl = intCheck()
         if not adsl:
@@ -850,9 +844,10 @@ class GradientzPosterX(Renderer):
         self.pstcanal = None
         self.timer = eTimer()
         try:
-            self.timer_conn = self.timer.timeout.connect(self.showPoster)
+            self.timer_conn = self.timer.timeout.connect(self.showBackdrop)
         except:
-            self.timer.callback.append(self.showPoster)
+            pass
+            self.timer.callback.append(self.showBackdrop)
         # self.timer.start(10, True)
 
     def applySkin(self, desktop, parent):
@@ -892,11 +887,13 @@ class GradientzPosterX(Renderer):
                     if self.nxts:
                         service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
                     else:
+                        pass
                         self.canal[0] = None
                         self.canal[1] = self.source.event.getBeginTime()
                         if PY3:
                             self.canal[2] = self.source.event.getEventName().replace('\xc2\x86', '').replace('\xc2\x87', '')
                         else:
+                            pass
                             self.canal[2] = self.source.event.getEventName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
                         self.canal[3] = self.source.event.getExtendedDescription()
                         self.canal[4] = self.source.event.getShortDescription()
@@ -907,6 +904,7 @@ class GradientzPosterX(Renderer):
                     if PY3:
                         self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')  # .encode('utf-8')
                     else:
+                        pass
                         self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
                     self.canal[1] = events[self.nxts][1]
                     self.canal[2] = events[self.nxts][4]
@@ -917,12 +915,13 @@ class GradientzPosterX(Renderer):
                         if self.canal[0] not in apdb:
                             apdb[self.canal[0]] = service.toString()
             except Exception as e:
-                self.logPoster("Error (service) : " + str(e))
+                pass
+                self.logBackdrop("Error (service) : " + str(e))
                 if self.instance:
                     self.instance.hide()
                 return
             if not servicetype or servicetype is None:
-                self.logPoster("Error service type undefined")
+                self.logBackdrop("Error service type undefined")
                 if self.instance:
                     self.instance.hide()
                 return
@@ -931,49 +930,50 @@ class GradientzPosterX(Renderer):
                 if curCanal == self.oldCanal:
                     return
                 self.oldCanal = curCanal
-                self.logPoster("Service: {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
+                self.logBackdrop("Service: {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
                 self.pstcanal = convtext(self.canal[5])
                 if self.pstcanal is not None:
-                    self.pstrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
-                    self.pstcanal = str(self.pstrNm)
+                    self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
+                    self.pstcanal = str(self.backrNm)
                 if os.path.exists(self.pstcanal):
                     self.timer.start(10, True)
                 else:
+                    pass
                     canal = self.canal[:]
                     pdb.put(canal)
-                    start_new_thread(self.waitPoster, ())
+                    start_new_thread(self.waitBackdrop, ())
             except Exception as e:
-                self.logPoster("Error (eFile): " + str(e))
+                pass
+                self.logBackdrop("Error (eFile): " + str(e))
                 if self.instance:
                     self.instance.hide()
                 return
 
-    def showPoster(self):
+    def showBackdrop(self):
         if self.instance:
             self.instance.hide()
         if self.canal[5]:
             if self.pstcanal is not None and not os.path.exists(self.pstcanal):
                 self.pstcanal = convtext(self.canal[5])
-                self.pstrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
-                self.pstcanal = str(self.pstrNm)
+                self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
+                self.pstcanal = str(self.backrNm)
             if self.pstcanal is not None and os.path.exists(self.pstcanal):
-###                 print('showPoster----')
-                self.logPoster("[LOAD : showPoster] {}".format(self.pstcanal))
+                self.logBackdrop("[LOAD : showBackdrop] {}".format(self.pstcanal))
                 self.instance.setPixmap(loadJPG(self.pstcanal))
                 self.instance.setScale(1)
                 self.instance.show()
 
-    def waitPoster(self):
+    def waitBackdrop(self):
         if self.instance:
             self.instance.hide()
         if self.canal[5]:
             if self.pstcanal is not None and not os.path.exists(self.pstcanal):
                 self.pstcanal = convtext(self.canal[5])
-                self.pstrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
-                self.pstcanal = str(self.pstrNm)
+                self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
+                self.pstcanal = str(self.backrNm)
             loop = 180
             found = None
-            self.logPoster("[LOOP: waitPoster] {}".format(self.pstcanal))
+            self.logBackdrop("[LOOP: waitBackdrop] {}".format(self.pstcanal))
             while loop >= 0:
                 # if self.pstcanal is not None and os.path.exists(self.pstcanal):
                 loop = 0
@@ -983,11 +983,10 @@ class GradientzPosterX(Renderer):
             if found:
                 self.timer.start(20, True)
 
-    def logPoster(self, logmsg):
+    def logBackdrop(self, logmsg):
         try:
-            with open("/tmp/xtra_Poster.log", "a") as w:
+            with open("/tmp/xtra_Backdrop.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
             pass
-            # print('logPoster error', str(e))
             traceback.print_exc()

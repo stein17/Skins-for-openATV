@@ -10,7 +10,7 @@ import json
 import os
 import re
 import sys
-from .Converlibr import convtext
+from .GradientConverlibr import convtext
 
 PY3 = False
 if sys.version_info[0] >= 3:
@@ -82,7 +82,7 @@ class GradientzParental(Renderer):
 
                     self.pstcanal = convtext(eventNm) if eventNm else None
                     if not self.pstcanal:
-                        print('Event non trovato per la visualizzazione del poster')
+                        # print('Event non trovato per la visualizzazione del poster')
                         return
 
                     infos_file = "%s%s.json" % (path_folder, self.pstcanal)
@@ -96,7 +96,8 @@ class GradientzParental(Renderer):
                                 "Unrated": "UN", "": "UN", "Passed": "UN"
                             }.get(age, "UN")
                 except Exception as e:
-                    print("Errore durante la lettura delle informazioni sul rating:", e)
+                    pass
+                    # print("Errore durante la lettura delle informazioni sul rating:", e)
 
             if cert:
                 self.instance.setPixmap(loadPNG(os.path.join(pratePath, "FSK_%s.png" % cert)))
@@ -104,7 +105,8 @@ class GradientzParental(Renderer):
             else:
                 self.instance.hide()
         except Exception as e:
-            print("Error in showParental:", e)
+            pass
+            # print("Error in showParental:", e)
             self.instance.hide()
 
     def delay(self):

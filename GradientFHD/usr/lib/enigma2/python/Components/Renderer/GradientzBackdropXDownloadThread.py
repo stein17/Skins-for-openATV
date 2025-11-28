@@ -111,7 +111,7 @@ try:
                         thetvdbkey = value
                 my_cur_skin = True
 except Exception as e:
-    print("Errore nel caricamento delle API:", str(e))
+    pass
     my_cur_skin = False
 
 
@@ -233,7 +233,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
     def search_tmdb(self, dwn_backdrop, title, shortdesc, fulldesc, channel=None):
         try:
             self.dwn_backdrop = dwn_backdrop
-            print('self.dwn_backdrop=', self.dwn_backdrop)
+#             print('self.dwn_backdrop=', self.dwn_backdrop)
             title_safe = title
             # title_safe = self.UNAC(title)
             # title_safe = quoteEventName(title_safe)
@@ -241,7 +241,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
             # Sanitize the filename before saving
             self.title_safe = sanitize_filename(self.title_safe)
             url = f"https://api.themoviedb.org/3/search/multi?api_key={tmdb_api}&language={lng}&query={self.title_safe}"
-            print('backdrop search_tmdb url title safe', url)
+#             print('backdrop search_tmdb url title safe', url)
             data = None
             retries = Retry(total=1, backoff_factor=1)
             adapter = HTTPAdapter(max_retries=retries)
@@ -255,19 +255,19 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                 try:
                     data = response.json()
                 except ValueError as e:
-                    print(e)
+                    pass
                     data = None
                 self.downloadData2(data)
                 return True, "Download avviato con successo"
             else:
                 return False, f"Errore durante la ricerca su TMDb: {response.status_code}"
         except Exception as e:
-            print('Errore nella ricerca TMDb:', e)
+            pass
             return False, "Errore durante la ricerca su TMDb"
 
     def downloadData2(self, data):
         if isinstance(data, bytes):
-            print("Decoding bytes to string...")
+#             print("Decoding bytes to string...")
             data = data.decode('utf-8')
         data_json = data if isinstance(data, dict) else json.loads(data)
         if 'results' in data_json:
@@ -298,7 +298,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                             return True, "[SUCCESS poster: tmdb] title {} [poster{}-backdrop{}] => year{} => rating{} => showtitle{}".format(title, poster, backdrop, year, rating, show_title)
                     return False, "[SKIP : tmdb] Not found"
             except Exception as e:
-                print('error=', e)
+                pass
                 if os.path.exists(self.dwn_backdrop):
                     os.remove(self.dwn_backdrop)
                 return False, "[ERROR : tmdb]"
@@ -394,7 +394,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                 mj = requests.get(url_maze).json()
                 id = (mj['externals']['thetvdb'])
             except Exception as err:
-                print('Error:', err)
+                pass
 
             try:
                 m_type = 'tv'
@@ -417,7 +417,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                      
                     return False, "[SKIP : fanart] {} [{}-{}] => {} (Not found)".format(self.title_safe, chkType, year, url_maze)
             except Exception as e:
-                print(e)
+                pass
 
         except Exception as e:
             if os.path.exists(dwn_backdrop):
@@ -750,8 +750,8 @@ class GradientzBackdropXDownloadThread(threading.Thread):
             return False, "[ERROR : google] {} [{}-{}] => {} => {} ({})".format(self.title_safe, chkType, year, url_google, url_backdrop, str(e))
 
     def savebackdrop(self, url, callback):
-        print('000000000URLLLLL=', url)
-        print('000000000CALLBACK=', callback)
+###         print('000000000URLLLLL=', url)
+###         print('000000000CALLBACK=', callback)
         AGENTS = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
                   "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
                   "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
@@ -767,7 +767,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                 local_file.write(response.content)
 
         except exceptions.RequestException as error:
-            print("ERROR in module 'download': %s" % (str(error)))
+            pass
         return callback
 
     def resizebackdrop(self, dwn_backdrop):
@@ -785,7 +785,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
             rimg.save(dwn_backdrop)
             rimg.close()
         except Exception as e:
-            print("ERROR:{}".format(e))
+            pass
 
     def verifybackdrop(self, dwn_backdrop):
         try:
@@ -800,7 +800,7 @@ class GradientzBackdropXDownloadThread(threading.Thread):
                     pass
                 return False
         except Exception as e:
-            print(e)
+            pass
             try:
                 os.remove(dwn_backdrop)
             except:

@@ -299,14 +299,15 @@ def sanitize_filename(filename):
 def convtext(text=''):
     try:
         if text is None:
-            print('return None original text: ' + str(type(text)))
+###             print('return None original text: ' + str(type(text)))
             return
         if text == '':
-            print('text is an empty string')
+            # print('text is an empty string')
+                pass
         else:
-            print('original text:' + text)
+###             print('original text:' + text)
             text = text.lower()
-            print('lowercased text:' + text)
+###             print('lowercased text:' + text)
             text = text.lstrip()
             
             # text = cutName(text)
@@ -360,7 +361,7 @@ def convtext(text=''):
             for word in cutlist:
                 text = text.replace(word, '')
             text = ' '.join(text.split())
-            print(text)
+            # print(text)
 
             text = cutName(text)
             text = getCleanTitle(text)
@@ -384,7 +385,7 @@ def convtext(text=''):
 
             # Rimuovi accenti e normalizza
             text = remove_accents(text)
-            print('remove_accents text: ' + text)
+###             print('remove_accents text: ' + text)
 
             # Forzature finali
             text = text.replace('XXXXXX', '60')
@@ -393,16 +394,17 @@ def convtext(text=''):
             text = text.replace('il ritorno di colombo', 'colombo')
 
             # text = sanitize_filename(text)
-            # print('sanitize_filename text: ' + text)
+###             # print('sanitize_filename text: ' + text)
             return text.capitalize()
     except Exception as e:
-        print('convtext error: ' + str(e))
+        pass
+###         print('convtext error: ' + str(e))
         pass
 
 
 def convtextPAUSED(text=''):
     text = text.lower()
-    print('text lower init=', text)
+    # print('text lower init=', text)
     text = text.lstrip()
     text = text.replace("\xe2\x80\x93", "").replace('\xc2\x86', '').replace('\xc2\x87', '')  # replace special
     if 'bruno barbieri' in text:
@@ -491,7 +493,7 @@ def convtextPAUSED(text=''):
     text = text.partition("-")[0]
 
     text = remove_accents(text)
-    print('remove_accents text:', text)
+###     print('remove_accents text:', text)
 
     text = text + 'FIN'
     text = re.sub(r'(odc.\s\d+)+.*?FIN', '', text)
@@ -502,28 +504,29 @@ def convtextPAUSED(text=''):
     text = re.sub('FIN', '', text)
 
     text = sanitize_filename(text)
-    print('sanitize_filename text:', text)
+###     print('sanitize_filename text:', text)
 
     # forced
     text = text.replace('XXXXXX', '60')
     text = text.replace('brunobarbierix', 'bruno barbieri - 4 hotel')
 
     text = quote(text, safe="")
-    print('text final:', text)
+###     print('text final:', text)
     return unquote(text).capitalize()
 
 
 def convtextxx(text=''):
     try:
         if text is None:
-            print('return None original text: ', type(text))
+###             print('return None original text: ', type(text))
             return  # Esci dalla funzione se text è None
         if text == '':
-            print('text is an empty string')
+            # print('text is an empty string')
+                pass
         else:
-            print('original text: ', text)
+###             print('original text: ', text)
             text = text.lower()
-            print('lowercased text: ', text)
+###             print('lowercased text: ', text)
             text = text.lstrip()
             # #
             text = cutName(text)
@@ -649,16 +652,17 @@ def convtextxx(text=''):
             text = text.strip(' -')
 
             text = remove_accents(text)
-            print('remove_accents text: ', text)
+###             print('remove_accents text: ', text)
 
             # forced
             text = text.replace('XXXXXX', '60')
             text = text.replace('brunobarbierix', 'bruno barbieri - 4 hotel')
             text = quote(text, safe="")
-            print('text safe: ', text)
+###             print('text safe: ', text)
         return unquote(text).capitalize()
     except Exception as e:
-        print('convtext error: ', e)
+        pass
+###         print('convtext error: ', e)
         pass
 
 
@@ -677,7 +681,7 @@ class BackdropDB(GradientzBackdropXDownloadThread):
             if self.pstcanal is not None:
                 dwn_backdrop = path_folder + '/' + self.pstcanal + ".jpg"
             else:
-                print('none type xxxxxxxxxx- posterx')
+                # print('none type xxxxxxxxxx- posterx')
                 return
             if os.path.exists(dwn_backdrop):
                 os.utime(dwn_backdrop, (time.time(), time.time()))
@@ -713,7 +717,8 @@ class BackdropDB(GradientzBackdropXDownloadThread):
             with open("/tmp/BackdropDB.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
-            print('logDB error:', str(e))
+            pass
+            # print('logDB error:', str(e))
             traceback.print_exc()
 
 
@@ -758,7 +763,7 @@ class BackdropAutoDB(GradientzBackdropXDownloadThread):
                             canal[5] = canal[2]
                             self.pstcanal = convtext(canal[5]) if canal[5] else None
                             if not self.pstcanal:
-                                print('none type xxxxxxxxxx- posterx')
+                                # print('none type xxxxxxxxxx- posterx')
                                 return
                             dwn_backdrop = os.path.join(path_folder, self.pstcanal + ".jpg")
                             if os.path.exists(dwn_backdrop):
@@ -820,7 +825,8 @@ class BackdropAutoDB(GradientzBackdropXDownloadThread):
             with open("/tmp/BackdropAutoDB.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
-            print('logBackdrop error', str(e))
+            pass
+            # print('logBackdrop error', str(e))
             traceback.print_exc()
 
 
@@ -949,7 +955,7 @@ class GradientzBackdropX(Renderer):
                 self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
                 self.pstcanal = str(self.backrNm)
             if self.pstcanal is not None and os.path.exists(self.pstcanal):
-                print('showBackdrop----')
+###                 print('showBackdrop----')
                 self.logBackdrop("[LOAD : showBackdrop] {}".format(self.pstcanal))
                 self.instance.setPixmap(loadJPG(self.pstcanal))
                 self.instance.setScale(1)
@@ -980,5 +986,6 @@ class GradientzBackdropX(Renderer):
             with open("/tmp/xtra_Backdrop.log", "a") as w:
                 w.write("%s\n" % logmsg)
         except Exception as e:
-            print('logBackdrop error', str(e))
+            pass
+            # print('logBackdrop error', str(e))
             traceback.print_exc()
