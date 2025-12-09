@@ -1,23 +1,21 @@
 ##############################################################################################################################   
-#    <copyright>                                                                                                             #
-#    <!-- !!!!!!! DIESEN BLOCK NICHT ENTFERNEN !!!!!!! -->                                                                   #
-#    <!-- BootlogoSwitcher-Plugin, Idee und Skin von @stein17, erstellt mit Hilfe des PCG -->                                #
-# <!-- BootlogoSwitcher-Plugin, Idee und Skin von @stein17, optimiert von@ Mr.Servo(danke), erstellt mit Hilfe des PCG -->   #          
-#    <!-- Dieses Plugin ist Freeware und darf in anderen Images verwendet werden. -->                                        #
-#	 <!-- Bei Veröffentlichungen in Foren bitte den Autor angeben. -->                                                       #
-#	 <!-- Sie dürfen das Plugin modifizieren, aber nicht behaupten, dass es von Ihnen stammt, oder dass es Ihre Idee ist --> #
-#    <!-- Lassen Sie die Informationen im Feld „Copyright“ unverändert, fügen Sie nur etwas hinzu -->                        #
-#    </copyright>                                                                                                            #
+# <copyright>                                                                                                                #
+#  <!-- !!!!!!! DIESEN BLOCK NICHT ENTFERNEN !!!!!!! -->                                                                     #
+#  <!-- BootlogoSwitcher-Plugin, Idee und Skin von @stein17, optimiert von@ Mr.Servo(danke), erstellt mit Hilfe des PCG -->  #          
+#  <!-- Dieses Plugin ist Freeware und darf in anderen Images verwendet werden. -->                                          #
+#  <!-- Bei Veröffentlichungen in Foren bitte die Autoren angeben. -->                                                       #
+#  <!-- Sie dürfen das Plugin modifizieren, aber nicht behaupten, dass es von Ihnen stammt, oder dass es Ihre Idee ist -->   #
+#  <!-- Lassen Sie die Informationen im Feld „Copyright“ unverändert, fügen Sie nur etwas hinzu -->                          #
+# </copyright>                                                                                                               #
 #	                                                                                                                         #
-#	 <copyright>                                                                                                             #
-#	 <!-- !!!!!!! BUT DO NOT REMOVE OR THIS Copyright !!!!!!! -->                                                            #
-#    <!-- BootlogoSwitcher plugin, idea and skin by @stein17, created with the help of PCG ->                                #
-#    <!-- BootlogoSwitcher plugin, idea and skin by @stein17, optimized by @Mr.Servo(thanks), created with the help of PCG ->#
-#    <!-- This plugin is freeware and may be used in other images. -->                                                       #
-#	 <!-- When posting in forums, please cite the author. -->                                                                #                                                       
-#	 <!-- You may modify the plugin, but do not claim that it originated from you or that it is your idea -->                #
-#    <!-- Leave the information in the “Copyright field” unchanged, only add to it -->                                       #
-#    </copyright>                                                                                                            #
+# <copyright>                                                                                                                #
+#  <!-- !!!!!!! BUT DO NOT REMOVE OR THIS Copyright !!!!!!! -->                                                              #
+#  <!-- BootlogoSwitcher plugin, idea and skin by @stein17, optimized by @Mr.Servo(thanks), created with the help of PCG ->  #
+#  <!-- This plugin is freeware and may be used in other images. -->                                                         #
+#  <!-- When posting in forums, please cite the author. -->                                                                  #                                                       
+#  <!-- You may modify the plugin, but do not claim that it originated from you or that it is your idea -->                  #
+#  <!-- Leave the information in the “Copyright field” unchanged, only add to it -->                                         #
+# </copyright>                                                                                                               #
 ##############################################################################################################################
 
 """
@@ -163,17 +161,17 @@ class BLSmain(Screen, BLSglobals):
 		<eLabel name="line" position="0,60" size="1140, 1" zPosition="2" backgroundColor="#999999" halign="center" />
 		<eLabel name="line" position="0,586" size="1140, 1" zPosition="2" backgroundColor="#999999" halign="center" />
 		<widget source="key_red" render="Label" position="20,600" size="200,30" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="red_bg" position="18,598" size="204,34" backgroundColor="red" cornerRadius="4" zPosition="-2" />
-		<eLabel name="red_bg_center" position="20,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="red_bg" position="18,598" size="204,34" backgroundColor="red" cornerRadius="6" zPosition="-2" />
+		<eLabel name="red_bg_center" position="20,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_green" render="Label" position="250,600" size="200,30" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="green_bg" position="248,598" size="204,34" backgroundColor="green" cornerRadius="4" zPosition="-2" />
-		<eLabel name="green_bg_center" position="250,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="green_bg" position="248,598" size="204,34" backgroundColor="green" cornerRadius="6" zPosition="-2" />
+		<eLabel name="green_bg_center" position="250,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_yellow" render="Label" position="480,600" size="200,30" zPosition="1" font="Regular; 20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="yellow_bg" position="478,598" size="204,34" backgroundColor="yellow" cornerRadius="4" zPosition="-2" />
-		<eLabel name="yellow_bg_center" position="480,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="yellow_bg" position="478,598" size="204,34" backgroundColor="yellow" cornerRadius="6" zPosition="-2" />
+		<eLabel name="yellow_bg_center" position="480,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_blue" render="Label" position="710,600" size="200,30" zPosition="1" font="Regular; 20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="blue_bg" position="708,598" size="204,34" backgroundColor="blue" cornerRadius="4" zPosition="-2" />
-		<eLabel name="blue_bg_center" position="710,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="blue_bg" position="708,598" size="204,34" backgroundColor="blue" cornerRadius="6" zPosition="-2" />
+		<eLabel name="blue_bg_center" position="710,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<ePixmap position="940,602" size="45,26" zPosition="10" pixmap="~ok.png" transparent="1" alphatest="blend" scale="1" />
 		<ePixmap position="1010,602" size="45,26" zPosition="10" pixmap="~menu.png" transparent="1" alphatest="blend" scale="1" />
 		<ePixmap position="1080,602" size="45,26" zPosition="10" pixmap="~exit.png" transparent="1" alphatest="blend" scale="1" />
@@ -454,7 +452,7 @@ class BLSdownload(Screen, BLSglobals):
 			<convert type="ClockToText">Format:%a %d.%m. %H:%M</convert>
 		</widget>
 		<widget name="info" position="140,10" size="800,40" font="Regular;22" halign="left" valign="center" transparent="1" foregroundColor="white" backgroundColor="#20000000" />
-		<widget source="logoList" render="Listbox" position="20,70" size="650,450"  foregroundColor="white" backgroundColor="#20000000" backgroundColorSelected="white" foregroundColorSelected="black" transparent="1" scrollbarMode="showOnDemand" >
+		<widget source="logoList" render="Listbox" position="20,70" size="660,450"  foregroundColor="white" backgroundColor="#20000000" backgroundColorSelected="white" foregroundColorSelected="black" transparent="1" scrollbarMode="showOnDemand" >
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(4,2), size=(440,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # picName
 				MultiContentEntryText(pos=(430,2), size=(70,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # fileType
@@ -473,17 +471,17 @@ class BLSdownload(Screen, BLSglobals):
 		<eLabel name="line" position="0,60" size="1160, 1" zPosition="2" backgroundColor="#999999" halign="center" />
 		<eLabel name="line" position="0,586" size="1160, 1" zPosition="2" backgroundColor="#999999" halign="center" />
 		<widget source="key_red" render="Label" position="20,600" size="200,30" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="red_bg" position="18,598" size="204,34" backgroundColor="red" cornerRadius="4" zPosition="-2" />
-		<eLabel name="red_bg_center" position="20,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="red_bg" position="18,598" size="204,34" backgroundColor="red" cornerRadius="6" zPosition="-2" />
+		<eLabel name="red_bg_center" position="20,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_green" render="Label" position="250,600" size="200,30" zPosition="1" font="Regular;20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="green_bg" position="248,598" size="204,34" backgroundColor="green" cornerRadius="4" zPosition="-2" />
-		<eLabel name="green_bg_center" position="250,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="green_bg" position="248,598" size="204,34" backgroundColor="green" cornerRadius="6" zPosition="-2" />
+		<eLabel name="green_bg_center" position="250,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_yellow" render="Label" position="480,600" size="200,30" zPosition="1" font="Regular; 20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="yellow_bg" position="478,598" size="204,34" backgroundColor="yellow" cornerRadius="4" zPosition="-2" />
-		<eLabel name="yellow_bg_center" position="480,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="yellow_bg" position="478,598" size="204,34" backgroundColor="yellow" cornerRadius="6" zPosition="-2" />
+		<eLabel name="yellow_bg_center" position="480,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<widget source="key_blue" render="Label" position="710,600" size="200,30" zPosition="1" font="Regular; 20" halign="center" valign="center" foregroundColor="white" backgroundColor="black" transparent="1" />
-		<eLabel name="blue_bg" position="708,598" size="204,34" backgroundColor="blue" cornerRadius="4" zPosition="-2" />
-		<eLabel name="blue_bg_center" position="710,600" size="200,30" backgroundColor="black" cornerRadius="4" zPosition="-1" />
+		<eLabel name="blue_bg" position="708,598" size="204,34" backgroundColor="blue" cornerRadius="6" zPosition="-2" />
+		<eLabel name="blue_bg_center" position="710,600" size="200,30" backgroundColor="black" cornerRadius="6" zPosition="-1" />
 		<ePixmap position="960,602" size="45,26" zPosition="10" pixmap="~ok.png" transparent="1" alphatest="blend" scale="1" />
 		<ePixmap position="1030,602" size="45,26" zPosition="10" pixmap="~menu.png" transparent="1" alphatest="blend" scale="1" />
 		<ePixmap position="1100,602" size="45,26" zPosition="10" pixmap="~exit.png" transparent="1" alphatest="blend" scale="1" />
