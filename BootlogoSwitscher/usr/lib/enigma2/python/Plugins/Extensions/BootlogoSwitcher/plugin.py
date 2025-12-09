@@ -452,7 +452,7 @@ class BLSdownload(Screen, BLSglobals):
 			<convert type="ClockToText">Format:%a %d.%m. %H:%M</convert>
 		</widget>
 		<widget name="info" position="140,10" size="800,40" font="Regular;22" halign="left" valign="center" transparent="1" foregroundColor="white" backgroundColor="#20000000" />
-		<widget source="logoList" render="Listbox" position="20,70" size="660,450"  foregroundColor="white" backgroundColor="#20000000" backgroundColorSelected="white" foregroundColorSelected="black" transparent="1" scrollbarMode="showOnDemand" >
+		<widget source="logoList" render="Listbox" position="20,80" size="660,480"  foregroundColor="white" backgroundColor="#20000000" backgroundColorSelected="white" foregroundColorSelected="black" transparent="1" scrollbarMode="showOnDemand" >
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(4,2), size=(440,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # picName
 				MultiContentEntryText(pos=(430,2), size=(70,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # fileType
@@ -641,7 +641,7 @@ class BLSdownload(Screen, BLSglobals):
 				msg += f"BEREITS IM CACHE VORHANDENE LOGOS:\n{"\n".join(cached)}\n\n"
 			if failed:
 				msg += f"NICHT HERUNTERLADBARE LOGOS:\n{'\n'.join(failed)}\n\n"
-			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
+			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout=6, close_on_any_key=True)
 
 	def keyYellow(self):
 		self.switchToBootlogo("nach")
