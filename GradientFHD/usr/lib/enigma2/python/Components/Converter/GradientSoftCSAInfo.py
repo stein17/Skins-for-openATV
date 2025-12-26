@@ -1,4 +1,6 @@
 # IsSoftCSA Converter for Enigma2 Skins
+#
+# Thank you, @WXbet, for providing this.
 # 
 # This standalone converter can be used in skins to show/hide elements
 # based on whether SoftCSA (software descrambling) is active.
