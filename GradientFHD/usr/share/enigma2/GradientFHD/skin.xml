@@ -2733,15 +2733,40 @@ if len(listitems.list) &gt; 2:
 		<ePixmap pixmap="buttons/info.png" position="1800,285" size="60,38" alphatest="blend" zPosition="1" />
 		<ePixmap pixmap="buttons/menu.png" position="1689,285" size="60,38" alphatest="blend" zPosition="1" />
 	</screen>
-	<screen name="EPGSearch" title="EPG Search" position="center,center" size="1450,900" backgroundColor="transparent" flags="wfNoBorder">
-		<panel name="Template_Setup_Base" />
-		<panel name="Template_Text_Buttons_M_E" />
-		<eLabel position="27,675" size="1395,2" zPosition="1" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
-		<widget name="list" position="27,75" size="1395,585" itemHeight="45" font="Gradient_Font;30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" scrollbarMode="showOnDemand" />
-		<widget source="Event" render="Label" position="27,690" size="1395,135" backgroundColor="gradient_background" foregroundColor="gradient_foreground" halign="center" transparent="1" font="Gradient_Font;30">
-			<convert type="EventName">ExtendedDescription</convert>
-		</widget>
-	</screen>
+<screen name="EPGSearch" title="EPG Search" position="center,center" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder">
+  <widget name="list" position="39,90" size="1260,882" itemHeight="42" font="Gradient_Font;30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+  <widget source="Event" render="Label" position="1320,450" size="560,81" font="Gradient_Font; 33" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="10" valign="center" halign="left">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.VideoPicture" render="Pig" position="1320,130" size="556,314" zPosition="3" backgroundColor="Pic" />
+  <widget source="session.CurrentService" render="Label" position="1320,90" size="560,40" zPosition="4" font="Gradient_Font; 30" halign="center" valign="top" backgroundColor="transparent" foregroundColor="gradient_foreground" borderColor="black" borderWidth="2" transparent="1">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <eLabel position="1310,578" size="570,394" backgroundColor="gradient_BGO" zPosition="0" transparent="0" />
+  <widget source="Event" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1320,580" size="560,390" font="Gradient_Font; 30" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" valign="top" zPosition="1">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget source="Event" render="Label" position="1320,540" size="80,30" font="Gradient_Font;27" halign="left" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="center">
+    <convert type="EventTime">StartTime</convert>
+    <convert type="ClockToText" />
+  </widget>
+  <widget source="Event" render="Label" position="1650,540" size="80,30" font="Gradient_Font;27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="right" valign="center">
+    <convert type="EventTime">EndTime</convert>
+    <convert type="ClockToText" />
+  </widget>
+  <eLabel position="1400,554" size="250,1" backgroundColor="gradient_foreground_title" zPosition="1" />
+  <widget source="Event" render="Label" position="1730,540" size="150,30" font="Gradient_Font; 27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="right" valign="center">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText" />
+  </widget>
+  <panel name="Template_FullScreen_Base" />
+  <panel position="459,152" size="330,57">
+    <panel name="Template_Text_Buttons_I_M_E" />
+  </panel>
+  <panel position="146,436" size="250,57">
+    <panel name="progress_Default_GraphicalEPG" />
+  </panel>
+</screen>
 	<!-- Eventview Contextmenu -->
 	<screen name="EventViewContextMenu" position="center,center" size="1450,900" title="Eventview Menu" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="menu" position="27,75" size="1050,750" font="Gradient_Font;33" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" scrollbarMode="showOnDemand" itemHeight="54" enableWrapAround="1" transparent="1" />
