@@ -2830,14 +2830,16 @@
 		<eLabel name="fake" position="0, 0" size="0,0" />
 	</screen>
 	<screen name="template_icons_infobar">
-<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_crypt_on.png" position="1021,885" size="37,45" zPosition="2" alphatest="blend">
-    <convert type="ServiceInfo">IsCrypted</convert>
+<!--  Crypt-Icon nur wenn crypted UND NICHT SoftCSA: -->
+ <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_crypt_on.png" position="1021,885" size="37,45" zPosition="2" alphatest="blend">
+    <convert type="BlueASoftCSAInfo">IsCryptedNoSoftCSA</convert>
     <convert type="ConditionalShowHide" />
-  </widget>  
-  <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_softcsa.png" position="974,885" size="84,45" zPosition="2" alphatest="blend">
-	<convert type="BlueASoftCSAInfo" />
-	<convert type="ConditionalShowHide" />
-</widget>
+ </widget>
+<!--  SoftCSA-Icon wie gehabt: -->
+ <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_softcsa.png" position="974,885" size="84,45" zPosition="2" alphatest="blend">
+    <convert type="BlueASoftCSAInfo" />
+    <convert type="ConditionalShowHide" />
+ </widget>
   <widget alphatest="blend" pixmap="icons/ico_rec_on.png" position="246,913" render="Pixmap" size="70,22" source="session.RecordState" zPosition="4">
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
