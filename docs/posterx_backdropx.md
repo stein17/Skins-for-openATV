@@ -1,3 +1,24 @@
+# 🎨 Universelle Skin Integration (GradientFHD / GradientPosterX)
+
+Diese Seite enthält die vollständige XML-Referenz als **lesbaren Codeblock** (inkl. `<!-- Kommentare -->`).
+GitHub blendet HTML/XML-Kommentare außerhalb von Codeblöcken aus – im Codeblock bleibt alles sichtbar ✅
+
+---
+
+## 📌 Nutzung
+
+- Datei im Repo ablegen: `docs/posterx_backdropx.md`
+- In `README.md` verlinken: `docs/posterx_backdropx.md`
+- Optional: einklappbar über `<details>` (siehe unten)
+
+---
+
+## 🧩 XML (komplett)
+
+<details>
+  <summary>➡️ XML anzeigen (klicken)</summary>
+
+```xml
 <!-- UNIVERSELLE SKIN INTEGRATION für GradientFHD Plugin -->
 <!-- Funktioniert mit ALLEN Enigma2 Sources -->
 
@@ -203,7 +224,6 @@ Die Renderer erkennen automatisch den Source-Typ und extrahieren
 die entsprechenden Event/Service-Informationen. -->
 
 <!-- ================================================== -->
+```
 
-
-
-
+</details>
