@@ -44,6 +44,6 @@
 
 ## 📚 Dokumentation (klickbar)
 
-- 🖼️ **[PosterX & BackdropX](docs/posterx_backdropx.md)**
-- 🧩 **[Custom Override](docs/custom_override.md)**
-- 🎨 **[Skin Integration](docs/skin_integration.md)**
+- 🖼️ **[PosterX & BackdropX (DE/EN)](docs/PosterX-BackdropX-DE-EN.md)**
+- 🧩 **[Custom Override (DE/EN)](docs/Custom-Override-Poster-Backdrop-DE-EN.md)**
+- 🎨 **[Universelle Skin Integration](docs/Universelle-Skin-Integration-GradientFHD.md)**
