@@ -1,509 +1,209 @@
-# PosterX / BackdropX for Enigma2 (GradientFHD)  
-**AutoDB • Live Search • Custom Artwork • Slug Export • Storage Path**  
+<!-- UNIVERSELLE SKIN INTEGRATION für GradientFHD Plugin -->
+<!-- Funktioniert mit ALLEN Enigma2 Sources -->
+
+<!-- ================================================== -->
+<!-- EPG INTEGRATION (source="Event") -->
+<!-- ================================================== -->
+
+<!-- EPG  Event -->
+		<widget source="Event" render="GradientParental" position="1266,889" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="1130,670" cornerRadius="6" size="177,260" zPosition="2" />
+		<widget source="Event" render="GradientBackdropX" position="42,153" size="348,196" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientStarX" position="1126,934" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- ================================================== -->
+<!-- INFOBAR INTEGRATION (session.Event_Now/Next) -->
+<!-- ================================================== -->
+
+<!-- Aktuelles Event -->
+		<!-- Backdrop -->
+		<widget source="session.Event_Now" render="GradientBackdropX" position="20,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="257,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+	
+
+<!-- Nächstes Event -->
+	<!-- Backdrop -->
+		<widget source="session.Event_Next" render="GradientBackdropX" position="1510,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Next" render="GradientParental" position="1747,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Next" render="GradientStarX" position="1510,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" />
+
+<!-- ================================================== -->
+<!-- KOMPLETTES BEISPIEL:Infobar INTEGRATION  -->
+<!-- ================================================== -->
+
+	<!-- "InfoBar_Poster_X" -->
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+	<!-- InfoBar_Backdrop_X -->
+		<!-- Backdrop -->
+		<widget source="session.Event_Now" render="GradientBackdropX" position="20,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientBackdropX" position="1510,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="257,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1747,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1510,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" />
+
+	<!-- InfoBar_Poster_Backdrop_X -->
+		<!-- Backdrop -->
+		<widget source="session.Event_Now" render="GradientBackdropX" position="220,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientBackdropX" position="1310,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- 	Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+<!-- ================================================== -->
+	<!-- SecondInfobar_Poster_X -->
+<!-- ================================================== -->
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="878,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1808,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="600,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1530,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="610,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1542,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- ================================================== -->
+<!-- SENDERLISTE/CHANNELLIST (source="ServiceEvent")    -->
+<!-- Bis zu 6 Events pro Sender möglich mit nexts="0-5" -->
+<!-- KOMPLETTES BEISPIEL: CHANNELLIST                   -->
+<!-- ================================================== -->
+    
+    <!-- Senderliste mit bis zu 6 Events -->
+	    <!-- Event 1 -->
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="1" position="1601,147" size="270,150" zPosition="6" cornerRadius="9" />
+		<!-- Event 2 -->
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="2" position="1601,372" size="270,150" zPosition="6" cornerRadius="9" />
+		<!-- Event 3 -->
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="3" position="1601,597" size="270,150" zPosition="6" cornerRadius="9" />
+		<!-- Event 4 -->
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="4" position="1601,822" size="270,150" zPosition="6" cornerRadius="9" />
+		<!-- Event  (aktuell) -->
+		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="832,90" size="183,274" zPosition="6" cornerRadius="6" />
+		<widget source="ServiceEvent" render="GradientParental" position="953,302" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientStarX" position="831,370" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		
+		<!-- Event  (aktuell) -->
+		<widget source="ServiceEvent" nexts="0" render="GradientPosterX" position="850,300" size="200,300" cornerRadius="6" zPosition="6" />
+		<!-- Event 1 -->
+		<widget source="ServiceEvent" nexts="1" render="GradientPosterX" position="880,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<!-- Event 2 -->
+		<widget source="ServiceEvent" nexts="2" render="GradientPosterX" position="1146,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<!-- Event 3 -->
+		<widget source="ServiceEvent" nexts="3" render="GradientPosterX" position="1412,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<!-- Event 4 -->
+		<widget source="ServiceEvent" nexts="4" render="GradientPosterX" position="1678,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<!-- Event  (aktuell) -->
+		<widget source="ServiceEvent" render="GradientParental" position="980,532" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientStarX" position="858,610" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="ServiceEvent" render="GradientBackdropX" position="840,80" size="1060,596" zPosition="3" />
+		<ePixmap name="vod_backdrop" pixmap="screens/backdrop.png" position="840,79" size="1060,614" alphatest="blend" zPosition="5" />	
+		
+		<!-- Senderliste now next Events -->
+		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="2" />
+
+<!-- ================================================== -->
+<!-- EVENTVIEW INTEGRATION (source="Event") -->
+<!-- ================================================== -->
+<!-- Eventview verwendet Event -->
+		<widget source="Event" render="GradientBackdropX" position="50,517" size="530,298" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientParental" position="835,732" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="635,517" cornerRadius="6" size="185,278" zPosition="2" />
+		<widget source="Event" render="GradientStarX" position="635,795" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- ================================================== -->
+<!-- EMC SELECTION & MOVIE SELECTION (source="Service") -->
+<!-- ================================================== -->
+
+<!-- Movie Selection - für Aufnahmen und Movies -->
+		<!--  Poster -->
+		<widget source="Service" render="GradientPosterXEMC" position="498,620" cornerRadius="6" size="218,320" zPosition="3"  />
+		<!--  Backdrop -->
+		<widget source="Service" render="GradientBackdropXEMC" position="30,90" cornerRadius="6" size="685,388" zPosition="3"  />
+		<!-- Banner -->
+		<widget source="Service" render="GradientBannerXEMC" position="center,620" size="1000,185" zPosition="14" alphatest="blend" />
+		<!-- Parental -->
+		<widget source="Service" render="GradientParental" position="652,875" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="Service" render="GradientStarX" position="497,947" size="220,22" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- EMC Enhanced Movie Center -->
+		<!--  Poster -->
+		<widget source="Service" render="GradientPosterXEMC" position="498,620" cornerRadius="6" size="218,320" zPosition="3"  />
+		<!--  Backdrop -->
+		<widget source="Service" render="GradientBackdropXEMC" position="30,90" cornerRadius="6" size="685,388" zPosition="3"  />
+		<!-- Banner -->
+		<widget source="Service" render="GradientBannerXEMC" position="center,620" size="1000,185" zPosition="14" alphatest="blend" />
+		<!-- Parental -->
+		<widget source="Service" render="GradientParental" position="652,875" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="Service" render="GradientStarX" position="497,947" size="220,22" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- ================================================== -->
+<!-- Movie-EMC-Player INTEGRATION -->
+<!-- ================================================== -->
+	<!-- Player verwendet auch session.Event_Now -->
+		<widget source="session.CurrentService" render="GradientPosterXEMC" position="1580,440" size="204,300" zPosition="4" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientBackdropXEMC" position="23,440" size="569,320" zPosition="1" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientBannerXEMC" position="center,620" size="1000,185" zPosition="4" alphatest="blend" />
+		<widget source="session.Event_Now" render="GradientParental" position="1508,701" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+		<widget source="session.Event_Now" render="GradientStarX" position="1580,740" size="204,21" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+
+<!-- ================================================== -->
+
+<!-- WICHTIGE ATTRIBUTE:
+- nexts="0" = Aktuelles Event (Standard, kann weggelassen werden)
+- nexts="1" = Nächstes Event  
+- nexts="2" bis nexts="5" = Events 3-6 (nur bei ServiceEvent verfügbar)
+- alphatest="on" = Transparenz-Unterstützung
+- position="x,y" = Position in Pixeln
+- size="width,height" = Größe in Pixeln -->
+
+<!-- VERFÜGBARE RENDERER:
+- GradientPosterX = Poster anzeigen
+- GradientBackdropX = Hintergrundbilder 
+- GradientParental = FSK/USK Altersbewertungen
+- GradientStarX = Sterne-Bewertungen (0-10)
+- GradientPosterXEMC = Speziell für EMC/Movies
+- GradientBackdropXEMC = Speziell für EMC/Movies
+- GradientBannerXEMC = Horizontale Banner/Logos (Nur MovieList/Player) -->
+
+<!-- UNTERSTÜTZTE SOURCES:
+- Event = EPG Single Events, EventView
+- session.Event_Now = Aktuelles TV-Event (Infobar, Player)
+- session.Event_Next = Nächstes TV-Event (Infobar) 
+- ServiceEvent = Service-Events (Channellist, bis zu 6 Events)
+- Service = Movie/Recording Services (EMC, MovieSelection) -->
+
+<!-- UNIVERSAL KOMPATIBILITÄT:
+Alle Renderer sind universal und funktionieren mit ALLEN Sources!
+Die Renderer erkennen automatisch den Source-Typ und extrahieren
+die entsprechenden Event/Service-Informationen. -->
+
+<!-- ================================================== -->
 
-> ✅ **DE/EN Doppel-README in einer Datei**  
-> Diese README erklärt die Funktionen **PosterX / BackdropX** inkl. AutoDB, API-Keys, Speicherpfad, Slug-Export und Custom-Ordner.
 
----
 
-## Inhaltsverzeichnis / Table of Contents
 
-- [🇩🇪 Deutsch](#-deutsch)
-  - [1. Überblick](#1-überblick)
-  - [2. Was wird wo gespeichert](#2-was-wird-wo-gespeichert)
-  - [3. AutoDB: Was ist das und wie läuft es](#3-autodb-was-ist-das-und-wie-läuft-es)
-  - [4. AutoDB: Start, Laufzeit, Abbruch](#4-autodb-start-laufzeit-abbruch)
-  - [5. Was wird automatisch gelöscht (Cleanup)](#5-was-wird-automatisch-gelöscht-cleanup)
-  - [6. Bleiben Poster/Backdrops für Aufnahmen erhalten](#6-bleiben-posterbackdrops-für-aufnahmen-erhalten)
-  - [7. API-Keys einstellen](#7-api-keys-einstellen)
-  - [8. PosterX Speicherpfad auswählen](#8-posterx-speicherpfad-auswählen)
-  - [9. Slugs auslesen (PosterX/BackdropX)](#9-slugs-auslesen-posterxbackdropx)
-  - [10. Custom Artwork verwenden](#10-custom-artwork-verwenden)
-  - [11. Was passiert nach einem neuen AutoDB Scan](#11-was-passiert-nach-einem-neuen-autodb-scan)
-  - [12. Manuell Poster/Backdrops finden (Quellen)](#12-manuell-posterbackdrops-finden-quellen)
-  - [13. Fehlerdiagnose (Logs)](#13-fehlerdiagnose-logs)
-  - [14. FAQ](#14-faq)
-- [🇬🇧 English](#-english)
-  - [1. Overview](#1-overview)
-  - [2. Storage layout](#2-storage-layout)
-  - [3. AutoDB: What it is and how it works](#3-autodb-what-it-is-and-how-it-works)
-  - [4. AutoDB: Start, runtime, stop](#4-autodb-start-runtime-stop)
-  - [5. What gets deleted automatically (cleanup)](#5-what-gets-deleted-automatically-cleanup)
-  - [6. Do posters/backdrops for recordings remain](#6-do-postersbackdrops-for-recordings-remain)
-  - [7. API keys](#7-api-keys)
-  - [8. PosterX storage path](#8-posterx-storage-path)
-  - [9. Read slugs (PosterX/BackdropX)](#9-read-slugs-posterxbackdropx)
-  - [10. Using custom artwork](#10-using-custom-artwork)
-  - [11. What happens on the next AutoDB scan](#11-what-happens-on-the-next-autodb-scan)
-  - [12. Where to find artwork manually (sources)](#12-where-to-find-artwork-manually-sources)
-  - [13. Troubleshooting (logs)](#13-troubleshooting-logs)
-  - [14. FAQ](#14-faq-1)
-
----
-
-# 🇩🇪 Deutsch
-
-## 1. Überblick
-
-PosterX / BackdropX erweitert Enigma2 (GradientFHD) um:
-
-- 🖼️ **Poster & Backdrops** für EPG/Live-TV, Senderliste, SecondInfoBar, Player usw.
-- ⚙️ **AutoDB**: automatisches Vorladen/Scannen von Sendern und Speichern der Bilder
-- 🔑 **API-Keys**: bessere Treffer mit eigenen Keys (TMDb/TVDb/Fanart)
-- 💾 **Speicherpfad** frei wählbar (HDD / USB / NAS)
-- 🧩 **Custom Artwork**: eigene Poster/Backdrops dauerhaft nutzen (ohne Auto-Löschung)
-- 🧾 **Slug-Export**: Slugs automatisch in JSON exportieren (für Custom-Dateien)
-
----
-
-## 2. Was wird wo gespeichert
-
-Alles liegt unter dem ausgewählten **BASE-Pfad** (Standard: `/media/hdd`) im Ordner:
-
-```
-<BASE>/xtra/
-```
-
-### Ordnerstruktur
-
-```
-<BASE>/xtra/poster/           # Poster-Bilder (*.jpg)
-<BASE>/xtra/backdrop/         # Backdrop-Bilder (*.jpg)
-<BASE>/xtra/Info/             # Info/Rating/IDs (json)
-<BASE>/xtra/poster_info/      # Download-Herkunft & Provider-Infos (json)
-<BASE>/xtra/backdrop_info/    # Download-Herkunft & Provider-Infos (json)
-
-<BASE>/xtra/custom/poster/    # Eigene Poster (werden NICHT gelöscht)
-<BASE>/xtra/custom/backdrop/  # Eigene Backdrops (werden NICHT gelöscht)
-
-<BASE>/xtra/PosterX_slugs.json
-<BASE>/xtra/BackdropX_slugs.json
-```
-
----
-
-## 3. AutoDB: Was ist das und wie läuft es
-
-AutoDB scannt regelmäßig (oder per Start) Sender/Bouquets, liest EPG-Titel und lädt automatisch:
-
-- passende **Poster**
-- passende **Backdrops**
-- zusätzliche **Info-Daten** (IDs, Rating, Provider-Quelle)
-
-Damit werden Bilder später sofort angezeigt (z.B. in der Senderliste/SecondInfoBar/Player), ohne dass erst im Hintergrund gesucht werden muss.
-
-### Provider-Reihenfolge (vereinfachtes Prinzip)
-
-Je nach Inhalt wird eine sinnvolle Reihenfolge genutzt, z.B.:
-
-- 🎬 **Movies** → TMDb zuerst (oft beste Filmtreffer)
-- 📺 **Serien** → TVDb zuerst (oft besser für Serien)
-- Spezialfälle können Overrides nutzen (z.B. RTL Daily Shows)
-
----
-
-## 4. AutoDB: Start, Laufzeit, Abbruch
-
-### Start
-AutoDB kann über das Plugin-Menü gestartet werden.  
-Je nach Version/Setup kann AutoDB auch automatisch starten, z.B.:
-
-- nach GUI-Neustart (wenn aktiviert)
-- über Timer/Start-Trigger im Plugin
-
-### Laufzeit
-Während AutoDB läuft, werden neue Titel in eine Queue gepackt und verarbeitet.
-
-### Abbruch / Beenden
-✅ AutoDB kann per **EXIT** beendet werden (wie im Plugin vorgesehen).  
-Wichtig: EXIT soll normale Menüs schließen und nur im Live-TV (InfoBar) als „AutoDB beenden“ dienen (so ist es stabil).
-
----
-
-## 5. Was wird automatisch gelöscht (Cleanup)
-
-Damit die Box nicht „voll läuft“, werden Dateien nach einer gewissen Zeit automatisch entfernt.
-
-Typisch:
-
-- Poster/Backdrops & Info-Dateien werden nach **~3 Tagen** als „alt“ betrachtet und gelöscht/erneuert
-
-**Hinweis:** Das betrifft nur die „normalen“ Ordner:
-
-- `<BASE>/xtra/poster/`
-- `<BASE>/xtra/backdrop/`
-- `<BASE>/xtra/Info/`
-- `poster_info` / `backdrop_info`
-
-✅ **Nicht gelöscht** wird:
-
-- `<BASE>/xtra/custom/...`
-
----
-
-## 6. Bleiben Poster/Backdrops für Aufnahmen erhalten
-
-Grundsätzlich gilt:
-
-- AutoDB/Live-Suche arbeitet EPG-basiert (Titel/Slug)
-- Aufnahmen können eigene Titel/EPG-Daten haben
-
-### Wichtig:
-Wenn eine Aufnahme denselben **Slug** wie Live-TV verwendet, bleiben die Dateien oft verfügbar – aber Cleanup kann sie später entfernen.
-
-✅ Empfehlung für Aufnahmen oder Lieblingssendungen:
-➡️ **Custom Artwork nutzen**, damit es dauerhaft bleibt:
-
-```
-<BASE>/xtra/custom/poster/<slug>.jpg
-<BASE>/xtra/custom/backdrop/<slug>.jpg
-```
-
-Custom-Dateien werden nicht gelöscht.
-
----
-
-## 7. API-Keys einstellen
-
-Im Plugin-Menü kannst du API-Keys setzen.
-
-### Warum sind eigene API Keys besser?
-- höhere Limits
-- stabilere Treffer
-- weniger Rate-Limit/Block
-- genauere Ergebnisse
-
-### „Legacy“ Keys
-In manchen Setups sind „Legacy“-Keys bereits enthalten, damit grundsätzlich etwas funktioniert.  
-✅ Mit **eigenen Keys** sind die Ergebnisse meistens deutlich besser.
-
-### Wo bekomme ich die Keys?
-
-- **TMDb API**: https://www.themoviedb.org/settings/api  
-- **TheTVDB v4**: https://thetvdb.com/api-information  
-- **Fanart.tv**: https://fanart.tv/get-an-api-key/  
-
-*(Links können sich ändern – bei Bedarf im Browser öffnen.)*
-
----
-
-## 8. PosterX Speicherpfad auswählen
-
-Menüpunkt: **„PosterX Speicherpfad auswählen“**  
-(EN: **PosterX storage path**)
-
-Du wählst einen BASE-Pfad, z.B.:
-
-- `Auto (empfohlen)`
-- `/media/hdd`
-- `/media/usb`
-- `/media/net` (NAS)
-
-Nach dem Speichern werden alle Ordner automatisch erzeugt:
-
-```
-<BASE>/xtra/...
-<BASE>/xtra/custom/...
-```
-
-✅ Vorteil: alles (Poster/Backdrop/Info/Custom) liegt sauber zusammen in einem Baum.
-
----
-
-## 9. Slugs auslesen (PosterX/BackdropX)
-
-Menüpunkt: **„PosterX/BackdropX Slugs auslesen“**
-
-### Was passiert?
-Beim Aufruf werden automatisch Slugs gesammelt aus:
-
-- `<BASE>/xtra/poster_info/*.json`
-- `<BASE>/xtra/backdrop_info/*.json`
-- `/var/volatile/tmp/PosterAutoDB.log`
-- `/var/volatile/tmp/BackdropAutoDB.log`
-
-Dann werden 2 JSON-Dateien geschrieben:
-
-- `<BASE>/xtra/PosterX_slugs.json`
-- `<BASE>/xtra/BackdropX_slugs.json`
-
-### Wofür ist das gut?
-Wenn du eigene Bilder nutzen willst, brauchst du den korrekten **Slug**:
-
-✅ Beispiel:
-
-```
-Punkt 6 -> punkt_6
-Ich - Einfach unverbesserlich 2 -> ich_einfach_unverbesserlich_2
-```
-
----
-
-## 10. Custom Artwork verwenden
-
-Der wichtigste Ordner für „immer richtig“:
-
-```
-<BASE>/xtra/custom/
-```
-
-### Eigene Poster setzen
-Lege deine Datei hier ab:
-
-```
-<BASE>/xtra/custom/poster/<slug>.jpg
-```
-
-### Eigene Backdrops setzen
-Lege deine Datei hier ab:
-
-```
-<BASE>/xtra/custom/backdrop/<slug>.jpg
-```
-
-✅ Sobald ein Custom-Bild existiert, wird es bevorzugt und nicht überschrieben.
-
----
-
-## 11. Was passiert nach einem neuen AutoDB Scan
-
-- AutoDB lädt neue Daten für neue EPG-Titel
-- vorhandene Cache-Dateien können ersetzt werden (nach Cleanup-Regeln)
-- ✅ **Custom bleibt immer** und hat Priorität
-
-Das heißt:
-
-✅ Nach erneutem AutoDB Scan bleiben deine Custom-Bilder aktiv.
-
----
-
-## 12. Manuell Poster/Backdrops finden (Quellen)
-
-Wenn du selbst Bilder laden willst, sind diese Seiten die besten Startpunkte:
-
-- 🎬 **TMDb**: https://www.themoviedb.org  
-- 📺 **TVDb**: https://thetvdb.com  
-- 🏞️ **Fanart.tv**: https://fanart.tv  
-- ⭐ **IMDb**: https://www.imdb.com  
-- 🔎 **Google Bilder**: https://images.google.com  
-
-### Tipp
-Für RTL Daily Shows können IMDb-Mediaviewer Backdrops am besten passen.
-
----
-
-## 13. Fehlerdiagnose (Logs)
-
-Wichtige Logs:
-
-- `/var/volatile/tmp/PosterDB.log`
-- `/var/volatile/tmp/BackdropDB.log`
-- `/var/volatile/tmp/PosterAutoDB.log`
-- `/var/volatile/tmp/BackdropAutoDB.log`
-
-Wichtige Debug-Infos:
-
-- `<BASE>/xtra/poster_info/*.json`
-- `<BASE>/xtra/backdrop_info/*.json`
-- `<BASE>/xtra/Info/*.json`
-
----
-
-## 14. FAQ
-
-### ❓ Warum wird immer wieder das gleiche falsche Bild geladen?
-Weil bereits ein JSON-Cache existiert (Info/poster_info/backdrop_info).  
-✅ Lösung: einzelne Slugs resetten (nur gezielt löschen) oder Custom setzen.
-
-### ❓ Wird mein Custom-Bild gelöscht?
-❌ Nein. Alles unter `<BASE>/xtra/custom/` bleibt erhalten.
-
-### ❓ Kann ich den Speicherort später ändern?
-✅ Ja, über „PosterX Speicherpfad auswählen“. Ordner werden automatisch neu angelegt.
-
----
-
----
-
-# 🇬🇧 English
-
-## 1. Overview
-
-PosterX / BackdropX enhances Enigma2 (GradientFHD) with:
-
-- 🖼️ Posters & backdrops for EPG/Live-TV, channel list, SecondInfoBar, player, etc.
-- ⚙️ AutoDB: automatic scanning/prefetching and local caching
-- 🔑 API keys: better matches with your own keys (TMDb/TVDb/Fanart)
-- 💾 selectable storage path (HDD / USB / NAS)
-- 🧩 Custom artwork: your own posters/backdrops (never auto-deleted)
-- 🧾 Slug export: create slug lists for custom filenames
-
----
-
-## 2. Storage layout
-
-Everything is stored under the selected **BASE path** (default: `/media/hdd`) in:
-
-```
-<BASE>/xtra/
-```
-
-Folders:
-
-```
-<BASE>/xtra/poster/
-<BASE>/xtra/backdrop/
-<BASE>/xtra/Info/
-<BASE>/xtra/poster_info/
-<BASE>/xtra/backdrop_info/
-
-<BASE>/xtra/custom/poster/
-<BASE>/xtra/custom/backdrop/
-
-<BASE>/xtra/PosterX_slugs.json
-<BASE>/xtra/BackdropX_slugs.json
-```
-
----
-
-## 3. AutoDB: What it is and how it works
-
-AutoDB scans bouquets/services, reads EPG titles and downloads:
-
-- posters
-- backdrops
-- info data (IDs, ratings, sources)
-
-This improves UI responsiveness because artwork is already cached locally.
-
----
-
-## 4. AutoDB: Start, runtime, stop
-
-- Start AutoDB from the plugin menu (depends on your build)
-- It processes a queue of EPG events
-- Stop with **EXIT** (configured to be safe and not interfere with normal menu closing)
-
----
-
-## 5. What gets deleted automatically (cleanup)
-
-To prevent storage from filling up, old cache files are removed (commonly after ~3 days):
-
-- `<BASE>/xtra/poster/`
-- `<BASE>/xtra/backdrop/`
-- `<BASE>/xtra/Info/`
-- `poster_info` / `backdrop_info`
-
-✅ Not deleted:
-- `<BASE>/xtra/custom/...`
-
----
-
-## 6. Do posters/backdrops for recordings remain
-
-Recordings depend on titles/slugs and the cache cleanup policy.  
-To keep artwork permanently, use **custom artwork**.
-
----
-
-## 7. API keys
-
-Own API keys usually give better results and higher limits.
-
-Key sources:
-
-- TMDb: https://www.themoviedb.org/settings/api  
-- TVDb v4: https://thetvdb.com/api-information  
-- Fanart.tv: https://fanart.tv/get-an-api-key/  
-
----
-
-## 8. PosterX storage path
-
-Menu item: **PosterX storage path**  
-Choose a BASE path:
-
-- Auto (recommended)
-- /media/hdd
-- /media/usb
-- /media/net
-
-Folders will be created automatically.
-
----
-
-## 9. Read slugs (PosterX/BackdropX)
-
-Menu item: **Read slugs**
-
-Sources:
-
-- `<BASE>/xtra/poster_info/*.json`
-- `<BASE>/xtra/backdrop_info/*.json`
-- `/var/volatile/tmp/PosterAutoDB.log`
-- `/var/volatile/tmp/BackdropAutoDB.log`
-
-Outputs:
-
-- `<BASE>/xtra/PosterX_slugs.json`
-- `<BASE>/xtra/BackdropX_slugs.json`
-
----
-
-## 10. Using custom artwork
-
-Place your own files:
-
-- Posters: `<BASE>/xtra/custom/poster/<slug>.jpg`
-- Backdrops: `<BASE>/xtra/custom/backdrop/<slug>.jpg`
-
-Custom artwork is always preferred and never auto-deleted.
-
----
-
-## 11. What happens on the next AutoDB scan
-
-- new items are fetched
-- cache can be replaced by cleanup logic
-- ✅ custom artwork stays and keeps priority
-
----
-
-## 12. Where to find artwork manually (sources)
-
-- TMDb: https://www.themoviedb.org  
-- TVDb: https://thetvdb.com  
-- Fanart.tv: https://fanart.tv  
-- IMDb: https://www.imdb.com  
-- Google Images: https://images.google.com  
-
----
-
-## 13. Troubleshooting (logs)
-
-Main logs:
-
-- `/var/volatile/tmp/PosterDB.log`
-- `/var/volatile/tmp/BackdropDB.log`
-- `/var/volatile/tmp/PosterAutoDB.log`
-- `/var/volatile/tmp/BackdropAutoDB.log`
-
-JSON debug:
-
-- `<BASE>/xtra/poster_info/`
-- `<BASE>/xtra/backdrop_info/`
-- `<BASE>/xtra/Info/`
-
----
-
-## 14. FAQ
-
-**Why do I always get the same wrong image?**  
-Because cached JSON results are reused. Reset that slug or use custom artwork.
-
-**Will my custom files be deleted?**  
-No. Everything under `<BASE>/xtra/custom/` remains.
-
-**Can I change the storage path later?**  
-Yes, via PosterX storage path. Folders are created automatically.
