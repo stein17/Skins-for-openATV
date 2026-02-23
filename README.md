@@ -24,6 +24,19 @@
 
 ### 🎬 MovieScanner (EMC / Aufnahmen & Movies)
 - 🎬 **MovieScanner**: scannt ausgewählte Movie-/Aufnahmeordner und lädt Artwork (**Poster/Backdrop/Banner**) in den **EMC-Cache**
+  ✅  → scannt ALLE Aufnahmen in konfigurierten Ordnern        
+  ✅  → lädt: Serien-Poster, Staffel-Poster, Episode-Still    
+  ✅  → lädt: Backdrop, Banner                                 
+  ✅  → speichert in /media/hdd/xtra/EMC/                     
+
+  🖼️ GradientPosterXEMC  (Poster-Renderer)                     
+  ✅ → liest aus EMC-Cache                                   
+  ✅ → Priorität: Staffel-Poster → Serien-Poster             
+
+  🎞️ GradientBackdropXEMC  (Backdrop-Renderer)                 
+  ✅ → liest aus EMC-Cache                                   
+  ✅ → Priorität: Episode-Still → Staffel → Serien-Backdrop 
+	
 - ✅ **Ordner-Auswahl**: Pfade per **OK** an/aus, **GRÜN** startet den Suchlauf
 - 🧠 **Titel-Erkennung**: nutzt bereinigten Titel (`safe_name`) + Media-Type-Erkennung (TV/Film)
 - 🖼️ **Poster als Cover neben Aufnahme (optional)**: kopiert Poster als `*.jpg` neben die Aufnahme
