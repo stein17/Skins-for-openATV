@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Gradient_event_info.py
 # Klasse Gradient_event_info: TMDb lookup + JSON Info speichern (merge, atomic)
-
+# 02.26 @stein17, Many new features and improvements
 #<!-- Titel -->
 #<widget name="title" source="session.CurrentService" render="Label" position="20,20" size="600,40">
 #  <convert type="Gradient_event_info">title</convert>

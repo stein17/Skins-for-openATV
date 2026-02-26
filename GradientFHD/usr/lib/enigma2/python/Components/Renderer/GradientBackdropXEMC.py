@@ -1,31 +1,37 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# OPTIMIERTE VERSION - GradientBackdropXEMC.py
+# Verbessert: 2024-12-15
 # 02.26 @stein17, Many new features and improvements
+# 
+# Für EMC (Enhanced Movie Center), Movie Player, Movieliste
+# Zeigt Backdrops für Aufnahmen (.ts, .mkv, .mp4, .avi, etc.)
+#
+# Verbesserungen:
+# - TITLE_MAPPINGS Integration
+# - TMDb w1280 Backdrop (statt w500)
+# - JSON-Speicherung mit backdrop_path
+# - Besseres Error-Handling
+
+
 """
-OPTIMIERTE GradientPosterXEMC.py
-Fuer GradientFHD Skin
+2. NEUE GradientBackdropXEMC.py
+================================
 
-Fuer EMC (Enhanced Movie Center), Movie Player, Movieliste
-Zeigt Poster fuer Aufnahmen (.ts, .mkv, .mp4, .avi, etc.)
+Fuer Backdrop bei Aufnahmen/Filmen (EMC, Movie Player, Movieliste)
 
-NEUE FEATURES:
-1. TITLE_MAPPINGS fuer deutsche Sendungen
-2. Verbesserte Titelextraktion aus Dateinamen
-3. JSON-Speicherung fuer Rating/FSK (GradientStarX/GradientParental)
-4. Robustere Fehlerbehandlung
-5. Bessere Dateinamensbereinigung
+FEATURES:
+- Gleiche Logik wie GradientPosterXEMC.py
+- TITLE_MAPPINGS Integration
+- JSON-Speicherung fuer Rating/FSK
+- TMDb + OMDb + FanArt Suche
+- Backdrop w1280 Aufloesung
 
 SKIN.XML BEISPIELE:
 <!-- EMC Selection -->
-<widget source="Service" render="GradientPosterXEMC" position="825,506" size="110,164" zPosition="4" alphatest="blend" />
+<widget source="Service" render="GradientBackdropXEMC" position="10,100" size="600,337" zPosition="3" alphatest="blend" />
 
 <!-- Movie Player -->
-<widget source="session.CurrentService" render="GradientPosterXEMC" position="10,325" size="170,255" zPosition="4" alphatest="blend" />
-
-<!-- Movieliste -->
-<widget source="ServiceEvent" render="GradientPosterXEMC" position="750,385" size="170,255" zPosition="4" alphatest="blend" />
+<widget source="session.CurrentService" render="GradientBackdropXEMC" position="0,0" size="1280,720" zPosition="1" alphatest="blend" />
 """
-
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, eTimer, loadJPG, eEPGCache
 from ServiceReference import ServiceReference
@@ -44,21 +50,17 @@ import time
 import threading
 import requests
 from twisted.internet.reactor import callInThread
-
 PY3 = sys.version_info[0] >= 3
 if PY3:
     from urllib.parse import quote as urlquote
 else:
     from urllib import quote as urlquote
-
 try:
-    from .GradientConverlibr import convtext, cutName
+    from .GradientConverlibr import convtext, cutName, apply_title_mapping
 except:
-    from GradientConverlibr import convtext, cutName
-
+    from GradientConverlibr import convtext, cutName, apply_title_mapping
 DEBUG_EMC = False
 epgcache = eEPGCache.getInstance()
-
 
 # -----------------------------------------------------------------------------
 # EMC Cache-only Artwork (Poster/Backdrop/Banner)
@@ -288,144 +290,21 @@ try:
     lng = lng[:-3]
 except Exception:
     lng = 'de'
-
-# API Keys
 tmdb_api = '3c3efcf47c3577558812bb9d64019d65'
 omdb_api = '6a4c9432'
-
-# TITLE_MAPPINGS - Gleiche wie in GradientPosterXDownloadThread
-TITLE_MAPPINGS = {
-    # Daily Soaps
-    'gzsz': 'Gute Zeiten, schlechte Zeiten',
-    'gute zeiten schlechte zeiten': 'Gute Zeiten, schlechte Zeiten',
-    'unter uns': 'Unter uns',
-    'alles was zaehlt': 'Alles was zaehlt',
-    'awz': 'Alles was zaehlt',
-    'sturm der liebe': 'Sturm der Liebe',
-    'rote rosen': 'Rote Rosen',
-    'berlin tag und nacht': 'Berlin - Tag & Nacht',
-    'koeln 50667': 'Koeln 50667',
-    
-    # Nachrichten
-    'tagesschau': 'Tagesschau',
-    'tagesthemen': 'Tagesthemen',
-    'heute': 'heute',
-    'heute journal': 'heute-journal',
-    'heute-journal': 'heute-journal',
-    'heute show': 'heute-show',
-    'heute-show': 'heute-show',
-    'rtl aktuell': 'RTL Aktuell',
-    
-    # Magazine
-    'mittagsmagazin': 'Mittagsmagazin',
-    'morgenmagazin': 'Morgenmagazin',
-    'moma': 'Morgenmagazin',
-    'brisant': 'Brisant',
-    'explosiv': 'Explosiv - Das Magazin',
-    'taff': 'taff',
-    'galileo': 'Galileo',
-    'stern tv': 'stern TV',
-    
-    # Talk Shows
-    'maischberger': 'Maischberger',
-    'anne will': 'Anne Will',
-    'hart aber fair': 'hart aber fair',
-    'markus lanz': 'Markus Lanz',
-    'maybrit illner': 'Maybrit Illner',
-    'ndr talk show': 'NDR Talk Show',
-    
-    # Quiz/Game Shows
-    'wer wird millionaer': 'Wer wird Millionaer?',
-    'wwm': 'Wer wird Millionaer?',
-    'gefragt gejagt': 'Gefragt - Gejagt',
-    'bares fuer rares': 'Bares fuer Rares',
-    'die hoehle der loewen': 'Die Hoehle der Loewen',
-    'das supertalent': 'Das Supertalent',
-    'dsds': 'Deutschland sucht den Superstar',
-    'the voice of germany': 'The Voice of Germany',
-    'the masked singer': 'The Masked Singer',
-    'schlag den star': 'Schlag den Star',
-    
-    # Krimis/Serien
-    'tatort': 'Tatort',
-    'polizeiruf 110': 'Polizeiruf 110',
-    'der alte': 'Der Alte',
-    'soko muenchen': 'SOKO Muenchen',
-    'soko koeln': 'SOKO Koeln',
-    'soko leipzig': 'SOKO Leipzig',
-    'alarm fuer cobra 11': 'Alarm fuer Cobra 11 - Die Autobahnpolizei',
-    'cobra 11': 'Alarm fuer Cobra 11 - Die Autobahnpolizei',
-    'der bergdoktor': 'Der Bergdoktor',
-    'die rosenheim cops': 'Die Rosenheim-Cops',
-    'rosenheim cops': 'Die Rosenheim-Cops',
-    'in aller freundschaft': 'In aller Freundschaft',
-    'notruf hafenkante': 'Notruf Hafenkante',
-    
-    # Sport
-    'sportschau': 'Sportschau',
-    'sportstudio': 'das aktuelle sportstudio',
-    'champions league': 'UEFA Champions League',
-    'europa league': 'UEFA Europa League',
-    'bundesliga': 'Bundesliga',
-    'formel 1': 'Formula 1',
-    'f1': 'Formula 1',
-    
-    # Dokus
-    'terra x': 'Terra X',
-    'planet erde': 'Planet Earth',
-    'wildes deutschland': 'Wildes Deutschland',
-    '37 grad': '37 Grad',
-    
-    # Reality
-    'der bachelor': 'Der Bachelor',
-    'die bachelorette': 'Die Bachelorette',
-    'bauer sucht frau': 'Bauer sucht Frau',
-    'dschungelcamp': "I'm a Celebrity...Get Me Out of Here!",
-    'ich bin ein star': "I'm a Celebrity...Get Me Out of Here!",
-    'das perfekte dinner': 'Das perfekte Dinner',
-    
-    # Kinder
-    'die sendung mit der maus': 'Die Sendung mit der Maus',
-    'loewenzahn': 'Loewenzahn',
-    'peppa wutz': 'Peppa Pig',
-    'paw patrol': 'PAW Patrol',
-}
-
-# Muster die aus Dateinamen entfernt werden sollen
-FILENAME_JUNK = [
-    r'_+', r'-+', r'\.+',
-    r'\d{4}[-_]\d{2}[-_]\d{2}',  # Datum 2024-01-15
-    r'\d{2}[-_]\d{2}[-_]\d{4}',  # Datum 15-01-2024
-    r'\d{8}',                     # Datum 20240115
-    r'\d{4}',                     # Jahr
-    r'[Ss]\d{1,2}[Ee]\d{1,2}',   # S01E05
-    r'[Ss]taffel\s*\d+',
-    r'[Ee]pisode\s*\d+',
-    r'[Ff]olge\s*\d+',
-    r'[Tt]eil\s*\d+',
-    r'1080[pi]', r'720[pi]', r'576[pi]', r'480[pi]',
-    r'[Hh][Dd][Tt][Vv]', r'[Ww][Ee][Bb]', r'[Bb][Dd][Rr][Ii][Pp]',
-    r'[Xx]264', r'[Hh]264', r'[Hh]265', r'[Aa][Vv][Cc]',
-    r'[Aa][Cc]3', r'[Dd][Tt][Ss]', r'[Aa][Aa][Cc]',
-    r'[Gg][Ee][Rr][Mm][Aa][Nn]', r'[Ee][Nn][Gg][Ll][Ii][Ss][Hh]',
-    r'[Dd][Uu][Bb][Bb][Ee][Dd]', r'[Ss][Yy][Nn][Cc]',
-]
-
+fanart_api = '6d231536dea4318a88cb2520ce89473b'
+FILENAME_JUNK = ['_+', '-+', '\\.+', '\\d{4}[-_]\\d{2}[-_]\\d{2}', '\\d{2}[-_]\\d{2}[-_]\\d{4}', '\\d{8}', '\\d{4}', '[Ss]\\d{1,2}[Ee]\\d{1,2}', '[Ss]taffel\\s*\\d+', '[Ee]pisode\\s*\\d+', '[Ff]olge\\s*\\d+', '[Tt]eil\\s*\\d+', '1080[pi]', '720[pi]', '576[pi]', '480[pi]', '[Hh][Dd][Tt][Vv]', '[Ww][Ee][Bb]', '[Bb][Dd][Rr][Ii][Pp]', '[Xx]264', '[Hh]264', '[Hh]265', '[Aa][Vv][Cc]', '[Aa][Cc]3', '[Dd][Tt][Ss]', '[Aa][Aa][Cc]', '[Gg][Ee][Rr][Mm][Aa][Nn]', '[Ee][Nn][Gg][Ll][Ii][Ss][Hh]', '[Dd][Uu][Bb][Bb][Ee][Dd]', '[Ss][Yy][Nn][Cc]']
 
 def get_storage_folder():
-    """Findet den besten Speicherort fuer temporaere Dateien"""
-    if os.path.isdir("/media/hdd"):
-        return "/media/hdd/xtra"
-    if os.path.isdir("/media/usb"):
-        return "/media/usb/xtra"
-    if os.path.isdir("/media/mmc"):
-        return "/media/mmc/xtra"
-    return "/tmp"
-
-
+    if os.path.isdir('/media/hdd'):
+        return '/media/hdd/xtra'
+    if os.path.isdir('/media/usb'):
+        return '/media/usb/xtra'
+    if os.path.isdir('/media/mmc'):
+        return '/media/mmc/xtra'
+    return '/tmp'
 STORAGE_FOLDER = get_storage_folder()
-INFO_FOLDER = os.path.join(STORAGE_FOLDER, "Info")
-
+INFO_FOLDER = os.path.join(STORAGE_FOLDER, 'Info')
 for folder in [STORAGE_FOLDER, INFO_FOLDER]:
     if not os.path.exists(folder):
         try:
@@ -433,74 +312,25 @@ for folder in [STORAGE_FOLDER, INFO_FOLDER]:
         except:
             pass
 
-
 def getRandomUserAgent():
-    useragents = [
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
-    ]
+    useragents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0']
     import random
     return random.choice(useragents)
 
-
 def clean_filename_for_search(filename):
-    """
-    Bereinigt Dateinamen fuer die Suche
-    z.B. "Tatort_2024-01-15_Das_Erste_1080p.ts" -> "Tatort"
-    """
     if not filename:
-        return ""
-    
-    # Erweiterung entfernen
+        return ''
     name = os.path.splitext(filename)[0]
-    
-    # Sender-Namen entfernen
-    senders = [
-        'Das Erste', 'ZDF', 'RTL', 'SAT1', 'SAT.1', 'ProSieben', 'Pro7',
-        'VOX', 'kabel eins', 'RTLZWEI', 'RTL2', 'NITRO', 'DMAX', 'TLC',
-        'sixx', 'ProSieben MAXX', 'SAT.1 Gold', 'ARTE', 'Phoenix', '3sat',
-        'ONE', 'ZDFneo', 'ZDFinfo', 'ARD alpha', 'NDR', 'WDR', 'SWR',
-        'BR', 'HR', 'MDR', 'RBB', 'SR', 'tagesschau24', 'KiKA',
-        'ORF', 'ORF1', 'ORF2', 'SRF', 'ServusTV', 'ATV', 'Puls4',
-    ]
+    senders = ['Das Erste', 'ZDF', 'RTL', 'SAT1', 'SAT.1', 'ProSieben', 'Pro7', 'VOX', 'kabel eins', 'RTLZWEI', 'RTL2', 'NITRO', 'DMAX', 'TLC', 'sixx', 'ProSieben MAXX', 'SAT.1 Gold', 'ARTE', 'Phoenix', '3sat', 'ONE', 'ZDFneo', 'ZDFinfo', 'ARD alpha', 'NDR', 'WDR', 'SWR', 'BR', 'HR', 'MDR', 'RBB', 'SR', 'tagesschau24', 'KiKA', 'ORF', 'ORF1', 'ORF2', 'SRF', 'ServusTV', 'ATV', 'Puls4', 'ARD']
     for sender in senders:
-        name = re.sub(r'[_\-\s]*' + re.escape(sender) + r'[_\-\s]*', ' ', name, flags=re.I)
-    
-    # Junk-Pattern entfernen
+        name = re.sub('[_\\-\\s]*' + re.escape(sender) + '[_\\-\\s]*', ' ', name, flags=re.I)
     for pattern in FILENAME_JUNK:
         name = re.sub(pattern, ' ', name)
-    
-    # Unterstriche/Bindestriche zu Leerzeichen
-    name = re.sub(r'[_\-]+', ' ', name)
-    
-    # Mehrfache Leerzeichen
-    name = re.sub(r'\s+', ' ', name).strip()
-    
+    name = re.sub('[_\\-]+', ' ', name)
+    name = re.sub('\\s+', ' ', name).strip()
     return name
 
-
-def apply_title_mapping(title):
-    """Wendet TITLE_MAPPINGS an"""
-    if not title:
-        return title
-    
-    title_lower = title.lower().strip()
-    
-    # Exakter Match
-    if title_lower in TITLE_MAPPINGS:
-        return TITLE_MAPPINGS[title_lower]
-    
-    # Teilweiser Match
-    for key, mapped in TITLE_MAPPINGS.items():
-        if title_lower.startswith(key) or key in title_lower:
-            return mapped
-    
-    return title
-
-
 def save_info_json(slug, data):
-    """Speichert Info-JSON fuer GradientStarX/GradientParental"""
     if not slug or not data:
         return False
     try:
@@ -522,11 +352,9 @@ def save_info_json(slug, data):
             print('[EMC JSON ERROR] %s' % str(e))
         return False
 
+class EMCBackdropWorker(threading.Thread):
 
-class EMCPosterWorker(threading.Thread):
-    """Worker-Thread fuer EMC Poster-Download"""
-    
-    def __init__(self, dest_path, title, shortdesc="", extdesc=""):
+    def __init__(self, dest_path, title, shortdesc='', extdesc=''):
         threading.Thread.__init__(self)
         self.dest_path = dest_path
         self.title = title
@@ -534,161 +362,111 @@ class EMCPosterWorker(threading.Thread):
         self.extdesc = extdesc
         self.daemon = True
         self.success = False
-    
+
     def run(self):
         try:
-            # Title Mapping anwenden
             search_title = apply_title_mapping(self.title)
             if DEBUG_EMC:
-                print("[EMC] Searching: '%s' (original: '%s')" % (search_title, self.title))
-            
-            # Slug fuer JSON
+                print("[EMC BACKDROP] Searching: '%s' (original: '%s')" % (search_title, self.title))
             slug = convtext(self.title) if self.title else None
-            
-            # TMDb Suche
             result = self.search_tmdb(search_title, slug)
             if result:
                 self.success = True
                 return
-            
-            # OMDb Fallback
-            result = self.search_omdb(search_title, slug)
+            result = self.search_fanart(search_title, slug)
             if result:
                 self.success = True
                 return
-            
             if DEBUG_EMC:
-                print("[EMC] No poster found for: %s" % self.title)
-                
+                print('[EMC BACKDROP] No backdrop found for: %s' % self.title)
         except Exception as e:
             if DEBUG_EMC:
-                print("[EMC ERROR] %s" % str(e))
-    
+                print('[EMC BACKDROP ERROR] %s' % str(e))
+
     def search_tmdb(self, title, slug):
         try:
-            url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (
-                tmdb_api, lng, urlquote(title)
-            )
+            url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (tmdb_api, lng, urlquote(title))
             headers = {'User-Agent': getRandomUserAgent()}
             response = requests.get(url, headers=headers, timeout=(3, 6))
-            
             if response.status_code != 200:
                 return False
-            
             data = response.json()
             results = data.get('results', [])
-            
             for item in results:
                 media_type = item.get('media_type', '')
                 if media_type not in ['movie', 'tv']:
                     continue
-                
-                poster_path = item.get('poster_path')
-                if not poster_path:
+                backdrop_path = item.get('backdrop_path')
+                if not backdrop_path:
+                    backdrop_path = item.get('poster_path')
+                if not backdrop_path:
                     continue
-                
-                # Poster URL
-                poster_url = 'https://image.tmdb.org/t/p/w500%s' % poster_path
-                
-                # Info-JSON speichern
+                backdrop_url = 'https://image.tmdb.org/t/p/w1280%s' % backdrop_path
                 if slug:
-                    info = {
-                        'tmdb_id': item.get('id'),
-                        'tmdb_vote_average': item.get('vote_average', 0),
-                        'tmdb_vote_count': item.get('vote_count', 0),
-                        'title': item.get('title') or item.get('name', ''),
-                        'overview': item.get('overview', ''),
-                        'media_type': media_type,
-                        'adult': item.get('adult', False),
-                        'Rated': '18' if item.get('adult') else 'NA',
-                    }
+                    info = {'tmdb_id': item.get('id'), 'tmdb_vote_average': item.get('vote_average', 0), 'tmdb_vote_count': item.get('vote_count', 0), 'title': item.get('title') or item.get('name', ''), 'overview': item.get('overview', ''), 'backdrop_path': backdrop_path, 'media_type': media_type, 'adult': item.get('adult', False), 'Rated': '18' if item.get('adult') else 'NA'}
                     if media_type == 'movie' and item.get('release_date'):
                         info['year'] = item.get('release_date', '')[:4]
                     elif media_type == 'tv' and item.get('first_air_date'):
                         info['year'] = item.get('first_air_date', '')[:4]
-                    
                     save_info_json(slug, info)
-                
-                # Poster downloaden
-                return self.download_poster(poster_url)
-            
+                return self.download_backdrop(backdrop_url)
             return False
-            
         except Exception as e:
             if DEBUG_EMC:
-                print("[EMC TMDb ERROR] %s" % str(e))
+                print('[EMC TMDb ERROR] %s' % str(e))
             return False
-    
-    def search_omdb(self, title, slug):
+
+    def search_fanart(self, title, slug):
         try:
-            url = 'http://www.omdbapi.com/?t=%s&apikey=%s' % (urlquote(title), omdb_api)
-            response = requests.get(url, timeout=(3, 6))
-            data = response.json()
-            
-            if data.get('Response') != 'True':
+            url_maze = 'http://api.tvmaze.com/singlesearch/shows?q=%s' % urlquote(title)
+            mj = requests.get(url_maze, timeout=(3, 6)).json()
+            tvdb_id = mj.get('externals', {}).get('thetvdb')
+            if not tvdb_id:
                 return False
-            
-            poster_url = data.get('Poster')
-            if not poster_url or poster_url == 'N/A':
-                return False
-            
-            # Info-JSON speichern
-            if slug:
-                info = {
-                    'Rated': data.get('Rated', 'NA'),
-                    'imdb_rating': data.get('imdbRating', 'N/A'),
-                    'imdb_id': data.get('imdbID', ''),
-                    'year': data.get('Year', ''),
-                    'genre': data.get('Genre', ''),
-                    'plot': data.get('Plot', ''),
-                }
-                save_info_json(slug, info)
-            
-            return self.download_poster(poster_url)
-            
+            url_fanart = 'https://webservice.fanart.tv/v3/tv/%s?api_key=%s' % (tvdb_id, fanart_api)
+            fjs = requests.get(url_fanart, timeout=(3, 6)).json()
+            backdrop_url = None
+            if fjs.get('showbackground'):
+                backdrop_url = fjs['showbackground'][0].get('url')
+            elif fjs.get('tvthumb'):
+                backdrop_url = fjs['tvthumb'][0].get('url')
+            if backdrop_url:
+                return self.download_backdrop(backdrop_url)
+            return False
         except Exception as e:
             if DEBUG_EMC:
-                print("[EMC OMDb ERROR] %s" % str(e))
+                print('[EMC FanArt ERROR] %s' % str(e))
             return False
-    
-    def download_poster(self, url):
+
+    def download_backdrop(self, url):
         try:
             headers = {'User-Agent': getRandomUserAgent()}
             response = requests.get(url, headers=headers, timeout=(3, 6))
             response.raise_for_status()
-            
             with open(self.dest_path, 'wb') as f:
                 f.write(response.content)
-            
             if DEBUG_EMC:
-                print("[EMC] Poster saved: %s" % self.dest_path)
+                print('[EMC BACKDROP] Saved: %s' % self.dest_path)
             return True
-            
         except Exception as e:
             if DEBUG_EMC:
-                print("[EMC Download ERROR] %s" % str(e))
+                print('[EMC BACKDROP Download ERROR] %s' % str(e))
             return False
 
-
-class GradientPosterXEMC(Renderer):
-    """
-    Poster-Renderer fuer EMC / Movie Player
-    Cache-only: zeigt Poster nur aus EMC Cache (/media/hdd/xtra/EMC/poster)
-    """
-    
+class GradientBackdropXEMC(Renderer):
     GUI_WIDGET = ePixmap
-    
+
     def __init__(self):
         Renderer.__init__(self)
-        self.poster_path = None
+        self.backdrop_path = None
         self.timer = eTimer()
         try:
-            self.timer.timeout.connect(self._checkPoster)
+            self.timer.timeout.connect(self._checkBackdrop)
         except:
-            self.timer.callback.append(self._checkPoster)
+            self.timer.callback.append(self._checkBackdrop)
         self.worker = None
         self.check_count = 0
-    
+
     def changed(self, what):
         if not self.instance:
             return
@@ -696,14 +474,13 @@ class GradientPosterXEMC(Renderer):
             self.instance.hide()
             return
         self._updateEvent()
-    
+
     def _updateEvent(self):
         try:
             src = self.source
             event = None
             path = None
             ref = None
-            # Service-Pfad ermitteln
             if isinstance(src, ServiceEvent):
                 event = src.event
                 svc = getattr(src, 'service', None)
@@ -725,7 +502,6 @@ class GradientPosterXEMC(Renderer):
             if not path:
                 self.instance.hide()
                 return
-            # Titel-Kandidaten sammeln (Event -> .meta -> ref.getName -> Filename)
             titles = []
             if event:
                 try:
@@ -747,139 +523,126 @@ class GradientPosterXEMC(Renderer):
             fn_title = _emc_extract_title_from_filename(path)
             if fn_title:
                 titles.append(fn_title)
-            # Variants / Normalisierung (automatisch, keine manuellen Einträge pro Aufnahme)
-            expanded = []
-            for _t in titles:
-                for v in _emc_expand_title_variants(_t):
-                    if v and v not in expanded:
-                        expanded.append(v)
-
-            # TITLE_MAPPINGS anwenden (wenn vorhanden)
+            more = []
+            for t in titles:
+                if '_' in t:
+                    more.append(t.replace('_', ' '))
+                if '  ' in t:
+                    more.append(re.sub(r'\s+', ' ', t).strip())
+            titles += [t for t in more if t and t not in titles]
             try:
                 mapped = []
-                for _t in list(expanded):
-                    mt = apply_title_mapping(_t)
-                    if mt and mt not in expanded and mt not in mapped:
+                for t in list(titles):
+                    mt = apply_title_mapping(t)
+                    if mt and mt not in titles and mt not in mapped:
                         mapped.append(mt)
-                expanded += mapped
+                titles += mapped
             except Exception:
                 pass
-
-            titles = expanded
-
-            # ---- Season-aware lookup ----
-            # Wenn Dateiname S##E## enthält: erst Staffel-Poster suchen
-            season_titles = []
+            # ---- Episode-aware + Season-aware lookup ----
+            # Priority: Episode-Still (S01E05) → Season-Poster(backdrop) → Series-Backdrop
+            episode_titles = []
+            season_bd_titles = []
             try:
-                import re as _re2, os as _os2
-                _fn = _os2.path.basename(path or '')
+                import re as _re3, os as _os3
+                _fn = _os3.path.basename(path or '')
                 # Format 1: S01E05
-                _m  = _re2.search(r'[Ss](\d{1,2})[Ee](\d{1,3})', _fn)
+                _m  = _re3.search(r'[Ss](\d{1,2})[Ee](\d{1,3})', _fn)
                 # Format 2: 1x06
-                _m1x = _re2.search(r'\b(\d{1,2})[xX](\d{1,3})\b', _fn) if not _m else None
-                # Format 3: 'Serie 1. Titel' (Dokumentationen)
-                _m_n = _re2.search(r'^.+?\s+(\d{1,3})\.\s+', _fn) if not _m and not _m1x else None
+                _m1x = _re3.search(r'\b(\d{1,2})[xX](\d{1,3})\b', _fn) if not _m else None
+                # Format 3: 'Serie N. Titel'
+                _m_n = _re3.search(r'^(.+?)\s+(\d{1,3})\.\s+(.+)$', _fn) if not _m and not _m1x else None
 
                 if _m:
-                    _s = int(_m.group(1))
+                    _s = int(_m.group(1)); _e = int(_m.group(2))
                     for _t in titles:
-                        _clean = _re2.sub(r'\s*[Ss]\d{1,2}[Ee]\d{1,3}.*$', '', _t).strip()
+                        _clean = _re3.sub(r'\s*[Ss]\d{1,2}[Ee]\d{1,3}.*$', '', _t).strip()
                         if _clean:
-                            season_titles.append('%s_S%02d' % (_clean, _s))
+                            episode_titles.append('%s_S%02dE%02d' % (_clean, _s, _e))
+                            season_bd_titles.append('%s_S%02d' % (_clean, _s))
                 elif _m1x:
-                    _s = int(_m1x.group(1))
+                    _s = int(_m1x.group(1)); _e = int(_m1x.group(2))
                     for _t in titles:
-                        _clean = _re2.sub(r'\s*\d{1,2}[xX]\d{1,3}.*$', '', _t).strip()
+                        _clean = _re3.sub(r'\s*\d{1,2}[xX]\d{1,3}.*$', '', _t).strip()
                         if _clean:
-                            season_titles.append('%s_S%02d' % (_clean, _s))
+                            episode_titles.append('%s_S%02dE%02d' % (_clean, _s, _e))
+                            season_bd_titles.append('%s_S%02d' % (_clean, _s))
                 elif _m_n:
-                    # Dokumentationsformat → Staffel 1
+                    # Dokumentationsformat: Serie N. Titel → Staffel 1, Episode N
+                    _s = 1; _e = int(_m_n.group(2))
                     for _t in titles:
-                        _clean = _re2.sub(r'\s+\d{1,3}\..*$', '', _t).strip()
+                        _clean = _re3.sub(r'\s+\d{1,3}\..*$', '', _t).strip()
                         if _clean:
-                            season_titles.append('%s_S01' % _clean)
+                            episode_titles.append('%s_S01E%02d' % (_clean, _e))
+                            season_bd_titles.append('%s_S01' % _clean)
             except Exception:
                 pass
 
-            # Cache-only lookup: Staffel-Poster → Serien-Poster (Fallback)
             found = None
-            if season_titles:
-                found = _emc_find_artwork(EMC_POSTER_FOLDER, season_titles)
+            # 1. Episode-Still
+            if episode_titles:
+                found = _emc_find_artwork(EMC_BACKDROP_FOLDER, episode_titles)
+            # 2. Staffel-Backdrop
+            if not found and season_bd_titles:
+                found = _emc_find_artwork(EMC_BACKDROP_FOLDER, season_bd_titles)
+            # 3. Serien-Backdrop (Fallback)
             if not found:
-                found = _emc_find_artwork(EMC_POSTER_FOLDER, titles)
+                found = _emc_find_artwork(EMC_BACKDROP_FOLDER, titles)
             if not found:
                 self.instance.hide()
                 return
-            self.poster_path = found
-            self._showPoster(found)
+            self.backdrop_path = found
+            self._showBackdrop(found)
         except Exception as e:
             if DEBUG_EMC:
-                print('[EMC Poster _updateEvent ERROR] %s' % str(e))
+                print('[EMC Backdrop _updateEvent ERROR] %s' % str(e))
             self.instance.hide()
     def _startWorker(self, dest_path, query, short, ext):
-        # Alten Worker stoppen wenn noch aktiv
         if self.worker and self.worker.is_alive():
-            return  # Warten auf alten Worker
-        
-        self.worker = EMCPosterWorker(dest_path, query, short, ext)
+            return
+        self.worker = EMCBackdropWorker(dest_path, query, short, ext)
         self.worker.start()
         self.check_count = 0
-        self.timer.start(300, True)  # Nach 300ms pruefen
-    
-    def _checkPoster(self):
+        self.timer.start(300, True)
+
+    def _checkBackdrop(self):
         try:
             self.check_count += 1
-            
-            # Poster pruefen
-            if self.poster_path and os.path.exists(self.poster_path):
-                if os.path.getsize(self.poster_path) > 0:
-                    self._showPoster(self.poster_path)
+            if self.backdrop_path and os.path.exists(self.backdrop_path):
+                if os.path.getsize(self.backdrop_path) > 0:
+                    self._showBackdrop(self.backdrop_path)
                     return
-            
-            # Maximal 20 Versuche (ca. 6 Sekunden)
             if self.check_count < 20:
                 self.timer.start(300, True)
             else:
                 self.instance.hide()
-                
         except:
             self.instance.hide()
-    
-    def _showPoster(self, path):
+
+    def _showBackdrop(self, path):
         try:
             self.instance.setPixmap(loadJPG(path))
             self.instance.setScale(1)
             self.instance.show()
         except:
             self.instance.hide()
-
-
-# Test
 if __name__ == '__main__':
-    print("=" * 60)
-    print("GradientPosterXEMC - OPTIMIERTE VERSION")
-    print("=" * 60)
+    print('=' * 60)
+    print('GradientBackdropXEMC - NEU')
+    print('=' * 60)
     print()
-    print("FEATURES:")
-    print("  - TITLE_MAPPINGS fuer deutsche Sendungen")
-    print("  - JSON-Speicherung fuer Rating/FSK")
-    print("  - Verbesserte Dateinamensbereinigung")
-    print("  - TMDb + OMDb Suche")
+    print('ZWECK: Backdrop fuer Aufnahmen/Filme')
+    print('VERWENDUNG:')
+    print('  - EMC Selection')
+    print('  - Movie Player')
+    print('  - Movieliste')
     print()
-    print("TITLE_MAPPINGS Anzahl: %d" % len(TITLE_MAPPINGS))
+    print('SPEICHERORT: EMC Cache-only (/media/hdd/xtra/EMC/backdrop)')
+    print('  Film.ts -> Film_backdrop.jpg')
     print()
-    print("Dateinamensbereinigung Test:")
-    test_files = [
-        "Tatort_2024-01-15_Das_Erste_1080p.ts",
-        "GZSZ_RTL_S01E1234.ts",
-        "Der_Bergdoktor_ZDF_720p_German.mkv",
-        "Sportschau_2024-03-10_ARD.ts",
-        "The_Dark_Knight_2008_1080p_BluRay.mkv",
-    ]
-    for f in test_files:
-        cleaned = clean_filename_for_search(f)
-        mapped = apply_title_mapping(cleaned)
-        print("  '%s'" % f)
-        print("    -> cleaned: '%s'" % cleaned)
-        print("    -> mapped:  '%s'" % mapped)
-        print()
+    print('FEATURES:')
+    print('  - TITLE_MAPPINGS Integration')
+    print('  - TMDb + FanArt Suche')
+    print('  - JSON-Speicherung')
+    print('  - w1280 Aufloesung')
+    print()

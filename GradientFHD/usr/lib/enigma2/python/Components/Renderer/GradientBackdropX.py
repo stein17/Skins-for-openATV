@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# GradientBackdropX.py - patched build (progress + live bouquets + stream filter)
+# NOTE: this header is sanitized to avoid IndentationError from stray text lines.
+
+# BUGFIX VERSION - elif zu if geändert für korrekte Fallback-Kette
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -12,6 +18,7 @@
 # by beber...03.2022,
 # 03.2022 several enhancements : several renders with one queue thread, google search (incl. molotov for france) + autosearch & autoclean thread ...
 # for infobar,
+# 02.26 @stein17, Many new features and improvements
 # <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" />
 # <widget source="session.Event_Next" render="GradientBackdropX" position="100,100" size="680,1000" />
 # <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
@@ -23,9 +30,78 @@
 # <widget source="Event" render="GradientBackdropX" position="100,100" size="680,1000" />
 # <widget source="Event" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
 # or put tag -->  path="/media/hdd/backdrop"
+
+# ============================================================================
+# OPTIONAL: Custom recording (movie) directories for "Recording Asset Protection"
+# ============================================================================
+# ENGLISH
+# -------
+# What this is:
+#   Gradient Poster/Backdrop AutoDB keeps a LIVE artwork cache and normally deletes
+#   old images after 3 days (cleanup).
+#
+#   To still have posters/backdrops (and Info JSON) for your RECORDINGS months later,
+#   the code can "protect" artwork that belongs to existing recordings by scanning
+#   your recording directories and matching titles/slugs.
+#
+# What this file does:
+#   If your recordings are NOT stored in the default Enigma2 movie folders, you can
+#   create this file to add additional directories to scan:
+#
+#       /etc/enigma2/xtra_recording_dirs.conf
+#
+#   Format:
+#     - one directory path per line
+#     - lines starting with '#' are comments
+#
+# Effect:
+#   Artwork (poster/backdrop/info) matching recordings found in these directories
+#   is kept (not deleted by the 3-day cleanup), so you can still see it in EMC/
+#   MoviePlayer even after many months.
+#
+# Example:
+#   /media/hdd/movie
+#   /media/hdd/Serien
+#   /media/hdd/Filme
+#
+# DEUTSCH
+# -------
+# Wofür ist das:
+#   Gradient Poster/Backdrop AutoDB hält einen LIVE-Cache und löscht alte Bilder
+#   normalerweise nach 3 Tagen (Cleanup).
+#
+#   Damit Poster/Backdrops (und Info-JSON) für vorhandene AUFNAHMEN auch nach Monaten
+#   noch verfügbar sind, kann der Code Artwork schützen, indem er Aufnahme-Ordner
+#   scannt und passende Titel/Slugs findet.
+#
+# Was diese Datei bewirkt:
+#   Wenn deine Aufnahmen NICHT in den Standard-Enigma2 Movie-Ordnern liegen, kannst
+#   du über diese Datei zusätzliche Ordner angeben, die gescannt werden sollen:
+#
+#       /etc/enigma2/xtra_recording_dirs.conf
+#
+#   Format:
+#     - ein Ordnerpfad pro Zeile
+#     - Zeilen die mit '#' beginnen sind Kommentare
+#
+# Wirkung:
+#   Artwork (Poster/Backdrop/Info), das zu Aufnahmen aus diesen Ordnern passt, wird
+#   geschützt (nicht vom 3-Tage-Cleanup gelöscht). Dadurch siehst du auch nach vielen
+#   Monaten noch Poster/Backdrop in EMC/MoviePlayer.
+#
+# Beispiel:
+#   /media/hdd/movie
+#   /media/hdd/Serien
+#   /media/hdd/Filme
+# ============================================================================
+
 from __future__ import print_function
 from Components.Renderer.Renderer import Renderer
-from .GradientBackdropXDownloadThread import GradientBackdropXDownloadThread
+from .GradientBackdropXDownloadThread import (
+    GradientBackdropXDownloadThread,
+    get_store_slug,
+    get_provider_override,
+)
 from Components.Sources.CurrentService import CurrentService
 from Components.Sources.Event import Event
 from Components.Sources.EventInfo import EventInfo
@@ -46,9 +122,320 @@ import shutil
 import socket
 import sys
 import time
+import json
+import threading
+import datetime
+
+STOP_AUTODB_FILE = '/tmp/stop_backdrop_autodb'
+
+
+
+# =========================================================================
+# RECORDING ASSET PROTECTION (keep backdrops/posters/json for recordings)
+# =========================================================================
+RECORDING_PROTECT_CONF = '/etc/enigma2/xtra_recording_dirs.conf'
+
+try:
+    from .GradientConverlibr import convtext, get_canonical_slug as _xtra_convtext, apply_title_mapping as _xtra_apply_title_mapping
+except Exception:
+    try:
+        from GradientConverlibr import convtext as _xtra_convtext, apply_title_mapping as _xtra_apply_title_mapping
+    except Exception:
+        _xtra_convtext = None
+        _xtra_apply_title_mapping = None
+
+_RECORDING_EXTS = ('.ts', '.mkv', '.mp4', '.avi', '.mpeg', '.mpg', '.m2ts', '.mov', '.wmv')
+
+
+def get_canonical_slug(text):
+    """Return a stable filename slug (lowercase, underscores, umlaut-safe)."""
+    try:
+        import re, unicodedata
+        if not isinstance(text, str):
+            text = str(text or "")
+        # German umlauts / ß
+        repl = {"ä":"ae","ö":"oe","ü":"ue","ß":"ss","Ä":"Ae","Ö":"Oe","Ü":"Ue"}
+        for k,v in repl.items():
+            text = text.replace(k, v)
+        text = unicodedata.normalize("NFKD", text)
+        text = "".join(ch for ch in text if not unicodedata.combining(ch))
+        text = re.sub(r"[-–—/|,:!?.'\"()\[\]{}]", " ", text)
+        text = re.sub(r"\s+", " ", text).strip().lower()
+        text = text.replace(" ", "_")
+        text = re.sub(r"_+", "_", text).strip("_")
+        return text
+    except Exception:
+        return (text or "").replace(" ", "_").lower()
+
+def _read_extra_recording_dirs():
+    out = []
+    try:
+        if os.path.exists(RECORDING_PROTECT_CONF):
+            with open(RECORDING_PROTECT_CONF, 'r') as f:
+                for ln in f:
+                    ln = (ln or '').strip()
+                    if not ln or ln.startswith('#'):
+                        continue
+                    out.append(ln)
+    except Exception:
+        pass
+    return out
+
+
+def _get_recording_dirs():
+    dirs = set()
+    try:
+        vd = getattr(config, 'movielist', None)
+        if vd is not None and hasattr(vd, 'videodirs'):
+            val = vd.videodirs.value
+            if isinstance(val, (list, tuple)):
+                for p in val:
+                    if p:
+                        dirs.add(str(p))
+            elif isinstance(val, str) and val:
+                dirs.add(val)
+    except Exception:
+        pass
+
+    try:
+        up = getattr(config, 'usage', None)
+        if up is not None and hasattr(up, 'default_path'):
+            p = up.default_path.value
+            if p:
+                dirs.add(str(p))
+    except Exception:
+        pass
+
+    for p in (
+        '/media/hdd/movie', '/media/hdd/movies', '/media/hdd/recordings',
+        '/media/usb/movie', '/media/usb/movies', '/media/usb/recordings',
+        '/media/mmc/movie', '/media/mmc/movies', '/media/mmc/recordings',
+    ):
+        if os.path.isdir(p):
+            dirs.add(p)
+
+    for p in _read_extra_recording_dirs():
+        if os.path.isdir(p):
+            dirs.add(p)
+
+    return [d for d in dirs if d and os.path.isdir(d)]
+
+
+def _storage_xtra_base():
+    # Robust base selection: prefer existing xtra dirs (avoid false RW detection)
+    for p in ("/media/hdd/xtra", "/media/usb/xtra", "/media/mmc/xtra"):
+        try:
+            if os.path.isdir(p):
+                return p
+        except Exception:
+            pass
+    return "/tmp"
+
+
+def _meta_title_for_recording(media_path):
+    try:
+        meta = media_path + '.meta'
+        if not os.path.exists(meta):
+            base, _ = os.path.splitext(media_path)
+            meta = base + '.meta'
+        if not os.path.exists(meta):
+            return None
+        with open(meta, 'r') as f:
+            lines = f.read().splitlines()
+        if len(lines) >= 2:
+            t = (lines[1] or '').strip()
+            return t or None
+    except Exception:
+        return None
+
+
+def _clean_filename_for_search(filename):
+    try:
+        name = os.path.splitext(os.path.basename(filename))[0]
+        name = re.sub(r'\d{4}[-_]\d{2}[-_]\d{2}', ' ', name)
+        name = re.sub(r'\d{8}', ' ', name)
+        name = re.sub(r'(?i)(1080p|1080i|720p|2160p|4k|hdtv|web[- ]?dl|webrip|bdrip|bluray|x264|h264|h265|hevc|ac3|dts)', ' ', name)
+        senders = ['Das Erste','ZDF','RTL','SAT1','SAT.1','ProSieben','Pro7','VOX','kabel eins','RTLZWEI','RTL2','ARTE','Phoenix','3sat','ONE','ZDFneo','ZDFinfo','NDR','WDR','SWR','BR','HR','MDR','RBB','ARD']
+        for sn in senders:
+            name = re.sub(r'(?i)[_\-\s]*' + re.escape(sn) + r'[_\-\s]*', ' ', name)
+        name = re.sub(r'[_\-]+', ' ', name)
+        name = re.sub(r'\s+', ' ', name).strip()
+        return name
+    except Exception:
+        return ''
+
+
+def _slug_candidates(title):
+    out = set()
+    if not title:
+        return out
+
+    t = title
+    try:
+        if _xtra_apply_title_mapping:
+            t = _xtra_apply_title_mapping(t)
+    except Exception:
+        pass
+
+    try:
+        if _xtra_convtext:
+            st = _xtra_convtext(t)
+            if st:
+                out.add(st)
+    except Exception:
+        pass
+
+    try:
+        st2 = convtext(t)
+        if st2:
+            out.add(st2)
+    except Exception:
+        pass
+
+    return out
+
+
+def _build_recording_slug_set(max_files=50000):
+    slugs = set()
+    count = 0
+    for root in _get_recording_dirs():
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if not d.startswith('.') and d not in ('lost+found',)]
+            for fn in filenames:
+                if not fn:
+                    continue
+                if not fn.lower().endswith(_RECORDING_EXTS):
+                    continue
+                media = os.path.join(dirpath, fn)
+                count += 1
+                if count > max_files:
+                    return slugs
+                titles = []
+                mt = _meta_title_for_recording(media)
+                if mt:
+                    titles.append(mt)
+                titles.append(os.path.splitext(fn)[0])
+                titles.append(_clean_filename_for_search(fn))
+                for tt in titles:
+                    tt = (tt or '').strip()
+                    if not tt:
+                        continue
+                    for slug in _slug_candidates(tt):
+                        slugs.add(slug)
+    return slugs
+
+
+def _touch_if_exists(p):
+    try:
+        if p and os.path.exists(p):
+            os.utime(p, (time.time(), time.time()))
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def _refresh_recording_assets(slugs, log_func=None):
+    base = _storage_xtra_base()
+    poster_dir = os.path.join(base, 'poster')
+    backdrop_dir = os.path.join(base, 'backdrop')
+    info_dir = os.path.join(base, 'Info')
+    touched = 0
+    for slug in slugs:
+        if not slug:
+            continue
+        touched += 1 if _touch_if_exists(os.path.join(poster_dir, slug + '.jpg')) else 0
+        touched += 1 if _touch_if_exists(os.path.join(backdrop_dir, slug + '.jpg')) else 0
+        touched += 1 if _touch_if_exists(os.path.join(info_dir, slug + '.json')) else 0
+    if log_func:
+        try:
+            log_func('[AutoDB] recording-protect: %d slug(s), %d file(s) refreshed' % (len(slugs), touched))
+        except Exception:
+            pass
+    return touched
 
 from re import search, sub, I, S, escape
 
+# ============================================================================
+# AutoDB log path (OpenATV): /tmp is usually /var/volatile/tmp
+# ============================================================================
+try:
+    LOG_DIR = '/var/volatile/tmp' if os.path.isdir('/var/volatile/tmp') else '/tmp'
+except Exception:
+    LOG_DIR = '/tmp'
+
+def _autodb_log_path(name):
+    try:
+        return os.path.join(LOG_DIR, name)
+    except Exception:
+        return '/tmp/%s' % name
+
+
+
+def _autodb_progress_path(name):
+    try:
+        return os.path.join(LOG_DIR, name)
+    except Exception:
+        return '/tmp/%s' % name
+
+
+def _write_autodb_progress(kind, current, total, service_name=None, state='running'):
+    # Write AutoDB progress as JSON (atomic)
+    try:
+        path = _autodb_progress_path('BackdropAutoDB.progress.json')
+        tmp = path + '.tmp'
+        cur = int(current) if current is not None else 0
+        tot = int(total) if total is not None else 0
+        pct = int((float(cur) * 100.0 / float(tot)) if tot else 0)
+        data = {'ts': time.time(), 'kind': kind, 'state': state, 'current': cur, 'total': tot, 'percent': pct, 'service': service_name or ''}
+        with open(tmp, 'w') as f:
+            json.dump(data, f)
+        try:
+            os.replace(tmp, path)
+        except Exception:
+            os.rename(tmp, path)
+    except Exception:
+        pass
+
+
+def _merge_info_payload(out_path, payload):
+    """Merge debug payload into existing backdrop_info json without dropping cached URLs."""
+    try:
+        existing = {}
+        if os.path.exists(out_path):
+            try:
+                with open(out_path, 'r', encoding='utf-8') as f:
+                    existing = json.load(f) or {}
+            except Exception:
+                existing = {}
+        if not isinstance(existing, dict):
+            existing = {}
+        clean = {k: v for k, v in (payload or {}).items() if v is not None}
+        existing.update(clean)
+        tmp_path = out_path + '.tmp'
+        with open(tmp_path, 'w', encoding='utf-8') as f:
+            json.dump(existing, f, ensure_ascii=False, indent=2, sort_keys=True)
+        try:
+            os.replace(tmp_path, out_path)
+        except Exception:
+            os.rename(tmp_path, out_path)
+        return True
+    except Exception:
+        return False
+
+
+def _write_backdrop_info_debug(slug, payload):
+    """Write provider-trace info but keep existing backdrop_url/source intact."""
+    if not slug:
+        return False
+    try:
+        base = _storage_xtra_base()
+        info_dir = os.path.join(base, 'backdrop_info')
+        os.makedirs(info_dir, exist_ok=True)
+        out_path = os.path.join(info_dir, slug + '.json')
+        return _merge_info_payload(out_path, payload)
+    except Exception:
+        return False
 PY3 = False
 if sys.version_info[0] >= 3:
     PY3 = True
@@ -79,10 +466,12 @@ except ImportError:
 
 epgcache = eEPGCache.getInstance()
 if PY3:
-    pdb = queue.LifoQueue()
+    pdb = queue.PriorityQueue()
 else:
-    pass
-    pdb = queue.LifoQueue()
+    pdb = Queue.PriorityQueue()
+
+DEBUG_AUTODB = False  # set True only if you want verbose AutoDB per-event logging
+
 
 
 def isMountedInRW(mount_point):
@@ -115,6 +504,39 @@ epgcache = eEPGCache.getInstance()
 apdb = dict()
 
 
+
+# ============================================================================
+# LIVE SELECTION TRACKING (performance):
+# Track latest SERVICE only (not title), because many skins have multiple
+# GradientBackdropX instances (nexts=0..4) that would otherwise fight each other.
+# Timestamp is updated only when the service changes.
+# ============================================================================
+_LIVE_LOCK = threading.Lock()
+_LIVE_LATEST_SERVICE = None
+_LIVE_LATEST_TS = 0.0
+
+
+def _make_live_service(canal):
+    try:
+        return (canal[0] or '').strip()
+    except Exception:
+        return ''
+
+
+def set_live_latest(canal):
+    global _LIVE_LATEST_SERVICE, _LIVE_LATEST_TS
+    svc = _make_live_service(canal)
+    with _LIVE_LOCK:
+        if svc and svc != _LIVE_LATEST_SERVICE:
+            _LIVE_LATEST_SERVICE = svc
+            _LIVE_LATEST_TS = time.time()
+
+
+def get_live_latest():
+    with _LIVE_LOCK:
+        return _LIVE_LATEST_SERVICE, _LIVE_LATEST_TS
+
+
 try:
     lng = config.osd.language.value
     lng = lng[:-3]
@@ -124,51 +546,274 @@ except:
     pass
 
 
-# SET YOUR PREFERRED BOUQUET FOR AUTOMATIC BACKDROP GENERATION
-# WITH THE NUMBER OF ITEMS EXPECTED (BLANK LINE IN BOUQUET CONSIDERED)
-# IF NOT SET OR WRONG FILE THE AUTOMATIC BACKDROP GENERATION WILL WORK FOR
-# THE CHANNELS THAT YOU ARE VIEWING IN THE ENIGMA SESSION
 
-# add lululla
-def SearchBouquetTerrestrial():
-    import glob
-    import codecs
-    file = '/etc/enigma2/userbouquet.favourites.tv'
-    for file in sorted(glob.glob('/etc/enigma2/*.tv')):
-        with codecs.open(file, "r", encoding="utf-8") as f:
-            file = f.read()
-            x = file.strip().lower()
-            if x.find('eeee') != -1:
-                if x.find('82000') == -1 and x.find('c0000') == -1:
-                    return file
-                    break
+# AUTOMATISCHE BACKDROP-GENERIERUNG (AutoDB)
+# ---------------------------------------
+# - Es werden die TV-Bouquets aus /etc/enigma2/bouquets.tv eingelesen.
+# - Es wird eine Konfigurationsdatei erzeugt:
+#       /etc/enigma2/poster_autodb_bouquets.txt
+# - Dort kannst du mit 1/0 steuern, welche Bouquets AutoDB benutzt.
+# - AutoDB arbeitet dann nur mit den Sendern aus den aktivierten Bouquets.
+#
+
+bouquets_main_file = '/etc/enigma2/bouquets.tv'
+autodb_bouquets_file = '/etc/enigma2/poster_autodb_bouquets.txt'
+bouquet_dir = '/etc/enigma2'
 
 
-if SearchBouquetTerrestrial():
-    autobouquet_file = SearchBouquetTerrestrial()
-else:
-    pass
-    autobouquet_file = '/etc/enigma2/userbouquet.favourites.tv'
-# print('autobouquet_file = ', autobouquet_file)
-autobouquet_count = 70
-# Short script for Automatic poster generation on your preferred bouquet
-if not os.path.exists(autobouquet_file):
-    autobouquet_file = None
-    autobouquet_count = 0
-else:
-    pass
-    with open(autobouquet_file, 'r') as f:
-        lines = f.readlines()
-    if autobouquet_count > len(lines):
-        autobouquet_count = len(lines)
-    for i in range(autobouquet_count):
-        if '#SERVICE' in lines[i]:
-            line = lines[i][9:].strip().split(':')
-            if len(line) == 11:
-                value = ':'.join((line[3], line[4], line[5], line[6]))
-                if value != '0:0:0:0':
-                    service = ':'.join((line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8], line[9], line[10]))
-                    apdb[i] = service
+def _read_bouquets_from_main():
+    """
+    Liest /etc/enigma2/bouquets.tv und sammelt alle referenzierten
+    userbouquet.*.tv Einträge.
+    """
+    bouquet_ids = []
+    if not os.path.exists(bouquets_main_file):
+        return bouquet_ids
+    try:
+        with open(bouquets_main_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line.startswith('#SERVICE'):
+                    continue
+                if 'FROM BOUQUET "' in line:
+                    part = line.split('FROM BOUQUET "', 1)[1]
+                    name = part.split('"', 1)[0]
+                    if name.endswith('.tv') and name not in bouquet_ids:
+                        bouquet_ids.append(name)
+    except Exception as e:
+        print("[BackdropAutoDB] error reading bouquets.tv:", e)
+    return bouquet_ids
+
+
+def _collect_services_from_bouquet_id(bouquet_id, services, seen):
+    """
+    Liest alle #SERVICE Zeilen aus einer userbouquet.*.tv Datei und sammelt ServiceRefs.
+    """
+    bouquet_file = os.path.join(bouquet_dir, bouquet_id)
+    if not os.path.exists(bouquet_file):
+        return
+    try:
+        with open(bouquet_file, 'r') as f:
+            for line in f:
+                if not line.startswith('#SERVICE'):
+                    continue
+                parts = line[9:].strip().split(':')
+                if len(parts) < 11:
+                    continue
+                # ServiceRef nur aus den ersten 11 Teilen bauen
+                srvref = ':'.join(parts[:11])
+                if srvref in seen:
+                    continue
+                seen.add(srvref)
+                services.append(srvref)
+    except Exception as e:
+        print("[BackdropAutoDB] error reading bouquet %s: %s" % (bouquet_file, e))
+
+
+def _get_bouquet_display_name(bouquet_id):
+    """
+    Liest aus /etc/enigma2/userbouquet.*.tv die #NAME-Zeile aus.
+    """
+    bouquet_file = os.path.join(bouquet_dir, bouquet_id)
+    if not os.path.exists(bouquet_file):
+        return None
+    try:
+        with open(bouquet_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('#NAME'):
+                    # alles nach "#NAME " nehmen
+                    return line[5:].strip()
+    except Exception as e:
+        print("[BackdropAutoDB] error reading bouquet name %s: %s" % (bouquet_file, e))
+    return None
+
+
+# 1) bouquets.tv einlesen
+bouquet_ids = _read_bouquets_from_main()
+
+# 2) Vorherige Bouquet-Konfiguration (1/0) einlesen
+bouquet_flags = {}
+if os.path.exists(autodb_bouquets_file):
+    try:
+        with open(autodb_bouquets_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                parts = line.split('|')
+                if len(parts) >= 2:
+                    flag = parts[0].strip()
+                    # zweites Feld kann "userbouquet.dbe27.tv  #NAME HD+(TV)" sein
+                    name_field = parts[1].strip().split()[0]
+                    enabled = (flag != '0')
+                    bouquet_flags[name_field] = enabled
+    except Exception as e:
+        print("[BackdropAutoDB] bouquet config read error:", e)
+
+# 3) Neue Konfigurationsdatei mit Anleitung schreiben
+try:
+    with open(autodb_bouquets_file, 'w') as f:
+        f.write("# ==============================================\n")
+        f.write("#  Poster/Backdrop-AutoDB Bouquets\n")
+        f.write("# ==============================================\n")
+        f.write("# Diese Datei wird automatisch aus folgendem File erzeugt:\n")
+        f.write("#   /etc/enigma2/bouquets.tv\n")
+        f.write("#\n")
+        f.write("# Hier kannst du steuern, welche Bouquets von AutoDB\n")
+        f.write("# verwendet werden. AutoDB arbeitet nur mit Sendern aus\n")
+        f.write("# Bouquets, die mit '1|' markiert sind.\n")
+        f.write("#\n")
+        f.write("# AUFBAU EINER ZEILE:\n")
+        f.write("#   1|userbouquet.name.tv  #NAME Anzeigename\n")
+        f.write("#\n")
+        f.write("# BEDEUTUNG:\n")
+        f.write("#   1 = Bouquet AKTIV   -> Sender in diesem Bouquet werden von AutoDB benutzt\n")
+        f.write("#   0 = Bouquet AUS     -> Bouquet wird von AutoDB ignoriert\n")
+        f.write("#\n")
+        f.write("# BEISPIELE:\n")
+        f.write("#   1|userbouquet.favourites.tv  #NAME Favoriten (TV)\n")
+        f.write("#   0|userbouquet.pluto_tv_de.tv  #NAME Pluto TV (DE)\n")
+        f.write("#\n")
+        f.write("# SO KANNST DU ANPASSEN:\n")
+        f.write("#   - 1 in 0 ändern  -> Bouquet bleibt in der Liste, wird aber von AutoDB ignoriert\n")
+        f.write("#   - ganze Zeile löschen -> Bouquet wird komplett ignoriert\n")
+        f.write("#\n")
+        f.write("# WICHTIG:\n")
+        f.write("#   - Diese Datei wird bei jedem Enigma2-Start neu geschrieben.\n")
+        f.write("#   - Deine Einstellungen (0/1) werden übernommen, solange der Bouquet-Name gleich bleibt.\n")
+        f.write("#   - Neue Bouquets aus bouquets.tv werden automatisch mit '1|' (aktiv) hinzugefügt.\n")
+        f.write("# ==============================================\n\n")
+        for b_id in bouquet_ids:
+            enabled = bouquet_flags.get(b_id, True)
+            flag = '1' if enabled else '0'
+            bname = _get_bouquet_display_name(b_id)
+            if bname:
+                f.write("%s|%s  #NAME %s\n" % (flag, b_id, bname))
+            else:
+                f.write("%s|%s\n" % (flag, b_id))
+except Exception as e:
+    print("[BackdropAutoDB] bouquet config write error:", e)
+
+# 4) APDB (ServiceRefs) wird NICHT mehr beim Import gebaut.
+#    Das war langsam und kann den GUI-Thread blockieren (Spinner).
+#    Stattdessen wird APDB im AutoDB-Thread bei einem Lauf erzeugt.
+raw_services = []
+seen_services = set()
+
+
+def _read_autodb_config_runtime():
+    """Read bouquet enable/disable config from autodb_bouquets_file.
+
+    Returns:
+        (bouquet_list_in_file_order, flags_dict)
+
+    Notes:
+    - This is read at runtime so changes made by AutoDBManager take effect immediately.
+    - If the file contains no entries, fallback to bouquet_ids from bouquets.tv.
+    """
+    bq_list = []
+    flags = {}
+
+    try:
+        if os.path.exists(autodb_bouquets_file):
+            with open(autodb_bouquets_file, 'r') as f:
+                for line in f:
+                    line = (line or '').strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    if '|' not in line:
+                        continue
+                    parts = line.split('|', 1)
+                    if len(parts) < 2:
+                        continue
+                    flag = parts[0].strip()
+                    name_field = parts[1].strip().split()[0]
+                    if not name_field:
+                        continue
+                    enabled = (flag != '0')
+                    bq_list.append(name_field)
+                    flags[name_field] = enabled
+    except Exception as e:
+        try:
+            print('[AutoDB] config read error:', e)
+        except Exception:
+            pass
+
+    # fallback: if file has no usable entries
+    if not bq_list:
+        try:
+            bq_list = list(bouquet_ids)
+        except Exception:
+            bq_list = []
+        for b in bq_list:
+            flags[b] = True
+
+    return bq_list, flags
+
+def is_probably_stream_service(service_ref):
+    """Return True for IPTV/stream services that usually have no Enigma2 EPG.
+
+    We skip them in AutoDB to avoid wasting time and noisy logs.
+    """
+    try:
+        s = (service_ref or '').strip()
+        if not s:
+            return True
+        low = s.lower()
+        # common streaming service types
+        if s.startswith('4097:') or s.startswith('5001:') or s.startswith('5002:') or s.startswith('1:64:'):
+            return True
+        # url-like or m3u8/hls fragments
+        if 'http' in low or 'https' in low or 'm3u8' in low or 'rtmp' in low or 'rtsp' in low:
+            return True
+        # encoded URL in serviceref
+        if '%3a%2f%2f' in low:
+            return True
+        # DVB refs typically start with "1:"
+        if not s.startswith('1:'):
+            return True
+        return False
+    except Exception:
+        return False
+
+
+
+def build_apdb_for_autodb():
+    """Build apdb from enabled bouquets (runs inside AutoDB thread).
+
+    Important:
+    - re-reads bouquet enable/disable config each run (no Enigma2 restart required).
+    """
+    global apdb
+
+    bq_list, flags = _read_autodb_config_runtime()
+
+    raw = []
+    seen = set()
+    for b_id in bq_list:
+        if not flags.get(b_id, True):
+            continue
+        _collect_services_from_bouquet_id(b_id, raw, seen)
+
+    # Filter out IPTV/stream services (no Enigma2 EPG)
+
+    try:
+
+        raw = [r for r in raw if not is_probably_stream_service(r)]
+
+    except Exception:
+
+        pass
+
+
+    apdb.clear()
+    for idx, service in enumerate(raw):
+        apdb[idx] = service
+
+    active = [b_id for b_id in bq_list if flags.get(b_id, True)]
+    return active, len(apdb)
+
 
 
 # try:
@@ -225,19 +870,19 @@ REGEX = re.compile(
 
 
 def intCheck():
+    """Fast, GUI-safe internet connectivity check.
+    Avoids blocking HTTP requests in the main thread."""
     try:
-        response = urlopen("http://google.com", None, 5)
-        response.close()
-    except HTTPError:
-        pass
+        # Quick TCP check without DNS; 1.1.1.1:53 (Cloudflare) is usually reachable if routing works.
+        s = socket.create_connection(("1.1.1.1", 53), timeout=0.8)
+        try:
+            s.close()
+        except Exception:
+            pass
+        return True
+    except Exception:
         return False
-    except URLError:
-        pass
-        return False
-    except socket.timeout:
-        pass
-        return False
-    return True
+
 
 
 def remove_accents(string):
@@ -406,6 +1051,27 @@ def convtext(text=''):
     except Exception as e:
         pass
         pass
+
+
+def _guess_media_type(service_name, title, shortdesc='', fulldesc=''):
+    """Heuristic: decide 'movie' vs 'tv' for provider order in AutoDB."""
+    try:
+        s = (service_name or '').lower()
+        t = (title or '').lower()
+        blob = ' '.join([(title or ''), (shortdesc or ''), (fulldesc or '')]).lower()
+
+        if any(k in s for k in ['sky cinema', 'cinema', 'movie', 'film', 'kino']):
+            return 'movie'
+
+        if any(k in blob for k in ['staffel', 'episode', 'folge', 's0', 'e0', 'season']):
+            return 'tv'
+
+        # daily magazines/news formats
+        if any(k in t for k in ['punkt', 'tagesschau', 'heute journal', 'sport', 'news']):
+            return 'tv'
+    except Exception:
+        pass
+    return 'tv'
 
 
 def convtextPAUSED(text=''):
@@ -668,162 +1334,708 @@ class BackdropDB(GradientBackdropXDownloadThread):
         self.logdbg = None
         self.pstcanal = None
 
+        self._inflight = set()
+        self._done = {}  # key -> (timestamp, ok)
+
+        self._ok_ttl = 6 * 3600
+        self._fail_ttl = 10 * 60
+
+        self._lock = threading.Lock()
+
+    def _event_key(self, canal, raw_title):
+        return "%s::%s" % (_make_live_service(canal), (raw_title or "").strip().lower())
+
+    def _should_skip_cached(self, key):
+        now = time.time()
+        with self._lock:
+            if key in self._inflight:
+                return True
+            ts_ok = self._done.get(key)
+            if ts_ok is not None:
+                ts, ok = ts_ok
+                ttl = self._ok_ttl if ok else self._fail_ttl
+                if (now - ts) < ttl:
+                    return True
+                self._done.pop(key, None)
+            self._inflight.add(key)
+        return False
+
+    def _mark_done(self, key, ok):
+        now = time.time()
+        with self._lock:
+            self._inflight.discard(key)
+            self._done[key] = (now, bool(ok))
+
+    def _safe_call(self, func, *args):
+        try:
+            res = func(*args)
+            if isinstance(res, tuple) and len(res) == 2:
+                return res
+            return False, "[ERROR] %s returned %r" % (getattr(func, '__name__', 'func'), res)
+        except Exception as e:
+            return False, "[ERROR] %s (%s)" % (getattr(func, '__name__', 'func'), e)
+
+    def _is_latest(self, canal):
+        latest_svc, _ts = get_live_latest()
+        if latest_svc is None or latest_svc == '':
+            return True
+        try:
+            return (canal[0] or '').strip() == latest_svc
+        except Exception:
+            return True
+
+    def _latest_idle(self, min_idle=0.6):
+        latest, ts = get_live_latest()
+        if latest is None:
+            return True
+        try:
+            return (time.time() - float(ts)) >= float(min_idle)
+        except Exception:
+            return True
+
+
+    def _wait_until_idle(self, canal, min_idle, max_wait):
+        """Wait until the user stayed on the current service long enough.
+
+        Returns:
+            True  -> idle reached
+            False -> idle not reached within max_wait
+            None  -> aborted because user changed service
+        """
+        try:
+            start = time.time()
+            while (time.time() - start) < float(max_wait):
+                if not self._is_latest(canal):
+                    return None
+                if self._latest_idle(min_idle):
+                    return True
+                time.sleep(0.25)
+            if not self._is_latest(canal):
+                return None
+            return bool(self._latest_idle(min_idle))
+        except Exception:
+            return False
+
     def run(self):
         self.logDB("[QUEUE] : Initialized")
         while True:
-            canal = pdb.get()
-            self.logDB("[QUEUE] : {} : {}-{} ({})".format(canal[0], canal[1], canal[2], canal[5]))
-            self.pstcanal = convtext(canal[5])
-            if self.pstcanal is not None:
-                dwn_backdrop = path_folder + '/' + self.pstcanal + ".jpg"
+            item = pdb.get()
+            if isinstance(item, tuple) and len(item) == 3:
+                _prio, _ts, canal = item
             else:
+                canal = item
+            raw_title = (canal[2] or canal[5] or '')
+            key = self._event_key(canal, raw_title)
+
+            # drop if user already moved on
+            if not self._is_latest(canal):
+                pdb.task_done()
+                continue
+
+            if self._should_skip_cached(key):
+                pdb.task_done()
+                continue
+
+            self.logDB("[QUEUE] : {} : {}-{} ({})".format(canal[0], canal[1], canal[2], raw_title))
+
+            # Canonical slug for filenames (underscores) to avoid duplicates
+            try:
+                self.pstcanal = get_store_slug(raw_title)
+            except Exception:
+                self.pstcanal = get_canonical_slug(raw_title)
+
+            if not self.pstcanal:
+                self._mark_done(key, False)
+                pdb.task_done()
+                continue
+
+            dwn_backdrop = os.path.join(path_folder, "%s.jpg" % self.pstcanal)
+
+
+            # --- CUSTOM backdrop override (always wins) ---
+
+            try:
+
+                base = _storage_xtra_base()
+
+                custom_b = os.path.join(base, "custom", "backdrop", "%s.jpg" % self.pstcanal)
+
+                if os.path.exists(custom_b) and os.path.getsize(custom_b) > 0:
+
+                    try:
+
+                        shutil.copy2(custom_b, dwn_backdrop)
+
+                    except Exception:
+
+                        try:
+
+                            with open(custom_b, "rb") as _fi, open(dwn_backdrop, "wb") as _fo:
+
+                                _fo.write(_fi.read())
+
+                        except Exception:
+
+                            pass
+
+                    try:
+
+                        os.utime(dwn_backdrop, (time.time(), time.time()))
+
+                    except Exception:
+
+                        pass
+
+                    try:
+
+                        self.logDB("[SUCCESS : custom] %s -> %s" % (custom_b, dwn_backdrop))
+
+                    except Exception:
+
+                        pass
+
+                    try:
+
+                        bdb.task_done()
+
+                    except Exception:
+
+                        pass
+
+                    continue
+
+            except Exception:
+
                 pass
-                return
+
             if os.path.exists(dwn_backdrop):
-                os.utime(dwn_backdrop, (time.time(), time.time()))
-            '''
-            # if lng == "fr":
-                # if not os.path.exists(dwn_backdrop):
-                    # val, log = self.search_molotov_google(dwn_backdrop, canal[5], canal[4], canal[3], canal[0])
-                    # self.logDB(log)
-                # if not os.path.exists(dwn_backdrop):
-                    # val, log = self.search_programmetv_google(dwn_backdrop, canal[5], canal[4], canal[3], canal[0])
-                    # self.logDB(log)
-            '''
-            if not os.path.exists(dwn_backdrop):
-                val, log = self.search_tmdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
-                self.logDB(log)
-            elif not os.path.exists(dwn_backdrop):
-                val, log = self.search_tvdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
-                self.logDB(log)
-            elif not os.path.exists(dwn_backdrop):
-                val, log = self.search_fanart(dwn_backdrop, self.pstcanal, canal[4], canal[3])
-                self.logDB(log)
-            elif not os.path.exists(dwn_backdrop):
-                val, log = self.search_imdb(dwn_backdrop, self.pstcanal, canal[4], canal[3])
-                self.logDB(log)
-            elif not os.path.exists(dwn_backdrop):
-                val, log = self.search_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                self.logDB(log)
+                try:
+                    os.utime(dwn_backdrop, (time.time(), time.time()))
+                except Exception:
+                    pass
+                self._mark_done(key, True)
+                pdb.task_done()
+                continue
+
+            ok = False
+            providers_tried = []
+            import re as _re
+
+            def _track(provider, logmsg):
+                try:
+                    status = 'unknown'
+                    if isinstance(logmsg, str):
+                        if '[SUCCESS' in logmsg:
+                            status = 'success'
+                        elif '[SKIP' in logmsg:
+                            status = 'skip'
+                        elif '[ERROR' in logmsg:
+                            status = 'error'
+                    url = None
+                    if isinstance(logmsg, str):
+                        m = _re.search(r'=>\s*(https?://\S+)', logmsg)
+                        if m:
+                            url = m.group(1)
+                    providers_tried.append({'provider': provider, 'status': status, 'url': url, 'log': logmsg})
+                except Exception:
+                    providers_tried.append({'provider': provider, 'status': 'unknown', 'log': logmsg})
+
+            # Provider order (live): honor overrides from GradientBackdropXDownloadThread
+            try:
+                providers = get_provider_override(raw_title)
+            except Exception:
+                providers = ["tmdb", "tvdb", "fanart", "imdb", "google"]
+
+            # Run non-google providers first
+            for p in providers:
+                if ok or (not self._is_latest(canal)):
+                    break
+                if p == 'google':
+                    continue
+                try:
+                    if p == 'tmdb':
+                        val, log = self._safe_call(self.search_tmdb, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                    elif p == 'tvdb':
+                        val, log = self._safe_call(self.search_tvdb, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                    elif p == 'fanart':
+                        val, log = self._safe_call(self.search_fanart, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                    elif p == 'imdb':
+                        val, log = self._safe_call(self.search_imdb, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                    else:
+                        continue
+                    self.logDB(log)
+                    _track(p, log)
+                    ok = os.path.exists(dwn_backdrop)
+                except Exception as e:
+                    _track(p, "[ERROR] %s" % e)
+
+
+            nxts = canal[6] if (isinstance(canal, (list, tuple)) and len(canal) > 6) else 0
+            google_attempted = False
+
+            # Google strategy (only if enabled in provider list):
+            # - Now (nxts==0): quick idle (0.6s)
+            # - Next items (nxts>0): only if user stayed on the service longer (2.5s)
+            if (not ok) and ('google' in providers) and self._is_latest(canal):
+                if nxts in (0, '0', None):
+                    if self._latest_idle(0.6):
+                        val, log = self._safe_call(self.search_google, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                        self.logDB(log)
+                        _track('google', log)
+                        ok = os.path.exists(dwn_backdrop)
+                        google_attempted = True
+                else:
+                    idle_ok = self._wait_until_idle(canal, 2.5, 4.0)
+                    if idle_ok is None:
+                        # user moved away -> do not cache failure
+                        with self._lock:
+                            self._inflight.discard(key)
+                        pdb.task_done()
+                        continue
+                    if idle_ok:
+                        val, log = self._safe_call(self.search_google, dwn_backdrop, raw_title, canal[4], canal[3], canal[0])
+                        self.logDB(log)
+                        _track('google', log)
+                        ok = os.path.exists(dwn_backdrop)
+                        google_attempted = True
+
+            # Persist backdrop_info (success or fail) for debugging
+            try:
+                slug = self.pstcanal
+                if slug:
+                    payload = {
+                        'ts': int(time.time()),
+                        'service': canal[0],
+                        'event_ts': canal[1],
+                        'title': raw_title,
+                        'slug': slug,
+                        'providers_tried': providers_tried,
+                    }
+                    if os.path.exists(dwn_backdrop):
+                        payload['backdrop_file'] = dwn_backdrop
+                    _write_backdrop_info_debug(slug, payload)
+            except Exception:
+                pass
+
+            # If this was a NEXT item and we didn't attempt Google, do NOT cache failure.
+            if (not ok) and (not google_attempted) and (nxts not in (0, '0', None)):
+                with self._lock:
+                    self._inflight.discard(key)
+                pdb.task_done()
+                continue
+
+            # if user changed selection mid-run, do not cache as failure
+            if (not ok) and (not self._is_latest(canal)):
+                with self._lock:
+                    self._inflight.discard(key)
+                pdb.task_done()
+                continue
+
+            self._mark_done(key, ok)
             pdb.task_done()
 
     def logDB(self, logmsg):
-        import traceback
         try:
-            with open("/tmp/BackdropDB.log", "a") as w:
+            with open(_autodb_log_path('BackdropDB.log'), "a") as w:
                 w.write("%s\n" % logmsg)
-        except Exception as e:
-            pass
-            traceback.print_exc()
+        except Exception:
+            try:
+                traceback.print_exc()
+            except Exception:
+                pass
 
 
 threadDB = BackdropDB()
 threadDB.start()
 
 
+
+# --- Protected titles (evergreen shows) ---
+# Titles (lowercase, accent-insensitive) that should NEVER be removed by AutoDB cleanup.
+# You can extend this list safely. Matching is done against the file slug (convtext(title)).
+PROTECTED_TITLES = {
+    # Nachrichten/Talkshows
+    "barbara salesch", "ulrich wetzel", "auf streife",
+    "rtl aktuell", "punkt_6", "punkt_7", "punkt_8",
+    "punkt_12", "punkt_9", "punkt_11",
+    "tagesschau", "heute", "tagesthemen", "heute journal",
+    "brisant", "explosiv", "rtl extra", "stern tv",
+    
+    # Frühstücksfernsehen
+    "sat 1 frühstücksfernsehen", "frühstücksfernsehen",
+    "moma", "morgenmagazin", "volle kanne",
+    
+    # Daily Soaps
+    "gute zeiten schlechte zeiten", "gzsz",
+    "unter uns", "alles was zählt", "rote rosen",
+    "sturm der liebe", "lindenstraße", "verbotene liebe",
+    "in aller freundschaft", "marienhof",
+    "dahoam is dahoam", "watzmann ermittelt",
+    
+    # Gerichtsshows
+    "das strafgericht", "barbara salesch", "ulrich wetzel",
+    "richter alexander hold",
+    
+    # Wissenschaft
+    "nano", "quarks", "galileo", "welt der wunder",
+    
+    # Weitere
+    "wer weiß denn sowas", "wer weiss denn sowas",
+    "gefragt gejagt", "quizduell",
+}
+
+def _norm_protected_key(s):
+    try:
+        s = remove_accents(s.lower())
+    except Exception:
+        try:
+            s = s.lower()
+        except Exception:
+            return ""
+    # keep only letters/numbers/spaces
+    s = re.sub(r"[^a-z0-9\s\-]+", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+# Precompute normalized slug keys
+_PROTECTED_KEYS = set(_norm_protected_key(x) for x in PROTECTED_TITLES if x)
+
+
+# Recording slug cache (rebuilt per AutoDB run)
+_REC_SLUGS_CACHE = set()
+
+def is_protected_file(path_or_name):
+    """
+    Decide if a file should be protected from cleanup based on its filename (slug).
+    """
+    try:
+        name = os.path.basename(path_or_name)
+        name = os.path.splitext(name)[0]
+        try:
+            if name in _REC_SLUGS_CACHE:
+                return True
+        except Exception:
+            pass
+        key = _norm_protected_key(name)
+        # allow prefix match: "auf streife - die spezialisten" should protect under "auf streife"
+        for p in _PROTECTED_KEYS:
+            if not p:
+                continue
+            if key == p or key.startswith(p + " ") or key.startswith(p + "-"):
+                return True
+    except Exception:
+        pass
+    return False
+
+RUN_TRIGGER_FILE = '/tmp/run_backdrop_autodb'
+RUN_TRIGGER_FILE_ONCE = '/tmp/run_backdrop_autodb_once'
+
 class BackdropAutoDB(GradientBackdropXDownloadThread):
     def __init__(self):
         GradientBackdropXDownloadThread.__init__(self)
         self.logdbg = None
 
-    def run(self):
-        self.logAutoDB("[AutoDB] *** Initialized")
+    def _safe_call(self, func, *args):
+        try:
+            res = func(*args)
+            if isinstance(res, tuple) and len(res) == 2:
+                return res
+            return False, "[ERROR] %s returned %r" % (getattr(func, '__name__', 'func'), res)
+        except Exception as e:
+            return False, "[ERROR] %s (%s)" % (getattr(func, '__name__', 'func'), e)
+
+    def _wait_until_window_or_trigger(self):
+        """Wait until 00:00/05:00 OR a trigger file exists.
+
+        Returns:
+            'time'      -> night window
+            'trigger'   -> manual/boot trigger
+        """
         while True:
-            time.sleep(7200)  # 7200 - Start every 2 hours
-            self.logAutoDB("[AutoDB] *** Running ***")
-            self.pstcanal = None
-            # AUTO ADD NEW FILES - 1440 (24 hours ahead)
-            for service in apdb.values():
+            # manual trigger
+            try:
+                if os.path.exists(RUN_TRIGGER_FILE) or os.path.exists(RUN_TRIGGER_FILE_ONCE):
+                    return 'trigger'
+            except Exception:
+                pass
+
+            now = time.localtime()
+            hour = now.tm_hour
+            minute = now.tm_min
+            if (hour == 0 or hour == 5) and minute == 0:
+                return 'time'
+
+            sleep_secs = 60 - now.tm_sec
+            if sleep_secs < 5:
+                sleep_secs = 5
+            time.sleep(sleep_secs)
+
+    def _wait_until_night_window(self):
+        """Warten, bis es genau 00:00 oder 05:00 Uhr (Ortszeit) ist."""
+        while True:
+            now = time.localtime()
+            hour = now.tm_hour
+            minute = now.tm_min
+            if (hour == 0 or hour == 5) and minute == 0:
+                return
+            sleep_secs = 60 - now.tm_sec
+            if sleep_secs < 5:
+                sleep_secs = 5
+            time.sleep(sleep_secs)
+
+    def run(self):
+        self.logAutoDB("[AutoDB] *** Initialized (night mode 00:00 & 05:00, local time) ***")
+        while True:
+            self.logAutoDB("[AutoDB] Waiting for next run window (00:00 / 05:00, local time)")
+            reason = self._wait_until_window_or_trigger()
+            if reason == 'trigger':
+                # clear trigger(s)
                 try:
+                    if os.path.exists(RUN_TRIGGER_FILE_ONCE):
+                        os.remove(RUN_TRIGGER_FILE_ONCE)
+                except Exception:
+                    pass
+                try:
+                    if os.path.exists(RUN_TRIGGER_FILE):
+                        os.remove(RUN_TRIGGER_FILE)
+                except Exception:
+                    pass
+                self.logAutoDB('[AutoDB] *** Triggered run requested ***')
+            self.logAutoDB("[AutoDB] *** Running ***")
+
+            try:
+                active, total = build_apdb_for_autodb()
+                self.logAutoDB('[AutoDB] Active bouquets: %s' % ', '.join(active))
+                self.logAutoDB('[AutoDB] Total services in apdb: %d' % int(total))
+                _write_autodb_progress('backdrop', 0, total, state='running')
+            except Exception as e:
+                self.logAutoDB('[AutoDB] APDB build error: %s' % e)
+
+            for _idx, service in enumerate(apdb.values()):
+                # Stop support (requested by AutoDBManager)
+                try:
+                        if os.path.exists(STOP_AUTODB_FILE):
+                                self.logAutoDB('[AutoDB] *** Stop requested ***')
+                                break
+                except Exception:
+                        pass
+
+                _write_autodb_progress('backdrop', _idx + 1, total, state='running')
+                newfd = 0
+                service_name = None
+                try:
+                    service_name = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
                     events = epgcache.lookupEvent(['IBDCTESX', (service, 0, -1, 1440)])
                     if not events:
-                        self.logAutoDB("[AutoDB] No events found for service: {}".format(service))
+                        self.logAutoDB("[AutoDB] 0 new file(s) added ({})".format(service_name or service))
                         continue
-                    newfd = 0
-                    newcn = None
+
+                    stop_loop = False
                     for evt in events:
-                        self.logAutoDB("[AutoDB] evt {} events ({})".format(evt, events))
-                        canal = [None, None, None, None, None, None]
-                        if PY3:
-                            canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-                        else:
+                        # Stop support (requested by AutoDBManager)
+                        try:
+                                if os.path.exists(STOP_AUTODB_FILE):
+                                        self.logAutoDB('[AutoDB] *** Stop requested ***')
+                                        stop_loop = True
+                                        break
+                        except Exception:
+                                pass
+
+                        if evt[1] is None or evt[4] is None:
+                            continue
+
+                        raw_title = evt[4]
+                        if not raw_title:
+                            continue
+
+                        slug = get_store_slug(raw_title)
+                        if not slug:
+                            continue
+                        
+                        dwn_backdrop = os.path.join(path_folder, "%s.jpg" % slug)
+
+                        
+                        # --- CUSTOM backdrop override (always wins, AutoDB) ---
+                        
+                        try:
+                        
+                            base = _storage_xtra_base()
+                        
+                            custom_b = os.path.join(base, "custom", "backdrop", "%s.jpg" % slug)
+                        
+                            if os.path.exists(custom_b) and os.path.getsize(custom_b) > 0:
+                        
+                                try:
+                        
+                                    shutil.copy2(custom_b, dwn_backdrop)
+                        
+                                except Exception:
+                        
+                                    try:
+                        
+                                        with open(custom_b, "rb") as _fi, open(dwn_backdrop, "wb") as _fo:
+                        
+                                            _fo.write(_fi.read())
+                        
+                                    except Exception:
+                        
+                                        pass
+                        
+                                try:
+                        
+                                    os.utime(dwn_backdrop, (time.time(), time.time()))
+                        
+                                except Exception:
+                        
+                                    pass
+                        
+                                try:
+                        
+                                    self.logAutoDB("[SUCCESS : custom] %s -> %s" % (custom_b, dwn_backdrop))
+                        
+                                except Exception:
+                        
+                                    pass
+                        
+                                continue
+                        
+                        except Exception:
+                        
                             pass
-                            canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
-                        if evt[1] is None or evt[4] is None or evt[5] is None or evt[6] is None:
-                            self.logAutoDB("[AutoDB] *** missing epg for {}".format(canal[0]))
-                        else:
-                            pass
-                            canal[1] = evt[1]
-                            canal[2] = evt[4]
-                            canal[3] = evt[5]
-                            canal[4] = evt[6]
-                            canal[5] = canal[2]
-                            self.pstcanal = convtext(canal[5]) if canal[5] else None
-                            if not self.pstcanal:
-                                return
-                            dwn_backdrop = os.path.join(path_folder, self.pstcanal + ".jpg")
+
+                        if os.path.exists(dwn_backdrop):
+                            os.utime(dwn_backdrop, (time.time(), time.time()))
+                            continue
+                        
+                        shortdesc = evt[6] if len(evt) > 6 and evt[6] is not None else ''
+                        fulldesc = evt[5] if len(evt) > 5 and evt[5] is not None else ''
+                        
+                        self.logAutoDB('[QUEUE] : %s : %s-%s (%s)' % (service_name, evt[1], raw_title, slug))
+                        
+                        providers_tried = []
+                        import re as _re
+                        try:
+                            providers = get_provider_override(raw_title) or []
+                        except Exception:
+                            providers = []
+                        if not providers:
+                            mtype = _guess_media_type(service_name, raw_title, shortdesc, fulldesc)
+                            if mtype == 'movie':
+                                providers = ['tmdb', 'tvdb', 'fanart', 'imdb', 'google']
+                            else:
+                                providers = ['tvdb', 'tmdb', 'fanart', 'imdb', 'google']
+                        
+                        def _track(provider, logmsg):
+                            try:
+                                status = 'unknown'
+                                if isinstance(logmsg, str):
+                                    if '[SUCCESS' in logmsg:
+                                        status = 'success'
+                                    elif '[SKIP' in logmsg:
+                                        status = 'skip'
+                                    elif '[ERROR' in logmsg:
+                                        status = 'error'
+                                url = None
+                                if isinstance(logmsg, str):
+                                    m = _re.search(r'=>\s*(https?://\S+)', logmsg)
+                                    if m:
+                                        url = m.group(1)
+                                providers_tried.append({'provider': provider, 'status': status, 'url': url, 'log': logmsg})
+                            except Exception:
+                                providers_tried.append({'provider': provider, 'status': 'unknown', 'log': logmsg})
+                        
+                        for p in providers:
                             if os.path.exists(dwn_backdrop):
-                                os.utime(dwn_backdrop, (time.time(), time.time()))
-                            '''
-                            # if lng == "fr":
-                                # if not os.path.exists(dwn_backdrop):
-                                    # val, log = self.search_molotov_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                    # if val and log.find("SUCCESS"):
-                                        # newfd += 1
-                                # if not os.path.exists(dwn_backdrop):
-                                    # val, log = self.search_programmetv_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                    # if val and log.find("SUCCESS"):
-                                        # newfd += 1
-                            '''
-                            if not os.path.exists(dwn_backdrop):
-                                val, log = self.search_tmdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                if val and log.find("SUCCESS"):
-                                    newfd += 1
-                            elif not os.path.exists(dwn_backdrop):
-                                val, log = self.search_tvdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                if val and log.find("SUCCESS"):
-                                    newfd += 1
-                            elif not os.path.exists(dwn_backdrop):
-                                val, log = self.search_fanart(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                if val and log.find("SUCCESS"):
-                                    newfd += 1
-                            elif not os.path.exists(dwn_backdrop):
-                                val, log = self.search_imdb(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                if val and log.find("SUCCESS"):
-                                    newfd += 1
-                            elif not os.path.exists(dwn_backdrop):
-                                val, log = self.search_google(dwn_backdrop, self.pstcanal, canal[4], canal[3], canal[0])
-                                if val and log.find("SUCCESS"):
-                                    newfd += 1
-                            newcn = canal[0]
-                        self.logAutoDB("[AutoDB] {} new file(s) added ({})".format(newfd, newcn))
+                                break
+                            if p == 'tvdb':
+                                val, log = self._safe_call(self.search_tvdb, dwn_backdrop, raw_title, shortdesc, fulldesc, service_name)
+                            elif p == 'tmdb':
+                                val, log = self._safe_call(self.search_tmdb, dwn_backdrop, raw_title, shortdesc, fulldesc, service_name)
+                            elif p == 'fanart':
+                                val, log = self._safe_call(self.search_fanart, dwn_backdrop, raw_title, shortdesc, fulldesc, service_name)
+                            elif p == 'imdb':
+                                val, log = self._safe_call(self.search_imdb, dwn_backdrop, raw_title, shortdesc, fulldesc, service_name)
+                            elif p == 'google':
+                                val, log = self._safe_call(self.search_google, dwn_backdrop, raw_title, shortdesc, fulldesc, service_name)
+                            else:
+                                continue
+                            _track(p, log)
+                            self.logAutoDB(log)
+                        
+                        if os.path.exists(dwn_backdrop) and os.path.getsize(dwn_backdrop) > 0:
+                            newfd += 1
+                        
+                        # Persist backdrop_info json (AutoDB)
+                        try:
+                            payload = {
+                                'ts': int(time.time()),
+                                'service': service_name,
+                                'event_ts': evt[1],
+                                'title': raw_title,
+                                'slug': slug,
+                                'providers_tried': providers_tried,
+                            }
+                            if os.path.exists(dwn_backdrop):
+                                payload['backdrop_file'] = dwn_backdrop
+                            _write_backdrop_info_debug(slug, payload)
+                        except Exception as e:
+                            self.logAutoDB('[AutoDB] backdrop_info json error: %s' % e)
+
+                    if stop_loop:
+                            break
+                    # once per service (like PosterAutoDB)
+                    self.logAutoDB("[AutoDB] {} new file(s) added ({})".format(newfd, service_name or service))
+
                 except Exception as e:
-                    pass
-                    self.logAutoDB("[AutoDB] *** service error ({})".format(e))
-            # AUTO REMOVE OLD FILES
+                    self.logAutoDB("[AutoDB] *** service error : {} ({})".format(service, e))
+
+            # cleanup (keep as before)
             now_tm = time.time()
+            try:
+                _REC_SLUGS_CACHE.clear()
+                _REC_SLUGS_CACHE.update(_build_recording_slug_set())
+                _refresh_recording_assets(_REC_SLUGS_CACHE, log_func=self.logAutoDB)
+            except Exception:
+                pass
             emptyfd = 0
             oldfd = 0
             for f in os.listdir(path_folder):
-                diff_tm = now_tm - os.path.getmtime(path_folder + '/' + f)
-                if diff_tm > 120 and os.path.getsize(path_folder + '/' + f) == 0:  # Detect empty files > 2 minutes
-                    os.remove(path_folder + '/' + f)
-                    emptyfd += 1
-                if diff_tm > 31536000:  # Detect old files > 365 days old
-                    os.remove(path_folder + '/' + f)
-                    oldfd += 1
+                fullpath = os.path.join(path_folder, f)
+                try:
+                    diff_tm = now_tm - os.path.getmtime(fullpath)
+                    if diff_tm > 120 and os.path.getsize(fullpath) == 0:
+                        os.remove(fullpath)
+                        emptyfd += 1
+                        continue
+                    if diff_tm > 259200 and (not is_protected_file(fullpath)):
+                        os.remove(fullpath)
+                        oldfd += 1
+                except Exception:
+                    pass
+
             self.logAutoDB("[AutoDB] {} old file(s) removed".format(oldfd))
             self.logAutoDB("[AutoDB] {} empty file(s) removed".format(emptyfd))
-            self.logAutoDB("[AutoDB] *** Stopping ***")
-
+            _write_autodb_progress('backdrop', total, total, state='finished')
+            self.logAutoDB("[AutoDB] *** Job finished ***")
+            # If we ran because of a manual trigger, don't block the scheduled night runs.
+            # Short cooldown prevents tight loops if something keeps triggering.
+            for _ in range(300):
+                                try:
+                                        if os.path.exists(RUN_TRIGGER_FILE) or os.path.exists(RUN_TRIGGER_FILE_ONCE):
+                                                break
+                                except Exception:
+                                        pass
+                                time.sleep(1)  # cooldown (interruptible)
     def logAutoDB(self, logmsg):
-        import traceback
         try:
-            with open("/tmp/BackdropAutoDB.log", "a") as w:
-                w.write("%s\n" % logmsg)
-        except Exception as e:
-            pass
-            traceback.print_exc()
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(_autodb_log_path('BackdropAutoDB.log'), "a") as w:
+                w.write("[{}] {}\n".format(timestamp, logmsg))
+        except Exception:
+            try:
+                traceback.print_exc()
+            except Exception:
+                pass
 
 
 threadAutoDB = BackdropAutoDB()
@@ -832,9 +2044,7 @@ threadAutoDB.start()
 
 class GradientBackdropX(Renderer):
     def __init__(self):
-        adsl = intCheck()
-        if not adsl:
-            return
+        # NOTE: internet pre-check removed; renderer must always initialize
         Renderer.__init__(self)
         self.nxts = 0
         self.path = path_folder  # + '/'
@@ -855,9 +2065,10 @@ class GradientBackdropX(Renderer):
         for (attrib, value,) in self.skinAttributes:
             if attrib == "nexts":
                 self.nxts = int(value)
-            if attrib == "path":
+            elif attrib == "path":
                 self.path = str(value)
-            attribs.append((attrib, value))
+            else:
+                attribs.append((attrib, value))
         self.skinAttributes = attribs
         return Renderer.applySkin(self, desktop, parent)
 
@@ -881,7 +2092,32 @@ class GradientBackdropX(Renderer):
                     service = self.source.getCurrentServiceRef()
                     servicetype = "CurrentService"
                 elif isinstance(self.source, EventInfo):  # source="session.Event_Now" or source="session.Event_Next"
-                    service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                    # IMPORTANT: For session.Event_Now / session.Event_Next we must use the event provided by the source.
+                    # Otherwise NOW and NEXT will show the same backdrop when nexts is not set.
+                    ev = getattr(self.source, 'event', None)
+                    if ev is not None:
+                        try:
+                            service_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                        except Exception:
+                            service_ref = None
+                        try:
+                            if service_ref:
+                                self.canal[0] = ServiceReference(service_ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+                            else:
+                                self.canal[0] = None
+                        except Exception:
+                            self.canal[0] = None
+                        try:
+                            self.canal[1] = ev.getBeginTime()
+                            self.canal[2] = (ev.getEventName() or '').replace('\xc2\x86', '').replace('\xc2\x87', '')
+                            self.canal[3] = ev.getExtendedDescription()
+                            self.canal[4] = ev.getShortDescription()
+                            self.canal[5] = get_store_slug(self.canal[2])
+                        except Exception:
+                            pass
+                        service = None
+                    else:
+                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
                     servicetype = "EventInfo"
                 elif isinstance(self.source, Event):  # source="Event"
                     if self.nxts:
@@ -906,14 +2142,13 @@ class GradientBackdropX(Renderer):
                     else:
                         pass
                         self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
+                    if (not events) or len(events) <= int(self.nxts):
+                        raise Exception('epg events missing for index %s' % str(self.nxts))
                     self.canal[1] = events[self.nxts][1]
                     self.canal[2] = events[self.nxts][4]
                     self.canal[3] = events[self.nxts][5]
                     self.canal[4] = events[self.nxts][6]
                     self.canal[5] = self.canal[2]
-                    if not autobouquet_file:
-                        if self.canal[0] not in apdb:
-                            apdb[self.canal[0]] = service.toString()
             except Exception as e:
                 pass
                 self.logBackdrop("Error (service) : " + str(e))
@@ -931,17 +2166,26 @@ class GradientBackdropX(Renderer):
                     return
                 self.oldCanal = curCanal
                 self.logBackdrop("Service: {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
-                self.pstcanal = convtext(self.canal[5])
+                # canonical slug for filenames
+                try:
+                    self.pstcanal = get_store_slug(self.canal[5])
+                except Exception:
+                    self.pstcanal = get_canonical_slug(self.canal[5])
                 if self.pstcanal is not None:
-                    self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
+                    self.backrNm = os.path.join(self.path, str(self.pstcanal) + '.jpg')
                     self.pstcanal = str(self.backrNm)
-                if os.path.exists(self.pstcanal):
+                if self.pstcanal and os.path.exists(self.pstcanal):
                     self.timer.start(10, True)
                 else:
                     pass
-                    canal = self.canal[:]
-                    pdb.put(canal)
-                    start_new_thread(self.waitBackdrop, ())
+                    canal = self.canal[:] + [self.nxts]
+                    set_live_latest(canal)
+                    try:
+                        prio = 0 if int(self.nxts) == 0 else (10 + int(self.nxts))
+                    except Exception:
+                        prio = 0
+                    pdb.put((prio, time.time(), canal))
+                    start_new_thread(self.waitBackdrop, (self.pstcanal, self.oldCanal,))
             except Exception as e:
                 pass
                 self.logBackdrop("Error (eFile): " + str(e))
@@ -954,36 +2198,49 @@ class GradientBackdropX(Renderer):
             self.instance.hide()
         if self.canal[5]:
             if self.pstcanal is not None and not os.path.exists(self.pstcanal):
-                self.pstcanal = convtext(self.canal[5])
-                self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
+                # canonical slug for filenames
+                try:
+                    self.pstcanal = get_store_slug(self.canal[5])
+                except Exception:
+                    self.pstcanal = get_canonical_slug(self.canal[5])
+                self.backrNm = os.path.join(self.path, str(self.pstcanal) + '.jpg')
                 self.pstcanal = str(self.backrNm)
             if self.pstcanal is not None and os.path.exists(self.pstcanal):
                 self.logBackdrop("[LOAD : showBackdrop] {}".format(self.pstcanal))
                 self.instance.setPixmap(loadJPG(self.pstcanal))
                 self.instance.setScale(1)
                 self.instance.show()
+    def waitBackdrop(self, expected_path, canal_id):
+        """Wait for backdrop file to appear, but abort immediately if user changed selection."""
+        try:
+            if self.instance:
+                self.instance.hide()
+        except Exception:
+            pass
 
-    def waitBackdrop(self):
-        if self.instance:
-            self.instance.hide()
-        if self.canal[5]:
-            if self.pstcanal is not None and not os.path.exists(self.pstcanal):
-                self.pstcanal = convtext(self.canal[5])
-                self.backrNm = self.path + '/' + str(self.pstcanal) + ".jpg"
-                self.pstcanal = str(self.backrNm)
-            loop = 180
-            found = None
-            self.logBackdrop("[LOOP: waitBackdrop] {}".format(self.pstcanal))
-            while loop >= 0:
-                # if self.pstcanal is not None and os.path.exists(self.pstcanal):
-                loop = 0
-                found = True
-                time.sleep(0.5)
-                loop = loop - 1
-            if found:
-                self.timer.start(20, True)
+        if not expected_path or not canal_id:
+            return
+
+        self.logBackdrop("[WAIT] %s" % expected_path)
+
+        # Wait up to 60s (slow providers), but cancel if selection changed.
+        for _ in range(240):  # 240 x 0.25s
+            try:
+                if self.oldCanal != canal_id:
+                    return
+            except Exception:
+                return
+
+            if os.path.exists(expected_path):
+                try:
+                    self.timer.start(10, True)
+                except Exception:
+                    pass
+                return
+            time.sleep(0.25)
 
     def logBackdrop(self, logmsg):
+
         try:
             with open("/tmp/xtra_Backdrop.log", "a") as w:
                 w.write("%s\n" % logmsg)

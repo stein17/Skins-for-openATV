@@ -27,11 +27,13 @@
 			<convert type="GradientCaidInfo">Server: %S * CAID: %C * ECM: %T ms. * HOPS: %H</convert>
 		</widget>
 	</screen>
+	<!-- Infobar_OscamInfo_Time,_Caid,_Hops -->
 	<screen name="Infobar_OscamInfo_Time,_Caid,_Hops">
 		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Gradient_Font; 27" valign="center" backgroundColor="gradient_background" halign="left" transparent="1">
 			<convert type="GradientCaidInfo">CAID: %C * ECM: %T ms. * HOPS: %H</convert>
 		</widget>
 	</screen>
+	<!-- OscamInfo -->
 	<screen name="OscamInfo">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
 	</screen>
@@ -97,7 +99,7 @@
 	</screen>
 	<!-- EPGverticalPIG -->
 	<screen name="progress_Default_EPGverticalPIG">
-		<widget source="session.Event_Now" render="Progress" position="1164,525" size="720,16" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+		<widget source="Event" render="Progress" position="1164,525" size="720,16" foregroundColor="gradient_Line" transparent="1" zPosition="2">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 	</screen>
@@ -212,6 +214,7 @@
 		</widget>
 		<widget name="list" position="30,84" size="1260,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
 	</screen>
+
 	<!-- ChannelSelectionFull" label="Full Screen" -->
 	<screen name="ChannelSelectionFull" label="Full Screen" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<panel name="Fullscreen_Title_TopPanel" />
@@ -226,12 +229,43 @@
 		</widget>
 		<widget name="list" position="30,84" size="1860,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
 	</screen>
-	<!-- ChannelSelectionBackdrop" label="Backdrop" -->
-	<screen name="ChannelSelectionBackdrop" label="Backdrop" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent" zPosition="100">
+	<!-- ChannelSelection_4_Backdrops -->
+	<screen name="ChannelSelection_4_Backdrops" label="4_Backdrops" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="session.VideoPicture" render="Pig" position="1040,90" size="533,300" zPosition="6" backgroundColor="Pic" cornerRadius="15" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1038,88" size="537,304" zPosition="5" cornerRadius="16" />
+		<eLabel position="830,440" size="745,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="830,635" size="745,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1351,1052" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="830,935" size="745,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="12" minEvent="1" position="830,640" size="745,294" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,150" size="330,57">
+			<panel name="Template_Text_Buttons_M_I_EPG" />
+		</panel>
+		<widget source="ServiceEvent" render="Label" position="1150,997" size="520,38" backgroundColor="ButtonBack" font="Gradient_Font;24" foregroundColor="ButtonText" transparent="1" halign="left" valign="center" zPosition="3" noWrap="1">
+			<convert type="TransponderInfo" />
+		</widget>
+		<widget source="ServiceEvent" position="915,394" size="660,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" backgroundColor="gradient_background" foregroundColor="EventNameColor" zPosition="3" transparent="1" halign="left" valign="center">
+			<convert type="EventInfo">NowName</convert>
+		</widget>
+		<widget source="ServiceEvent" position="830,445" size="745,190" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 29" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget name="list" position="30,84" size="780,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+		<widget source="ServiceEvent" render="Picon" position="830,395" size="75,42" zPosition="6" alphatest="blend" transparent="1">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget source="ServiceEvent" position="830,938" size="745,40" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<panel name="ChannelSelection_4_Backdrop_X" />
+	</screen>
+	<!-- ChannelSelection_4_Poster -->
+	<screen name="ChannelSelection_4_Poster" label="4_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent" zPosition="100">
 		<widget source="ServiceEvent" position="1305,1936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
 			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
-		<widget source="ServiceEvent" position="870,480" size="1000,255" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="6" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="bottom" textBorderColor="black" textBorderWidth="1">
+		<widget source="ServiceEvent" position="1060,400" size="830,230" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 28" zPosition="6" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="bottom" textBorderColor="black" textBorderWidth="1">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 		<panel name="Template_FullScreen_Base" />
@@ -241,36 +275,31 @@
 		<widget source="ServiceEvent" render="Label" position="1150,997" size="520,38" font="Gradient_Font; 24" backgroundColor="gradient_background" transparent="1" halign="left" valign="center" zPosition="3" noWrap="1">
 			<convert type="TransponderInfo" />
 		</widget>
-		<widget source="session.VideoPicture" render="Pig" position="45,80" size="533,300" backgroundColor="#ff000000" zPosition="2" />
-		<ePixmap name="vod_backdrop" pixmap="screens/backdrop.png" position="600,80" size="1280,720" alphatest="blend" zPosition="5" />
-		<widget name="list" position="30,380" size="560,600" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="4" minEvent="4" position="1565,750" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="3" minEvent="3" position="1250,750" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="2" minEvent="2" position="935,750" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="1" minEvent="1" position="620,750" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-		<widget source="ServiceEvent" render="Label" position="620,260" size="1280,50" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="6">
+		<widget source="session.VideoPicture" render="Pig" position="45,80" size="462,260" backgroundColor="Pic" zPosition="2" />
+		<widget name="list" position="30,350" size="780,623" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+		<widget source="ServiceEvent" render="Label" position="850,240" size="1060,50" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="6">
 			<convert type="EventName">NowName</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="620,315" size="85,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" halign="left" valign="top" textBorderColor="black" textBorderWidth="1">
+		<widget source="ServiceEvent" render="Label" position="560,232" size="85,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" halign="left" valign="top" textBorderColor="black" textBorderWidth="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText" />
 		</widget>
-		<eLabel text="-" position="706,315" size="20,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" valign="top" textBorderColor="black" textBorderWidth="1" />
-		<widget source="ServiceEvent" render="Label" position="730,315" size="85,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" valign="top" textBorderColor="black" textBorderWidth="1">
+		<eLabel text="-" position="660,232" size="20,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" valign="top" textBorderColor="black" textBorderWidth="1" />
+		<widget source="ServiceEvent" render="Label" position="695,232" size="85,33" font="Gradient_Font; 30" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="6" transparent="1" valign="top" textBorderColor="black" textBorderWidth="1" halign="right">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText" />
 		</widget>
-		<widget source="ServiceEvent" render="Label" position="820,315" size="150,33" font="Gradient_Font;30" backgroundColor="gradient_background" foregroundColor="EventTimeColor" transparent="1" halign="right" valign="top" zPosition="6" textBorderColor="black" textBorderWidth="1">
+		<widget source="ServiceEvent" render="Label" position="630,275" size="150,33" font="Gradient_Font;30" backgroundColor="gradient_background" foregroundColor="EventTimeColor" transparent="1" halign="right" valign="top" zPosition="6" textBorderColor="black" textBorderWidth="1">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText" />
 		</widget>
-		<widget source="ServiceEvent" render="Picon" position="621,180" size="120,72" zPosition="6" alphatest="blend" transparent="1">
+		<widget source="ServiceEvent" render="Picon" position="560,100" size="220,124" zPosition="6" alphatest="blend" transparent="1">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
-		<panel name="ChannelSelection_Backdrop_X" />
+		<panel name="ChannelSelection_4_Poster_X" />
 	</screen>
 	<!-- ChannelSelection3_Fields_Poster" label="3_Fields_Poster" -->
-	<screen name="ChannelSelection3_Fields_Poster" label="3_Fields_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+<!-- 	<screen name="ChannelSelection3_Fields_Poster" label="3_Fields_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="1340,90" size="550,310" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="800,935" size="530,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
 			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
@@ -302,7 +331,43 @@
 		</widget>
 		<widget name="list" position="30,84" size="760,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
 		<panel name="ChannelSelection_Poster_X" />
-	</screen>
+	</screen> -->
+	
+	
+	<screen name="ChannelSelection3_Fields_Poster" label="3_Fields_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+  <widget source="session.VideoPicture" render="Pig" position="1340,90" size="550,310" zPosition="3" backgroundColor="Pic" />
+  <widget source="ServiceEvent" position="1340,935" size="550,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
+    <convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+  </widget>
+  <eLabel position="799,530" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+  <eLabel position="800,780" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+  <eLabel position="1340,928" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="22" minEvent="1" position="1340,420" size="550,500" font="Gradient_Font; 29" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+  <panel name="Template_FullScreen_Base" />
+  <panel position="459,150" size="330,57">
+    <panel name="Template_Text_Buttons_M_I_EPG" />
+  </panel>
+  <widget source="ServiceEvent" render="Label" position="1150,997" size="520,38" backgroundColor="ButtonBack" font="Gradient_Font;24" foregroundColor="ButtonText" transparent="1" halign="left" valign="center" zPosition="3" noWrap="1">
+    <convert type="TransponderInfo" />
+  </widget>
+  <ePixmap pixmap="screens/PosterBg_now.png" position="800,88" size="260,394" alphatest="blend" transparent="1" zPosition="4" />
+  <ePixmap pixmap="screens/PosterBg_next.png" position="1070,88" size="260,394" alphatest="blend" transparent="1" zPosition="4" />
+  <widget source="ServiceEvent" position="800,485" size="530,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" backgroundColor="gradient_background" foregroundColor="EventNameColor" zPosition="3" transparent="1" halign="left" valign="center">
+    <convert type="EventInfo">NowName</convert>
+  </widget>
+  <widget source="ServiceEvent" position="800,535" size="530,190" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" position="800,735" size="530,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="left" valign="center">
+    <convert type="EventInfo">NextName</convert>
+  </widget>
+  <widget source="ServiceEvent" position="800,785" size="530,190" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
+    <convert type="EventName">NextDescription</convert>
+  </widget>
+  <widget name="list" position="30,84" size="760,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+  <panel name="ChannelSelection_Poster_X" />
+</screen>
+	
 	<!-- ChannelSelection3_Fields" label="3_Fields" -->
 	<screen name="ChannelSelection3_Fields" label="3_Fields" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="800,90" size="550,310" zPosition="3" backgroundColor="Pic" />
@@ -335,58 +400,100 @@
 			<convert type="EventName">NextDescription</convert>
 		</widget>
 		<widget name="list" position="30,84" size="760,896" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
-		<!-- <panel name="ChannelSelection_Poster_X" /> -->
 	</screen>
-	<!-- ChannelSelection_Backdrop_X -->
-	<screen name="ChannelSelection_Backdrop_X">
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="1" position="620,805" size="300,169" zPosition="1" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="2" position="935,805" size="300,169" zPosition="1" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="3" position="1250,805" size="300,169" zPosition="1" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="4" position="1565,805" size="300,169" zPosition="1" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientzBackdropX" nexts="1" position="620,805" size="300,169" zPosition="2" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientzBackdropX" nexts="2" position="935,805" size="300,169" zPosition="2" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientzBackdropX" nexts="3" position="1250,805" size="300,169" zPosition="2" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientzBackdropX" nexts="4" position="1565,805" size="300,169" zPosition="2" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientBackdropX" position="680,80" size="1200,675" zPosition="3" />
-		<widget source="ServiceEvent" render="GradientzBackdropX" position="680,80" size="1200,675" zPosition="4" />
-		<widget source="ServiceEvent" render="GradientPosterX" position="620,365" size="240,360" zPosition="6" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientiPosterX" position="620,365" size="240,360" zPosition="5" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientzPosterX" position="620,365" size="240,360" zPosition="7" cornerRadius="6" />
-	</screen>
-	<!-- Poster_ChannelSelection_X -->
+	<!--  ChannelSelection PosterX -->
 	<screen name="ChannelSelection_Poster_X">
 		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="2" />
 		<widget source="ServiceEvent" render="GradientPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="2" />
-		<widget source="ServiceEvent" render="GradientzPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="3" />
-		<widget source="ServiceEvent" render="GradientzPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="3" />
-		<widget source="ServiceEvent" render="GradientiPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="1" />
-		<widget source="ServiceEvent" render="GradientiPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="1" />
 	</screen>
-	<!-- TEMPLATES_Infobar_Mini_Poster -->
+	<!-- ChannelSelection_4_Backdrop_X -->
+	<screen name="ChannelSelection_4_Backdrop_X">
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="4" minEvent="4" position="1585,765" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="3" minEvent="3" position="1585,540" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="2" minEvent="2" position="1585,315" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="1" minEvent="1" position="1585,90" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,145" size="274,154" zPosition="5" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,370" size="274,154" zPosition="5" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,595" size="274,154" zPosition="5" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,820" size="274,154" zPosition="5" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" cornerRadius="10" position="830,88" size="187,278" zPosition="5" />
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="1" position="1601,147" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="2" position="1601,372" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="3" position="1601,597" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientBackdropX" nexts="4" position="1601,822" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="832,90" size="183,274" zPosition="6" cornerRadius="6" />
+		<widget source="ServiceEvent" render="GradientParental" position="953,302" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientStarX" position="831,370" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+	</screen>
+	<!-- ChannelSelection_4_Poster_X -->
+	<screen name="ChannelSelection_4_Poster_X">
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="4" minEvent="4" position="1638,647" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="3" minEvent="3" position="1372,647" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="2" minEvent="2" position="1106,647" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="1" minEvent="1" position="840,647" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+		<widget source="ServiceEvent" nexts="0" render="GradientPosterX" position="850,300" size="200,300" cornerRadius="6" zPosition="6" />
+		<widget source="ServiceEvent" nexts="1" render="GradientPosterX" position="880,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<widget source="ServiceEvent" nexts="2" render="GradientPosterX" position="1146,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<widget source="ServiceEvent" nexts="3" render="GradientPosterX" position="1412,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<widget source="ServiceEvent" nexts="4" render="GradientPosterX" position="1678,700" size="180,270" cornerRadius="6" zPosition="5" />
+		<widget source="ServiceEvent" render="GradientParental" position="980,532" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientStarX" position="858,610" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="ServiceEvent" render="GradientBackdropX" position="840,80" size="1060,596" zPosition="3" />
+		<ePixmap name="vod_backdrop" pixmap="screens/backdrop.png" position="840,79" size="1060,614" alphatest="blend" zPosition="5" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="878,698" size="184,274" zPosition="4" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1144,698" size="184,274" zPosition="4" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1410,698" size="184,274" zPosition="4" cornerRadius="10" />
+		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1676,698" size="184,274" zPosition="4" cornerRadius="10" />
+	</screen>
+	<!-- TEMPLATES_Infobar_Poster -->
 	<screen name="template_Poster_Infobar">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
 	</screen>
+	<!-- InfoBar_Poster_X -->
 	<screen name="InfoBar_Poster_X">
-		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientPosterX" nexts="0" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Now" render="GradientPosterX" nexts="1" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Now" render="GradientzPosterX" nexts="0" position="20,460" size="185,278" cornerRadius="6" zPosition="3" />
-		<widget source="session.Event_Now" render="GradientzPosterX" nexts="1" position="1625,460" size="185,278" cornerRadius="6" zPosition="3" />
-		<widget source="session.Event_Now" render="GradientiPosterX" nexts="0" position="20,460" size="185,278" cornerRadius="6" zPosition="1" />
-		<widget source="session.Event_Now" render="GradientiPosterX" nexts="1" position="1625,460" size="185,278" cornerRadius="6" zPosition="1" />
+		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
 		<!-- ImdbRating -->
-		<ePixmap pixmap="icons/starbar_empty.png" position="20,742" size="185,19" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="session.Event_Now" render="GradientStarX" pixmap="icons/starbar_filled.png" position="20,742" size="185,19" alphatest="blend" transparent="1" zPosition="13" />
-		<ePixmap pixmap="icons/starbar_empty.png" position="1625,742" size="185,19" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="session.Event_Next" render="GradientStarX" pixmap="icons/starbar_filled.png" position="1625,742" size="185,19" alphatest="blend" transparent="1" zPosition="13" />
+		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
-	<!-- TEMPLATES_Infobar_Mini_Poster -->
+	<!-- InfoBar_Backdrop_X -->
+	<screen name="InfoBar_Backdrop_X">
+		<!-- Backdrop -->
+		<widget source="session.Event_Now" render="GradientBackdropX" position="20,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientBackdropX" position="1510,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="257,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1747,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1510,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" />
+	</screen>
+	<!-- InfoBar_Poster_Backdrop_X -->
+	<screen name="InfoBar_Poster_Backdrop_X">
+		<!-- Backdrop -->
+		<widget source="session.Event_Now" render="GradientBackdropX" position="220,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientBackdropX" position="1310,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- 	Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+	</screen>
+	<!-- SecondInfobar_Poster_X -->
 	<screen name="template_Poster_SecondInfobar">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
 		<panel name="SecondInfobar_Event" />
 	</screen>
+	<!-- SecondInfobar_Event -->
 	<screen name="SecondInfobar_Event">
 		<widget source="session.Event_Now" render="Label" position="45,186" size="900,570" font="Gradient_Font; 33" backgroundColor="gradient_background" zPosition="2" halign="left" transparent="1" valign="top">
 			<convert type="EventName">FullDescription</convert>
@@ -395,22 +502,7 @@
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 	</screen>
-	<!-- SecondInfobar_Poster -->
-	<screen name="SecondInfobar_Poster_X">
-		<widget source="session.Event_Now" render="GradientParental" position="878,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Now" render="GradientParental" nexts="1" position="1808,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientPosterX" nexts="0" position="600,220" size="340,500" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Now" render="GradientPosterX" nexts="1" position="1530,220" size="340,500" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Now" render="GradientzPosterX" nexts="0" position="600,220" size="340,500" cornerRadius="6" zPosition="3" />
-		<widget source="session.Event_Now" render="GradientzPosterX" nexts="1" position="1530,220" size="340,500" cornerRadius="6" zPosition="3" />
-		<!-- ImdbRating -->
-		<ePixmap pixmap="icons/starsbar_empty.png" position="610,725" size="315,32" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="session.Event_Now" render="GradientStarX" pixmap="icons/starsbar_filled.png" position="610,725" size="315,32" alphatest="blend" transparent="1" zPosition="13" />
-		<ePixmap pixmap="icons/starsbar_empty.png" position="1542,725" size="315,32" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="session.Event_Next" render="GradientStarX" pixmap="icons/starsbar_filled.png" position="1542,725" size="315,32" alphatest="blend" transparent="1" zPosition="13" />
-		<panel name="SecondInfobar_Poster_Event" />
-	</screen>
+	<!-- SecondInfobar_Poster_Event -->
 	<screen name="SecondInfobar_Poster_Event">
 		<widget source="session.Event_Now" render="Label" position="45,186" size="540,570" font="Gradient_Font; 33" backgroundColor="gradient_background" zPosition="2" halign="left" transparent="1" valign="top">
 			<convert type="EventName">FullDescription</convert>
@@ -419,37 +511,216 @@
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 	</screen>
+	<!-- SecondInfobar_Poster_X -->
+	<screen name="SecondInfobar_Poster_X">
+		<!-- Parental -->
+		<widget source="session.Event_Now" render="GradientParental" position="878,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientParental" position="1808,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- Poster -->
+		<widget source="session.Event_Now" render="GradientPosterX" position="600,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientPosterX" position="1530,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<!-- ImdbRating -->
+		<widget source="session.Event_Now" render="GradientStarX" position="610,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientStarX" position="1542,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="SecondInfobar_Poster_Event" />
+	</screen>
+	<!-- template_Poster_Eventwiew -->
+	<screen name="template_Poster_Eventwiew">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_description_eventview" />
+	</screen>
+	<!-- epg_description_eventview_Poster -->
 	<screen name="epg_description_eventview_Poster">
 		<widget name="epg_description" position="27,87" size="900,435" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="120" textBorderColor="black" textBorderWidth="2" />
 	</screen>
+	<!-- epg_description_eventview -->
 	<screen name="epg_description_eventview">
 		<widget name="epg_description" position="27,87" size="900,735" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="10" borderWidth="1" borderColor="black" />
 	</screen>
-	<screen name="template_Poster_Eventwiew">
-		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
-	</screen>
+	<!-- Eventwiew_Poster_x -->
 	<screen name="Eventwiew_Poster_x">
-		<!-- Parental -->
-		<widget source="Event" render="GradientParental" position="860,734" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
-		<widget source="Event" render="GradientPosterX" position="735,517" cornerRadius="6" size="185,278" zPosition="2" />
-		<widget source="Event" render="GradientzPosterX" position="735,517" cornerRadius="6" size="185,278" zPosition="3" />
-		<widget source="Event" render="GradientiPosterX" position="735,517" cornerRadius="6" size="185,278" zPosition="1" />
-		<ePixmap pixmap="icons/starbar_empty.png" position="735,795" size="185,19" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="Event" render="GradientStarX" pixmap="icons/starbar_filled.png" position="735,795" size="185,19" alphatest="blend" transparent="1" zPosition="13" />
+		<widget source="Event" render="GradientBackdropX" position="50,517" size="530,298" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientParental" position="835,732" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="635,517" cornerRadius="6" size="185,278" zPosition="2" />
+		<widget source="Event" render="GradientStarX" position="635,795" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="epg_description_eventview_Poster" />
 	</screen>
+	
+	
+	<!-- template_Poster_EPGvertical_Pig -->
+	<screen name="template_Poster_EPGvertical_Pig">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_Event_EPGvertical_Pig" />
+	</screen>
+	<!-- epg_description_EPGvertical_Poster Pig-->
+	<screen name="epg_Event_EPGvertical_Pig_Poster_x">
+		<widget source="Event" font="Gradient_Font; 27" position="1400,605" size="485,358" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" valign="top" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- epg_description_EPGvertical -->
+	<screen name="epg_Event_EPGvertical_Pig">
+		<widget source="Event" render="Label" font="Gradient_Font; 30" position="1170,605" size="710,358" valign="top" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- EPGvertical_Poster_x -->
+	<screen name="EPGvertical_Pig_Poster_x">
+		<widget source="Event" render="GradientParental" position="1329,871" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="1170,608" size="220,324" cornerRadius="6" zPosition="2" />
+		<widget source="Event" render="GradientStarX" position="1170,936" size="220,23" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="epg_Event_EPGvertical_Pig_Poster_x" />
+	</screen>	
+	<!-- template_Poster_EPGvertical -->
+	<screen name="template_Poster_EPGvertical">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_Event_EPGvertical" />
+	</screen>
+	<!-- epg_description_EPGvertical_Poster -->
+	<screen name="epg_Event_EPGvertical_Poster_x">
+		<widget source="Event" render="Label" font="Gradient_Font; 30" position="330,816" size="1550,158" valign="top" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- epg_description_EPGvertical -->
+	<screen name="epg_Event_EPGvertical">
+		<widget source="Event" render="Label" font="Gradient_Font; 30" position="40,816" size="1840,158" valign="top" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- EPGvertical_Poster_x -->
+	<screen name="EPGvertical_Poster_x">
+		<widget source="Event" render="GradientBackdropX" position="33,814" size="284,160" zPosition="11" cornerRadius="6" />
+		<panel name="epg_Event_EPGvertical_Poster_x" />
+	</screen>		
+	<!-- template_GraphicalEPG_PIG_Poster -->
+	<screen name="template_Poster_GraphicalEPG_PIG">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_Event_GraphicalEPGPIG" />
+	</screen>
+	<!-- epg_description_GraphicalEPG_PIG_Poster -->
+	<screen name="epg_Event_GraphicalEPGPIG_Poster_x">
+		<widget source="Event" render="Label" position="248,185" size="1040,250" font="Gradient_Font; 30" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" valign="top" zPosition="1">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- epg_description_GraphicalEPG_PIG -->
+	<screen name="epg_Event_GraphicalEPGPIG">
+		<widget source="Event" render="Label" position="48,185" size="1240,250" font="Gradient_Font; 30" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" valign="top" zPosition="1">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPGPIG_Poster_x -->
+	<screen name="GraphicalEPGPIG_Poster_x">
+		<widget source="Event" render="GradientParental" position="175,371" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="56,176" cornerRadius="6" size="163,240" zPosition="2" />
+		<widget source="Event" render="GradientStarX" position="45,420" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="epg_Event_GraphicalEPGPIG_Poster_x" />
+	</screen>
+	<!-- template_GraphicalEPG_Poster -->
+	<screen name="template_Poster_GraphicalEPG">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_Event_GraphicalEPG" />
+	</screen>
+	<!-- epg_description_GraphicalEPG_Poster -->
+	<screen name="epg_Event_GraphicalEPG_Poster_x">
+		<widget source="Event" render="Label" position="560,153" size="1310,198" font="Gradient_Font; 30" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" valign="top" zPosition="1">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- epg_description_GraphicalEPG -->
+	<screen name="epg_Event_GraphicalEPG">
+		<widget source="Event" render="Label" position="42,153" size="1833,198" font="Gradient_Font; 30" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" valign="top" zPosition="1">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- GraphicalEPG_Poster_x -->
+	<screen name="GraphicalEPG_Poster_x">
+		<widget source="Event" render="GradientBackdropX" position="42,153" size="348,196" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientPosterX" position="410,152" cornerRadius="6" size="134,198" zPosition="2" />
+		<panel name="epg_Event_GraphicalEPG_Poster_x" />
+	</screen>
+	<!-- template_EPGSelection_Poster -->
+	<screen name="template_Poster_EPGSelection">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="epg_Event_EPGSelection" />
+	</screen>
+	<!-- epg_description_EPGSelection_Poster -->
+	<screen name="epg_Event_EPGSelection_Poster_x">
+		<widget source="Event" position="1320,669" size="547,294" font="Gradient_Font; 30" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1"  foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" valign="top" zPosition="1" >
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- epg_description_EPGSelection -->
+	<screen name="epg_Event_EPGSelection">
+		<widget source="Event" position="1140,669" size="717,294" font="Gradient_Font; 30" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1"  foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" valign="top" zPosition="1" >
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+	</screen>
+	<!-- EPGSelection_Poster_x -->
+	<screen name="EPGSelection_Poster_x">
+		<widget source="Event" render="GradientParental" position="1266,889" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientPosterX" position="1130,670" cornerRadius="6" size="177,260" zPosition="2" />
+		<widget source="Event" render="GradientStarX" position="1126,934" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="epg_Event_EPGSelection_Poster_x" />
+	</screen>
+	<!-- template_Poster_Player -->
 	<screen name="template_Poster_Player">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
 	</screen>
-	<!-- TEMPLATES_Player_Poster-->
+	<!-- Player_Poster X -->
 	<screen name="template_Player_Poster">
-		<widget source="session.Event_Now" render="GradientParental" position="1750,677" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
-		<widget source="session.Event_Now" render="GradientPosterX" position="1630,465" cornerRadius="6" size="185,278" zPosition="1" />
-		<widget source="session.Event_Now" render="GradientBackdropX" position="1100,485" cornerRadius="6" size="492,277" zPosition="1" />
-		<widget source="session.Event_Now" render="GradientzPosterX" position="1630,465" cornerRadius="6" size="185,278" zPosition="2" />
-		<widget source="session.Event_Now" render="GradientzBackdropX" position="1100,485" cornerRadius="6" size="492,277" zPosition="2" />
-		<ePixmap pixmap="icons/starbar_empty.png" position="1630,745" size="185,19" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="session.Event_Now" render="GradientStarX" pixmap="icons/starbar_filled.png" position="1630,745" size="185,19" alphatest="blend" transparent="1" zPosition="13" />
+		<widget source="session.CurrentService" render="GradientPosterXEMC" position="1626,440" size="204,300" zPosition="4" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientBackdropXEMC" position="0,440" size="569,320" zPosition="1" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientBannerXEMC" position="596,575" size="1000,185" zPosition="4" alphatest="blend"/>
+		<widget source="session.Event_Now" render="GradientParental" position="1767,677" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+		<widget source="session.Event_Now" render="GradientStarX" position="1626,740" size="204,21" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
+	<!-- template_PosterEMCSelection -->
+	<screen name="template_PosterEMCSelection">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+		<panel name="Event_EMCSelection" />
+	</screen>
+	<!-- Event_EMCSelection_Poster -->
+	<screen name="Event_EMCSelection_Poster">
+		<widget font="Gradient_Font; 30" position="30,620" size="455,260" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1"  source="Service" backgroundColor="gradient_background" transparent="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+	</screen>	
+	<!-- Event_EMCSelection -->
+	<screen name="Event_EMCSelection">
+		<widget font="Gradient_Font; 30" position="30,620" size="690,350" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1"  source="Service" backgroundColor="gradient_background" transparent="1">
+			<convert type="EventName">ExtendedDescription</convert>
+		</widget>
+	</screen>	
+	<!-- EMCSelection_Poster X -->
+	<screen name="template_EMCSelection_Poster">
+		<!--  Poster -->
+		<widget source="Service" render="GradientPosterXEMC" position="498,620" cornerRadius="6" size="218,320" zPosition="3"  />
+		<!--  Backdrop -->
+		<widget source="Service" render="GradientBackdropXEMC" position="30,90" cornerRadius="6" size="685,388" zPosition="3"  />
+		<!-- Banner -->
+		<!-- <widget source="session.CurrentService" render="GradientBannerXEMC" position="center,620" size="800,140" zPosition="14" alphatest="blend" /> -->
+		<widget source="Service" render="GradientBannerXEMC" position="30,886" size="455,84" zPosition="14" alphatest="blend" />
+		<!-- Parental -->
+		<widget source="Service" render="GradientParental" position="652,875" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="Service" render="GradientStarX" position="497,947" size="220,22" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<panel name="Event_EMCSelection_Poster" />
+	</screen>
+	<!-- template_PosterEMCSelection -->
+	<screen name="template_Poster_Movie_Selection">
+		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="2,2" size="2,2" />
+	</screen>	
+	<!-- Movie_Selection_Poster X -->
+	<screen name="template_Movie_Selection_Poster">
+		<!--  Poster -->
+		<widget source="Service" render="GradientPosterXEMC" position="1699,517" cornerRadius="6" size="180,264" zPosition="3" delayPic="200" />
+		<!-- Parental -->
+		<widget source="Service" render="GradientParental" position="1607,609" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<!-- ImdbRating -->
+		<widget source="Service" render="GradientStarX" position="1699,789" size="180,18" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+	</screen>	
 	<!-- Infobar VPN -->
 	<screen name="template_Infobar_VPN">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
@@ -594,72 +865,72 @@
 		</widget>
 	</screen>
 	<!-- TEMPLATES Infobar VPN  Center-->
-	<screen name="template_Infobar_VPN_center">
-		<eLabel name="title_bg" position="center,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
-		<eLabel name="title_line" position="537,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
-		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1055,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
-		</widget>
-		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="708,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
-		</widget>
-		<!-- Ländertext (z. B. "DE – Deutschland") -->
-		<widget source="session.CurrentService" render="Label" position="745,736" size="60,30" font="Regular;24" transparent="1" halign="center" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
-		</widget>
-		<!-- Öffentliche IP -->
-		<widget source="session.CurrentService" render="Label" position="850,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
-		</widget>
-		<!-- Empfänger-IP -->
-		<widget source="session.CurrentService" render="Label" position="1095,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
-		</widget>
-		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnProvider</convert>
-		</widget>
-		<!-- Optional: Provider-Name daneben -->
-		<widget source="session.CurrentService" render="Label" position="580,736" size="120,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">VpnProviderPretty</convert>
-		</widget>
-		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="810,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
-		</widget>
-	</screen>
+<screen name="template_Infobar_VPN_center">
+  <eLabel name="title_bg" position="532,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
+  <eLabel name="title_line" position="536,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
+  <!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
+  <widget source="session.CurrentService" render="GradientMapPixmap" position="1057,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">ConnType</convert>
+  </widget>
+  <!-- Länderflagge -->
+  <widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="706,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+  </widget>
+  <!-- Ländertext (z. B. "DE – Deutschland") -->
+  <widget source="session.CurrentService" render="Label" position="746,736" size="60,30" font="Regular;24" transparent="1" halign="center" valign="center">
+    <convert type="GradientVPNInfo">CountryCode</convert>
+  </widget>
+  <!-- Öffentliche IP -->
+  <widget source="session.CurrentService" render="Label" position="853,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">IP</convert>
+  </widget>
+  <!-- Empfänger-IP -->
+  <widget source="session.CurrentService" render="Label" position="1095,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">ReceiverIP</convert>
+  </widget>
+  <!-- Provider-Icon (optional): -->
+  <widget source="session.CurrentService" render="GradientMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientVPNInfo">VpnProvider</convert>
+  </widget>
+  <!-- Optional: Provider-Name daneben -->
+  <widget source="session.CurrentService" render="Label" position="580,736" size="120,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
+    <convert type="GradientVPNInfo">VpnProviderPretty</convert>
+  </widget>
+  <!-- NET-Status-Symbol (an/aus) -->
+  <widget source="session.CurrentService" render="GradientMapPixmap" position="815,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientVPNInfo">NetActive</convert>
+  </widget>
+</screen>
 	<!-- 	Infobar_None_VPN_center -->
-	<screen name="template_Infobar_None_VPN_center">
-		<eLabel name="title_bg" position="577,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
-		<eLabel name="title_line" position="581,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
+<screen name="template_Infobar_None_VPN_center">
+		<eLabel name="title_bg" position="532,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
+		<eLabel name="title_line" position="536,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="830,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+		<widget source="session.CurrentService" render="GradientMapPixmap" position="783,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
 			<convert type="GradientVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Öffentliche IP -->
-		<widget source="session.CurrentService" render="Label" position="625,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
+		<widget source="session.CurrentService" render="Label" position="578,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
 			<convert type="GradientVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
-		<widget source="session.CurrentService" render="Label" position="870,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
+		<widget source="session.CurrentService" render="Label" position="821,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
 			<convert type="GradientVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="585,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+		<widget source="session.CurrentService" render="GradientMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
 			<convert type="GradientVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Ländername ausgeschrieben -->
-		<widget source="session.CurrentService" render="Label" position="1115,734" size="190,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
+		<widget source="session.CurrentService" render="Label" position="1068,734" size="190,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
 			<convert type="GradientVPNInfo">CountryName</convert>
 		</widget>
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1303,734" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+		<widget source="session.CurrentService" render="GradientMapPixmap" position="1260,734" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
 			<convert type="GradientVPNInfo">VpnActive</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1075,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1028,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
 			<convert type="GradientVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
@@ -669,7 +940,7 @@
     pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png"
     pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
     <convert type="GradientVPNInfo">NetActive</convert>
-</widget> -->
+	</widget> -->
 	<!-- SecondInfoBar VPN -->
 	<screen name="template_VPN_SecondInfoBar">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
@@ -724,6 +995,7 @@
 	<screen name="template_VPN_Eventview">
 		<eLabel name="fake" backgroundColor="background" zPosition="-20" position="1,1" size="1,1" />
 	</screen>
+	<!-- template_Eventview_VPN -->
 	<screen name="template_Eventview_VPN">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
 		<widget source="session.CurrentService" render="GradientMapPixmap" position="970,525" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
@@ -797,18 +1069,22 @@
 			<convert type="GradientVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
+	<!-- EMCSelection_List_default -->
 	<screen name="EMCSelection_List_default">
-		<widget name="list" position="615,90" size="1275,870" transparent="1" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemHeight="58" enableWrapAround="1" scrollbarMode="showOnDemand" CoolDirInfoWidth="165" CoolCSPos="1080" CoolBarHPos="10" CoolBarPos="1050" CoolBarSizeSa="200,14" CoolDateColor="1" CoolDateFont="Gradient_Font;23" CoolDateHPos="30" CoolDatePos="1050" CoolDateWidth="200" CoolFolderSize="1010" CoolFolderHPos="8" CoolFont="Gradient_Font;30" CoolHighlightColor="1" CoolIconHPos="10" CoolIconPos="2" CoolIconSize="38,38" CoolMovieHPos="14" CoolMoviePiconPos="140" CoolMoviePiconSize="880" CoolMoviePos="60" CoolMovieSize="960" CoolPiconHPos="12" CoolPiconHeight="38" CoolPiconPos="60" CoolProgressPos="1180" CoolProgressHPos="8" CoolProgressFont="Gradient_Font;20" CoolProgressHeight="18" CoolSelNumTxtWidth="40" CoolSelectFont="Gradient_Font;30" CoolTitleColor="1" DefaultColor="white" FrontColorSel="gradient_foreground" />
+		<widget name="list" position="735,90" size="1155,870" transparent="1" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemHeight="58" enableWrapAround="1" scrollbarMode="showOnDemand" CoolDirInfoWidth="165" CoolCSPos="960" CoolBarHPos="10" CoolBarPos="930" CoolBarSizeSa="200,14" CoolDateColor="1" CoolDateFont="Gradient_Font;23" CoolDateHPos="30" CoolDatePos="930" CoolDateWidth="200" CoolFolderSize="890" CoolFolderHPos="8" CoolFont="Gradient_Font;30" CoolHighlightColor="1" CoolIconHPos="10" CoolIconPos="2" CoolIconSize="38,38" CoolMovieHPos="14" CoolMoviePiconPos="140" CoolMoviePiconSize="760" CoolMoviePos="60" CoolMovieSize="840" CoolPiconHPos="12" CoolPiconHeight="38" CoolPiconPos="60" CoolProgressPos="1060" CoolProgressHPos="8" CoolProgressFont="Gradient_Font;20" CoolProgressHeight="18" CoolSelNumTxtWidth="40" CoolSelectFont="Gradient_Font;30" CoolTitleColor="1" DefaultColor="white" FrontColorSel="gradient_foreground" />
 	</screen>
+	<!-- EMCSelection_List_more_lines -->
 	<screen name="EMCSelection_List_more_lines">
 		<widget name="list" position="615,90" size="1275,870" transparent="1" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemHeight="38" enableWrapAround="1" scrollbarMode="showOnDemand" CoolDirInfoWidth="165" CoolCSPos="1080" CoolBarHPos="6" CoolBarPos="1050" CoolBarSizeSa="200,12" CoolDateColor="1" CoolDateFont="Gradient_Font;18" CoolDateHPos="18" CoolDatePos="1050" CoolDateWidth="200" CoolFolderSize="1010" CoolFolderHPos="4" CoolFont="Gradient_Font;28" CoolHighlightColor="1" CoolIconHPos="2" CoolIconPos="4" CoolIconSize="34,34" CoolMovieHPos="3" CoolMoviePiconPos="140" CoolMoviePiconSize="880" CoolMoviePos="60" CoolMovieSize="960" CoolPiconHPos="2" CoolPiconHeight="34" CoolPiconPos="60" CoolProgressPos="1180" CoolProgressHPos="6" CoolProgressFont="Gradient_Font;18" CoolProgressHeight="18" CoolSelNumTxtWidth="40" CoolSelectFont="Gradient_Font;28" CoolTitleColor="1" DefaultColor="white" FrontColorSel="gradient_foreground" />
 	</screen>
+	<!-- Gradient_Fullscreen_BLUE -->
 	<screen name="Gradient_Fullscreen_BLUE">
 		<eLabel name="fullscreen_bg" position="15,79" size="1890,963" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
 		<eLabel name="title_bg" position="15,15" size="1890,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
 		<eLabel name="title_line" position="15,75" size="1890,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
 		<eLabel name="Line_Fullscreen" position="24,978" size="1872,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 	</screen>
+	<!-- Gradient_SecondInfobar_BLUE -->
 	<screen name="Gradient_SecondInfobar_BLUE">
 		<eLabel name="fullscreen_bg" position="15,79" size="1890,974" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
 		<eLabel name="title_bg" position="15,15" size="1890,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
@@ -818,6 +1094,7 @@
 		<eLabel name="Line_Infobar" position="394,998" size="1035,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="6" />
 		<eLabel name="Line_vertical" position="1450,845" size="3,201" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,vertical" zPosition="6" />
 	</screen>
+	<!-- Gradient_Setup_BLUE -->
 	<screen name="Gradient_Setup_BLUE">
 		<eLabel name="setup_bg" position="0,64" size="1450,834" backgroundColor="gradient_BGM,gradient_TBGM,gradient_BGM,vertical" zPosition="-8" />
 		<!-- <eLabel name="setup_bg" position="0,64" size="1450,834" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" /> -->
@@ -825,12 +1102,14 @@
 		<eLabel name="title_line" position="0,60" size="1450,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
 		<eLabel name="Line_Setup" position="15,831" size="1420,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 	</screen>
+	<!-- Gradient_Menu_BLUE -->
 	<screen name="Gradient_Menu_BLUE">
 		<eLabel name="menu_bg" position="0,64" size="1100,837" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
 		<eLabel name="title_bg" position="0,0" size="1100,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
 		<eLabel name="title_line" position="0,60" size="1100,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
 		<eLabel name="Line_Menu" position="15,831" size="1070,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 	</screen>
+	<!-- Gradient_Infobar_BLUE -->
 	<screen name="Gradient_Infobar_BLUE">
 		<eLabel name="infobar_bg" position="0,830" size="1830,225" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
 		<eLabel name="title_bg" position="0,770" size="1830,60" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />
@@ -838,6 +1117,7 @@
 		<eLabel name="Line_Infobar" position="354,998" size="1035,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="6" />
 		<eLabel name="Line_vertical" position="1410,845" size="3,201" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,vertical" zPosition="6" />
 	</screen>
+	<!-- Fullscreen_Title_TopPanel -->
 	<screen name="Fullscreen_Title_TopPanel">
 		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
 			<convert type="ClockToText">Default</convert>
@@ -848,6 +1128,7 @@
 		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 		<panel name="Gradient_Fullscreen_BLUE" />
 	</screen>
+	<!-- Fullscreen_TopPanel -->
 	<screen name="Fullscreen_TopPanel">
 		<widget source="global.CurrentTime" render="Label" position="1635,15" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
 			<convert type="ClockToText">Default</convert>
@@ -857,9 +1138,11 @@
 		</widget>
 		<panel name="Gradient_Fullscreen_BLUE" />
 	</screen>
+	<!-- FullscreenTitlePanel -->
 	<screen name="FullscreenTitlePanel">
 		<widget source="Title" render="Label" position="45,15" size="1110,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 	</screen>
+	<!-- FullscreenPIGPanel -->
 	<screen name="FullscreenPIGPanel">
 		<eLabel position="1020,39" size="861,489" zPosition="2" backgroundColor="darkgrey" foregroundColor="gradient_background" />
 		<widget source="session.VideoPicture" render="Pig" position="1023,41" size="855,482" zPosition="3" backgroundColor="Pic" />
@@ -894,6 +1177,7 @@
 		<widget source="Title" render="Label" position="30,0" size="930,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" wrap="ellipsis" />
 		<panel name="Gradient_Setup_BLUE" />
 	</screen>
+	<!-- Setup_TopPanel -->
 	<screen name="Setup_TopPanel">
 		<widget source="global.CurrentTime" render="Label" position="1170,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
 			<convert type="ClockToText">Default</convert>
@@ -903,6 +1187,7 @@
 		</widget>
 		<panel name="Gradient_Setup_BLUE" />
 	</screen>
+	<!-- Setup_TitlePanel -->
 	<screen name="Setup_TitlePanel">
 		<widget source="Title" render="Label" position="30,0" size="930,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" wrap="ellipsis" />
 	</screen>
@@ -923,12 +1208,14 @@
 		<widget source="Title" render="Label" position="30,0" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 		<panel name="Gradient_Menu_BLUE" />
 	</screen>
+	<!-- Menu_TopPanel -->
 	<screen name="Menu_TopPanel">
 		<widget source="global.CurrentTime" render="Label" position="825,0" size="240,60" font="Italic; 42" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<panel name="Gradient_Menu_BLUE" />
 	</screen>
+	<!-- Menu_TitlePanel -->
 	<screen name="Menu_TitlePanel">
 		<widget source="Title" render="Label" position="30,0" size="720,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
 	</screen>
@@ -1030,37 +1317,42 @@
 		<panel name="TemplateButton_Yellow_Automatic_all_Menu" />
 		<panel name="TemplateButton_Blue_Automatic_all_Menu" />
 	</screen>
+	
+
+	
+	
+	
 	<screen name="TemplateButton_Red_Automatic_all_Menu">
-		<ePixmap pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
-		<widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="25,850" size="30,30" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
+		<ePixmap pixmap="buttons/key_red.png" position="25,852" size="30,30" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="25,852" size="30,30" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="key_red" position="60,846" size="155,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,Button,Label" transparent="1" />
-		<widget source="key_red" render="Label" position="60,846" size="155,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,StaticText" transparent="1" />
+		<widget name="key_red" position="60,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,Button,Label" transparent="1" />
+		<widget source="key_red" render="Label" position="60,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_red,StaticText" transparent="1" />
 	</screen>
 	<screen name="TemplateButton_Green_Automatic_all_Menu">
-		<ePixmap pixmap="buttons/key_green.png" position="200,850" size="30,30" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
-		<widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="200,850" size="30,30" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
+			<ePixmap pixmap="buttons/key_green.png" position="235,851" size="30,30" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="235,852" size="30,30" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="key_green" position="235,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,Button,Label" transparent="1" />
-		<widget source="key_green" render="Label" position="235,846" size="255,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,StaticText" transparent="1" />
+		<widget name="key_green" position="275,838" size="140,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,Button,Label" transparent="1" />
+		<widget source="key_green" render="Label" position="275,838" size="140,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_green,StaticText" transparent="1" />
 	</screen>
 	<screen name="TemplateButton_Yellow_Automatic_all_Menu">
-		<ePixmap pixmap="buttons/key_yellow.png" position="505,850" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
-		<widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="505,850" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
+			<ePixmap pixmap="buttons/key_yellow.png" position="445,852" size="30,30" alphatest="blend" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="445,852" size="30,30" alphatest="blend" objectTypes="key_yellow,StaticText" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="key_yellow" position="540,846" size="165,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,Button,Label" transparent="1" />
-		<widget source="key_yellow" render="Label" position="540,846" size="165,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,StaticText" transparent="1" />
+		<widget name="key_yellow" position="485,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,Button,Label" transparent="1" />
+		<widget source="key_yellow" render="Label" position="485,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_yellow,StaticText" transparent="1" />
 	</screen>
 	<screen name="TemplateButton_Blue_Automatic_all_Menu">
-		<ePixmap pixmap="buttons/key_blue.png" position="700,850" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
-		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="700,850" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
+		<ePixmap pixmap="buttons/key_blue.png" position="655,852" size="30,30" alphatest="blend" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="655,852" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="key_blue" position="735,846" size="200,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
-		<widget source="key_blue" render="Label" position="735,846" size="200,38" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
+		<widget name="key_blue" position="695,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Label" position="695,838" size="160,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
 	</screen>
 	<!-- SKIN-DESIGN-COLOR-BUTTONS-Name -->
 	<screen name="Template_Color_Buttons_Name">
@@ -1149,8 +1441,8 @@
 		<widget source="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="930,850" size="30,30" alphatest="blend" objectTypes="key_blue,StaticText" transparent="1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="key_blue" position="965,836" size="255,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
-		<widget source="key_blue" render="Label" position="965,836" size="255,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
+		<widget name="key_blue" position="965,836" size="305,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,Button,Label" transparent="1" />
+		<widget source="key_blue" render="Label" position="965,836" size="305,58" backgroundColor="ButtonBack" font="Gradient_Font;27" foregroundColor="ButtonText" zPosition="+1" valign="center" halign="left" objectTypes="key_blue,StaticText" transparent="1" />
 	</screen>
 	<!-- SKIN-DESIGN-Template_Label_text_Save_Exit -->
 	<screen name="Template_Label_text_Save_Exit">
@@ -1435,8 +1727,8 @@
 			<convert type="OAWeather">observationPoint</convert>
 		</widget>
 		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
-    <convert type="OAWeather">logo</convert>
-  </widget> -->
+		<convert type="OAWeather">logo</convert>
+		</widget> -->
 		<widget position="60,110" size="660,30" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
 			<convert type="OAWeather">raintext</convert>
 		</widget>
@@ -1469,8 +1761,8 @@
 			<convert type="OAWeather">city</convert>
 		</widget>
 		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
-    <convert type="OAWeather">logo</convert>
-  </widget> -->
+		<convert type="OAWeather">logo</convert>
+		</widget> -->
 		<widget position="55,160" size="300,64" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
 			<convert type="OAWeather">raintext</convert>
 		</widget>
@@ -1521,12 +1813,11 @@
 			<convert type="OAWeather">observationPoint</convert>
 		</widget>
 		<!--   <widget alphatest="blend" render="OAWeatherPixmap" position="527,305" size="186,27" source="session.OAWeather" transparent="1">
-    <convert type="OAWeather">logo</convert>
-  </widget> -->
+		<convert type="OAWeather">logo</convert>
+		</widget> -->
 		<widget position="55,160" size="300,64" backgroundColor="background" borderWidth="2" borderColor="black" shadowColor="black" shadowOffset="-2,-2" foregroundColor="white" render="Label" font="Gradient_Font; 24" source="session.OAWeather" zPosition="5" halign="left" transparent="1">
 			<convert type="OAWeather">raintext</convert>
 		</widget>
 		<panel name="template_weather_compact_Background" />
 	</screen>
-
 </skin>
