@@ -88,13 +88,13 @@ PROVIDER_DOMAIN_KEYS = {
     'perfect-privacy.com': 'perfect privacy', 'azirevpn.com': 'azirevpn',
     'hide.me': 'hide.me', 'hidemyass.com': 'hidemyass', 'tunnelbear.com': 'tunnelbear',
     'mozilla.org': 'mozilla vpn', 'cryptostorm.is': 'cryptostorm', 'wevpn.com': 'wevpn',
-    'privatevpn.com': 'privatevpn', 'nordlynx': 'nordvpn',
+    'privatevpn.com': 'privatevpn', 'nordlynx': 'nordvpn', 'twojevod.pl': 'twojevod',
 }
 
 PROVIDER_PRETTY = {
     'mullvad': 'Mullvad VPN', 'nordvpn': 'NordVPN', 'protonvpn': 'ProtonVPN',
     'expressvpn': 'ExpressVPN', 'surfshark': 'Surfshark VPN', 'ipvanish': 'IPVanish VPN',
-    'cyberghost': 'CyberGhost VPN', 'ovpn': 'OVPN'
+    'cyberghost': 'CyberGhost VPN', 'ovpn': 'OVPN', 'twojevod': 'TwojeVOD VPN'
 }
 
 def _run(cmd):
