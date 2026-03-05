@@ -58,6 +58,7 @@ import json
 import time
 import traceback
 import threading
+import types
 import xml.etree.ElementTree as _ET
 from datetime import datetime
 from urllib.parse import quote, urlencode
@@ -292,7 +293,11 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, NoSave, ConfigNothing, ConfigInteger, ConfigYesNo, ConfigSelection, ConfigClock, ConfigText
-from enigma import eTimer
+from enigma import eTimer, eActionMap
+try:
+	from Tools import Notifications
+except Exception:
+	Notifications = None
 
 # Utils
 import os
@@ -842,6 +847,69 @@ for _dir in [EMC_BASE, EMC_POSTER, EMC_BACKDROP, EMC_BANNER, EMC_INFOS]:
 		except:
 			pass
 
+PATHS_LOG = "/tmp/GradientFHD_paths.log"
+
+
+def _append_paths_log(source, rows=None):
+	"""Write active scan/cache paths for easier support diagnostics."""
+	try:
+		lines = ["[%s] %s" % (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), source)]
+		for r in (rows or []):
+			lines.append("  - %s" % r)
+		with open(PATHS_LOG, "a+", encoding="utf-8") as lf:
+			lf.write("\n".join(lines) + "\n")
+	except Exception:
+		pass
+
+
+def _normalize_legacy_info_json_names():
+	"""Rename legacy '*.ts.json' / '*.cut.json' style info files to clean '<title>.json'."""
+	renamed = 0
+	removed_dupes = 0
+	try:
+		if not os.path.isdir(EMC_INFOS):
+			return renamed, removed_dupes
+		for fn in os.listdir(EMC_INFOS):
+			if not fn.lower().endswith('.json'):
+				continue
+			stem = os.path.splitext(fn)[0]
+			clean = make_safe_cache_name(stem)
+			if not clean or clean == stem:
+				continue
+			src = os.path.join(EMC_INFOS, fn)
+			dst = os.path.join(EMC_INFOS, clean + '.json')
+			try:
+				if os.path.abspath(src) == os.path.abspath(dst):
+					continue
+			except Exception:
+				pass
+			try:
+				if os.path.exists(dst):
+					# Ziel existiert bereits -> Altdatei entfernen
+					os.remove(src)
+					removed_dupes += 1
+				else:
+					os.rename(src, dst)
+					renamed += 1
+			except Exception:
+				pass
+	except Exception:
+		pass
+	return renamed, removed_dupes
+
+
+_renamed_infos, _removed_info_dupes = (0, 0)
+
+_append_paths_log("MovieScanner init", [
+	"EMC_BASE=%s" % EMC_BASE,
+	"EMC_POSTER=%s" % EMC_POSTER,
+	"EMC_BACKDROP=%s" % EMC_BACKDROP,
+	"EMC_BANNER=%s" % EMC_BANNER,
+	"EMC_INFOS=%s" % EMC_INFOS,
+	"renamed_info_json=%d" % _renamed_infos,
+	"removed_info_json_dupes=%d" % _removed_info_dupes,
+])
+
 # TV-Cache (für EPG)
 
 
@@ -855,6 +923,7 @@ def get_tv_cache_base():
 
 CLEANUP_REPORT = "/tmp/GradientFHD_cleanup_report.txt"
 SCHED_LOG = "/tmp/GradientFHD_cleanup_schedule.log"
+MOVIESCAN_SCHED_LOG = "/tmp/GradientFHD_moviescanner_schedule.log"
 # REPORT_PATH wird dynamisch in EMC_BASE erstellt
 def get_report_path():
 	return os.path.join(get_emc_cache_base(), "scanner_report_%s.txt" % datetime.now().strftime("%Y%m%d_%H%M%S"))
@@ -921,19 +990,121 @@ def count_videos_root_only(path):
 	return total
 
 
+NETWORK_SCAN_ROOTS = ("/media/autofs", "/media/net")
+LOCAL_MOVIE_ROOTS = (DEFAULT_HDD_MOVIE, "/media/usb/movie", "/media/mmc/movie")
+
+
+def _norm_real_path(path):
+	try:
+		return os.path.abspath(os.path.realpath(path))
+	except Exception:
+		try:
+			return os.path.abspath(path)
+		except Exception:
+			return path
+
+
+def _append_unique_dir(paths, seen, candidate):
+	try:
+		if (not candidate) or (not os.path.isdir(candidate)) or is_excluded_dir(candidate):
+			return
+		np = _norm_real_path(candidate)
+		if np in seen:
+			return
+		seen.add(np)
+		paths.append(candidate)
+	except Exception:
+		pass
+
+
+def _is_flat_movie_root(path):
+	np = _norm_real_path(path)
+	for r in LOCAL_MOVIE_ROOTS:
+		if np == _norm_real_path(r):
+			return True
+	return False
+
+
+def _configured_video_dirs():
+	"""Try Enigma2 recording/movie config paths as additional scan start points."""
+	out = []
+	candidates = []
+	try:
+		vd = getattr(getattr(config, 'movielist', None), 'videodirs', None)
+		if vd is not None:
+			val = getattr(vd, 'value', None)
+			if isinstance(val, (list, tuple)):
+				candidates.extend([x for x in val if isinstance(x, str)])
+	except Exception:
+		pass
+	try:
+		last_videodir = getattr(getattr(config, 'movielist', None), 'last_videodir', None)
+		if last_videodir is not None:
+			val = getattr(last_videodir, 'value', None)
+			if isinstance(val, str) and val:
+				candidates.append(val)
+	except Exception:
+		pass
+	for p in candidates:
+		try:
+			if isinstance(p, str) and p and os.path.isdir(p):
+				out.append(p)
+		except Exception:
+			pass
+	return out
+
+
+def _add_children(paths, seen, base):
+	"""Add first-level child folders of base (no recursion here)."""
+	for name in listdir_filtered(base):
+		p = os.path.join(base, name)
+		if os.path.isdir(p) and (not is_excluded_dir(p)):
+			_append_unique_dir(paths, seen, p)
+
+
 def scan_start_points():
+	"""
+	Build selectable scan roots.
+
+	Legacy behavior is kept (/media/hdd/movie + subdirs), but we additionally
+	support NAS/autofs structures like:
+	  /media/autofs/DISKSTATION/Filme
+	and configured movielist video dirs.
+	"""
 	roots = []
-	if os.path.isdir(DEFAULT_HDD_MOVIE):
-		roots.append(DEFAULT_HDD_MOVIE)
-		for name in listdir_filtered(DEFAULT_HDD_MOVIE):
-			p = os.path.join(DEFAULT_HDD_MOVIE, name)
-			if os.path.isdir(p) and (not is_excluded_dir(p)):
-				roots.append(p)
+	seen = set()
+
+	# 1) Known local movie roots (legacy + common alternatives)
+	for base in LOCAL_MOVIE_ROOTS:
+		if os.path.isdir(base):
+			_append_unique_dir(roots, seen, base)
+			_add_children(roots, seen, base)
+
+	# 2) Explicitly configured movie/recording dirs from Enigma2 config
+	for p in _configured_video_dirs():
+		_append_unique_dir(roots, seen, p)
+		# If this is a movie root, expose its direct subfolders as selectable items
+		if _is_flat_movie_root(p):
+			_add_children(roots, seen, p)
+
+	# 3) Network automount roots (/media/autofs, /media/net)
+	#    Add host/share level and one level below, so users can select either
+	#    the complete share or a dedicated movie folder (e.g. .../Filme).
+	for net_root in NETWORK_SCAN_ROOTS:
+		if not os.path.isdir(net_root):
+			continue
+		for host_or_share in listdir_filtered(net_root):
+			host_path = os.path.join(net_root, host_or_share)
+			if not os.path.isdir(host_path) or is_excluded_dir(host_path):
+				continue
+			_append_unique_dir(roots, seen, host_path)
+			_add_children(roots, seen, host_path)
+
 	return roots
 
 
 def nice_folder_label(path):
-	is_root_movie = os.path.abspath(path) == os.path.abspath(DEFAULT_HDD_MOVIE)
+	is_root_movie = _is_flat_movie_root(path)
 	base = os.path.basename(os.path.normpath(path)) or path
 	if is_root_movie:
 		cnt = count_videos_root_only(path)
@@ -977,6 +1148,121 @@ def split_camel_case(s):
 	return re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', s)
 
 
+# Suffixe/Sidecars, die manchmal fälschlich im Titel landen (z.B. nach Schnitt)
+KNOWN_TITLE_SUFFIXES = (
+	".ts", ".mkv", ".avi", ".mp4", ".m4v", ".mpg", ".mpeg", ".mov", ".wmv", ".flv", ".stream", ".iso",
+	".cut", ".cuts", ".meta", ".eit", ".ap", ".sc", ".del", ".tmp"
+)
+
+
+def _fix_mojibake_text(s):
+	"""Heuristisch typische UTF-8/Latin1-Mojibake reparieren (z.B. "zurÃ¼ck" -> "zurück")."""
+	if not s:
+		return s
+	try:
+		t = str(s)
+	except Exception:
+		return s
+	try:
+		bad_before = t.count("Ã") + t.count("Â")
+		if bad_before <= 0:
+			return t
+		for enc in ("latin-1", "cp1252"):
+			try:
+				cand = t.encode(enc, "ignore").decode("utf-8", "ignore")
+			except Exception:
+				continue
+			if not cand:
+				continue
+			bad_after = cand.count("Ã") + cand.count("Â")
+			if bad_after < bad_before:
+				t = cand
+				break
+	except Exception:
+		pass
+	return t
+
+
+def _strip_known_title_suffixes(s):
+	"""Entfernt am Ende angehängte Dateisuffixe mehrfach (z.B. '.ts', '.cut', '.meta')."""
+	if not s:
+		return s
+	try:
+		t = str(s).strip()
+	except Exception:
+		return s
+	# mehrfach entfernen, falls z.B. '.ts.meta' im Titel landet
+	for _ in range(4):
+		low = t.lower().rstrip()
+		changed = False
+		for ext in KNOWN_TITLE_SUFFIXES:
+			if low.endswith(ext):
+				t = t[:len(t) - len(ext)].rstrip(" ._-")
+				changed = True
+				break
+		if not changed:
+			break
+	return t
+
+
+def _extract_trailing_year(s):
+	"""Extrahiert ein Jahr, wenn es am Ende steht, und liefert (title_without_year, year_or_None)."""
+	if not s:
+		return s, None
+	try:
+		t = str(s).strip()
+	except Exception:
+		return s, None
+
+	# ... (2024) / ... [2024]
+	m = re.match(r'^(.*?)\s*[\(\[]((?:19|20)\d{2})[\)\]]\s*$', t)
+	if m:
+		return (m.group(1).strip() or t), m.group(2)
+
+	# ... 2024 / ...-2024
+	m = re.match(r'^(.*?)\s*[-_. ]\s*((?:19|20)\d{2})\s*$', t)
+	if m:
+		try:
+			y = int(m.group(2))
+			if 1900 <= y <= datetime.now().year + 1:
+				return (m.group(1).strip() or t), m.group(2)
+		except Exception:
+			pass
+	return t, None
+
+
+def make_safe_cache_name(title, fallback_stem=None):
+	"""Einheitlicher Safe-Name für Cache-Dateien (ohne versehentliches '.ts')."""
+	t = title or ""
+	if t:
+		t = _fix_mojibake_text(t)
+		t = t.replace("\xc2\x86", "").replace("\xc2\x87", "")
+		t = t.replace("Â\x86", "").replace("Â\x87", "")
+		t = re.sub(r'\s+', ' ', t.replace('_', ' ')).strip()
+		t = _strip_known_title_suffixes(t)
+		t = re.sub(r'[\\/:"*?<>|]+', '', t).strip()
+		t = _strip_known_title_suffixes(t)
+		t = re.sub(r'\s+', ' ', t).strip(' .')
+	if (not t) and fallback_stem:
+		f = os.path.splitext(os.path.basename(fallback_stem))[0]
+		f = _strip_known_title_suffixes(_fix_mojibake_text(f or ""))
+		f = re.sub(r'[\\/:"*?<>|]+', '', f).strip()
+		t = f or ""
+	return t
+
+
+# Late init: now helper functions are available
+try:
+	_renamed_infos, _removed_info_dupes = _normalize_legacy_info_json_names()
+	if _renamed_infos or _removed_info_dupes:
+		_append_paths_log("MovieScanner legacy-info-normalize", [
+			"renamed_info_json=%d" % _renamed_infos,
+			"removed_info_json_dupes=%d" % _removed_info_dupes,
+		])
+except Exception:
+	pass
+
+
 PREFIX_RX = re.compile(
 	r'^\s*(\d{4,8}\s+\d{3,4}\s*[-–]\s*)?'
 	r'([A-Za-z0-9_+ÄÖÜäöüß\. ]{2,}?\s+(HD|FHD|SD)\s*(DE)?(\s*\[ \+ \])?\s*[-–]\s*)?',
@@ -989,6 +1275,8 @@ def clean_title_from_filename(name, fullpath=None):
 	Liefert (title, year) aus Dateiname/Meta.
 	Entfernt Kanal-/Zeit-Vorspänne und gängige Tags.
 	"""
+	year = None
+
 	# 1) E2 .meta bevorzugen
 	if fullpath:
 		try:
@@ -996,13 +1284,20 @@ def clean_title_from_filename(name, fullpath=None):
 		except Exception:
 			mt = None
 		if mt:
-			t = re.sub(r"\s+", " ", mt.replace("_", " ")).strip()
+			t = _fix_mojibake_text(mt)
+			t = re.sub(r"\s+", " ", str(t).replace("_", " ")).strip()
 			t = re.sub(r'\[[^\]]*\]', ' ', t)
-			my = re.search(r"(19|20)\d{2}", t)
-			year = my.group(0) if my else None
-			return t, year
+			t = _strip_known_title_suffixes(t)
+			t = re.sub(r'\s+', ' ', t).strip()
+			t, y2 = _extract_trailing_year(t)
+			if y2:
+				year = y2
+			if t:
+				return t, year
 
 	base = os.path.splitext(name)[0]
+	base = _fix_mojibake_text(base)
+	base = _strip_known_title_suffixes(base)
 	base = base.replace("_", " ").replace(".", " ")
 	base = re.sub(r'^\s*(\d{3,4}(?:\s+\d{3,4}){0,2}\s*)', ' ', base)  # "0306 0217"
 	base = re.sub(r'^\s*(?:(?:sky|spiegel|history|nat\s*geo|disney|kinowelt|cinema|premiere|premieren|sat\s*1|rtl|zdf|orf|ard|vox|pro\s*7|sci|syfy|hd|fhd|uhd|de|vip)(?:[^\w]+|\b))+', ' ', base, flags=re.I)
@@ -1013,11 +1308,16 @@ def clean_title_from_filename(name, fullpath=None):
 		pass
 	base = re.sub(r'\s+', ' ', base).strip()
 
-	year = None
-	m_last_year = re.search(r'(.+?)\s*\(((?:19|20)\d{2})\)\s*$', base)
-	if m_last_year:
-		base = m_last_year.group(1).strip()
-		year = m_last_year.group(2)
+	# Jahr am Ende erkennen: "Titel (2024)" oder "Titel 2024"
+	base, y2 = _extract_trailing_year(base)
+	if y2:
+		year = y2
+
+	if not year:
+		m_last_year = re.search(r'(.+?)\s*\(((?:19|20)\d{2})\)\s*$', base)
+		if m_last_year:
+			base = m_last_year.group(1).strip()
+			year = m_last_year.group(2)
 
 	STOP = ('sky', 'cinema', 'premiere', 'premieren', 'fhd', 'hd', 'de', 'vip', 'kinowelt', 'tv', 'spiegel', 'history', 'nat', 'geo', 'disney', 'rtl', 'sat', 'pro', 'vox', 'arte', 'zdf', 'orf', 'srf', 'one', 'syfy')
 	low = base.lower()
@@ -1029,11 +1329,11 @@ def clean_title_from_filename(name, fullpath=None):
 					base = tail
 					break
 
+	base = _strip_known_title_suffixes(base)
 	base = re.sub(r'\s+', ' ', base).strip()
 
 	if year:
 		try:
-			from datetime import datetime
 			y = int(year)
 			if y < 1900 or y > datetime.now().year + 1:
 				year = None
@@ -1042,6 +1342,8 @@ def clean_title_from_filename(name, fullpath=None):
 
 	if not base:
 		base = os.path.splitext(name)[0]
+	base = _strip_known_title_suffixes(_fix_mojibake_text(base))
+	base = re.sub(r'\s+', ' ', base).strip()
 	return base, year
 
 
@@ -1097,6 +1399,21 @@ if not hasattr(config.plugins.GradientFHD, 'scanner'):
 if not hasattr(config.plugins.GradientFHD.scanner, 'cleanup'):
 	config.plugins.GradientFHD.scanner.cleanup = ConfigSubsection()
 C = config.plugins.GradientFHD.scanner.cleanup
+AS = config.plugins.GradientFHD.scanner
+
+# Migrate legacy MovieScanner auto-scan settings from cleanup.* to scanner.*
+_legacy_auto_scan_enabled = None
+_legacy_auto_scan_time = None
+try:
+	if hasattr(C, 'auto_scan_enabled'):
+		_legacy_auto_scan_enabled = bool(AS.auto_scan_enabled.value)
+except Exception:
+	_legacy_auto_scan_enabled = None
+try:
+	if hasattr(C, 'auto_scan_time'):
+		_legacy_auto_scan_time = C.auto_scan_time.value
+except Exception:
+	_legacy_auto_scan_time = None
 
 # Persist selected scan paths (EMC/movie)
 if not hasattr(config.plugins.GradientFHD.scanner, 'movie_paths'):
@@ -1192,6 +1509,12 @@ C.size_emc_gb_preset = ConfigSelection(default='0', choices=[
 C.auto_enabled = _ensure_yesno('auto_enabled', False)
 C.auto_time = _ensure_clock('auto_time', 3 * 3600 + 30 * 60)  # 03:30
 
+# MovieScanner Auto-Scan (sauber getrennt unter scanner.*)
+if not hasattr(AS, 'auto_scan_enabled'):
+	AS.auto_scan_enabled = ConfigYesNo(default=bool(_legacy_auto_scan_enabled) if _legacy_auto_scan_enabled is not None else False)
+if not hasattr(AS, 'auto_scan_time'):
+	AS.auto_scan_time = ConfigClock(default=_legacy_auto_scan_time if _legacy_auto_scan_time is not None else (4 * 3600 + 30 * 60))
+
 
 def _limit_bytes(gb_preset):
 	try:
@@ -1204,6 +1527,7 @@ def _limit_bytes(gb_preset):
 def build_title_candidates(title, mtype=None):
 	import re as _re
 	t = (title or '').strip()
+	t = _strip_known_title_suffixes(_fix_mojibake_text(t))
 	cands = []
 	if not t:
 		return cands
@@ -1214,6 +1538,10 @@ def build_title_candidates(title, mtype=None):
 	t2 = _re.sub(r'\([^\)]*\)$', ' ', t2).strip(' -:– ')
 	if t2 and t2 not in cands:
 		cands.append(t2)
+	# Variante ohne angehängtes Jahr ("Titel 2024" -> "Titel")
+	t3, _y3 = _extract_trailing_year(t2)
+	if t3 and t3 not in cands:
+		cands.append(t3)
 	parts = _re.split(r'\s*[\-:–]\s*', t2)
 	if len(parts) >= 2:
 		first = parts[0].strip(); last = parts[-1].strip(); mid = ' '.join(parts[:-1]).strip()
@@ -1265,6 +1593,550 @@ def build_title_candidates(title, mtype=None):
 # ===== MovieScannerMain (GRÜN = Suchlauf) =====
 
 
+
+def _ms_notify(text, timeout=6, mtype=None):
+	try:
+		if Notifications is None:
+			return
+		if mtype is None:
+			mtype = MessageBox.TYPE_INFO
+		if hasattr(Notifications, 'AddPopup'):
+			Notifications.AddPopup(text, mtype, int(timeout))
+		else:
+			Notifications.AddNotification(MessageBox, text, type=mtype, timeout=int(timeout))
+	except Exception:
+		pass
+
+
+class MovieScannerStatusOSD(Screen):
+	skin = """
+        <screen name="MovieScannerStatusOSD" position="10,10" size="1160,90" backgroundColor="#80000000" cornerRadius="20" flags="wfNoBorder" zPosition="999">
+			<widget name="current" position="20,4" size="1120,32" font="Gradient_Font; 27" foregroundColor="green" backgroundColor="background" transparent="1" valign="center" borderWidth="1" borderColor="black" />
+			<widget name="progress" position="20,40" size="1120,10" foregroundColor="yellow" borderColor="yellow" borderWidth="2" backgroundColor="black" />
+			<widget name="status" position="20,54" size="1120,32" font="Gradient_Font; 27" foregroundColor="white" backgroundColor="background" transparent="1" borderWidth="1" borderColor="black" />
+		</screen>
+	"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self["progress"] = ProgressBar()
+		self["progress"].setRange((0, 100))
+		self["progress"].setValue(0)
+		self["status"] = Label("")
+		self["current"] = Label("")
+
+	def updateState(self, current_text, status_text, percent):
+		try:
+			self["current"].setText(current_text or "")
+		except Exception:
+			pass
+		try:
+			self["status"].setText(status_text or "")
+		except Exception:
+			pass
+		try:
+			p = int(percent or 0)
+			if p < 0:
+				p = 0
+			elif p > 100:
+				p = 100
+			self["progress"].setValue(p)
+		except Exception:
+			pass
+
+
+class MovieScannerEngine(object):
+	def __init__(self, owner_screen):
+		self.owner_screen = owner_screen
+		self.session = owner_screen.session
+		self.stop_flag = False
+		self.stats = {"total": 0, "done": 0, "ok": 0, "skipped": 0, "err": 0, "poster": 0, "backdrop": 0, "banner": 0}
+		self._hint_base = getattr(owner_screen, "_hint_base", "") or ""
+		self._has_current_widget = bool(getattr(owner_screen, "_has_current_widget", False))
+		self.current_line = ""
+		for _name in (
+			"_worker", "_download_image", "_try_tmdb", "_try_tvdb", "_try_tvdb_legacy",
+			"_try_omdb_poster", "_try_fanart_banner", "_copyPosterToRecording",
+			"_try_tvdb_banner", "_try_tvdb_legacy_banner"
+		):
+			setattr(self, _name, types.MethodType(getattr(MovieScannerMain, _name), self))
+
+	def status_line(self):
+		return "Gesamt: %(total)d  Fertig: %(done)d  Poster: %(poster)d  Backdrop: %(backdrop)d  Banner: %(banner)d  Skip: %(skipped)d  Err: %(err)d" % self.stats
+
+	def percent(self):
+		total = int(self.stats.get("total", 0) or 0)
+		if total <= 0:
+			return 0
+		done = int(self.stats.get("done", 0) or 0)
+		return int(done * 100.0 / max(total, 1))
+
+	def _visible_screen(self):
+		return getattr(MOVIESCAN_WATCHER, "screen", None)
+
+	def _apply_to_visible_screen(self):
+		scr = self._visible_screen()
+		if scr is None:
+			return
+		try:
+			scr["progress"].setValue(self.percent())
+		except Exception:
+			pass
+		try:
+			scr["status"].setText(self.status_line())
+		except Exception:
+			pass
+		try:
+			scr["current"].setText(self.current_line or "")
+		except Exception:
+			pass
+		try:
+			if not getattr(scr, "_has_current_widget", False):
+				if self.current_line and self._hint_base:
+					scr["hint"].setText(self.current_line + ("\n\n" + self._hint_base))
+				elif self.current_line:
+					scr["hint"].setText(self.current_line)
+				else:
+					scr["hint"].setText(self._hint_base)
+		except Exception:
+			pass
+
+	def _ui_set_current(self, text, idx):
+		total = max(int(self.stats.get("total", 0) or 0), 0)
+		prefix = _t("Aktuell", "Current")
+		counter = (" (%d/%d)" % (idx, total)) if total else (" (%d)" % idx)
+		self.current_line = "%s: %s%s" % (prefix, text, counter)
+		MOVIESCAN_WATCHER.update_views()
+
+	def _ui_progress(self):
+		MOVIESCAN_WATCHER.update_views()
+
+	def _apply_finish_to_visible_screen(self):
+		scr = self._visible_screen()
+		if scr is None:
+			return
+		if self.stop_flag:
+			msg = _t("Abgebrochen.", "Aborted.")
+		else:
+			msg = _t("Fertig. Report: %s", "Done. Report: %s") % REPORT_PATH
+		try:
+			scr["info"].setText(msg)
+		except Exception:
+			pass
+		try:
+			scr["status"].setText(self.status_line())
+		except Exception:
+			pass
+		try:
+			scr["hint"].setText(msg + ("\n\n" + self._hint_base if self._hint_base else ""))
+		except Exception:
+			pass
+		try:
+			scr["current"].setText("")
+		except Exception:
+			pass
+		try:
+			scr["progress"].setValue(self.percent())
+		except Exception:
+			pass
+
+	def _ui_finish(self):
+		MOVIESCAN_WATCHER.finish(stopped=bool(self.stop_flag))
+
+
+class MovieScannerRunController(object):
+	EXIT_DEBOUNCE = 0.35
+	RED_DEBOUNCE = 0.25
+
+	def __init__(self):
+		self.running = False
+		self.session = None
+		self.screen = None
+		self.engine = None
+		self.scan_thread = None
+		self.osd = None
+		self.osd_visible = False
+		self._hooked = False
+		self._last_exit_ts = 0.0
+		self._last_red_ts = 0.0
+		self._stop_box_open = False
+		self.scheduled_run = False
+
+	def _action_allowed(self):
+		try:
+			dlg = getattr(self.session, "current_dialog", None)
+		except Exception:
+			dlg = None
+		if dlg is None:
+			return False
+		try:
+			nm = dlg.__class__.__name__ or ""
+		except Exception:
+			nm = ""
+		return nm.startswith("InfoBar") or nm == "InfoBar"
+
+	def _is_exit_action(self, args):
+		for a in args:
+			if isinstance(a, str) and a in ("cancel", "exit", "hide"):
+				return True
+		for a in args:
+			if isinstance(a, int) and a in (0xAE, 174):
+				return True
+		return False
+
+	def _is_red_action(self, args):
+		for a in args:
+			if isinstance(a, str) and a == "red":
+				return True
+		return False
+
+	def _on_global_action(self, *args, **kwargs):
+		if not self.running or self.session is None:
+			return 0
+		if not self._action_allowed():
+			return 0
+		now = time.time()
+		if self._is_red_action(args):
+			if self._last_red_ts and (now - self._last_red_ts) < self.RED_DEBOUNCE:
+				return 0
+			self._last_red_ts = now
+			if self.osd_visible and self.screen is None:
+					# In hidden LiveTV mode, RED should do nothing.
+					return 0
+			return 0
+		if self._is_exit_action(args):
+			if self._last_exit_ts and (now - self._last_exit_ts) < self.EXIT_DEBOUNCE:
+				return 0
+			self._last_exit_ts = now
+			if self.screen is None and self.osd_visible:
+					# In LiveTV with OSD visible, EXIT should stop the scan and close everything.
+					self.stop_and_close_all()
+			return 0
+		return 0
+
+	def _hook_global_actions(self):
+		if self._hooked:
+			return
+		for ctx in ("OkCancelActions", "InfobarShowHideActions", "ColorActions"):
+			try:
+				eActionMap.getInstance().bindAction(ctx, -0x7FFFFFFF, self._on_global_action)
+				self._hooked = True
+			except Exception:
+				pass
+
+	def attach_screen(self, screen):
+		try:
+			self.session = screen.session
+		except Exception:
+			pass
+		self.screen = screen
+		if self.running and self.engine is not None:
+			try:
+				screen.scan_thread = self.scan_thread
+			except Exception:
+				pass
+			self._close_osd()
+			self.engine._apply_to_visible_screen()
+
+	def start(self, screen, files):
+		self.session = screen.session
+		self.screen = screen
+		self.engine = MovieScannerEngine(screen)
+		self.engine.stats["total"] = len(files)
+		self.running = True
+		self.scheduled_run = False
+		self._hook_global_actions()
+		self._close_osd()
+		self.scan_thread = threading.Thread(target=self.engine._worker, args=(files,))
+		self.scan_thread.daemon = True
+		self.scan_thread.start()
+		try:
+			screen.scan_thread = self.scan_thread
+		except Exception:
+			pass
+
+	def start_background(self, session, files, show_osd=True, scheduled=False):
+		if self.running:
+			return False
+		class _BgOwner(object):
+			pass
+		owner = _BgOwner()
+		owner.session = session
+		owner._hint_base = ""
+		owner._has_current_widget = False
+		self.session = session
+		self.screen = None
+		self.engine = MovieScannerEngine(owner)
+		self.engine.stats["total"] = len(files)
+		self.running = True
+		self.scheduled_run = bool(scheduled)
+		self._hook_global_actions()
+		self._close_osd()
+		if show_osd:
+			self._ensure_osd()
+		self.scan_thread = threading.Thread(target=self.engine._worker, args=(files,))
+		self.scan_thread.daemon = True
+		self.scan_thread.start()
+		return True
+
+	def _close_osd(self):
+		try:
+			if self.osd is not None:
+				self.osd.hide()
+		except Exception:
+			pass
+		try:
+			if self.osd is not None:
+				self.osd.close()
+		except Exception:
+			pass
+		self.osd = None
+		self.osd_visible = False
+
+	def _ensure_osd(self):
+		if not self.running or self.session is None or self.engine is None:
+			return
+		if self.osd is None:
+			try:
+				self.osd = self.session.instantiateDialog(MovieScannerStatusOSD)
+			except Exception:
+				self.osd = None
+		if self.osd is not None:
+			try:
+				self.osd.show()
+			except Exception:
+				pass
+			self.osd_visible = True
+			self._refresh_osd()
+
+	def _refresh_osd(self):
+		if self.osd is None or self.engine is None:
+			return
+		try:
+			self.osd.updateState(self.engine.current_line, self.engine.status_line(), self.engine.percent())
+		except Exception:
+			pass
+
+	def show_osd_parallel(self):
+		if not self.running or self.engine is None:
+			return
+		self._ensure_osd()
+
+	def close_osd_only(self):
+		self._close_osd()
+
+	def stop_and_close_all(self):
+		if not self.running:
+			return
+		self.request_stop()
+		self._close_osd()
+		self.screen = None
+		self._close_to_livetv()
+
+	def _close_to_livetv(self):
+		"""Close dialogs until we are back on InfoBar/LiveTV (robust async).
+
+		Certain dialog chains (ExtensionsMenu -> Plugin) don't pop synchronously in a tight loop.
+		We therefore close ONE dialog per timer tick until InfoBar becomes current_dialog.
+		"""
+		if self.session is None:
+			return
+		try:
+			from enigma import eTimer
+		except Exception:
+			eTimer = None
+
+		# Fallback: best-effort sync loop
+		if eTimer is None:
+			for _i in range(96):
+				try:
+					dlg = getattr(self.session, "current_dialog", None)
+				except Exception:
+					dlg = None
+				if dlg is None:
+					break
+				try:
+					nm = dlg.__class__.__name__ or ""
+				except Exception:
+					nm = ""
+				if ("InfoBar" in nm) or nm == "InfoBar":
+					break
+				try:
+					dlg.close()
+				except Exception:
+					try:
+						self.session.close(dlg)
+					except Exception:
+						break
+			return
+
+		# Async: close step-by-step
+		try:
+			if getattr(self, "_livetv_close_timer", None) is None:
+				self._livetv_close_timer = eTimer()
+				try:
+					self._livetv_close_timer.callback.append(self._close_to_livetv_step)
+				except Exception:
+					self._livetv_close_timer_conn = self._livetv_close_timer.timeout.connect(self._close_to_livetv_step)
+		except Exception:
+			return
+
+		self._livetv_close_steps_left = 96
+		try:
+			self._livetv_close_timer.start(10, True)
+		except Exception:
+			pass
+
+	def _close_to_livetv_step(self):
+		try:
+			steps = int(getattr(self, "_livetv_close_steps_left", 0))
+		except Exception:
+			steps = 0
+		if steps <= 0:
+			return
+		self._livetv_close_steps_left = steps - 1
+
+		try:
+			dlg = getattr(self.session, "current_dialog", None)
+		except Exception:
+			dlg = None
+		if dlg is None:
+			return
+		try:
+			nm = dlg.__class__.__name__ or ""
+		except Exception:
+			nm = ""
+		if ("InfoBar" in nm) or nm == "InfoBar":
+			return
+
+		try:
+			dlg.close()
+		except Exception:
+			try:
+				self.session.close(dlg)
+			except Exception:
+				return
+
+		try:
+			self._livetv_close_timer.start(10, True)
+		except Exception:
+			pass
+
+	def hide_to_livetv(self):
+		if not self.running or self.engine is None:
+			return
+		# Close the MovieScanner dialog itself first, then unwind dialog stack to InfoBar.
+		try:
+			if self.screen is not None:
+				self.screen.close()
+		except Exception:
+			pass
+		self.screen = None
+		self._ensure_osd()
+		self._close_to_livetv()
+
+	def hide_to_osd(self):
+		if not self.running or self.engine is None:
+			return
+		self.screen = None
+		self._ensure_osd()
+
+	def reopen_main(self):
+		if not self.running or self.session is None:
+			return
+		if self.screen is not None:
+			return
+		self._close_osd()
+		try:
+			self.session.open(MovieScannerMain)
+		except Exception:
+			pass
+
+	def update_views(self):
+		if not self.running or self.engine is None:
+			return
+		if self.osd_visible:
+			self._refresh_osd()
+		else:
+			self.engine._apply_to_visible_screen()
+
+	def request_stop(self):
+		if self.engine is not None:
+			self.engine.stop_flag = True
+		self.update_views()
+
+	def ask_stop(self):
+		if self._stop_box_open or self.session is None:
+			return
+		self._stop_box_open = True
+
+		def _cb(ans):
+			self._stop_box_open = False
+			if ans:
+				self.request_stop()
+
+		def _open():
+			try:
+				self.session.openWithCallback(
+					_cb,
+					MessageBox,
+					_t("MovieScanner wirklich stoppen?", "Really stop MovieScanner?"),
+					type=MessageBox.TYPE_YESNO,
+					default=False
+				)
+			except Exception:
+				self._stop_box_open = False
+
+		try:
+			t = eTimer()
+			t.callback.append(_open)
+			t.start(50, True)
+			self._stop_prompt_timer = t
+		except Exception:
+			_open()
+
+	def _write_schedule_result(self, stopped=False):
+		if not getattr(self, "scheduled_run", False):
+			return
+		try:
+			ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+			state = 'aborted' if stopped else 'finished'
+			result = ''
+			if self.engine is not None:
+				result = self.engine.status_line()
+			with open(MOVIESCAN_SCHED_LOG, 'a') as f:
+				f.write('[%s] scheduled moviescan %s: %s\n' % (ts, state, result))
+		except Exception:
+			pass
+
+	def finish(self, stopped=False):
+		if not self.running:
+			return
+		self.running = False
+		self._close_osd()
+		try:
+			if self.engine is not None:
+				self.engine._apply_finish_to_visible_screen()
+		except Exception:
+			pass
+		self._write_schedule_result(stopped=bool(stopped))
+		txt = ("Suchlauf abgebrochen  |  " if stopped else "Suchlauf beendet  |  ")
+		if self.engine is not None:
+			txt += self.engine.status_line()
+		_ms_notify(txt, timeout=6)
+		try:
+			if self.screen is not None:
+				self.screen["key_red"].setText(_t("Schließen", "Close"))
+		except Exception:
+			pass
+		self.screen = None
+		self.scan_thread = None
+		self.engine = None
+		self.scheduled_run = False
+
+MOVIESCAN_WATCHER = MovieScannerRunController()
+
+
 class MovieScannerMain(Screen):
 	skin = """
     <screen name="GradientFHD_MovieScannerMain" position="center,center" size="1160,860" title="GradientDB - Movie Scanner" backgroundColor="transparent" flags="wfNoBorder">
@@ -1312,14 +2184,14 @@ class MovieScannerMain(Screen):
 		self["key_red"] = Label(_("Schließen"))
 		self["key_green"] = Label(_("Suchlauf"))
 		self["key_yellow"] = Label(_("Info"))
-		self["key_blue"] = Label(_t("Cache-Verwaltung", "Cache management"))
+		self["key_blue"] = Label(_t("Einstellungen", "Settings"))
 		self["progress"] = ProgressBar()
 		self["progress"].setRange((0, 100))
 		self["progress"].setValue(0)
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "InfobarActions"], {
-			"cancel": self.close,
-			"red": self.close,
+			"cancel": self.keyExitScreen,
+			"red": self.keyRedOsd,
 			"green": self.startScan,
 			"yellow": self.showInfoMain,
 			"blue": self.openAdvancedCleanup,
@@ -1347,6 +2219,10 @@ class MovieScannerMain(Screen):
 		ensure_dirs()
 		self.onLayoutFinish.append(self.populatePaths)
 		self.onLayoutFinish.append(self._detect_current_widget)
+		try:
+			MOVIESCAN_WATCHER.attach_screen(self)
+		except Exception:
+			pass
 
 	def _noop(self): pass
 
@@ -1372,11 +2248,25 @@ class MovieScannerMain(Screen):
 					saved = [x.strip() for x in raw.split(',') if x.strip()]
 		except Exception:
 			saved = []
-		for p in scan_start_points():
+		saved_norm = set([_norm_real_path(p) for p in saved if isinstance(p, str) and p])
+		discovered = scan_start_points()
+		seen_disp = set([_norm_real_path(p) for p in discovered])
+		# Keep previously saved valid paths visible, even if they are currently
+		# not returned by auto-discovery.
+		for sp in saved:
+			try:
+				if isinstance(sp, str) and sp and os.path.isdir(sp):
+					nsp = _norm_real_path(sp)
+					if nsp not in seen_disp:
+						discovered.append(sp)
+						seen_disp.add(nsp)
+			except Exception:
+				pass
+		for p in discovered:
 			label, _cnt = nice_folder_label(p)
 			prechecked = 1 if os.path.isdir(p) else 0
-			if saved:
-				prechecked = 1 if p in saved else 0
+			if saved_norm:
+				prechecked = 1 if _norm_real_path(p) in saved_norm else 0
 			items.append(xtraSelectionEntryComponent("%s" % label, 1, 0, prechecked))
 			self._path_by_row_index[idx] = p
 			idx += 1
@@ -1384,9 +2274,9 @@ class MovieScannerMain(Screen):
 		# Base hint shown below (and reused during scan updates)
 		self._hint_base = _t(
 			"Ordner wählen (OK = an/aus).  Grün startet den Suchlauf.\n"
-			"Während des Suchlaufs wird der aktuell verarbeitete Titel angezeigt.",
+			"ROT blendet aus. Danach ist Live TV sichtbar, OSD läuft weiter.",
 			"Select folders (OK = toggle).  Green starts scanning.\n"
-			"During scanning, the currently processed title is shown."
+			"RED hides the window. Live TV becomes visible and the OSD keeps running."
 		)
 		try:
 			self["hint"].setText(self._hint_base)
@@ -1396,7 +2286,7 @@ class MovieScannerMain(Screen):
 			self["current"].setText("")
 		except Exception:
 			pass
-		self["status"].setText(_t("Blau: Cache-Verwaltung öffnen  •  Grün: Suchlauf starten", "Blue: Open cache management  •  Green: Start scan"))
+		self["status"].setText(_t("Blau: MovieScan-Verwaltung öffnen  •  Grün: Suchlauf starten", "Blue: Open MovieScan-management  •  Green: Start scan"))
 
 
 	def _detect_current_widget(self):
@@ -1410,12 +2300,17 @@ class MovieScannerMain(Screen):
 
 	def _gather_selected_paths(self):
 		sel_paths = []
+		seen = set()
 		try:
 			for idx, item in enumerate(self["paths"].list):
 				row = self["paths"].list[idx][0]
 				checked = row[3]
 				real_path = self._path_by_row_index.get(idx)
 				if checked and real_path and os.path.isdir(real_path):
+					np = _norm_real_path(real_path)
+					if np in seen:
+						continue
+					seen.add(np)
 					sel_paths.append(real_path)
 		except Exception:
 			pass
@@ -1425,11 +2320,38 @@ class MovieScannerMain(Screen):
 		self.session.open(MovieScannerCleanupAdvanced)
 
 	def showInfoMain(self):
+		sel = []
+		try:
+			sel = self._gather_selected_paths()
+		except Exception:
+			sel = []
 		text = build_info_text_emc()
 		self.session.open(MessageBox, text, MessageBox.TYPE_INFO)
 
+	def keyRedOsd(self):
+		try:
+			if MOVIESCAN_WATCHER.running:
+				MOVIESCAN_WATCHER.hide_to_livetv()
+				return
+		except Exception:
+			pass
+		self.close()
+
+	def keyExitScreen(self):
+		try:
+			if MOVIESCAN_WATCHER.running:
+				MOVIESCAN_WATCHER.stop_and_close_all()
+				return
+		except Exception:
+			pass
+		self.close()
+
 	# ===== Suchlauf =====
 	def startScan(self):
+		if MOVIESCAN_WATCHER.running:
+			MOVIESCAN_WATCHER.request_stop()
+			self["status"].setText(_("Abbruch angefordert..."))
+			return
 		if self.scan_thread and self.scan_thread.is_alive():
 			self.stop_flag = True
 			self["status"].setText(_("Abbruch angefordert..."))
@@ -1465,6 +2387,13 @@ class MovieScannerMain(Screen):
 					pf.write('  - %s\n' % ap)
 		except Exception:
 			pass
+		try:
+			_append_paths_log("MovieScanner startScan", [
+				"selected=%s" % ", ".join(sel),
+				"available=%s" % ", ".join(scan_start_points()),
+			])
+		except Exception:
+			pass
 
 		self.stop_flag = False
 		self.stats = {"total": 0, "done": 0, "ok": 0, "skipped": 0, "err": 0, "poster": 0, "backdrop": 0, "banner": 0}
@@ -1472,13 +2401,17 @@ class MovieScannerMain(Screen):
 		self["info"].setText("")
 		self["status"].setText("Gesamt: %(total)d  Fertig: %(done)d  Poster: %(poster)d  Backdrop: %(backdrop)d  Banner: %(banner)d  Skip: %(skipped)d  Err: %(err)d" % self.stats)
 		try:
-			self["hint"].setText(_t("Suche läuft...", "Scan running...") + ("\n\n" + self._hint_base if self._hint_base else ""))
+			run_hint = _t(
+				"Suche läuft...\n\nROT blendet aus. Danach ist Live TV sichtbar, OSD läuft weiter.",
+				"Scan running...\n\nRED hides the window. Live TV becomes visible and the OSD keeps running."
+			)
+			self["hint"].setText(run_hint)
 		except Exception:
 			pass
 
 		files = []
 		for base in sel:
-			if os.path.abspath(base) == os.path.abspath(DEFAULT_HDD_MOVIE):
+			if _is_flat_movie_root(base):
 				try:
 					for f in os.listdir(base):
 						fp = os.path.join(base, f)
@@ -1495,12 +2428,16 @@ class MovieScannerMain(Screen):
 
 		self.stats["total"] = len(files)
 		if not files:
-			self.session.open(MessageBox, _("Keine passenden Dateien gefunden."), MessageBox.TYPE_INFO, timeout=5)
-			return
+				self.session.open(MessageBox, _("Keine passenden Dateien gefunden."), MessageBox.TYPE_INFO, timeout=5)
+				return
 
-		self.scan_thread = threading.Thread(target=self._worker, args=(files,))
-		self.scan_thread.daemon = True
-		self.scan_thread.start()
+		MOVIESCAN_WATCHER.start(self, files)
+		MOVIESCAN_WATCHER.show_osd_parallel()
+		try:
+			self["key_red"].setText(_t("Ausblenden", "Hide"))
+		except Exception:
+			pass
+		self["status"].setText(_t("Suchlauf läuft  •  ROT blendet aus  •  EXIT beendet alles", "Scan running  •  RED hides  •  EXIT stops everything"))
 
 	def _worker(self, files):
 		tmdb_key = get_tmdb_key()
@@ -1531,7 +2468,7 @@ class MovieScannerMain(Screen):
 					if _norm:
 						title_key = _norm
 						title_search = _norm
-				safe_name = re.sub(r'[\\/:"*?<>|]+', '', title_key).strip()
+				safe_name = make_safe_cache_name(title_key, fallback_stem=os.path.splitext(os.path.basename(fp))[0])
 				if not safe_name:
 					safe_name = "item_%d" % idx
 
@@ -1655,7 +2592,7 @@ class MovieScannerMain(Screen):
 
 						# Bereinigter safe_name ohne S##E## / Episode-Suffixe
 						import re as _re_ep
-						_ep_safe = _re_ep.sub(r'[\\/:\"*?<>|]+', '', _ep_series_title).strip()
+						_ep_safe = make_safe_cache_name(_ep_series_title, fallback_stem=os.path.splitext(_fn_base)[0])
 						_ep_format       = _ep_info.get('format', 'unknown')
 
 						# Für "Serie-EpTitel" Format: Geschwister-Dateien analysieren
@@ -3427,7 +4364,7 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 	"""
 
 	skin = """
-    <screen name="MovieScannerCleanupAdvanced" position="center,center" size="1160,860" title="GradientFHD – Cache-Verwaltung" backgroundColor="transparent" flags="wfNoBorder">
+    <screen name="MovieScannerCleanupAdvanced" position="center,center" size="1160,860" title="GradientFHD – MovieScan-Verwaltung" backgroundColor="transparent" flags="wfNoBorder">
         <widget source="Title" render="Label" position="20,0" size="1060,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
         <widget name="config" position="30,90" size="1100,450" itemHeight="45" font="Gradient_Font;30" backgroundColor="gradient_background" scrollbarMode="showOnDemand" transparent="1" />
         <widget name="hint" position="30,570" size="1100,130" font="Gradient_Font;30" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
@@ -3451,10 +4388,10 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.setTitle(_t("GradientFHD – Cache-Verwaltung", "GradientFHD – Cache Management"))
+		self.setTitle(_t("GradientFHD – MovieScan-Verwaltung", "GradientFHD – MovieScan-Management"))
 		self['status'] = Label('')
 		self['hint'] = Label('')
-		self._setlbl('key_red', _t('Schließen', 'Close'))
+		self._setlbl('key_red', _t('Speichern', 'Save'))
 		self._setlbl('key_green', _t('Bereinigen', 'Clean up'))
 		self._setlbl('key_yellow', _t('Vorschau', 'Preview'))
 		self._setlbl('key_blue', _t('Info', 'Info'))
@@ -3474,7 +4411,12 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 			'ok': lambda: None
 		}, -1)
 
+		self._hint_map = []
 		self._rebuild()
+		try:
+			self['config'].onSelectionChanged.append(self._update_hint)
+		except Exception:
+			pass
 		self._update_hint()
 
 	def _setlbl(self, name, text):
@@ -3485,41 +4427,125 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 
 	def _close_and_save(self):
 		try:
+			for x in (self['config'].list or []):
+				try:
+					cfg = x[1] if len(x) > 1 else None
+					if hasattr(cfg, 'save'):
+						cfg.save()
+				except Exception:
+					pass
+		except Exception:
+			pass
+		try:
+			AS.auto_scan_enabled.save()
+		except Exception:
+			pass
+		try:
+			AS.auto_scan_time.save()
+		except Exception:
+			pass
+		try:
 			configfile.save()
+		except Exception:
+			pass
+		try:
+			schedule_cleanup_timer(self.session)
+		except Exception:
+			pass
+		try:
+			schedule_moviescanner_timer(self.session)
 		except Exception:
 			pass
 		self.close()
 
 	def _update_hint(self):
-		self['hint'].setText(_t(
-			"Bereinigung (EMC): Es werden nur Poster/Backdrops/Banner/Infos behalten, "
-			"für die im gesamten Movie-Ordner eine Aufnahme existiert.\n"
-			"Alles andere wird als Cache-Altlast gelöscht.",
-			"Cleanup (EMC): Only posters/backdrops/banners/infos are kept if a matching recording exists "
-			"in the full Movie folder.\n"
-			"Everything else is treated as leftover cache and removed."
-		))
+		idx = 0
+		try:
+			idx = self['config'].getCurrentIndex()
+		except Exception:
+			idx = 0
+		try:
+			text = self._hint_map[idx]
+		except Exception:
+			text = _t(
+				"Cache-Verwaltung: Einstellungen für EMC-Cache, Bereinigung und MovieScanner-Automatik.",
+				"Cache management: settings for EMC cache, cleanup and MovieScanner automation."
+			)
+		try:
+			self['hint'].setText(text)
+		except Exception:
+			pass
 
 	def _rebuild(self):
 		lst = []
+		hints = []
+
 		lst.append(getConfigListEntry(_t('--- EMC Limit ---', '--- EMC Limit ---'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"EMC-Limit: Begrenzt die maximale Größe des EMC-Caches per GB-Vorgabe.",
+			"EMC limit: Restricts the maximum EMC cache size using a GB preset."
+		))
 		lst.append(getConfigListEntry(_t('Max. EMC Cache (GB, Preset)', 'Max. EMC cache (GB preset)'), C.size_emc_gb_preset))
-		lst.append(getConfigListEntry(_t('--- Speicher ---', '--- Storage ---'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"Legt fest, wie groß der EMC-Cache maximal werden darf.",
+			"Defines how large the EMC cache is allowed to grow."
+		))
+
+		lst.append(getConfigListEntry(_t('--- Cover-Kopie ---', '--- Cover Copy ---'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"Cover-Kopie: Zusätzliche Ablage direkt neben der Aufnahme.",
+			"Cover copy: Additional storage directly next to the recording."
+		))
 		lst.append(getConfigListEntry(_t('Poster zusätzlich als Cover neben Aufnahme (nur EMC Cache)', 'Also copy poster as cover next to recording (EMC cache only)'), config.plugins.GradientFHD.scanner.copyPosterToRecording))
+		hints.append(_t(
+			"Speichert das Poster zusätzlich als Coverdatei neben der Aufnahme im EMC-Bereich.",
+			"Also stores the poster as a cover file next to the recording in the EMC area."
+		))
 
-
-		lst.append(getConfigListEntry(_t('--- Automatik ---', '--- Automation ---'), NoSave(ConfigNothing())))
+		lst.append(getConfigListEntry(_t('--- Cache Bereinigung ---', '--- Cache Cleanup ---'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"Automatische Bereinigung des EMC-Caches nach Zeitplan.",
+			"Automatic cleanup of the EMC cache on a schedule."
+		))
 		lst.append(getConfigListEntry(_t('Automatische Bereinigung aktivieren', 'Enable automatic cleanup'), C.auto_enabled))
+		hints.append(_t(
+			"Aktiviert oder deaktiviert die automatische Cache-Bereinigung.",
+			"Enables or disables automatic cache cleanup."
+		))
 		lst.append(getConfigListEntry(_t('Uhrzeit (HH:MM) für zukünftige Terminplanung', 'Time (HH:MM) for scheduled cleanup'), C.auto_time))
-		lst.append(getConfigListEntry(_t('Hinweis: Planung wird beim GUI-Start eingerichtet.', 'Note: schedule is set up on GUI start.'), NoSave(ConfigNothing())))
-		lst.append(getConfigListEntry(_t('Die Box muss an/idle sein.', 'Receiver must be on/idle.'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"Uhrzeit für die automatische Cache-Bereinigung.",
+			"Time used for automatic cache cleanup."
+		))
+
+		lst.append(getConfigListEntry(_t('--- MovieScanner Automatik ---', '--- MovieScanner Automation ---'), NoSave(ConfigNothing())))
+		hints.append(_t(
+			"Automatischer MovieScanner-Suchlauf im Hintergrund.",
+			"Automatic MovieScanner background scan."
+		))
+		lst.append(getConfigListEntry(_t('Automatischen MovieScanner aktivieren', 'Enable automatic MovieScanner'), AS.auto_scan_enabled))
+		hints.append(_t(
+			"Aktiviert oder deaktiviert den automatischen Suchlauf für Aufnahmen.",
+			"Enables or disables the automatic scan for recordings."
+		))
+		lst.append(getConfigListEntry(_t('Uhrzeit (HH:MM) für automatischen Suchlauf', 'Time (HH:MM) for automatic scan'), AS.auto_scan_time))
+		hints.append(_t(
+			"Uhrzeit für den automatischen MovieScanner-Suchlauf.",
+			"Time used for the automatic MovieScanner scan."
+		))
 
 		self._lst = lst
+		self._hint_map = hints
 		self["config"].list = lst
+		try:
+			self["config"].l.setList(lst)
+		except Exception:
+			pass
+		self._update_hint()
 
 	def show_info(self):
 		txt = _t(
-			"Cache-Verwaltung\n\n"
+			"MovieScan-Verwaltung\n\n"
 			"GREEN: Löscht Cache-Dateien (Poster/Backdrop/Banner/Infos), "
 			"für die keine passende Aufnahme im gesamten Movie-Ordner gefunden wird.\n"
 			"YELLOW: Vorschau (ohne Löschen) zeigt die Anzahl, die betroffen wäre.\n\n"
@@ -3585,7 +4611,7 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 							_norm = _normalize_emc_title(title_guess, os.path.splitext(os.path.basename(fp))[0])
 							if _norm:
 								title_key = _norm
-						safe_name = re.sub(r'[\\\\/:"*?<>|]+', '', (title_key or '')).strip()
+						safe_name = make_safe_cache_name(title_key, fallback_stem=os.path.splitext(fn)[0])
 						if not safe_name:
 							safe_name = os.path.splitext(fn)[0].strip()
 						if safe_name:
@@ -3616,16 +4642,29 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 		return items
 
 	def _cleanup_orphan_cache(self, do_delete=False):
-		# Always use full Movie root for matching (user request)
-		paths = []
-		try:
-			if os.path.isdir(DEFAULT_HDD_MOVIE):
-				paths = [DEFAULT_HDD_MOVIE]
-		except Exception:
-			paths = []
-		# Fallback to selected paths only if movie root is not available
+		# Use selected/discovered scan paths for matching so NAS/autofs recordings
+		# are considered as well.
+		paths = self._load_selected_movie_paths()
 		if not paths:
-			paths = self._load_selected_movie_paths()
+			# legacy fallback
+			try:
+				if os.path.isdir(DEFAULT_HDD_MOVIE):
+					paths = [DEFAULT_HDD_MOVIE]
+			except Exception:
+				paths = []
+		# dedupe
+		_u = []
+		_s = set()
+		for p in (paths or []):
+			try:
+				np = _norm_real_path(p)
+				if np in _s:
+					continue
+				_s.add(np)
+				_u.append(p)
+			except Exception:
+				pass
+		paths = _u
 
 		keep = self._collect_recording_safe_names(paths)
 		cache_items = self._collect_cache_items()
@@ -3715,7 +4754,7 @@ class MovieScannerCleanupTimer(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.session = session
-		self.setTitle(_t("GradientFHD – Cache Timer", "GradientFHD – Cache Timer"))
+		self.setTitle(_t("GradientFHD – MovieScanner Automatik", "GradientFHD – MovieScanner Automation"))
 
 		self['status'] = Label('')
 		self._setlbl('key_red', _t('Schließen', 'Close'))
@@ -3751,10 +4790,11 @@ class MovieScannerCleanupTimer(Screen, ConfigListScreen):
 
 	def _rebuild(self):
 		lst = []
-		lst.append(getConfigListEntry(_t('Automatische Bereinigung aktivieren', 'Enable automatic cleanup'), C.auto_enabled))
-		lst.append(getConfigListEntry(_('Uhrzeit (HH:MM)'), C.auto_time))
-		lst.append(getConfigListEntry(_t('Hinweis: Planung wird beim GUI-Start eingerichtet.', 'Note: schedule is set up on GUI start.'), NoSave(ConfigNothing())))
-		lst.append(getConfigListEntry(_t('Die Box muss an/idle sein.', 'Receiver must be on/idle.'), NoSave(ConfigNothing())))
+		lst.append(getConfigListEntry(_t('Automatischen MovieScanner aktivieren', 'Enable automatic MovieScanner'), AS.auto_scan_enabled))
+		lst.append(getConfigListEntry(_t('Uhrzeit (HH:MM) für automatischen Suchlauf', 'Time (HH:MM) for automatic scan'), AS.auto_scan_time))
+		lst.append(getConfigListEntry(_t('Hinweis: Einstellungen werden sofort gespeichert und zusätzlich beim GUI-Start neu eingeplant.', 'Note: settings are saved immediately and also re-scheduled on GUI start.'), NoSave(ConfigNothing())))
+		lst.append(getConfigListEntry(_t('Nur mit gespeicherten Ordnern aus dem MovieScanner.', 'Only uses saved folders from MovieScanner.'), NoSave(ConfigNothing())))
+		lst.append(getConfigListEntry(_t('ROT speichert die Einstellungen.', 'RED saves the settings.'), NoSave(ConfigNothing())))
 		try:
 			self['config'].list = lst
 			self['config'].l.setList(lst)
@@ -3818,6 +4858,35 @@ def build_info_text_emc():
 	]
 	return '\n'.join(lines)
 
+def build_debug_paths_text(selected_paths=None):
+	"""Debug popup: zeigt ausgewählte Pfade + Scan-Startpunkte."""
+	try:
+		selected_paths = selected_paths or []
+	except Exception:
+		selected_paths = []
+
+	out = []
+	out.append("Pfade (Debug):")
+
+	if selected_paths:
+		out.append("Ausgewählt:")
+		for sp in selected_paths:
+			out.append("  - %s" % sp)
+	else:
+		out.append("Ausgewählt: (keine)")
+
+	try:
+		avail = scan_start_points()
+		if avail:
+			out.append("")
+			out.append("Scan-Startpunkte:")
+			for ap in avail:
+				out.append("  - %s" % ap)
+	except Exception as e:
+		out.append("")
+		out.append("Scan-Startpunkte: (Fehler: %s)" % e)
+
+	return "\n".join(out)
 def build_info_text():
 	info = _collect_cache_info()
 	def line(seg, a):
@@ -3833,6 +4902,27 @@ def build_info_text():
 		line('emc', 'poster'), line('emc', 'backdrop'), line('emc', 'banner'), line('emc', 'infos'),
 	]
 	return '\n'.join(lines)
+
+
+def _load_saved_paths_from_config():
+	"""Read persisted scanner.movie_paths config (json-list or csv)."""
+	out = []
+	try:
+		raw = (config.plugins.GradientFHD.scanner.movie_paths.value or '').strip()
+		if raw:
+			if raw.startswith('['):
+				vals = json.loads(raw)
+			else:
+				vals = [x.strip() for x in raw.split(',') if x.strip()]
+			for p in (vals or []):
+				try:
+					if p and os.path.isdir(p):
+						out.append(p)
+				except Exception:
+					pass
+	except Exception:
+		pass
+	return out
 
 def _retention_days_value(sel):
 	v = sel.value
@@ -4037,7 +5127,7 @@ def run_scheduled_cleanup_headless():
 	ts = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	(removed, freed) = _run_cleanup_headless(write_report=True)
 	try:
-		with open(SCHED_LOG, 'a') as f:
+		with open(SCHED_LOG, 'w') as f:
 			f.write('[%s] scheduled cleanup: removed=%d freed=%.1f MB\n' % (ts, removed, bytes_to_mb(freed)))
 	except Exception:
 		pass
@@ -4073,9 +5163,124 @@ def schedule_cleanup_timer(session):
 		_cleanup_timer.callback.append(_cb)
 		_cleanup_timer.start(delta, True)
 		try:
-			with open(SCHED_LOG, 'a') as f:
-				f.write('Scheduled next cleanup at %s\n' % run_at.strftime('%Y-%m-%d %H:%M:%S'))
+			with open(SCHED_LOG, 'w') as f:
+				pass
 		except Exception:
 			pass
+	except Exception:
+		pass
+
+def _load_saved_movie_paths():
+	res = []
+	try:
+		raw = (config.plugins.GradientFHD.scanner.movie_paths.value or '').strip()
+	except Exception:
+		raw = ''
+	if not raw:
+		return res
+	try:
+		if raw.startswith('['):
+			vals = json.loads(raw)
+		else:
+			vals = [x.strip() for x in raw.split(',') if x.strip()]
+	except Exception:
+		vals = []
+	seen = set()
+	for p in vals:
+		try:
+			if isinstance(p, str) and p and os.path.isdir(p):
+				np = _norm_real_path(p)
+				if np in seen:
+					continue
+				seen.add(np)
+				res.append(p)
+		except Exception:
+			pass
+	return res
+
+def _collect_movie_files_from_paths(sel):
+	files = []
+	for base in (sel or []):
+		try:
+			if _is_flat_movie_root(base):
+				try:
+					for f in os.listdir(base):
+						fp = os.path.join(base, f)
+						if os.path.isfile(fp) and f.lower().endswith(VIDEO_EXTS):
+							files.append(fp)
+				except Exception:
+					pass
+			else:
+				for root, dirs, fls in os.walk(base):
+					dirs[:] = [d for d in dirs if not is_excluded_dir(os.path.join(root, d))]
+					for f in fls:
+						if f.lower().endswith(VIDEO_EXTS):
+							files.append(os.path.join(root, f))
+		except Exception:
+			pass
+	return files
+
+def run_scheduled_moviescan_headless(session):
+	if session is None:
+		return False
+	if MOVIESCAN_WATCHER.running:
+		return False
+	sel = _load_saved_movie_paths()
+	if not sel:
+		try:
+			with open(MOVIESCAN_SCHED_LOG, 'w') as f:
+				f.write('[%s] scheduled moviescan skipped: no saved paths\n' % datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+		except Exception:
+			pass
+		return False
+	files = _collect_movie_files_from_paths(sel)
+	if not files:
+		try:
+			with open(MOVIESCAN_SCHED_LOG, 'w') as f:
+				f.write('[%s] scheduled moviescan skipped: no matching files\n' % datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+		except Exception:
+			pass
+		return False
+	ok = False
+	try:
+		ok = bool(MOVIESCAN_WATCHER.start_background(session, files, show_osd=True, scheduled=True))
+	except Exception:
+		ok = False
+	try:
+		with open(MOVIESCAN_SCHED_LOG, 'w') as f:
+			f.write('[%s] scheduled moviescan: started=%s files=%d\n' % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), str(bool(ok)), len(files)))
+	except Exception:
+		pass
+	return ok
+
+_moviescan_timer = None
+def schedule_moviescanner_timer(session):
+	global _moviescan_timer
+	try:
+		if _moviescan_timer is not None:
+			try: _moviescan_timer.stop()
+			except Exception: pass
+			_moviescan_timer = None
+		if not AS.auto_scan_enabled.value:
+			return
+		(hh, mm) = AS.auto_scan_time.value
+		now = datetime.now()
+		run_at = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
+		if run_at <= now:
+			run_at = run_at + timedelta(days=1)
+		delta = max(1, int((run_at - now).total_seconds()) * 1000)  # ms
+		_moviescan_timer = eTimer()
+		def _cb():
+			try:
+				run_scheduled_moviescan_headless(session)
+			except Exception:
+				pass
+			try:
+				schedule_moviescanner_timer(session)  # täglich neu
+			except Exception:
+				pass
+		_moviescan_timer.callback.append(_cb)
+		_moviescan_timer.start(delta, True)
+
 	except Exception:
 		pass

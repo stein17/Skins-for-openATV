@@ -2240,10 +2240,4 @@ class GradientBackdropX(Renderer):
             time.sleep(0.25)
 
     def logBackdrop(self, logmsg):
-
-        try:
-            with open("/tmp/xtra_Backdrop.log", "a") as w:
-                w.write("%s\n" % logmsg)
-        except Exception as e:
-            pass
-            traceback.print_exc()
+        return

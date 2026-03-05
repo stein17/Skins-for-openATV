@@ -157,9 +157,21 @@ config.plugins.GradientFHD.posterXPath = ConfigSelection(
 )
 
 
+def _gradientfhd_sessionstart(reason=None, session=None, **kwargs):
+    if session is None:
+        return
+    try:
+        from .GradientMoviescanner import schedule_cleanup_timer, schedule_moviescanner_timer
+        schedule_cleanup_timer(session)
+        schedule_moviescanner_timer(session)
+    except Exception:
+        pass
+
+
 def Plugins(**kwargs):
     return [PluginDescriptor(name=_("GradientFHD  Configtool"), description=_("Personalize your GradientFHD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
-    icon="plugin.png", fnc=main)]
+    icon="plugin.png", fnc=main),
+    PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=_gradientfhd_sessionstart)]
 
 
 def main(session, **kwargs):

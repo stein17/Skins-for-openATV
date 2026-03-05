@@ -2,7 +2,7 @@
 # 02.26 @stein17, Many new features and improvements
 # GradientFHD – EMC Banner Renderer (Cache-only)
 #
-# - Reads banners from: /media/hdd/xtra/EMC/banner/
+# - Reads banners from: <storage>/xtra/EMC/banner/
 # - Prefers TMDb-ID naming: tmdb_<id>_banner.jpg (or tmdb_<id>.jpg)
 # - Falls back to title/filename slug: <slug>_banner.jpg / <slug>.jpg
 #
@@ -20,13 +20,52 @@ import unicodedata
 from Components.Renderer.Renderer import Renderer
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.CurrentService import CurrentService
+from Components.config import config
 from enigma import ePixmap, loadJPG, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
 
 DEBUG = True
 
-EMC_BASE = "/media/hdd/xtra/EMC"
+
+def _get_emc_cache_base():
+	"""Resolve EMC cache base path compatible with GradientMoviescanner."""
+	try:
+		base = config.plugins.GradientFHD.poster_storage_base.value
+		if base == "AUTO":
+			for candidate in ("/media/hdd", "/media/usb", "/media/mmc"):
+				if os.path.isdir(candidate):
+					base = candidate
+					break
+			else:
+				base = "/media/hdd"
+	except Exception:
+		base = "/media/hdd"
+	return os.path.join(base, "xtra", "EMC")
+
+
+EMC_BASE = _get_emc_cache_base()
 BANNER_FOLDER = os.path.join(EMC_BASE, "banner")
 INFO_FOLDER = os.path.join(EMC_BASE, "infos")
+
+for _d in (EMC_BASE, BANNER_FOLDER, INFO_FOLDER):
+	try:
+		if not os.path.exists(_d):
+			os.makedirs(_d, exist_ok=True)
+	except Exception:
+		pass
+
+PATHS_LOG = "/tmp/GradientFHD_paths.log"
+
+def _log_active_paths_once():
+	try:
+		with open(PATHS_LOG, "a+", encoding="utf-8") as lf:
+			lf.write("[%s] GradientBannerXEMC EMC_BASE=%s\n" % (__import__('time').strftime("%Y-%m-%d %H:%M:%S"), EMC_BASE))
+	except Exception:
+		pass
+
+_log_active_paths_once()
+
+# Keep module-level helper variable names stable (cleanup/no-op for linters)
+del _d
 
 
 def _debug(msg):
@@ -351,13 +390,13 @@ class GradientBannerXEMC(Renderer):
 
 # -----------------------------------------------------------------------------
 # EMC Cache-only Artwork (Poster/Backdrop/Banner)
-#   - show artwork ONLY from /media/hdd/xtra/EMC/{poster,backdrop,banner}
+#   - show artwork ONLY from <storage>/xtra/EMC/{poster,backdrop,banner}
 #   - NEVER download and NEVER write next to recordings
 # -----------------------------------------------------------------------------
 
-EMC_POSTER_FOLDER = "/media/hdd/xtra/EMC/poster"
-EMC_BACKDROP_FOLDER = "/media/hdd/xtra/EMC/backdrop"
-EMC_BANNER_FOLDER = "/media/hdd/xtra/EMC/banner"
+EMC_POSTER_FOLDER = os.path.join(EMC_BASE, "poster")
+EMC_BACKDROP_FOLDER = os.path.join(EMC_BASE, "backdrop")
+EMC_BANNER_FOLDER = os.path.join(EMC_BASE, "banner")
 
 # folder index cache: {folder: {norm_key: fullpath}}
 _EMC_INDEX = {}

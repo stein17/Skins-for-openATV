@@ -82,6 +82,53 @@ HINT_TEXT = (
     '    Tip: zap through selected bouquets once and wait a few seconds.\n\n'
 )
 
+def _fmt_mb(num_bytes):
+    try:
+        return '%.1f MB' % (float(num_bytes) / 1024.0 / 1024.0)
+    except Exception:
+        return '0.0 MB'
+
+
+def _scan_cache_dir(path):
+    count = 0
+    size = 0
+    if not os.path.isdir(path):
+        return count, size
+    try:
+        for root, dirs, files in os.walk(path):
+            for fn in files:
+                fp = os.path.join(root, fn)
+                count += 1
+                try:
+                    size += os.path.getsize(fp)
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return count, size
+
+
+def build_autodb_info_text():
+    items = [
+        (tr('Poster', 'Poster'), '/media/hdd/xtra/poster'),
+        (tr('Backdrop', 'Backdrop'), '/media/hdd/xtra/backdrop'),
+        (tr('Info-json', 'Info-json'), '/media/hdd/xtra/Info'),
+    ]
+
+    lines = [HINT_TEXT.strip(), '']
+    total_size = 0
+
+    lines.append(tr('Current TV cache:', 'Aktueller TV-Cache:'))
+    for label, path in items:
+        cnt, sz = _scan_cache_dir(path)
+        total_size += sz
+        lines.append('%s: %d (~%s)' % (label, cnt, _fmt_mb(sz)))
+
+    lines.append('')
+    lines.append('%s ~%s' % (tr('Total TV cache:', 'Gesamt TV-Cache:'), _fmt_mb(total_size)))
+    return '\n'.join(lines)
+
+
 def _notify(text, timeout=5, mtype=None):
     # Prefer non-modal popup if available; AddNotification(MessageBox, ...) can block keys on some images.
     try:
@@ -785,6 +832,34 @@ class AutoDBRunWatcher(object):
 WATCHER = AutoDBRunWatcher()
 
 
+class AutoDBInfoScreen(Screen):
+    skin = """
+    <screen name="AutoDBInfoScreen" position="center,center" size="1100,680" title="Information" flags="wfNoBorder" backgroundColor="transparent">
+        <widget source="Title" render="Label" position="20,0" size="1060,60" font="Italic; 42" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+        <eLabel name="menu_bg" position="0,60" size="1100,620" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+        <eLabel name="title_bg" position="0,0" size="1100,70" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="12" />
+        <eLabel name="title_line" position="0,60" size="1100,4" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+        <eLabel name="Line_Menu" position="15,625" size="1070,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+        <eLabel name="Line_Menu" position="15,375" size="1070,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+        <widget name="text" position="20,70" size="1060,540" font="Regular;30" backgroundColor="gradient_background" halign="left" valign="top" transparent="1" />
+    </screen>
+    """
+
+    def __init__(self, session):
+        Screen.__init__(self, session)
+        self['title_lbl'] = Label(tr('Information', 'Informationen'))
+        self['text'] = Label(build_autodb_info_text())
+        self['actions'] = ActionMap(
+            ['OkCancelActions', 'ColorActions'],
+            {
+                'ok': self.close,
+                'cancel': self.close,
+                'blue': self.close,
+            },
+            -1
+        )
+
+
 class AutoDBManager(Screen):
     skin = """
     <screen name="AutoDBManager" position="center,center" size="1100,680" title="AutoDB Manager (Poster + Backdrop)" flags="wfNoBorder" backgroundColor="transparent">
@@ -1003,7 +1078,7 @@ class AutoDBManager(Screen):
             self.refresh()
 
     def show_info(self):
-        self.session.open(MessageBox, HINT_TEXT, type=MessageBox.TYPE_INFO, timeout=20)
+        self.session.open(AutoDBInfoScreen)
 
     def save(self):
         if _write_bouquet_file(self.entries):

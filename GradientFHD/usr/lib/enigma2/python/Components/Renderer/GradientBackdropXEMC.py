@@ -64,13 +64,52 @@ epgcache = eEPGCache.getInstance()
 
 # -----------------------------------------------------------------------------
 # EMC Cache-only Artwork (Poster/Backdrop/Banner)
-#   - show artwork ONLY from /media/hdd/xtra/EMC/{poster,backdrop,banner}
+#   - show artwork ONLY from <storage>/xtra/EMC/{poster,backdrop,banner}
 #   - NEVER download and NEVER write next to recordings
+#   - storage is resolved dynamically like MovieScanner
 # -----------------------------------------------------------------------------
 
-EMC_POSTER_FOLDER = "/media/hdd/xtra/EMC/poster"
-EMC_BACKDROP_FOLDER = "/media/hdd/xtra/EMC/backdrop"
-EMC_BANNER_FOLDER = "/media/hdd/xtra/EMC/banner"
+def _get_emc_cache_base():
+    """Resolve EMC cache base path compatible with GradientMoviescanner."""
+    try:
+        base = config.plugins.GradientFHD.poster_storage_base.value
+        if base == "AUTO":
+            for candidate in ("/media/hdd", "/media/usb", "/media/mmc"):
+                if os.path.isdir(candidate):
+                    base = candidate
+                    break
+            else:
+                base = "/media/hdd"
+    except Exception:
+        base = "/media/hdd"
+    return os.path.join(base, "xtra", "EMC")
+
+
+EMC_BASE = _get_emc_cache_base()
+EMC_POSTER_FOLDER = os.path.join(EMC_BASE, "poster")
+EMC_BACKDROP_FOLDER = os.path.join(EMC_BASE, "backdrop")
+EMC_BANNER_FOLDER = os.path.join(EMC_BASE, "banner")
+
+for _d in (EMC_BASE, EMC_POSTER_FOLDER, EMC_BACKDROP_FOLDER, EMC_BANNER_FOLDER):
+    try:
+        if not os.path.exists(_d):
+            os.makedirs(_d, exist_ok=True)
+    except Exception:
+        pass
+
+PATHS_LOG = "/tmp/GradientFHD_paths.log"
+
+def _log_active_paths_once():
+    try:
+        with open(PATHS_LOG, "a+", encoding="utf-8") as lf:
+            lf.write("[%s] GradientBackdropXEMC EMC_BASE=%s\n" % (time.strftime("%Y-%m-%d %H:%M:%S"), EMC_BASE))
+    except Exception:
+        pass
+
+_log_active_paths_once()
+
+# Keep module-level helper variable names stable (cleanup/no-op for linters)
+del _d
 
 # folder index cache: {folder: {norm_key: fullpath}}
 _EMC_INDEX = {}
@@ -187,6 +226,68 @@ def _emc_norm_key(s):
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
+def _special_series_id(series_title):
+    """Known special series aliases where episode-title mapping is needed."""
+    k = _emc_norm_key(series_title)
+    if not k:
+        return None
+    if ('wir waren wie brueder' in k) or ('wir waren wie bruder' in k) or ('band of brothers' in k):
+        return 'band_of_brothers'
+    return None
+
+
+def _special_episode_number(series_title, episode_title):
+    """Map known localized episode titles to S01Exx (currently: Band of Brothers)."""
+    sid = _special_series_id(series_title)
+    if sid != 'band_of_brothers' or not episode_title:
+        return None
+
+    ek = _emc_norm_key(episode_title)
+    if not ek:
+        return None
+
+    # German + English aliases
+    table = {
+        'currahee': 1,
+        'der erste tag': 2,
+        'day of days': 2,
+        'brennpunkt normandie': 3,
+        'carentan': 3,
+        'die neuen': 4,
+        'replacements': 4,
+        'kreuzungen': 5,
+        'crossroads': 5,
+        'bastogne': 6,
+        'durchbruch': 7,
+        'the breaking point': 7,
+        'der spezialauftrag': 8,
+        'the last patrol': 8,
+        'warum wir kaempfen': 9,
+        'why we fight': 9,
+        'kriegsende': 10,
+        'points': 10,
+    }
+
+    best = None
+    best_len = 0
+    for raw, ep in table.items():
+        rk = _emc_norm_key(raw)
+        if not rk:
+            continue
+        if ek == rk or ek.startswith(rk) or rk.startswith(ek) or (rk in ek) or (ek in rk):
+            if len(rk) > best_len:
+                best = ep
+                best_len = len(rk)
+    return best
+
+
+def _special_series_alias_titles(series_title):
+    sid = _special_series_id(series_title)
+    if sid == 'band_of_brothers':
+        return ['Band of Brothers', 'Wir waren wie Brüder', 'Wir waren wie Brueder']
+    return [series_title] if series_title else []
+
+
 def _emc_build_index(folder):
     try:
         mtime = os.path.getmtime(folder)
@@ -296,6 +397,12 @@ fanart_api = '6d231536dea4318a88cb2520ce89473b'
 FILENAME_JUNK = ['_+', '-+', '\\.+', '\\d{4}[-_]\\d{2}[-_]\\d{2}', '\\d{2}[-_]\\d{2}[-_]\\d{4}', '\\d{8}', '\\d{4}', '[Ss]\\d{1,2}[Ee]\\d{1,2}', '[Ss]taffel\\s*\\d+', '[Ee]pisode\\s*\\d+', '[Ff]olge\\s*\\d+', '[Tt]eil\\s*\\d+', '1080[pi]', '720[pi]', '576[pi]', '480[pi]', '[Hh][Dd][Tt][Vv]', '[Ww][Ee][Bb]', '[Bb][Dd][Rr][Ii][Pp]', '[Xx]264', '[Hh]264', '[Hh]265', '[Aa][Vv][Cc]', '[Aa][Cc]3', '[Dd][Tt][Ss]', '[Aa][Aa][Cc]', '[Gg][Ee][Rr][Mm][Aa][Nn]', '[Ee][Nn][Gg][Ll][Ii][Ss][Hh]', '[Dd][Uu][Bb][Bb][Ee][Dd]', '[Ss][Yy][Nn][Cc]']
 
 def get_storage_folder():
+    try:
+        xtra = os.path.dirname(EMC_BASE)
+        if xtra:
+            return xtra
+    except Exception:
+        pass
     if os.path.isdir('/media/hdd'):
         return '/media/hdd/xtra'
     if os.path.isdir('/media/usb'):
@@ -540,46 +647,141 @@ class GradientBackdropXEMC(Renderer):
             except Exception:
                 pass
             # ---- Episode-aware + Season-aware lookup ----
-            # Priority: Episode-Still (S01E05) → Season-Poster(backdrop) → Series-Backdrop
+            # Priority: Episode-Still (S01E05 / Series-EpTitle) -> Season-Backdrop -> Series-Backdrop
             episode_titles = []
             season_bd_titles = []
             try:
                 import re as _re3, os as _os3
+
+                def _dedupe(seq):
+                    out = []
+                    seen = set()
+                    for x in seq or []:
+                        if not x:
+                            continue
+                        x = str(x).strip()
+                        if not x:
+                            continue
+                        if x in seen:
+                            continue
+                        seen.add(x)
+                        out.append(x)
+                    return out
+
+                def _clean_series(x):
+                    if not x:
+                        return ''
+                    y = str(x).strip()
+                    # S01E05 / [S01E05]
+                    y = _re3.sub(r'\s*[\[(]?[Ss]\d{1,2}[Ee]\d{1,3}[\])]?.*$', '', y).strip()
+                    # 1x06 / [1x06]
+                    y = _re3.sub(r'\s*[\[(]?\d{1,2}[xX]\d{1,3}[\])]?.*$', '', y).strip()
+                    # Doku-Format "Serie 3. Titel"
+                    y = _re3.sub(r'\s+\d{1,3}\..*$', '', y).strip()
+                    y = _re3.sub(r'\s+', ' ', y).strip(' -_')
+                    return y
+
                 _fn = _os3.path.basename(path or '')
+                _stem = _os3.path.splitext(_fn)[0].strip()
+
                 # Format 1: S01E05
-                _m  = _re3.search(r'[Ss](\d{1,2})[Ee](\d{1,3})', _fn)
+                _m = _re3.search(r'[Ss](\d{1,2})[Ee](\d{1,3})', _stem)
                 # Format 2: 1x06
-                _m1x = _re3.search(r'\b(\d{1,2})[xX](\d{1,3})\b', _fn) if not _m else None
-                # Format 3: 'Serie N. Titel'
-                _m_n = _re3.search(r'^(.+?)\s+(\d{1,3})\.\s+(.+)$', _fn) if not _m and not _m1x else None
+                _m1x = _re3.search(r'\b(\d{1,2})[xX](\d{1,3})\b', _stem) if not _m else None
+                # Format 3: "Serie N. Titel"
+                _m_n = _re3.search(r'^(.+?)\s+(\d{1,3})\.\s+(.+)$', _stem) if not _m and not _m1x else None
+                # Format 4: "Serie-Episodentitel"
+                _m_h = _re3.search(r'^(.+?)\s*[-–]\s*(.+)$', _stem) if not _m and not _m1x and not _m_n else None
+
+                # Fallback: SxxExx kann auch im Event-/Meta-Titel stehen
+                if not _m and not _m1x:
+                    _joined = ' | '.join([t for t in titles if t])
+                    _m = _re3.search(r'[Ss](\d{1,2})[Ee](\d{1,3})', _joined)
+                    _m1x = _re3.search(r'\b(\d{1,2})[xX](\d{1,3})\b', _joined) if not _m else None
 
                 if _m:
                     _s = int(_m.group(1)); _e = int(_m.group(2))
                     for _t in titles:
-                        _clean = _re3.sub(r'\s*[Ss]\d{1,2}[Ee]\d{1,3}.*$', '', _t).strip()
+                        _clean = _clean_series(_t)
                         if _clean:
                             episode_titles.append('%s_S%02dE%02d' % (_clean, _s, _e))
                             season_bd_titles.append('%s_S%02d' % (_clean, _s))
+                    _clean_fn = _clean_series(_stem)
+                    if _clean_fn:
+                        episode_titles.append('%s_S%02dE%02d' % (_clean_fn, _s, _e))
+                        season_bd_titles.append('%s_S%02d' % (_clean_fn, _s))
                 elif _m1x:
                     _s = int(_m1x.group(1)); _e = int(_m1x.group(2))
                     for _t in titles:
-                        _clean = _re3.sub(r'\s*\d{1,2}[xX]\d{1,3}.*$', '', _t).strip()
+                        _clean = _clean_series(_t)
                         if _clean:
                             episode_titles.append('%s_S%02dE%02d' % (_clean, _s, _e))
                             season_bd_titles.append('%s_S%02d' % (_clean, _s))
+                    _clean_fn = _clean_series(_stem)
+                    if _clean_fn:
+                        episode_titles.append('%s_S%02dE%02d' % (_clean_fn, _s, _e))
+                        season_bd_titles.append('%s_S%02d' % (_clean_fn, _s))
                 elif _m_n:
-                    # Dokumentationsformat: Serie N. Titel → Staffel 1, Episode N
-                    _s = 1; _e = int(_m_n.group(2))
-                    for _t in titles:
-                        _clean = _re3.sub(r'\s+\d{1,3}\..*$', '', _t).strip()
-                        if _clean:
-                            episode_titles.append('%s_S01E%02d' % (_clean, _e))
-                            season_bd_titles.append('%s_S01' % _clean)
+                    # Dokumentationsformat: Serie N. Titel -> Staffel 1, Episode N
+                    _series = (_m_n.group(1) or '').strip()
+                    _e = int(_m_n.group(2))
+                    _ep_title = (_m_n.group(3) or '').strip()
+                    if _series:
+                        episode_titles.append('%s_S01E%02d' % (_series, _e))
+                        season_bd_titles.append('%s_S01' % _series)
+                    if _series and _ep_title:
+                        # falls im Cache als "Serie-Episodentitel" abgelegt
+                        episode_titles.append('%s-%s' % (_series, _ep_title))
+                        episode_titles.append('%s - %s' % (_series, _ep_title))
+                    episode_titles.append(_stem)
+                elif _m_h:
+                    # Series-EpTitle: z.B. "Wir waren wie Brüder-Bastogne"
+                    _series = (_m_h.group(1) or '').strip()
+                    _ep_title = (_m_h.group(2) or '').strip()
+                    _special_ep = _special_episode_number(_series, _ep_title)
+                    _alias_titles = _special_series_alias_titles(_series)
+
+                    if _series:
+                        # Prefer stable alias titles for matching
+                        for _at in _alias_titles:
+                            if _at and _at not in titles:
+                                titles.insert(0, _at)
+
+                    if _special_ep:
+                        # For known series map episode-title -> S01Exx and avoid wrong generic cache hits
+                        for _at in _alias_titles:
+                            if _at:
+                                episode_titles.append('%s_S01E%02d' % (_at, _special_ep))
+                                season_bd_titles.append('%s_S01' % _at)
+                        # Prevent fallback to wrong "Series-EpisodeTitle" backdrops
+                        try:
+                            _keep_norm = set([_emc_norm_key(x) for x in _alias_titles if x])
+                            _series_only = []
+                            for _t2 in list(titles):
+                                _nk = _emc_norm_key(_t2)
+                                if _nk in _keep_norm and _t2 not in _series_only:
+                                    _series_only.append(_t2)
+                            for _at in _alias_titles:
+                                if _at and _at not in _series_only:
+                                    _series_only.insert(0, _at)
+                            titles = _series_only
+                        except Exception:
+                            pass
+                    else:
+                        if _series and _ep_title:
+                            episode_titles.append('%s-%s' % (_series, _ep_title))
+                            episode_titles.append('%s - %s' % (_series, _ep_title))
+                        episode_titles.append(_stem)
+                        if _series:
+                            season_bd_titles.append('%s_S01' % _series)
+
+                episode_titles = _dedupe(episode_titles)
+                season_bd_titles = _dedupe(season_bd_titles)
             except Exception:
                 pass
 
             found = None
-            # 1. Episode-Still
+            # 1. Episode-Still / episode-specific backdrop
             if episode_titles:
                 found = _emc_find_artwork(EMC_BACKDROP_FOLDER, episode_titles)
             # 2. Staffel-Backdrop
@@ -637,7 +839,7 @@ if __name__ == '__main__':
     print('  - Movie Player')
     print('  - Movieliste')
     print()
-    print('SPEICHERORT: EMC Cache-only (/media/hdd/xtra/EMC/backdrop)')
+    print('SPEICHERORT: EMC Cache-only (<storage>/xtra/EMC/backdrop)')
     print('  Film.ts -> Film_backdrop.jpg')
     print()
     print('FEATURES:')

@@ -1957,12 +1957,7 @@ class GradientPosterX(Renderer):
                                 self.timer.start(10, True)
 
         def logPoster(self, logmsg):
-            try:
-                with open("/tmp/xtra_Poster.log", "a") as w:
-                    w.write("%s\n" % logmsg)
-            except Exception as e:
-                print('logPoster error', str(e))
-                traceback.print_exc()
+            return
 
 
 #try:
