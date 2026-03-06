@@ -47,11 +47,22 @@ class Gradient_event_info(object):
         if info_folder:
             self.INFO_FOLDER = info_folder
         else:
-            if os.path.exists("/media/hdd"):
-                self.INFO_FOLDER = "/media/hdd/xtra/Info"
-            elif os.path.exists("/media/usb"):
-                self.INFO_FOLDER = "/media/usb/xtra/Info"
-            else:
+            try:
+                sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
+                if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
+                    base = sel.value
+                    if os.path.isdir(base):
+                        self.INFO_FOLDER = os.path.join(base, "xtra", "Info")
+                    else:
+                        self.INFO_FOLDER = "/tmp/Info"
+                else:
+                    chosen = None
+                    for base in ("/media/usb", "/media/hdd", "/media/mmc", "/media/net", "/media/autofs"):
+                        if os.path.isdir(base):
+                            chosen = base
+                            break
+                    self.INFO_FOLDER = os.path.join(chosen, "xtra", "Info") if chosen else "/tmp/Info"
+            except Exception:
                 self.INFO_FOLDER = "/tmp/Info"
         self._ensure_folder(self.INFO_FOLDER)
         self.tmdb_api = tmdb_api or self._find_tmdb_key()

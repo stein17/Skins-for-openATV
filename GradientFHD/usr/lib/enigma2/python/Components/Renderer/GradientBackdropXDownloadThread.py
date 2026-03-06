@@ -958,42 +958,46 @@ def getPosterXBasePath():
             return sel.value
     except Exception:
         pass
-    for p in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net"):
+    for p in ("/media/usb", "/media/hdd", "/media/mmc", "/media/net", "/media/autofs"):
         try:
             if os.path.exists(p) and isMountedInRW(p):
                 return p
         except Exception:
             pass
-    return "/media/hdd"
+    return "/media/usb" if os.path.isdir("/media/usb") else "/media/hdd"
 
 
-base_path = getPosterXBasePath()
-xtra_base = os.path.join(base_path, "xtra")
+def _refresh_storage_paths():
+    global base_path, xtra_base, path_folder, info_folder, backdrop_info_folder
+    base_path = getPosterXBasePath()
+    xtra_base = os.path.join(base_path, "xtra")
 
-# Backdrop folder
-path_folder = os.path.join(xtra_base, "backdrop")
+    # Backdrop folder
+    path_folder = os.path.join(xtra_base, "backdrop")
 
-# Info folder (fuer JSON mit Rating/Parental)
-info_folder = os.path.join(xtra_base, "Info")
+    # Info folder (fuer JSON mit Rating/Parental)
+    info_folder = os.path.join(xtra_base, "Info")
 
-# Backdrop-info folder (debug/trace: which provider was used)
-backdrop_info_folder = os.path.join(xtra_base, "backdrop_info")
+    # Backdrop-info folder (debug/trace: which provider was used)
+    backdrop_info_folder = os.path.join(xtra_base, "backdrop_info")
 
-# Ensure full folder tree exists (including custom folders)
-for folder in (
-    xtra_base,
-    path_folder,
-    info_folder,
-    backdrop_info_folder,
-    os.path.join(xtra_base, "poster"),
-    os.path.join(xtra_base, "poster_info"),
-    os.path.join(xtra_base, "custom", "poster"),
-    os.path.join(xtra_base, "custom", "backdrop"),
-):
-    try:
-        os.makedirs(folder, exist_ok=True)
-    except Exception:
-        pass
+    # Ensure full folder tree exists (including custom folders)
+    for folder in (
+        xtra_base,
+        path_folder,
+        info_folder,
+        backdrop_info_folder,
+        os.path.join(xtra_base, "poster"),
+        os.path.join(xtra_base, "poster_info"),
+        os.path.join(xtra_base, "custom", "poster"),
+        os.path.join(xtra_base, "custom", "backdrop"),
+    ):
+        try:
+            os.makedirs(folder, exist_ok=True)
+        except Exception:
+            pass
+
+_refresh_storage_paths()
 
 # ============================================================================
 # LOAD SKIN-SPECIFIC API KEYS
@@ -1463,7 +1467,7 @@ class GradientBackdropXDownloadThread(threading.Thread):
     # If exists, it will be used and copied to destination, skipping all providers.
     # ------------------------------------------------------------------------
     def _custom_base_dir(self):
-        for base in (xtra_base, '/media/hdd/xtra', '/media/usb/xtra', '/media/mmc/xtra', '/media/net/xtra'):
+        for base in (xtra_base,):
             try:
                 if os.path.exists(base):
                     return base
@@ -1602,6 +1606,7 @@ class GradientBackdropXDownloadThread(threading.Thread):
         except Exception:
             return False, None
     def __init__(self):
+        _refresh_storage_paths()
         threading.Thread.__init__(self)
         # NOTE: avoid blocking network probes in __init__; downloads handle errors
         self.adsl = True

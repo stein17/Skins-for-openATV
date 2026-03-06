@@ -815,22 +815,23 @@ DEFAULT_HDD_MOVIE = "/media/hdd/movie"
 
 
 def get_emc_cache_base():
-	"""Get EMC cache base path - /media/hdd/xtra/EMC/"""
+	"""Get EMC cache base path from GradientFHD storage setting."""
 	try:
-		# Try to get from GradientFHD config
-		base = config.plugins.GradientFHD.poster_storage_base.value
-		if base == "AUTO":
-			for candidate in ["/media/hdd", "/media/usb", "/media/mmc"]:
-				if os.path.isdir(candidate) and os.access(candidate, os.W_OK):
-					base = candidate
-					break
-			else:
-				base = "/media/hdd"
-	except:
-		base = "/media/hdd"
-	
-	# EMC structure: /media/hdd/xtra/EMC/
-	return os.path.join(base, "xtra", "EMC")
+		base = config.plugins.GradientFHD.posterXPath.value
+		if base and base != "AUTO":
+			if os.path.isdir(base):
+				return os.path.join(base, "xtra", "EMC")
+	except Exception:
+		pass
+
+	for candidate in ["/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"]:
+		try:
+			if os.path.isdir(candidate) and os.access(candidate, os.W_OK):
+				return os.path.join(candidate, "xtra", "EMC")
+		except Exception:
+			pass
+
+	return os.path.join("/media/hdd", "xtra", "EMC")
 
 
 EMC_BASE = get_emc_cache_base()
@@ -2055,10 +2056,14 @@ class MovieScannerRunController(object):
 	def update_views(self):
 		if not self.running or self.engine is None:
 			return
+		# Update BOTH: Main window (if open) and OSD (if visible)
+		if self.screen is not None:
+			try:
+				self.engine._apply_to_visible_screen()
+			except Exception:
+				pass
 		if self.osd_visible:
 			self._refresh_osd()
-		else:
-			self.engine._apply_to_visible_screen()
 
 	def request_stop(self):
 		if self.engine is not None:
@@ -2432,7 +2437,7 @@ class MovieScannerMain(Screen):
 				return
 
 		MOVIESCAN_WATCHER.start(self, files)
-		MOVIESCAN_WATCHER.show_osd_parallel()
+		# MOVIESCAN_WATCHER.show_osd_parallel()  # OSD now starts on RED (hide)
 		try:
 			self["key_red"].setText(_t("Ausblenden", "Hide"))
 		except Exception:

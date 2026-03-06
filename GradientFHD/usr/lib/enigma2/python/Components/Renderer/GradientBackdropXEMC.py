@@ -72,7 +72,7 @@ epgcache = eEPGCache.getInstance()
 def _get_emc_cache_base():
     """Resolve EMC cache base path compatible with GradientMoviescanner."""
     try:
-        base = config.plugins.GradientFHD.poster_storage_base.value
+        base = config.plugins.GradientFHD.posterXPath.value
         if base == "AUTO":
             for candidate in ("/media/hdd", "/media/usb", "/media/mmc"):
                 if os.path.isdir(candidate):
@@ -404,9 +404,9 @@ def get_storage_folder():
     except Exception:
         pass
     if os.path.isdir('/media/hdd'):
-        return '/media/hdd/xtra'
+        return os.path.join(getPosterXBasePath(), 'xtra')
     if os.path.isdir('/media/usb'):
-        return '/media/usb/xtra'
+        return os.path.join(_get_emc_cache_base().rsplit("/xtra/EMC", 1)[0], "xtra")
     if os.path.isdir('/media/mmc'):
         return '/media/mmc/xtra'
     return '/tmp'

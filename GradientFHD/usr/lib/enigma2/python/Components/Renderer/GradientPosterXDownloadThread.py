@@ -785,29 +785,33 @@ def getPosterXBasePath():
     return "/media/hdd"
 
 
-base_path = getPosterXBasePath()
-xtra_base = os.path.join(base_path, "xtra")
+def _refresh_storage_paths():
+    global base_path, xtra_base, path_folder, info_folder, poster_info_folder
+    base_path = getPosterXBasePath()
+    xtra_base = os.path.join(base_path, "xtra")
 
-# Default/fallback folders
-path_folder = os.path.join(xtra_base, "poster")
-info_folder = os.path.join(xtra_base, "Info")
-poster_info_folder = os.path.join(xtra_base, "poster_info")
+    # Default/fallback folders
+    path_folder = os.path.join(xtra_base, "poster")
+    info_folder = os.path.join(xtra_base, "Info")
+    poster_info_folder = os.path.join(xtra_base, "poster_info")
 
-# Ensure folder tree exists (including custom folders)
-for d in (
-    xtra_base,
-    path_folder,
-    info_folder,
-    poster_info_folder,
-    os.path.join(xtra_base, "backdrop"),
-    os.path.join(xtra_base, "backdrop_info"),
-    os.path.join(xtra_base, "custom", "poster"),
-    os.path.join(xtra_base, "custom", "backdrop"),
-):
-    try:
-        os.makedirs(d, exist_ok=True)
-    except Exception:
-        pass
+    # Ensure folder tree exists (including custom folders)
+    for d in (
+        xtra_base,
+        path_folder,
+        info_folder,
+        poster_info_folder,
+        os.path.join(xtra_base, "backdrop"),
+        os.path.join(xtra_base, "backdrop_info"),
+        os.path.join(xtra_base, "custom", "poster"),
+        os.path.join(xtra_base, "custom", "backdrop"),
+    ):
+        try:
+            os.makedirs(d, exist_ok=True)
+        except Exception:
+            pass
+
+_refresh_storage_paths()
 
 
 
@@ -1164,10 +1168,10 @@ def _strip_subtitle(title):
 _TITLE_OVERRIDES_CACHE = {"mtime": None, "data": None}
 
 def _title_overrides_path():
-    for p in ("/media/hdd/xtra/custom/title_overrides.json", "/media/hdd/xtra/title_overrides.json"):
+    for p in (os.path.join(xtra_base, "custom", "title_overrides.json"), os.path.join(xtra_base, "title_overrides.json")):
         if os.path.exists(p):
             return p
-    return "/media/hdd/xtra/custom/title_overrides.json"
+    return os.path.join(xtra_base, "custom", "title_overrides.json")
 
 def _load_title_overrides():
     path = _title_overrides_path()
@@ -1228,7 +1232,7 @@ def _match_override(store_slug, raw_title=None):
     return None
 
 def _allow_google():
-    return os.path.exists("/media/hdd/xtra/.allow_google") or os.path.exists("/media/hdd/xtra/custom/.allow_google")
+    return os.path.exists(os.path.join(xtra_base, ".allow_google")) or os.path.exists(os.path.join(xtra_base, "custom", ".allow_google"))
 
 def get_query_variants(title, shortdesc=None, fulldesc=None, **kwargs):
     """v17: Generic, EPG-driven query plan (no hardcoded title lists)."""
@@ -1361,7 +1365,7 @@ def load_poster_from_json(title, target1, target2=None):
     slug = get_store_slug(title)
 
     # 1) Erst poster_info pruefen (enthaelt direkte URL + Quelle)
-    poster_info_bases = [os.path.join(xtra_base, 'poster_info'), '/media/hdd/xtra/poster_info', '/media/usb/xtra/poster_info', '/media/mmc/xtra/poster_info', '/media/net/xtra/poster_info', '/tmp/poster_info', '/tmp']
+    poster_info_bases = [os.path.join(xtra_base, 'poster_info'), '/tmp/poster_info', '/tmp']
     for base in poster_info_bases:
         jf = os.path.join(base, slug + '.json')
         if os.path.exists(jf):
@@ -1377,7 +1381,7 @@ def load_poster_from_json(title, target1, target2=None):
                 pass
 
     # 2) Fallback: alte Meta-Info (/xtra/Info) mit TMDb poster_path
-    info_bases = [os.path.join(xtra_base, 'Info'), '/media/hdd/xtra/Info', '/media/usb/xtra/Info', '/media/mmc/xtra/Info', '/media/net/xtra/Info', '/tmp']
+    info_bases = [os.path.join(xtra_base, 'Info'), '/tmp']
     for base in info_bases:
         jf = os.path.join(base, slug + '.json')
         if os.path.exists(jf):
@@ -1625,6 +1629,7 @@ def generate_search_variants(title):
 
 class GradientPosterXDownloadThread(threading.Thread):
     def __init__(self):
+        _refresh_storage_paths()
         adsl = intCheck()
         if not adsl:
             return
@@ -1657,7 +1662,7 @@ class GradientPosterXDownloadThread(threading.Thread):
     # will be skipped. Custom assets never expire.
     # ------------------------------------------------------------------------
     def _custom_base_dir(self):
-        for base in (xtra_base, '/media/hdd/xtra', '/media/usb/xtra', '/media/mmc/xtra', '/media/net/xtra'):
+        for base in (xtra_base,):
             try:
                 if os.path.exists(base):
                     return base

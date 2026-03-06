@@ -229,11 +229,21 @@ def _get_recording_dirs():
 
 
 def _storage_xtra_base():
-    # Robust base selection: prefer existing xtra dirs (avoid false RW detection)
-    for p in ("/media/hdd/xtra", "/media/usb/xtra", "/media/mmc/xtra"):
+    # Use configured PosterX base if available; supports custom paths like /media/autofs/...
+    try:
+        sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
+        if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
+            base = sel.value
+            if os.path.isdir(base):
+                return os.path.join(base, "xtra")
+    except Exception:
+        pass
+
+    # AUTO fallback: prefer first writable/usable mount
+    for base in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"):
         try:
-            if os.path.isdir(p):
-                return p
+            if os.path.isdir(base):
+                return os.path.join(base, "xtra")
         except Exception:
             pass
     return "/tmp"
@@ -795,19 +805,10 @@ def isMountedInRW(mount_point):
 
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 noposter = "/usr/share/enigma2/%s/main/noposter.jpg" % cur_skin
-path_folder = "/media/usb/xtra/poster/"
-if os.path.exists("/media/hdd"):
-    if isMountedInRW("/media/hdd"):
-        path_folder = "/media/hdd/xtra/poster/"
-elif os.path.exists("/media/usb"):
-    if isMountedInRW("/media/usb"):
-        path_folder = "/media/usb/xtra/poster/"
-elif os.path.exists("/media/mmc"):
-    if isMountedInRW("/media/mmc"):
-        path_folder = "/media/mmc/xtra/poster/"
+path_folder = os.path.join(_storage_xtra_base(), "poster") + "/"
 
 if not os.path.exists(path_folder):
-    os.makedirs(path_folder)
+    os.makedirs(path_folder, exist_ok=True)
 
 
 REGEX = re.compile(

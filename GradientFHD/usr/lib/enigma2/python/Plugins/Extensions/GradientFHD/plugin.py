@@ -143,20 +143,29 @@ config.plugins.GradientFHD.tempUnit = ConfigSelection(default="Celsius", choices
 # The user selects where the whole "xtra" folder should be stored.
 # Example: base="/media/hdd" -> /media/hdd/xtra/... (poster/backdrop/Info/...)
 #
-# AUTO keeps the previous behaviour (auto-detect the first writable mount).
 # ---------------------------------------------------------------------
 config.plugins.GradientFHD.posterXPath = ConfigSelection(
-    default="AUTO",
+    default="/media/hdd",
     choices=[
-        ("AUTO", tr("Auto (recommended)", "Auto (empfohlen)")),
-        ("/media/hdd", "HDD (/media/hdd)"),
+                ("/media/hdd", "HDD (/media/hdd)"),
         ("/media/usb", "USB (/media/usb)"),
         ("/media/mmc", "MMC (/media/mmc)"),
         ("/media/net", "NAS (/media/net)"),
+        ("/media/autofs", "NAS (/media/autofs)"),
     ]
 )
 
 
+
+# --- Migration: AUTO removed -> force HDD ---
+try:
+    if getattr(config.plugins.GradientFHD, "posterXPath", None) and config.plugins.GradientFHD.posterXPath.value == "AUTO":
+        config.plugins.GradientFHD.posterXPath.value = "/media/hdd"
+        config.plugins.GradientFHD.posterXPath.save()
+        configfile.save()
+except Exception:
+    pass
+# ------------------------------------------
 def _gradientfhd_sessionstart(reason=None, session=None, **kwargs):
     if session is None:
         return
@@ -1075,7 +1084,7 @@ class GradientFHD_Config(Screen, ConfigListScreen):
             pass
 
         # AUTO: prefer HDD -> USB -> MMC -> NAS
-        for p in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net"):
+        for p in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"):
             if self._isWritablePath(p):
                 return p
         # last resort

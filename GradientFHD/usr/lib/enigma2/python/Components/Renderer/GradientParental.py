@@ -91,19 +91,33 @@ def isMountedInRW(mount_point):
 
 
 def get_info_folder():
-    path_folder = '/tmp/Info'
-    if os.path.exists('/media/hdd') and isMountedInRW('/media/hdd'):
-        path_folder = '/media/hdd/xtra/Info'
-    elif os.path.exists('/media/usb') and isMountedInRW('/media/usb'):
-        path_folder = '/media/usb/xtra/Info'
-    elif os.path.exists('/media/mmc') and isMountedInRW('/media/mmc'):
-        path_folder = '/media/mmc/xtra/Info'
-    if not os.path.exists(path_folder):
+    # Prefer configured base from GradientFHD (supports /media/autofs/...)
+    try:
+        sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
+        if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
+            base = sel.value
+            if os.path.isdir(base):
+                d = os.path.join(base, 'xtra', 'Info')
+                os.makedirs(d, exist_ok=True)
+                return d
+    except Exception:
+        pass
+
+    for base in ('/media/usb', '/media/hdd', '/media/mmc', '/media/net', '/media/autofs'):
         try:
-            os.makedirs(path_folder)
-        except OSError:
+            if os.path.exists(base) and isMountedInRW(base):
+                d = os.path.join(base, 'xtra', 'Info')
+                os.makedirs(d, exist_ok=True)
+                return d
+        except Exception:
             pass
-    return path_folder
+
+    d = '/tmp/Info'
+    try:
+        os.makedirs(d, exist_ok=True)
+    except Exception:
+        pass
+    return d
 
 
 INFO_FOLDER = get_info_folder()

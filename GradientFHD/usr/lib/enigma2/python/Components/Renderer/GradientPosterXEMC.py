@@ -43,6 +43,22 @@ import json
 import time
 import threading
 import requests
+
+def getPosterXBasePath():
+    try:
+        sel = getattr(getattr(config.plugins, 'GradientFHD', None), 'posterXPath', None)
+        if sel is not None and getattr(sel, 'value', None) and sel.value and sel.value != "AUTO":
+            return sel.value
+    except Exception:
+        pass
+    # fallback: prefer mounted targets in GUI order
+    for base in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"):
+        try:
+            if os.path.exists(base) and os.access(base, os.W_OK):
+                return base
+        except Exception:
+            pass
+    return "/media/hdd"
 from twisted.internet.reactor import callInThread
 
 PY3 = sys.version_info[0] >= 3
@@ -70,7 +86,7 @@ epgcache = eEPGCache.getInstance()
 def _get_emc_cache_base():
     """Resolve EMC cache base path compatible with GradientMoviescanner."""
     try:
-        base = config.plugins.GradientFHD.poster_storage_base.value
+        base = config.plugins.GradientFHD.posterXPath.value
         if base == "AUTO":
             for candidate in ("/media/hdd", "/media/usb", "/media/mmc"):
                 if os.path.isdir(candidate):
@@ -522,9 +538,9 @@ def get_storage_folder():
     except Exception:
         pass
     if os.path.isdir("/media/hdd"):
-        return "/media/hdd/xtra"
+        return os.path.join(getPosterXBasePath(), "xtra")
     if os.path.isdir("/media/usb"):
-        return "/media/usb/xtra"
+        return os.path.join(_get_emc_cache_base().rsplit("/xtra/EMC", 1)[0], "xtra")
     if os.path.isdir("/media/mmc"):
         return "/media/mmc/xtra"
     return "/tmp"

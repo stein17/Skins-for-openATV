@@ -67,12 +67,23 @@ except:
     pass
 
 def get_storage_folder():
-    if os.path.isdir('/media/hdd'):
-        return '/media/hdd/xtra'
-    if os.path.isdir('/media/usb'):
-        return '/media/usb/xtra'
-    if os.path.isdir('/media/mmc'):
-        return '/media/mmc/xtra'
+    # Prefer configured base from GradientFHD (supports /media/autofs/...)
+    try:
+        sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
+        if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
+            base = sel.value
+            if os.path.isdir(base):
+                return os.path.join(base, "xtra")
+    except Exception:
+        pass
+
+    # AUTO fallback (USB first, not HDD first)
+    for base in ('/media/usb', '/media/hdd', '/media/mmc', '/media/net', '/media/autofs'):
+        try:
+            if os.path.isdir(base):
+                return os.path.join(base, 'xtra')
+        except Exception:
+            pass
     return '/tmp'
 STORAGE_FOLDER = get_storage_folder()
 INFO_FOLDER = os.path.join(STORAGE_FOLDER, 'Info')

@@ -109,12 +109,20 @@ def _scan_cache_dir(path):
 
 
 def build_autodb_info_text():
-    items = [
-        (tr('Poster', 'Poster'), '/media/hdd/xtra/poster'),
-        (tr('Backdrop', 'Backdrop'), '/media/hdd/xtra/backdrop'),
-        (tr('Info-json', 'Info-json'), '/media/hdd/xtra/Info'),
-    ]
+    items = []
+    try:
+        base = config.plugins.GradientFHD.posterXPath.value
+    except Exception:
+        base = "/media/hdd"
+    if not base or base == "AUTO":
+        base = "/media/hdd"
+    xtra = os.path.join(base, "xtra")
 
+    items = [
+        (tr('Poster', 'Poster'), os.path.join(xtra, 'poster')),
+        (tr('Backdrop', 'Backdrop'), os.path.join(xtra, 'backdrop')),
+        (tr('Info-json', 'Info-json'), os.path.join(xtra, 'Info')),
+    ]
     lines = [HINT_TEXT.strip(), '']
     total_size = 0
 

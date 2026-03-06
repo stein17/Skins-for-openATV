@@ -50,8 +50,20 @@ load_tmdb_key()
 
 # --- INFO folder: prefer persistent storage even if mounted read-only (reading cached jsons still works) ---
 def get_info_folder():
+    # Prefer configured base from GradientFHD (supports /media/autofs/...)
+    try:
+        sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
+        if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
+            base = sel.value
+            if os.path.isdir(base):
+                d = os.path.join(base, 'xtra', 'Info')
+                os.makedirs(d, exist_ok=True)
+                return d
+    except Exception:
+        pass
+
     candidates = []
-    for base in ('/media/hdd', '/media/usb', '/media/mmc'):
+    for base in ('/media/usb', '/media/hdd', '/media/mmc', '/media/net', '/media/autofs'):
         try:
             info_dir = os.path.join(base, 'xtra', 'Info')
             if os.path.exists(info_dir):

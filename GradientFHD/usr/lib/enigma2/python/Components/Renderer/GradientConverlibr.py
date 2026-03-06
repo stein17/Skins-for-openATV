@@ -54,7 +54,7 @@ def _load_title_overrides():
     _TITLE_OVERRIDES_LOADED = True
     try:
         import os, json
-        path = "/media/hdd/xtra/custom/title_overrides.json"
+        path = os.path.join(getPosterXBasePath(), "xtra", "custom", "title_overrides.json")
         if os.path.exists(path):
             with open(path, "r") as f:
                 data = json.load(f)

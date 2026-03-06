@@ -29,7 +29,7 @@ DEBUG = True
 def _get_emc_cache_base():
 	"""Resolve EMC cache base path compatible with GradientMoviescanner."""
 	try:
-		base = config.plugins.GradientFHD.poster_storage_base.value
+		base = config.plugins.GradientFHD.posterXPath.value
 		if base == "AUTO":
 			for candidate in ("/media/hdd", "/media/usb", "/media/mmc"):
 				if os.path.isdir(candidate):
