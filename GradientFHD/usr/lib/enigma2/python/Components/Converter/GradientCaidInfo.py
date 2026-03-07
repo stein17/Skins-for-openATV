@@ -1,3 +1,56 @@
+# -*- coding: utf-8 -*-
+#
+# =============================================================================
+#  DEUTSCH / GERMAN
+# =============================================================================
+#  SoftCam Info Converter for Enigma2 Skins
+#
+#  Copyright (c) 2026  @stein17
+#
+#  Freeware:
+#  Dieses Projekt ist Freeware. Die private Nutzung ist erlaubt.
+#  Anpassungen für eigene Skins/Setups (z.B. OpenATV/Enigma2) sind ausdrücklich
+#  erlaubt.
+#
+#  Bedingungen:
+#  1) Dieser Copyright-/Lizenz-Header muss in allen Kopien und abgeleiteten
+#     Versionen vollständig erhalten bleiben und darf nicht entfernt oder
+#     unkenntlich gemacht werden.
+#  2) Eine Weitergabe (unverändert oder geändert) ist erlaubt, sofern dieser
+#     Header erhalten bleibt und die ursprünglichen Urheber genannt werden.
+#  3) Eine kommerzielle Nutzung (Verkauf, Paywall, bezahlte Images/Feeds,
+#     kommerzielle Bundles) ist ohne vorherige schriftliche Zustimmung der
+#     Urheber nicht gestattet.
+#
+#  Haftungsausschluss:
+#  Die Software wird „wie sie ist“ bereitgestellt, ohne jegliche Garantie.
+#  Die Nutzung erfolgt auf eigene Gefahr. Für Schäden oder Datenverlust wird
+#  keine Haftung übernommen.
+#
+#
+#  ENGLISH
+# =============================================================================
+#  SoftCam Info Converter for Enigma2 Skins
+#
+#  Copyright (c) 2026  @stein17
+#
+#  Freeware:
+#  This project is freeware. Private use is permitted.
+#  Modifications for your own skins/setups (e.g. OpenATV/Enigma2) are explicitly
+#  allowed.
+#
+#  Conditions:
+#  1) This copyright/license header must be kept fully intact in all copies and
+#     derivative works and must not be removed or obscured.
+#  2) Redistribution (modified or unmodified) is permitted as long as this header
+#     is retained and the original authors are credited.
+#  3) Commercial use (sale, paywall, paid images/feeds, commercial bundles) is
+#     not permitted without prior written consent from the authors.
+#
+#  Disclaimer:
+#  This software is provided “as is”, without warranty of any kind.
+#  Use at your own risk. The authors are not liable for any damages or data loss.
+# =============================================================================
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation
 from Tools.Directories import fileExists
