@@ -330,7 +330,7 @@ class PLiHDFullNightMod_Config(Screen, ConfigListScreen):
         self.set_background = getConfigListEntry(_("Set background transparency:"), self.myAtileHD_background)
         self.set_poster_epg = getConfigListEntry(_("Poster EPG:"), self.myAtileHD_poster_epg)
         self.set_pig = getConfigListEntry(_("Switch Mini TV on/off:"), self.myAtileHD_pig)
-        self.set_caid = getConfigListEntry(_("Caid Info Infobar:"), self.myAtileHD_caid)
+        self.set_caid = getConfigListEntry(_("Softcam Info Infobar:"), self.myAtileHD_caid)
         self.set_weather = getConfigListEntry(_("Weather Info:"), self.myAtileHD_weather)
         self.set_weather_icons = getConfigListEntry(_("Weather Icons style:"), self.myAtileHD_weather_icons)
         self.set_poster_infobar = getConfigListEntry(_("Poster Infobar:"), self.myAtileHD_poster_infobar)

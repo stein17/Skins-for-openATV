@@ -1,9 +1,73 @@
+# -*- coding: utf-8 -*-
+#
+#<convert type="xxxxCaidInfo">Server: %S * CAID: %C * ECM: %T</convert>
+#<convert type="xxxxCaidInfo">OSCam: %K %v * CAID: %C * ECM: %T</convert>
+#<convert type="xxxxCaidInfo">OSCam: %K %v * Server: %S * CAID: %C * ECM: %T</convert>
+#
+# =============================================================================
+#  DEUTSCH / GERMAN
+# =============================================================================
+#  SoftCam-Info Converter for Enigma2 Skins
+#
+#  Copyright (c) 2026  @stein17
+#
+#  Freeware:
+#  Dieses Projekt ist Freeware. Die private Nutzung ist erlaubt.
+#  Anpassungen für eigene Skins/Setups (z.B. OpenATV/Enigma2) sind ausdrücklich
+#  erlaubt.
+#
+#  Bedingungen:
+#  1) Dieser Copyright-/Lizenz-Header muss in allen Kopien und abgeleiteten
+#     Versionen vollständig erhalten bleiben und darf nicht entfernt oder
+#     unkenntlich gemacht werden.
+#  2) Eine Weitergabe (unverändert oder geändert) ist erlaubt, sofern dieser
+#     Header erhalten bleibt und die ursprünglichen Urheber genannt werden.
+#  3) Eine kommerzielle Nutzung (Verkauf, Paywall, bezahlte Images/Feeds,
+#     kommerzielle Bundles) ist ohne vorherige schriftliche Zustimmung der
+#     Urheber nicht gestattet.
+#
+#  Haftungsausschluss:
+#  Die Software wird „wie sie ist“ bereitgestellt, ohne jegliche Garantie.
+#  Die Nutzung erfolgt auf eigene Gefahr. Für Schäden oder Datenverlust wird
+#  keine Haftung übernommen.
+#
+#
+#  ENGLISH
+# =============================================================================
+#  SoftCam-Info Converter for Enigma2 Skins
+#
+#  Copyright (c) 2026  @stein17
+#
+#  Freeware:
+#  This project is freeware. Private use is permitted.
+#  Modifications for your own skins/setups (e.g. OpenATV/Enigma2) are explicitly
+#  allowed.
+#
+#  Conditions:
+#  1) This copyright/license header must be kept fully intact in all copies and
+#     derivative works and must not be removed or obscured.
+#  2) Redistribution (modified or unmodified) is permitted as long as this header
+#     is retained and the original authors are credited.
+#  3) Commercial use (sale, paywall, paid images/feeds, commercial bundles) is
+#     not permitted without prior written consent from the authors.
+#
+#  Disclaimer:
+#  This software is provided “as is”, without warranty of any kind.
+#  Use at your own risk. The authors are not liable for any damages or data loss.
+# =============================================================================
 from Components.Converter.Converter import Converter
 from enigma import iServiceInformation
 from Tools.Directories import fileExists
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 import os
+import re
+import time
+import subprocess
+try:
+    from urllib.request import urlopen
+except:
+    urlopen = None
 info = {}
 old_ecm_mtime = None
 
@@ -117,7 +181,7 @@ class PliModCaidInfo(Poll, Converter, object):
             self.type = self.CRDTXT
         elif type == 'Short':
             self.type = self.SHORT
-        elif type == 'Default' or type == '' or type == None or type == '%':
+        elif type == 'Default' or type == '' or type == None or type == '%' :
             self.type = self.ALL
         else:
             self.type = self.FORMAT
@@ -349,7 +413,7 @@ class PliModCaidInfo(Poll, Converter, object):
                         if ecm_info.get('ecm time', '').find('msec') > -1:
                             ecm_time = ecm_info.get('ecm time', '')
                         else:
-                            ecm_time = ecm_info.get('ecm time', '').replace('.', '').lstrip('0') ###########+ ' ms'
+                            ecm_time = ecm_info.get('ecm time', '').replace('.', '').lstrip('0')
                         if self.type == self.DELAY:
                             return ecm_time
                         protocol = ecm_info.get('protocol', '')
@@ -374,10 +438,43 @@ class PliModCaidInfo(Poll, Converter, object):
                             params = self.sfmt.split(' ')
                             for param in params:
                                 if param != '':
+                                    before_len = len(textvalue)
                                     if param[0] != '%':
                                         textvalue += param
+
                                     elif param == '%S':
-                                        textvalue += server
+
+                                        sv = (server or '').strip().lower()
+
+                                        if (not sv) or sv == 'local':
+
+                                            # Local card: show provider label if known (e.g. CAID 1843 => HD+)
+
+                                            local_label = ''
+
+                                            try:
+
+                                                if (caid or '').upper() == '1843':
+
+                                                    local_label = 'HD+'
+
+                                            except:
+
+                                                pass
+
+                                            if local_label:
+
+                                                textvalue += '%s (local)' % local_label
+
+                                            else:
+
+                                                textvalue += 'local'
+
+                                        else:
+
+                                            textvalue += server
+
+
                                     elif param == '%H':
                                         textvalue += hops
                                     elif param == '%SY':
@@ -400,13 +497,19 @@ class PliModCaidInfo(Poll, Converter, object):
                                         textvalue += reader
                                     elif param == '%T':
                                         textvalue += ecm_time
+                                    elif param == '%V':
+                                        textvalue += self.getSoftcamVersion()
+                                    elif param == '%v':
+                                        textvalue += self.getSoftcamVersionShort()
+                                    elif param == '%K':
+                                        textvalue += self.getSoftcamKind()
                                     elif param == '%t':
                                         textvalue += '\t'
                                     elif param == '%n':
                                         textvalue += '\n'
                                     elif param[1:].isdigit():
                                         textvalue = textvalue.ljust(len(textvalue) + int(param[1:]))
-                                    if len(textvalue) > 0:
+                                    if len(textvalue) > 0 and len(textvalue) != before_len:
                                         if textvalue[-1] != '\t' and textvalue[-1] != '\n':
                                             textvalue += ' '
 
@@ -494,6 +597,147 @@ class PliModCaidInfo(Poll, Converter, object):
 
     text = property(getText)
 
+    # --- Softcam version (WebIF/title + fallback) ---
+    def getSoftcamKind(self):
+        # Returns "MASTER", "EMU" or "" (no OSCam prefix, so you can format in skin)
+        try:
+            out = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore").lower()
+        except:
+            out = ""
+        if "oscam-master" in out:
+            return "MASTER"
+        if "oscam-emu" in out:
+            return "EMU"
+        return ""
+
+    def _read_httpport(self, conf_path, default_port="8888"):
+        port = default_port
+        try:
+            if fileExists(conf_path):
+                with open(conf_path, "r") as f:
+                    for line in f:
+                        line_s = line.strip()
+                        if not line_s or line_s.startswith("#") or "=" not in line_s:
+                            continue
+                        k, v = line_s.split("=", 1)
+                        if k.strip().lower() == "httpport":
+                            port = v.strip()
+                            break
+        except:
+            pass
+        return port
+
+    def _webif_title(self, port):
+        if urlopen is None:
+            return ""
+        try:
+            html = urlopen("http://127.0.0.1:%s/status.html" % port, timeout=1).read().decode("utf-8", "ignore")
+            m = re.search(r"<title>\s*([^<]+)\s*</title>", html, re.IGNORECASE)
+            if m:
+                return m.group(1).strip()
+        except:
+            pass
+        return ""
+
+    def _detect_softcam_exec(self):
+        # Returns (exe_path, name_hint)
+        candidates = [
+            ("oscam-emu", "/usr/bin/oscam-emu", "OSCam"),
+            ("oscam", "/usr/bin/oscam", "OSCam"),
+            ("ncam", "/usr/bin/ncam", "NCam"),
+            ("cccam", "/usr/bin/CCcam", "CCcam"),
+            ("mgcamd", "/usr/bin/mgcamd", "Mgcamd"),
+            ("gbox", "/usr/bin/gbox", "Gbox"),
+            ("scam", "/usr/bin/scam", "Scam"),
+        ]
+        try:
+            out = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore")
+        except:
+            out = ""
+        out_l = out.lower()
+
+        for proc_name, exe_path, hint in candidates:
+            if proc_name in out_l:
+                if exe_path and fileExists(exe_path):
+                    return (exe_path, hint)
+                return ("", hint)
+        return ("", "")
+
+    def getSoftcamVersion(self):
+        # Cache (avoid WebIF fetch each poll tick)
+        now = time.time()
+        cache = getattr(self, "_softcam_cache", None)
+        if cache and (now - cache.get("ts", 0)) < 10:
+            return cache.get("val", "")
+
+        exe_path, hint = self._detect_softcam_exec()
+
+        # OSCam / NCam prefer WebIF <title>
+        conf_candidates = []
+        if "oscam" in (exe_path or "").lower() or hint == "OSCam":
+            conf_candidates = [
+                ("/etc/tuxbox/config/oscam-emu/oscam.conf", "8888"),
+                ("/etc/tuxbox/config/oscam/oscam.conf", "8888"),
+                ("/etc/tuxbox/config/oscam-stable/oscam.conf", "8888"),
+                ("/etc/tuxbox/config/oscam-smod/oscam.conf", "8888"),
+                ("/etc/tuxbox/config/oscam-master/oscam.conf", "8888"),
+            ]
+        elif "ncam" in (exe_path or "").lower() or hint == "NCam":
+            conf_candidates = [
+                ("/etc/tuxbox/config/ncam/ncam.conf", "8888"),
+                ("/etc/tuxbox/config/ncam/oscam.conf", "8888"),
+            ]
+
+        for conf_path, def_port in conf_candidates:
+            port = self._read_httpport(conf_path, def_port)
+            title = self._webif_title(port)
+            if title:
+                self._softcam_cache = {"ts": now, "val": title}
+                return title
+
+        # Fallback: try binary flags
+        if exe_path and fileExists(exe_path):
+            for arg in ("-V", "-v", "--version"):
+                try:
+                    out = subprocess.check_output([exe_path, arg], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore")
+                    m = re.search(r"(OSCam\s+[^\r\n]+|NCam\s+[^\r\n]+|CCcam\s+[^\r\n]+|Mgcamd\s+[^\r\n]+|Gbox\s+[^\r\n]+|Scam\s+[^\r\n]+)", out, re.IGNORECASE)
+                    if m:
+                        val = m.group(1).strip()
+                        self._softcam_cache = {"ts": now, "val": val}
+                        return val
+                except:
+                    pass
+
+        # Last resort: name only
+        self._softcam_cache = {"ts": now, "val": (hint or "")}
+        return hint or ""
+
+    
+    def getSoftcamVersionShort(self):
+        full = (self.getSoftcamVersion() or "").strip()
+        full_l = full.lower()
+
+        # detect smod by process name or title text
+        try:
+            psout = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore").lower()
+        except:
+            psout = ""
+        is_smod = ("oscam-smod" in psout) or ("smod" in full_l)
+
+        # Normalize SMOD: rsvn11726 / "Trunk rsvn11726" / r11726 -> "smod 11726"
+        if is_smod:
+            import re
+            m = re.search(r"rsvn\s*([0-9]+)", full_l)
+            if not m:
+                m = re.search(r"\br\s*([0-9]{4,})\b", full_l)
+            if m:
+                return "SMOD " + m.group(1)
+
+        # Default behavior: strip leading "OSCam " / "NCam "
+        import re
+        out = re.sub(r'^(OSCam|NCam)\s*', '', full, flags=re.IGNORECASE).strip()
+        return out
+
     def ecmfile(self):
         global info
         global old_ecm_mtime
@@ -568,7 +812,7 @@ class PliModCaidInfo(Poll, Converter, object):
                                 if item[1].strip() == 'emu':
                                     item[0] = 'source'
                             elif item[0] == 'from':
-                                if item[1].strip() == 'local':
+                                if item[1].strip().lower().startswith('local'):
                                     item[1] = 'sci'
                                     item[0] = 'source'
                                 else:
