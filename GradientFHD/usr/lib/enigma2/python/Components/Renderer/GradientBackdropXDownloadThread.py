@@ -1053,20 +1053,13 @@ except NameError:
     thetvdbkey_legacy = thetvdbkey  # Built-in legacy key fallback
 
 # ============================================================================
-# IMAGE SIZES - Backdrop spezifisch (groesser als Poster)
+# IMAGE SIZES - Backdrop
+# Hard cap to reduce ePicLoad / accelAlloc pressure on the box.
 # ============================================================================
-isz = "780,439"   # Backdrop default
-bisz = "1280,720" # Backdrop big
-screenwidth = getDesktop(0).size()
-if screenwidth.width() <= 1280:
-    isz = "780,439"
-    bisz = "1280,720"
-elif screenwidth.width() <= 1920:
-    isz = "1280,720"
-    bisz = "1920,1080"
-else:
-    isz = "1920,1080"
-    bisz = "3840,2160"
+MAX_BACKDROP_W = 685
+MAX_BACKDROP_H = 388
+isz = "300,169"
+bisz = "685,388"
 
 
 # ============================================================================
@@ -1545,6 +1538,10 @@ class GradientBackdropXDownloadThread(threading.Thread):
 
                 try:
                     shutil.copy2(custom_path, dwn_backdrop)
+                    try:
+                        self.resizeBackdrop(dwn_backdrop)
+                    except Exception:
+                        pass
                 except Exception:
                     return False, None
 
@@ -3115,13 +3112,7 @@ class GradientBackdropXDownloadThread(threading.Thread):
     # ========================================================================
 
     def saveBackdrop(self, url, filepath):
-        """Speichert Backdrop-Bild.
-
-        FIX:
-        - Immer als echtes JPEG speichern (PNG/WebP werden konvertiert)
-        - Atomic write: erst .tmp schreiben, dann os.replace() -> verhindert "halb geladene"/verzerrte Bilder
-          wenn Enigma2 genau waehrend des Schreibens laedt.
-        """
+        """Download + normalize backdrop as bounded baseline JPEG."""
         import io
         tmp = filepath + '.tmp'
         try:
@@ -3130,33 +3121,40 @@ class GradientBackdropXDownloadThread(threading.Thread):
             response.raise_for_status()
             data = response.content or b''
 
-            # already JPEG?
-            if len(data) > 3 and data[:3] == bytes((0xFF, 0xD8, 0xFF)):
-                with open(tmp, 'wb') as f:
-                    f.write(data)
+            img = Image.open(io.BytesIO(data))
+            try:
+                img = img.convert('RGB')
+            except Exception:
+                pass
 
-                # normalize progressive JPEG to baseline (best effort)
+            width, height = img.size
+            if not width or not height:
                 try:
-                    img = Image.open(tmp)
-                    progressive = bool(img.info.get('progressive') or img.info.get('progression'))
                     img.close()
-                    if progressive:
-                        img = Image.open(tmp).convert('RGB')
-                        img.save(tmp, 'JPEG', quality=92, optimize=True, progressive=False)
-                        img.close()
                 except Exception:
                     pass
+                return False
 
-                os.replace(tmp, filepath)
-                return True
+            scale = min(float(MAX_BACKDROP_W) / float(width), float(MAX_BACKDROP_H) / float(height), 1.0)
+            new_width = max(1, int(round(width * scale)))
+            new_height = max(1, int(round(height * scale)))
 
-            # decode and re-encode as JPEG
-            bio = io.BytesIO(data)
-            img = Image.open(bio)
-            img = img.convert('RGB')
-            img.save(tmp, 'JPEG', quality=92, optimize=True, progressive=False)
-            img.close()
+            if new_width != width or new_height != height:
+                try:
+                    rimg = img.resize((new_width, new_height), Image.LANCZOS)
+                except Exception:
+                    rimg = img.resize((new_width, new_height), Image.ANTIALIAS)
+                try:
+                    img.close()
+                except Exception:
+                    pass
+                img = rimg
 
+            img.save(tmp, 'JPEG', quality=90, optimize=True, progressive=False)
+            try:
+                img.close()
+            except Exception:
+                pass
             os.replace(tmp, filepath)
             return True
 
@@ -3169,7 +3167,6 @@ class GradientBackdropXDownloadThread(threading.Thread):
             except Exception:
                 pass
             try:
-                # remove broken output, if any
                 if os.path.exists(filepath):
                     os.remove(filepath)
             except Exception:
@@ -3203,7 +3200,7 @@ class GradientBackdropXDownloadThread(threading.Thread):
 
             if w <= 0 or h <= 0:
                 return False
-            if w < 800 or h < 360:
+            if w < 300 or h < 160:
                 return False
             ratio = float(w) / float(h)
             if ratio < 1.40:
@@ -3216,22 +3213,41 @@ class GradientBackdropXDownloadThread(threading.Thread):
 
     def resizeBackdrop(self, dwn_backdrop):
 
-        """Skaliert Backdrop auf richtige Groesse."""
+        """Shrink backdrop to the configured maximum box without upscaling."""
         try:
             img = Image.open(dwn_backdrop)
-            width, height = img.size
-            ratio = float(width) / float(height)
-            new_width = int(isz.split(",")[0])
-            new_height = int(new_width / ratio)
-            
             try:
-                rimg = img.resize((new_width, new_height), Image.LANCZOS)
-            except:
-                rimg = img.resize((new_width, new_height), Image.ANTIALIAS)
-            
-            img.close()
-            rimg.save(dwn_backdrop)
-            rimg.close()
+                img = img.convert('RGB')
+            except Exception:
+                pass
+            width, height = img.size
+            if not width or not height:
+                try:
+                    img.close()
+                except Exception:
+                    pass
+                return
+
+            scale = min(float(MAX_BACKDROP_W) / float(width), float(MAX_BACKDROP_H) / float(height), 1.0)
+            new_width = max(1, int(round(width * scale)))
+            new_height = max(1, int(round(height * scale)))
+
+            if new_width != width or new_height != height:
+                try:
+                    rimg = img.resize((new_width, new_height), Image.LANCZOS)
+                except Exception:
+                    rimg = img.resize((new_width, new_height), Image.ANTIALIAS)
+                try:
+                    img.close()
+                except Exception:
+                    pass
+                img = rimg
+
+            img.save(dwn_backdrop, 'JPEG', quality=90, optimize=True, progressive=False)
+            try:
+                img.close()
+            except Exception:
+                pass
         except Exception as e:
             if DEBUG_BACKDROP:
                 print("[resizeBackdrop error] %s" % str(e))

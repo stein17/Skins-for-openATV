@@ -33,13 +33,17 @@ SKIN.XML BEISPIELE:
 <widget source="session.CurrentService" render="GradientBackdropXEMC" position="0,0" size="1280,720" zPosition="1" alphatest="blend" />
 """
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, eTimer, loadJPG, eEPGCache
+from enigma import ePixmap, eTimer, loadJPG, eEPGCache, ePicLoad, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
 from ServiceReference import ServiceReference
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.CurrentService import CurrentService
 from Components.Sources.EventInfo import EventInfo
 from Components.Sources.Event import Event
 from Components.config import config
+try:
+    from Components.AVSwitch import AVSwitch
+except Exception:
+    AVSwitch = None
 import NavigationInstance
 import os
 import sys
@@ -566,6 +570,10 @@ class GradientBackdropXEMC(Renderer):
     def __init__(self):
         Renderer.__init__(self)
         self.backdrop_path = None
+        self._last_path = None
+        self.picload = None
+        self.picload_conn = None
+        self._decode_path = None
         self.timer = eTimer()
         try:
             self.timer.timeout.connect(self._checkBackdrop)
@@ -574,11 +582,116 @@ class GradientBackdropXEMC(Renderer):
         self.worker = None
         self.check_count = 0
 
+    def postWidgetCreate(self, instance):
+        Renderer.postWidgetCreate(self, instance)
+        try:
+            self.picload = ePicLoad()
+            try:
+                self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+            except Exception:
+                self.picload.PictureData.get().append(self._onPicDecoded)
+        except Exception:
+            self.picload = None
+
+    def preWidgetRemove(self, instance):
+        try:
+            self.timer.stop()
+        except Exception:
+            pass
+        self._clearPixmap()
+        try:
+            Renderer.preWidgetRemove(self, instance)
+        except Exception:
+            pass
+
+    def _clearPixmap(self):
+        try:
+            if self.instance is not None:
+                try:
+                    self.instance.setPixmap(None)
+                except Exception:
+                    pass
+                self.instance.hide()
+        except Exception:
+            pass
+
+    def _getDecodeSize(self):
+        w = h = 0
+        try:
+            sz = self.instance.size()
+            w = sz.width()
+            h = sz.height()
+        except Exception:
+            pass
+        if w <= 0:
+            w = 685
+        if h <= 0:
+            h = 388
+        return int(w), int(h)
+
+    def _startDecodeBackdrop(self, path):
+        if not self.instance or not path or not os.path.exists(path):
+            return False
+        try:
+            self._clearPixmap()
+            self._decode_path = path
+            if self.picload is None:
+                self.picload = ePicLoad()
+                try:
+                    self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+                except Exception:
+                    self.picload.PictureData.get().append(self._onPicDecoded)
+            width, height = self._getDecodeSize()
+            sc = (1, 1)
+            try:
+                if AVSwitch is not None:
+                    sc = AVSwitch().getFramebufferScale()
+            except Exception:
+                pass
+            try:
+                self.picload.setPara((width, height, sc[0], sc[1], False, 1, '#00000000'))
+            except Exception:
+                self.picload.setPara([width, height, sc[0], sc[1], False, 1, '#00000000'])
+            res = self.picload.startDecode(path)
+            if res != 0:
+                self._decode_path = None
+                return False
+            return True
+        except Exception:
+            self._decode_path = None
+            return False
+
+    def _onPicDecoded(self, picInfo=None):
+        try:
+            if not self.instance or not self.picload or not self._decode_path:
+                return
+            ptr = self.picload.getData()
+            if ptr is None:
+                return
+            self.instance.setPixmap(ptr)
+            try:
+                self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+            except Exception:
+                try:
+                    self.instance.setScale(1)
+                except Exception:
+                    pass
+            self.instance.show()
+            self._last_path = self._decode_path
+        except Exception:
+            try:
+                self.instance.hide()
+            except Exception:
+                pass
+        finally:
+            self._decode_path = None
+
     def changed(self, what):
         if not self.instance:
             return
         if what[0] == self.CHANGED_CLEAR:
-            self.instance.hide()
+            self._last_path = None
+            self._clearPixmap()
             return
         self._updateEvent()
 
@@ -604,10 +717,12 @@ class GradientBackdropXEMC(Renderer):
                     except Exception:
                         path = None
             else:
-                self.instance.hide()
+                self._last_path = None
+                self._clearPixmap()
                 return
             if not path:
-                self.instance.hide()
+                self._last_path = None
+                self._clearPixmap()
                 return
             titles = []
             if event:
@@ -791,9 +906,12 @@ class GradientBackdropXEMC(Renderer):
             if not found:
                 found = _emc_find_artwork(EMC_BACKDROP_FOLDER, titles)
             if not found:
-                self.instance.hide()
+                self._last_path = None
+                self._clearPixmap()
                 return
             self.backdrop_path = found
+            if found == self._last_path:
+                return
             self._showBackdrop(found)
         except Exception as e:
             if DEBUG_EMC:
@@ -817,17 +935,20 @@ class GradientBackdropXEMC(Renderer):
             if self.check_count < 20:
                 self.timer.start(300, True)
             else:
-                self.instance.hide()
+                self._last_path = None
+                self._clearPixmap()
         except:
-            self.instance.hide()
+            self._last_path = None
+            self._clearPixmap()
 
     def _showBackdrop(self, path):
         try:
-            self.instance.setPixmap(loadJPG(path))
-            self.instance.setScale(1)
-            self.instance.show()
+            if not self._startDecodeBackdrop(path):
+                self._last_path = None
+                self._clearPixmap()
         except:
-            self.instance.hide()
+            self._last_path = None
+            self._clearPixmap()
 if __name__ == '__main__':
     print('=' * 60)
     print('GradientBackdropXEMC - NEU')

@@ -742,18 +742,24 @@ def get_tmdb_api_key():
         return ""
 
 
+# Keep the on-disk poster cache lightweight.
+# The renderer widgets in this skin currently top out around 340x500, so there is
+# no benefit in caching giant poster files like 780x1170 / 1280x1920 for normal use.
+# AutoDB keeps working; only the stored poster size is reduced to a sensible maximum.
+MAX_POSTER_W = 340
+MAX_POSTER_H = 500
 isz = "185,278"
-bisz = "300,450"
+bisz = "340,500"
 screenwidth = getDesktop(0).size()
 if screenwidth.width() <= 1280:
-    isz = isz.replace(isz, "185,278")
-    bisz = bisz.replace(bisz, "300,450")
+    isz = "185,278"
+    bisz = "300,450"
 elif screenwidth.width() <= 1920:
-    isz = isz.replace(isz, "342,514")
-    bisz = bisz.replace(bisz, "780,1170")
+    isz = "342,500"
+    bisz = "340,500"
 else:
-    isz = isz.replace(isz, "780,1170")
-    bisz = bisz.replace(bisz, "1280,1920")
+    isz = "342,500"
+    bisz = "340,500"
 
 
 def isMountedInRW(mount_point):
@@ -828,7 +834,7 @@ def try_upgrade_poster_from_info(title, out_path):
         tmdb_id = data.get("tmdb_id") or data.get("id")
         if not poster_path:
             return False
-        url = "https://image.tmdb.org/t/p/w780" + poster_path
+        url = "https://image.tmdb.org/t/p/w500" + poster_path
         if _download_file_simple(url, out_path, timeout=(10, 25)):
             # sanity: portrait posters only
             if _is_portrait(out_path):
@@ -1751,6 +1757,11 @@ class GradientPosterXDownloadThread(threading.Thread):
 
                 try:
                     shutil.copy2(custom_path, dwn_poster)
+                    try:
+                        self.sizeb = True
+                        self.resizePoster(dwn_poster)
+                    except Exception:
+                        pass
                 except Exception:
                     # If copy fails, treat as not found
                     return False, None
@@ -1953,7 +1964,7 @@ class GradientPosterXDownloadThread(threading.Thread):
             if not poster_path_tmdb or not tmdb_id:
                 return False, "TMDb: Not found"
         
-            img_url = "https://image.tmdb.org/t/p/w780" + poster_path_tmdb
+            img_url = "https://image.tmdb.org/t/p/w500" + poster_path_tmdb
             if not _download_file_simple(img_url, dwn_poster, timeout=(10, 25)):
                 return False, "TMDb: download failed"
         
@@ -3009,6 +3020,7 @@ class GradientPosterXDownloadThread(threading.Thread):
     def savePoster(self, url, callback):
 ###         print('000000000URLLLLL=', url)
 ###         print('000000000CALLBACK=', callback)
+        import io
         AGENTS = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
                   "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
                   "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
@@ -3024,8 +3036,31 @@ class GradientPosterXDownloadThread(threading.Thread):
                 os.makedirs(os.path.dirname(callback), exist_ok=True)
             except Exception:
                 pass
-            with open(callback, "wb") as local_file:
-                local_file.write(response.content)
+
+            img = Image.open(io.BytesIO(response.content or b''))
+            try:
+                img = img.convert('RGB')
+            except Exception:
+                pass
+
+            width, height = img.size
+            if width and height:
+                scale = min(float(MAX_POSTER_W) / float(width), float(MAX_POSTER_H) / float(height), 1.0)
+                new_width = max(1, int(round(width * scale)))
+                new_height = max(1, int(round(height * scale)))
+                if new_width != width or new_height != height:
+                    rimg = img.resize((new_width, new_height), ANTIALIAS)
+                    try:
+                        img.close()
+                    except Exception:
+                        pass
+                    img = rimg
+
+            img.save(callback, format='JPEG', quality=90, optimize=True)
+            try:
+                img.close()
+            except Exception:
+                pass
             if _image_too_large(callback):
                 _remove_silent(callback)
 
@@ -3036,41 +3071,52 @@ class GradientPosterXDownloadThread(threading.Thread):
                     l.debug("download failed: %s", str(error))
             except Exception:
                 pass
+        except Exception:
+            pass
         return callback
 
     def resizePoster(self, dwn_poster):
         try:
+            target = bisz if self.sizeb else isz
+            self.sizeb = False
 
-            if self.sizeb:
-                self.sizeb = False
-
-                img = Image.open(dwn_poster)
-                width, height = img.size
-                ratio = float(width) // float(height)
-                new_height = int(bisz.split(",")[1])
-                new_width = int(ratio * new_height)
-                try:
-                    rimg = img.resize((new_width, new_height), ANTIALIAS)
-                except:
-                    rimg = img.resize((new_width, new_height), ANTIALIAS)
-                img.close()
-                rimg.save(dwn_poster)
-                rimg.close()
+            max_w, max_h = [int(x) for x in target.split(",")]
             img = Image.open(dwn_poster)
-            width, height = img.size
-            ratio = float(width) // float(height)
-            new_height = int(isz.split(",")[1])
-            new_width = int(ratio * new_height)
             try:
-                rimg = img.resize((new_width, new_height), ANTIALIAS)
-            except:
-                rimg = img.resize((new_width, new_height), ANTIALIAS)
-            img.close()
-            rimg.save(dwn_poster)
-            rimg.close()
-        except Exception as e:
+                # Normalize orientation but keep portrait posters portrait.
+                try:
+                    img = img.convert("RGB")
+                except Exception:
+                    pass
+
+                width, height = img.size
+                if not width or not height:
+                    img.close()
+                    return
+
+                # Never upscale tiny files; only shrink when larger than target box.
+                scale = min(float(max_w) / float(width), float(max_h) / float(height), 1.0)
+                new_width = max(1, int(round(width * scale)))
+                new_height = max(1, int(round(height * scale)))
+
+                if new_width == width and new_height == height:
+                    img.save(dwn_poster, format="JPEG", quality=90, optimize=True)
+                else:
+                    rimg = img.resize((new_width, new_height), ANTIALIAS)
+                    try:
+                        rimg.save(dwn_poster, format="JPEG", quality=90, optimize=True)
+                    finally:
+                        try:
+                            rimg.close()
+                        except Exception:
+                            pass
+            finally:
+                try:
+                    img.close()
+                except Exception:
+                    pass
+        except Exception:
             pass
-            # print("ERROR:{}".format(e))
 
 
     def verifyPoster(self, posterfile):

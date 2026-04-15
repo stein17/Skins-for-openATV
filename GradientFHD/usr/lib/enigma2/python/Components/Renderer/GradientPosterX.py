@@ -115,9 +115,13 @@
     
 
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, eTimer, loadJPG, eEPGCache, BT_HALIGN_CENTER, BT_VALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE
+from enigma import ePixmap, eTimer, loadJPG, eEPGCache, ePicLoad, BT_HALIGN_CENTER, BT_VALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE
 from ServiceReference import ServiceReference
 from Components.config import config
+try:
+    from Components.AVSwitch import AVSwitch
+except Exception:
+    AVSwitch = None
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.CurrentService import CurrentService
 from Components.Sources.EventInfo import EventInfo
@@ -136,6 +140,13 @@ import unicodedata
 import traceback
 
 STOP_AUTODB_FILE = '/tmp/stop_poster_autodb'
+
+MAX_POSTER_W = 340
+MAX_POSTER_H = 500
+
+
+def _posterx_dbg(msg):
+    return
 
 
 
@@ -1800,19 +1811,48 @@ threadAutoDB = PosterAutoDB()
 threadAutoDB.start()
 
 class GradientPosterX(Renderer):
+        GUI_WIDGET = ePixmap
+
         def __init__(self):
                 Renderer.__init__(self)
                 self.nxts = 0
                 self.canal = [None, None, None, None, None, None]
                 self.oldCanal = None
                 self.logdbg = None
+                self._dbg_last_path = None
+                self._dbg_last_title = None
+                self._dbg_load_count = 0
+                self._dbg_changed_count = 0
+                self._dbg_parent_name = None
+                self._dbg_parent_id = None
+                self._waiting_path = None
+                self._waitPosterPath = None
+                self._waitPosterQueued = False
+                self._waitPosterLoops = 0
+                self._loading_path = None
+                self._decode_path = None
+                self.picload = None
+                self.picload_conn = None
                 if not self.intCheck():
                        return
                 self.timer = eTimer()
                 self.timer.callback.append(self.showPoster)
+                self.waitTimer = eTimer()
+                self.waitTimer.callback.append(self.waitPoster)
 
         def applySkin(self, desktop, parent):
                 attribs = []
+                try:
+                        self._dbg_parent_name = parent.__class__.__name__ if parent is not None else None
+                        self._dbg_parent_id = id(parent) if parent is not None else None
+                        _posterx_dbg("applySkin() self_id=%s parent=%s parent_id=%s skinAttributes=%s" % (
+                                id(self),
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                repr(self.skinAttributes)
+                        ))
+                except Exception:
+                        pass
                 for (attrib, value,) in self.skinAttributes:
                         if attrib == "nexts":
                                 self.nxts = int(value)
@@ -1832,132 +1872,428 @@ class GradientPosterX(Renderer):
                         sock = False
                 return sock
 
-        GUI_WIDGET = ePixmap
+        def postWidgetCreate(self, instance):
+                Renderer.postWidgetCreate(self, instance)
+                try:
+                        self.picload = ePicLoad()
+                        try:
+                                self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+                        except Exception:
+                                self.picload.PictureData.get().append(self._onPicDecoded)
+                except Exception as e:
+                        self.picload = None
+                        self.logPoster("Error (ePicLoad init) : " + str(e))
+
+        def preWidgetRemove(self, instance):
+                try:
+                        if getattr(self, 'timer', None) is not None:
+                                self.timer.stop()
+                except Exception:
+                        pass
+                try:
+                        if getattr(self, 'waitTimer', None) is not None:
+                                self.waitTimer.stop()
+                except Exception:
+                        pass
+                try:
+                        self._clearPixmap()
+                except Exception:
+                        pass
+                try:
+                        Renderer.preWidgetRemove(self, instance)
+                except Exception:
+                        pass
+
+        def _clearPixmap(self):
+                try:
+                        if self.instance is not None:
+                                try:
+                                        self.instance.setPixmap(None)
+                                except Exception:
+                                        pass
+                                self.instance.hide()
+                except Exception:
+                        pass
+
+        def _getDecodeSize(self):
+                w = 0
+                h = 0
+                try:
+                        sz = self.instance.size()
+                        w = sz.width()
+                        h = sz.height()
+                except Exception:
+                        try:
+                                for (attrib, value) in getattr(self, 'skinAttributes', []):
+                                        if attrib == 'size':
+                                                try:
+                                                        w, h = [int(x) for x in str(value).split(',')]
+                                                except Exception:
+                                                        w, h = value
+                                                break
+                        except Exception:
+                                pass
+                if w <= 0:
+                        w = 185
+                if h <= 0:
+                        h = 278
+                w = min(int(w), MAX_POSTER_W)
+                h = min(int(h), MAX_POSTER_H)
+                return int(w), int(h)
+
+        def _startDecodePoster(self, pstrNm):
+                if not self.instance or not pstrNm or not os.path.exists(pstrNm):
+                        return False
+                try:
+                        self._clearPixmap()
+                        self._decode_path = pstrNm
+                        if self.picload is None:
+                                self.picload = ePicLoad()
+                                try:
+                                        self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+                                except Exception:
+                                        self.picload.PictureData.get().append(self._onPicDecoded)
+                        width, height = self._getDecodeSize()
+                        sc = (1, 1)
+                        try:
+                                sc = AVSwitch().getFramebufferScale()
+                        except Exception:
+                                pass
+                        try:
+                                self.picload.setPara((width, height, sc[0], sc[1], False, 1, '#00000000'))
+                        except Exception:
+                                self.picload.setPara([width, height, sc[0], sc[1], False, 1, '#00000000'])
+                        res = self.picload.startDecode(pstrNm)
+                        try:
+                                _posterx_dbg("EPICLOAD START self_id=%s instance_id=%s nxts=%s path=%s size=%sx%s res=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        repr(pstrNm),
+                                        width,
+                                        height,
+                                        repr(res)
+                                ))
+                        except Exception:
+                                pass
+                        if res != 0:
+                                self.logPoster("Error (startDecode) : %s (%s)" % (res, pstrNm))
+                                self._decode_path = None
+                                return False
+                        return True
+                except Exception as e:
+                        self.logPoster("Error (ePicLoad decode) : " + str(e))
+                        self._decode_path = None
+                        return False
+
+        def _onPicDecoded(self, picInfo=None):
+                try:
+                        if not self.instance or not self.picload or not self._decode_path:
+                                return
+                        ptr = self.picload.getData()
+                        if ptr is None:
+                                self.logPoster("Error (ePicLoad data) : %s" % repr(self._decode_path))
+                                return
+                        self.instance.setPixmap(ptr)
+                        try:
+                                self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+                        except Exception:
+                                try:
+                                        self.instance.setScale(1)
+                                except Exception:
+                                        pass
+                        self.instance.show()
+                        try:
+                                self._dbg_last_path = self._decode_path
+                                self._dbg_last_title = self.canal[2]
+                                self._loading_path = None
+                                self._waiting_path = None
+                                _posterx_dbg("EPICLOAD DONE self_id=%s instance_id=%s nxts=%s path=%s title=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        repr(self._dbg_last_path),
+                                        repr(self._dbg_last_title)
+                                ))
+                        except Exception:
+                                pass
+                except Exception as e:
+                        self.logPoster("Error (ePicLoad callback) : " + str(e))
+                finally:
+                        self._decode_path = None
 
         def changed(self, what):
                 if not self.instance:
                         return
+                try:
+                        self._dbg_changed_count += 1
+                        _posterx_dbg("changed() self_id=%s instance_id=%s parent=%s parent_id=%s nxts=%s count=%s what=%s source=%s" % (
+                                id(self),
+                                id(self.instance) if self.instance is not None else None,
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                self.nxts,
+                                self._dbg_changed_count,
+                                repr(what),
+                                self.source.__class__.__name__ if self.source is not None else 'None'
+                        ))
+                except Exception:
+                        pass
                 if what[0] == self.CHANGED_CLEAR:
-                        self.instance.hide()
-                if what[0] != self.CHANGED_CLEAR:
-                        servicetype = None
-                        try:
-                                service = None
-                                if isinstance(self.source, ServiceEvent):  # source="ServiceEvent"
-                                        service = self.source.getCurrentService()
-                                        servicetype = "ServiceEvent"
-                                elif isinstance(self.source, CurrentService):  # source="session.CurrentService"
-                                        service = self.source.getCurrentServiceRef()
-                                        servicetype = "CurrentService"
-                                elif isinstance(self.source, EventInfo):  # source="session.Event_Now" or source="session.Event_Next"
-                                        # IMPORTANT: use the event provided by the source (NOW vs NEXT)
-                                        servicetype = "EventInfo"
-                                        ev = getattr(self.source, 'event', None)
-                                        if ev is not None:
-                                                try:
-                                                        service_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                                                        if service_ref:
-                                                                self.canal[0] = ServiceReference(service_ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-                                                        else:
-                                                                self.canal[0] = None
-                                                except Exception:
-                                                        self.canal[0] = None
-                                                try:
-                                                        self.canal[1] = ev.getBeginTime()
-                                                        self.canal[2] = ev.getEventName()
-                                                        self.canal[3] = ev.getExtendedDescription()
-                                                        self.canal[4] = ev.getShortDescription()
-                                                        qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
-
-                                                        self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
-                                                except Exception:
-                                                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                        self._clearPixmap()
+                        return
+                servicetype = None
+                try:
+                        service = None
+                        if isinstance(self.source, ServiceEvent):
+                                service = self.source.getCurrentService()
+                                servicetype = "ServiceEvent"
+                        elif isinstance(self.source, CurrentService):
+                                service = self.source.getCurrentServiceRef()
+                                servicetype = "CurrentService"
+                        elif isinstance(self.source, EventInfo):
+                                servicetype = "EventInfo"
+                                ev = getattr(self.source, 'event', None)
+                                if ev is not None:
+                                        try:
+                                                service_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                                if service_ref:
+                                                        self.canal[0] = ServiceReference(service_ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
                                                 else:
-                                                        service = None
-                                        else:
-                                                service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                                elif isinstance(self.source, Event):  # source="Event"
-                                        if self.nxts:
-                                                service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                                        else:
+                                                        self.canal[0] = None
+                                        except Exception:
                                                 self.canal[0] = None
-                                                self.canal[1] = self.source.event.getBeginTime()
-                                                self.canal[2] = self.source.event.getEventName()
-                                                self.canal[3] = self.source.event.getExtendedDescription()
-                                                self.canal[4] = self.source.event.getShortDescription()
-                                                # Use canonical slug for filenames (underscores) to avoid duplicates
+                                        try:
+                                                self.canal[1] = ev.getBeginTime()
+                                                self.canal[2] = ev.getEventName()
+                                                self.canal[3] = ev.getExtendedDescription()
+                                                self.canal[4] = ev.getShortDescription()
                                                 qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
-
                                                 self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
-                                        servicetype = "Event"
-                                if service:
-                                        events = epgcache.lookupEvent(['IBDCTESX', (service.toString(), 0, -1, -1)])
-                                        self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-                                        self.canal[1] = events[self.nxts][1]
-                                        self.canal[2] = events[self.nxts][4]
-                                        self.canal[3] = events[self.nxts][5]
-                                        self.canal[4] = events[self.nxts][6]
-                                        # Use canonical slug for filenames (underscores) to avoid duplicates
-                                        qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
-
-                                        self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
-                        except Exception as e:
-                                self.logPoster("Error (service) : " + str(e))
-                                self.instance.hide()
-                                return
-                        if not servicetype:
-                                self.logPoster("Error service type undefined")
-                                self.instance.hide()
-                                return
-                        try:
-                                curCanal = "{}-{}".format(self.canal[1], self.canal[2])
-                                if curCanal == self.oldCanal:
-                                        return
-                                self.oldCanal = curCanal
-                                self.logPoster("Service : {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
-                                pstrNm = path_folder + self.canal[5] + ".jpg"
-                                if os.path.exists(pstrNm):
-                                        self.timer.start(100, True)
+                                        except Exception:
+                                                service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                        else:
+                                                service = None
                                 else:
-                                        canal = self.canal[:]
-                                        pdb.put(canal)
-                                        start_new_thread(self.waitPoster, ())
-                        except Exception as e:
-                                self.logPoster("Error (eFile) : " + str(e))
-                                self.instance.hide()
+                                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                        elif isinstance(self.source, Event):
+                                if self.nxts:
+                                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                else:
+                                        self.canal[0] = None
+                                        self.canal[1] = self.source.event.getBeginTime()
+                                        self.canal[2] = self.source.event.getEventName()
+                                        self.canal[3] = self.source.event.getExtendedDescription()
+                                        self.canal[4] = self.source.event.getShortDescription()
+                                        qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
+                                        self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
+                                servicetype = "Event"
+                        if service:
+                                events = epgcache.lookupEvent(['IBDCTESX', (service.toString(), 0, -1, -1)])
+                                self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+                                self.canal[1] = events[self.nxts][1]
+                                self.canal[2] = events[self.nxts][4]
+                                self.canal[3] = events[self.nxts][5]
+                                self.canal[4] = events[self.nxts][6]
+                                qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
+                                self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
+                except Exception as e:
+                        self.logPoster("Error (service) : " + str(e))
+                        self._clearPixmap()
+                        return
+                if not servicetype:
+                        self.logPoster("Error service type undefined")
+                        self._clearPixmap()
+                        return
+                try:
+                        curCanal = "{}-{}".format(self.canal[1], self.canal[2])
+                        try:
+                                _posterx_dbg("changed() RESOLVED self_id=%s instance_id=%s nxts=%s servicetype=%s canal=%s oldCanal=%s slug=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        servicetype,
+                                        repr(curCanal),
+                                        repr(self.oldCanal),
+                                        repr(self.canal[5])
+                                ))
+                        except Exception:
+                                pass
+                        if curCanal == self.oldCanal:
+                                try:
+                                        _posterx_dbg("changed() SKIP same canal nxts=%s canal=%s" % (self.nxts, repr(curCanal)))
+                                except Exception:
+                                        pass
                                 return
+                        self.oldCanal = curCanal
+                        self.logPoster("Service : {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
+                        pstrNm = path_folder + self.canal[5] + ".jpg"
+                        try:
+                                _posterx_dbg("changed() PATH nxts=%s title=%s path=%s exists=%s size=%s" % (
+                                        self.nxts,
+                                        repr(self.canal[2]),
+                                        repr(pstrNm),
+                                        os.path.exists(pstrNm),
+                                        os.path.getsize(pstrNm) if os.path.exists(pstrNm) else -1
+                                ))
+                        except Exception:
+                                pass
+                        if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                                self._waiting_path = None
+                                self._waitPosterPath = None
+                                self._waitPosterQueued = False
+                                try:
+                                        self.waitTimer.stop()
+                                except Exception:
+                                        pass
+                                try:
+                                        _posterx_dbg("changed()->timer.start nxts=%s delay=100 path=%s" % (self.nxts, repr(pstrNm)))
+                                except Exception:
+                                        pass
+                                self.timer.start(100, True)
+                        else:
+                                canal = self.canal[:]
+                                try:
+                                        _posterx_dbg("changed()->queue/waitPoster nxts=%s path=%s canal=%s waiting_path=%s" % (self.nxts, repr(pstrNm), repr(canal), repr(self._waiting_path)))
+                                except Exception:
+                                        pass
+                                # Hide stale poster immediately while waiting for a new file.
+                                self._clearPixmap()
+                                self._dbg_last_path = None
+                                self._dbg_last_title = None
+                                if self._waiting_path == pstrNm and self._waitPosterQueued:
+                                        try:
+                                                _posterx_dbg("changed()->SKIP duplicate waitPoster nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                                        except Exception:
+                                                pass
+                                        return
+                                self._waiting_path = pstrNm
+                                self._waitPosterPath = pstrNm
+                                self._waitPosterQueued = True
+                                self._waitPosterLoops = 180
+                                pdb.put(canal)
+                                self.waitTimer.start(500, True)
+                except Exception as e:
+                        self.logPoster("Error (eFile) : " + str(e))
+                        self._clearPixmap()
+                        return
 
         def showPoster(self):
-                self.instance.hide()
+                try:
+                        _posterx_dbg("showPoster() ENTER self_id=%s instance_id=%s parent=%s parent_id=%s nxts=%s canal=%s oldCanal=%s" % (
+                                id(self),
+                                id(self.instance) if self.instance is not None else None,
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                self.nxts,
+                                repr(self.canal),
+                                repr(self.oldCanal)
+                        ))
+                except Exception:
+                        pass
                 if self.canal[5]:
                         pstrNm = path_folder + self.canal[5] + ".jpg"
-                        if os.path.exists(pstrNm):
+                        if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                                if self._dbg_last_path == pstrNm and self._decode_path is None:
+                                        try:
+                                                _posterx_dbg("SKIP LOADJPG same path nxts=%s path=%s title=%s" % (
+                                                        self.nxts,
+                                                        repr(pstrNm),
+                                                        repr(self.canal[2])
+                                                ))
+                                        except Exception:
+                                                pass
+                                        try:
+                                                self.instance.show()
+                                        except Exception:
+                                                pass
+                                        self._waiting_path = None
+                                        self._waitPosterPath = None
+                                        self._waitPosterQueued = False
+                                        return
                                 self.logPoster("[LOAD : showPoster] {}".format(pstrNm))
-                                self.instance.setPixmap(loadJPG(pstrNm))
-                                try:  # some images do not support .setPixmapScaleFlags
-                                        self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-                                except Exception:  # use old .setScale(1) instead
-                                        self.instance.setScale(1)
-                                self.instance.show()
+                                try:
+                                        self._dbg_load_count += 1
+                                        self._loading_path = pstrNm
+                                        _posterx_dbg("LOADJPG BEFORE self_id=%s instance_id=%s nxts=%s count=%s path=%s size=%s old_path=%s old_title=%s" % (
+                                                id(self),
+                                                id(self.instance) if self.instance is not None else None,
+                                                self.nxts,
+                                                self._dbg_load_count,
+                                                repr(pstrNm),
+                                                os.path.getsize(pstrNm) if os.path.exists(pstrNm) else -1,
+                                                repr(self._dbg_last_path),
+                                                repr(self._dbg_last_title)
+                                        ))
+                                except Exception:
+                                        pass
+                                if not self._startDecodePoster(pstrNm):
+                                        try:
+                                                self._clearPixmap()
+                                                self.instance.setPixmap(loadJPG(pstrNm))
+                                                try:
+                                                        self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+                                                except Exception:
+                                                        self.instance.setScale(1)
+                                                self.instance.show()
+                                                self._dbg_last_path = pstrNm
+                                                self._dbg_last_title = self.canal[2]
+                                                self._loading_path = None
+                                                self._waiting_path = None
+                                                self._waitPosterPath = None
+                                                self._waitPosterQueued = False
+                                                try:
+                                                        _posterx_dbg("LOADJPG AFTER nxts=%s path=%s title=%s" % (
+                                                                self.nxts,
+                                                                repr(self._dbg_last_path),
+                                                                repr(self._dbg_last_title)
+                                                        ))
+                                                except Exception:
+                                                        pass
+                                        except Exception as e:
+                                                self.logPoster("Error (fallback loadJPG) : " + str(e))
 
         def waitPoster(self):
-                self.instance.hide()
-                if self.canal[5]:
-                        pstrNm = path_folder + self.canal[5] + ".jpg"
-                        loop = 180
-                        found = None
+                pstrNm = self._waitPosterPath
+                if not pstrNm:
+                        self._waitPosterQueued = False
+                        return
+                if not self._waitPosterQueued:
+                        return
+                if self._waitPosterLoops == 180:
                         self.logPoster("[LOOP : waitPoster] {}".format(pstrNm))
-                        while loop >= 0:
-                                if os.path.exists(pstrNm):
-                                        if os.path.getsize(pstrNm) > 0:
-                                                loop = 0
-                                                found = True
-                                time.sleep(0.5)
-                                loop = loop - 1
-                        if found:
-                                self.timer.start(10, True)
+                        try:
+                                _posterx_dbg("waitPoster() ENTER nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                        except Exception:
+                                pass
+                if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                        self._waitPosterQueued = False
+                        self._waitPosterLoops = 0
+                        self._waiting_path = None
+                        self._waitPosterPath = None
+                        try:
+                                _posterx_dbg("waitPoster() FOUND nxts=%s path=%s -> timer.start(10)" % (self.nxts, repr(pstrNm)))
+                        except Exception:
+                                pass
+                        self.timer.start(10, True)
+                        return
+                self._waitPosterLoops -= 1
+                if self._waitPosterLoops <= 0:
+                        self._waitPosterQueued = False
+                        self._waiting_path = None
+                        self._waitPosterPath = None
+                        try:
+                                _posterx_dbg("waitPoster() TIMEOUT nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                        except Exception:
+                                pass
+                        return
+                self.waitTimer.start(500, True)
 
         def logPoster(self, logmsg):
+            try:
+                _posterx_dbg(str(logmsg))
+            except Exception:
+                pass
             return
 
 

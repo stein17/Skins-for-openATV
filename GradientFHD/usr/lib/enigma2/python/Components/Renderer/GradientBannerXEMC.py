@@ -21,9 +21,13 @@ from Components.Renderer.Renderer import Renderer
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.CurrentService import CurrentService
 from Components.config import config
-from enigma import ePixmap, loadJPG, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
+try:
+	from Components.AVSwitch import AVSwitch
+except Exception:
+	AVSwitch = None
+from enigma import ePixmap, loadJPG, ePicLoad, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
 
-DEBUG = True
+DEBUG = False
 
 
 def _get_emc_cache_base():
@@ -213,6 +217,95 @@ class GradientBannerXEMC(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
 		self._last_path = None
+		self.picload = None
+		self.picload_conn = None
+		self._decode_path = None
+
+	def postWidgetCreate(self, instance):
+		Renderer.postWidgetCreate(self, instance)
+		try:
+			self.picload = ePicLoad()
+			try:
+				self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+			except Exception:
+				self.picload.PictureData.get().append(self._onPicDecoded)
+		except Exception:
+			self.picload = None
+
+	def preWidgetRemove(self, instance):
+		self._clear()
+		try:
+			Renderer.preWidgetRemove(self, instance)
+		except Exception:
+			pass
+
+	def _getDecodeSize(self):
+		w = h = 0
+		try:
+			sz = self.instance.size()
+			w = sz.width()
+			h = sz.height()
+		except Exception:
+			pass
+		if w <= 0:
+			w = 455
+		if h <= 0:
+			h = 84
+		return int(w), int(h)
+
+	def _startDecodeBanner(self, path):
+		if not self.instance or not path or not os.path.exists(path):
+			return False
+		try:
+			self._clear()
+			self._decode_path = path
+			if self.picload is None:
+				self.picload = ePicLoad()
+				try:
+					self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+				except Exception:
+					self.picload.PictureData.get().append(self._onPicDecoded)
+			width, height = self._getDecodeSize()
+			sc = (1, 1)
+			try:
+				if AVSwitch is not None:
+					sc = AVSwitch().getFramebufferScale()
+			except Exception:
+				pass
+			try:
+				self.picload.setPara((width, height, sc[0], sc[1], False, 1, '#00000000'))
+			except Exception:
+				self.picload.setPara([width, height, sc[0], sc[1], False, 1, '#00000000'])
+			res = self.picload.startDecode(path)
+			if res != 0:
+				self._decode_path = None
+				return False
+			return True
+		except Exception:
+			self._decode_path = None
+			return False
+
+	def _onPicDecoded(self, picInfo=None):
+		try:
+			if not self.instance or not self.picload or not self._decode_path:
+				return
+			ptr = self.picload.getData()
+			if ptr is None:
+				return
+			self.instance.setPixmap(ptr)
+			try:
+				self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+			except Exception:
+				try:
+					self.instance.setScale(1)
+				except Exception:
+					pass
+			self.instance.show()
+			self._last_path = self._decode_path
+		except Exception:
+			self._clear()
+		finally:
+			self._decode_path = None
 
 	
 	def changed(self, what):
@@ -358,23 +451,9 @@ class GradientBannerXEMC(Renderer):
 			if found == self._last_path:
 				return
 
-			pm = loadJPG(found)
-			if pm is None:
+			if not self._startDecodeBanner(found):
 				self._clear()
 				return
-
-			self.instance.setPixmap(pm)
-			# Skalierung: Banner an Widget-Größe anpassen (Skin-Einstellungen respected)
-			try:
-				self.instance.setPixmapScaleFlags(
-					BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-			except Exception:
-				try:
-					self.instance.setScale(1)
-				except Exception:
-					pass
-			self.instance.show()
-			self._last_path = found
 
 		except Exception as e:
 			_debug('changed() error: %s' % e)
@@ -383,6 +462,10 @@ class GradientBannerXEMC(Renderer):
 	def _clear(self):
 		try:
 			if self.instance:
+				try:
+					self.instance.setPixmap(None)
+				except Exception:
+					pass
 				self.instance.hide()
 		except Exception:
 			pass

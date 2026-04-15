@@ -102,11 +102,25 @@ from .GradientBackdropXDownloadThread import (
     get_store_slug,
     get_provider_override,
 )
+
+try:
+    from .GradientPosterXDownloadThread import get_query_variants
+except Exception:
+    try:
+        from GradientPosterXDownloadThread import get_query_variants
+    except Exception:
+        def get_query_variants(title, shortdesc=None, fulldesc=None, **kwargs):
+            return {'slug_title': (title or '').strip()}
+
 from Components.Sources.CurrentService import CurrentService
 from Components.Sources.Event import Event
 from Components.Sources.EventInfo import EventInfo
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.config import config
+try:
+    from Components.AVSwitch import AVSwitch
+except Exception:
+    AVSwitch = None
 from ServiceReference import ServiceReference
 from six import text_type
 from enigma import (
@@ -114,6 +128,11 @@ from enigma import (
     loadJPG,
     eEPGCache,
     eTimer,
+    ePicLoad,
+    BT_HALIGN_CENTER,
+    BT_VALIGN_CENTER,
+    BT_KEEP_ASPECT_RATIO,
+    BT_SCALE,
 )
 import NavigationInstance
 import os
@@ -127,6 +146,129 @@ import threading
 import datetime
 
 STOP_AUTODB_FILE = '/tmp/stop_backdrop_autodb'
+
+MAX_BACKDROP_W = 685
+MAX_BACKDROP_H = 388
+
+
+def _backdropx_dbg(msg):
+    return
+
+
+def _unique_keep_order(items):
+    out = []
+    seen = set()
+    for it in items or []:
+        if not it:
+            continue
+        if it in seen:
+            continue
+        seen.add(it)
+        out.append(it)
+    return out
+
+
+def _backdrop_slug_candidates(title, shortdesc=None, fulldesc=None, base_slug=None):
+    """Build filename slug candidates for already-downloaded backdrops.
+
+    Order matters: first the current canonical/base slug, then exact episodic/raw-title
+    variants, then a couple of lightweight title normalizations.
+    """
+    candidates = []
+    try:
+        if base_slug:
+            candidates.append(str(base_slug).strip())
+    except Exception:
+        pass
+
+    raw_title = (title or '').strip()
+    if raw_title:
+        try:
+            candidates.append(get_canonical_slug(raw_title))
+        except Exception:
+            pass
+        try:
+            candidates.append(convtext(raw_title))
+        except Exception:
+            pass
+
+        # common EPG suffix cleanup while keeping episode numbers in exact candidate above
+        cleaned = raw_title
+        try:
+            cleaned = re.sub(r'\s*[\-–:]\s*Folge\s*\d+.*$', '', cleaned, flags=re.I)
+            cleaned = re.sub(r'\s*[\-–:]\s*Episode\s*\d+.*$', '', cleaned, flags=re.I)
+            cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+        except Exception:
+            pass
+        if cleaned and cleaned != raw_title:
+            try:
+                candidates.append(get_canonical_slug(cleaned))
+            except Exception:
+                pass
+            try:
+                candidates.append(convtext(cleaned))
+            except Exception:
+                pass
+
+    try:
+        qv = get_query_variants(title, shortdesc, fulldesc) or {}
+        slug_title = (qv.get('slug_title') or '').strip()
+        if slug_title:
+            try:
+                candidates.append(get_store_slug(slug_title))
+            except Exception:
+                pass
+            try:
+                candidates.append(get_canonical_slug(slug_title))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    return _unique_keep_order(candidates)
+
+
+def _resolve_existing_backdrop_path(title, shortdesc=None, fulldesc=None, base_slug=None):
+    """Return first existing backdrop path, preferring exact/base slug then episodic variants."""
+    try:
+        candidates = _backdrop_slug_candidates(title, shortdesc, fulldesc, base_slug)
+        for slug in candidates:
+            p = os.path.join(path_folder, '%s.jpg' % slug)
+            try:
+                if os.path.exists(p) and os.path.getsize(p) > 0:
+                    return p, slug
+            except Exception:
+                pass
+
+        # Last-resort fallback: if only a per-episode file exists, prefer the most recent one
+        # that matches the base slug prefix. This preserves older BackdropDB naming.
+        if base_slug:
+            try:
+                pref = str(base_slug).strip() + '_'
+                best = None
+                best_mtime = -1
+                for fn in os.listdir(path_folder):
+                    if not fn.lower().endswith('.jpg'):
+                        continue
+                    if not fn.startswith(pref):
+                        continue
+                    p = os.path.join(path_folder, fn)
+                    try:
+                        if os.path.getsize(p) <= 0:
+                            continue
+                        mt = os.path.getmtime(p)
+                    except Exception:
+                        continue
+                    if mt > best_mtime:
+                        best_mtime = mt
+                        best = p
+                if best:
+                    return best, os.path.splitext(os.path.basename(best))[0]
+            except Exception:
+                pass
+    except Exception:
+        pass
+    return None, base_slug
 
 
 
@@ -1329,6 +1471,36 @@ def convtextxx(text=''):
         pass
 
 
+# =========================================================================
+# GLOBAL BACKDROP DECODE LOCK:
+# Prevent multiple GradientBackdropX instances from decoding the same file
+# at the same time.
+# =========================================================================
+_BACKDROP_PATH_LOCK = threading.Lock()
+_BACKDROP_ACTIVE_PATHS = set()
+
+def _backdrop_acquire_path(path):
+    if not path:
+        return False
+    with _BACKDROP_PATH_LOCK:
+        if path in _BACKDROP_ACTIVE_PATHS:
+            return False
+        _BACKDROP_ACTIVE_PATHS.add(path)
+        return True
+
+def _backdrop_release_path(path):
+    if not path:
+        return
+    with _BACKDROP_PATH_LOCK:
+        _BACKDROP_ACTIVE_PATHS.discard(path)
+
+def _backdrop_path_busy(path):
+    if not path:
+        return False
+    with _BACKDROP_PATH_LOCK:
+        return path in _BACKDROP_ACTIVE_PATHS
+
+
 class BackdropDB(GradientBackdropXDownloadThread):
     def __init__(self):
         GradientBackdropXDownloadThread.__init__(self)
@@ -2044,201 +2216,534 @@ threadAutoDB.start()
 
 
 class GradientBackdropX(Renderer):
-    def __init__(self):
-        # NOTE: internet pre-check removed; renderer must always initialize
-        Renderer.__init__(self)
-        self.nxts = 0
-        self.path = path_folder  # + '/'
-        self.canal = [None, None, None, None, None, None]
-        self.oldCanal = None
-        self.logdbg = None
-        self.pstcanal = None
-        self.timer = eTimer()
-        try:
-            self.timer_conn = self.timer.timeout.connect(self.showBackdrop)
-        except:
-            pass
-            self.timer.callback.append(self.showBackdrop)
-        # self.timer.start(10, True)
+        GUI_WIDGET = ePixmap
 
-    def applySkin(self, desktop, parent):
-        attribs = []
-        for (attrib, value,) in self.skinAttributes:
-            if attrib == "nexts":
-                self.nxts = int(value)
-            elif attrib == "path":
-                self.path = str(value)
-            else:
-                attribs.append((attrib, value))
-        self.skinAttributes = attribs
-        return Renderer.applySkin(self, desktop, parent)
+        def __init__(self):
+                Renderer.__init__(self)
+                self.nxts = 0
+                self.canal = [None, None, None, None, None, None]
+                self.oldCanal = None
+                self.logdbg = None
+                self._dbg_last_path = None
+                self._dbg_last_title = None
+                self._dbg_load_count = 0
+                self._resolved_path = None
+                self._resolved_slug = None
+                self._dbg_changed_count = 0
+                self._dbg_parent_name = None
+                self._dbg_parent_id = None
+                self._decode_delay_ms = 100
+                self._dbg_pos_x = None
+                self._waiting_path = None
+                self._waitBackdropPath = None
+                self._waitBackdropQueued = False
+                self._waitBackdropLoops = 0
+                self._loading_path = None
+                self._decode_path = None
+                self.picload = None
+                self.picload_conn = None
+                if not self.intCheck():
+                       return
+                self.timer = eTimer()
+                self.timer.callback.append(self.showBackdrop)
+                self.waitTimer = eTimer()
+                self.waitTimer.callback.append(self.waitBackdrop)
 
-    GUI_WIDGET = ePixmap
-
-    def changed(self, what):
-        if not self.instance:
-            return
-        if what[0] == self.CHANGED_CLEAR:
-            if self.instance:
-                self.instance.hide()
-            return
-        if what[0] != self.CHANGED_CLEAR:
-            servicetype = None
-            try:
-                service = None
-                if isinstance(self.source, ServiceEvent):  # source="ServiceEvent"
-                    service = self.source.getCurrentService()
-                    servicetype = "ServiceEvent"
-                elif isinstance(self.source, CurrentService):  # source="session.CurrentService"
-                    service = self.source.getCurrentServiceRef()
-                    servicetype = "CurrentService"
-                elif isinstance(self.source, EventInfo):  # source="session.Event_Now" or source="session.Event_Next"
-                    # IMPORTANT: For session.Event_Now / session.Event_Next we must use the event provided by the source.
-                    # Otherwise NOW and NEXT will show the same backdrop when nexts is not set.
-                    ev = getattr(self.source, 'event', None)
-                    if ev is not None:
-                        try:
-                            service_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                        except Exception:
-                            service_ref = None
-                        try:
-                            if service_ref:
-                                self.canal[0] = ServiceReference(service_ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
-                            else:
-                                self.canal[0] = None
-                        except Exception:
-                            self.canal[0] = None
-                        try:
-                            self.canal[1] = ev.getBeginTime()
-                            self.canal[2] = (ev.getEventName() or '').replace('\xc2\x86', '').replace('\xc2\x87', '')
-                            self.canal[3] = ev.getExtendedDescription()
-                            self.canal[4] = ev.getShortDescription()
-                            self.canal[5] = get_store_slug(self.canal[2])
-                        except Exception:
-                            pass
-                        service = None
-                    else:
-                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                    servicetype = "EventInfo"
-                elif isinstance(self.source, Event):  # source="Event"
-                    if self.nxts:
-                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-                    else:
+        def applySkin(self, desktop, parent):
+                attribs = []
+                try:
+                        self._dbg_parent_name = parent.__class__.__name__ if parent is not None else None
+                        self._dbg_parent_id = id(parent) if parent is not None else None
+                        self._dbg_pos_x = None
+                        self._decode_delay_ms = 100
+                        _backdropx_dbg("applySkin() self_id=%s parent=%s parent_id=%s skinAttributes=%s" % (
+                                id(self),
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                repr(self.skinAttributes)
+                        ))
+                except Exception:
                         pass
-                        self.canal[0] = None
-                        self.canal[1] = self.source.event.getBeginTime()
-                        if PY3:
-                            self.canal[2] = self.source.event.getEventName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+                for (attrib, value,) in self.skinAttributes:
+                        if attrib == "nexts":
+                                self.nxts = int(value)
                         else:
-                            pass
-                            self.canal[2] = self.source.event.getEventName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
-                        self.canal[3] = self.source.event.getExtendedDescription()
-                        self.canal[4] = self.source.event.getShortDescription()
-                        self.canal[5] = self.canal[2]
-                    servicetype = "Event"
-                if service is not None:
-                    events = epgcache.lookupEvent(['IBDCTESX', (service.toString(), 0, -1, -1)])
-                    if PY3:
-                        self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')  # .encode('utf-8')
-                    else:
+                                attribs.append((attrib, value))
+                                if attrib == 'position':
+                                        try:
+                                                self._dbg_pos_x = int(value[0])
+                                        except Exception:
+                                                pass
+                try:
+                        if self._dbg_parent_name == 'InfoBar' and self._dbg_pos_x is not None and self._dbg_pos_x >= 1000:
+                                self._decode_delay_ms = 180
+                        else:
+                                self._decode_delay_ms = 100
+                        _backdropx_dbg("applySkin() delay self_id=%s parent=%s pos_x=%s delay_ms=%s" % (
+                                id(self),
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_pos_x),
+                                repr(self._decode_delay_ms)
+                        ))
+                except Exception:
                         pass
-                        self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '').encode('utf-8')
-                    if (not events) or len(events) <= int(self.nxts):
-                        raise Exception('epg events missing for index %s' % str(self.nxts))
-                    self.canal[1] = events[self.nxts][1]
-                    self.canal[2] = events[self.nxts][4]
-                    self.canal[3] = events[self.nxts][5]
-                    self.canal[4] = events[self.nxts][6]
-                    self.canal[5] = self.canal[2]
-            except Exception as e:
-                pass
-                self.logBackdrop("Error (service) : " + str(e))
-                if self.instance:
-                    self.instance.hide()
-                return
-            if not servicetype or servicetype is None:
-                self.logBackdrop("Error service type undefined")
-                if self.instance:
-                    self.instance.hide()
-                return
+                self.skinAttributes = attribs
+                return Renderer.applySkin(self, desktop, parent)
+
+        def intCheck(self):
+                sock = False
+                try:
+                     import socket
+                     socket.setdefaulttimeout(0.5)
+                     socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(("8.8.8.8", 53))
+                     sock = True
+                except:
+                        sock = False
+                return sock
+
+        def postWidgetCreate(self, instance):
+                Renderer.postWidgetCreate(self, instance)
+                try:
+                        self.picload = ePicLoad()
+                        try:
+                                self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+                        except Exception:
+                                self.picload.PictureData.get().append(self._onPicDecoded)
+                except Exception as e:
+                        self.picload = None
+                        self.logBackdrop("Error (ePicLoad init) : " + str(e))
+
+        def preWidgetRemove(self, instance):
+                try:
+                        if getattr(self, 'timer', None) is not None:
+                                self.timer.stop()
+                except Exception:
+                        pass
+                try:
+                        if getattr(self, 'waitTimer', None) is not None:
+                                self.waitTimer.stop()
+                except Exception:
+                        pass
+                try:
+                        self._clearPixmap()
+                except Exception:
+                        pass
+                try:
+                        Renderer.preWidgetRemove(self, instance)
+                except Exception:
+                        pass
+
+        def _clearPixmap(self):
+                try:
+                        if self.instance is not None:
+                                try:
+                                        self.instance.setPixmap(None)
+                                except Exception:
+                                        pass
+                                self.instance.hide()
+                except Exception:
+                        pass
+
+        def _getDecodeSize(self):
+                w = 0
+                h = 0
+                try:
+                        sz = self.instance.size()
+                        w = sz.width()
+                        h = sz.height()
+                except Exception:
+                        try:
+                                for (attrib, value) in getattr(self, 'skinAttributes', []):
+                                        if attrib == 'size':
+                                                try:
+                                                        w, h = [int(x) for x in str(value).split(',')]
+                                                except Exception:
+                                                        w, h = value
+                                                break
+                        except Exception:
+                                pass
+                if w <= 0:
+                        w = 300
+                if h <= 0:
+                        h = 169
+                w = min(int(w), MAX_BACKDROP_W)
+                h = min(int(h), MAX_BACKDROP_H)
+                return int(w), int(h)
+
+        def _startDecodePoster(self, pstrNm):
+                if not self.instance or not pstrNm or not os.path.exists(pstrNm):
+                        return False
+                try:
+                        self._clearPixmap()
+                        self._decode_path = pstrNm
+                        if self.picload is None:
+                                self.picload = ePicLoad()
+                                try:
+                                        self.picload_conn = self.picload.PictureData.connect(self._onPicDecoded)
+                                except Exception:
+                                        self.picload.PictureData.get().append(self._onPicDecoded)
+                        width, height = self._getDecodeSize()
+                        sc = (1, 1)
+                        try:
+                                sc = AVSwitch().getFramebufferScale()
+                        except Exception:
+                                pass
+                        try:
+                                self.picload.setPara((width, height, sc[0], sc[1], False, 1, '#00000000'))
+                        except Exception:
+                                self.picload.setPara([width, height, sc[0], sc[1], False, 1, '#00000000'])
+                        res = self.picload.startDecode(pstrNm)
+                        try:
+                                _backdropx_dbg("EPICLOAD START self_id=%s instance_id=%s nxts=%s path=%s size=%sx%s res=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        repr(pstrNm),
+                                        width,
+                                        height,
+                                        repr(res)
+                                ))
+                        except Exception:
+                                pass
+                        if res != 0:
+                                self.logBackdrop("Error (startDecode) : %s (%s)" % (res, pstrNm))
+                                self._decode_path = None
+                                return False
+                        return True
+                except Exception as e:
+                        self.logBackdrop("Error (ePicLoad decode) : " + str(e))
+                        self._decode_path = None
+                        return False
+
+        def _onPicDecoded(self, picInfo=None):
+                try:
+                        if not self.instance or not self.picload or not self._decode_path:
+                                return
+                        ptr = self.picload.getData()
+                        if ptr is None:
+                                self.logBackdrop("Error (ePicLoad data) : %s" % repr(self._decode_path))
+                                return
+                        self.instance.setPixmap(ptr)
+                        try:
+                                self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+                        except Exception:
+                                try:
+                                        self.instance.setScale(1)
+                                except Exception:
+                                        pass
+                        self.instance.show()
+                        try:
+                                self._dbg_last_path = self._decode_path
+                                self._dbg_last_title = self.canal[2]
+                                self._loading_path = None
+                                self._waiting_path = None
+                                _backdropx_dbg("EPICLOAD DONE self_id=%s instance_id=%s nxts=%s path=%s title=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        repr(self._dbg_last_path),
+                                        repr(self._dbg_last_title)
+                                ))
+                        except Exception:
+                                pass
+                except Exception as e:
+                        self.logBackdrop("Error (ePicLoad callback) : " + str(e))
+                finally:
+                        self._decode_path = None
+
+        def changed(self, what):
+                if not self.instance:
+                        return
+                try:
+                        self._dbg_changed_count += 1
+                        _backdropx_dbg("changed() self_id=%s instance_id=%s parent=%s parent_id=%s nxts=%s count=%s what=%s source=%s" % (
+                                id(self),
+                                id(self.instance) if self.instance is not None else None,
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                self.nxts,
+                                self._dbg_changed_count,
+                                repr(what),
+                                self.source.__class__.__name__ if self.source is not None else 'None'
+                        ))
+                except Exception:
+                        pass
+                if what[0] == self.CHANGED_CLEAR:
+                        self._clearPixmap()
+                        return
+                servicetype = None
+                try:
+                        service = None
+                        if isinstance(self.source, ServiceEvent):
+                                service = self.source.getCurrentService()
+                                servicetype = "ServiceEvent"
+                        elif isinstance(self.source, CurrentService):
+                                service = self.source.getCurrentServiceRef()
+                                servicetype = "CurrentService"
+                        elif isinstance(self.source, EventInfo):
+                                servicetype = "EventInfo"
+                                ev = getattr(self.source, 'event', None)
+                                if ev is not None:
+                                        try:
+                                                service_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                                if service_ref:
+                                                        self.canal[0] = ServiceReference(service_ref).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+                                                else:
+                                                        self.canal[0] = None
+                                        except Exception:
+                                                self.canal[0] = None
+                                        try:
+                                                self.canal[1] = ev.getBeginTime()
+                                                self.canal[2] = ev.getEventName()
+                                                self.canal[3] = ev.getExtendedDescription()
+                                                self.canal[4] = ev.getShortDescription()
+                                                qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
+                                                self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
+                                        except Exception:
+                                                service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                        else:
+                                                service = None
+                                else:
+                                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                        elif isinstance(self.source, Event):
+                                if self.nxts:
+                                        service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+                                else:
+                                        self.canal[0] = None
+                                        self.canal[1] = self.source.event.getBeginTime()
+                                        self.canal[2] = self.source.event.getEventName()
+                                        self.canal[3] = self.source.event.getExtendedDescription()
+                                        self.canal[4] = self.source.event.getShortDescription()
+                                        qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
+                                        self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
+                                servicetype = "Event"
+                        if service:
+                                events = epgcache.lookupEvent(['IBDCTESX', (service.toString(), 0, -1, -1)])
+                                self.canal[0] = ServiceReference(service).getServiceName().replace('\xc2\x86', '').replace('\xc2\x87', '')
+                                self.canal[1] = events[self.nxts][1]
+                                self.canal[2] = events[self.nxts][4]
+                                self.canal[3] = events[self.nxts][5]
+                                self.canal[4] = events[self.nxts][6]
+                                qv = get_query_variants(self.canal[2], self.canal[4], self.canal[3])
+                                self.canal[5] = get_store_slug(qv.get('slug_title') or self.canal[2])
+                except Exception as e:
+                        self.logBackdrop("Error (service) : " + str(e))
+                        self._clearPixmap()
+                        return
+                if not servicetype:
+                        self.logBackdrop("Error service type undefined")
+                        self._clearPixmap()
+                        return
+                try:
+                        curCanal = "{}-{}".format(self.canal[1], self.canal[2])
+                        try:
+                                _backdropx_dbg("changed() RESOLVED self_id=%s instance_id=%s nxts=%s servicetype=%s canal=%s oldCanal=%s slug=%s" % (
+                                        id(self),
+                                        id(self.instance) if self.instance is not None else None,
+                                        self.nxts,
+                                        servicetype,
+                                        repr(curCanal),
+                                        repr(self.oldCanal),
+                                        repr(self.canal[5])
+                                ))
+                        except Exception:
+                                pass
+                        same_canal = (curCanal == self.oldCanal)
+                        self.logBackdrop("Service : {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], curCanal))
+                        resolved_path, resolved_slug = _resolve_existing_backdrop_path(self.canal[2], self.canal[4], self.canal[3], self.canal[5])
+                        pstrNm = resolved_path or (path_folder + self.canal[5] + ".jpg")
+                        if same_canal:
+                                if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                                        try:
+                                                _backdropx_dbg("changed() SKIP same canal nxts=%s canal=%s" % (self.nxts, repr(curCanal)))
+                                        except Exception:
+                                                pass
+                                        return
+                                try:
+                                        _backdropx_dbg("changed() SAME canal but missing file -> retry nxts=%s canal=%s path=%s" % (self.nxts, repr(curCanal), repr(pstrNm)))
+                                except Exception:
+                                        pass
+                        self.oldCanal = curCanal
+                        self._resolved_path = pstrNm
+                        self._resolved_slug = resolved_slug or self.canal[5]
+                        try:
+                                _backdropx_dbg("changed() PATH nxts=%s title=%s path=%s exists=%s size=%s resolved_slug=%s base_slug=%s" % (
+                                        self.nxts,
+                                        repr(self.canal[2]),
+                                        repr(pstrNm),
+                                        os.path.exists(pstrNm),
+                                        os.path.getsize(pstrNm) if os.path.exists(pstrNm) else -1,
+                                        repr(resolved_slug),
+                                        repr(self.canal[5])
+                                ))
+                        except Exception:
+                                pass
+                        if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                                self._waiting_path = None
+                                self._waitBackdropPath = None
+                                self._waitBackdropQueued = False
+                                try:
+                                        self.waitTimer.stop()
+                                except Exception:
+                                        pass
+                                try:
+                                        _backdropx_dbg("changed()->timer.start nxts=%s delay=%s path=%s" % (self.nxts, getattr(self, '_decode_delay_ms', 100), repr(pstrNm)))
+                                except Exception:
+                                        pass
+                                self.timer.start(getattr(self, '_decode_delay_ms', 100), True)
+                        else:
+                                canal = self.canal[:]
+                                try:
+                                        _backdropx_dbg("changed()->queue/waitBackdrop nxts=%s path=%s canal=%s waiting_path=%s" % (self.nxts, repr(pstrNm), repr(canal), repr(self._waiting_path)))
+                                except Exception:
+                                        pass
+                                # Hide stale poster immediately while waiting for a new file.
+                                self._clearPixmap()
+                                self._dbg_last_path = None
+                                self._dbg_last_title = None
+                                if self._waiting_path == pstrNm and self._waitBackdropQueued:
+                                        try:
+                                                _backdropx_dbg("changed()->SKIP duplicate waitBackdrop nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                                        except Exception:
+                                                pass
+                                        return
+                                self._waiting_path = pstrNm
+                                self._waitBackdropPath = pstrNm
+                                self._waitBackdropQueued = True
+                                self._waitBackdropLoops = 180
+                                pdb.put(canal)
+                                self.waitTimer.start(500, True)
+                except Exception as e:
+                        self.logBackdrop("Error (eFile) : " + str(e))
+                        self._clearPixmap()
+                        return
+
+        def showBackdrop(self):
+                try:
+                        _backdropx_dbg("showBackdrop() ENTER self_id=%s instance_id=%s parent=%s parent_id=%s nxts=%s canal=%s oldCanal=%s" % (
+                                id(self),
+                                id(self.instance) if self.instance is not None else None,
+                                repr(self._dbg_parent_name),
+                                repr(self._dbg_parent_id),
+                                self.nxts,
+                                repr(self.canal),
+                                repr(self.oldCanal)
+                        ))
+                except Exception:
+                        pass
+                if self.canal[5]:
+                        pstrNm = getattr(self, '_resolved_path', None) or (path_folder + self.canal[5] + ".jpg")
+                        if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                                if self._dbg_last_path == pstrNm and self._decode_path is None:
+                                        try:
+                                                _backdropx_dbg("SKIP LOADJPG same path nxts=%s path=%s title=%s" % (
+                                                        self.nxts,
+                                                        repr(pstrNm),
+                                                        repr(self.canal[2])
+                                                ))
+                                        except Exception:
+                                                pass
+                                        try:
+                                                self.instance.show()
+                                        except Exception:
+                                                pass
+                                        self._waiting_path = None
+                                        self._waitBackdropPath = None
+                                        self._waitBackdropQueued = False
+                                        return
+                                self.logBackdrop("[LOAD : showBackdrop] {}".format(pstrNm))
+                                try:
+                                        self._dbg_load_count += 1
+                                        self._loading_path = pstrNm
+                                        _backdropx_dbg("LOADJPG BEFORE self_id=%s instance_id=%s nxts=%s count=%s path=%s size=%s old_path=%s old_title=%s" % (
+                                                id(self),
+                                                id(self.instance) if self.instance is not None else None,
+                                                self.nxts,
+                                                self._dbg_load_count,
+                                                repr(pstrNm),
+                                                os.path.getsize(pstrNm) if os.path.exists(pstrNm) else -1,
+                                                repr(self._dbg_last_path),
+                                                repr(self._dbg_last_title)
+                                        ))
+                                except Exception:
+                                        pass
+                                if not self._startDecodePoster(pstrNm):
+                                        try:
+                                                self._clearPixmap()
+                                                self.instance.setPixmap(loadJPG(pstrNm))
+                                                try:
+                                                        self.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+                                                except Exception:
+                                                        self.instance.setScale(1)
+                                                self.instance.show()
+                                                self._dbg_last_path = pstrNm
+                                                self._dbg_last_title = self.canal[2]
+                                                self._loading_path = None
+                                                self._waiting_path = None
+                                                self._waitBackdropPath = None
+                                                self._waitBackdropQueued = False
+                                                try:
+                                                        _backdropx_dbg("LOADJPG AFTER nxts=%s path=%s title=%s" % (
+                                                                self.nxts,
+                                                                repr(self._dbg_last_path),
+                                                                repr(self._dbg_last_title)
+                                                        ))
+                                                except Exception:
+                                                        pass
+                                        except Exception as e:
+                                                self.logBackdrop("Error (fallback loadJPG) : " + str(e))
+                        else:
+                                self._clearPixmap()
+                                self._dbg_last_path = None
+                                self._dbg_last_title = None
+
+        def waitBackdrop(self):
+                pstrNm = self._waitBackdropPath
+                if not pstrNm:
+                        self._waitBackdropQueued = False
+                        return
+                if not self._waitBackdropQueued:
+                        return
+                if self._waitBackdropLoops == 180:
+                        self.logBackdrop("[LOOP : waitBackdrop] {}".format(pstrNm))
+                        try:
+                                _backdropx_dbg("waitBackdrop() ENTER nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                        except Exception:
+                                pass
+                if os.path.exists(pstrNm) and os.path.getsize(pstrNm) > 0:
+                        self._waitBackdropQueued = False
+                        self._waitBackdropLoops = 0
+                        self._waiting_path = None
+                        self._waitBackdropPath = None
+                        try:
+                                _backdropx_dbg("waitBackdrop() FOUND nxts=%s path=%s -> timer.start(%s)" % (self.nxts, repr(pstrNm), getattr(self, '_decode_delay_ms', 100)))
+                        except Exception:
+                                pass
+                        self.timer.start(getattr(self, '_decode_delay_ms', 100), True)
+                        return
+                self._waitBackdropLoops -= 1
+                if self._waitBackdropLoops <= 0:
+                        self._waitBackdropQueued = False
+                        self._waiting_path = None
+                        self._waitBackdropPath = None
+                        try:
+                                _backdropx_dbg("waitBackdrop() TIMEOUT nxts=%s path=%s" % (self.nxts, repr(pstrNm)))
+                        except Exception:
+                                pass
+                        self._clearPixmap()
+                        self._dbg_last_path = None
+                        self._dbg_last_title = None
+                        return
+                self.waitTimer.start(500, True)
+
+        def logBackdrop(self, logmsg):
             try:
-                curCanal = "{}-{}".format(self.canal[1], self.canal[2])
-                if curCanal == self.oldCanal:
-                    return
-                self.oldCanal = curCanal
-                self.logBackdrop("Service: {} [{}] : {} : {}".format(servicetype, self.nxts, self.canal[0], self.oldCanal))
-                # canonical slug for filenames
-                try:
-                    self.pstcanal = get_store_slug(self.canal[5])
-                except Exception:
-                    self.pstcanal = get_canonical_slug(self.canal[5])
-                if self.pstcanal is not None:
-                    self.backrNm = os.path.join(self.path, str(self.pstcanal) + '.jpg')
-                    self.pstcanal = str(self.backrNm)
-                if self.pstcanal and os.path.exists(self.pstcanal):
-                    self.timer.start(10, True)
-                else:
-                    pass
-                    canal = self.canal[:] + [self.nxts]
-                    set_live_latest(canal)
-                    try:
-                        prio = 0 if int(self.nxts) == 0 else (10 + int(self.nxts))
-                    except Exception:
-                        prio = 0
-                    pdb.put((prio, time.time(), canal))
-                    start_new_thread(self.waitBackdrop, (self.pstcanal, self.oldCanal,))
-            except Exception as e:
+                _backdropx_dbg(str(logmsg))
+            except Exception:
                 pass
-                self.logBackdrop("Error (eFile): " + str(e))
-                if self.instance:
-                    self.instance.hide()
-                return
-
-    def showBackdrop(self):
-        if self.instance:
-            self.instance.hide()
-        if self.canal[5]:
-            if self.pstcanal is not None and not os.path.exists(self.pstcanal):
-                # canonical slug for filenames
-                try:
-                    self.pstcanal = get_store_slug(self.canal[5])
-                except Exception:
-                    self.pstcanal = get_canonical_slug(self.canal[5])
-                self.backrNm = os.path.join(self.path, str(self.pstcanal) + '.jpg')
-                self.pstcanal = str(self.backrNm)
-            if self.pstcanal is not None and os.path.exists(self.pstcanal):
-                self.logBackdrop("[LOAD : showBackdrop] {}".format(self.pstcanal))
-                self.instance.setPixmap(loadJPG(self.pstcanal))
-                self.instance.setScale(1)
-                self.instance.show()
-    def waitBackdrop(self, expected_path, canal_id):
-        """Wait for backdrop file to appear, but abort immediately if user changed selection."""
-        try:
-            if self.instance:
-                self.instance.hide()
-        except Exception:
-            pass
-
-        if not expected_path or not canal_id:
             return
 
-        self.logBackdrop("[WAIT] %s" % expected_path)
 
-        # Wait up to 60s (slow providers), but cancel if selection changed.
-        for _ in range(240):  # 240 x 0.25s
-            try:
-                if self.oldCanal != canal_id:
-                    return
-            except Exception:
-                return
 
-            if os.path.exists(expected_path):
-                try:
-                    self.timer.start(10, True)
-                except Exception:
-                    pass
-                return
-            time.sleep(0.25)
 
-    def logBackdrop(self, logmsg):
-        return
+

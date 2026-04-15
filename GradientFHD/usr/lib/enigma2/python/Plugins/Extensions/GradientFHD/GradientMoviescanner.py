@@ -1348,21 +1348,79 @@ def clean_title_from_filename(name, fullpath=None):
 	return base, year
 
 
-def detect_media_type(path_or_name):
-	s = path_or_name.lower()
-	if any(k in s for k in ('doku', 'dokumentation', 'dokumentar', 'documentary')):
-		return "tv"
-	if any(k in s for k in ('staffel', 'season', 'serie', 'episode', 'folge')):
-		return "tv"
+def _extract_recording_channel(path_or_name):
+	"""Best-effort channel extraction from recording filenames like
+	'20251226 1322 - Sky Cinema Action HD - Rambo.ts'.
+	Returns the channel part or ''.
+	"""
+	try:
+		base = os.path.splitext(os.path.basename(path_or_name or ''))[0]
+		base = _fix_mojibake_text(base)
+		parts = [p.strip() for p in re.split(r'\s*[-–]\s*', base) if p and p.strip()]
+		if len(parts) >= 3:
+			if re.match(r'^\d{6,8}\s+\d{3,4}$', parts[0]) or re.match(r'^\d{6,8}$', parts[0]):
+				return parts[1]
+	except Exception:
+		pass
+	return ''
+
+
+def _is_movie_channel_hint(channel_name):
+	"""Channels with a strong movie bias should not force recordings into TV mode."""
+	try:
+		ch = re.sub(r'\s+', ' ', (channel_name or '').strip().lower())
+	except Exception:
+		ch = ''
+	if not ch:
+		return False
+	for hint in (
+		'sky cinema', 'cinema', 'kinowelt', 'warner tv film', 'tnt film',
+		'mgm', 'silverline', 'axn movies', 'movie channel'
+	):
+		if hint in ch:
+			return True
+	return False
+
+
+def detect_media_type(path_or_name, title_hint=None, fullpath=None):
+	"""Classify recording as movie or tv.
+
+	Important fix:
+	Recordings from clear movie channels like 'Sky Cinema ...' must stay movie,
+	even if the raw filename uses a typical recording schema with many ' - '.
+	"""
+	try:
+		raw = ' '.join([x for x in (path_or_name, fullpath, title_hint) if x]).lower()
+	except Exception:
+		raw = (path_or_name or '').lower()
+	title_s = ((title_hint or '') if isinstance(title_hint, str) else str(title_hint or '')).lower()
 	import re as _re
-	if _re.search(r'\bS\d{1,2}E\d{1,3}\b', s) or _re.search(r'\bE\d{1,3}\b', s):
+
+	if any(k in raw for k in ('doku', 'dokumentation', 'dokumentar', 'documentary')):
+		return "tv"
+	if any(k in raw for k in ('staffel', 'season', 'serie', 'episode', 'folge')):
+		return "tv"
+	if _re.search(r'\bS\d{1,2}E\d{1,3}\b', raw) or _re.search(r'\bE\d{1,3}\b', raw):
 		return "tv"
 	# Episoden-/Teil-Nummern in Aufnahmenamen ("1. ...", "Teil 2")
-	if _re.search(r'\b(teil|part)\s*\d+\b', s) or _re.search(r'\b\d+\.\s+[^\d/]', s):
+	if _re.search(r'\b(teil|part)\s*\d+\b', raw) or _re.search(r'\b\d+\.\s+[^\d/]', raw):
 		return "tv"
+
+	# Strong movie-channel override for recordings like:
+	# 20251226 1322 - Sky Cinema Action HD - Rambo.ts
+	channel_hint = _extract_recording_channel(fullpath or path_or_name)
+	if _is_movie_channel_hint(channel_hint):
+		return "movie"
+
 	# Aufnahme-Schema: Datum - Sender - Serie - Episode
-	if s.count(' - ') >= 3 or s.replace('_', ' - ').count(' - ') >= 3:
+	if raw.count(' - ') >= 3 or raw.replace('_', ' - ').count(' - ') >= 3:
 		return "tv"
+
+	# If title itself clearly looks episodic, keep TV.
+	if title_s and (' - ' in title_s or ' – ' in title_s):
+		if any(k in title_s for k in ('staffel', 'season', 'serie', 'episode', 'folge')):
+			return "tv"
+
 	return "movie"
 
 
@@ -2465,7 +2523,7 @@ class MovieScannerMain(Screen):
 				break
 			try:
 				title_guess, year = clean_title_from_filename(os.path.basename(fp), fullpath=fp)
-				mtype = detect_media_type(fp + " " + os.path.dirname(fp))
+				mtype = detect_media_type(fp + " " + os.path.dirname(fp), title_hint=title_guess, fullpath=fp)
 				title_key = title_guess
 				title_search = title_guess
 				if mtype == 'tv':
@@ -4610,7 +4668,7 @@ class MovieScannerCleanupAdvanced(Screen, ConfigListScreen):
 					fp = os.path.join(root, fn)
 					try:
 						title_guess, _year = clean_title_from_filename(fn, fullpath=fp)
-						mtype = detect_media_type(fp + ' ' + os.path.dirname(fp))
+						mtype = detect_media_type(fp + ' ' + os.path.dirname(fp), title_hint=title_guess, fullpath=fp)
 						title_key = title_guess
 						if mtype == 'tv':
 							_norm = _normalize_emc_title(title_guess, os.path.splitext(os.path.basename(fp))[0])
