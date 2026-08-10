@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case "$1" in
+    remove|purge)
+        verein_base="/usr/share/enigma2/BundesligaWQHD/Verein"
+        if [ -d "$verein_base" ]; then
+            for marker in "$verein_base"/*/.bundesliga_team_asset.json; do
+                [ -f "$marker" ] || continue
+                team_dir="${marker%/*}"
+                case "$team_dir" in
+                    "$verein_base"/*) rm -rf "$team_dir" ;;
+                esac
+            done
+        fi
+        ;;
+esac
+
+exit 0

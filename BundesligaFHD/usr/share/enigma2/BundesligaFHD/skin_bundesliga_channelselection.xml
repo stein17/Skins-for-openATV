@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+  <!-- ========================================================= -->
+  <!-- Neue, in OpenATV auswaehlbare ChannelSelection-Screens    -->
+  <!-- Die Zeilen-/Kachelgestaltung kommt aus skinTemplates.xml. -->
+  <!-- ========================================================= -->
+  <!-- Bundesliga Standard -->
+<!--   <screen name="ChannelSelectionDefault" label="Bundesliga Standard" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+    <panel name="ChannelSelection" />
+  </screen> -->
+  <!-- Bundesliga mit Live-TV -->
+ <!--  <screen name="ChannelSelectionPIG" label="Bundesliga mit Live-TV (e2MDB)" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+    <panel name="ChannelSelection_PIG" />
+  </screen> -->
+<!--   Bundesliga Vollbild (e2MDB) -->
+  <screen name="ChannelSelectionFull" label="Bundesliga Vollbild (e2MDB)" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="list" position="266,89" size="1631,914" scrollbarMode="showNever" colorServiceRecorded="red" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" foregroundColorServiceNotAvail="#00555555" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select" transparent="1" />
+		<ePixmap pixmap="Verein/Logos/1-bundesliga.png" position="66,855" size="150,150" zPosition="5" alphatest="blend" borderWidth="2" borderColor="club_primary" scale="1" />
+		<panel name="Template_Color_Button_Automatic_full" />
+		<panel position="30,25" size="230,50">
+			<panel name="Template_Text_Buttons_M_I_EPG" />
+		</panel>
+		<panel position="1,62" size="239,925">
+			<panel name="Logo_ChannelSelection_Default" />
+		</panel>
+		<panel name="Header_Title_Clock_ChannelSelection" />
+		<panel name="Bundesliga_Fullscreen_club_primary" />
+	</screen>
+
+ <!--  Bundesliga Live-TV (e2MDB)-->
+	<screen name="ChannelSelection_Live-TV" label="Bundesliga Live-TV (e2MDB)" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="list" position="27,98" size="1350,920" scrollbarMode="showNever" colorServiceRecorded="red" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" foregroundColorServiceNotAvail="#00555555" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select" transparent="1" />
+		<widget source="ServiceEvent" position="1412,390" size="468,296" font="Regular; 27" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1"  zPosition="2" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" halign="left" valign="top">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="ServiceEvent" render="BLSingleEpgList" position="1412,698" size="468,210" font="Regular; 27" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="MetrixHDPrimeTime" position="1412,914" size="468,71" font="Regular; 27" foregroundColor="green" backgroundColor="bl_bg" borderWidth="1" borderColor="black" transparent="1" zPosition="5" halign="left" valign="center" wrap="1" />
+		<widget source="session.VideoPicture" render="Pig" position="1409,98" size="476,268" zPosition="3" backgroundColor="Pic" />
+		<panel name="Template_Color_Button_Automatic_full" />
+		<panel position="30,25" size="230,50">
+			<panel name="Template_Text_Buttons_M_I_EPG" />
+		</panel>
+		<panel name="Header_Title_Clock_ChannelSelection" />
+		<panel name="Bundesliga_Fullscreen_right_Pic_club_primary" />
+		<panel name="Logo_ChannelSelection_LiveTV_Default" />
+		<eLabel name="Club" position="17,17" size="1886,1046" zPosition="-20" backgroundColor="club_primary" cornerRadius="10" />
+		<eLabel name="BG" position="20,20" size="1880,1040" zPosition="-10" backgroundColor="bl_bg" cornerRadius="10" />
+	    <eLabel name="" position="21,20" size="1879,68" backgroundColor="bl_bg,title_gradient,club_primary,vertical" zPosition="-9" cornerRadius="9" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" />
+		<eLabel name="" position="21,25" size="4,64" backgroundColor="bl_bg,title_gradient,club_primary,vertical" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" />
+		<eLabel name="" position="1896,25" size="4,64" backgroundColor="bl_bg,title_gradient,club_primary,vertical" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" />
+		<eLabel position="20,87" size="1883,2" zPosition="10" backgroundColor="club_primary" />
+		<eLabel position="20,1004" size="1880,2" zPosition="10" backgroundColor="club_primary" /> 
+		<eLabel position="1405,368" size="482,2" backgroundColor="club_primary" />
+		<eLabel position="1405,690" size="482,2" backgroundColor="club_primary" />
+		<eLabel position="1405,908" size="482,2" backgroundColor="club_primary" />
+	</screen>
+	
+ <!--  Bundesliga TV-Spielfilm (e2MDB) -->
+  <screen name="ChannelSelection_TV-Spielfilm" label="Bundesliga TV-Spielfilm (e2MDB)" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
+    <panel name="Bundesliga_Fullscreen_club_primary0" />
+    <panel name="Template_Color_Button_Automatic_full" />
+    <panel position="30,25" size="230,50">
+      <panel name="Template_Text_Buttons_M_I_EPG" />
+    </panel>
+    <eLabel name="Club" position="17,17" size="1886,1046" zPosition="-20" backgroundColor="club_primary" cornerRadius="10" />
+    <eLabel name="BG" position="20,20" size="1880,1040" zPosition="-10" backgroundColor="bl_bg" cornerRadius="10" />
+    <eLabel position="21,89" size="1881,915" zPosition="-1" backgroundColor="#00F4F4F4" />
+    <eLabel position="21,25" size="4,64" backgroundColor="bl_bg,title_gradient,club_primary,vertical" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" />
+    <eLabel position="1896,25" size="4,64" backgroundColor="bl_bg,title_gradient,club_primary,vertical" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" />
+    <eLabel position="21,20" size="1879,68" zPosition="-9" backgroundColor="bl_bg,title_gradient,club_primary,vertical" backgroundGradient="bl_bg,title_gradient,club_primary,vertical" cornerRadius="9" />
+    <eLabel position="20,87" size="1883,2" zPosition="10" backgroundColor="club_primary" />
+    <widget name="list" position="21,21" size="1881,983" scrollbarMode="showNever" colorServiceRecorded="red" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" foregroundColorServiceNotAvail="#00555555" backgroundColor="#00F4F4F4" foregroundColor="black" backgroundColorSelected="#00E4E4E4" foregroundColorSelected="black" transparent="1" />
+    <eLabel position="20,1004" size="1880,2" zPosition="10" backgroundColor="club_primary" />
+    <widget source="global.CurrentTime" render="Label" position="1313,1015" size="300,38" noWrap="1" font="Regular; 27" backgroundColor="bl_bg" foregroundColor="bl_text" halign="center" valign="center" transparent="1">
+      <convert type="ClockToText">Format:%a %d.%m.  %H:%M</convert>
+    </widget>
+  </screen>
+</skin>

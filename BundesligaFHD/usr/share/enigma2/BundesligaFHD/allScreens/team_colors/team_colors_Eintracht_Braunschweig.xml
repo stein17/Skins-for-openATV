@@ -1,0 +1,176 @@
+<skin>
+
+  
+  <!-- #Eintracht_Braunschweig# -->
+  <!-- Gelb -->
+  <!-- <color name="club_selection_bg" value="#00ffcc00" /> -->
+  <!-- Schwarz -->
+  <!-- <color name="club_selection_fg" value="#00111111" /> -->
+  <!-- Dunkelgelb -->
+  <!-- <color name="club_dark" value="#00a67c00" /> -->
+  <!-- backgroundColorSelected="#00ffcc00" foregroundColorSelected="#00111111" -->
+  <!-- itemCornerRadiusSelected="12" itemGradientSelected="#00ffe66a,#00ffcc00,#00a67c00,vertical" -->
+
+		
+		
+<colors>
+    <color name="title_gradient" value="#00a67c00" />
+	
+	<color name="V_IGS_T" value="#0018171c" />
+    <color name="V_IGS_C" value="#00ffbc04" />
+	<color name="V_IGS_B" value="#00a67c00" />
+	
+    <color name="bl_bg" value="#0008090c" />
+	<color name="bl_line" value="#00ffbc04" />
+    <color name="bl_text" value="#00eff1f1" />
+	
+	<color name="club_dark" value="#0018171c" />
+    <color name="club_primary" value="#00ffbc04" />
+    <color name="club_selection_bg" value="#00ffbc04" />
+    <color name="club_selection_fg" value="#0008090c" />
+	
+    <color name="ScrollbarBorder" value="#00ffd000" />
+    <color name="ScrollbarForeground" value="#001a1a1a" />
+    <color name="SliderBorder" value="#00ffd000" />
+    <color name="SliderForeground" value="#001a1a1a" />
+	
+	<color name="ch-fg-name" value="grey" />
+	<color name="ch-fg-name-select" value="#00fcfcfc" />
+	<color name="ch-fg-event" value="#00fcfcfc" />
+	<color name="ch-fg-event-select" value="#00ffbc04" />
+	<color name="ch-bg-select" value="#0018171c" />
+
+	
+	<color name="fg-title-ib" value="#00fcfcfc" />
+	<color name="fg-clock-ib" value="#00ffbc04" />
+	<color name="fg-date-ib" value="#00fcfcfc" />
+	
+	<color name="fg-title-m" value="#0008090c" />
+	<color name="fg-title-s" value="#0008090c" />
+	<color name="fg-clock-s" value="#0008090c" />
+	<color name="fg-date-s" value="#0008090c" />
+  </colors>	
+  
+
+  
+  
+ <windowstyle type="skinned" id="0">
+    <title offset="45,11" font="Regular;41" borderColor="black" borderWidth="1" />
+    <configList entryLeftOffset="22" headerLeftOffset="8" headerFont="Regular;32" entryFont="Regular;32" valueFont="Regular;27" />
+    <!-- Allgemeine Fensterfarben -->
+    <color name="Background" color="bl_bg" />
+    <color name="LabelForeground" color="bl_text" />
+    <!-- Listbox normal -->
+    <color name="ListboxBackground" color="bl_bg" />
+    <color name="ListboxForeground" color="bl_text" />
+    <!-- Listbox Auswahl -->
+    <color name="ListboxSelectedBackground" color="club_selection_bg" />
+    <color name="ListboxSelectedForeground" color="club_selection_fg" />
+    <!-- Markierte Einträge -->
+    <color name="ListboxMarkedBackground" color="club_selection_bg" />
+    <color name="ListboxMarkedForeground" color="club_selection_fg" />
+    <color name="ListboxMarkedAndSelectedBackground" color="club_selection_bg" />
+    <color name="ListboxMarkedAndSelectedForeground" color="club_selection_fg" />
+    <!-- Fenstertitel -->
+    <color name="WindowTitleForeground" color="bl_text" />
+    <color name="WindowTitleBackground" color="bl_bg" />
+    <!-- Scrollbar -->
+    <color name="ScrollbarForeground" color="club_primary" />
+    <color name="ScrollbarBorder" color="bl_text" /> 
+    <!-- Slider -->
+    <color name="SliderForeground" color="club_primary" />
+    <color name="SliderBorder" color="bl_text" />
+
+    <!-- Borderset -->
+    <borderset name="bsWindow">
+      <pixmap pos="bpTopLeft" filename="BundesligaFHD/screens/Yellow/bs_tl.png" />
+      <pixmap pos="bpTop" filename="BundesligaFHD/screens/Yellow/bs_t.png" />
+      <pixmap pos="bpTopRight" filename="BundesligaFHD/screens/Yellow/bs_tr.png" />
+      <pixmap pos="bpLeft" filename="BundesligaFHD/screens/Yellow/bs_l.png" />
+      <pixmap pos="bpRight" filename="BundesligaFHD/screens/Yellow/bs_r.png" />
+      <pixmap pos="bpBottomLeft" filename="BundesligaFHD/screens/Yellow/bs_bl.png" />
+      <pixmap pos="bpBottom" filename="BundesligaFHD/screens/Yellow/bs_b.png" />
+      <pixmap pos="bpBottomRight" filename="BundesligaFHD/screens/Yellow/bs_br.png" />
+    </borderset>
+
+
+    <borderset name="bsListboxEntry">
+      <pixmap filename="BundesligaFHD/screens/Yellow/line_top.png" pos="bpTop" />
+      <pixmap filename="BundesligaFHD/screens/Yellow/line_bottom.png" pos="bpBottom" />
+	  <pixmap filename="BundesligaFHD/screens/Yellow/line_left.png" pos="bpLeft"/>
+    </borderset>
+    <!-- Scrolllabel -->
+    <scrolllabel scrollbarWidth="10" scrollbarBorderWidth="1" scrollbarOffset="5" />
+    <!-- Listbox -->
+    <listbox scrollbarWidth="10" scrollbarBorderWidth="1" pageSize="0" scrollbarOffset="5" />
+  </windowstyle>
+  
+  	<!-- Header Title Clock Setup-->
+	<screen name="Header_Title_Clock_Setup">
+		<widget source="Title" render="Label" position="340,54" size="970,56" font="Regular; 46" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s"  transparent="1" zPosition="5" />
+		<widget source="global.CurrentTime" render="Label" position="1730,54" size="130,56" font="Regular;46" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s"  transparent="1" zPosition="5">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,62" size="320,40" font="Regular; 30" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="title_gradient"  transparent="1" zPosition="5">
+			<convert type="ClockToText">Format:%A, %d. %B</convert>
+		</widget>
+	</screen>
+	
+	    <!-- Header Clock ChannelSelection-->
+  <screen name="Header_Clock_ChannelSelection">
+      <widget source="global.CurrentTime" render="Label" position="1750,25" size="130,56" font="Regular;46" valign="center" halign="center" backgroundColor="bl_bg" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1400,32" size="320,40" font="Regular; 30" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="bl_bg" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%A, %d. %B</convert>
+    </widget>
+  </screen>
+	
+	<!-- Header Title Clock ChannelSelection-->
+	<screen name="Header_Title_Clock_ChannelSelection">
+		<widget source="Title" render="Label" position="320,25" size="1000,56" font="Regular; 46" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s"  transparent="1" zPosition="5" />
+		<widget source="global.CurrentTime" render="Label" position="1750,25" size="130,56" font="Regular;46" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s"  transparent="1" zPosition="5">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="1400,32" size="320,40" font="Regular; 30" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="title_gradient"  transparent="1" zPosition="5">
+			<convert type="ClockToText">Format:%A, %d. %B</convert>
+		</widget>
+	</screen> 
+    <!--   MessageBox -->
+  	 <screen name="MessageBox_list">
+    <widget name="list" position="15,210" size="1170,360" padding="10,0" itemHeight="45" font="Regular;30" scrollbarMode="showOnDemand" backgroundColorSelected="club_dark"  foregroundColorSelected="bl_text" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
+ </screen>
+    <!-- setup_config -->
+     <screen name="setup_config">
+   <widget name="config" position="305,115" size="1050,810" itemHeight="45" font="Regular;30"  backgroundColorSelected="club_dark" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="bl_text"  backgroundColor="bl_bg"  transparent="1" /> 
+   </screen> 
+  
+   <!-- Logo_Setup -->
+  <screen name="Logo_Setup_Default">
+    <ePixmap pixmap="Verein/Eintracht_Braunschweig/Logo_Setup/Eintracht_Braunschweig.jpg" position="50,50" size="240,925" alphatest="blend"  />
+  </screen>
+  <!-- Logo_ChannelSelection -->
+  <screen name="Logo_ChannelSelection_Default">
+    <ePixmap pixmap="Verein/Eintracht_Braunschweig/Logo_Setup/Eintracht_Braunschweig.jpg" position="20,20" size="240,925" zPosition="4" alphatest="blend"  />
+  </screen>
+<!--   Banner_Setup_Default -->
+    <screen name="Banner_Setup_Default">
+    <ePixmap pixmap="Verein/Eintracht_Braunschweig/Banner/Eintracht_Braunschweig.jpg" position="1370,830" size="486,136" alphatest="blend" transparent="1" />
+  </screen>
+  <!-- Stadium_GUI_Default -->
+ <screen  name="Stadium_GUI_Default">
+  <ePixmap pixmap="Verein/Eintracht_Braunschweig/Stadium_GUI/Eintracht_Braunschweig.jpg" position="center,center" size="1920,1080" zPosition="-10" />
+  </screen>
+ <!--  Stadium_Inside_Player -->
+         <screen name="Stadium_Inside_Player" >
+<ePixmap pixmap="Verein/Eintracht_Braunschweig/Stadium_Inside/Eintracht_Braunschweig.jpg" position="10,785" size="526,285" zPosition="0" alphatest="blend" />
+   </screen>
+    <!--  Stadium_Inside_Infobar -->
+         <screen name="Stadium_Inside_Infobar" >
+      <ePixmap pixmap="Verein/Eintracht_Braunschweig/Stadium_Inside/Eintracht_Braunschweig.jpg" position="14,715" size="526,285" zPosition="4" alphatest="blend" />
+      </screen>
+	<!--   Stadium_Inside_Grid -->
+	  	 <screen name="Stadium_Inside_Grid" >
+	  <ePixmap pixmap="Verein/Eintracht_Braunschweig/Stadium_Inside/Eintracht_Braunschweig.jpg" position="1417,545" size="458,249" scale="1" zPosition="5" alphatest="blend" />
+	   </screen>
+</skin>
