@@ -1,105 +1,65 @@
-# Bundesliga FHD/WQHD – Git- und openATV-Feed-Aufbau
+# Bundesliga FHD/WQHD – zwei Feed-Pakete mit Auflösungswechsel
 
-Diese Fassung arbeitet wie `GradientFHD`: Im Git liegen nur die Paketquellen.
-Die IPKs werden mit `SRCREV = "${AUTOREV}"` durch das OE-/openATV-Buildsystem
-erzeugt. Für normale Änderungen wird lokal keine IPK gebaut.
+Diese Fassung benötigt genau zwei BB-Dateien: eine für FHD und eine für WQHD.
+Ein drittes Installer-Paket ist nicht mehr nötig. Der Wechsel der Auflösung ist
+direkt in beiden Bundesliga-Config-Menüs eingebaut.
 
-## 1. Diese fünf Ordner ins Skins-for-openATV Git kopieren
 
-Direkt nach `G:\Mein Git\Skins-for-openATV\` kopieren:
+Der Ordner `oe-alliance-bb` enthält nur die Vorlagen für Captain und gehört
+nicht in einen der vier Paketordner.
 
-- `BundesligaInstaller`
-- `BundesligaFHD`
-- `BundesligaWQHD`
-- `BundesligaFHD-teams`
-- `BundesligaWQHD-teams`
+## 1. Genau zwei BB-Dateien für das OE-Git
 
-Optional kann diese Anleitung zusätzlich als `README_Bundesliga_Feed.md` ins
-Repository kopiert werden. Den Ordner `oe-alliance-bb` nicht in diese fünf
-Paketordner mischen; er enthält Vorlagen für das separate OE-Git.
+Aus `oe-alliance-bb`:
 
-## 2. Die drei BB-Dateien gehören ins OE-Git
-
-Die Vorlagen aus `oe-alliance-bb` gehören im OE-Alliance-Repository nach:
-
-`meta-oe/recipes-distros/openatv/plugins/`
-
-- `enigma2-plugin-extensions-bundesligainstaller.bb`
 - `enigma2-plugin-skins-bundesligafhd.bb`
 - `enigma2-plugin-skins-bundesligawqhd.bb`
 
-Nach Aufnahme dieser Rezepte baut der Feed automatisch folgende Pakete:
 
-- `enigma2-plugin-extensions-bundesligainstaller`
-- `enigma2-plugin-skins-bundesligafhd`
-- `enigma2-plugin-skins-bundesligawqhd`
+## 2. Verhalten auf der Box
 
-## 3. Dein normaler Support-Workflow
+- Das Config-Menü zeigt eindeutig `Aktiver Skin: Bundesliga FHD` oder
+  `Aktiver Skin: Bundesliga WQHD`.
+- Direkt darunter steht nur die mögliche Aktion zum Wechsel auf die andere
+  Auflösung. Es werden nicht mehr beide Varianten als „installiert“ angezeigt.
+- Beim Wechsel wird zuerst das Zielpaket installiert und geprüft.
+- Verein, individuelle Farben und Skinparts werden auf das Ziel übertragen.
+- Erst nach erfolgreicher Aktivierung wird das bisherige Skin-Paket entfernt.
+- Schlägt die Installation fehl, bleibt der bisherige Skin aktiv und erhalten.
+- Beim Entfernen werden Skin, Config-Plugin sowie die eigenen Converter und
+  Renderer vollständig gelöscht.
+- Gemeinsame Altdateien aus Version 1.2 werden erst beim letzten Bundesliga-
+  Skin entfernt, damit eine noch vorhandene alte Installation funktionsfähig
+  bleibt.
 
-### XML oder Datei im Skin ändern
+FHD und WQHD besitzen ab Version 1.3 eigene Komponentennamen (`BLFHD…` und
+`BLWQHD…`). Dadurch überschreibt keine Variante mehr Dateien der anderen.
 
-Beispiel:
 
-`BundesligaFHD/usr/share/enigma2/BundesligaFHD/skin.xml`
+## 3. Normaler Git-Support
 
-oder:
-
-`BundesligaWQHD/usr/share/enigma2/BundesligaWQHD/icons/mein_icon.png`
-
-Danach nur noch:
-
-```bash
-cd "/g/Mein Git/Skins-for-openATV"
-git switch python3
-git pull --ff-only origin python3
-git add -- BundesligaFHD BundesligaWQHD BundesligaInstaller
-git commit -m "Update Bundesliga skins"
-git push origin python3
-```
-
-Der OE-Feed baut die neuen Pakete aus dem aktuellen Git-Stand. Eine manuelle
-IPK und eine manuelle Versionsänderung sind nicht nötig.
-
-### Bild eines ausgelagerten Vereins ersetzen
-
-Beispiel FHD Borussia Dortmund:
-
-`BundesligaFHD-teams/Verein/Borussia_Dortmund/`
-
-Beispiel WQHD Hertha BSC:
-
-`BundesligaWQHD-teams/Verein/Hertha_BSC/`
-
-Das vorhandene Bild unter demselben Dateinamen ersetzen und committen:
-
-```bash
-git add -- BundesligaFHD-teams BundesligaWQHD-teams
-git commit -m "Update Bundesliga team images"
-git push origin python3
-```
-
-Neue Installationen laden sofort die neue Datei. Auf einer Box mit bereits
-installiertem Verein: Bundesliga-Konfiguration öffnen, BLAU `Vereine`, Verein
-markieren und BLAU `Aktualisieren` drücken.
-
-Solange der Dateiname gleich bleibt, müssen weder ZIP, IPK, Katalog noch
-Prüfsumme neu erzeugt werden. Nur beim Hinzufügen, Löschen oder Umbenennen einer
-benötigten Vereinsdatei muss außerdem die jeweilige Datei
-`team_assets/catalog.json` im Skin angepasst werden.
-
-## 4. Git Bash – erste Veröffentlichung
+XML, Python-Datei oder Icon wie bisher direkt im passenden Git-Ordner ändern.
+Danach:
 
 ```bash
 cd "/g/Mein Git/Skins-for-openATV"
 git switch python3
 git pull --ff-only origin python3
-git status
-git add -- BundesligaInstaller BundesligaFHD BundesligaWQHD BundesligaFHD-teams BundesligaWQHD-teams README_Bundesliga_Feed.md
-git commit -m "Add Bundesliga FHD WQHD feed installer and team downloads"
+git add -- BundesligaFHD BundesligaWQHD BundesligaFHD-teams BundesligaWQHD-teams README_Bundesliga_Feed.md
+git commit -m "Update Bundesliga FHD WQHD"
 git push origin python3
 ```
 
-## 5. Verhalten auf der Box
+Der Feed baut durch `SRCREV = "${AUTOREV}"` aus dem aktuellen Git-Stand. Für
+normale Skin-Änderungen muss keine IPK von Hand gebaut werden.
+
+Bei einem Icon-Austausch in einem ausgelagerten Vereinsordner bleibt der
+Dateiname gleich. Anschließend reicht ebenfalls Commit und Push. Bereits
+installierte Vereine lassen sich in der Bundesliga-Konfiguration über
+`BLAU – Vereine – BLAU – Aktualisieren` neu aus GitHub laden.
+
+
+## 4. Verhalten auf der Box
 
 - Der Auswahl-Installer fragt FHD oder WQHD ab.
 - Er installiert den Skin über dessen Paketnamen vom openATV-Feed.
