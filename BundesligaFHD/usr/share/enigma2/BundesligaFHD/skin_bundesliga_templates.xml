@@ -158,10 +158,10 @@
       <convert type="EventName">Name</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1385,490" size="160,32" font="Regular;23" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Times</convert>
+      <convert type="BLFHDEventTime">Times</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1685,490" size="160,32" font="Regular;23" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5" halign="right">
-      <convert type="BLEventTime">ElapsedRemaining</convert>
+      <convert type="BLFHDEventTime">ElapsedRemaining</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" position="1530,498" size="155,10" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="black" cornerRadius="4" zPosition="5">
       <convert type="EventTime">Progress</convert>
@@ -181,13 +181,13 @@
     </widget>
     <eLabel text="LIVE" position="1415,495" size="50,22" font="Regular; 19" halign="center" valign="center" foregroundColor="bl_text" backgroundColor="club_primary" cornerRadius="6" zPosition="5" />
     <widget source="ServiceEvent" render="Label" position="1473,492" size="150,30" font="Regular; 25" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Times</convert>
+      <convert type="BLFHDEventTime">Times</convert>
     </widget>
     <widget source="ServiceEvent" render="Progress" position="1620,499" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="black" cornerRadius="6" zPosition="5">
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="1778,492" size="100,30" font="Regular;25" halign="right" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Remaining</convert>
+      <convert type="BLFHDEventTime">Remaining</convert>
     </widget>
   </screen>
   <!-- VideoPicture_EPG -->
@@ -219,13 +219,13 @@
     </widget>
     <eLabel text="LIVE" position="1415,495" size="50,22" font="Regular; 19" halign="center" valign="center" foregroundColor="bl_text" backgroundColor="club_primary" cornerRadius="6" zPosition="5" />
     <widget source="session.Event_Now" render="Label" position="1473,492" size="150,30" font="Regular; 25" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Times</convert>
+      <convert type="BLFHDEventTime">Times</convert>
     </widget>
     <widget source="session.Event_Now" render="Progress" position="1620,499" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="black" cornerRadius="6" zPosition="5">
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget source="session.Event_Now" render="Label" position="1778,492" size="100,30" font="Regular;25" halign="right" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Remaining</convert>
+      <convert type="BLFHDEventTime">Remaining</convert>
     </widget>
   </screen>
   <!-- ServiceEvent_ChannelSelection -->
@@ -241,18 +241,18 @@
     </widget>
     <eLabel text="LIVE" position="1412,224" size="60,28" font="Regular;22" halign="center" valign="center" foregroundColor="bl_text" backgroundColor="club_primary" borderColor="grey" borderWidth="1" cornerRadius="4" zPosition="5" />
     <widget source="ServiceEvent" render="Label" position="1490,220" size="250,35" font="Regular; 25" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Times</convert>
+      <convert type="BLFHDEventTime">Times</convert>
     </widget>
     <widget source="ServiceEvent" render="Progress" position="1412,262" size="468,10" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="black" cornerRadius="6" zPosition="5">
       <convert type="EventTime">Progress</convert>
     </widget>
     <widget source="ServiceEvent" render="Label" position="1760,220" size="120,35" font="Regular;25" halign="right" backgroundColor="bl_bg" foregroundColor="bl_text" borderWidth="1" borderColor="black" transparent="1" zPosition="5">
-      <convert type="BLEventTime">Remaining</convert>
+      <convert type="BLFHDEventTime">Remaining</convert>
     </widget>
     <widget source="ServiceEvent" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1412,280" size="468,386" font="Regular; 29" zPosition="2" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" halign="left" valign="top">
       <convert type="EventName">FullDescription</convert>
     </widget>
-    <widget source="ServiceEvent" render="BLSingleEpgList" position="1412,689" size="468,293" font="Regular; 29" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" valign="top" zPosition="2" />
+    <widget source="ServiceEvent" render="BLFHDSingleEpgList" position="1412,689" size="468,293" font="Regular; 29" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" valign="top" zPosition="2" />
   </screen>
   
     <!-- Header Title Clock Menu-->
@@ -863,13 +863,13 @@ for x in self.additionalWidgets:
  <!--  Ab hier templates vom Gradient -->
 <!-- 	<screen name="Infobar_OscamInfo,_Reader,_Time,_Caid,_Hops">
 		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Regular; 27" valign="center" backgroundColor="bl_bg" halign="left" transparent="1">
-			<convert type="BLCaidInfo">Server: %S * CAID: %C * HOPS: % * ECM: %T ms. </convert>
+			<convert type="BLFHDCaidInfo">Server: %S * CAID: %C * HOPS: % * ECM: %T ms. </convert>
 		</widget>
 	</screen> -->
 	<!-- Infobar_OscamInfo_Time,_Caid,_Hops -->
 <!-- 	<screen name="Infobar_OscamInfo_Time,_Caid,_Hops">
 		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Regular; 27" valign="center" backgroundColor="bl_bg" halign="left" transparent="1">
-		<convert type="BLCaidInfo">CAID: %C * HOPS: % * ECM: %T ms. </convert>
+		<convert type="BLFHDCaidInfo">CAID: %C * HOPS: % * ECM: %T ms. </convert>
 	</widget>
 	</screen> -->
 	<!-- OscamInfo -->
@@ -886,36 +886,36 @@ for x in self.additionalWidgets:
 	</screen>
 	<screen name="template_Infobar_VPN">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="BLCountryFlagPixmap" position="188,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="BLVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="188,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="225,282" size="60,32" font="Regular;26" transparent="1" halign="center" valign="center">
-			<convert type="BLVPNInfo">CountryCode</convert>
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="60,320" size="230,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">IP</convert>
+			<convert type="BLFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="60,240" size="230,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">ReceiverIP</convert>
+			<convert type="BLFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="20,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-			<convert type="BLVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+			<convert type="BLFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 		<widget source="session.CurrentService" render="Label" position="60,280" size="120,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">VpnProviderPretty</convert>
+			<convert type="BLFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Label -->
 		<eLabel name="Background" position="10,230" size="290,130" backgroundColor="#101a1b20,#1014151a,#100a0a0d,vertical" zPosition="-5" cornerRadius="10" />
@@ -924,34 +924,34 @@ for x in self.additionalWidgets:
 	<!-- skin_Infobar_None_VPN -->
 <screen name="template_Infobar_none_VPN">
   <!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">ConnType</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">ConnType</convert>
   </widget>
   <!-- Länderflagge-->
-  <widget source="session.CurrentService" render="BLCountryFlagPixmap" position="19,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-    <convert type="BLVPNInfo">CountryCode</convert>
+  <widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="19,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+    <convert type="BLFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Öffentliche IP -->
   <widget source="session.CurrentService" render="Label" position="60,320" size="230,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="BLVPNInfo">IP</convert>
+    <convert type="BLFHDVPNInfo">IP</convert>
   </widget>
   <!-- Empfänger-IP -->
   <widget source="session.CurrentService" render="Label" position="60,240" size="230,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="BLVPNInfo">ReceiverIP</convert>
+    <convert type="BLFHDVPNInfo">ReceiverIP</convert>
   </widget>
   <!-- NET-Status-Symbol (an/aus) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">NetActive</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">NetActive</convert>
   </widget>
   <!-- Label -->
   <eLabel name="Background" position="10,230" size="290,130" backgroundColor="#101a1b20,#1014151a,#100a0a0d,vertical" zPosition="-5" cornerRadius="10" />
   <!-- Ländername ausgeschrieben -->
   <widget source="session.CurrentService" render="Label" position="60,280" size="190,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-    <convert type="BLVPNInfo">CountryName</convert>
+    <convert type="BLFHDVPNInfo">CountryName</convert>
   </widget>
   <!-- VPN ON/OFF (MapPixmap -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="255,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-    <convert type="BLVPNInfo">VpnActive</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="255,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+    <convert type="BLFHDVPNInfo">VpnActive</convert>
   </widget>
 </screen>
 	
@@ -959,36 +959,36 @@ for x in self.additionalWidgets:
 <screen name="template_Infobar_VPN_center">
   <eLabel name="title_bg" position="16,642" size="760,38" backgroundColor="#101a1b20,#1014151a,#100a0a0d,vertical" zPosition="-1" cornerRadius="6"  />
   <!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="535,645" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">ConnType</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="535,645" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">ConnType</convert>
   </widget>
   <!-- Länderflagge -->
-  <widget source="session.CurrentService" render="BLCountryFlagPixmap" position="185,644" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-    <convert type="BLVPNInfo">CountryCode</convert>
+  <widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="185,644" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+    <convert type="BLFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Ländertext (z. B. "DE – Deutschland") -->
   <widget source="session.CurrentService" render="Label" position="227,646" size="60,30" font="Regular;24" transparent="1" halign="center" valign="center">
-    <convert type="BLVPNInfo">CountryCode</convert>
+    <convert type="BLFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Öffentliche IP -->
   <widget source="session.CurrentService" render="Label" position="330,646" size="200,30" font="Regular;24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="BLVPNInfo">IP</convert>
+    <convert type="BLFHDVPNInfo">IP</convert>
   </widget>
   <!-- Empfänger-IP -->
   <widget source="session.CurrentService" render="Label" position="575,646" size="200,30" font="Regular;24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="BLVPNInfo">ReceiverIP</convert>
+    <convert type="BLFHDVPNInfo">ReceiverIP</convert>
   </widget>
   <!-- Provider-Icon (optional): -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="20,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-    <convert type="BLVPNInfo">VpnProvider</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+    <convert type="BLFHDVPNInfo">VpnProvider</convert>
   </widget>
   <!-- Optional: Provider-Name daneben -->
   <widget source="session.CurrentService" render="Label" position="60,646" size="120,30" font="Regular;24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="BLVPNInfo">VpnProviderPretty</convert>
+    <convert type="BLFHDVPNInfo">VpnProviderPretty</convert>
   </widget>
   <!-- NET-Status-Symbol (an/aus) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="290,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">NetActive</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="290,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">NetActive</convert>
   </widget>
 </screen>
 
@@ -998,33 +998,33 @@ for x in self.additionalWidgets:
   <!-- Label -->
    <eLabel name="title_bg" position="16,642" size="770,38" backgroundColor="#101a1b20,#1014151a,#100a0a0d,vertical" zPosition="-1" cornerRadius="6"  />
   <!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="20,645" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">ConnType</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="20,645" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">ConnType</convert>
   </widget>
   <!-- Länderflagge-->
-  <widget source="session.CurrentService" render="BLCountryFlagPixmap" position="260,644" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-    <convert type="BLVPNInfo">CountryCode</convert>
+  <widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="260,644" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+    <convert type="BLFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Öffentliche IP -->
   <widget source="session.CurrentService" render="Label" position="543,645" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black" valign="center">
-    <convert type="BLVPNInfo">IP</convert>
+    <convert type="BLFHDVPNInfo">IP</convert>
   </widget>
   <!-- Empfänger-IP -->
   <widget source="session.CurrentService" render="Label" position="58,645" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black" valign="center">
-    <convert type="BLVPNInfo">ReceiverIP</convert>
+    <convert type="BLFHDVPNInfo">ReceiverIP</convert>
   </widget>
   <!-- NET-Status-Symbol (an/aus) -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="750,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-    <convert type="BLVPNInfo">NetActive</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="750,645" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+    <convert type="BLFHDVPNInfo">NetActive</convert>
   </widget>
   
   <!-- Ländername ausgeschrieben -->
   <widget source="session.CurrentService" render="Label" position="300,645" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-    <convert type="BLVPNInfo">CountryName</convert>
+    <convert type="BLFHDVPNInfo">CountryName</convert>
   </widget>
   <!-- VPN ON/OFF (MapPixmap -->
-  <widget source="session.CurrentService" render="BLMapPixmap" position="505,645" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-    <convert type="BLVPNInfo">VpnActive</convert>
+  <widget source="session.CurrentService" render="BLFHDMapPixmap" position="505,645" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+    <convert type="BLFHDVPNInfo">VpnActive</convert>
   </widget>
 </screen>
 
@@ -1035,80 +1035,80 @@ for x in self.additionalWidgets:
 	<!-- TEMPLATES SecondInfoBar VPN -->
 	<screen name="template_SecondInfoBar_VPN">
 	<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1420,605" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1420,605" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="BLCountryFlagPixmap" position="1800,649" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="BLVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="1800,649" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="1740,650" size="60,32" font="Regular;27" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" halign="center" valign="center">
-			<convert type="BLVPNInfo">CountryCode</convert>
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1460,650" size="230,32" font="Regular;27" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">IP</convert>
+			<convert type="BLFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1460,605" size="230,32" font="Regular;27" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">ReceiverIP</convert>
+			<convert type="BLFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1700,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-			<convert type="BLVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1700,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+			<convert type="BLFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 		<widget source="session.CurrentService" render="Label" position="1740,605" size="120,32" font="Regular;27" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">VpnProviderPretty</convert>
+			<convert type="BLFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1420,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1420,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1700,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1700,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 	</screen>
 	<!-- SecondInfoBar_None_VPN -->
 	<screen name="template_SecondInfoBar_None_VPN">
 	<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1420,605" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1420,605" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="BLCountryFlagPixmap" position="1660,649" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="BLVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="1660,649" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="1700,650" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" halign="left" valign="center">
-			<convert type="BLVPNInfo">CountryName</convert>
+			<convert type="BLFHDVPNInfo">CountryName</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1460,650" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">IP</convert>
+			<convert type="BLFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1460,605" size="200,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">ReceiverIP</convert>
+			<convert type="BLFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1662,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-			<convert type="BLVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1662,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+			<convert type="BLFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 
 		<widget source="session.CurrentService" render="Label" position="1700,605" size="144,32" font="Regular; 24" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black" halign="left">
-			<convert type="BLVPNInfo">VpnProviderPretty</convert>
+			<convert type="BLFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1420,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1420,650" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/BundesligaFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1840,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1840,605" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 	</screen>
 	<!-- Eventview VPN -->
@@ -1118,24 +1118,24 @@ for x in self.additionalWidgets:
 	<!-- template_Eventview_VPN -->
 	<screen name="template_Eventview_VPN">
 		<!--  VPN-Status-Symbol (EIN/AUS) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1767,665" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
-			<convert type="BLVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1767,665" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/BundesligaFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/BundesligaFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/BundesligaFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/BundesligaFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/BundesligaFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/BundesligaFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/BundesligaFHD/vpn/vpn_status_off.png">
+			<convert type="BLFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1335,980" size="260,32" font="Regular;26" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="BLVPNInfo">IP</convert>
+			<convert type="BLFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="BLCountryFlagPixmap" position="1765,610" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="BLVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="BLFHDCountryFlagPixmap" position="1765,610" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/share/enigma2/BundesligaFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="BLMapPixmap" position="1810,665" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
-			<convert type="BLVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="BLFHDMapPixmap" position="1810,665" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/BundesligaFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/BundesligaFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/BundesligaFHD/vpn/net_off.png">
+			<convert type="BLFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE") -->
 		<widget source="session.CurrentService" render="Label" position="1807,611" size="50,32" font="Regular;26" transparent="1" halign="left" valign="center">
-			<convert type="BLVPNInfo">CountryCode</convert>
+			<convert type="BLFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	
@@ -1415,7 +1415,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1660,925" size="25,28" render="Pixmap" pixmap="tunericons/a_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_0</convert>
+    <convert type="BLFHDFrontendInfo">REC_0</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1685,925" size="25,28" pixmap="tunericons/b_grey.png" zPosition="1" alphatest="blend" />
@@ -1435,7 +1435,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1685,925" size="25,28" render="Pixmap" pixmap="tunericons/b_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_1</convert>
+    <convert type="BLFHDFrontendInfo">REC_1</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1710,925" size="25,28" pixmap="tunericons/c_grey.png" zPosition="1" alphatest="blend" />
@@ -1455,7 +1455,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1710,925" size="25,28" render="Pixmap" pixmap="tunericons/c_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_2</convert>
+    <convert type="BLFHDFrontendInfo">REC_2</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1735,925" size="25,28" pixmap="tunericons/d_grey.png" zPosition="1" alphatest="blend" />
@@ -1475,7 +1475,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1735,925" size="25,28" render="Pixmap" pixmap="tunericons/d_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_3</convert>
+    <convert type="BLFHDFrontendInfo">REC_3</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1760,925" size="25,28" pixmap="tunericons/e_grey.png" zPosition="1" alphatest="blend" />
@@ -1495,7 +1495,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1760,925" size="25,28" render="Pixmap" pixmap="tunericons/e_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_4</convert>
+    <convert type="BLFHDFrontendInfo">REC_4</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1785,925" size="25,28" pixmap="tunericons/f_grey.png" zPosition="1" alphatest="blend" />
@@ -1515,7 +1515,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1785,925" size="25,28" render="Pixmap" pixmap="tunericons/f_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_5</convert>
+    <convert type="BLFHDFrontendInfo">REC_5</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1810,925" size="25,28" pixmap="tunericons/g_grey.png" zPosition="1" alphatest="blend" />
@@ -1535,7 +1535,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1810,925" size="25,28" render="Pixmap" pixmap="tunericons/g_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_6</convert>
+    <convert type="BLFHDFrontendInfo">REC_6</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1835,925" size="25,28" pixmap="tunericons/h_grey.png" zPosition="1" alphatest="blend" />
@@ -1555,7 +1555,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1835,925" size="25,28" render="Pixmap" pixmap="tunericons/h_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_7</convert>
+    <convert type="BLFHDFrontendInfo">REC_7</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1860,925" size="25,28" pixmap="tunericons/i_grey.png" zPosition="1" alphatest="blend" />
@@ -1575,7 +1575,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1860,925" size="25,28" render="Pixmap" pixmap="tunericons/i_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_8</convert>
+    <convert type="BLFHDFrontendInfo">REC_8</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
   <ePixmap position="1885,925" size="25,28" pixmap="tunericons/j_grey.png" zPosition="1" alphatest="blend" />
@@ -1595,7 +1595,7 @@ for x in self.additionalWidgets:
     <convert type="ConditionalShowHide" />
   </widget>
   <widget source="session.FrontendInfo" position="1885,925" size="25,28" render="Pixmap" pixmap="tunericons/j_red.png" zPosition="6" alphatest="blend">
-    <convert type="BLFrontendInfo">REC_9</convert>
+    <convert type="BLFHDFrontendInfo">REC_9</convert>
     <convert type="ConditionalShowHide">Blink</convert>
   </widget>
 </screen>
@@ -1606,58 +1606,58 @@ for x in self.additionalWidgets:
 <!-- System-Load -->
 <eLabel position="1270,360" size="130,24" text="System-Load" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,366" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">LOAD</convert>
+	<convert type="BLFHDSystemInfo">LOAD</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,360" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">LOAD</convert>
+	<convert type="BLFHDSystemInfo">LOAD</convert>
 </widget>
 <!-- CPU-Last -->
 <eLabel position="1270,395" size="130,24" text="CPU-Last" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,401" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">CPU</convert>
+	<convert type="BLFHDSystemInfo">CPU</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,395" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">CPU</convert>
+	<convert type="BLFHDSystemInfo">CPU</convert>
 </widget>
 <!-- RAM-Free -->
 <eLabel position="1270,430" size="130,24" text="RAM-Free" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,436" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">MEMUSEDPCT</convert>
+	<convert type="BLFHDSystemInfo">MEMUSEDPCT</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,430" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">MEMFREETXT</convert>
+	<convert type="BLFHDSystemInfo">MEMFREETXT</convert>
 </widget>
 <!-- CPU-Temp -->
 <eLabel position="1270,465" size="130,24" text="CPU-Temp" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,471" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">TEMP</convert>
+	<convert type="BLFHDSystemInfo">TEMP</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,465" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">TEMP</convert>
+	<convert type="BLFHDSystemInfo">TEMP</convert>
 </widget>
 <!-- Flash-Free -->
 <eLabel position="1270,500" size="130,24" text="Flash-Free" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,506" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">FLASHUSEDPCT</convert>
+	<convert type="BLFHDSystemInfo">FLASHUSEDPCT</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,500" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">FLASHFREETXT</convert>
+	<convert type="BLFHDSystemInfo">FLASHFREETXT</convert>
 </widget>
 <!-- HDD-Free -->
 <eLabel position="1270,535" size="130,24" text="HDD-Free" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,541" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">HDDUSEDPCT</convert>
+	<convert type="BLFHDSystemInfo">HDDUSEDPCT</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,535" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">HDDFREETXT</convert>
+	<convert type="BLFHDSystemInfo">HDDFREETXT</convert>
 </widget>
 <!-- USB-Free -->
 <eLabel position="1270,570" size="130,24" text="USB-Free" font="Regular;22" foregroundColor="grey" backgroundColor="background" />
 <widget source="global.CurrentTime" render="Progress" position="1410,576" size="160,12" foregroundColor="club_primary" borderColor="grey" borderWidth="1" backgroundColor="bl_bg" cornerRadius="4">
-	<convert type="BLSystemInfo">USBUSEDPCT</convert>
+	<convert type="BLFHDSystemInfo">USBUSEDPCT</convert>
 </widget>
 <widget source="global.CurrentTime" render="Label" position="1555,570" size="150,24" font="Regular;22" halign="right" foregroundColor="white" backgroundColor="background" transparent="1">
-	<convert type="BLSystemInfo">USBFREETXT</convert>
+	<convert type="BLFHDSystemInfo">USBFREETXT</convert>
 </widget>
 </screen>
 

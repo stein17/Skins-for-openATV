@@ -2,14 +2,29 @@
 
 case "$1" in
     remove|purge)
-        verein_base="/usr/share/enigma2/BundesligaWQHD/Verein"
-        if [ -d "$verein_base" ]; then
-            for marker in "$verein_base"/*/.bundesliga_team_asset.json; do
-                [ -f "$marker" ] || continue
-                team_dir="${marker%/*}"
-                case "$team_dir" in
-                    "$verein_base"/*) rm -rf "$team_dir" ;;
-                esac
+        rm -rf /usr/share/enigma2/BundesligaWQHD
+        rm -rf /usr/lib/enigma2/python/Plugins/Extensions/BundesligaWQHD
+        rm -rf /etc/enigma2/BundesligaWQHD
+
+        rm -f /usr/lib/enigma2/python/Components/Converter/BLWQHD*.py
+        rm -f /usr/lib/enigma2/python/Components/Converter/BLWQHD*.pyo
+        rm -f /usr/lib/enigma2/python/Components/Converter/__pycache__/BLWQHD*.pyc
+        rm -f /usr/lib/enigma2/python/Components/Renderer/BLWQHD*.py
+        rm -f /usr/lib/enigma2/python/Components/Renderer/BLWQHD*.pyo
+        rm -f /usr/lib/enigma2/python/Components/Renderer/__pycache__/BLWQHD*.pyc
+
+        # Altdateien aus Version 1.2 erst löschen, wenn kein anderer
+        # Bundesliga-Skin mehr darauf angewiesen sein kann.
+        if ! opkg status enigma2-plugin-skins-bundesligafhd 2>/dev/null | grep -q '^Status: install ok installed$'; then
+            for name in BLCaidInfo BLEventTime BLFrontendInfo BLServiceType BLSoftCSAInfo BLSystemInfo BLTransponderInfo BLVPNInfo; do
+                rm -f "/usr/lib/enigma2/python/Components/Converter/${name}.py"
+                rm -f "/usr/lib/enigma2/python/Components/Converter/${name}.pyo"
+                rm -f /usr/lib/enigma2/python/Components/Converter/__pycache__/${name}*.pyc
+            done
+            for name in BLCountryFlagPixmap BLMapPixmap BLSingleEpgList; do
+                rm -f "/usr/lib/enigma2/python/Components/Renderer/${name}.py"
+                rm -f "/usr/lib/enigma2/python/Components/Renderer/${name}.pyo"
+                rm -f /usr/lib/enigma2/python/Components/Renderer/__pycache__/${name}*.pyc
             done
         fi
         ;;

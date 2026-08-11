@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 
 PLUGIN_NAME = "BundesligaWQHD Config"
-PLUGIN_VERSION = "0.4"
+PLUGIN_VERSION = "0.5"
 SKIN_NAME = "BundesligaWQHD"
 SKIN_XML = "BundesligaWQHD/skin.xml"
 SKIN_BASE = "/usr/share/enigma2/BundesligaWQHD"
