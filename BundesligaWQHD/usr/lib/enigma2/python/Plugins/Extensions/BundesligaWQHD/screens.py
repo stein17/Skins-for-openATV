@@ -35,7 +35,7 @@ from .settings import (
 
 MAIN_SKIN_GRADIENT="""
 <screen name="BundesligaWQHDConfig" position="0,0" size="2560,1440" title="BundesligaWQHD Config" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="407,167" size="1400,1080" itemHeight="60" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1613,1317" size="533,51" font="Regular; 35" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
 <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
   <panel name="Template_Color_Button_Automatic_all" />
@@ -51,7 +51,7 @@ MAIN_SKIN_GRADIENT="""
 
 SKINPART_SKIN_GRADIENT="""
 <screen name="BundesligaWQHDSkinParts" position="0,0" size="2560,1440" title="BundesligaWQHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="407,167" size="1400,1080" itemHeight="60" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
 <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
   <panel name="Template_Color_Button_Automatic_all" />
   <panel name="Template_Text_Buttons_M_O_E" />

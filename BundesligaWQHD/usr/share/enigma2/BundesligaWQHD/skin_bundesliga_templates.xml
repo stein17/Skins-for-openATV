@@ -307,7 +307,7 @@
   </screen>
   
    <screen name="setup_config">
-    <widget name="config" position="407,153" size="1400,1080" itemHeight="60" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" />
+    <widget name="config" position="407,153" size="1400,1080" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" transparent="1" />
   </screen>
   <!-- setup_common -->
   <screen name="setup_common">
@@ -327,7 +327,7 @@
   </screen>
 <!--   MessageBox -->
   <screen name="MessageBox_list">
-    <widget name="list" position="20,280" size="1560,480" padding="13,0" itemHeight="60" font="Regular;40" scrollbarMode="showOnDemand" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
+    <widget name="list" position="20,280" size="1560,480" padding="13,0" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
   </screen>
   <screen name="MessageBox-template-4">
     <panel name="MessageBox_list" />
@@ -338,7 +338,7 @@
     <!-- icons TYPE_YESNO, TYPE_INFO, TYPE_WARNING, TYPE_ERROR, TYPE_MESSAGE -->
     <widget name="icon" position="16,16" size="107,107" pixmaps="icons/message/question-80.png,icons/message/info-80.png,icons/message/info-80.png,icons/message/attention-80.png,icons/message/info-80.png" alphatest="blend" conditional="icon" scale="1" transparent="1" />
     <widget name="text" position="20,160" size="1560,100" font="Regular;44" valign="center" halign="center" backgroundColor="bl_bg" foregroundColor="bl_text" />
-    <!--   <widget name="list" position="20,280" size="1560,480" padding="13,0" itemHeight="60" font="Regular;40" scrollbarMode="showOnDemand" itemCornerRadiusSelected="8" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
+    <!--   <widget name="list" position="20,280" size="1560,480" padding="13,0" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" itemCornerRadiusSelected="8" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
  -->
     <applet type="onLayoutFinish"># this should be factored out into some helper code,but currently demonstrates applets.
 from __future__ import division
@@ -507,13 +507,13 @@ for x in self.additionalWidgets:
   <screen name="wizard_template">
   <widget name="text" position="407,240" size="1400,600" font="Regular;40" valign="bottom" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
   <eLabel position="407,840" size="1400,3" backgroundColor="club_primary" />
-  <widget source="list" render="Listbox" position="407,907" size="1400,360" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1">
+  <widget source="list" render="Listbox" position="407,907" size="1400,360" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1">
     <convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (11, 0), size = (1360, 60), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular",40)],
 				"itemHeight": 60
 				}</convert>
   </widget>
-  <widget name="config" position="407,907" size="1400,360" itemHeight="60" zPosition="14" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1" />
+  <widget name="config" position="407,907" size="1400,360" itemHeight="72" zPosition="14" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1" />
   <widget name="HelpWindow" position="1567,20" size="972,204" zPosition="1" transparent="1" alphatest="blend" />
   <ePixmap pixmap="buttons/key_red.png" position="80,1320" size="37,37" alphatest="blend" />
   <widget name="languagetext" position="133,1313" size="340,51" noWrap="1" zPosition="+1" valign="center" font="Regular; 36" halign="left" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
@@ -528,13 +528,13 @@ for x in self.additionalWidgets:
 <screen name="wizard_template_2">
   <widget name="text" position="407,233" size="1400,380" font="Regular;36" valign="bottom" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
   <eLabel position="407,640" size="1400,3" backgroundColor="club_primary" />
-  <widget source="list" render="Listbox" position="407,667" size="1400,600" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1">
+  <widget source="list" render="Listbox" position="407,667" size="1400,600" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1">
     <convert type="TemplatedMultiContent">{"template": [ MultiContentEntryText(pos = (11, 0), size = (1360, 60), flags = RT_HALIGN_LEFT, text = 0) ],
 				"fonts": [gFont("Regular",40)],
 				"itemHeight": 60
 				}</convert>
   </widget>
-  <widget name="config" position="407,667" size="1400,600" itemHeight="60" zPosition="14" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1" />
+  <widget name="config" position="407,667" size="1400,600" itemHeight="72" zPosition="14" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="bl_bg" foregroundColor="bl_text" itemGradientSelected="club_selection_gradient" borderWidth="1" borderColor="black" foregroundColorSelected="club_selection_fg" transparent="1" />
   <widget name="HelpWindow" position="1567,20" size="972,204" zPosition="1" transparent="1" alphatest="blend" />
   <ePixmap pixmap="buttons/key_red.png" position="80,1320" size="37,37" alphatest="blend" />
   <widget name="languagetext" position="133,1313" size="340,51" noWrap="1" zPosition="+1" valign="center" font="Regular; 36" halign="left" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" conditional="languagetext" />
