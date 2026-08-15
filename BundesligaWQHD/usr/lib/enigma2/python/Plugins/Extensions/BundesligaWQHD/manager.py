@@ -370,7 +370,8 @@ class SkinManager(object):
         """Recreate runtime files and return a missing saved team entry.
 
         A clean flash restores the saved profile name before its image pack is
-        available. In that case Bayern is activated as a temporary fallback;
+        available. In that case the neutral Default design is activated as a
+        temporary fallback;
         the saved profile itself is deliberately not overwritten.
         """
         changed = False

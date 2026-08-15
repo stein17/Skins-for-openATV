@@ -2,14 +2,14 @@
 from __future__ import absolute_import
 
 PLUGIN_NAME = "BundesligaWQHD Config"
-PLUGIN_VERSION = "0.5"
+PLUGIN_VERSION = "0.6"
 SKIN_NAME = "BundesligaWQHD"
 SKIN_XML = "BundesligaWQHD/skin.xml"
 SKIN_BASE = "/usr/share/enigma2/BundesligaWQHD"
 STATE_BASE = "/etc/enigma2/BundesligaWQHD"
 STATE_ACTIVE_DIR = STATE_BASE + "/mySkin"
 TEAM_CATALOG = SKIN_BASE + "/team_assets/catalog.json"
-DEFAULT_TEAM_TITLE = "FC Bayern München"
+DEFAULT_TEAM_TITLE = "Default"
 
 # (interner Schlüssel, sichtbarer Text, Farbname in der Skin-XML)
 COLOR_ITEMS = (

@@ -97,7 +97,7 @@ class _RestoreTeamHelper(object):
             error = result.get("error") if result else _("Unbekannter Fehler")
             self.session.open(
                 MessageBox,
-                _("Der gespeicherte Verein konnte nicht wiederhergestellt werden. FC Bayern München bleibt vorläufig aktiv.\n\n%s")
+                _("Der gespeicherte Verein konnte nicht wiederhergestellt werden. Das Default-Design bleibt vorläufig aktiv.\n\n%s")
                 % error,
                 MessageBox.TYPE_ERROR
             )
