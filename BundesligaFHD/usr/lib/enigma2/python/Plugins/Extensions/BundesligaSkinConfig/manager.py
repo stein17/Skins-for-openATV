@@ -17,6 +17,7 @@ from .teamassets import TeamAssetManager, TeamAssetError
 
 TEAM_DIRNAME = "team_colors"
 TEAM_LINK = "skin_10_team_profile.xml"
+TEAM_SELECTION_PIXMAP = "select_54.png"
 COLOR_OVERRIDE_FILE = "skin_20_user_colors.xml"
 LEGACY_TEAM_LINKS = ("skin_user_team_colors.xml",)
 
@@ -216,12 +217,40 @@ class SkinManager(object):
                 return path_value
         return teams[0][0] if teams else ""
 
+    def selection_pixmap_path(self):
+        """Return the stable path used by all setup_config screens."""
+        return os.path.join(self.assets.verein_dir, TEAM_SELECTION_PIXMAP)
+
+    def selection_pixmap_for_entry(self, entry):
+        if not entry:
+            return ""
+        return os.path.join(self.assets.team_path(entry), TEAM_SELECTION_PIXMAP)
+
+    def selection_pixmap_is_current(self, entry):
+        source = self.selection_pixmap_for_entry(entry)
+        destination = self.selection_pixmap_path()
+        return bool(
+            source
+            and os.path.isfile(source)
+            and os.path.islink(destination)
+            and os.path.realpath(destination) == os.path.realpath(source)
+        )
+
     def apply_team(self, source):
         if not source or not os.path.isfile(source):
             raise IOError("Teamprofil nicht gefunden: %s" % source)
         entry = self.assets.team_for_profile(source)
-        if entry and not self.assets.is_installed(entry):
+        if not entry:
+            raise TeamAssetError("Der Verein wurde im Vereinskatalog nicht gefunden.")
+        if not self.assets.is_installed(entry):
             raise TeamAssetError("Die Bilder für %s sind noch nicht installiert." % entry["title"])
+        selection_source = self.selection_pixmap_for_entry(entry)
+        if not os.path.isfile(selection_source):
+            raise TeamAssetError("Das Auswahlbild für %s fehlt." % entry["title"])
+
+        # The skin always uses Verein/select_54.png.  Only this link changes,
+        # so every club can keep its own image inside its asset directory.
+        self._replace_symlink(selection_source, self.selection_pixmap_path())
         self._replace_symlink(source, os.path.join(self.active_dir, TEAM_LINK))
         for legacy in LEGACY_TEAM_LINKS:
             legacy_path = os.path.join(self.active_dir, legacy)
@@ -357,7 +386,8 @@ class SkinManager(object):
         if team_source:
             expected = os.path.realpath(team_source)
             current = os.path.realpath(self.current_team()) if self.current_team() else ""
-            if current != expected:
+            entry = self.assets.team_for_profile(team_source)
+            if current != expected or not self.selection_pixmap_is_current(entry):
                 self.apply_team(team_source)
                 changed = True
 
@@ -399,5 +429,11 @@ class SkinManager(object):
             os.remove(filename)
 
     def _replace_symlink(self, source, destination):
-        self._remove(destination)
-        os.symlink(source, destination)
+        temp = "%s.tmp-%d" % (destination, os.getpid())
+        self._remove(temp)
+        try:
+            os.symlink(source, temp)
+            os.replace(temp, destination)
+        except Exception:
+            self._remove(temp)
+            raise

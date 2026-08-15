@@ -19,7 +19,7 @@ from Screens.Standby import TryQuitMainloop
 from . import _
 from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION
 from .manager import SkinManager
-from .teamassets import TeamAssetError, format_bytes
+from .teamassets import format_bytes
 from .settings import (
     cancel_colors,
     color_config,
@@ -33,60 +33,71 @@ from .settings import (
     set_saved_skinpart,
 )
 
-MAIN_SKIN_GRADIENT="""
+MAIN_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDConfig" position="0,0" size="2560,1440" title="BundesligaWQHD Config" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1613,1317" size="533,51" font="Regular; 35" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
-<widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
-  <panel name="Template_Color_Button_Automatic_all" />
-  <panel name="Template_Text_Buttons_M_O_E" />
-  <panel name="Logo_Setup_Default" />
-  <panel name="Header_Title_Clock_Setup" />
-  <panel name="VideoPicture_Setup" />
-  <panel name="Bundesliga_Basic_Setup_club_primary" />
-  <panel name="Bundesliga_Setup_right_Pic_club_primary" />
-  <panel name="Banner_Setup_Default" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
-SKINPART_SKIN_GRADIENT="""
+SKINPART_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDSkinParts" position="0,0" size="2560,1440" title="BundesligaWQHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-<widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
-  <panel name="Template_Color_Button_Automatic_all" />
-  <panel name="Template_Text_Buttons_M_O_E" />
-  <panel name="Logo_Setup_Default" />
-  <panel name="Header_Title_Clock_Setup" />
-  <panel name="VideoPicture_Setup" />
-  <panel name="Bundesliga_Basic_Setup_club_primary" />
-  <panel name="Bundesliga_Setup_right_Pic_club_primary" />
-  <panel name="Banner_Setup_Default" />
+    <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
-TEAM_DOWNLOAD_SKIN="""
-<screen name="BundesligaWQHDTeamDownload" position="center,center" size="1680,430" title="Verein installieren" backgroundColor="#0018171c">
-    <widget name="headline" position="70,55" size="1540,75" font="Regular;52" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0018171c" transparent="1" />
-    <widget name="status" position="90,165" size="1500,170" font="Regular;38" halign="center" valign="center" foregroundColor="#00d8d8d8" backgroundColor="#0018171c" transparent="1" />
+TEAM_DOWNLOAD_SKIN = """
+<screen name="BundesligaWQHDTeamDownload" position="0,0" size="2560,1440" title="Verein installieren" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="status" position="407,167" size="1400,880" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" transparent="1" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
-TEAM_MANAGER_SKIN="""
-<screen name="BundesligaWQHDTeamManager" position="center,center" size="1860,1040" title="Installierte Vereine" backgroundColor="#0018171c">
-    <widget name="headline" position="70,35" size="1720,75" font="Regular;52" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0018171c" transparent="1" />
-    <widget name="list" position="80,140" size="1700,720" itemHeight="64" font="Regular;38" foregroundColor="#00fcfcfc" foregroundColorSelected="#00fcfcfc" backgroundColor="#0018171c" backgroundColorSelected="#00650010" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="hint" position="80,875" size="1700,62" font="Regular;32" halign="center" valign="center" foregroundColor="#00d8d8d8" backgroundColor="#0018171c" transparent="1" />
-    <widget name="key_red" position="100,955" size="440,60" font="Regular;36" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#00dc052d" />
-    <widget name="key_green" position="710,955" size="440,60" font="Regular;36" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0000b140" />
-    <widget name="key_blue" position="1320,955" size="440,60" font="Regular;36" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#00005baa" />
+TEAM_MANAGER_SKIN = """
+<screen name="BundesligaWQHDTeamManager" position="0,0" size="2560,1440" title="Installierte Vereine" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="list" position="407,167" size="1400,1013" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="hint" position="407,1233" size="1400,60" font="Regular;40" halign="center" valign="center" foregroundColor="club_primary" backgroundColor="bl_bg" transparent="1" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
 # ConfigList-Sonderstil für Teamprofile, die einen aktiven Screen
 # <screen name="setup_config"> enthalten. Ohne itemGradientSelected werden
 # die bsListboxEntry-Pixmaps von OpenATV wieder sichtbar.
-_GRADIENT_MAIN_WIDGET='foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1"'
-_CONTRAST_MAIN_WIDGET='foregroundColorSelected="bl_text" backgroundColor="bl_bg" backgroundColorSelected="club_dark" transparent="1"'
+_GRADIENT_MAIN_WIDGET = 'foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1"'
+_CONTRAST_MAIN_WIDGET = 'foregroundColorSelected="bl_text" backgroundColor="bl_bg" backgroundColorSelected="club_dark" transparent="1"'
 
 MAIN_SKIN_CONTRAST = MAIN_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST_MAIN_WIDGET)
 SKINPART_SKIN_CONTRAST = SKINPART_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST_MAIN_WIDGET)
@@ -126,16 +137,10 @@ class BundesligaWQHDTeamDownload(Screen):
         Screen.__init__(self, session)
         self["headline"] = Label(_("%s installieren") % entry["title"])
         self["status"] = Label(_("Download wird vorbereitet …"))
-        self["actions"] = ActionMap(
-            ["SetupActions"],
-            {"cancel": self._ignore_cancel},
-            -2
-        )
+        self["actions"] = ActionMap(["SetupActions"], {"cancel": self._ignore_cancel}, -2)
         self.onLayoutFinish.append(self._start)
 
     def _ignore_cancel(self):
-        # Die bestehende Installation darf während des atomaren Austauschs
-        # nicht durch ein geschlossenes Fenster verwaisen.
         return
 
     def _start(self):
@@ -721,7 +726,7 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
             self.close()
 
     def about(self):
-        text="%s\nVersion %s\n\n%s" % (
+        text = "%s\nVersion %s\n\n%s" % (
             PLUGIN_NAME,
             PLUGIN_VERSION,
             _("Eigenständige Verwaltung der Bundesliga-Teamprofile, individuellen Farben und zusätzlichen Skinparts.")
@@ -751,7 +756,7 @@ class BundesligaWQHDSkinParts(Screen, ConfigListScreen):
             choices = manager.category_choices(category)
             current = manager.active_category_value(category)
             if current not in [item[0] for item in choices]:
-                current="default"
+                current = "default"
             cfg = NoSave(ConfigSelection(default=current, choices=choices))
             entry = getConfigListEntry(_(title) + ":", cfg)
             self.entries.append((category, cfg, entry))
@@ -803,7 +808,7 @@ class BundesligaWQHDSkinParts(Screen, ConfigListScreen):
             for category, cfg, _entry in self.entries:
                 if cfg.value != self.start_values.get(category):
                     self.manager.apply_category(category, cfg.value)
-                    filename="" if cfg.value == "default" else basename(cfg.value)
+                    filename = "" if cfg.value == "default" else basename(cfg.value)
                     set_saved_skinpart(category, filename)
                     changed = True
         except Exception as error:

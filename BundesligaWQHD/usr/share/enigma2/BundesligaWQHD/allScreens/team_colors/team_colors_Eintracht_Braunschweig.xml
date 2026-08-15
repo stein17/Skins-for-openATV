@@ -27,7 +27,9 @@
 	<color name="club_dark" value="#0018171c" />
     <color name="club_primary" value="#00ffbc04" />
     <color name="club_selection_bg" value="#00ffbc04" />
-    <color name="club_selection_fg" value="#0008090c" />
+
+	<!--  <color name="club_selection_fg" value="#0008090c" /> -->
+	<color name="club_selection_fg" value="#00ffbc04" />
 	
     <color name="ScrollbarBorder" value="#00ffd000" />
     <color name="ScrollbarForeground" value="#001a1a1a" />
@@ -41,7 +43,10 @@
 	<color name="ch-bg-select" value="#0018171c" />
 	<color name="selection_gradient_top" value="#00303036" />
 	<color name="selection_gradient_bottom" value="#0008090C" />
-	<color name="club_selection_gradient" value="selection_gradient_top,club_selection_bg,selection_gradient_bottom,vertical" />
+	
+	<!-- 	<color name="club_selection_gradient" value="selection_gradient_top,club_selection_bg,selection_gradient_bottom,vertical" /> -->
+	<color name="club_selection_gradient" value="selection_gradient_top,club_dark,selection_gradient_bottom,vertical" />
+	
 	<color name="ch_selection_gradient" value="selection_gradient_top,ch-bg-select,selection_gradient_bottom,vertical" />
 	<color name="dark_selection_gradient" value="selection_gradient_top,club_dark,selection_gradient_bottom,vertical" />
 
@@ -110,49 +115,119 @@
     <listbox scrollbarWidth="13" scrollbarBorderWidth="1" pageSize="0" scrollbarOffset="7" />
   </windowstyle>
   
-  	<!-- Header Title Clock Setup-->
-	<screen name="Header_Title_Clock_Setup">
-		<widget source="Title" render="Label" position="453,72" size="1293,75" font="Regular; 61" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s"  transparent="1" zPosition="5" />
-		<widget source="global.CurrentTime" render="Label" position="2307,72" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s"  transparent="1" zPosition="5">
-			<convert type="ClockToText">Format:%H:%M</convert>
-		</widget>
-		<widget source="global.CurrentTime" render="Label" position="1867,83" size="427,53" font="Regular; 40" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="title_gradient"  transparent="1" zPosition="5">
-			<convert type="ClockToText">Format:%A, %d. %B</convert>
-		</widget>
-	</screen>
-	
-	    <!-- Header Clock ChannelSelection-->
-  <screen name="Header_Clock_ChannelSelection">
-      <widget source="global.CurrentTime" render="Label" position="2333,33" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="bl_bg" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+  
+      <!-- Header Title Clock Menu-->
+  <screen name="Header_Title_Clock_menu">
+    <widget source="Title" render="Label" position="453,75" size="1293,75" font="Regular; 56" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-m"  transparent="1" zPosition="5" />
+    <widget source="global.CurrentTime" render="Label" position="2307,75" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="1867,43" size="427,53" font="Regular; 40" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="bl_bg" transparent="1" zPosition="5">
+    <widget source="global.CurrentTime" render="Label" position="1867,88" size="427,53" font="Regular; 40" halign="right" valign="center" backgroundColor="title_gradient" foregroundColor="fg-date-s"  transparent="1" zPosition="5">
       <convert type="ClockToText">Format:%A, %d. %B</convert>
     </widget>
   </screen>
-	
-	<!-- Header Title Clock ChannelSelection-->
-	<screen name="Header_Title_Clock_ChannelSelection">
-		<widget source="Title" render="Label" position="427,33" size="1333,75" font="Regular; 61" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s"  transparent="1" zPosition="5" />
-		<widget source="global.CurrentTime" render="Label" position="2333,33" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s"  transparent="1" zPosition="5">
-			<convert type="ClockToText">Format:%H:%M</convert>
-		</widget>
-		<widget source="global.CurrentTime" render="Label" position="1867,43" size="427,53" font="Regular; 40" halign="right" valign="center" foregroundColor="fg-date-s" backgroundColor="title_gradient"  transparent="1" zPosition="5">
-			<convert type="ClockToText">Format:%A, %d. %B</convert>
-		</widget>
-	</screen> 
+  
+  <!-- Header Title Clock Setup-->
+  <screen name="Header_Title_Clock_Setup">
+    <widget source="Title" render="Label" position="453,75" size="1293,75" font="Regular; 56" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s" transparent="1" zPosition="5" />
+    <widget source="global.CurrentTime" render="Label" position="2307,75" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1867,88" size="427,53" font="Regular; 40" halign="right" valign="center" backgroundColor="title_gradient" foregroundColor="fg-date-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%A, %d. %B</convert>
+    </widget>
+  </screen>
+  
+    <!-- Header  Clock Setup-->
+  <screen name="Header_Clock_Setup">
+      <widget source="global.CurrentTime" render="Label" position="2307,75" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1867,88" size="427,53" font="Regular; 40" halign="right" valign="center" backgroundColor="title_gradient" foregroundColor="fg-date-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%A, %d. %B</convert>
+    </widget>
+  </screen>
+  <!-- Header Title Clock ChannelSelection-->
+  <screen name="Header_Title_Clock_ChannelSelection">
+    <widget source="Title" render="Label" position="427,36" size="1333,75" font="Regular; 56" noWrap="1" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-title-s" transparent="1" zPosition="5" />
+    <widget source="global.CurrentTime" render="Label" position="2333,36" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1867,48" size="427,53" font="Regular; 40" halign="right" valign="center" backgroundColor="title_gradient" foregroundColor="fg-date-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%A, %d. %B</convert>
+    </widget>
+  </screen>
+    <!-- Header Clock ChannelSelection-->
+  <screen name="Header_Clock_ChannelSelection">
+      <widget source="global.CurrentTime" render="Label" position="2333,36" size="173,75" font="Regular;61" valign="center" halign="center" backgroundColor="title_gradient" foregroundColor="fg-clock-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1867,48" size="427,53" font="Regular; 40" halign="right" valign="center" backgroundColor="title_gradient" foregroundColor="fg-date-s" transparent="1" zPosition="5">
+      <convert type="ClockToText">Format:%A, %d. %B</convert>
+    </widget>
+  </screen>
+  
+  
+  
+
     <!--   MessageBox -->
-  	 <screen name="MessageBox_list">
-    <widget name="list" position="20,280" size="1560,480" padding="13,0" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" backgroundColorSelected="dark_selection_gradient"  foregroundColorSelected="bl_text" backgroundColor="bl_bg" foregroundColor="bl_text" transparent="1" />
+	 <screen name="MessageBox_list">
+    <widget name="list" position="40,280" size="1400,480" padding="20,3" itemHeight="72" font="Regular;40" scrollbarMode="showNever" borderWidth="1" borderColor="black" foregroundColor="bl_text" foregroundColorSelected="club_primary" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" horizontalAlignment="center" verticalAlignment="center" transparent="1" />
  </screen>
     <!-- setup_config -->
      <screen name="setup_config">
-   <widget name="config" position="407,153" size="1400,1080" itemHeight="72" font="Regular;40"  backgroundColorSelected="dark_selection_gradient" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="bl_text"  backgroundColor="bl_bg"  transparent="1" />
-   </screen> 
+   <widget name="config" position="407,153" size="1400,1080" itemHeight="72" font="Regular;40" borderWidth="1" borderColor="black" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1" />
+   </screen>
+<!-- Main menu -->
+  <screen name="Menu" position="0,0" size="2560,1440" title="Main menu" flags="wfNoBorder" backgroundColor="transparent">
+       <widget source="menu" render="Listbox" position="407,167" size="1387,1080" borderWidth="1" borderColor="black" foregroundColor="bl_text" foregroundColorSelected="club_primary" backgroundColor="bl_bg" itemGradientSelected="selection_gradient_top,ch-bg-select,selection_gradient_bottom,vertical" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+      <templates>
+        <template name="Default" fonts="Regular;59,Regular;56,Regular;55" itemWidth="1387" itemHeight="108">
+          <mode name="default" itemHeight="100">
+            <text index="0" position="40,4" size="1080,100" font="0" verticalAlignment="center" horizontalAlignment="left" />
+          </mode>
+          <mode name="text">
+            <text index="3" position="40,4" size="1080,100" font="0" verticalAlignment="center" horizontalAlignment="left" />
+          </mode>
+          <mode name="number">
+            <text index="2" position="40,4" size="60,100" font="1" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="3" position="100,4" size="1020,100" font="1" verticalAlignment="center" horizontalAlignment="left" />
+          </mode>
+          <mode name="image">
+            <pixmap index="1" position="40,8" size="100,100" alpha="blend" scale="centerScaled" />
+            <text index="3" position="151,4" size="971,100" font="1" verticalAlignment="center" horizontalAlignment="left" />
+          </mode>
+          <mode name="both">
+            <pixmap index="1" position="40,8" size="100,100" alpha="blend" scale="centerScaled" />
+            <text index="2" position="151,4" size="60,100" font="2" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="3" position="227,4" size="931,100" font="2" verticalAlignment="center" horizontalAlignment="left" />
+          </mode>
+        </template>
+      </templates>
+    </widget>
+
+    <widget source="menu" render="FixedLabel" text="►" position="1752,1253" size="40,40" font="Regular;32" foregroundColor="green" backgroundColor="bl_bg" halign="right" valign="bottom" transparent="1" zPosition="10">
+      <convert type="MetrixHDMenuEntryCompare" />
+      <convert type="ValueRange">0,10</convert>
+      <convert type="ConditionalShowHide">Invert</convert>
+    </widget>
+    <widget name="menuimage" position="144,1093" size="171,171" alphatest="blend" borderWidth="2" borderColor="verydarkgrey" scale="1" zPosition="2" />
+    <widget source="description" render="Label" position="1843,720" size="624,353" conditional="description" font="Regular;36" valign="center" halign="center" foregroundColor="bl_text" backgroundColor="bl_bg" zPosition="12" transparent="1">
+      <convert type="MetrixMenuDescription" />
+    </widget>
+    <panel name="Banner_Setup_Default" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_menu" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+  </screen>
           <!-- Logo_ChannelSelection_LiveTV -->
   <screen name="Logo_ChannelSelection_LiveTV_Default">
-    <ePixmap pixmap="preview/preview_team_colors_Eintracht_Braunschweig.png" position="150,32" size="84,84" scale="1" zPosition="5" alphatest="blend" />
-	<ePixmap pixmap="Logos/2-bundesliga_64x64.png" position="34,32" size="85,85" scale="1" zPosition="5" alphatest="blend" />
+    <ePixmap pixmap="preview/preview_team_colors_Eintracht_Braunschweig.png" position="151,32" size="84,84" scale="1" zPosition="5" alphatest="blend" />
+	<ePixmap pixmap="Logos/2-bundesliga_64x64.png" position="35,32" size="85,85" scale="1" zPosition="5" alphatest="blend" />
   </screen>
    <!-- Logo_Setup -->
   <screen name="Logo_Setup_Default">

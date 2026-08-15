@@ -35,50 +35,61 @@ from .settings import (
 
 MAIN_SKIN_GRADIENT = """
 <screen name="BundesligaFHDConfig" position="0,0" size="1920,1080" title="BundesligaFHD Config" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="305,125" size="1050,810" itemHeight="45" font="Regular;30" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="config" position="305,125" size="1050,810" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1210,988" size="400,38" font="Regular; 26" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
-<widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
-  <panel name="Template_Color_Button_Automatic_all" />
-  <panel name="Template_Text_Buttons_M_O_E" />
-  <panel name="Logo_Setup_Default" />
-  <panel name="Header_Title_Clock_Setup" />
-  <panel name="VideoPicture_Setup" />
-  <panel name="Bundesliga_Basic_Setup_club_primary" />
-  <panel name="Bundesliga_Setup_right_Pic_club_primary" />
-  <panel name="Banner_Setup_Default" />
+    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
 SKINPART_SKIN_GRADIENT = """
 <screen name="BundesligaFHDSkinParts" position="0,0" size="1920,1080" title="BundesligaFHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
-    <widget name="config" position="305,125" size="1050,810" itemHeight="45" font="Regular;30" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="V_IGS_T,V_IGS_C,V_IGS_B,vertical" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-<widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
-  <panel name="Template_Color_Button_Automatic_all" />
-  <panel name="Template_Text_Buttons_M_O_E" />
-  <panel name="Logo_Setup_Default" />
-  <panel name="Header_Title_Clock_Setup" />
-  <panel name="VideoPicture_Setup" />
-  <panel name="Bundesliga_Basic_Setup_club_primary" />
-  <panel name="Bundesliga_Setup_right_Pic_club_primary" />
-  <panel name="Banner_Setup_Default" />
+    <widget name="config" position="305,125" size="1050,810" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
 TEAM_DOWNLOAD_SKIN = """
-<screen name="BundesligaFHDTeamDownload" position="center,center" size="1260,325" title="Verein installieren" backgroundColor="#0018171c">
-    <widget name="headline" position="52,40" size="1156,58" font="Regular;39" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0018171c" transparent="1" />
-    <widget name="status" position="68,125" size="1124,128" font="Regular;29" halign="center" valign="center" foregroundColor="#00d8d8d8" backgroundColor="#0018171c" transparent="1" />
+<screen name="BundesligaFHDTeamDownload" position="0,0" size="1920,1080" title="Verein installieren" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="status" position="305,125" size="1050,660" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" transparent="1" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 
 TEAM_MANAGER_SKIN = """
-<screen name="BundesligaFHDTeamManager" position="center,center" size="1395,780" title="Installierte Vereine" backgroundColor="#0018171c">
-    <widget name="headline" position="52,26" size="1291,57" font="Regular;39" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0018171c" transparent="1" />
-    <widget name="list" position="60,105" size="1275,540" itemHeight="48" font="Regular;29" foregroundColor="#00fcfcfc" foregroundColorSelected="#00fcfcfc" backgroundColor="#0018171c" backgroundColorSelected="#00650010" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="hint" position="60,656" size="1275,47" font="Regular;24" halign="center" valign="center" foregroundColor="#00d8d8d8" backgroundColor="#0018171c" transparent="1" />
-    <widget name="key_red" position="75,716" size="330,45" font="Regular;27" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#00dc052d" />
-    <widget name="key_green" position="532,716" size="330,45" font="Regular;27" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#0000b140" />
-    <widget name="key_blue" position="990,716" size="330,45" font="Regular;27" halign="center" valign="center" foregroundColor="#00fcfcfc" backgroundColor="#00005baa" />
+<screen name="BundesligaFHDTeamManager" position="0,0" size="1920,1080" title="Installierte Vereine" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="list" position="305,125" size="1050,760" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
+    <widget name="hint" position="305,925" size="1050,45" font="Regular;30" halign="center" valign="center" foregroundColor="club_primary" backgroundColor="bl_bg" transparent="1" />
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_M_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
 </screen>
 """
 

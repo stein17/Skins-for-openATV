@@ -1,518 +1,541 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <templates>
-<!-- 	<template component="serviceList" name="Default" screens="ChannelSelectionDefault" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
-		<mode name="services" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
-				<pixmap index="Picon" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="Number" position="left" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" />
-				<pixmap index="IsInBouquetImage" position="left,2" size="30,30" alpha="blend" scale="centerScaled" />
-				<text index="ServiceName" position="left,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-				<text index="Title1" position="left,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" />
-				<progress index="Progress" position="right,9" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			</panel>
-		</mode>								
-		<mode name="other" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<mode name="bouquets" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="8">
-				<text index="Number" position="left" size="45,38" font="1" horizontalAlignment="right" verticalAlignment="center" />
-				<pixmap index="Picon" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="CryptoImage" position="left,3" size="30,30" alpha="blend" scale="centerScaled" />
-				<pixmap index="ServiceTypeImage" position="left,1" size="33,33" alpha="blend" scale="centerScaled" />
-				<pixmap index="RecordingIndicator" position="left,1" size="33,33" alpha="blend" scale="centerScaled" />
-				<pixmap index="MarkerImage" position="left" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="ServiceName" position="left" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="1" verticalAlignment="center" wrap="noWrap" />
-				<text index="Title1" position="left" size="375,38" font="1" autoGrow="1" verticalAlignment="center" wrap="noWrap" />
-				<progress index="Progress" position="right,9" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,vertical" />
-			</panel>
-		</mode>
-	</template> -->
-	
-<template component="serviceList" name="Live-TV e2MDB [12 Service Grid]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
-
-	<mode name="services" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-		<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
-			<pixmap index="Picon" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
-			<text index="Number" position="left" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
-			<pixmap index="IsInBouquetImage" position="left,3" size="30,30" alpha="blend" scale="centerScaled"/>
-			<text index="ServiceName" position="left,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="ellipsis" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
-			<text index="Title1" position="left,0" size="570,38" font="1" verticalAlignment="center" wrap="ellipsis"/>
-			<progress index="Progress" position="right,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
-		</panel>
-	</mode>
-
-	<mode name="other" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-		<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
-			<pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
-			<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
-			<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" wrap="ellipsis"/>
-			<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" wrap="ellipsis"/>
-		</panel>
-	</mode>
-
-	<mode name="bouquets" itemWidth="675" itemHeight="152" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-
-		<!-- Sendungsbild / Picon -->
-		<pixmap index="ImageOrPicon1" position="8,8" size="188,105" alpha="blend" scale="centerScaled"/>
-
-		<!-- Sendernummer: Auswahlschatten und eigentlicher Text -->
-		<text index="Number" position="212,2" size="60,36" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="Number" position="210,0" size="60,36" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Sendername: Auswahlschatten und eigentlicher Text -->
-		<text index="ServiceName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
-		<text index="ServiceName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select" serviceNotAvailColor="#00555555" serviceNotAvailColorSelected="ch-fg-name-select" recordColor="red" recordColorSelected="ch-fg-name-select" pseudoColor="blue" pseudoColorSelected="ch-fg-name-select" streamColor="orange" streamColorSelected="ch-fg-name-select"/>
-
-		<!-- Marker: Auswahlschatten und eigentlicher Text -->
-		<text index="MarkerName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="MarkerName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="green" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Ordner: Auswahlschatten und eigentlicher Text -->
-		<text index="FolderName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="FolderName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Service-Symbole -->
-		<pixmap index="CryptoImage" position="600,5" size="30,30" alpha="blend" scale="centerScaled"/>
-		<pixmap index="ServiceTypeImage" position="638,2" size="33,33" alpha="blend" scale="centerScaled"/>
-		<pixmap index="RecordingIndicator" position="638,2" size="33,33" alpha="blend" scale="centerScaled"/>
-
-		<!-- Aktuelle Sendung: Auswahlschatten und eigentlicher Text -->
-		<text index="Title1" position="212,38" size="464,36" font="2" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="Title1" position="210,36" size="465,36" font="2" verticalAlignment="center" wrap="ellipsis" foregroundColor="white" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Kurzbeschreibung: Auswahlschatten und eigentlicher Text -->
-		<text index="ShortDescription1" position="212,74" size="464,72" font="2" verticalAlignment="center" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="ShortDescription1" position="210,72" size="465,72" font="2" verticalAlignment="center" wrap="1" foregroundColor="white" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Anfangs-/Endzeit: Auswahlschatten und eigentlicher Text -->
-		<text index="StartEndTime1" position="5,119" size="135,30" font="3" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
-		<text index="StartEndTime1" position="4,117" size="135,30" font="3" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
-
-		<!-- Fortschritt -->
-		<progress index="Progress" position="124,128" size="71,9" borderWidth="1" borderColor="ch-fg-name" borderColorSelected="ch-fg-name-select" foregroundGradient="green,yellow,red,horizontal"/>
-
-		<!-- Trennlinie -->
-		<rectangle position="4,150" size="668,2" foregroundColor="club_primary" foregroundColorSelected="club_primary"/>
-	</mode>
-
-</template>
-	
-	
-	<!-- ====================================================== -->
-	<!-- NORMALE LISTE                                         -->
-	<!-- ====================================================== -->
-	<template component="serviceList" name="Live-TV Picon [10 Service horizontal]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;26,Regular;24">
-	<mode name="services" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-		<pixmap index="Picon" position="15,2" size="60,35" alpha="blend" scale="centerScaled" />
-		<text index="Number" position="84,2" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-		<text index="Number" position="83,0" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" />
-		<pixmap index="IsInBouquetImage" position="139,4" size="30,30" alpha="blend" scale="centerScaled" />
-		<text index="ServiceName" position="182,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-		<text index="ServiceName" position="180,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-		<text index="Title1" position="418,2" size="510,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-		<text index="Title1" position="416,0" size="510,38" font="1" verticalAlignment="center" wrap="noWrap" />
-		<progress index="Progress" position="945,14" size="90,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-	</mode>
-	<!-- BOUQUET / ORDNERLISTE -->
-	<mode name="other" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-		<pixmap index="MarkerImage" position="15,2" size="60,35" alpha="blend" scale="centerScaled" />
-		<pixmap index="FolderImage" position="15,2" size="60,35" alpha="blend" scale="centerScaled" />
-		<text index="EntryName" position="88,2" size="938,38" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-		<text index="EntryName" position="86,0" size="938,38" font="0" verticalAlignment="center" />
-		<text index="MarkerName" position="88,2" size="938,38" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-		<text index="MarkerName" position="86,0" size="938,38" foregroundColor="green" font="0" verticalAlignment="center" />
-	</mode>
-	<!-- Inhalt endet bei ca. 1450 Pixel -> rechts Mini-TV     -->
-	<mode name="bouquets" itemHeight="92">
-	<!-- Sendernummer -->
-	<text index="Number" position="9,2" size="45,86" font="1" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-	<text index="Number" position="8,0" size="45,86" font="1" horizontalAlignment="right" verticalAlignment="center" />
-	<!-- Picon -->
-	<pixmap index="Picon" position="60,3" size="137,80" alpha="blend" scale="centerScaled" />
-	<!-- AKTUELLE SENDUNG -->
-	<text index="ServiceName" position="208,2" size="458,36" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-	<text index="ServiceName" position="206,0" size="458,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-	<text index="Title1" position="208,32" size="458,32" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="Title1" position="206,30" size="458,32" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#00ff9900" />
-	<!-- aktuelle Sendezeit -->
-	<text index="StartEndTime1" position="208,59" size="195,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="StartEndTime1" position="206,57" size="195,29" font="3" wrap="noWrap" />
-	<!-- Progress -->
-	<progress index="Progress" position="409,67" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,vertical" />
-	<!-- Restzeit -->
-	<text index="Remain" position="497,59" size="113,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="Remain" position="495,57" size="113,29" font="3" wrap="noWrap" />
-	<!-- STATUS-SYMBOLE -->
-	<pixmap index="CryptoImage" position="668,4" size="30,30" alpha="blend" scale="centerScaled" />
-	<pixmap index="ServiceTypeImage" position="666,43" size="33,33" alpha="blend" scale="centerScaled" />
-	<!-- NÄCHSTE SENDUNG -->
-	<text text="Next:" position="714,4" size="75,36" font="2" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text text="Next:" position="713,2" size="75,36" font="2" foregroundColor="green" />
-	<text index="Title2" position="793,4" size="296,55" font="2" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="Title2" position="791,2" size="296,55" font="2" wrap="1" foregroundColor="#00ff9900" />
-	<!-- nächste Sendezeit -->
-	<text index="StartEndTime2" position="793,59" size="188,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="StartEndTime2" position="791,57" size="188,29" font="3" wrap="noWrap" />
-	<!-- Dauer -->
-	<text index="Duration2" position="988,59" size="101,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-	<text index="Duration2" position="986,57" size="101,29" font="3" wrap="noWrap" />
-	<!-- Trennlinie -->
-	<text text="Line" position="0,86" size="1088,1" backgroundColor="club_primary" />
-</mode>
-</template>
-	
-	<!-- Grid1 -->
-
-		<template component="serviceList" name="Vollbild Grid e2MDB [5 Service vertical]" screens="ChannelSelectionFull" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
-		<mode name="services" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
-			<text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" />
-			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-		</mode>
-		<mode name="other" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<mode name="bouquets" itemWidth="326" itemHeight="914" orientation="horizontal" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="ImageOrPicon1" position="0,2" size="326,123" alpha="blend" scale="centerScaled" />
-			<text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
-			<text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<progress index="Progress" position="9,173" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			<text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
-			<!-- Schatten -->
-			<text index="Title1" position="11,200" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1" />
-			<!-- eigentlicher Text -->
-			<text index="Title1" position="9,198" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="ShortDescription1" position="11,263" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ShortDescription1" position="9,261" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="ExtendedDescription1" position="11,320" size="315,288" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ExtendedDescription1" position="9,318" size="315,288" font="2" foregroundColor="#00C8C8C8" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="StartTime2" position="11,623" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime2" position="9,621" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title2" position="69,623" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title2" position="68,621" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime3" position="11,650" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime3" position="9,648" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title3" position="69,650" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title3" position="68,648" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime4" position="11,677" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime4" position="9,675" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title4" position="69,677" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title4" position="68,675" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime5" position="11,704" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime5" position="9,702" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title5" position="69,704" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title5" position="68,702" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime6" position="11,731" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime6" position="9,729" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title6" position="69,731" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title6" position="68,729" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime7" position="11,758" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime7" position="9,756" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title7" position="69,758" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title7" position="68,756" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime8" position="11,785" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime8" position="9,783" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title8" position="69,785" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title8" position="68,783" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<rectangle position="8,818" size="311,2" backgroundColor="#00404040" />
-			<text text="Primetime" position="84,827" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text text="Primetime" position="83,825" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1" />
-			<text index="StartTimeP" position="9,827" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTimeP" position="8,825" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="TitleP" position="11,863" size="315,62" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="TitleP" position="9,861" size="315,62" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1" />
-		</mode>
-	</template>
-	<!-- Grid2 -->
-		<template component="serviceList" name="Vollbild Grid e2MDB [10 Service vertical]" screens="ChannelSelectionFull" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
-		<mode name="services" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
-			<text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" />
-			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-		</mode>
-		<mode name="other" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<!-- <mode name="bouquets" itemWidth="143" itemHeight="180" orientation="grid" -->
-		<mode name="bouquets" itemWidth="326" itemHeight="457" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="ImageOrPicon1" position="0,2" size="326,123" alpha="blend" scale="centerScaled" />
-			<text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
-			<text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			<text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
-			<!-- Schatten -->
-			<text index="Title1" position="11,192" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1" />
-			<!-- eigentlicher Text -->
-			<text index="Title1" position="9,191" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<!-- <text index="Title1" position="9,198" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/> -->
-			<text index="ShortDescription1" position="11,255" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ShortDescription1" position="9,254" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-
-			<text index="StartTime2" position="11,308" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title2" position="69,308" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title2" position="68,306" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime3" position="11,335" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title3" position="69,335" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title3" position="68,333" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-
-			<rectangle position="8,365" size="296,2" backgroundColor="#00404040" />
-			<text text="Primetime" position="84,369" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text text="Primetime" position="83,368" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1" />
-			<text index="StartTimeP" position="9,369" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTimeP" position="8,368" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="TitleP" position="11,401" size="315,62" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="TitleP" position="9,400" size="315,62" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1" />
-		</mode>
-	</template>
-	
-	
-	
-		<!-- Grid1 -->
-
-		<template component="serviceList" name="Live-TV Grid e2MDB [4 Service vertical]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
-		<mode name="services" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
-			<text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" />
-			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-		</mode>
-		<mode name="other" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<mode name="bouquets" itemWidth="326" itemHeight="914" orientation="horizontal" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="ImageOrPicon1" position="0,2" size="326,123" alpha="blend" scale="centerScaled" />
-			<text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
-			<text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<progress index="Progress" position="9,173" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			<text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
-			<!-- Schatten -->
-			<text index="Title1" position="11,200" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1" />
-			<!-- eigentlicher Text -->
-			<text index="Title1" position="9,198" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="ShortDescription1" position="11,263" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ShortDescription1" position="9,261" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="ExtendedDescription1" position="11,320" size="315,288" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ExtendedDescription1" position="9,318" size="315,288" font="2" foregroundColor="#00C8C8C8" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<text index="StartTime2" position="11,623" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime2" position="9,621" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title2" position="69,623" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title2" position="68,621" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime3" position="11,650" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime3" position="9,648" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title3" position="69,650" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title3" position="68,648" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime4" position="11,677" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime4" position="9,675" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title4" position="69,677" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title4" position="68,675" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime5" position="11,704" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime5" position="9,702" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title5" position="69,704" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title5" position="68,702" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime6" position="11,731" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime6" position="9,729" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title6" position="69,731" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title6" position="68,729" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime7" position="11,758" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime7" position="9,756" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title7" position="69,758" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title7" position="68,756" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime8" position="11,785" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime8" position="9,783" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title8" position="69,785" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title8" position="68,783" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<rectangle position="8,818" size="311,2" backgroundColor="#00404040" />
-			<text text="Primetime" position="84,827" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text text="Primetime" position="83,825" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1" />
-			<text index="StartTimeP" position="9,827" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTimeP" position="8,825" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="TitleP" position="11,863" size="315,62" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="TitleP" position="9,861" size="315,62" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1" />
-		</mode>
-	</template>
-	<!-- Grid2 -->
-		<template component="serviceList" name="Live-TV Grid e2MDB [8 Service vertical]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
-		<mode name="services" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
-			<text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" />
-			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-		</mode>
-		<mode name="other" itemWidth="1050" itemHeight="45" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<!-- <mode name="bouquets" itemWidth="143" itemHeight="180" orientation="grid" -->
-		<mode name="bouquets" itemWidth="326" itemHeight="457" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="ImageOrPicon1" position="0,2" size="326,123" alpha="blend" scale="centerScaled" />
-			<text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
-			<text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000" />
-			<text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
-			<progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			<text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
-			<!-- Schatten -->
-			<text index="Title1" position="11,192" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1" />
-			<!-- eigentlicher Text -->
-			<text index="Title1" position="9,191" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-			<!-- <text index="Title1" position="9,198" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/> -->
-			<text index="ShortDescription1" position="11,255" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="ShortDescription1" position="9,254" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1" />
-
-			<text index="StartTime2" position="11,308" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title2" position="69,308" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title2" position="68,306" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-			<text index="StartTime3" position="11,335" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title3" position="69,335" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="Title3" position="68,333" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis" />
-
-			<rectangle position="8,365" size="296,2" backgroundColor="#00404040" />
-			<text text="Primetime" position="84,369" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text text="Primetime" position="83,368" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1" />
-			<text index="StartTimeP" position="9,369" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="StartTimeP" position="8,368" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap" />
-			<text index="TitleP" position="11,401" size="315,62" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" />
-			<text index="TitleP" position="9,400" size="315,62" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1" />
-		</mode>
-	</template>
-	
-
-<!-- ChannelSelection_TV-Spielfilm -->
-	<template component="serviceList" name="ChannelSelection_TV-Spielfilm" screens="Bundesliga TV-Spielfilm" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
-		<mode name="services" itemWidth="1881" itemHeight="54" orientation="vertical" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
-			<pixmap index="Picon" position="23,10" size="60,35" alpha="blend" scale="centerScaled" />
-			<text index="ServiceName" position="98,0" size="390,54" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange" />
-			<text index="Title1" position="503,0" size="1230,54" font="1" verticalAlignment="center" wrap="ellipsis" />
-			<progress index="Progress" position="1769,21" size="90,12" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-		</mode>
-		<mode name="other" itemWidth="1881" itemHeight="54" orientation="vertical" backgroundColor="bl_bg" foregroundColor="black" backgroundColorSelected="ch-bg-select" foregroundColorSelected="black">
-			<panel position="23,0" size="1836,54" layout="horizontal" spacing="15">
-				<pixmap index="MarkerImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-45,54" font="0" verticalAlignment="center" wrap="ellipsis" />
-				<text index="MarkerName" position="left" size="e-45,54" foregroundColor="black" foregroundColorSelected="black" font="0" verticalAlignment="center" wrap="ellipsis" />
-			</panel>
-		</mode>
-		<mode name="bouquets" itemWidth="314" itemHeight="983" orientation="horizontal" backgroundColor="white" foregroundColor="black" backgroundColorSelected="#00E4E4E4" foregroundColorSelected="black" transparent="1">
-			<!-- Der Spaltenrand gehoert zur Kachel und verschwindet daher in Listenmodi automatisch. -->
-			<rectangle position="312,0" size="2,983" backgroundColor="club_primary" backgroundColorSelected="club_primary" />
-			<!-- Kopf im roten Vereinsbereich: Sendername links, kleines Picon rechts. -->
-			<text index="ServiceName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" serviceNotAvailColor="#00D0D0D0" serviceNotAvailColorSelected="black" recordColor="white" recordColorSelected="black" pseudoColor="white" pseudoColorSelected="black" streamColor="white" streamColorSelected="black" foregroundColor="white" foregroundColorSelected="black" transparent="1" />
-			<text index="MarkerName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColor="white" foregroundColorSelected="black" transparent="1" />
-			<text index="FolderName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColor="white" foregroundColorSelected="black" transparent="1" />
-			<pixmap index="Picon" position="227,11" size="75,45" alpha="blend" scale="centerScaled" transparent="1" />
-			<pixmap index="MarkerImage" position="236,11" size="60,45" alpha="blend" scale="centerScaled" transparent="1" />
-			<pixmap index="FolderImage" position="236,14" size="54,39" alpha="blend" scale="centerScaled" transparent="1" />
-
-			<!-- Aktuelles Sendungsbild; ohne Bildquelle wird das Picon als Ersatz benutzt. -->
-			<pixmap index="ImageOrPicon1" position="2,68" size="311,175" alpha="blend" scale="centerScaled" />
-
-			<!-- Laufende Sendung wie bei TV Spielfilm auf dunkler Flaeche. -->
-			<rectangle position="2,242" size="311,153" backgroundColor="#003D3D3D" backgroundColorSelected="club_selection_bg" />
-			<text index="StartEndTime1" position="9,247" size="294,33" font="1" foregroundColor="#00FF4A45" foregroundColorSelected="bl_text" verticalAlignment="center" wrap="noWrap" />
-			<text index="Title1" position="9,281" size="294,96" font="1" foregroundColor="white" foregroundColorSelected="cyan" horizontalAlignment="left" verticalAlignment="top" wrap="wrap" />
-			<progress index="Progress" position="9,382" size="294,9" borderWidth="1" borderColor="#00707070" borderColorSelected="club_selection_fg" backgroundColor="#00505050" backgroundColorSelected="#00505050" foregroundGradient="#00FF4A45,#00FFB040,horizontal" foregroundGradientSelected="#00FF4A45,#00f50632,horizontal" />
-
-			<!-- Naechste Sendungen: rote Uhrzeit, Titel und Kurzbeschreibung. -->
-			<rectangle position="2,395" size="311,2" backgroundColor="#00D0D0D0" />
-			<text index="StartTime2" position="9,401" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="Title2" position="72,401" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescription2" position="72,432" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-
-			<rectangle position="2,482" size="311,2" backgroundColor="#00D0D0D0" />
-			<text index="StartTime3" position="9,488" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="Title3" position="72,488" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescription3" position="72,519" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-
-			<rectangle position="2,569" size="311,2" backgroundColor="#00D0D0D0" />
-			<text index="StartTime4" position="9,575" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="Title4" position="72,575" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescription4" position="72,606" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-
-			<rectangle position="2,656" size="311,2" backgroundColor="#00D0D0D0" />
-			<text index="StartTime5" position="9,662" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="Title5" position="72,662" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescription5" position="72,693" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-
-			<rectangle position="2,743" size="311,2" backgroundColor="#00D0D0D0" />
-			<text index="StartTime6" position="9,749" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="Title6" position="72,749" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescription6" position="72,780" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-
-			<!-- Primetime am Kartenende. -->
-			<rectangle position="2,830" size="311,2" backgroundColor="#00A0A0A0" />
-			<text text="Primetime" position="9,836" size="294,30" font="1" foregroundColor="#00D02020" foregroundColorSelected="#00D02020" verticalAlignment="center" wrap="noWrap" translate="1" />
-			<text index="StartTimeP" position="9,870" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap" />
-			<text index="TitleP" position="72,870" size="231,33" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis" />
-			<text index="ShortDescriptionP" position="72,905" size="231,65" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap" />
-		</mode>
-	</template>
-
+<!-- Bundesliga Standard -->
+  <template component="serviceList" name="Bundesliga Standard" screens="BundesligaChannelSelectionPIG,BundesligaChannelSelection" fonts="Regular;32,Regular;29,Regular;27">
+    <mode name="services" itemHeight="72" backgroundColor="bl_bg" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient"/>
+      <!-- Schatten -->
+      <text index="Number" position="10,2" size="53,68" font="0" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <!-- Sendernummer -->
+      <text index="Number" position="8,1" size="53,68" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+      <pixmap index="Picon" position="71,4" size="105,62" alpha="blend" scale="centerScaled"/>
+      <!-- Schatten Sendername -->
+      <text index="ServiceName" position="190,2" size="668,35" font="0" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <!-- Sendername -->
+      <text index="ServiceName" position="188,1" size="668,35" font="0" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <!-- Schatten Sendung -->
+      <text index="Title1" position="190,36" size="668,32" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <!-- Sendung -->
+      <text index="Title1" position="188,35" size="668,32" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Schatten Restlaufzeit -->
+      <text index="Remain" position="902,5" size="195,32" font="2" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="Remain" position="900,3" size="195,32" font="2" horizontalAlignment="right" verticalAlignment="center"/>
+      <progress index="Progress" position="990,47" size="105,11" borderWidth="1" borderColor="bl_text" borderColorSelected="ch-fg-event-select" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <!-- Normale Senderliste innerhalb eines Bouquets. -->
+    <mode name="bouquets" itemHeight="72" backgroundColor="bl_bg" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient"/>
+      <text index="Number" position="10,2" size="53,68" font="0" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="Number" position="8,1" size="53,68" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+      <pixmap index="Picon" position="71,4" size="105,62" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="190,2" size="668,35" font="0" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="ServiceName" position="188,1" size="668,35" font="0" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="190,36" size="668,32" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="Title1" position="188,35" size="668,32" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Remain" position="902,5" size="195,32" font="2" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="Remain" position="900,3" size="195,32" font="2" horizontalAlignment="right" verticalAlignment="center"/>
+      <progress index="Progress" position="990,47" size="105,11" borderWidth="1" borderColor="bl_text" borderColorSelected="ch-fg-event-select" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemHeight="72" backgroundColor="bl_bg" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient"/>
+      <pixmap index="MarkerImage" position="15,6" size="60,60" alpha="blend" scale="centerScaled"/>
+      <pixmap index="FolderImage" position="15,6" size="60,60" alpha="blend" scale="centerScaled"/>
+      <!-- Schatten -->
+      <text index="EntryName" position="92,2" size="938,68" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="EntryName" position="90,1" size="938,68" font="0" verticalAlignment="center"/>
+      <text index="MarkerName" position="92,2" size="938,68" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="black"/>
+      <text index="MarkerName" position="90,1" size="938,68" font="0" verticalAlignment="center" foregroundColor="green"/>
+    </mode>
+  </template>
+  <!-- Live-TV e2MDB [12 Service Grid] -->
+  <template component="serviceList" name="Live-TV e2MDB [12 Service Grid]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
+    <mode name="services" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+        <pixmap index="Picon" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="Number" position="left" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+        <pixmap index="IsInBouquetImage" position="left,3" size="30,30" alpha="blend" scale="centerScaled"/>
+        <text index="ServiceName" position="left,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="ellipsis" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+        <text index="Title1" position="left,0" size="570,38" font="1" verticalAlignment="center" wrap="ellipsis"/>
+        <progress index="Progress" position="right,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+      </panel>
+    </mode>
+    <mode name="other" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" wrap="ellipsis"/>
+        <text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center" wrap="ellipsis"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="675" itemHeight="152" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <!-- Sendungsbild / Picon -->
+      <pixmap index="ImageOrPicon1" position="8,8" size="188,105" alpha="blend" scale="centerScaled"/>
+      <!-- Sendernummer: Auswahlschatten und eigentlicher Text -->
+      <text index="Number" position="212,2" size="60,36" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Number" position="210,0" size="60,36" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Sendername: Auswahlschatten und eigentlicher Text -->
+      <text index="ServiceName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select" serviceNotAvailColor="#00555555" serviceNotAvailColorSelected="ch-fg-name-select" recordColor="red" recordColorSelected="ch-fg-name-select" pseudoColor="blue" pseudoColorSelected="ch-fg-name-select" streamColor="orange" streamColorSelected="ch-fg-name-select"/>
+      <!-- Marker: Auswahlschatten und eigentlicher Text -->
+      <text index="MarkerName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="MarkerName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="green" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Ordner: Auswahlschatten und eigentlicher Text -->
+      <text index="FolderName" position="279,2" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="FolderName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Service-Symbole -->
+      <pixmap index="CryptoImage" position="600,5" size="30,30" alpha="blend" scale="centerScaled"/>
+      <pixmap index="ServiceTypeImage" position="638,2" size="33,33" alpha="blend" scale="centerScaled"/>
+      <pixmap index="RecordingIndicator" position="638,2" size="33,33" alpha="blend" scale="centerScaled"/>
+      <!-- Aktuelle Sendung: Auswahlschatten und eigentlicher Text -->
+      <text index="Title1" position="212,38" size="464,36" font="2" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="210,36" size="465,36" font="2" verticalAlignment="center" wrap="ellipsis" foregroundColor="white" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Kurzbeschreibung: Auswahlschatten und eigentlicher Text -->
+      <text index="ShortDescription1" position="212,74" size="464,72" font="2" verticalAlignment="center" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="ShortDescription1" position="210,72" size="465,72" font="2" verticalAlignment="center" wrap="1" foregroundColor="white" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Anfangs-/Endzeit: Auswahlschatten und eigentlicher Text -->
+      <text index="StartEndTime1" position="5,119" size="135,30" font="3" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartEndTime1" position="4,117" size="135,30" font="3" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="ch-fg-name" foregroundColorSelected="ch-fg-name-select"/>
+      <!-- Fortschritt -->
+      <progress index="Progress" position="124,128" size="71,9" borderWidth="1" borderColor="ch-fg-name" borderColorSelected="ch-fg-name-select" foregroundGradient="green,yellow,red,horizontal"/>
+      <!-- Trennlinie -->
+      <rectangle position="4,150" size="668,2" foregroundColor="club_primary" foregroundColorSelected="club_primary"/>
+    </mode>
+  </template>
+  <!-- Live-TV Picon [10 Service horizontal] -->
+  <template component="serviceList" name="Live-TV Picon [10 Service horizontal]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;26,Regular;24">
+    <mode name="services" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="15,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="Number" position="84,2" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="Number" position="83,0" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+      <pixmap index="IsInBouquetImage" position="139,4" size="30,30" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="182,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="180,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="418,2" size="510,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="416,0" size="510,38" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <progress index="Progress" position="945,14" size="90,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <!-- BOUQUET / ORDNERLISTE -->
+    <mode name="other" itemHeight="38" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="MarkerImage" position="15,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <pixmap index="FolderImage" position="15,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="EntryName" position="88,2" size="938,38" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="EntryName" position="86,0" size="938,38" font="0" verticalAlignment="center"/>
+      <text index="MarkerName" position="88,2" size="938,38" font="0" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="MarkerName" position="86,0" size="938,38" foregroundColor="green" font="0" verticalAlignment="center"/>
+    </mode>
+    <!-- Inhalt endet bei ca. 1450 Pixel -> rechts Mini-TV     -->
+    <mode name="bouquets" itemHeight="92" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="bl_bg" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient"/>
+      <!-- Sendernummer -->
+      <text index="Number" position="9,2" size="45,86" font="1" horizontalAlignment="right" verticalAlignment="center" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="Number" position="8,0" size="45,86" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+      <!-- Picon -->
+      <pixmap index="Picon" position="60,3" size="137,80" alpha="blend" scale="centerScaled"/>
+      <!-- AKTUELLE SENDUNG -->
+      <text index="ServiceName" position="208,2" size="458,36" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="206,0" size="458,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="208,32" size="458,32" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="206,30" size="458,32" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#00ff9900"/>
+      <!-- aktuelle Sendezeit -->
+      <text index="StartEndTime1" position="208,59" size="195,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartEndTime1" position="206,57" size="195,29" font="3" wrap="noWrap"/>
+      <!-- Progress -->
+      <progress index="Progress" position="409,67" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,vertical"/>
+      <!-- Restzeit -->
+      <text index="Remain" position="497,59" size="113,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Remain" position="495,57" size="113,29" font="3" wrap="noWrap"/>
+      <!-- STATUS-SYMBOLE -->
+      <pixmap index="CryptoImage" position="668,4" size="30,30" alpha="blend" scale="centerScaled"/>
+      <pixmap index="ServiceTypeImage" position="666,43" size="33,33" alpha="blend" scale="centerScaled"/>
+      <!-- NÄCHSTE SENDUNG -->
+      <text text="Next:" position="714,4" size="75,36" font="2" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text text="Next:" position="713,2" size="75,36" font="2" foregroundColor="green"/>
+      <text index="Title2" position="793,4" size="296,55" font="2" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title2" position="791,2" size="296,55" font="2" wrap="1" foregroundColor="#00ff9900"/>
+      <!-- nächste Sendezeit -->
+      <text index="StartEndTime2" position="793,59" size="188,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartEndTime2" position="791,57" size="188,29" font="3" wrap="noWrap"/>
+      <!-- Dauer -->
+      <text index="Duration2" position="988,59" size="101,29" font="3" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Duration2" position="986,57" size="101,29" font="3" wrap="noWrap"/>
+      <!-- Trennlinie -->
+      <text text="Line" position="0,86" size="1088,1" backgroundColor="club_primary"/>
+    </mode>
+  </template>
+  <!-- Vollbild Grid e2MDB [5 Service vertical] -->
+  <template component="serviceList" name="Vollbild Grid e2MDB [5 Service vertical]" screens="ChannelSelectionFull" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+    <mode name="services" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center"/>
+        <text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="326" itemHeight="914" orientation="horizontal" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="bl_bg" foregroundColorSelected="ch-fg-name-select">
+      <!-- Verlauf über die komplette ausgewählte Spalte -->
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <!-- Sendungsbild/Picon: 280 × 160, mittig -->
+      <pixmap index="ImageOrPicon1" position="23,6" size="280,160" alpha="blend" scale="centerScaled" cornerRadius="6"/>
+      <!-- Sendernummer: Schatten -->
+      <text index="Number" position="8,175" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <!-- Sendernummer -->
+      <text index="Number" position="6,174" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Sendername: Schatten -->
+      <text index="ServiceName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <!-- Sendername -->
+      <text index="ServiceName" position="0,174" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <!-- Marker: Schatten -->
+      <text index="MarkerName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Marker -->
+      <text index="MarkerName" position="0,174" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <!-- Ordner: Schatten -->
+      <text index="FolderName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Ordner -->
+      <text index="FolderName" position="0,174" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <!-- Fortschritt -->
+      <progress index="Progress" position="9,219" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+      <!-- Restlaufzeit: Schatten -->
+      <text index="Remain" position="197,210" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Restlaufzeit -->
+      <text index="Remain" position="195,208" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Titel: Schatten -->
+      <text index="Title1" position="11,246" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1"/>
+      <!-- Titel -->
+      <text index="Title1" position="9,244" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <!-- Kurzbeschreibung: Schatten -->
+      <text index="ShortDescription1" position="11,309" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Kurzbeschreibung -->
+      <text index="ShortDescription1" position="9,307" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <!-- Erweiterte Beschreibung: Schatten -->
+      <text index="ExtendedDescription1" position="11,366" size="315,242" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Erweiterte Beschreibung -->
+      <text index="ExtendedDescription1" position="9,364" size="315,242" font="2" foregroundColor="#00C8C8C8" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="StartTime2" position="11,623" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime2" position="9,621" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title2" position="69,623" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title2" position="68,621" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime3" position="11,650" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime3" position="9,648" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title3" position="69,650" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title3" position="68,648" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime4" position="11,677" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime4" position="9,675" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title4" position="69,677" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title4" position="68,675" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime5" position="11,704" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime5" position="9,702" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title5" position="69,704" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title5" position="68,702" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime6" position="11,731" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime6" position="9,729" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title6" position="69,731" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title6" position="68,729" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime7" position="11,758" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime7" position="9,756" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title7" position="69,758" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title7" position="68,756" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime8" position="11,785" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime8" position="9,783" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title8" position="69,785" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title8" position="68,783" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <rectangle position="8,818" size="311,2" backgroundColor="#00404040"/>
+      <text text="Primetime" position="84,827" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text text="Primetime" position="83,825" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1"/>
+      <text index="StartTimeP" position="9,827" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTimeP" position="8,825" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="TitleP" position="11,863" size="315,62" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="TitleP" position="9,861" size="315,62" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1"/>
+    </mode>
+  </template>
+  <!-- Vollbild Grid e2MDB [10 Service vertical] -->
+  <template component="serviceList" name="Vollbild Grid e2MDB [10 Service vertical]" screens="ChannelSelectionFull" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+    <mode name="services" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center"/>
+        <text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="326" itemHeight="457" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="ImageOrPicon1" position="53,6" size="220,124" alpha="blend" scale="centerScaled" cornerRadius="6"/>
+      <text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap"/>
+      <text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+      <text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Schatten -->
+      <text index="Title1" position="11,192" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1"/>
+      <!-- eigentlicher Text -->
+      <text index="Title1" position="9,191" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="ShortDescription1" position="11,255" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="ShortDescription1" position="9,254" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="StartTime2" position="11,308" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title2" position="69,308" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title2" position="68,306" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime3" position="11,335" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title3" position="69,335" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title3" position="68,333" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <rectangle position="8,365" size="296,2" backgroundColor="#00404040"/>
+      <text text="Primetime" position="84,372" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text text="Primetime" position="83,371" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1"/>
+      <text index="StartTimeP" position="9,372" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTimeP" position="8,371" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="TitleP" position="11,404" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="TitleP" position="9,402" size="315,53" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1"/>
+    </mode>
+  </template>
+  <!-- Live-TV Grid e2MDB [4 Service vertical] -->
+  <template component="serviceList" name="Live-TV Grid e2MDB [4 Service vertical]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+    <mode name="services" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center"/>
+        <text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="326" itemHeight="908" orientation="horizontal" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="bl_bg" foregroundColorSelected="ch-fg-name-select">
+      <!-- Verlauf über die komplette ausgewählte Spalte -->
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <!-- Sendungsbild/Picon: 280 × 160, mittig -->
+      <pixmap index="ImageOrPicon1" position="23,6" size="280,160" alpha="blend" scale="centerScaled" cornerRadius="6"/>
+      <!-- Sendernummer: Schatten -->
+      <text index="Number" position="8,175" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <!-- Sendernummer -->
+      <text index="Number" position="6,174" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Sendername: Schatten -->
+      <text index="ServiceName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <!-- Sendername -->
+      <text index="ServiceName" position="0,174" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <!-- Marker: Schatten -->
+      <text index="MarkerName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Marker -->
+      <text index="MarkerName" position="0,174" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <!-- Ordner: Schatten -->
+      <text index="FolderName" position="2,175" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Ordner -->
+      <text index="FolderName" position="0,174" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <!-- Fortschritt -->
+      <progress index="Progress" position="9,219" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+      <!-- Restlaufzeit: Schatten -->
+      <text index="Remain" position="197,210" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Restlaufzeit -->
+      <text index="Remain" position="195,208" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Titel: Schatten -->
+      <text index="Title1" position="11,246" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1"/>
+      <!-- Titel -->
+      <text index="Title1" position="9,244" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <!-- Kurzbeschreibung: Schatten -->
+      <text index="ShortDescription1" position="11,309" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Kurzbeschreibung -->
+      <text index="ShortDescription1" position="9,307" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <!-- Erweiterte Beschreibung: Schatten -->
+      <text index="ExtendedDescription1" position="11,366" size="315,242" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <!-- Erweiterte Beschreibung -->
+      <text index="ExtendedDescription1" position="9,364" size="315,242" font="2" foregroundColor="#00C8C8C8" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="StartTime2" position="11,613" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime2" position="9,611" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title2" position="69,613" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title2" position="68,611" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime3" position="11,640" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime3" position="9,638" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title3" position="69,640" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title3" position="68,638" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime4" position="11,667" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime4" position="9,665" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title4" position="69,667" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title4" position="68,665" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime5" position="11,694" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime5" position="9,692" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title5" position="69,694" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title5" position="68,692" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime6" position="11,721" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime6" position="9,719" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title6" position="69,721" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title6" position="68,719" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime7" position="11,748" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime7" position="9,746" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title7" position="69,748" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title7" position="68,746" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime8" position="11,775" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime8" position="9,773" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title8" position="69,775" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title8" position="68,773" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <rectangle position="8,808" size="301,2" backgroundColor="#00404040"/>
+      <text text="Primetime" position="84,817" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text text="Primetime" position="83,815" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1"/>
+      <text index="StartTimeP" position="9,817" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTimeP" position="8,815" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="TitleP" position="11,853" size="315,52" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="TitleP" position="9,851" size="315,52" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1"/>
+    </mode>
+  </template>
+  <!-- Live-TV Grid e2MDB [8 Service vertical] -->
+  <template component="serviceList" name="Live-TV Grid e2MDB [8 Service vertical]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+    <mode name="services" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="99,2" size="225,38" font="1" verticalAlignment="center" wrap="noWrap" autoFit="Title1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="339,2" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap"/>
+      <progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemWidth="1050" itemHeight="54" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center"/>
+        <text index="MarkerName" position="left" size="e-45,38" foregroundColor="green" font="0" verticalAlignment="center"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="326" itemHeight="454" orientation="grid" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="ImageOrPicon1" position="53,6" size="220,124" alpha="blend" scale="centerScaled" cornerRadius="6"/>
+      <text index="Number" position="8,129" size="60,39" font="2" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="Number" position="6,128" size="60,39" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap"/>
+      <text index="ServiceName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000" serviceNotAvailColor="#FF000000" serviceNotAvailColorSelected="#00000000" recordColor="#FF000000" recordColorSelected="#00000000" pseudoColor="#FF000000" pseudoColorSelected="#00000000" streamColor="#FF000000" streamColorSelected="#00000000"/>
+      <text index="ServiceName" position="0,128" size="326,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="MarkerName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="MarkerName" position="0,128" size="326,39" font="1" foregroundColor="green" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="FolderName" position="2,129" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="FolderName" position="0,128" size="326,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis"/>
+      <progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+      <text index="Remain" position="197,164" size="114,30" font="3" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="#0000E0E0" foregroundColorSelected="#00FFFFFF" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap"/>
+      <!-- Schatten -->
+      <text index="Title1" position="11,192" size="315,62" font="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000" verticalAlignment="top" wrap="1"/>
+      <!-- eigentlicher Text -->
+      <text index="Title1" position="9,191" size="315,62" font="1" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="ShortDescription1" position="11,255" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="ShortDescription1" position="9,254" size="315,53" font="2" foregroundColor="#00B0B0B0" foregroundColorSelected="#00FFFFFF" verticalAlignment="top" wrap="1"/>
+      <text index="StartTime2" position="11,308" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title2" position="69,308" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title2" position="68,306" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <text index="StartTime3" position="11,335" size="57,27" font="3" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title3" position="69,335" size="255,27" font="3" verticalAlignment="center" wrap="ellipsis" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="Title3" position="68,333" size="255,27" font="3" foregroundColorSelected="#00FFFFFF" verticalAlignment="center" wrap="ellipsis"/>
+      <rectangle position="8,365" size="296,2" backgroundColor="#00404040"/>
+      <text text="Primetime" position="84,372" size="267,33" font="1" verticalAlignment="center" wrap="noWrap" translate="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text text="Primetime" position="83,371" size="267,33" font="1" foregroundColor="#0000E0E0" foregroundColorSelected="#0000FFFF" verticalAlignment="center" wrap="noWrap" translate="1"/>
+      <text index="StartTimeP" position="9,372" size="83,33" font="1" verticalAlignment="center" wrap="noWrap" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="StartTimeP" position="8,371" size="83,33" font="1" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="center" wrap="noWrap"/>
+      <text index="TitleP" position="11,404" size="315,53" font="2" verticalAlignment="top" wrap="1" foregroundColor="#FF000000" foregroundColorSelected="#00000000"/>
+      <text index="TitleP" position="9,402" size="315,53" font="2" foregroundColor="#00A0A0A0" foregroundColorSelected="#00D0D0D0" verticalAlignment="top" wrap="1"/>
+    </mode>
+  </template>
+  <!-- ChannelSelection_TV-Spielfilm -->
+  <template component="serviceList" name="ChannelSelection_TV-Spielfilm" screens="Bundesliga TV-Spielfilm" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
+    <mode name="services" itemWidth="1880" itemHeight="54" orientation="vertical" backgroundColor="bl_bg" foregroundColor="ch-fg-name" backgroundColorSelected="ch-bg-select" foregroundColorSelected="ch-fg-name-select">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <pixmap index="Picon" position="23,10" size="60,35" alpha="blend" scale="centerScaled"/>
+      <text index="ServiceName" position="98,0" size="390,54" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="red" pseudoColor="blue" streamColor="orange"/>
+      <text index="Title1" position="503,0" size="1230,54" font="1" verticalAlignment="center" wrap="ellipsis"/>
+      <progress index="Progress" position="1769,21" size="90,12" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+    </mode>
+    <mode name="other" itemWidth="1880" itemHeight="54" orientation="vertical" backgroundColor="bl_bg" foregroundColor="bl_text" backgroundColorSelected="bl_bg" foregroundColorSelected="club_selection_fg">
+      <rectangle position="2,2" size="e-3,e-3" foregroundGradientSelected="ch_selection_gradient" cornerRadius="6"/>
+      <panel position="23,0" size="e-46,54" layout="horizontal" spacing="15">
+        <pixmap index="MarkerImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled"/>
+        <pixmap index="FolderImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled"/>
+        <text index="EntryName" position="left" size="e-45,54" font="0" foregroundColor="black" foregroundColorSelected="club_selection_fg" verticalAlignment="center" wrap="ellipsis"/>
+        <text index="MarkerName" position="left" size="e-45,54" font="0" foregroundColor="green" foregroundColorSelected="club_selection_fg" verticalAlignment="center" wrap="ellipsis"/>
+      </panel>
+    </mode>
+    <mode name="bouquets" itemWidth="313" itemHeight="985" orientation="horizontal" backgroundColor="white" foregroundColor="black" backgroundColorSelected="#00E4E4E4" foregroundColorSelected="black" transparent="1">
+      <!-- Der Spaltenrand gehoert zur Kachel und verschwindet daher in Listenmodi automatisch. -->
+      <rectangle position="312,0" size="1,985" backgroundColor="club_primary" backgroundColorSelected="club_primary"/>
+      <!-- Kopf im roten Vereinsbereich: Sendername links, kleines Picon rechts. -->
+      <text index="ServiceName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" serviceNotAvailColor="#00D0D0D0" serviceNotAvailColorSelected="black" recordColor="white" recordColorSelected="black" pseudoColor="white" pseudoColorSelected="black" streamColor="white" streamColorSelected="black" foregroundColor="white" foregroundColorSelected="black" transparent="1"/>
+      <text index="MarkerName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColor="white" foregroundColorSelected="black" transparent="1"/>
+      <text index="FolderName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColor="white" foregroundColorSelected="black" transparent="1"/>
+      <pixmap index="Picon" position="227,11" size="75,45" alpha="blend" scale="centerScaled" transparent="1"/>
+      <pixmap index="MarkerImage" position="236,11" size="60,45" alpha="blend" scale="centerScaled" transparent="1"/>
+      <pixmap index="FolderImage" position="236,14" size="54,39" alpha="blend" scale="centerScaled" transparent="1"/>
+      <!-- Aktuelles Sendungsbild; ohne Bildquelle wird das Picon als Ersatz benutzt. -->
+      <pixmap index="ImageOrPicon1" position="2,68" size="310,175" alpha="blend" scale="centerScaled"/>
+      <!-- Laufende Sendung wie bei TV Spielfilm auf dunkler Flaeche. -->
+      <rectangle position="2,242" size="310,153" backgroundColor="#003D3D3D" backgroundColorSelected="club_selection_bg"/>
+      <text index="StartEndTime1" position="9,247" size="294,33" font="1" foregroundColor="#00FF4A45" foregroundColorSelected="bl_text" verticalAlignment="center" wrap="noWrap"/>
+      <text index="Title1" position="9,281" size="294,96" font="1" foregroundColor="white" foregroundColorSelected="cyan" horizontalAlignment="left" verticalAlignment="top" wrap="wrap"/>
+      <progress index="Progress" position="9,382" size="294,9" borderWidth="1" borderColor="#00707070" borderColorSelected="club_selection_fg" backgroundColor="#00505050" backgroundColorSelected="#00505050" foregroundGradient="#00FF4A45,#00FFB040,horizontal" foregroundGradientSelected="#00FF4A45,#00f50632,horizontal"/>
+      <!-- Nächste Sendungen: rote Uhrzeit, Titel und Kurzbeschreibung. -->
+      <rectangle position="2,395" size="310,2" backgroundColor="#00D0D0D0"/>
+      <text index="StartTime2" position="9,401" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="Title2" position="72,401" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescription2" position="72,432" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <rectangle position="2,482" size="310,2" backgroundColor="#00D0D0D0"/>
+      <text index="StartTime3" position="9,488" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="Title3" position="72,488" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescription3" position="72,519" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <rectangle position="2,569" size="310,2" backgroundColor="#00D0D0D0"/>
+      <text index="StartTime4" position="9,575" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="Title4" position="72,575" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescription4" position="72,606" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <rectangle position="2,656" size="310,2" backgroundColor="#00D0D0D0"/>
+      <text index="StartTime5" position="9,662" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="Title5" position="72,662" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescription5" position="72,693" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <rectangle position="2,743" size="310,2" backgroundColor="#00D0D0D0"/>
+      <text index="StartTime6" position="9,749" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="Title6" position="72,749" size="231,32" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescription6" position="72,780" size="231,44" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <!-- Primetime am Kartenende. -->
+      <rectangle position="2,830" size="310,2" backgroundColor="#00A0A0A0"/>
+      <text text="Primetime" position="9,836" size="294,30" font="1" foregroundColor="#00D02020" foregroundColorSelected="#00D02020" verticalAlignment="center" wrap="noWrap" translate="1"/>
+      <text index="StartTimeP" position="9,870" size="59,29" font="2" foregroundColor="#00FF4A45" foregroundColorSelected="#00D02020" verticalAlignment="top" wrap="noWrap"/>
+      <text index="TitleP" position="72,870" size="231,33" font="2" foregroundColor="black" foregroundColorSelected="black" verticalAlignment="top" wrap="ellipsis"/>
+      <text index="ShortDescriptionP" position="72,905" size="231,65" font="3" foregroundColor="#00505050" foregroundColorSelected="#00303030" verticalAlignment="top" wrap="wrap"/>
+      <rectangle position="1,0" size="1,985" backgroundColor="club_primary" backgroundColorSelected="club_primary"/>
+    </mode>
+  </template>
 </templates>
