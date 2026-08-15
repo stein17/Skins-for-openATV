@@ -23,9 +23,7 @@ TARGET_SKIN_XML = "BundesligaWQHD/skin.xml"
 TARGET_SKIN_DIR = "/usr/share/enigma2/BundesligaWQHD"
 TARGET_MODULE = "Plugins.Extensions.BundesligaWQHD"
 TARGET_SWITCHER = "/usr/lib/enigma2/python/Plugins/Extensions/BundesligaWQHD/resolution.py"
-TARGET_IPK_PREFIX = TARGET_PACKAGE + "_"
 
-LOCAL_IPK_DIRS = ("/tmp", "/media/hdd", "/media/usb", "/media/mmc")
 OPKG_STATUS_FILES = ("/var/lib/opkg/status", "/usr/lib/opkg/status")
 
 
@@ -46,35 +44,12 @@ def package_is_installed(package_name):
             if fields.get("Package") == package_name:
                 return fields.get("Status") == "install ok installed"
     return False
-
-
-def find_local_ipk():
-    candidates = []
-    for directory in LOCAL_IPK_DIRS:
-        try:
-            filenames = os.listdir(directory)
-        except OSError:
-            continue
-        for filename in filenames:
-            if filename.startswith(TARGET_IPK_PREFIX) and filename.endswith(".ipk"):
-                path_value = os.path.join(directory, filename)
-                if os.path.isfile(path_value):
-                    try:
-                        modified = os.path.getmtime(path_value)
-                    except OSError:
-                        modified = 0
-                    candidates.append((modified, path_value))
-    candidates.sort(reverse=True)
-    return candidates[0][1] if candidates else ""
-
-
 class ResolutionSwitcher(object):
     """Install the other resolution first and remove this package afterwards."""
 
     def __init__(self, session, transfer):
         self.session = session
         self.transfer = transfer or {}
-        self.local_ipk = find_local_ipk()
 
     def start(self):
         if package_is_installed(TARGET_PACKAGE) and os.path.isfile(TARGET_SWITCHER):
@@ -83,11 +58,10 @@ class ResolutionSwitcher(object):
                 "Soll zu %s gewechselt und %s anschließend vollständig entfernt werden?"
             ) % (CURRENT_TITLE, TARGET_TITLE, TARGET_TITLE, CURRENT_TITLE)
         else:
-            source = _("dem lokalen Test-IPK") if self.local_ipk else _("dem openATV-Feed")
             question = _(
-                "%s ist aktiv.\n\nSoll %s vollständig entfernt und durch %s (%s) aus %s ersetzt werden?\n\n"
+                "%s ist aktiv.\n\nSoll %s vollständig entfernt und durch %s (%s) vom openATV-Feed ersetzt werden?\n\n"
                 "Verein, Farben und Skinparts werden übernommen."
-            ) % (CURRENT_TITLE, CURRENT_TITLE, TARGET_TITLE, TARGET_RESOLUTION, source)
+            ) % (CURRENT_TITLE, CURRENT_TITLE, TARGET_TITLE, TARGET_RESOLUTION)
         self.session.openWithCallback(
             self._confirmed,
             MessageBox,
@@ -102,10 +76,7 @@ class ResolutionSwitcher(object):
         if package_is_installed(TARGET_PACKAGE) and os.path.isfile(TARGET_SWITCHER):
             self._activate_target()
             return
-        if self.local_ipk:
-            command = "opkg install --force-reinstall %s" % quote(self.local_ipk)
-        else:
-            command = "opkg update && opkg install --force-reinstall %s" % quote(TARGET_PACKAGE)
+        command = "opkg update && opkg install --force-reinstall %s" % quote(TARGET_PACKAGE)
         self.session.openWithCallback(
             self._install_finished,
             Console,
