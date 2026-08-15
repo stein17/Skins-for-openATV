@@ -34,8 +34,8 @@ def format_bytes(value):
 class TeamAssetManager(object):
     """Install and remove team images stored as ordinary files on GitHub.
 
-    Only FC Bayern Munich is delivered by the OpenATV feed package. All other
-    clubs are downloaded file-by-file from the python3 branch. Replacing an
+    Only the neutral Default design is delivered by the OpenATV feed package.
+    All clubs are downloaded file-by-file from the python3 branch. Replacing an
     image in Git therefore needs only a normal commit and no new ZIP or IPK.
     """
 
@@ -274,7 +274,7 @@ class TeamAssetManager(object):
         if not entry:
             raise TeamAssetError("Verein wurde im Katalog nicht gefunden.")
         if self.is_default(entry):
-            raise TeamAssetError("FC Bayern München ist das geschützte Standardpaket.")
+            raise TeamAssetError("Das neutrale Default-Design ist das geschützte Standardpaket.")
         if os.path.basename(active_profile or "") == entry["profile"]:
             raise TeamAssetError("Der aktive Verein kann nicht gelöscht werden.")
         target = self.team_path(entry)

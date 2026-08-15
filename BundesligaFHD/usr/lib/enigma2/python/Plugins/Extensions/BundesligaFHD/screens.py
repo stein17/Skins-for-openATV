@@ -183,7 +183,7 @@ class BundesligaFHDTeamManager(Screen):
         Screen.__init__(self, session)
         self["headline"] = Label(_("Installierte Vereinsbilder"))
         self["list"] = MenuList([], enableWrapAround=True)
-        self["hint"] = Label(_("Der aktive Verein und FC Bayern München sind geschützt."))
+        self["hint"] = Label(_("Der aktive Verein und das Default-Design sind geschützt."))
         self["key_red"] = Label(_("Löschen"))
         self["key_green"] = Label(_("Schließen"))
         self["key_blue"] = Label(_("Aktualisieren"))
@@ -229,7 +229,7 @@ class BundesligaFHDTeamManager(Screen):
         if self.assets.is_default(entry):
             self.session.open(
                 MessageBox,
-                _("FC Bayern München gehört zum Basis-Skin und kann nicht gelöscht werden."),
+                _("Das Default-Design gehört zum Basis-Skin und kann nicht gelöscht werden."),
                 MessageBox.TYPE_INFO,
                 timeout=7
             )
@@ -282,7 +282,7 @@ class BundesligaFHDTeamManager(Screen):
         if self.assets.is_default(entry):
             self.session.open(
                 MessageBox,
-                _("FC Bayern München gehört zum Basis-Skin und wird automatisch über den openATV-Feed aktualisiert."),
+                _("Das Default-Design gehört zum Basis-Skin und wird automatisch über den openATV-Feed aktualisiert."),
                 MessageBox.TYPE_INFO,
                 timeout=8
             )
