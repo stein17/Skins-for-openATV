@@ -24,7 +24,6 @@ from .settings import (
     cancel_colors,
     color_config,
     get_overrides,
-    get_saved_skinparts,
     get_saved_team,
     overrides_active,
     reset_colors,
@@ -368,8 +367,6 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
         team_choices = self.teams or [("", _("Keine Teamprofile gefunden"))]
         self.team_config = NoSave(ConfigSelection(default=self.start_team, choices=team_choices))
         self.skinparts_action = NoSave(ConfigNothing())
-        self.resolution_action = NoSave(ConfigNothing())
-        self.resolution_switcher = None
 
         self.list = []
         self._build_list()
@@ -407,16 +404,6 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
     def _build_list(self):
         self.team_entry = getConfigListEntry(_("Bundesliga Verein:"), self.team_config)
         self.list.append(self.team_entry)
-        self.active_resolution_entry = getConfigListEntry(
-            _("Aktiver Skin: Bundesliga FHD (1920 × 1080)"),
-            NoSave(ConfigNothing())
-        )
-        self.resolution_entry = getConfigListEntry(
-            _("Auflösung wechseln: Bundesliga WQHD (2560 × 1440)"),
-            self.resolution_action
-        )
-        self.list.append(self.active_resolution_entry)
-        self.list.append(self.resolution_entry)
         self.list.append(getConfigListEntry(_("──────── Senderliste ────────"), NoSave(ConfigNothing())))
         for key, label, _xml_name in COLOR_ITEMS[:5]:
             self.list.append(getConfigListEntry(_(label), color_config(key)))
@@ -446,23 +433,8 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
         _set_preview(self, preview)
 
     def keyOK(self):
-        if self["config"].getCurrent() == self.resolution_entry:
-            self.openResolutionSwitch()
-            return
         if self.skinparts_entry is not None and self["config"].getCurrent() == self.skinparts_entry:
             self.openSkinparts()
-
-    def openResolutionSwitch(self):
-        from .resolution import ResolutionSwitcher
-
-        selected_team = basename(self.team_config.value) if self.team_config.value else get_saved_team()
-        transfer = {
-            "team": selected_team,
-            "skinparts": get_saved_skinparts(),
-            "colors": get_overrides(),
-        }
-        self.resolution_switcher = ResolutionSwitcher(self.session, transfer)
-        self.resolution_switcher.start()
 
     def openWeatherSettings(self):
         """Open OAWeather settings and return here when the screen is closed."""
