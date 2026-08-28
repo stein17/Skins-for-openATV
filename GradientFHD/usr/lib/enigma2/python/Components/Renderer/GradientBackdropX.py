@@ -19,6 +19,7 @@
 # 03.2022 several enhancements : several renders with one queue thread, google search (incl. molotov for france) + autosearch & autoclean thread ...
 # for infobar,
 # 02.26 @stein17, Many new features and improvements
+# 08.26 @stein17, Spinner/Netzwerk-Sicherheit: Cache-Anzeige ohne Online-Prüfung
 # <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" />
 # <widget source="session.Event_Next" render="GradientBackdropX" position="100,100" size="680,1000" />
 # <widget source="session.Event_Now" render="GradientBackdropX" position="100,100" size="680,1000" nexts="2" />
@@ -138,7 +139,6 @@ import NavigationInstance
 import os
 import re
 import shutil
-import socket
 import sys
 import time
 import json
@@ -149,6 +149,7 @@ STOP_AUTODB_FILE = '/tmp/stop_backdrop_autodb'
 
 MAX_BACKDROP_W = 685
 MAX_BACKDROP_H = 388
+STORAGE_BASES = ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs")
 
 
 def _backdropx_dbg(msg):
@@ -368,14 +369,14 @@ def _storage_xtra_base():
     try:
         sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
         if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
-            base = sel.value
-            if os.path.isdir(base):
-                return os.path.join(base, "xtra")
+            # The path is an explicit user choice. Do not probe it here: stat()
+            # on an unavailable NAS/autofs path can block the Enigma2 GUI.
+            return os.path.join(str(sel.value).rstrip('/'), "xtra")
     except Exception:
         pass
 
     # AUTO fallback: prefer first writable/usable mount
-    for base in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"):
+    for base in STORAGE_BASES:
         try:
             if os.path.isdir(base):
                 return os.path.join(base, "xtra")
@@ -638,9 +639,8 @@ def isMountedInRW(mount_point):
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 noposter = "/usr/share/enigma2/%s/main/noposter.jpg" % cur_skin
 path_folder = os.path.join(_storage_xtra_base(), "backdrop") + "/"
-
-if not os.path.exists(path_folder):
-    os.makedirs(path_folder, exist_ok=True)
+# Cache folders are created by the BackdropDB/AutoDB worker threads. Creating a
+# directory here could block skin loading when a selected NAS is unavailable.
 
 
 epgcache = eEPGCache.getInstance()
@@ -1010,22 +1010,6 @@ REGEX = re.compile(
     r'\s[чсЧС]\.?\s\d{1,3}.*|'             # Parte/Episodio in russo
     r'\d{1,3}-(?:я|й)\s?с-н.*',            # Finale con numero e suffisso russo
     re.DOTALL)
-
-
-def intCheck():
-    """Fast, GUI-safe internet connectivity check.
-    Avoids blocking HTTP requests in the main thread."""
-    try:
-        # Quick TCP check without DNS; 1.1.1.1:53 (Cloudflare) is usually reachable if routing works.
-        s = socket.create_connection(("1.1.1.1", 53), timeout=0.8)
-        try:
-            s.close()
-        except Exception:
-            pass
-        return True
-    except Exception:
-        return False
-
 
 
 def remove_accents(string):
@@ -1590,6 +1574,7 @@ class BackdropDB(GradientBackdropXDownloadThread):
             return False
 
     def run(self):
+        self.prepare_storage()
         self.logDB("[QUEUE] : Initialized")
         while True:
             item = pdb.get()
@@ -1957,6 +1942,7 @@ class BackdropAutoDB(GradientBackdropXDownloadThread):
             time.sleep(sleep_secs)
 
     def run(self):
+        self.prepare_storage()
         self.logAutoDB("[AutoDB] *** Initialized (night mode 00:00 & 05:00, local time) ***")
         while True:
             self.logAutoDB("[AutoDB] Waiting for next run window (00:00 / 05:00, local time)")
@@ -2242,8 +2228,8 @@ class GradientBackdropX(Renderer):
                 self._decode_path = None
                 self.picload = None
                 self.picload_conn = None
-                if not self.intCheck():
-                       return
+                # Never gate the renderer on an internet probe. Cached artwork
+                # must remain available while the receiver is offline.
                 self.timer = eTimer()
                 self.timer.callback.append(self.showBackdrop)
                 self.waitTimer = eTimer()
@@ -2289,17 +2275,6 @@ class GradientBackdropX(Renderer):
                         pass
                 self.skinAttributes = attribs
                 return Renderer.applySkin(self, desktop, parent)
-
-        def intCheck(self):
-                sock = False
-                try:
-                     import socket
-                     socket.setdefaulttimeout(0.5)
-                     socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(("8.8.8.8", 53))
-                     sock = True
-                except:
-                        sock = False
-                return sock
 
         def postWidgetCreate(self, instance):
                 Renderer.postWidgetCreate(self, instance)
@@ -2742,8 +2717,4 @@ class GradientBackdropX(Renderer):
             except Exception:
                 pass
             return
-
-
-
-
 

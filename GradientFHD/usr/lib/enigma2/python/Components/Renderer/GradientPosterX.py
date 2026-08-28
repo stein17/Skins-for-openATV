@@ -14,6 +14,7 @@
 
 # 06.24 @stein17, Created new info!
 # 02.26 @stein17, Many new features and improvements
+# 08.26 @stein17, Spinner/Netzwerk-Sicherheit: Cache-Anzeige ohne Online-Prüfung
 #Infobar
     #Poster now
     #<widget source="session.Event_Now" render="GradientPosterX" nexts="0" position="10,285" cornerRadius="6" size="170,255" zPosition="100" scale="stretch"/>
@@ -130,7 +131,6 @@ from Components.Renderer.GradientPosterXDownloadThread import GradientPosterXDow
 import NavigationInstance
 import os
 import sys
-import socket
 import re
 import shutil
 import time
@@ -143,6 +143,7 @@ STOP_AUTODB_FILE = '/tmp/stop_poster_autodb'
 
 MAX_POSTER_W = 340
 MAX_POSTER_H = 500
+STORAGE_BASES = ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs")
 
 
 def _posterx_dbg(msg):
@@ -244,14 +245,14 @@ def _storage_xtra_base():
     try:
         sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
         if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
-            base = sel.value
-            if os.path.isdir(base):
-                return os.path.join(base, "xtra")
+            # The path is an explicit user choice. Do not probe it here: stat()
+            # on an unavailable NAS/autofs path can block the Enigma2 GUI.
+            return os.path.join(str(sel.value).rstrip('/'), "xtra")
     except Exception:
         pass
 
     # AUTO fallback: prefer first writable/usable mount
-    for base in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs"):
+    for base in STORAGE_BASES:
         try:
             if os.path.isdir(base):
                 return os.path.join(base, "xtra")
@@ -817,9 +818,8 @@ def isMountedInRW(mount_point):
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 noposter = "/usr/share/enigma2/%s/main/noposter.jpg" % cur_skin
 path_folder = os.path.join(_storage_xtra_base(), "poster") + "/"
-
-if not os.path.exists(path_folder):
-    os.makedirs(path_folder, exist_ok=True)
+# Cache folders are created by the PosterDB/AutoDB worker threads. Creating a
+# directory here could block skin loading when a selected NAS is unavailable.
 
 
 REGEX = re.compile(
@@ -907,6 +907,7 @@ class PosterDB(GradientPosterXDownloadThread):
             return False, "[ERROR] %s (%s)" % (getattr(func, "__name__", "func"), e)
 
     def run(self):
+        self.prepare_storage()
         self.logDB("[QUEUE] : Initialized")
         while True:
             canal = pdb.get()
@@ -1387,6 +1388,7 @@ class PosterAutoDB(GradientPosterXDownloadThread):
                         time.sleep(sleep_secs)
 
         def run(self):
+                self.prepare_storage()
                 self.logAutoDB("[AutoDB] *** Initialized (night mode 00:00 & 05:00) ***")
                 while True:
                         self.logAutoDB("[AutoDB] Waiting for next run window (00:00 / 05:00, local time)")
@@ -1833,8 +1835,8 @@ class GradientPosterX(Renderer):
                 self._decode_path = None
                 self.picload = None
                 self.picload_conn = None
-                if not self.intCheck():
-                       return
+                # Never gate the renderer on an internet probe. Cached artwork
+                # must remain available while the receiver is offline.
                 self.timer = eTimer()
                 self.timer.callback.append(self.showPoster)
                 self.waitTimer = eTimer()
@@ -1860,17 +1862,6 @@ class GradientPosterX(Renderer):
                                 attribs.append((attrib, value))
                 self.skinAttributes = attribs
                 return Renderer.applySkin(self, desktop, parent)
-
-        def intCheck(self):
-                sock = False
-                try:
-                     import socket
-                     socket.setdefaulttimeout(0.5)
-                     socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(("8.8.8.8", 53))
-                     sock = True
-                except:
-                        sock = False
-                return sock
 
         def postWidgetCreate(self, instance):
                 Renderer.postWidgetCreate(self, instance)
@@ -2305,5 +2296,3 @@ class GradientPosterX(Renderer):
         #shutil.rmtree(path_folder)
 #except:
     #pass
-
-

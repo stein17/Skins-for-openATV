@@ -3,6 +3,7 @@
 # GradientStarX - patched for stable display in Player + Live
 # Based on user's "OPTIMIERTE GradientStarX.py - Version 3" (minimal functional changes)
 # 02.26 @stein17, Many new features and improvements
+# 08.26 @stein17, Spinner/Netzwerk-Sicherheit: Datei- und TMDb-Zugriffe im Hintergrund
 from __future__ import print_function
 
 from Components.Renderer.Renderer import Renderer
@@ -15,6 +16,7 @@ import json
 import os
 import sys
 import re
+import threading
 import requests
 from requests.adapters import HTTPAdapter, Retry
 
@@ -24,6 +26,7 @@ except Exception:
     from GradientConverlibr import convtext, quoteEventName, apply_title_mapping
 
 PY3 = sys.version_info[0] >= 3
+STORAGE_BASES = ('/media/hdd', '/media/usb', '/media/mmc', '/media/net', '/media/autofs')
 
 # --- TMDB key (keep user's logic) ---
 tmdb_api = '3c3efcf47c3577558812bb9d64019d65'
@@ -54,16 +57,14 @@ def get_info_folder():
     try:
         sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
         if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
-            base = sel.value
-            if os.path.isdir(base):
-                d = os.path.join(base, 'xtra', 'Info')
-                os.makedirs(d, exist_ok=True)
-                return d
+            # Respect the explicit selection without probing a possibly offline
+            # NAS/autofs path in the Enigma2 GUI thread.
+            return os.path.join(str(sel.value).rstrip('/'), 'xtra', 'Info')
     except Exception:
         pass
 
     candidates = []
-    for base in ('/media/usb', '/media/hdd', '/media/mmc', '/media/net', '/media/autofs'):
+    for base in STORAGE_BASES:
         try:
             info_dir = os.path.join(base, 'xtra', 'Info')
             if os.path.exists(info_dir):
@@ -72,12 +73,8 @@ def get_info_folder():
                 candidates.append(info_dir)
         except Exception:
             pass
-    for d in candidates:
-        try:
-            os.makedirs(d, exist_ok=True)
-            return d
-        except Exception:
-            pass
+    if candidates:
+        return candidates[0]
     path_folder = '/tmp/Info'
     try:
         os.makedirs(path_folder, exist_ok=True)
@@ -107,6 +104,7 @@ def save_tmdb_vote(slug, vote):
     if not slug or vote is None:
         return
     try:
+        os.makedirs(INFO_FOLDER, exist_ok=True)
         path = os.path.join(INFO_FOLDER, slug + '.json')
         data = {}
         if os.path.exists(path):
@@ -189,6 +187,7 @@ def create_http_session():
     return session
 
 http_session = create_http_session()
+_HTTP_LOCK = threading.Lock()
 
 class GradientStarX(Renderer):
     GUI_WIDGET = ePixmap
@@ -202,6 +201,13 @@ class GradientStarX(Renderer):
         self._init_tries = 0
         self._last_key = None
         self._last_vote = None
+        self._active = True
+        self._work_lock = threading.Lock()
+        self._work_pending = None
+        self._work_result = None
+        self._worker_running = False
+        self._work_generation = 0
+        self._result_timer = None
 
     def applySkin(self, desktop, parent):
         attribs = []
@@ -216,6 +222,13 @@ class GradientStarX(Renderer):
         return Renderer.applySkin(self, desktop, parent)
 
     def postWidgetCreate(self, instance):
+        self._active = True
+        if self._result_timer is None:
+            self._result_timer = eTimer()
+            try:
+                self._result_timer.timeout.connect(self._poll_worker_result)
+            except Exception:
+                self._result_timer.callback.append(self._poll_worker_result)
         # EMC/Player sometimes doesn't call changed() again after CLEAR.
         # Do a few delayed retries after create.
         if self._init_timer is None:
@@ -226,6 +239,20 @@ class GradientStarX(Renderer):
                 self._init_timer.callback.append(self._init_retry)
         self._init_tries = 0
         self._init_timer.start(250, True)
+
+    def preWidgetRemove(self, instance):
+        self._active = False
+        self._work_generation += 1
+        for timer in (self.timer, self._init_timer, self._result_timer):
+            try:
+                if timer is not None:
+                    timer.stop()
+            except Exception:
+                pass
+        try:
+            Renderer.preWidgetRemove(self, instance)
+        except Exception:
+            pass
 
     def _init_retry(self):
         self._init_tries += 1
@@ -266,17 +293,16 @@ class GradientStarX(Renderer):
             return
 
         try:
-            title = None
             event = None
             file_path = None
             src = self.source
 
-            # 1) Prefer currently playing file path (Player stability)
+            # Reading Enigma2 source objects stays in the GUI thread. Slow file,
+            # NAS and HTTP operations are handed to the worker below.
             play_path = _get_playing_path()
-            if play_path and os.path.isfile(play_path):
+            if play_path:
                 file_path = play_path
 
-            # 2) Otherwise use source-specific info
             if file_path is None:
                 if isinstance(src, ServiceEvent):
                     event = getattr(src, 'event', None)
@@ -291,71 +317,141 @@ class GradientStarX(Renderer):
                 else:
                     event = getattr(src, 'event', None)
 
-            # 3) Title: if file playback, lock to meta/filename (avoid "Sendepause" etc.)
-            if file_path and os.path.isfile(file_path):
-                if file_path.endswith('.ts'):
-                    title = _read_ts_meta_title(file_path)
-                if not title:
-                    title = clean_filename_for_search(os.path.basename(file_path))
-
-            # 4) Live title from event
-            if not title and event:
+            event_title = None
+            if event:
                 ev_name = event.getEventName() if event else ''
                 if ev_name:
                     ev_name = ev_name.replace('Â\x86', '').replace('Â\x87', '').strip()
-                    # ignore generic/unstable placeholders
                     if ev_name.lower() not in ('sendepause',):
-                        title = ev_name
+                        event_title = ev_name
 
-            if not title:
-                # If we already had a stable value for the same key, keep it
+            if not file_path and not event_title:
                 if self._last_vote is not None and self._last_key:
                     self._render_stars(self._last_vote)
                 else:
                     self.instance.hide()
                 return
 
-            mapped_title = apply_title_mapping(title)
-            slug = convtext(mapped_title) if mapped_title else None
-            if not slug:
-                self.instance.hide()
-                return
-
-            key = file_path if (file_path and os.path.isfile(file_path)) else slug
-
-            cached_vote = load_tmdb_vote(slug)
-            if cached_vote is None and self._last_key == key and self._last_vote is not None:
-                # keep last vote if current lookup fails transiently
-                cached_vote = self._last_vote
-
-            if cached_vote is not None:
-                self._last_key = key
-                self._last_vote = cached_vote
-                self._render_stars(cached_vote)
-                return
-
-            # Network fetch only if we don't have anything cached
-            vote = self._fetch_tmdb_vote(mapped_title)
-            if vote is not None:
-                save_tmdb_vote(slug, vote)
-                self._last_key = key
-                self._last_vote = vote
-                self._render_stars(vote)
-            else:
-                self.instance.hide()
-
+            self._queue_worker({
+                'file_path': file_path,
+                'event_title': event_title,
+                'last_key': self._last_key,
+                'last_vote': self._last_vote,
+            })
         except Exception:
             self.instance.hide()
+
+    def _queue_worker(self, request):
+        self._work_generation += 1
+        request['generation'] = self._work_generation
+        start_worker = False
+        with self._work_lock:
+            self._work_pending = request
+            if not self._worker_running:
+                self._worker_running = True
+                start_worker = True
+
+        if start_worker:
+            worker = threading.Thread(target=self._worker_loop, name='GradientStarX-worker')
+            worker.daemon = True
+            worker.start()
+        try:
+            if self._result_timer is not None:
+                self._result_timer.start(100, True)
+        except Exception:
+            pass
+
+    def _worker_loop(self):
+        while self._active:
+            with self._work_lock:
+                request = self._work_pending
+                self._work_pending = None
+                if request is None:
+                    self._worker_running = False
+                    return
+            result = self._resolve_vote_worker(request)
+            with self._work_lock:
+                self._work_result = result
+        with self._work_lock:
+            self._worker_running = False
+
+    def _resolve_vote_worker(self, request):
+        title = None
+        file_path = request.get('file_path')
+        is_recording = False
+        try:
+            is_recording = bool(file_path and os.path.isfile(file_path))
+        except Exception:
+            is_recording = False
+
+        if is_recording:
+            if file_path.endswith('.ts'):
+                title = _read_ts_meta_title(file_path)
+            if not title:
+                title = clean_filename_for_search(os.path.basename(file_path))
+        if not title:
+            title = request.get('event_title')
+
+        if not title:
+            return {
+                'generation': request['generation'],
+                'key': request.get('last_key'),
+                'vote': request.get('last_vote'),
+            }
+
+        try:
+            mapped_title = apply_title_mapping(title)
+            slug = convtext(mapped_title) if mapped_title else None
+        except Exception:
+            mapped_title = None
+            slug = None
+        if not slug:
+            return {'generation': request['generation'], 'key': None, 'vote': None}
+
+        key = file_path if is_recording else slug
+        cached_vote = load_tmdb_vote(slug)
+        if cached_vote is None and request.get('last_key') == key:
+            cached_vote = request.get('last_vote')
+        if cached_vote is None:
+            cached_vote = self._fetch_tmdb_vote(mapped_title)
+            if cached_vote is not None:
+                save_tmdb_vote(slug, cached_vote)
+        return {'generation': request['generation'], 'key': key, 'vote': cached_vote}
+
+    def _poll_worker_result(self):
+        result = None
+        keep_polling = False
+        with self._work_lock:
+            if self._work_result is not None:
+                result = self._work_result
+                self._work_result = None
+            keep_polling = self._worker_running or self._work_pending is not None or self._work_result is not None
+
+        if result is not None and result.get('generation') == self._work_generation and self._active:
+            vote = result.get('vote')
+            if vote is not None:
+                self._last_key = result.get('key')
+                self._last_vote = vote
+                self._render_stars(vote)
+            elif self.instance is not None:
+                self.instance.hide()
+
+        if keep_polling and self._active:
+            try:
+                self._result_timer.start(100, True)
+            except Exception:
+                pass
 
     def _fetch_tmdb_vote(self, title):
         if not tmdb_api or not title:
             return None
         try:
             q = quoteEventName(title)
-            url = 'http://api.themoviedb.org/3/search/multi?api_key=%s&query=%s' % (tmdb_api, q)
+            url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&query=%s' % (tmdb_api, q)
             if lng:
                 url += '&language=%s' % lng
-            r = http_session.get(url, timeout=(3, 6))
+            with _HTTP_LOCK:
+                r = http_session.get(url, timeout=(3, 6))
             r.raise_for_status()
             data = r.json()
             results = data.get('results') or []

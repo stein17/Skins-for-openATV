@@ -267,7 +267,6 @@ def _remove_silent(path):
     except Exception:
         pass
 
-import socket
 import sys
 import threading
 import difflib
@@ -322,12 +321,8 @@ else:
 
 
 try:
-    from urllib.error import URLError, HTTPError
-    from urllib.request import urlopen
     from urllib.parse import quote_plus
 except:
-    from urllib2 import URLError, HTTPError
-    from urllib2 import urlopen
     from urllib import quote_plus
 
 
@@ -748,6 +743,7 @@ def get_tmdb_api_key():
 # AutoDB keeps working; only the stored poster size is reduced to a sensible maximum.
 MAX_POSTER_W = 340
 MAX_POSTER_H = 500
+STORAGE_BASES = ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs")
 isz = "185,278"
 bisz = "340,500"
 screenwidth = getDesktop(0).size()
@@ -782,7 +778,7 @@ def getPosterXBasePath():
     except Exception:
         pass
 
-    for p in ("/media/hdd", "/media/usb", "/media/mmc", "/media/net"):
+    for p in STORAGE_BASES:
         try:
             if os.path.exists(p) and isMountedInRW(p):
                 return p
@@ -791,7 +787,7 @@ def getPosterXBasePath():
     return "/media/hdd"
 
 
-def _refresh_storage_paths():
+def _refresh_storage_paths(ensure=False):
     global base_path, xtra_base, path_folder, info_folder, poster_info_folder
     base_path = getPosterXBasePath()
     xtra_base = os.path.join(base_path, "xtra")
@@ -801,7 +797,11 @@ def _refresh_storage_paths():
     info_folder = os.path.join(xtra_base, "Info")
     poster_info_folder = os.path.join(xtra_base, "poster_info")
 
-    # Ensure folder tree exists (including custom folders)
+    if not ensure:
+        return
+
+    # Directory creation may wake an unavailable NAS/autofs mount. Call this
+    # only from a download worker, never while Enigma2 creates the renderer.
     for d in (
         xtra_base,
         path_folder,
@@ -817,7 +817,7 @@ def _refresh_storage_paths():
         except Exception:
             pass
 
-_refresh_storage_paths()
+_refresh_storage_paths(ensure=False)
 
 
 
@@ -1413,20 +1413,6 @@ except NameError:
         return t
 
 
-def intCheck():
-    try:
-        response = urlopen("http://google.com", None, 5)
-        response.close()
-    except HTTPError:
-        return False
-    except URLError:
-        return False
-    except socket.timeout:
-        return False
-    else:
-        return True
-
-
 def quoteEventName(eventName):
     try:
         text = eventName.decode('utf8').replace(u'\x86', u'').replace(u'\x87', u'').encode('utf8')
@@ -1635,11 +1621,8 @@ def generate_search_variants(title):
 
 class GradientPosterXDownloadThread(threading.Thread):
     def __init__(self):
-        _refresh_storage_paths()
-        adsl = intCheck()
-        if not adsl:
-            return
         threading.Thread.__init__(self)
+        _refresh_storage_paths(ensure=False)
         self.checkMovie = ["film", "movie", "фильм", "кино", "ταινία",
                            "película", "cinéma", "cine", "cinema",
                            "filma"]
@@ -1660,6 +1643,10 @@ class GradientPosterXDownloadThread(threading.Thread):
                         "société", "clips", "concert", "santé",
                         "éducation", "variété"]
         self.sizeb = False
+
+    def prepare_storage(self):
+        """Create cache folders from the worker thread before file/network I/O."""
+        _refresh_storage_paths(ensure=True)
 
 
     # ------------------------------------------------------------------------
@@ -1814,11 +1801,9 @@ class GradientPosterXDownloadThread(threading.Thread):
         except Exception:
             pass
         
-        # TMDb search
+        # TMDb search. No separate connectivity probe is needed here; the
+        # provider request already has timeouts and reports its own error.
         try:
-            if not intCheck():
-                return False, "TMDb: no internet"
-        
             tmdb_api = get_tmdb_api_key()
             if not tmdb_api:
                 return False, "TMDb: missing key"

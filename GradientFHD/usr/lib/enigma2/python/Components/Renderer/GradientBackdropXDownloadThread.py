@@ -914,19 +914,6 @@ def isMountedInRW(mount_point):
     return False
 
 
-def intCheck(timeout=0.8):
-    """Fast connectivity probe (no HTTP)."""
-    try:
-        import socket
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(timeout)
-        s.connect(("8.8.8.8", 53))
-        s.close()
-        return True
-    except Exception:
-        return False
-
-
 def sanitize_filename(filename):
     """Safe sanitize: never crash on None/bytes."""
     if filename is None:
@@ -948,6 +935,7 @@ def sanitize_filename(filename):
 # ============================================================================
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 nobackdrop = "/usr/share/enigma2/%s/main/nobackdrop.jpg" % cur_skin
+STORAGE_BASES = ("/media/hdd", "/media/usb", "/media/mmc", "/media/net", "/media/autofs")
 
 def getPosterXBasePath():
     """Return the user selected base path for /xtra.
@@ -958,16 +946,16 @@ def getPosterXBasePath():
             return sel.value
     except Exception:
         pass
-    for p in ("/media/usb", "/media/hdd", "/media/mmc", "/media/net", "/media/autofs"):
+    for p in STORAGE_BASES:
         try:
             if os.path.exists(p) and isMountedInRW(p):
                 return p
         except Exception:
             pass
-    return "/media/usb" if os.path.isdir("/media/usb") else "/media/hdd"
+    return "/media/hdd"
 
 
-def _refresh_storage_paths():
+def _refresh_storage_paths(ensure=False):
     global base_path, xtra_base, path_folder, info_folder, backdrop_info_folder
     base_path = getPosterXBasePath()
     xtra_base = os.path.join(base_path, "xtra")
@@ -981,7 +969,11 @@ def _refresh_storage_paths():
     # Backdrop-info folder (debug/trace: which provider was used)
     backdrop_info_folder = os.path.join(xtra_base, "backdrop_info")
 
-    # Ensure full folder tree exists (including custom folders)
+    if not ensure:
+        return
+
+    # Directory creation may wake an unavailable NAS/autofs mount. Call this
+    # only from a download worker, never while Enigma2 creates the renderer.
     for folder in (
         xtra_base,
         path_folder,
@@ -997,7 +989,7 @@ def _refresh_storage_paths():
         except Exception:
             pass
 
-_refresh_storage_paths()
+_refresh_storage_paths(ensure=False)
 
 # ============================================================================
 # LOAD SKIN-SPECIFIC API KEYS
@@ -1603,32 +1595,22 @@ class GradientBackdropXDownloadThread(threading.Thread):
         except Exception:
             return False, None
     def __init__(self):
-        _refresh_storage_paths()
         threading.Thread.__init__(self)
-        # NOTE: avoid blocking network probes in __init__; downloads handle errors
-        self.adsl = True
-        try:
-            self.adsl = bool(intCheck())
-        except Exception:
-            self.adsl = True
-        if not self.adsl and DEBUG_BACKDROP:
-            print('Keine Internetverbindung')
+        _refresh_storage_paths(ensure=False)
         
         # HTTP Session mit Retry
         self.http = create_http_session()
         
-        # Gradient_event_info Instanz fuer JSON-Speicherung
-        try:
-            self._event_info = Gradient_event_info(info_folder=info_folder, tmdb_api=tmdb_api, lang=lng)
-        except:
-            self._event_info = None
+        # Initialized later by prepare_storage() in the worker thread. Its
+        # constructor creates the Info folder and may otherwise wake a NAS.
+        self._event_info = None
         
         # Erweiterte Listen fuer Medientyp-Erkennung
         self.checkMovie = [
             "film", "movie", "spielfilm", "kino", "cinema",
             "film", "kino", "tainia", "pelicula", "cinema", "filma"
         ]
-        
+
         # ERWEITERTE TV-LISTE fuer Magazine, Dokus, Sport etc.
         self.checkTV = [
             # Standard
@@ -1672,6 +1654,19 @@ class GradientBackdropXDownloadThread(threading.Thread):
             "culture", "infos", "feuilleton", "telerealite",
             "societe", "clips", "concert", "sante", "variete"
         ]
+
+    def prepare_storage(self):
+        """Create cache folders from the worker thread before file/network I/O."""
+        _refresh_storage_paths(ensure=True)
+        if self._event_info is None and Gradient_event_info is not None:
+            try:
+                self._event_info = Gradient_event_info(
+                    info_folder=info_folder,
+                    tmdb_api=tmdb_api,
+                    lang=lng
+                )
+            except Exception:
+                self._event_info = None
 
     # ========================================================================
     # TITLE MAPPING FUNCTION - Hauptfunktion fuer bessere Treffer

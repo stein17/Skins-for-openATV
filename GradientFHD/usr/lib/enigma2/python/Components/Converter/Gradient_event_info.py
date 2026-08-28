@@ -3,11 +3,12 @@
 =====================================
 
 Converter fuer skin.xml - zeigt TMDb-Daten als Labels
+08.26 @stein17: Spinner/Netzwerk-Sicherheit durch Hintergrundzugriffe
 
 NEUE FEATURES:
-- Bessere Timeouts (6 Sek statt 10)
-- Fehlerbehandlung
-- Retry-Strategie
+- JSON- und TMDb-Zugriffe laufen außerhalb des Enigma2-GUI-Threads
+- Vorhandene Werte werden im Speicher zwischengespeichert
+- Fehlgeschlagene Abfragen werden zeitlich begrenzt wiederholt
 - apply_title_mapping() Integration
 
 SKIN.XML VERWENDUNG:
@@ -35,6 +36,8 @@ import NavigationInstance
 import os
 import sys
 import json
+import threading
+import time
 import requests
 from requests.adapters import HTTPAdapter, Retry
 PY3 = sys.version_info[0] >= 3
@@ -57,6 +60,7 @@ try:
 except:
     lng = 'de'
 tmdb_api = '3c3efcf47c3577558812bb9d64019d65'
+STORAGE_BASES = ('/media/hdd', '/media/usb', '/media/mmc', '/media/net', '/media/autofs')
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 try:
     tmdb_key_path = '/usr/share/enigma2/%s/tmdbkey' % cur_skin
@@ -71,14 +75,14 @@ def get_storage_folder():
     try:
         sel = getattr(config.plugins.GradientFHD, "posterXPath", None)
         if sel is not None and getattr(sel, "value", None) and sel.value != "AUTO":
-            base = sel.value
-            if os.path.isdir(base):
-                return os.path.join(base, "xtra")
+            # Respect the explicit selection without probing a possibly offline
+            # NAS/autofs path in the GUI thread.
+            return os.path.join(str(sel.value).rstrip('/'), "xtra")
     except Exception:
         pass
 
-    # AUTO fallback (USB first, not HDD first)
-    for base in ('/media/usb', '/media/hdd', '/media/mmc', '/media/net', '/media/autofs'):
+    # AUTO fallback: same order as PosterX, BackdropX and StarX.
+    for base in STORAGE_BASES:
         try:
             if os.path.isdir(base):
                 return os.path.join(base, 'xtra')
@@ -87,11 +91,6 @@ def get_storage_folder():
     return '/tmp'
 STORAGE_FOLDER = get_storage_folder()
 INFO_FOLDER = os.path.join(STORAGE_FOLDER, 'Info')
-if not os.path.exists(INFO_FOLDER):
-    try:
-        os.makedirs(INFO_FOLDER, exist_ok=True)
-    except:
-        pass
 
 def create_http_session():
     session = requests.Session()
@@ -101,6 +100,7 @@ def create_http_session():
     session.mount('https://', adapter)
     return session
 http_session = create_http_session()
+_TMDB_HTTP_LOCK = threading.Lock()
 
 def get_event_info_from_json(slug, field):
     if not slug:
@@ -115,10 +115,24 @@ def get_event_info_from_json(slug, field):
     except:
         return None
 
+def load_event_info_json(slug):
+    if not slug:
+        return None
+    try:
+        json_path = os.path.join(INFO_FOLDER, slug + '.json')
+        if not os.path.exists(json_path):
+            return None
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else None
+    except Exception:
+        return None
+
 def save_event_info_to_json(slug, data):
     if not slug or not data:
         return False
     try:
+        os.makedirs(INFO_FOLDER, exist_ok=True)
         json_path = os.path.join(INFO_FOLDER, slug + '.json')
         existing = {}
         if os.path.exists(json_path):
@@ -144,7 +158,8 @@ def fetch_from_tmdb(title, slug):
     try:
         search_title = apply_title_mapping(title)
         url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (tmdb_api, lng, urlquote(search_title))
-        response = http_session.get(url, timeout=(3, 6))
+        with _TMDB_HTTP_LOCK:
+            response = http_session.get(url, timeout=(3, 6))
         if response.status_code != 200:
             return None
         data = response.json()
@@ -186,6 +201,62 @@ def fetch_from_tmdb(title, slug):
         if DEBUG_INFO:
             print('[INFO] Unexpected Error: %s' % str(e))
         return None
+
+
+# The Converter's getText() method runs in Enigma2's GUI thread. Neither NAS
+# file access nor HTTP is allowed there. One worker per slug loads the JSON and,
+# only when needed, performs the TMDb request. The existing one-second converter
+# timer then picks up the in-memory result without any cross-thread GUI access.
+_INFO_LOCK = threading.Lock()
+_INFO_CACHE = {}
+_INFO_PENDING = set()
+_INFO_LAST_FAILURE = {}
+_INFO_RETRY_SECONDS = 30.0
+
+
+def _event_info_worker(title, slug, field):
+    data = {}
+    try:
+        stored = load_event_info_json(slug)
+        if isinstance(stored, dict):
+            data.update(stored)
+        if data.get(field) is None:
+            fetched = fetch_from_tmdb(title, slug)
+            if isinstance(fetched, dict):
+                data.update(fetched)
+    except Exception:
+        pass
+    finally:
+        with _INFO_LOCK:
+            _INFO_CACHE[slug] = data
+            if data.get(field) is None:
+                _INFO_LAST_FAILURE[slug] = time.time()
+            else:
+                _INFO_LAST_FAILURE.pop(slug, None)
+            _INFO_PENDING.discard(slug)
+
+
+def request_event_info_async(title, slug, field):
+    now = time.time()
+    start_worker = False
+    with _INFO_LOCK:
+        cached_data = _INFO_CACHE.get(slug)
+        last_failure = _INFO_LAST_FAILURE.get(slug, 0.0)
+        if isinstance(cached_data, dict) and cached_data.get(field) is not None:
+            return cached_data
+        if slug not in _INFO_PENDING and (now - last_failure) >= _INFO_RETRY_SECONDS:
+            _INFO_PENDING.add(slug)
+            start_worker = True
+
+    if start_worker:
+        worker = threading.Thread(
+            target=_event_info_worker,
+            args=(title, slug, field),
+            name='GradientEventInfo-%s' % slug[:24]
+        )
+        worker.daemon = True
+        worker.start()
+    return None
 
 class Gradient_event_info(Converter, object):
     TITLE = 0
@@ -240,15 +311,7 @@ class Gradient_event_info(Converter, object):
             field = field_map.get(self.type)
             if not field:
                 return ''
-            value = get_event_info_from_json(slug, field)
-            if value is not None:
-                if self.type == self.TMDB_VOTE_AVERAGE:
-                    try:
-                        return '%.1f' % float(value)
-                    except:
-                        return str(value)
-                return str(value)
-            info_data = fetch_from_tmdb(title, slug)
+            info_data = request_event_info_async(title, slug, field)
             if info_data:
                 value = info_data.get(field)
                 if value is not None:
@@ -277,8 +340,8 @@ if __name__ == '__main__':
     print('=' * 60)
     print()
     print('FEATURES:')
-    print('  - Timeout: 6 Sekunden (vorher: 10)')
-    print('  - Retry-Strategie (2 Versuche)')
+    print('  - JSON/TMDb laufen im Hintergrund')
+    print('  - Kein blockierender Netzwerkzugriff im GUI-Thread')
     print('  - apply_title_mapping() Integration')
     print('  - Bessere Fehlerbehandlung')
     print()
