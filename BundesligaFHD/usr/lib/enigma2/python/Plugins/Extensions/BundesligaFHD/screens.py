@@ -46,6 +46,9 @@ MAIN_SKIN_GRADIENT = """
     <panel name="Bundesliga_Basic_Setup_club_primary" />
     <panel name="Bundesliga_Setup_right_Pic_club_primary" />
     <panel name="Banner_Setup_Default" />
+    <panel position="30,25" size="130,130">
+      <panel name="Logo_Bundesliga_Default" />
+    </panel>
 </screen>
 """
 
@@ -61,6 +64,9 @@ SKINPART_SKIN_GRADIENT = """
     <panel name="Bundesliga_Basic_Setup_club_primary" />
     <panel name="Bundesliga_Setup_right_Pic_club_primary" />
     <panel name="Banner_Setup_Default" />
+    <panel position="30,25" size="130,130">
+      <panel name="Logo_Bundesliga_Default" />
+    </panel>
 </screen>
 """
 
@@ -75,6 +81,9 @@ TEAM_DOWNLOAD_SKIN = """
     <panel name="Bundesliga_Basic_Setup_club_primary" />
     <panel name="Bundesliga_Setup_right_Pic_club_primary" />
     <panel name="Banner_Setup_Default" />
+    <panel position="30,25" size="130,130">
+      <panel name="Logo_Bundesliga_Default" />
+    </panel>
 </screen>
 """
 
@@ -90,6 +99,9 @@ TEAM_MANAGER_SKIN = """
     <panel name="Bundesliga_Basic_Setup_club_primary" />
     <panel name="Bundesliga_Setup_right_Pic_club_primary" />
     <panel name="Banner_Setup_Default" />
+    <panel position="30,25" size="130,130">
+      <panel name="Logo_Bundesliga_Default" />
+    </panel>
 </screen>
 """
 
