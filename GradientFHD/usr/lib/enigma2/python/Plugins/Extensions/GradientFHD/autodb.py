@@ -1127,9 +1127,9 @@ class AutoDBManager(Screen):
         # Ensure AutoDB workers are loaded even if no Infobar widgets are active
         try:
             if self.run_poster:
-                from Components.Renderer import GradientPosterX  # noqa: F401
+                from Components.Renderer import GradientFHDPosterX  # noqa: F401
             if self.run_backdrop:
-                from Components.Renderer import GradientBackdropX  # noqa: F401
+                from Components.Renderer import GradientFHDBackdropX  # noqa: F401
         except Exception:
             pass
 

@@ -1,10 +1,22 @@
 #!/bin/sh
+
+# During an upgrade the new package owns these paths.  Do not remove the
+# freshly installed files when the old package's postrm is called.
+case "$1" in
+	upgrade|failed-upgrade|abort-upgrade)
+		exit 0
+		;;
+esac
+
 rm -rf /usr/share/enigma2/GradientFHD
-rm -rf /usr/lib/enigma2/python/Components/Converter/Gradient*
-rm -rf /usr/lib/enigma2/python/Components/Renderer/Gradient*
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/GradientFHD*
-echo "                                                                 "
+rm -f /usr/lib/enigma2/python/Components/Converter/GradientFHD*.py
+rm -f /usr/lib/enigma2/python/Components/Converter/GradientFHD*.pyc
+rm -f /usr/lib/enigma2/python/Components/Converter/__pycache__/GradientFHD*.pyc
+rm -f /usr/lib/enigma2/python/Components/Renderer/GradientFHD*.py
+rm -f /usr/lib/enigma2/python/Components/Renderer/GradientFHD*.pyc
+rm -f /usr/lib/enigma2/python/Components/Renderer/__pycache__/GradientFHD*.pyc
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/GradientFHD
+
 echo "GradientFHD skin was successfully removed from your receiver"
-echo "                                                                 "
-echo "The GUI of your receiver is now rebooting....                    "
+
 exit 0

@@ -472,14 +472,14 @@ def get_tmdb_key():
 		return k
 	# Legacy/fallback key bundled in the renderers
 	try:
-		from Components.Renderer.GradientPosterXDownloadThread import get_tmdb_api_key as _get
+		from Components.Renderer.GradientWQHDPosterXDownloadThread import get_tmdb_api_key as _get
 		k = (_get() or '').strip()
 		if k:
 			return k
 	except Exception:
 		pass
 	try:
-		from Components.Renderer import GradientPosterXDownloadThread as _r
+		from Components.Renderer import GradientWQHDPosterXDownloadThread as _r
 		k = (getattr(_r, 'tmdb_api', '') or '').strip()
 		if k:
 			return k
@@ -499,9 +499,9 @@ def get_tvdb_key():
 	k = _read_key_file("thetvdbkey")
 	if k:
 		return k
-	# Renderer defaults (legacy key bundled in GradientPosterXDownloadThread)
+	# Renderer defaults (legacy key bundled in GradientWQHDPosterXDownloadThread)
 	try:
-		from Components.Renderer import GradientPosterXDownloadThread as _r
+		from Components.Renderer import GradientWQHDPosterXDownloadThread as _r
 		k = (getattr(_r, 'thetvdbkey', '') or getattr(_r, 'TVDB_LEGACY_DEFAULT_KEY', '') or '').strip()
 		if k:
 			return k
@@ -525,7 +525,7 @@ def get_tvdb_legacy_key():
 	if k:
 		return k
 	try:
-		from Components.Renderer import GradientPosterXDownloadThread as _r
+		from Components.Renderer import GradientWQHDPosterXDownloadThread as _r
 		k = (getattr(_r, 'TVDB_LEGACY_DEFAULT_KEY', '') or getattr(_r, 'thetvdbkey', '') or '').strip()
 		if k:
 			return k
@@ -731,7 +731,7 @@ def get_omdb_key():
 	if k:
 		return k
 	try:
-		from Components.Renderer import GradientPosterXDownloadThread as _r
+		from Components.Renderer import GradientWQHDPosterXDownloadThread as _r
 		k = (getattr(_r, 'omdb_api', '') or '').strip()
 		if k:
 			return k
@@ -749,7 +749,7 @@ def get_fanart_key():
 	if k:
 		return k
 	try:
-		from Components.Renderer import GradientPosterXDownloadThread as _r
+		from Components.Renderer import GradientWQHDPosterXDownloadThread as _r
 		k = (getattr(_r, 'fanart_api', '') or '').strip()
 		if k:
 			return k
@@ -3420,7 +3420,7 @@ class MovieScannerMain(Screen):
 			# 2) Built-in renderer default
 			if not resolved:
 				try:
-					from Components.Renderer import GradientPosterXDownloadThread as _rdt
+					from Components.Renderer import GradientWQHDPosterXDownloadThread as _rdt
 					_bk = (getattr(_rdt, 'TVDB_LEGACY_DEFAULT_KEY', '') or '').strip()
 					if _bk and _is_tvdb_hex32_key(_bk):
 						resolved = _bk

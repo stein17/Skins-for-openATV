@@ -169,6 +169,8 @@ except Exception:
 def _gradientwqhd_sessionstart(reason=None, session=None, **kwargs):
     if session is None:
         return
+    if config.skin.primary_skin.value != "GradientWQHD/skin.xml":
+        return
     try:
         from .GradientMoviescanner import schedule_cleanup_timer, schedule_moviescanner_timer
         schedule_cleanup_timer(session)
