@@ -1,0 +1,66 @@
+<skin>
+	<!-- SecondInfoBar VPN -->
+<screen name="ChannelSelection" position="center,center" size="2560,1440" backgroundColor="transparent" flags="wfNoBorder" title="Channel Selection">
+		<widget name="list" position="32,32" size="2013,960" serviceItemHeight="91" serviceNumberFont="Gradient_Font;80" serviceNameFont="Italic;80" serviceInfoFont="Gradient_Font;80" progressInfoFont="Gradient_Font;67" listMarginLeft="9" listMarginRight="37" fieldMargins="11" itemsDistances="11" progressbarHeight="19" progressBarWidth="141" progressbarBorderWidth="1" backgroundColor="gradient_background" foregroundColor="foregroundColor_Channel" backgroundColorSelected="Channel_Selected" foregroundColorSelected="foregroundColor_Channel_Selected" colorServiceRecorded="red" colorServicePseudoRecorded="lightblue" colorServiceStreamed="infobar_tuner_rec" colorServiceDescription="foregroundColor_Event" colorServiceDescriptionSelected="foregroundColor_Event_Selected" colorEventProgressbar="ProgressbarColor_ChannelSelection" picServiceEventProgressbar="GradientWQHD/infobar/Progress_Ch_List_Gradient.png" colorEventProgressbarBorder="ProgressbarColorBorder_ChannelSelection" colorEventProgressbarBorderSelected="ProgressbarColorBorder_ChannelSelection" foregroundColorServiceNotAvail="#00555555" scrollbarMode="showOnDemand" transparent="1" />
+		<widget source="ServiceEvent" render="Label" position="1760,1453" size="740,100" font="Gradient_Font; 44" foregroundColor="EventNameColor" backgroundColor="gradient_background" zPosition="2" transparent="1" valign="center">
+			<convert type="EventName">NowName</convert>
+		</widget>
+		<widget source="ServiceEvent" render="Label" position="2080,453" size="187,80" font="Gradient_Font; 67" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="12" transparent="1" halign="left" valign="center">
+			<convert type="EventTime">StartTime</convert>
+			<convert type="ClockToText" />
+		</widget>
+		<widget source="ServiceEvent" render="Label" position="2320,453" size="187,80" font="Gradient_Font; 67" foregroundColor="EventTimeColor" backgroundColor="gradient_background" zPosition="2" transparent="1" valign="center" halign="right">
+			<convert type="EventTime">EndTime</convert>
+			<convert type="ClockToText" />
+		</widget>
+		<widget source="ServiceEvent" render="Label" position="2300,1565" size="200,44" font="Gradient_Font;40" backgroundColor="gradient_background" foregroundColor="EventTimeColor" transparent="1" halign="right" valign="top">
+			<convert type="EventTime">Remaining</convert>
+			<convert type="RemainingToText" />
+		</widget>
+		<widget source="ServiceEvent" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1580,1627" size="920,427" font="Gradient_Font; 40" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2">
+			<convert type="EventName">FullDescription</convert>
+		</widget>
+		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="11" position="40,1013" size="2480,320" font="Gradient_Font; 72" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+<widget source="ServiceEvent" render="Progress" position="2080,560" size="427,40" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+<eLabel text="-" position="2268,453" size="53,80" halign="center" valign="center" font="Gradient_Font; 107" zPosition="10" transparent="1" />
+		<eLabel position="2080,576" size="427,8" zPosition="1" backgroundColor="gradient_foreground_title" />
+		<!-- 		<widget source="ServiceEvent" render="Label" position="2065,1335" size="120,29" font="Gradient_Font; 28" foregroundColor="gradient_background" backgroundColor="gradient_foreground" halign="center" valign="center" transparent="1" zPosition="10">
+			<convert type="GradientServiceOrbitalPosition" />
+		</widget> -->
+		<widget source="ServiceEvent" render="Picon" position="2080,187" size="427,240" zPosition="6" alphatest="blend" transparent="1">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget source="ServiceEvent" position="40,1333" size="2480,80" font="Gradient_Font; 72" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="green" transparent="1">
+			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+		</widget>
+		<eLabel position="1560,2569" size="940,3" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<eLabel position="1560,2067" size="940,3" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+		<panel name="Template_FullScreen_Base0" />
+
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_I_EPG0" />
+		</panel>
+		<panel name="progress_Default_List_ChannelSelection0" />
+		<panel name="progress_Default_ChannelSelection0" />
+<eLabel text="&gt;" position="2133,773" size="80,80" halign="center" valign="center" font="Gradient_Font; 107" zPosition="10" transparent="1" />
+<eLabel text="&gt;" position="2133,640" size="80,80" halign="center" valign="center" font="Gradient_Font; 107" zPosition="10" transparent="1" />
+<eLabel text="INFO" position="2240,640" size="187,80" halign="center" valign="center" font="Gradient_Font; 67" zPosition="10" transparent="0" borderWidth="3" borderColor="ButtonText" />
+    <widget source="global.CurrentTime" render="Label" position="2333,53" size="200,80" font="Italic; 69" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="2053,53" size="307,80" font="Italic; 67" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="left" valign="center" transparent="1" zPosition="1">
+      <convert type="ClockToText">Format:%a, %d.%m</convert>
+    </widget>
+    <widget source="Title" render="Label" position="68,1493" size="1480,80" font="Italic; 56" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" zPosition="1" />
+    <panel name="Gradient_Fullscreen_BLUE0" />
+<eLabel name="fullscreen_bg" position="13,13" size="2533,1413" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+   
+    <eLabel name="title_line" position="21,1000" size="2520,5" backgroundColor="gradient_BGLM" zPosition="10" />
+    <eLabel name="Line_Fullscreen" position="32,2637" size="2496,3" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
+
+	<eLabel name="" position="2240,773" size="187, 80" backgroundColor="blue" borderWidth="3" borderColor="ButtonText" />
+</screen>
+
+</skin>

@@ -1,0 +1,52 @@
+<skin>
+	<!-- EventView Font 60 -->
+<screen name="EventView" position="center,center" size="1933,1200" backgroundColor="transparent" flags="wfNoBorder" title="Eventview">
+    <widget source="global.CurrentTime" render="Label" position="1667,0" size="240,93" font="Italic; 80" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="right" valign="center" transparent="1" zPosition="1">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1067,0" size="587,93" font="Italic; 80" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1" halign="left" valign="center" transparent="1" zPosition="1">
+        <convert type="ClockToText">Format %a %d %b %Y</convert>
+    </widget>
+  <widget source="Service" render="Picon" position="1400,133" size="504,284" zPosition="0" transparent="1" alphatest="blend">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <widget name="channel" position="53,-17" size="1013,93" font="Italic; 80" halign="left" valign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+  <eLabel position="1453,604" size="400,8" backgroundColor="gradient_foreground_title" zPosition="1" />
+  
+  <eLabel text="&lt;" position="1400,573" size="40,67" halign="center" valign="center" font="Gradient_Font; 67" transparent="1" />
+  <eLabel text="&gt;" position="1864,573" size="40,67" halign="center" valign="center" font="Gradient_Font; 67" transparent="1" />
+  
+  
+  <widget source="session.RecordState" render="Pixmap" pixmap="infobar/icon_record.png" position="1801,1083" size="96,60" zPosition="1" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink,2000</convert>
+  </widget>
+    <eLabel name="setup_bg" position="0,99" size="1933,1112" backgroundColor="gradient_BGM,gradient_TBGM,gradient_BGM,vertical" zPosition="-8" />
+    <!-- <eLabel name="setup_bg" position="0,85" size="1933,1112" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" /> -->
+    <eLabel name="title_bg" position="0,0" size="1933,107" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-9" cornerRadius="16" />
+    <eLabel name="title_line" position="0,93" size="1933,5" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="10" />
+    
+  <panel name="Template_Setup_Base0" />
+  
+
+
+    <widget source="Service" render="Progress" position="1453,588" size="400,40" foregroundColor="gradient_Line" transparent="1" zPosition="2">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <eLabel text="-" position="1620,453" size="67,93" halign="center" valign="center" font="Gradient_Font; 107" zPosition="10" transparent="1" />
+
+<widget source="Event" render="Label" position="1400,467" zPosition="2" size="220,93" font="Gradient_Font; 80" halign="left" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1">
+  <convert type="EventTime">StartTime</convert>
+  <convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<widget source="Event" render="Label" position="1684,467" zPosition="2" size="220,93" font="Gradient_Font; 80" halign="right" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1">
+  <convert type="EventTime">EndTime</convert>
+  <convert type="ClockToText">Format:%H:%M</convert>
+</widget>
+<widget source="Event" render="Label" position="1400,653" size="504,93" font="Gradient_Font;80" transparent="1" halign="center" valign="center" zPosition="99" backgroundColor="gradient_background" foregroundColor="gradient_foreground">
+  <convert type="EventTime">Remaining</convert>
+  <convert type="RemainingToText">InMinutes</convert>
+</widget>
+<widget name="epg_description" position="40,120" size="1333,1067" font="Gradient_Font; 80" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" zPosition="10" borderWidth="1" borderColor="black" />
+
+</screen>
+</skin>

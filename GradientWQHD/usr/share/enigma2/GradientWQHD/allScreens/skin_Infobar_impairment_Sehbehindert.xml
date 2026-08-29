@@ -1,0 +1,64 @@
+<skin>
+	<!-- InfoBar Font 60 -->
+<screen name="InfoBar" flags="wfNoBorder" position="60,center" size="2440,1440" title="InfoBar" backgroundColor="transparent">
+    <panel name="template_OA_weather_default" />
+      <eLabel name="infobar_bg" position="0,1107" size="2440,300" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
+    <eLabel name="title_bg" position="0,933" size="2440,173" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />
+    <eLabel name="title_line" position="0,1107" size="2440,7" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="6" />
+    
+    
+   <widget source="session.CurrentService" render="Label" position="400,963" size="1333,120" font="Italic; 96" halign="left" valign="center" transparent="1" foregroundColor="gradient_foreground_selection" backgroundColor="background" textBorderColor="black" textBorderWidth="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget source="session.RecordState" render="Pixmap" pixmap="infobar/icon_record.png" position="1633,993" size="96,60" zPosition="6" alphatest="blend">
+      <convert type="ConditionalShowHide">Blink,1000</convert>
+    </widget>
+   
+<widget source="global.CurrentTime" render="Label" position="2075,952" zPosition="1" size="367,141" font="Gradient_Font; 140" backgroundColor="gradient_background_selection" transparent="1" halign="center" valign="center" foregroundColor="white">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget backgroundColor="background" font="Gradient_Font; 63" valign="center" halign="right" position="1700,952" render="Label" size="373,75" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="white">
+      <convert type="ClockToText">Format:%A</convert>
+    </widget>
+    <widget backgroundColor="background" font="Gradient_Font; 63" valign="center" halign="right" position="1700,1019" render="Label" size="373,75" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="white">
+      <convert type="ClockToText">Format:%e. %B</convert>
+    </widget>
+    <widget source="session.Event_Now" render="Label" position="7,1133" size="373,93" font="Gradient_Font; 64" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="left" transparent="1">
+      <convert type="EventTime">Times</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="session.Event_Now" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="400,1133" size="1707,93" font="Gradient_Font; 83" noWrap="1" valign="center" halign="left" transparent="1" backgroundColor="gradient_background">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="session.Event_Now" render="Label" position="2093,1133" size="333,93" font="Gradient_Font; 77" valign="center" halign="right" transparent="1" backgroundColor="gradient_background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText" />
+    </widget>
+    <widget source="session.Event_Next" render="Label" position="7,1307" size="373,93" font="Gradient_Font; 64" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="left" transparent="1">
+      <convert type="EventTime">Times</convert>
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget source="session.Event_Next" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="400,1307" size="1707,93" font="Gradient_Font; 83" noWrap="1" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="left" transparent="1">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="session.Event_Next" render="Label" position="2093,1307" size="333,93" font="Gradient_Font; 77" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="right" transparent="1">
+      <convert type="EventTime">Duration</convert>
+      <convert type="ClockToText">InMinutes</convert>
+    </widget>
+
+    
+    
+    
+    <widget source="session.CurrentService" render="Picon" position="16,939" zPosition="2" size="307,164" transparent="1" alphatest="blend">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+  
+    <eLabel position="407,1264" size="1693,5" backgroundColor="gradient_foreground_title" zPosition="1" />
+    <widget source="session.Event_Now" render="Progress" position="407,1252" size="1693,29" foregroundColor="gradient_foregroud_progress" zPosition="2" transparent="1">
+    <convert type="EventTime">Progress</convert>
+  </widget> 
+
+
+
+  </screen>
+</skin>
