@@ -27,13 +27,13 @@
 </screen>
 	<screen name="Infobar_OscamInfo,_Reader,_Time,_Caid,_Hops">
 		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Gradient_Font; 27" valign="center" backgroundColor="gradient_background" halign="left" transparent="1">
-			<convert type="GradientCaidInfo">Server: %S * CAID: %C * HOPS: % * ECM: %T ms. </convert>
+			<convert type="GradientFHDCaidInfo">Server: %S * CAID: %C * HOPS: % * ECM: %T ms. </convert>
 		</widget>
 	</screen>
 	<!-- Infobar_OscamInfo_Time,_Caid,_Hops -->
 	<screen name="Infobar_OscamInfo_Time,_Caid,_Hops">
 		<widget source="session.CurrentService" position="354,1001" size="1035,45" render="Label" font="Gradient_Font; 27" valign="center" backgroundColor="gradient_background" halign="left" transparent="1">
-		<convert type="GradientCaidInfo">CAID: %C * HOPS: % * ECM: %T ms. </convert>
+		<convert type="GradientFHDCaidInfo">CAID: %C * HOPS: % * ECM: %T ms. </convert>
 	</widget>
 	</screen>
 	<!-- OscamInfo -->
@@ -148,7 +148,7 @@
 	<!-- ChannelSelectionDefault" label="Default" -->
 	<screen name="ChannelSelectionDefault" label="Default" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="ServiceEvent" position="1305,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<widget source="ServiceEvent" position="1305,85" size="585,42" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" font="Gradient_Font; 32" backgroundColor="gradient_background" foregroundColor="EventNameColor" zPosition="3" transparent="1" halign="left" valign="center">
 			<convert type="EventInfo">NowName</convert>
@@ -165,7 +165,7 @@
 		<eLabel position="1305,400" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1305,720" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1305,930" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="10" minEvent="2" position="1305,732" size="585,192" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="10" minEvent="2" position="1305,732" size="585,192" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -179,14 +179,14 @@
 	<screen name="ChannelSelectionPIG" label="With Live TV" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="1290,90" size="585,330" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="1290,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<widget source="ServiceEvent" position="1290,430" size="585,260" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="4" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 		<eLabel position="1290,690" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1290,930" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="10" minEvent="2" position="1290,700" size="585,226" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="10" minEvent="2" position="1290,700" size="585,226" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -200,14 +200,14 @@
 	<screen name="ChannelSelection" label="Grid_Vertical" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="1290,90" size="585,330" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="1290,936" size="585,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<widget source="ServiceEvent" position="1290,430" size="585,323" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 30" zPosition="4" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="0" halign="left" valign="top">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
 		<eLabel position="1290,761" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1290,930" size="585,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="14" minEvent="8" position="1290,769" size="585,156" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="14" minEvent="8" position="1290,769" size="585,156" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -240,7 +240,7 @@
 		<eLabel position="830,635" size="745,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1351,1052" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="830,935" size="745,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="12" minEvent="1" position="830,640" size="745,294" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="12" minEvent="1" position="830,640" size="745,294" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -259,14 +259,14 @@
 			<convert type="ServiceName">Reference</convert>
 		</widget>
 		<widget source="ServiceEvent" position="830,938" size="745,40" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<panel name="ChannelSelection_4_Backdrop_X" />
 	</screen>
 	<!-- ChannelSelection_5_Poster -->
 <screen name="ChannelSelection_5_Poster" label="5_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent" zPosition="100">
   <widget source="ServiceEvent" position="1140,999" size="515,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-    <convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+    <convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
   </widget>
   <widget source="ServiceEvent" position="1105,153" size="800,374" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 29" zPosition="6" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="center" borderWidth="1" borderColor="black">
     <convert type="EventName">FullDescription</convert>
@@ -306,12 +306,12 @@
 <!-- 	<screen name="ChannelSelection3_Fields_Poster" label="3_Fields_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="1340,90" size="550,310" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="800,935" size="530,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<eLabel position="1340,450" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1340,740" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="800,928" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="22" minEvent="1" position="800,505" size="530,418" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="22" minEvent="1" position="800,505" size="530,418" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -341,12 +341,12 @@
 	<screen name="ChannelSelection3_Fields_Poster" label="3_Fields_Poster" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
   <widget source="session.VideoPicture" render="Pig" position="1340,90" size="550,310" zPosition="3" backgroundColor="Pic" />
   <widget source="ServiceEvent" position="1340,935" size="550,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-    <convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+    <convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
   </widget>
   <eLabel position="799,530" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
   <eLabel position="800,780" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
   <eLabel position="1340,928" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="22" minEvent="1" position="1340,420" size="550,500" font="Gradient_Font; 29" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+  <widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="22" minEvent="1" position="1340,420" size="550,500" font="Gradient_Font; 29" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
   <panel name="Template_FullScreen_Base" />
   <panel position="459,150" size="330,57">
     <panel name="Template_Text_Buttons_M_I_EPG" />
@@ -376,12 +376,12 @@
 	<screen name="ChannelSelection3_Fields" label="3_Fields" base="ChannelSelection" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="800,90" size="550,310" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="1360,935" size="530,42" font="Gradient_Font;32" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
-			<convert type="GradientPrimeTime">PrimeTime,noDuration</convert>
+			<convert type="GradientFHDPrimeTime">PrimeTime,noDuration</convert>
 		</widget>
 		<eLabel position="800,450" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="800,740" size="550,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
 		<eLabel position="1360,928" size="530,2" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" zPosition="10" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="32" minEvent="1" position="1360,90" size="530,834" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="32" minEvent="1" position="1360,90" size="530,834" font="Gradient_Font; 30" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" valign="top" zPosition="2" />
 		<panel name="Template_FullScreen_Base" />
 		<panel position="459,150" size="330,57">
 			<panel name="Template_Text_Buttons_M_I_EPG" />
@@ -407,42 +407,42 @@
 	</screen>
 	<!--  ChannelSelection PosterX -->
 	<screen name="ChannelSelection_Poster_X">
-		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="2" />
-		<widget source="ServiceEvent" render="GradientPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDPosterX" nexts="0" position="816,118" size="240,360" cornerRadius="6" zPosition="2" />
+		<widget source="ServiceEvent" render="GradientFHDPosterX" nexts="1" position="1086,118" size="240,360" cornerRadius="6" zPosition="2" />
 	</screen>
 	<!-- ChannelSelection_4_Backdrop_X -->
 	<screen name="ChannelSelection_4_Backdrop_X">
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="4" minEvent="4" position="1585,765" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="3" minEvent="3" position="1585,540" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="2" minEvent="2" position="1585,315" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
-		<widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="1" minEvent="1" position="1585,90" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="4" minEvent="4" position="1585,765" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="3" minEvent="3" position="1585,540" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="2" minEvent="2" position="1585,315" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
+		<widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="1" minEvent="1" position="1585,90" size="300,50" font="Gradient_Font; 22" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="bottom" zPosition="12" />
 		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,145" size="274,154" zPosition="5" cornerRadius="10" />
 		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,370" size="274,154" zPosition="5" cornerRadius="10" />
 		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,595" size="274,154" zPosition="5" cornerRadius="10" />
 		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="1599,820" size="274,154" zPosition="5" cornerRadius="10" />
 		<eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" cornerRadius="10" position="830,88" size="187,278" zPosition="5" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="1" position="1601,147" size="270,150" zPosition="6" cornerRadius="9" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="2" position="1601,372" size="270,150" zPosition="6" cornerRadius="9" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="3" position="1601,597" size="270,150" zPosition="6" cornerRadius="9" />
-		<widget source="ServiceEvent" render="GradientBackdropX" nexts="4" position="1601,822" size="270,150" zPosition="6" cornerRadius="9" />
-		<widget source="ServiceEvent" render="GradientPosterX" nexts="0" position="832,90" size="183,274" zPosition="6" cornerRadius="6" />
-		<widget source="ServiceEvent" render="GradientParental" position="953,302" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="ServiceEvent" render="GradientStarX" position="831,370" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="ServiceEvent" render="GradientFHDBackdropX" nexts="1" position="1601,147" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientFHDBackdropX" nexts="2" position="1601,372" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientFHDBackdropX" nexts="3" position="1601,597" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientFHDBackdropX" nexts="4" position="1601,822" size="270,150" zPosition="6" cornerRadius="9" />
+		<widget source="ServiceEvent" render="GradientFHDPosterX" nexts="0" position="832,90" size="183,274" zPosition="6" cornerRadius="6" />
+		<widget source="ServiceEvent" render="GradientFHDParental" position="953,302" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientFHDStarX" position="831,370" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
 	<!-- ChannelSelection_5_Poster_X -->
 <screen name="ChannelSelection_5_Poster_X">
-  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="4" minEvent="4" position="1638,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="3" minEvent="3" position="1372,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="2" minEvent="2" position="1106,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-  <widget source="ServiceEvent" render="GradientSingleEpgList" maxEvents="1" minEvent="1" position="840,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
-  <widget source="ServiceEvent" nexts="0" render="GradientPosterX" position="845,158" size="250,375" cornerRadius="10" zPosition="6" />
-  <widget source="ServiceEvent" nexts="1" render="GradientPosterX" position="845,595" size="250,375" cornerRadius="10" zPosition="5" />
-  <widget source="ServiceEvent" nexts="2" render="GradientPosterX" position="1111,595" size="250,375" cornerRadius="10" zPosition="5" />
-  <widget source="ServiceEvent" nexts="3" render="GradientPosterX" position="1377,595" size="250,375" cornerRadius="10" zPosition="5" />
-  <widget source="ServiceEvent" nexts="4" render="GradientPosterX" position="1643,595" size="250,375" cornerRadius="10" zPosition="5" />
- 	<widget source="ServiceEvent" render="GradientParental" position="850,465" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
-		<widget source="ServiceEvent" render="GradientStarX" position="590,320" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" /> 
-  <!-- 		<widget source="ServiceEvent" nexts="0" render="GradientBackdropX" position="840,80" size="1060,596" zPosition="3" />
+  <widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="4" minEvent="4" position="1638,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+  <widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="3" minEvent="3" position="1372,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+  <widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="2" minEvent="2" position="1106,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+  <widget source="ServiceEvent" render="GradientFHDSingleEpgList" maxEvents="1" minEvent="1" position="840,540" size="260,48" font="Gradient_Font; 21" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="center" valign="top" zPosition="12" />
+  <widget source="ServiceEvent" nexts="0" render="GradientFHDPosterX" position="845,158" size="250,375" cornerRadius="10" zPosition="6" />
+  <widget source="ServiceEvent" nexts="1" render="GradientFHDPosterX" position="845,595" size="250,375" cornerRadius="10" zPosition="5" />
+  <widget source="ServiceEvent" nexts="2" render="GradientFHDPosterX" position="1111,595" size="250,375" cornerRadius="10" zPosition="5" />
+  <widget source="ServiceEvent" nexts="3" render="GradientFHDPosterX" position="1377,595" size="250,375" cornerRadius="10" zPosition="5" />
+  <widget source="ServiceEvent" nexts="4" render="GradientFHDPosterX" position="1643,595" size="250,375" cornerRadius="10" zPosition="5" />
+	<widget source="ServiceEvent" render="GradientFHDParental" position="850,465" size="60,60" alphatest="blend" zPosition="10" transparent="1" />
+		<widget source="ServiceEvent" render="GradientFHDStarX" position="590,320" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+  <!-- 		<widget source="ServiceEvent" nexts="0" render="GradientFHDBackdropX" position="840,80" size="1060,596" zPosition="3" />
 		<ePixmap name="vod_backdrop" pixmap="screens/backdrop.png" position="840,79" size="1060,614" alphatest="blend" zPosition="5" /> -->
   <eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="843,156" size="254,379" zPosition="4" cornerRadius="10" />
   <eLabel backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" position="843,593" size="254,379" zPosition="4" cornerRadius="10" />
@@ -457,41 +457,41 @@
 	<!-- InfoBar_Poster_X -->
 	<screen name="InfoBar_Poster_X">
 		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Now" render="GradientFHDParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientFHDParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- Poster -->
-		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Now" render="GradientFHDPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientFHDPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
 		<!-- ImdbRating -->
-		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
-		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Now" render="GradientFHDStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientFHDStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
 	<!-- InfoBar_Backdrop_X -->
 	<screen name="InfoBar_Backdrop_X">
 		<!-- Backdrop -->
-		<widget source="session.Event_Now" render="GradientBackdropX" position="20,558" size="300,169" zPosition="11" cornerRadius="6" />
-		<widget source="session.Event_Next" render="GradientBackdropX" position="1510,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Now" render="GradientFHDBackdropX" position="20,558" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientFHDBackdropX" position="1510,558" size="300,169" zPosition="11" cornerRadius="6" />
 		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientParental" position="257,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Next" render="GradientParental" position="1747,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Now" render="GradientFHDParental" position="257,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientFHDParental" position="1747,664" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- ImdbRating -->
-		<widget source="session.Event_Now" render="GradientStarX" position="20,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
-		<widget source="session.Event_Next" render="GradientStarX" position="1510,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" />
+		<widget source="session.Event_Now" render="GradientFHDStarX" position="20,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientFHDStarX" position="1510,730" size="300,31" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" />
 	</screen>
 	<!-- InfoBar_Poster_Backdrop_X -->
 	<screen name="InfoBar_Poster_Backdrop_X">
 		<!-- Backdrop -->
-		<widget source="session.Event_Now" render="GradientBackdropX" position="220,520" size="300,169" zPosition="11" cornerRadius="6" />
-		<widget source="session.Event_Next" render="GradientBackdropX" position="1310,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Now" render="GradientFHDBackdropX" position="220,520" size="300,169" zPosition="11" cornerRadius="6" />
+		<widget source="session.Event_Next" render="GradientFHDBackdropX" position="1310,520" size="300,169" zPosition="11" cornerRadius="6" />
 		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Next" render="GradientParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Now" render="GradientFHDParental" position="144,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientFHDParental" position="1749,677" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- 	Poster -->
-		<widget source="session.Event_Now" render="GradientPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Next" render="GradientPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Now" render="GradientFHDPosterX" position="20,460" size="185,278" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientFHDPosterX" position="1625,460" size="185,278" cornerRadius="6" zPosition="2" />
 		<!-- ImdbRating -->
-		<widget source="session.Event_Now" render="GradientStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
-		<widget source="session.Event_Next" render="GradientStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Now" render="GradientFHDStarX" position="20,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientFHDStarX" position="1625,742" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
 	<!-- SecondInfobar_Poster_X -->
 	<screen name="template_Poster_SecondInfobar">
@@ -519,14 +519,14 @@
 	<!-- SecondInfobar_Poster_X -->
 	<screen name="SecondInfobar_Poster_X">
 		<!-- Parental -->
-		<widget source="session.Event_Now" render="GradientParental" position="878,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="session.Event_Next" render="GradientParental" position="1808,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Now" render="GradientFHDParental" position="878,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="session.Event_Next" render="GradientFHDParental" position="1808,658" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- Poster -->
-		<widget source="session.Event_Now" render="GradientPosterX" position="600,220" size="340,500" cornerRadius="6" zPosition="2" />
-		<widget source="session.Event_Next" render="GradientPosterX" position="1530,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Now" render="GradientFHDPosterX" position="600,220" size="340,500" cornerRadius="6" zPosition="2" />
+		<widget source="session.Event_Next" render="GradientFHDPosterX" position="1530,220" size="340,500" cornerRadius="6" zPosition="2" />
 		<!-- ImdbRating -->
-		<widget source="session.Event_Now" render="GradientStarX" position="610,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
-		<widget source="session.Event_Next" render="GradientStarX" position="1542,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Now" render="GradientFHDStarX" position="610,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.Event_Next" render="GradientFHDStarX" position="1542,725" size="315,32" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="SecondInfobar_Poster_Event" />
 	</screen>
 	<!-- template_Poster_Eventwiew -->
@@ -544,10 +544,10 @@
 	</screen>
 	<!-- Eventwiew_Poster_x -->
 	<screen name="Eventwiew_Poster_x">
-		<widget source="Event" render="GradientBackdropX" position="50,517" size="530,298" zPosition="11" cornerRadius="6" />
-		<widget source="Event" render="GradientParental" position="835,732" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
-		<widget source="Event" render="GradientPosterX" position="635,517" cornerRadius="6" size="185,278" zPosition="2" />
-		<widget source="Event" render="GradientStarX" position="635,795" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Event" render="GradientFHDBackdropX" position="50,517" size="530,298" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientFHDParental" position="835,732" size="60,60" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientFHDPosterX" position="635,517" cornerRadius="6" size="185,278" zPosition="2" />
+		<widget source="Event" render="GradientFHDStarX" position="635,795" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="epg_description_eventview_Poster" />
 	</screen>
 	
@@ -571,9 +571,9 @@
 	</screen>
 	<!-- EPGvertical_Poster_x -->
 	<screen name="EPGvertical_Pig_Poster_x">
-		<widget source="Event" render="GradientParental" position="1329,871" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
-		<widget source="Event" render="GradientPosterX" position="1170,608" size="220,324" cornerRadius="6" zPosition="2" />
-		<widget source="Event" render="GradientStarX" position="1170,936" size="220,23" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Event" render="GradientFHDParental" position="1329,871" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="Event" render="GradientFHDPosterX" position="1170,608" size="220,324" cornerRadius="6" zPosition="2" />
+		<widget source="Event" render="GradientFHDStarX" position="1170,936" size="220,23" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="epg_Event_EPGvertical_Pig_Poster_x" />
 	</screen>	
 	<!-- template_Poster_EPGvertical -->
@@ -595,7 +595,7 @@
 	</screen>
 	<!-- EPGvertical_Poster_x -->
 	<screen name="EPGvertical_Poster_x">
-		<widget source="Event" render="GradientBackdropX" position="33,814" size="284,160" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientFHDBackdropX" position="33,814" size="284,160" zPosition="11" cornerRadius="6" />
 		<panel name="epg_Event_EPGvertical_Poster_x" />
 	</screen>		
 	<!-- template_GraphicalEPG_PIG_Poster -->
@@ -617,9 +617,9 @@
 	</screen>
 	<!-- GraphicalEPGPIG_Poster_x -->
 	<screen name="GraphicalEPGPIG_Poster_x">
-		<widget source="Event" render="GradientParental" position="175,371" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
-		<widget source="Event" render="GradientPosterX" position="56,176" cornerRadius="6" size="163,240" zPosition="2" />
-		<widget source="Event" render="GradientStarX" position="45,420" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Event" render="GradientFHDParental" position="175,371" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientFHDPosterX" position="56,176" cornerRadius="6" size="163,240" zPosition="2" />
+		<widget source="Event" render="GradientFHDStarX" position="45,420" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="epg_Event_GraphicalEPGPIG_Poster_x" />
 	</screen>
 	<!-- template_GraphicalEPG_Poster -->
@@ -641,8 +641,8 @@
 	</screen>
 	<!-- GraphicalEPG_Poster_x -->
 	<screen name="GraphicalEPG_Poster_x">
-		<widget source="Event" render="GradientBackdropX" position="42,153" size="348,196" zPosition="11" cornerRadius="6" />
-		<widget source="Event" render="GradientPosterX" position="410,152" cornerRadius="6" size="134,198" zPosition="2" />
+		<widget source="Event" render="GradientFHDBackdropX" position="42,153" size="348,196" zPosition="11" cornerRadius="6" />
+		<widget source="Event" render="GradientFHDPosterX" position="410,152" cornerRadius="6" size="134,198" zPosition="2" />
 		<panel name="epg_Event_GraphicalEPG_Poster_x" />
 	</screen>
 	<!-- template_EPGSelection_Poster -->
@@ -664,9 +664,9 @@
 	</screen>
 	<!-- EPGSelection_Poster_x -->
 	<screen name="EPGSelection_Poster_x">
-		<widget source="Event" render="GradientParental" position="1266,889" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
-		<widget source="Event" render="GradientPosterX" position="1130,670" cornerRadius="6" size="177,260" zPosition="2" />
-		<widget source="Event" render="GradientStarX" position="1126,934" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Event" render="GradientFHDParental" position="1266,889" size="40,40" alphatest="blend" zPosition="105" transparent="1" />
+		<widget source="Event" render="GradientFHDPosterX" position="1130,670" cornerRadius="6" size="177,260" zPosition="2" />
+		<widget source="Event" render="GradientFHDStarX" position="1126,934" size="185,19" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="epg_Event_EPGSelection_Poster_x" />
 	</screen>
 	<!-- template_Poster_Player -->
@@ -675,11 +675,11 @@
 	</screen>
 	<!-- Player_Poster X -->
 	<screen name="template_Player_Poster">
-		<widget source="session.CurrentService" render="GradientPosterXEMC" position="1626,440" size="204,300" zPosition="4" alphatest="blend" />
-		<widget source="session.CurrentService" render="GradientBackdropXEMC" position="0,440" size="569,320" zPosition="1" alphatest="blend" />
-		<widget source="session.CurrentService" render="GradientBannerXEMC" position="596,575" size="1000,185" zPosition="4" alphatest="blend"/>
-		<widget source="session.Event_Now" render="GradientParental" position="1767,677" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
-		<widget source="session.Event_Now" render="GradientStarX" position="1626,740" size="204,21" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="session.CurrentService" render="GradientFHDPosterXEMC" position="1626,440" size="204,300" zPosition="4" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientFHDBackdropXEMC" position="0,440" size="569,320" zPosition="1" alphatest="blend" />
+		<widget source="session.CurrentService" render="GradientFHDBannerXEMC" position="596,575" size="1000,185" zPosition="4" alphatest="blend"/>
+		<widget source="session.Event_Now" render="GradientFHDParental" position="1767,677" size="60,60" alphatest="blend" zPosition="5" transparent="1" />
+		<widget source="session.Event_Now" render="GradientFHDStarX" position="1626,740" size="204,21" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>
 	<!-- template_PosterEMCSelection -->
 	<screen name="template_PosterEMCSelection">
@@ -780,16 +780,16 @@
 	<!-- EMCSelection_Poster X -->
 	<screen name="template_EMCSelection_Poster">
 		<!--  Poster -->
-		<widget source="Service" render="GradientPosterXEMC" position="498,620" cornerRadius="6" size="218,320" zPosition="3"  />
+		<widget source="Service" render="GradientFHDPosterXEMC" position="498,620" cornerRadius="6" size="218,320" zPosition="3"  />
 		<!--  Backdrop -->
-		<widget source="Service" render="GradientBackdropXEMC" position="30,90" cornerRadius="6" size="685,388" zPosition="3"  />
+		<widget source="Service" render="GradientFHDBackdropXEMC" position="30,90" cornerRadius="6" size="685,388" zPosition="3"  />
 		<!-- Banner -->
-		<!-- <widget source="session.CurrentService" render="GradientBannerXEMC" position="center,620" size="800,140" zPosition="14" alphatest="blend" /> -->
-		<widget source="Service" render="GradientBannerXEMC" position="30,886" size="455,84" zPosition="14" alphatest="blend" />
+		<!-- <widget source="session.CurrentService" render="GradientFHDBannerXEMC" position="center,620" size="800,140" zPosition="14" alphatest="blend" /> -->
+		<widget source="Service" render="GradientFHDBannerXEMC" position="30,886" size="455,84" zPosition="14" alphatest="blend" />
 		<!-- Parental -->
-		<widget source="Service" render="GradientParental" position="652,875" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="Service" render="GradientFHDParental" position="652,875" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- ImdbRating -->
-		<widget source="Service" render="GradientStarX" position="497,947" size="220,22" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Service" render="GradientFHDStarX" position="497,947" size="220,22" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 		<panel name="Event_EMCSelection_Poster" />
 	</screen>
 	<!-- template_PosterEMCSelection -->
@@ -799,11 +799,11 @@
 	<!-- Movie_Selection_Poster X -->
 	<screen name="template_Movie_Selection_Poster">
 		<!--  Poster -->
-		<widget source="Service" render="GradientPosterXEMC" position="1699,517" cornerRadius="6" size="180,264" zPosition="3" />
+		<widget source="Service" render="GradientFHDPosterXEMC" position="1699,517" cornerRadius="6" size="180,264" zPosition="3" />
 		<!-- Parental -->
-		<widget source="Service" render="GradientParental" position="1607,609" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
+		<widget source="Service" render="GradientFHDParental" position="1607,609" size="60,60" alphatest="blend" zPosition="110" transparent="1" />
 		<!-- ImdbRating -->
-		<widget source="Service" render="GradientStarX" position="1699,789" size="180,18" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
+		<widget source="Service" render="GradientFHDStarX" position="1699,789" size="180,18" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled.png" backgroundPixmap="icons/starbar_empty.png" />
 	</screen>	
 	<!-- Infobar VPN -->
 	<screen name="template_Infobar_VPN">
@@ -811,36 +811,36 @@
 	</screen>
 	<screen name="template_Infobar_VPN_left">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="188,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="188,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="225,282" size="60,32" font="Regular;26" transparent="1" halign="center" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="60,320" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="60,240" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="20,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="20,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 		<widget source="session.CurrentService" render="Label" position="60,280" size="120,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">VpnProviderPretty</convert>
+			<convert type="GradientFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Label -->
 		<eLabel name="Background" position="10,230" size="290,130" backgroundColor="gradient_background" zPosition="-5" cornerRadius="10" />
@@ -848,69 +848,69 @@
 	<!-- skin_Infobar_None_VPN_Left -->
 	<screen name="template_Infobar_None_VPN_Left">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="20,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="19,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="19,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="60,320" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="60,240" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="20,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Label -->
 		<eLabel name="Background" position="10,230" size="290,130" backgroundColor="gradient_background" zPosition="-5" cornerRadius="10" />
 		<!-- Ländername ausgeschrieben -->
 		<widget source="session.CurrentService" render="Label" position="60,280" size="190,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">CountryName</convert>
+			<convert type="GradientFHDVPNInfo">CountryName</convert>
 		</widget>
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="255,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="255,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnActive</convert>
 		</widget>
 	</screen>
 	<!-- skin_Infobar_None_VPN_right -->
 	<screen name="template_Infobar_VPN_right">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1610,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1610,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1778,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1778,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="1820,282" size="60,32" font="Regular;26" transparent="1" halign="center" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1650,320" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1650,240" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1610,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1610,280" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 		<widget source="session.CurrentService" render="Label" position="1650,280" size="120,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">VpnProviderPretty</convert>
+			<convert type="GradientFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1610,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1610,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Label -->
 		<eLabel name="Background" position="1600,230" size="290,130" backgroundColor="gradient_background" zPosition="-5" cornerRadius="10" />
@@ -918,34 +918,34 @@
 	<!-- 	Infobar_None_VPN_right -->
 	<screen name="template_Infobar_None_VPN_right">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1610,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1610,240" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1650,320" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1650,240" size="230,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1610,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1610,320" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Label -->
 		<eLabel name="Background" position="1600,230" size="290,130" backgroundColor="gradient_background" zPosition="-5" cornerRadius="10" />
 		<!-- Ländername ausgeschrieben -->
 		<widget source="session.CurrentService" render="Label" position="1650,280" size="190,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">CountryName</convert>
+			<convert type="GradientFHDVPNInfo">CountryName</convert>
 		</widget>
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1845,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1845,280" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnActive</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1609,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1609,279" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	<!-- TEMPLATES Infobar VPN  Center-->
@@ -953,36 +953,36 @@
   <eLabel name="title_bg" position="532,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
   <eLabel name="title_line" position="536,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
   <!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-  <widget source="session.CurrentService" render="GradientMapPixmap" position="1057,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-    <convert type="GradientVPNInfo">ConnType</convert>
+  <widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1057,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientFHDVPNInfo">ConnType</convert>
   </widget>
   <!-- Länderflagge -->
-  <widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="706,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-    <convert type="GradientVPNInfo">CountryCode</convert>
+  <widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="706,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+    <convert type="GradientFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Ländertext (z. B. "DE – Deutschland") -->
   <widget source="session.CurrentService" render="Label" position="746,736" size="60,30" font="Regular;24" transparent="1" halign="center" valign="center">
-    <convert type="GradientVPNInfo">CountryCode</convert>
+    <convert type="GradientFHDVPNInfo">CountryCode</convert>
   </widget>
   <!-- Öffentliche IP -->
   <widget source="session.CurrentService" render="Label" position="853,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="GradientVPNInfo">IP</convert>
+    <convert type="GradientFHDVPNInfo">IP</convert>
   </widget>
   <!-- Empfänger-IP -->
   <widget source="session.CurrentService" render="Label" position="1095,736" size="200,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="GradientVPNInfo">ReceiverIP</convert>
+    <convert type="GradientFHDVPNInfo">ReceiverIP</convert>
   </widget>
   <!-- Provider-Icon (optional): -->
-  <widget source="session.CurrentService" render="GradientMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-    <convert type="GradientVPNInfo">VpnProvider</convert>
+  <widget source="session.CurrentService" render="GradientFHDMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+    <convert type="GradientFHDVPNInfo">VpnProvider</convert>
   </widget>
   <!-- Optional: Provider-Name daneben -->
   <widget source="session.CurrentService" render="Label" position="580,736" size="120,30" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-    <convert type="GradientVPNInfo">VpnProviderPretty</convert>
+    <convert type="GradientFHDVPNInfo">VpnProviderPretty</convert>
   </widget>
   <!-- NET-Status-Symbol (an/aus) -->
-  <widget source="session.CurrentService" render="GradientMapPixmap" position="815,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-    <convert type="GradientVPNInfo">NetActive</convert>
+  <widget source="session.CurrentService" render="GradientFHDMapPixmap" position="815,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+    <convert type="GradientFHDVPNInfo">NetActive</convert>
   </widget>
 </screen>
 	<!-- 	Infobar_None_VPN_center -->
@@ -990,40 +990,40 @@
 		<eLabel name="title_bg" position="532,730" size="766,40" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-1" cornerRadius="6" />
 		<eLabel name="title_line" position="536,769" size="758,2" backgroundColor="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="1" />
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="783,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="783,734" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="578,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="821,734" size="200,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="540,734" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Ländername ausgeschrieben -->
 		<widget source="session.CurrentService" render="Label" position="1068,734" size="190,32" font="Regular;24" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">CountryName</convert>
+			<convert type="GradientFHDVPNInfo">CountryName</convert>
 		</widget>
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1260,734" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1260,734" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnActive</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1028,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1028,733" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	<!-- NET-Status-Symbol (an/aus) -->
-	<!-- <widget source="session.CurrentService" render="GradientMapPixmap"
+	<!-- <widget source="session.CurrentService" render="GradientFHDMapPixmap"
     position="1260,440" size="68,32" zPosition="5" alphatest="blend" scaled="1"
     pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png"
     pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-    <convert type="GradientVPNInfo">NetActive</convert>
+    <convert type="GradientFHDVPNInfo">NetActive</convert>
 	</widget> -->
 	<!-- SecondInfoBar VPN -->
 	<screen name="template_VPN_SecondInfoBar">
@@ -1032,47 +1032,47 @@
 	<!-- TEMPLATES SecondInfoBar VPN -->
 	<screen name="template_SecondInfoBar_VPN">
 		<!--  VPN-Status-Symbol (EIN/AUS) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1480,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1480,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1520,1012" size="240,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1740,1008" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1740,1008" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1840,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1840,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE") -->
 		<widget source="session.CurrentService" render="Label" position="1770,1010" size="60,32" font="Regular;26" transparent="1" halign="center" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	<!-- SecondInfoBar_None_VPN -->
 	<screen name="template_SecondInfoBar_None_VPN">
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1480,1010" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1480,1010" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnActive</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1520,1012" size="240,32" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1740,1008" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1740,1008" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1840,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1840,1010" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE") -->
 		<widget source="session.CurrentService" render="Label" position="1770,1010" size="60,32" font="Regular;26" transparent="1" halign="center" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	<!-- Eventview VPN -->
@@ -1082,75 +1082,75 @@
 	<!-- template_Eventview_VPN -->
 	<screen name="template_Eventview_VPN">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="970,525" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="970,525" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Länderflagge -->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1250,569" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1250,569" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Ländertext (z. B. "DE – Deutschland") -->
 		<widget source="session.CurrentService" render="Label" position="1290,572" size="60,32" font="Regular;27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="center">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1010,570" size="230,32" font="Regular;27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1010,525" size="230,32" font="Regular;27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- Provider-Icon (optional): -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1250,525" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnProvider</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1250,525" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.mullvad="/usr/share/enigma2/GradientFHD/vpn/prov_mullvad.png" pixmap.nordvpn="/usr/share/enigma2/GradientFHD/vpn/prov_nord.png" pixmap.protonvpn="/usr/share/enigma2/GradientFHD/vpn/prov_proton.png" pixmap.expressvpn="/usr/share/enigma2/GradientFHD/vpn/prov_express.png" pixmap.surfshark="/usr/share/enigma2/GradientFHD/vpn/prov_surfshark.png" pixmap.ipvanish="/usr/share/enigma2/GradientFHD/vpn/prov_ipvanish.png" pixmap.cyberghost="/usr/share/enigma2/GradientFHD/vpn/prov_cyberghost.png" pixmap.ovpn="/usr/share/enigma2/GradientFHD/vpn/prov_ovpn.png" pixmap.unknown="/usr/share/enigma2/GradientFHD/vpn/prov_blank.png" pixmap.none="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnProvider</convert>
 		</widget>
 		<!-- Optional: Provider-Name daneben -->
 		<widget source="session.CurrentService" render="Label" position="1290,525" size="120,32" font="Regular;27" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">VpnProviderPretty</convert>
+			<convert type="GradientFHDVPNInfo">VpnProviderPretty</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="970,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="970,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1360,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1360,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 	</screen>
 	<!-- 	Eventview_None_VPN -->
 	<screen name="template_Eventview_None_VPN">
 		<!-- Verbindungs-Icon (LAN/WLAN/OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="970,525" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="970,525" size="32,32" zPosition="5" alphatest="blend" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on.png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Öffentliche IP -->
 		<widget source="session.CurrentService" render="Label" position="1010,570" size="230,32" font="Regular; 26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">IP</convert>
+			<convert type="GradientFHDVPNInfo">IP</convert>
 		</widget>
 		<!-- Empfänger-IP -->
 		<widget source="session.CurrentService" render="Label" position="1010,525" size="230,32" font="Regular; 26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black">
-			<convert type="GradientVPNInfo">ReceiverIP</convert>
+			<convert type="GradientFHDVPNInfo">ReceiverIP</convert>
 		</widget>
 		<!-- NET-Status-Symbol (an/aus) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="970,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">NetActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="970,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.net_on="/usr/share/enigma2/GradientFHD/vpn/net_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">NetActive</convert>
 		</widget>
 		<!-- Verbindungs-Icon (LAN/WLAN/NET-OFF) -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1360,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
-			<convert type="GradientVPNInfo">ConnType</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1360,570" size="32,32" zPosition="5" alphatest="blend" scaled="1" pixmap.lan="/usr/share/enigma2/GradientFHD/vpn/lan_on(0).png" pixmap.wlan="/usr/share/enigma2/GradientFHD/vpn/wlan_on.png" pixmap.net_off="/usr/share/enigma2/GradientFHD/vpn/net_off.png">
+			<convert type="GradientFHDVPNInfo">ConnType</convert>
 		</widget>
 		<!-- Ländername ausgeschrieben -->
 		<widget source="session.CurrentService" render="Label" position="1280,525" size="190,30" font="Regular;26" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" borderWidth="1" borderColor="black" halign="left" valign="center">
-			<convert type="GradientVPNInfo">CountryName</convert>
+			<convert type="GradientFHDVPNInfo">CountryName</convert>
 		</widget>
 		<!-- VPN ON/OFF (MapPixmap -->
-		<widget source="session.CurrentService" render="GradientMapPixmap" position="1240,569" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
-			<convert type="GradientVPNInfo">VpnActive</convert>
+		<widget source="session.CurrentService" render="GradientFHDMapPixmap" position="1240,569" size="32,32" alphatest="blend" pixmap.True="/usr/share/enigma2/GradientFHD/vpn/vpn_status_on.png" pixmap.False="/usr/share/enigma2/GradientFHD/vpn/vpn_status_off.png">
+			<convert type="GradientFHDVPNInfo">VpnActive</convert>
 		</widget>
 		<!-- Länderflagge-->
-		<widget source="session.CurrentService" render="GradientCountryFlagPixmap" position="1240,524" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
-			<convert type="GradientVPNInfo">CountryCode</convert>
+		<widget source="session.CurrentService" render="GradientFHDCountryFlagPixmap" position="1240,524" size="34,34" zPosition="5" alphatest="blend" scaled="1" basePath="/usr/lib/enigma2/python/Plugins/Extensions/GradientFHD/contry_flags/" missing="missing.png" preferName="0" fuzzy="0">
+			<convert type="GradientFHDVPNInfo">CountryCode</convert>
 		</widget>
 	</screen>
 	<!-- Gradient_Fullscreen_BLUE -->

@@ -477,7 +477,7 @@ class GradientWQHD_APIKeysSetup(Screen, ConfigListScreen):
         else:
             # If legacy empty, attempt to test renderer built-in default (optional)
             try:
-                from Components.Renderer import GradientPosterXDownloadThread as t
+                from Components.Renderer import GradientWQHDPosterXDownloadThread as t
                 k = getattr(t, 'TVDB_LEGACY_DEFAULT_KEY', None)
                 if k:
                     ok, msg = _tvdb_legacy_xml_test(str(k))
