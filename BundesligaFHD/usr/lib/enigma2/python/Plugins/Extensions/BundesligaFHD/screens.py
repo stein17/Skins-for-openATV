@@ -20,7 +20,9 @@ from . import _
 from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION
 from .manager import SkinManager
 from .teamassets import format_bytes
+from .weathericons import DEFAULT_ICONSET_ID, WeatherIconsetManager
 from .settings import (
+    cancel_weather_settings,
     cancel_colors,
     color_config,
     get_overrides,
@@ -29,7 +31,11 @@ from .settings import (
     reset_colors,
     save_colors,
     save_team,
+    save_weather_settings,
     set_saved_skinpart,
+    weather_animation_config,
+    weather_animation_interval_config,
+    weather_iconset_config,
 )
 
 MAIN_SKIN_GRADIENT = """
@@ -177,6 +183,49 @@ class BundesligaFHDTeamDownload(Screen):
     def _worker(self):
         try:
             self.assets.install(self.entry, progress=self._progress_from_thread)
+            result = {"ok": True, "error": ""}
+        except Exception as error:
+            result = {"ok": False, "error": str(error)}
+        self._reactor.callFromThread(self.close, result)
+
+
+class BundesligaFHDWeatherIconsetDownload(Screen):
+    skin = TEAM_DOWNLOAD_SKIN
+
+    def __init__(self, session, manager, entry):
+        self.session = session
+        self.manager = manager
+        self.entry = entry
+        self._started = False
+        Screen.__init__(self, session)
+        self["headline"] = Label(_("Wetter-Iconset installieren"))
+        self["status"] = Label(_("Download wird vorbereitet …"))
+        self["actions"] = ActionMap(["SetupActions"], {"cancel": self._ignore_cancel}, -2)
+        self.onLayoutFinish.append(self._start)
+
+    def _ignore_cancel(self):
+        return
+
+    def _start(self):
+        if self._started:
+            return
+        self._started = True
+        try:
+            from twisted.internet import reactor
+            self._reactor = reactor
+        except Exception as error:
+            self.close({"ok": False, "error": _("Downloaddienst nicht verfügbar: %s") % error})
+            return
+        worker = Thread(target=self._worker, name="BundesligaFHD-WeatherIconsetDownload")
+        worker.daemon = True
+        worker.start()
+
+    def _progress_from_thread(self, status):
+        self._reactor.callFromThread(self["status"].setText, _(status))
+
+    def _worker(self):
+        try:
+            self.manager.install(self.entry["id"], progress=self._progress_from_thread)
             result = {"ok": True, "error": ""}
         except Exception as error:
             result = {"ok": False, "error": str(error)}
@@ -344,6 +393,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
     def __init__(self, session):
         self.session = session
         self.manager = SkinManager()
+        self.weather_icons = WeatherIconsetManager()
         self._layout_ready = False
         self.skinparts_changed = False
         self.pending_replace = None
@@ -410,6 +460,10 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("──────── Infobar ────────"), NoSave(ConfigNothing())))
         for key, label, _xml_name in COLOR_ITEMS[5:8]:
             self.list.append(getConfigListEntry(_(label), color_config(key)))
+        self.list.append(getConfigListEntry(_("──────── Wetteranimation ────────"), NoSave(ConfigNothing())))
+        self.list.append(getConfigListEntry(_("Wetteranimation:"), weather_animation_config()))
+        self.list.append(getConfigListEntry(_("Bildwechsel (kleiner = schneller):"), weather_animation_interval_config()))
+        self.list.append(getConfigListEntry(_("Animiertes Wetter-Iconset:"), weather_iconset_config()))
         self.list.append(getConfigListEntry(_("──────── Menü / Setup ────────"), NoSave(ConfigNothing())))
         for key, label, _xml_name in COLOR_ITEMS[8:12]:
             self.list.append(getConfigListEntry(_(label), color_config(key)))
@@ -538,7 +592,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
         if selected_entry and not self.manager.assets.is_installed(selected_entry):
             self._ask_team_download(selected_entry)
             return
-        self._continue_save(team_changed)
+        self._check_iconset_download(team_changed)
 
     def _ask_team_download(self, selected_entry):
         current_entry = self.manager.assets.team_for_profile(self.manager.current_team())
@@ -610,6 +664,49 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
             return
         selected_team = self.team_config.value
         team_changed = bool(selected_team and selected_team != self.manager.current_team())
+        self._check_iconset_download(team_changed)
+
+    def _check_iconset_download(self, team_changed):
+        iconset_id = weather_iconset_config().value
+        if iconset_id == DEFAULT_ICONSET_ID or self.weather_icons.is_installed(iconset_id):
+            self._continue_save(team_changed)
+            return
+        entry = self.weather_icons.entry(iconset_id)
+        if not entry:
+            self.session.open(
+                MessageBox,
+                _("Das ausgewählte Wetter-Iconset ist unbekannt."),
+                MessageBox.TYPE_ERROR
+            )
+            return
+        self.session.openWithCallback(
+            lambda answer: self._iconset_download_answer(answer, team_changed, entry),
+            MessageBox,
+            _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?\n\nDas Standardset bleibt als Rückfall erhalten.")
+            % (entry["title"], self.weather_icons.package_size_text(entry)),
+            MessageBox.TYPE_YESNO,
+            default=True
+        )
+
+    def _iconset_download_answer(self, answer, team_changed, entry):
+        if not answer:
+            return
+        self.session.openWithCallback(
+            lambda result: self._iconset_download_finished(result, team_changed),
+            BundesligaFHDWeatherIconsetDownload,
+            self.weather_icons,
+            entry
+        )
+
+    def _iconset_download_finished(self, result, team_changed):
+        if not result or not result.get("ok"):
+            error = result.get("error") if result else _("Unbekannter Fehler")
+            self.session.open(
+                MessageBox,
+                _("Das Wetter-Iconset wurde nicht installiert. Die bisherige Auswahl bleibt erhalten.\n\n%s") % error,
+                MessageBox.TYPE_ERROR
+            )
+            return
         self._continue_save(team_changed)
 
     def _continue_save(self, team_changed):
@@ -642,6 +739,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
             else:
                 save_colors()
                 self.manager.write_color_overrides(get_overrides())
+            save_weather_settings()
         except Exception as error:
             self.pending_replace = None
             self.session.open(MessageBox, _("Speichern fehlgeschlagen:\n%s") % error, MessageBox.TYPE_ERROR)
@@ -680,6 +778,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
             )
         else:
             cancel_colors()
+            cancel_weather_settings()
             if self.skinparts_changed:
                 self._ask_restart()
             else:
@@ -688,6 +787,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
     def _cancel_confirmed(self, answer):
         if answer:
             cancel_colors()
+            cancel_weather_settings()
             if self.skinparts_changed:
                 self._ask_restart()
             else:

@@ -8,10 +8,12 @@ from Components.config import (
     ConfigSubsection,
     ConfigSelection,
     ConfigText,
+    ConfigYesNo,
     configfile,
 )
 
 from .constants import COLOR_ITEMS, COLOR_CHOICES
+from .weathericons import DEFAULT_ICONSET_ID, iconset_choices
 
 
 if not hasattr(config.plugins, "BundesligaFHD"):
@@ -27,6 +29,18 @@ if not hasattr(_cfg, "skinparts"):
     _cfg.skinparts = ConfigText(default="", fixed_size=False)
 if not hasattr(_cfg, "state_version"):
     _cfg.state_version = ConfigText(default="1", fixed_size=False)
+if not hasattr(_cfg, "weather_animation"):
+    _cfg.weather_animation = ConfigYesNo(default=True)
+if not hasattr(_cfg, "weather_animation_interval"):
+    _cfg.weather_animation_interval = ConfigSelection(
+        default="200",
+        choices=[(str(value), "%d ms" % value) for value in range(100, 501, 20)]
+    )
+if not hasattr(_cfg, "weather_iconset"):
+    _cfg.weather_iconset = ConfigSelection(
+        default=DEFAULT_ICONSET_ID,
+        choices=iconset_choices()
+    )
 
 for key, _label, _xml_name in COLOR_ITEMS:
     if not hasattr(_cfg, key):
@@ -39,6 +53,31 @@ for key, _label, _xml_name in COLOR_ITEMS:
 
 def color_config(key):
     return getattr(_cfg, key)
+
+
+def weather_animation_config():
+    return _cfg.weather_animation
+
+
+def weather_animation_interval_config():
+    return _cfg.weather_animation_interval
+
+
+def weather_iconset_config():
+    return _cfg.weather_iconset
+
+
+def save_weather_settings():
+    _cfg.weather_animation.save()
+    _cfg.weather_animation_interval.save()
+    _cfg.weather_iconset.save()
+    configfile.save()
+
+
+def cancel_weather_settings():
+    _cfg.weather_animation.cancel()
+    _cfg.weather_animation_interval.cancel()
+    _cfg.weather_iconset.cancel()
 
 
 def overrides_active():
