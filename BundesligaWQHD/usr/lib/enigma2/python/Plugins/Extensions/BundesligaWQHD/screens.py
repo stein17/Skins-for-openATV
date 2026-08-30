@@ -15,6 +15,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER
 
 from . import _
 from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION, SKIN_BASE
@@ -42,7 +43,7 @@ MAIN_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDConfig" position="0,0" size="2560,1440" title="BundesligaWQHD Config" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1613,1317" size="533,51" font="Regular; 35" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
-    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" scale="1" zPosition="2" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -60,7 +61,7 @@ MAIN_SKIN_GRADIENT = """
 SKINPART_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDSkinParts" position="0,0" size="2560,1440" title="BundesligaWQHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" scale="1" zPosition="2" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -120,7 +121,7 @@ MAIN_SKIN_CONTRAST = MAIN_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST
 SKINPART_SKIN_CONTRAST = SKINPART_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST_MAIN_WIDGET)
 
 
-def _set_preview(screen, preview):
+def _set_preview(screen, preview, scale=False):
     """Show a preview only after the Pixmap widget has been instantiated."""
     try:
         picture = screen["Picture"]
@@ -133,6 +134,13 @@ def _set_preview(screen, preview):
 
     if preview:
         try:
+            if scale:
+                instance.setPixmapScaleFlags(
+                    BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER
+                )
+                instance.setScale(1)
+            else:
+                instance.setScale(0)
             instance.setPixmapFromFile(preview)
             picture.show()
             return True
@@ -486,7 +494,8 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
     def selectionChanged(self):
         if not self._layout_ready:
             return
-        if self["config"].getCurrent() == self.weather_iconset_entry:
+        iconset_preview = self["config"].getCurrent() == self.weather_iconset_entry
+        if iconset_preview:
             preview = join(
                 SKIN_BASE,
                 "weather",
@@ -498,7 +507,7 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
         else:
             source = self.team_config.value
             preview = self.manager.preview_for_source(source, "team_colors")
-        _set_preview(self, preview)
+        _set_preview(self, preview, scale=iconset_preview)
 
     def keyOK(self):
         if self.skinparts_entry is not None and self["config"].getCurrent() == self.skinparts_entry:

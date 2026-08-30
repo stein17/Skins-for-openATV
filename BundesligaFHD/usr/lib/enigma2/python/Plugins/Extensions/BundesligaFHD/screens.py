@@ -15,6 +15,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER
 
 from . import _
 from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION, SKIN_BASE
@@ -42,7 +43,7 @@ MAIN_SKIN_GRADIENT = """
 <screen name="BundesligaFHDConfig" position="0,0" size="1920,1080" title="BundesligaFHD Config" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="305,125" size="1050,810" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1210,988" size="400,38" font="Regular; 26" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
-    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" scale="1" zPosition="2" />
+    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -60,7 +61,7 @@ MAIN_SKIN_GRADIENT = """
 SKINPART_SKIN_GRADIENT = """
 <screen name="BundesligaFHDSkinParts" position="0,0" size="1920,1080" title="BundesligaFHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="305,125" size="1050,810" itemHeight="54" font="Regular;30" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" scale="1" zPosition="2" />
+    <widget name="Picture" position="1386,543" size="460,260" alphatest="on" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -120,7 +121,7 @@ MAIN_SKIN_CONTRAST = MAIN_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST
 SKINPART_SKIN_CONTRAST = SKINPART_SKIN_GRADIENT.replace(_GRADIENT_MAIN_WIDGET, _CONTRAST_MAIN_WIDGET)
 
 
-def _set_preview(screen, preview):
+def _set_preview(screen, preview, scale=False):
     """Show a preview only after the Pixmap widget has been instantiated."""
     try:
         picture = screen["Picture"]
@@ -133,6 +134,13 @@ def _set_preview(screen, preview):
 
     if preview:
         try:
+            if scale:
+                instance.setPixmapScaleFlags(
+                    BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER
+                )
+                instance.setScale(1)
+            else:
+                instance.setScale(0)
             instance.setPixmapFromFile(preview)
             picture.show()
             return True
@@ -486,7 +494,8 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
     def selectionChanged(self):
         if not self._layout_ready:
             return
-        if self["config"].getCurrent() == self.weather_iconset_entry:
+        iconset_preview = self["config"].getCurrent() == self.weather_iconset_entry
+        if iconset_preview:
             preview = join(
                 SKIN_BASE,
                 "weather",
@@ -498,7 +507,7 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
         else:
             source = self.team_config.value
             preview = self.manager.preview_for_source(source, "team_colors")
-        _set_preview(self, preview)
+        _set_preview(self, preview, scale=iconset_preview)
 
     def keyOK(self):
         if self.skinparts_entry is not None and self["config"].getCurrent() == self.skinparts_entry:
