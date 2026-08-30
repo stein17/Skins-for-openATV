@@ -20,6 +20,9 @@ TEAM_LINK = "skin_10_team_profile.xml"
 TEAM_SELECTION_PIXMAP = "select_72.png"
 COLOR_OVERRIDE_FILE = "skin_20_user_colors.xml"
 LEGACY_TEAM_LINKS = ("skin_user_team_colors.xml",)
+SKINPART_FILENAME_ALIASES = {
+    ("weather", "weather_5_Day _Details_Compact.xml"): "weather_5_Day_Details_Compact.xml",
+}
 
 
 def decode_skin_name(value):
@@ -335,7 +338,9 @@ class SkinManager(object):
     def source_for_category_filename(self, category, filename):
         if not category or not filename:
             return ""
-        direct = os.path.join(self.all_screens_dir, category, os.path.basename(filename))
+        filename = os.path.basename(filename)
+        filename = SKINPART_FILENAME_ALIASES.get((category, filename), filename)
+        direct = os.path.join(self.all_screens_dir, category, filename)
         return direct if os.path.isfile(direct) else ""
 
     def category_link(self, category):

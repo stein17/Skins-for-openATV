@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 
 from importlib import invalidate_caches
-from os.path import basename, isdir
+from os.path import basename, isdir, isfile, join
 from threading import Thread
 
 from Components.ActionMap import ActionMap
@@ -17,7 +17,7 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 
 from . import _
-from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION
+from .constants import COLOR_ITEMS, PLUGIN_NAME, PLUGIN_VERSION, SKIN_BASE
 from .manager import SkinManager
 from .teamassets import format_bytes
 from .weathericons import DEFAULT_ICONSET_ID, WeatherIconsetManager
@@ -42,7 +42,7 @@ MAIN_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDConfig" position="0,0" size="2560,1440" title="BundesligaWQHD Config" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" scrollbarMode="showOnDemand" enableWrapAround="1" />
     <widget name="key_menu_hint" position="1613,1317" size="533,51" font="Regular; 35" halign="right" valign="center" backgroundColor="bl_bg" transparent="1" />
-    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" scale="1" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -60,7 +60,7 @@ MAIN_SKIN_GRADIENT = """
 SKINPART_SKIN_GRADIENT = """
 <screen name="BundesligaWQHDSkinParts" position="0,0" size="2560,1440" title="BundesligaWQHD Skinparts" flags="wfNoBorder" backgroundColor="transparent">
     <widget name="config" position="407,167" size="1400,1080" itemHeight="72" font="Regular;40" halign="left" valign="center" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_72.png" borderWidth="1" borderColor="black" transparent="1" scrollbarMode="showOnDemand" enableWrapAround="1" />
-    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" zPosition="2" />
+    <widget name="Picture" position="1848,724" size="613,347" alphatest="on" scale="1" zPosition="2" />
     <panel name="Template_Color_Button_Automatic_all" />
     <panel name="Template_Text_Buttons_M_O_E" />
     <panel name="Logo_Setup_Default" />
@@ -463,7 +463,11 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
         self.list.append(getConfigListEntry(_("──────── Wetteranimation ────────"), NoSave(ConfigNothing())))
         self.list.append(getConfigListEntry(_("Wetteranimation:"), weather_animation_config()))
         self.list.append(getConfigListEntry(_("Bildwechsel (kleiner = schneller):"), weather_animation_interval_config()))
-        self.list.append(getConfigListEntry(_("Animiertes Wetter-Iconset:"), weather_iconset_config()))
+        self.weather_iconset_entry = getConfigListEntry(
+            _("Animiertes Wetter-Iconset:"),
+            weather_iconset_config()
+        )
+        self.list.append(self.weather_iconset_entry)
         self.list.append(getConfigListEntry(_("──────── Menü / Setup ────────"), NoSave(ConfigNothing())))
         for key, label, _xml_name in COLOR_ITEMS[8:12]:
             self.list.append(getConfigListEntry(_(label), color_config(key)))
@@ -482,8 +486,18 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
     def selectionChanged(self):
         if not self._layout_ready:
             return
-        source = self.team_config.value
-        preview = self.manager.preview_for_source(source, "team_colors")
+        if self["config"].getCurrent() == self.weather_iconset_entry:
+            preview = join(
+                SKIN_BASE,
+                "weather",
+                "IconsetPreviews",
+                "%s.png" % weather_iconset_config().value
+            )
+            if not isfile(preview):
+                preview = ""
+        else:
+            source = self.team_config.value
+            preview = self.manager.preview_for_source(source, "team_colors")
         _set_preview(self, preview)
 
     def keyOK(self):
