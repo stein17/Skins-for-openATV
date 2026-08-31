@@ -1,6 +1,6 @@
 # Animierte Wetter-Iconsets
 
-Der Skin enthält nur **Meteocons 2 Fill** als Standardset. Die vier optionalen
+Der Skin enthält nur **Meteocons 2 Fill** als Standardset. Die fünf optionalen
 Designs werden erst nach ihrer Auswahl in der BundesligaFHD- oder
 BundesligaWQHD-Konfiguration aus dem GitHub-Release
 `animated-weather-icons-v1.0.0` geladen.
@@ -13,6 +13,8 @@ SHA-256-Prüfsummen.
 Verfügbare Designs:
 
 - Meteocons 2 Fill (Standard, MIT)
+- stein17 Animated Weather v1.0 (private Nutzung; keine Weiterverteilung ohne
+  schriftliche Genehmigung von stein17)
 - amCharts 1.0.0 (CC BY 4.0)
 - Meteocons 3 Flat (MIT)
 - Meteocons 3 Line (MIT)

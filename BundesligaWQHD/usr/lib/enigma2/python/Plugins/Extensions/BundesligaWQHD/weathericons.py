@@ -17,7 +17,7 @@ from .constants import SKIN_BASE
 DEFAULT_ICONSET_ID = "meteocons-2-fill"
 RESOLUTION_KEY = "wqhd"
 FRAME_COUNT = 24
-MAX_ARCHIVE_SIZE = 20 * 1024 * 1024
+MAX_ARCHIVE_SIZE = 25 * 1024 * 1024
 MAX_UNPACKED_SIZE = 35 * 1024 * 1024
 MAX_ARCHIVE_FILES = 1200
 DOWNLOAD_CHUNK_SIZE = 128 * 1024
@@ -48,6 +48,28 @@ ICONSETS = (
                 "bytes": 1211300,
                 "sha256": "16febf503fb307d8335c1a0d32eaba396353d593b1d7cf29b563b14b8c938ccd",
                 "archive_root": "meteocons-2-fill-wqhd-192",
+                "icon_size": 192,
+            },
+        },
+    },
+    {
+        "id": "stein17-animated-v1.0",
+        "title": "stein17 Animated Weather v1.0",
+        "bundled_default": False,
+        "license": "Copyright stein17 - private Nutzung",
+        "packages": {
+            "fhd": {
+                "file": "stein17-animated-v1.0-fhd-144.zip",
+                "bytes": 11511154,
+                "sha256": "659b4896fc3e2f13db86e5f171c811349a35fce4dce73b1f8ff2758bca25b8b6",
+                "archive_root": "stein17-animated-v1.0-fhd-144",
+                "icon_size": 144,
+            },
+            "wqhd": {
+                "file": "stein17-animated-v1.0-wqhd-192.zip",
+                "bytes": 22677725,
+                "sha256": "9b4793adf22b3dd95f0c514b6c7c89a56c1aba605853db6b7f183e5222065c6e",
+                "archive_root": "stein17-animated-v1.0-wqhd-192",
                 "icon_size": 192,
             },
         },
