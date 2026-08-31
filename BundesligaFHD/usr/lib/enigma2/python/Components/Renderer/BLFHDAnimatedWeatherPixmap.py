@@ -90,6 +90,7 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 		self.frames = []
 		self.frameIndex = 0
 		self.animationPath = ""
+		self.conditionText = ""
 
 	@classmethod
 	def getWeatherMap(cls, animationPath):
@@ -154,6 +155,55 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 				code = ""
 		return code.upper() if code else "NA"
 
+	def getConditionText(self):
+		"""Liest den zum Widget gehoerenden OAWeather-Beschreibungstext.
+
+		MSN liefert gelegentlich fuer "teilweise sonnig" und "teilweise
+		bewoelkt" denselben Yahoo-Code. Der Text bleibt aber verschieden und
+		erlaubt dem Renderer deshalb eine eindeutige Motivauswahl.
+		"""
+		try:
+			converter = self.source
+			index = getattr(converter, "index", None)
+			weatherSource = getattr(converter, "source", None)
+			if index is not None and weatherSource is not None:
+				return str(weatherSource.getKeyforDay("text", index, "") or "").strip()
+		except Exception:
+			pass
+		return ""
+
+	def getMappedFolder(self, code, animationPath, conditionText=""):
+		mapping = self.getWeatherMap(animationPath)
+		entry = mapping.get(code, mapping.get("NA", {}))
+		folder = entry.get("icon", "") if isinstance(entry, dict) else str(entry)
+		text = ""
+		if conditionText:
+			text = conditionText.casefold().replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
+
+		# Die beiden verwechselbaren Tagesvarianten anhand des Textes trennen.
+		if code in ("30", "34") and text:
+			if any(word in text for word in ("sonnig", "heiter", "sunny", "fair")):
+				folder = "mostly-sunny-day"
+			elif any(word in text for word in ("bewoelkt", "cloudy")):
+				folder = "partly-cloudy-day"
+
+		# MSN/OAWeather kann auch bei Regenlagen unterschiedliche Codes mit
+		# demselben sichtbaren Text liefern. Nur eindeutig benannte Regenstufen
+		# werden deshalb textbasiert vereinheitlicht; Schauer und Gewitter
+		# bleiben weiterhin vollständig mapping.json-gesteuert.
+		if text:
+			if any(word in text for word in ("gefrierender regen", "gefrierender nieselregen", "freezing rain", "freezing drizzle")):
+				folder = "freezing-rain"
+			elif any(word in text for word in ("starker regen", "starkregen", "heavy rain", "heavy rainfall")):
+				folder = "heavy-rain"
+			elif any(word in text for word in ("leichter regen", "leichter regenfall", "light rain", "light rainfall")):
+				folder = "light-rain"
+			elif any(word in text for word in ("nieselregen", "spruehregen", "drizzle")):
+				folder = "drizzle"
+			elif text.strip(" .,-") in ("regen", "regenfall", "rain", "rainfall"):
+				folder = "rain"
+		return folder
+
 	def animationEnabled(self):
 		if weather_animation_config is None:
 			return True
@@ -171,10 +221,8 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 			value = DEFAULT_FRAME_INTERVAL
 		return max(100, min(500, value))
 
-	def loadFrames(self, code, animationPath):
-		mapping = self.getWeatherMap(animationPath)
-		entry = mapping.get(code, mapping.get("NA", {}))
-		folder = entry.get("icon", "") if isinstance(entry, dict) else str(entry)
+	def loadFrames(self, code, animationPath, conditionText=""):
+		folder = self.getMappedFolder(code, animationPath, conditionText)
 		framePath = join(animationPath, folder)
 		frames = []
 		if folder and exists(framePath):
@@ -205,6 +253,7 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 			_AnimationClock.remove(self)
 			self.code = ""
 			self.animationPath = ""
+			self.conditionText = ""
 			self.frames = []
 			self.instance.hide()
 			return
@@ -217,13 +266,15 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 			return
 
 		code = self.getWeatherCode()
+		conditionText = self.getConditionText()
 		animationPath = self.getAnimationPath()
-		if code == self.code and animationPath == self.animationPath and self.frames:
+		if code == self.code and animationPath == self.animationPath and conditionText == self.conditionText and self.frames:
 			return
 		_AnimationClock.remove(self)
 		self.code = code
 		self.animationPath = animationPath
-		self.frames = self.loadFrames(code, animationPath)
+		self.conditionText = conditionText
+		self.frames = self.loadFrames(code, animationPath, conditionText)
 		self.frameIndex = 0
 		if not self.frames:
 			self.showStaticFallback()
