@@ -1,0 +1,12 @@
+#!/bin/sh
+
+ROOT="${ANIMATEDWEATHER_ROOT:-}"
+PLUGIN="${ROOT}/usr/lib/enigma2/python/Plugins/Extensions/AnimatedWeather"
+RENDERER="${ROOT}/usr/lib/enigma2/python/Components/Renderer/AnimatedWeatherPixmap"
+RENDERER_CACHE="${ROOT}/usr/lib/enigma2/python/Components/Renderer/__pycache__"
+
+rm -f "${RENDERER}.pyc" "${RENDERER}.pyo" \
+    "${RENDERER_CACHE}"/AnimatedWeatherPixmap*.pyc \
+    "${RENDERER_CACHE}"/AnimatedWeatherPixmap*.pyo
+find "$PLUGIN" -type d -name __pycache__ -prune -exec rm -rf {} \; 2>/dev/null || true
+exit 0

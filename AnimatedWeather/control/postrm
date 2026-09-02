@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Bei einem Upgrade installiert opkg bereits die neue Version. Deren Dateien
+# dürfen durch das postrm der alten Version nicht wieder entfernt werden.
+case "${1:-remove}" in
+    remove|purge|disappear)
+        ;;
+    *)
+        exit 0
+        ;;
+esac
+
+ROOT="${ANIMATEDWEATHER_ROOT:-}"
+PLUGIN="${ROOT}/usr/lib/enigma2/python/Plugins/Extensions/AnimatedWeather"
+RENDERER="${ROOT}/usr/lib/enigma2/python/Components/Renderer/AnimatedWeatherPixmap"
+RENDERER_CACHE="${ROOT}/usr/lib/enigma2/python/Components/Renderer/__pycache__"
+DATA="${ROOT}/usr/share/enigma2/AnimatedWeather"
+
+# Ausschließlich eigene Dateien und Laufzeitreste entfernen. Wettersets auf
+# HDD, USB und MMC sind Benutzerdaten und bleiben erhalten.
+rm -f "${RENDERER}.py" "${RENDERER}.pyc" "${RENDERER}.pyo" \
+    "${RENDERER_CACHE}"/AnimatedWeatherPixmap*.pyc \
+    "${RENDERER_CACHE}"/AnimatedWeatherPixmap*.pyo
+rm -rf "$PLUGIN" "$DATA"
+exit 0

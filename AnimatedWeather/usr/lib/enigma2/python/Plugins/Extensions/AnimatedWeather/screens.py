@@ -1,0 +1,595 @@
+# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
+import os
+from threading import Thread
+
+from Components.ActionMap import ActionMap
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+from Components.config import getConfigListEntry
+from Screens.ChoiceBox import ChoiceBox
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, getDesktop
+
+from . import _
+from .constants import PLUGIN_NAME, PLUGIN_VERSION, PREVIEW_PATH, STATIC_ICONSET_ID
+from .iconsets import IconsetError, IconsetManager, format_bytes, safe_id
+from .settings import (
+    animation_config,
+    cancel_settings,
+    iconset_config,
+    interval_config,
+    refresh_iconset_choices,
+    save_settings,
+    storage_config,
+)
+
+
+MAIN_SKIN_HD = """
+<screen name="AnimatedWeatherSetup" position="center,center" size="1000,560" title="Animated Weather">
+    <widget name="config" position="20,70" size="620,260" itemHeight="45" font="Regular;25" scrollbarMode="showOnDemand" />
+    <widget name="info" position="25,345" size="630,120" font="Regular;22" halign="left" valign="top" />
+    <eLabel position="675,65" size="305,305" zPosition="0" backgroundColor="#40000000" />
+    <widget name="preview_title" position="690,72" size="275,35" zPosition="2" font="Regular;23" halign="center" valign="center" transparent="1" />
+    <widget name="preview" position="693,118" size="270,180" zPosition="1" alphatest="blend" />
+    <widget name="preview_name" position="685,310" size="285,55" zPosition="2" font="Regular;17" halign="center" valign="center" transparent="1" />
+    <widget name="hint" position="25,475" size="950,35" font="Regular;20" halign="center" valign="center" />
+    <widget name="key_red" position="20,515" size="225,35" font="Regular;21" halign="center" valign="center" backgroundColor="#00900000" />
+    <widget name="key_green" position="265,515" size="225,35" font="Regular;21" halign="center" valign="center" backgroundColor="#00009000" />
+    <widget name="key_yellow" position="510,515" size="225,35" font="Regular;21" halign="center" valign="center" backgroundColor="#00909000" />
+    <widget name="key_blue" position="755,515" size="225,35" font="Regular;21" halign="center" valign="center" backgroundColor="#00000090" />
+</screen>
+"""
+
+MAIN_SKIN_FHD = """
+<screen name="AnimatedWeatherSetup" position="center,center" size="1560,720" title="Animated Weather">
+    <widget name="config" position="35,90" size="980,330" itemHeight="60" font="Regular;32" scrollbarMode="showOnDemand" />
+    <widget name="info" position="45,445" size="970,145" font="Regular;28" halign="left" valign="top" />
+    <eLabel position="1050,82" size="465,390" zPosition="0" backgroundColor="#40000000" />
+    <widget name="preview_title" position="1070,92" size="425,45" zPosition="2" font="Regular;30" halign="center" valign="center" transparent="1" />
+    <widget name="preview" position="1065,135" size="435,290" zPosition="1" alphatest="blend" />
+    <widget name="preview_name" position="1060,414" size="445,55" zPosition="2" font="Regular;22" halign="center" valign="center" transparent="1" />
+    <widget name="hint" position="45,600" size="1470,45" font="Regular;25" halign="center" valign="center" />
+    <widget name="key_red" position="35,655" size="360,45" font="Regular;27" halign="center" valign="center" backgroundColor="#00900000" />
+    <widget name="key_green" position="415,655" size="360,45" font="Regular;27" halign="center" valign="center" backgroundColor="#00009000" />
+    <widget name="key_yellow" position="795,655" size="360,45" font="Regular;27" halign="center" valign="center" backgroundColor="#00909000" />
+    <widget name="key_blue" position="1175,655" size="350,45" font="Regular;27" halign="center" valign="center" backgroundColor="#00000090" />
+</screen>
+"""
+
+MAIN_SKIN_WQHD = """
+<screen name="AnimatedWeatherSetup" position="center,center" size="2080,960" title="Animated Weather">
+    <widget name="config" position="45,120" size="1320,440" itemHeight="80" font="Regular;43" scrollbarMode="showOnDemand" />
+    <widget name="info" position="60,595" size="1305,195" font="Regular;37" halign="left" valign="top" />
+    <eLabel position="1410,110" size="610,520" zPosition="0" backgroundColor="#40000000" />
+    <widget name="preview_title" position="1440,125" size="550,60" zPosition="2" font="Regular;40" halign="center" valign="center" transparent="1" />
+    <widget name="preview" position="1430,185" size="570,380" zPosition="1" alphatest="blend" />
+    <widget name="preview_name" position="1425,560" size="580,65" zPosition="2" font="Regular;29" halign="center" valign="center" transparent="1" />
+    <widget name="hint" position="60,805" size="1960,60" font="Regular;34" halign="center" valign="center" />
+    <widget name="key_red" position="45,880" size="490,60" font="Regular;36" halign="center" valign="center" backgroundColor="#00900000" />
+    <widget name="key_green" position="550,880" size="490,60" font="Regular;36" halign="center" valign="center" backgroundColor="#00009000" />
+    <widget name="key_yellow" position="1055,880" size="490,60" font="Regular;36" halign="center" valign="center" backgroundColor="#00909000" />
+    <widget name="key_blue" position="1560,880" size="480,60" font="Regular;36" halign="center" valign="center" backgroundColor="#00000090" />
+</screen>
+"""
+
+TASK_SKIN_HD = """
+<screen name="AnimatedWeatherTask" position="center,center" size="650,260" title="Animated Weather">
+    <widget name="status" position="30,55" size="590,145" font="Regular;25" halign="center" valign="center" />
+    <widget name="hint" position="30,210" size="590,35" font="Regular;19" halign="center" valign="center" />
+</screen>
+"""
+
+TASK_SKIN_FHD = """
+<screen name="AnimatedWeatherTask" position="center,center" size="1000,390" title="Animated Weather">
+    <widget name="status" position="45,80" size="910,215" font="Regular;32" halign="center" valign="center" />
+    <widget name="hint" position="45,320" size="910,45" font="Regular;25" halign="center" valign="center" />
+</screen>
+"""
+
+TASK_SKIN_WQHD = """
+<screen name="AnimatedWeatherTask" position="center,center" size="1330,520" title="Animated Weather">
+    <widget name="status" position="60,105" size="1210,285" font="Regular;43" halign="center" valign="center" />
+    <widget name="hint" position="60,425" size="1210,60" font="Regular;34" halign="center" valign="center" />
+</screen>
+"""
+
+
+def _resolution_skin(hd, fhd, wqhd):
+    width = getDesktop(0).size().width()
+    if width >= 2560:
+        return wqhd
+    if width >= 1920:
+        return fhd
+    return hd
+
+
+class AnimatedWeatherTask(Screen):
+    def __init__(self, session, title, worker):
+        self.skin = _resolution_skin(TASK_SKIN_HD, TASK_SKIN_FHD, TASK_SKIN_WQHD)
+        self.session = session
+        self.worker = worker
+        self._started = False
+        Screen.__init__(self, session)
+        self.setTitle(title)
+        self["status"] = Label(_("Vorgang wird vorbereitet …"))
+        self["hint"] = Label(_("Bitte warten und die Box nicht ausschalten."))
+        self["actions"] = ActionMap(["SetupActions"], {"cancel": self._ignore_cancel}, -2)
+        self.onLayoutFinish.append(self._start)
+
+    def _ignore_cancel(self):
+        return
+
+    def _start(self):
+        if self._started:
+            return
+        self._started = True
+        try:
+            from twisted.internet import reactor
+            self._reactor = reactor
+        except Exception as error:
+            self.close({"ok": False, "error": _("Hintergrunddienst nicht verfügbar: %s") % error})
+            return
+        thread = Thread(target=self._run, name="AnimatedWeather-Task")
+        thread.daemon = True
+        thread.start()
+
+    def _progress(self, text):
+        self._reactor.callFromThread(self["status"].setText, _(text))
+
+    def _run(self):
+        try:
+            result = self.worker(self._progress)
+            response = {"ok": True, "result": result, "error": ""}
+        except Exception as error:
+            response = {"ok": False, "result": None, "error": str(error)}
+        self._reactor.callFromThread(self.close, response)
+
+
+class AnimatedWeatherSetup(Screen, ConfigListScreen):
+    def __init__(self, session):
+        self.skin = _resolution_skin(MAIN_SKIN_HD, MAIN_SKIN_FHD, MAIN_SKIN_WQHD)
+        self.session = session
+        self._preview_ready = False
+        self._preview_file = None
+        self._last_storage = storage_config().value
+        self._initial = (
+            animation_config().value,
+            interval_config().value,
+            storage_config().value,
+            iconset_config().value,
+        )
+        refresh_iconset_choices()
+        Screen.__init__(self, session)
+        self.setTitle("%s v%s" % (PLUGIN_NAME, PLUGIN_VERSION))
+        self.list = []
+        self._build_list()
+        ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
+
+        self["key_red"] = Label(_("Abbrechen"))
+        self["key_green"] = Label(_("Speichern"))
+        self["key_yellow"] = Label(_("Eigene ZIP"))
+        self["key_blue"] = Label(_("Online-Sets"))
+        self["info"] = Label("")
+        self["hint"] = Label(_("MENU: Installierte Sets verwalten"))
+        self["preview"] = Pixmap()
+        self["preview_title"] = Label(_("Vorschau"))
+        self["preview_name"] = Label("")
+        self["actions"] = ActionMap(
+            ["SetupActions", "ColorActions", "MenuActions"],
+            {
+                "cancel": self.keyCancel,
+                "red": self.keyCancel,
+                "green": self.keySave,
+                "yellow": self.importLocal,
+                "blue": self.openOnlineSets,
+                "menu": self.manageInstalled,
+            },
+            -2,
+        )
+        self.onLayoutFinish.append(self._layoutFinished)
+
+    def _layoutFinished(self):
+        try:
+            self["preview"].instance.setPixmapScaleFlags(
+                BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER
+            )
+        except Exception:
+            pass
+        self._preview_ready = True
+        if self.selectionChanged not in self["config"].onSelectionChanged:
+            self["config"].onSelectionChanged.append(self.selectionChanged)
+        self.selectionChanged()
+
+    def _build_list(self):
+        self.list = [
+            getConfigListEntry(_("Animation abspielen:"), animation_config()),
+            getConfigListEntry(_("Bildwechsel (kleiner = schneller):"), interval_config()),
+            getConfigListEntry(_("Speicherort der Iconsets:"), storage_config()),
+            getConfigListEntry(_("Wetter-Iconset:"), iconset_config()),
+        ]
+
+    def _refreshConfigList(self, preferred=None):
+        self._preview_file = None
+        refresh_iconset_choices(preferred)
+        self._build_list()
+        self["config"].setList(self.list)
+        self.selectionChanged()
+
+    def manager(self):
+        return IconsetManager(storage_key=storage_config().value)
+
+    def changedEntry(self):
+        if storage_config().value != self._last_storage:
+            self._last_storage = storage_config().value
+            self._refreshConfigList(STATIC_ICONSET_ID)
+            return
+        self.selectionChanged()
+
+    def selectionChanged(self):
+        manager = self.manager()
+        iconset_id = iconset_config().value
+        if iconset_id == STATIC_ICONSET_ID:
+            text = _("Es werden die unveränderten, statischen Symbole von OAWeather angezeigt.")
+        else:
+            entry = manager.public_entry(iconset_id)
+            installed = manager.is_installed(iconset_id)
+            local = manager.installed_entry(iconset_id)
+            if entry:
+                text = "%s\n%s: %s" % (
+                    entry.get("label", iconset_id),
+                    _("Lizenz"),
+                    entry.get("license", _("Unbekannt")),
+                )
+                if manager.update_available(iconset_id):
+                    text += "\n" + _("Status: verbesserte Version verfügbar")
+                elif installed:
+                    text += "\n" + _("Status: installiert")
+                else:
+                    text += "\n" + _("Status: Download erforderlich (%s)") % manager.package_size_text(entry)
+            elif local:
+                text = "%s\n%s\n%s" % (
+                    local["label"],
+                _("Eigenes lokales Iconset (statisch oder animiert)."),
+                    local["path"],
+                )
+            else:
+                text = _("Das ausgewählte Iconset ist am gewählten Speicherort nicht vorhanden.")
+        self["info"].setText(text)
+        self._updatePreview(manager, iconset_id)
+
+    def _updatePreview(self, manager, iconset_id):
+        if not self._preview_ready:
+            return
+        preview = ""
+        label = _("OAWeather Original (statisch)")
+        if iconset_id != STATIC_ICONSET_ID:
+            entry = manager.public_entry(iconset_id) or manager.installed_entry(iconset_id) or {}
+            label = entry.get("label", iconset_id)
+            candidate = os.path.join(PREVIEW_PATH, "%s.png" % iconset_id)
+            if os.path.isfile(candidate) and not os.path.islink(candidate):
+                preview = candidate
+            else:
+                preview = manager.preview_frame(iconset_id)
+        self["preview_name"].setText(label)
+        if preview:
+            try:
+                if preview != self._preview_file:
+                    self["preview"].instance.setPixmapFromFile(preview)
+                    self._preview_file = preview
+                self["preview"].show()
+                return
+            except Exception as error:
+                print("[AnimatedWeather] Vorschau konnte nicht geladen werden: %s" % error)
+        self._preview_file = None
+        self["preview"].hide()
+
+    def keyCancel(self):
+        cancel_settings()
+        self.close(False)
+
+    def keySave(self):
+        manager = self.manager()
+        iconset_id = iconset_config().value
+        if iconset_id != STATIC_ICONSET_ID and manager.update_available(iconset_id):
+            entry = manager.public_entry(iconset_id)
+            self.session.openWithCallback(
+                lambda answer: self._downloadAnswer(answer, entry, True),
+                MessageBox,
+                _("Für %s ist eine Aktualisierung verfügbar.\n\nJetzt von GitHub laden und sicher ersetzen?")
+                % entry.get("label", iconset_id),
+                MessageBox.TYPE_YESNO,
+                default=True,
+            )
+            return
+        if iconset_id != STATIC_ICONSET_ID and not manager.is_installed(iconset_id):
+            entry = manager.public_entry(iconset_id)
+            if not entry:
+                self.session.open(
+                    MessageBox,
+                _("Dieses Iconset ist nicht installiert und besitzt kein gültiges Paket."),
+                    MessageBox.TYPE_ERROR,
+                )
+                return
+            question = _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?")
+            self.session.openWithCallback(
+                lambda answer: self._downloadAnswer(answer, entry, True),
+                MessageBox,
+                question % (entry.get("label", iconset_id), manager.package_size_text(entry)),
+                MessageBox.TYPE_YESNO,
+                default=True,
+            )
+            return
+        self._finishSave()
+
+    def _finishSave(self):
+        current = (
+            animation_config().value,
+            interval_config().value,
+            storage_config().value,
+            iconset_config().value,
+        )
+        changed = current != self._initial
+        save_settings()
+        if changed:
+            self.session.openWithCallback(
+                self._restartAnswer,
+                MessageBox,
+                _("Die Einstellungen wurden gespeichert.\n\nGUI jetzt neu starten, damit alle geöffneten Wetterwidgets neu geladen werden?"),
+                MessageBox.TYPE_YESNO,
+                default=True,
+            )
+        else:
+            self.close(True)
+
+    def _restartAnswer(self, answer):
+        if answer:
+            self.session.open(TryQuitMainloop, 3)
+        else:
+            self.close(True)
+
+    def openOnlineSets(self):
+        manager = self.manager()
+        choices = []
+        for entry in manager.public_entries():
+            installed = manager.is_installed(entry["id"])
+            if installed and manager.update_available(entry["id"]):
+                status = _("Aktualisierung verfügbar")
+            elif installed:
+                status = _("installiert")
+            else:
+                status = _("online, %s") % manager.package_size_text(entry)
+            choices.append(("%s  [%s]" % (entry.get("label", entry["id"]), status), entry))
+        self.session.openWithCallback(
+            self._onlineChoice,
+            ChoiceBox,
+            title=_("Online verfügbares Wetter-Iconset auswählen"),
+            list=choices,
+        )
+
+    def _onlineChoice(self, answer):
+        if not answer:
+            return
+        entry = answer[1]
+        manager = self.manager()
+        if manager.is_installed(entry["id"]) and not manager.update_available(entry["id"]):
+            self._refreshConfigList(entry["id"])
+            return
+        if manager.update_available(entry["id"]):
+            question = _("%s aktualisieren, von GitHub laden und sicher prüfen?\n\nGröße: %s\nLizenz: %s")
+        else:
+            question = _("%s von GitHub herunterladen und sicher prüfen?\n\nGröße: %s\nLizenz: %s")
+        self.session.openWithCallback(
+            lambda confirmed: self._downloadAnswer(confirmed, entry, False),
+            MessageBox,
+            question
+            % (
+                entry.get("label", entry["id"]),
+                manager.package_size_text(entry),
+                entry.get("license", _("Unbekannt")),
+            ),
+            MessageBox.TYPE_YESNO,
+            default=True,
+        )
+
+    def _downloadAnswer(self, answer, entry, save_after):
+        if not answer:
+            return
+        manager = self.manager()
+        self.session.openWithCallback(
+            lambda result: self._downloadFinished(result, entry["id"], save_after),
+            AnimatedWeatherTask,
+            _("Wetter-Iconset installieren"),
+            lambda progress: manager.install_public(entry["id"], progress=progress),
+        )
+
+    def _downloadFinished(self, result, iconset_id, save_after):
+        if not result or not result.get("ok"):
+            error = result.get("error") if result else _("Unbekannter Fehler")
+            self.session.open(MessageBox, _("Iconset wurde nicht installiert:\n\n%s") % error, MessageBox.TYPE_ERROR)
+            return
+        self._refreshConfigList(iconset_id)
+        if save_after:
+            self._finishSave()
+
+    def importLocal(self):
+        archives = self.manager().scan_local_archives()
+        if not archives:
+            self.session.open(
+                MessageBox,
+                _("Keine ZIP-Datei gefunden.\n\nBitte die ZIP nach /tmp, /media/hdd, /media/usb, /media/mmc oder in einen AnimatedWeather-Ordner kopieren."),
+                MessageBox.TYPE_INFO,
+            )
+            return
+        choices = [
+            ("%s  [%s]" % (os.path.basename(path), os.path.dirname(path)), path)
+            for path in archives
+        ]
+        self.session.openWithCallback(
+            self._archiveChoice,
+            ChoiceBox,
+            title=_("Eigene Wetter-ZIP auswählen"),
+            list=choices,
+        )
+
+    def _archiveChoice(self, answer):
+        if not answer:
+            return
+        archive_filename = answer[1]
+        try:
+            candidates = self.manager().inspect_archive(archive_filename)
+        except Exception as error:
+            self.session.open(MessageBox, _("ZIP-Prüfung fehlgeschlagen:\n\n%s") % error, MessageBox.TYPE_ERROR)
+            return
+        if len(candidates) == 1:
+            self._askLocalName(archive_filename, candidates[0])
+            return
+        choices = []
+        for candidate in candidates:
+            frame_text = "%d" % candidate["min_frames"]
+            if candidate["max_frames"] != candidate["min_frames"]:
+                frame_text += "–%d" % candidate["max_frames"]
+            choices.append((
+                "%s  [%s, %s Frames, %sx%s]"
+                % (
+                    candidate["root"] or _("Hauptordner"),
+                    candidate["layout"],
+                    frame_text,
+                    candidate["dimensions"][0],
+                    candidate["dimensions"][1],
+                ),
+                candidate,
+            ))
+        self.session.openWithCallback(
+            lambda selected: self._candidateChoice(selected, archive_filename),
+            ChoiceBox,
+            title=_("Mehrere vollständige Iconsets gefunden – bitte eines auswählen"),
+            list=choices,
+        )
+
+    def _candidateChoice(self, answer, archive_filename):
+        if answer:
+            self._askLocalName(archive_filename, answer[1])
+
+    def _askLocalName(self, archive_filename, candidate):
+        default_name = candidate.get("label") or os.path.splitext(os.path.basename(archive_filename))[0]
+        # Vorbereitete Wettersets enthalten ihren Anzeigenamen bereits im
+        # Manifest. In diesem Fall ist keine virtuelle Tastatur erforderlich.
+        if candidate.get("manifest_label"):
+            self._localNameEntered(default_name, archive_filename, candidate)
+            return
+        try:
+            from Screens.VirtualKeyBoard import VirtualKeyBoard
+            self.session.openWithCallback(
+                lambda name: self._localNameEntered(name, archive_filename, candidate),
+                VirtualKeyBoard,
+                title=_("Anzeigename für das eigene Iconset"),
+                text=default_name,
+            )
+        except ImportError:
+            self._localNameEntered(default_name, archive_filename, candidate)
+
+    def _localNameEntered(self, name, archive_filename, candidate):
+        if not name:
+            return
+        iconset_id = "local-%s" % safe_id(name)
+        exists = self.manager().is_installed(iconset_id)
+        if exists:
+            self.session.openWithCallback(
+                lambda answer: self._startLocalImport(answer, archive_filename, candidate, name, True),
+                MessageBox,
+                _("Ein lokales Iconset mit diesem Namen ist bereits installiert.\n\nSicher ersetzen?"),
+                MessageBox.TYPE_YESNO,
+                default=False,
+            )
+        else:
+            self._startLocalImport(True, archive_filename, candidate, name, False)
+
+    def _startLocalImport(self, answer, archive_filename, candidate, name, overwrite):
+        if not answer:
+            return
+        manager = self.manager()
+        self.session.openWithCallback(
+            self._localImportFinished,
+            AnimatedWeatherTask,
+            _("Eigenes Iconset importieren"),
+            lambda progress: manager.import_local(
+                archive_filename,
+                candidate,
+                name,
+                overwrite=overwrite,
+                progress=progress,
+            ),
+        )
+
+    def _localImportFinished(self, result):
+        if not result or not result.get("ok"):
+            error = result.get("error") if result else _("Unbekannter Fehler")
+            self.session.open(MessageBox, _("Eigenes Iconset wurde nicht installiert:\n\n%s") % error, MessageBox.TYPE_ERROR)
+            return
+        iconset_id = result.get("result")
+        self._refreshConfigList(iconset_id)
+        self.session.open(
+            MessageBox,
+            _("Das eigene Iconset wurde lokal installiert und ausgewählt.\n\nZum Aktivieren bitte mit Grün speichern."),
+            MessageBox.TYPE_INFO,
+            timeout=10,
+        )
+
+    def manageInstalled(self):
+        entries = self.manager().installed_entries()
+        if not entries:
+            self.session.open(MessageBox, _("Es sind noch keine Wetter-Iconsets installiert."), MessageBox.TYPE_INFO)
+            return
+        choices = [("%s%s" % (entry["label"], _(" (lokal)") if entry["local_only"] else ""), entry) for entry in entries]
+        self.session.openWithCallback(
+            self._installedChoice,
+            ChoiceBox,
+            title=_("Installiertes Iconset verwalten"),
+            list=choices,
+        )
+
+    def _installedChoice(self, answer):
+        if not answer:
+            return
+        entry = answer[1]
+        choices = [
+            (_("Aktivieren"), "activate"),
+            (_("Löschen"), "delete"),
+            (_("Abbrechen"), "cancel"),
+        ]
+        self.session.openWithCallback(
+            lambda action: self._installedAction(action, entry),
+            ChoiceBox,
+            title=entry["label"],
+            list=choices,
+        )
+
+    def _installedAction(self, answer, entry):
+        if not answer or answer[1] == "cancel":
+            return
+        if answer[1] == "activate":
+            self._refreshConfigList(entry["id"])
+            return
+        self.session.openWithCallback(
+            lambda confirmed: self._deleteAnswer(confirmed, entry),
+            MessageBox,
+            _("%s wirklich von dieser Box löschen?") % entry["label"],
+            MessageBox.TYPE_YESNO,
+            default=False,
+        )
+
+    def _deleteAnswer(self, answer, entry):
+        if not answer:
+            return
+        try:
+            if iconset_config().value == entry["id"]:
+                iconset_config().value = STATIC_ICONSET_ID
+            self.manager().remove(entry["id"])
+            self._refreshConfigList(iconset_config().value)
+        except Exception as error:
+            self.session.open(MessageBox, _("Iconset konnte nicht gelöscht werden:\n\n%s") % error, MessageBox.TYPE_ERROR)

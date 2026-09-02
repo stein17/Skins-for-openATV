@@ -1,30 +1,25 @@
-# Animierte Wetter-Iconsets
+# Animated Weather – Wettersets
 
-Der Skin enthält nur **Meteocons 2 Fill** als Standardset. Die fünf optionalen
-Designs werden erst nach ihrer Auswahl in der BundesligaFHD- oder
-BundesligaWQHD-Konfiguration aus dem GitHub-Release
-`animated-weather-icons-v1.0.0` geladen.
+Diese neutralen Wettersets sind für das skinunabhängige Enigma2-Plugin
+**Animated Weather** vorbereitet. Das Plugin verändert OAWeather nicht.
 
-Die großen ZIP-Dateien gehören deshalb **nicht in diesen Git-Ordner**. Sie
-werden als Assets des gleichnamigen GitHub-Releases veröffentlicht. Der
-Katalog dokumentiert Dateinamen, Größen, Auflösungen, Lizenzen und feste
-SHA-256-Prüfsummen.
+Die Archive werden nicht im Plugin-IPK gespeichert. Bei der Installation lädt
+das Plugin nur das ausgewählte Set aus dem GitHub-Release, prüft Dateigröße und
+SHA-256-Prüfsumme, entpackt es auf den ausgewählten Datenträger und entfernt die
+temporäre ZIP anschließend wieder.
 
-Verfügbare Designs:
+| Anzeige im Plugin | Ordner | Größe | Lizenz |
+|---|---|---:|---|
+| amCharts Weather Icon (animated) | `amcharts-1.0.0` | 160 × 160 | CC BY 4.0 |
+| meteocons-Fill (animated) | `meteocons-2-fill` | 180 × 180 | MIT |
+| meteocons-Flat (animated) | `meteocons-3-flat` | 180 × 180 | MIT |
+| meteocons-Line (animated) | `meteocons-3-line` | 180 × 180 | MIT |
+| meteocons-Monochrome White (animated) | `meteocons-3-monochrome-white` | 180 × 180 | MIT |
+| stein17 Weather v.1.2 (animated) | `stein17-weather-v1.2` | 180 × 180 | Copyright stein17 – Nutzung mit Animated Weather gestattet; sonst nur mit Genehmigung |
 
-- Meteocons 2 Fill (Standard, MIT)
-- stein17 Animated Weather v1.1 (private Nutzung; keine Weiterverteilung ohne
-  schriftliche Genehmigung von stein17)
-- amCharts 1.0.0 (CC BY 4.0)
-- Meteocons 3 Flat (MIT)
-- Meteocons 3 Line (MIT)
-- Meteocons 3 Monochrome White (MIT)
+Alle Animationen verwenden 24 fortlaufend nummerierte Frames. Die PNG-Dateien
+sind als transparente PNG-8-Dateien optimiert. Der Renderer skaliert die Motive
+proportional auf die im Skin festgelegte Widgetgröße.
 
-Die öffentlichen Meteocons- und amCharts-Pakete verwenden für FHD 144 × 144
-Pixel und für WQHD 192 × 192 Pixel. **stein17 Animated Weather v1.1** verwendet
-ein gemeinsames Paket mit 180 × 180 Pixeln für beide Skins. Dadurch muss das
-große eigene Set nur einmal als Release-Asset bereitgestellt werden.
-
-Jedes Motiv besitzt 24 Frames. Der Installer akzeptiert ausschließlich die im
-Katalog festgelegten Dateien und prüft sie vollständig, bevor er ein
-vorhandenes optionales Set ersetzt.
+Die Lizenz des jeweiligen Grafikprojekts bleibt erhalten. Details liegen in
+jedem Archiv.

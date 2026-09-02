@@ -1,0 +1,74 @@
+ANIMATED WEATHER v0.3-r0 – KURZANLEITUNG
+=========================================
+
+Das Plugin ist skinunabhängig und verändert OAWeather nicht.
+
+OAWeather 2.3 verwendet den internen Screen „OAWeatherOverview“. Das Plugin
+schaltet dessen Wetterbild-Widgets beim Öffnen automatisch auf Animation um.
+Die OAWeather-Dateien und das statische Anbieterlogo bleiben unverändert.
+
+Installation eines Wettersets
+------------------------------
+
+1. Im Plugin-Menü „Animated Weather“ öffnen.
+2. Speicherort für entpackte Sets wählen: Flash, HDD, USB oder MMC.
+3. BLAU („Online-Sets“) drücken und ein Set auswählen.
+4. Download und sichere Prüfung bestätigen.
+5. Das Set unter „Wetter-Iconset“ auswählen.
+6. GRÜN drücken und die GUI neu starten.
+
+Das Plugin lädt nur das ausgewählte Wetterset aus dem offiziellen GitHub-
+Release. Die ZIP-Datei liegt während der Installation unter /tmp, wird anhand
+von Dateigröße und SHA-256-Prüfsumme kontrolliert und danach gelöscht. Das
+entpackte Set bleibt am gewählten Speicherort und funktioniert anschließend
+offline. Im Plugin-IPK selbst befinden sich keine Wetterset-Archive.
+
+Rechts im Einstellungsfenster erscheint sofort eine Vorschau des markierten
+Iconsets. Dafür enthält das kleine Plugin nur je ein kompaktes Vorschaubild.
+Für HD, FHD und WQHD wird dieselbe Vorschau passend skaliert.
+
+Die OAWeather-eigene Auswahl „Wetter-Icon-Stil“ darf auf „Standard“ bleiben.
+Sie verwaltet nur die bisherigen statischen OAWeather-Iconsets.
+
+Zusätzliche Skin-Widgets
+------------------------
+
+Für zusätzliche Wetterwidgets im Skin wird ausschließlich der Renderer des
+bereits vorhandenen OAWeather-Widgets geändert:
+
+  render="OAWeatherPixmap"
+
+wird zu:
+
+  render="AnimatedWeatherPixmap"
+
+Converter, source und OAWeather-Dateien bleiben unverändert.
+
+Eigene Sets
+-----------
+
+Ein eigenes Iconset kann direkt in seinem Hauptordner ein Vorschaubild mit
+dem festen Namen preview.png enthalten. Empfohlen sind 435 × 290 Pixel mit
+transparentem Hintergrund. Fehlt preview.png, verwendet das Plugin ein
+geeignetes a0.png aus dem Wetterset.
+
+ZIP-Dateien können unter /tmp oder unter
+/media/hdd|usb|mmc/AnimatedWeather/packages abgelegt und mit GELB importiert
+werden. Eine ZIP im Ordner AnimatedWeather/sets wird ebenfalls gefunden.
+Fertige Set-Ordner werden direkt unter AnimatedWeather/sets erkannt.
+
+Unterstützt werden:
+
+- mapping.json mit animierten Motivordnern oder statischen PNG-Zielen
+- animierte Code-Ordner 0 bis 47, optional NA
+- statische Einzelbilder 0.png bis 47.png, optional na.png
+
+„Animation abspielen: Nein“ hält das gewählte Set auf seinem ersten Bild an.
+„OAWeather Original (statisch)“ zeigt weiterhin die OAWeather-Originalicons.
+
+Deinstallation
+--------------
+
+Beim Entfernen des IPK werden Plugin, Renderer-Cache, Katalog und Vorschauen
+unter /usr/share/enigma2/AnimatedWeather vollständig gelöscht. Persönliche
+Wettersets auf HDD, USB oder MMC bleiben absichtlich erhalten.

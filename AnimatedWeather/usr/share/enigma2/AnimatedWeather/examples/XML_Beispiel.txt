@@ -1,0 +1,36 @@
+STATISCHE ODER ANIMIERTE OAWEATHER-SYMBOLE IM SKIN
+===================================================
+
+Der vorhandene OAWeather-Converter bleibt unverändert. Nur der Renderer wird
+im Wetter-Widget ausgetauscht.
+
+Bisher statisch:
+
+<widget source="session.OAWeather" render="OAWeatherPixmap" position="100,100" size="180,180" transparent="1" zPosition="3">
+    <convert type="OAWeather">weathericon,day1</convert>
+</widget>
+
+Neu über Animated Weather:
+
+<widget source="session.OAWeather" render="AnimatedWeatherPixmap" position="100,100" size="180,180" transparent="1" zPosition="3">
+    <convert type="OAWeather">weathericon,day1</convert>
+</widget>
+
+Gültige OAWeather-Tage:
+
+    weathericon,current
+    weathericon,day1
+    weathericon,day2
+    weathericon,day3
+    weathericon,day4
+    weathericon,day5
+
+Das Widget darf im Skin eine beliebige Größe besitzen. Der Renderer skaliert
+die Frames proportional und behält das Seitenverhältnis bei.
+
+WICHTIG:
+
+Wenn das Plugin nicht als feste Abhängigkeit des Skins installiert wird,
+sollte die Änderung als optionaler Skinpart angeboten werden. Ein Skin darf
+den Renderer AnimatedWeatherPixmap nur verwenden, wenn das Plugin installiert
+ist.
