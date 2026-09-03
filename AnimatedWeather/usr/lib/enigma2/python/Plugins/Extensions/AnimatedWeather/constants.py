@@ -4,7 +4,7 @@ from os.path import join
 
 
 PLUGIN_NAME = "Animated Weather"
-PLUGIN_VERSION = "0.3-r0"
+PLUGIN_VERSION = "0.3-r2"
 PLUGIN_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/AnimatedWeather"
 DATA_PATH = "/usr/share/enigma2/AnimatedWeather"
 CATALOG_PATH = join(DATA_PATH, "catalog.json")
@@ -27,10 +27,10 @@ STORAGE_CHOICES = (
     ("mmc", "MMC (/media/mmc)"),
 )
 
-RELEASE_BASE_URL = (
+OFFICIAL_RELEASE_PREFIX = (
     "https://github.com/stein17/Skins-for-openATV/releases/download/"
-    "animated-weather-icons-v1.2.0/"
 )
+RELEASE_BASE_URL = OFFICIAL_RELEASE_PREFIX + "animated-weather-icons-v1.3.0/"
 
 MAX_ARCHIVE_SIZE = 30 * 1024 * 1024
 MAX_UNPACKED_SIZE = 100 * 1024 * 1024

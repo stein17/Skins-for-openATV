@@ -204,10 +204,20 @@ class AnimatedWeatherPixmap(Renderer):
             folder = entry.get("icon", "") if isinstance(entry, dict) else str(entry)
 
             if code in ("30", "34") and text:
-                if any(word in text for word in ("sonnig", "heiter", "sunny", "fair")):
-                    folder = self._existingTarget(animationPath, "mostly-sunny-day", folder)
-                elif any(word in text for word in ("bewoelkt", "cloudy")):
+                # Erst eindeutige vollständige Bezeichnungen prüfen. Das
+                # einzelne Wort "sonnig" darf "Teilweise sonnig" nicht als
+                # "Überwiegend sonnig" einstufen.
+                if any(phrase in text for phrase in (
+                    "teilweise sonnig", "teils sonnig", "teilweise bewoelkt",
+                    "partly sunny", "partly cloudy", "partly clear",
+                )):
                     folder = self._existingTarget(animationPath, "partly-cloudy-day", folder)
+                elif any(phrase in text for phrase in (
+                    "ueberwiegend sonnig", "meist sonnig",
+                    "groesstenteils sonnig", "mostly sunny",
+                    "mainly sunny", "fair",
+                )):
+                    folder = self._existingTarget(animationPath, "mostly-sunny-day", folder)
 
             if text:
                 if any(word in text for word in ("gefrierender regen", "gefrierender nieselregen", "freezing rain", "freezing drizzle")):
@@ -237,11 +247,18 @@ class AnimatedWeatherPixmap(Renderer):
         else:
             folder = "0.png" if isfile(join(animationPath, "0.png")) else "0"
         if code in ("30", "34") and text:
-            if any(word in text for word in ("sonnig", "heiter", "sunny", "fair")):
-                preferred = "34.png" if isfile(join(animationPath, "34.png")) else "34"
-                folder = self._existingTarget(animationPath, preferred, folder)
-            elif any(word in text for word in ("bewoelkt", "cloudy")):
+            if any(phrase in text for phrase in (
+                "teilweise sonnig", "teils sonnig", "teilweise bewoelkt",
+                "partly sunny", "partly cloudy", "partly clear",
+            )):
                 preferred = "30.png" if isfile(join(animationPath, "30.png")) else "30"
+                folder = self._existingTarget(animationPath, preferred, folder)
+            elif any(phrase in text for phrase in (
+                "ueberwiegend sonnig", "meist sonnig",
+                "groesstenteils sonnig", "mostly sunny",
+                "mainly sunny", "fair",
+            )):
+                preferred = "34.png" if isfile(join(animationPath, "34.png")) else "34"
                 folder = self._existingTarget(animationPath, preferred, folder)
         return folder
 

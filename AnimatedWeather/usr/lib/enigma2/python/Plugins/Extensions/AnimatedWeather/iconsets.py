@@ -22,6 +22,7 @@ from .constants import (
     MAX_FRAMES,
     MAX_UNPACKED_SIZE,
     MIN_FRAMES,
+    OFFICIAL_RELEASE_PREFIX,
     RELEASE_BASE_URL,
     STATIC_ICONSET_ID,
     storage_path,
@@ -732,7 +733,7 @@ class IconsetManager(object):
                 shutil.rmtree(work)
 
     def _download(self, url, destination, expected_size, progress):
-        if not url.startswith(RELEASE_BASE_URL):
+        if not url.startswith(OFFICIAL_RELEASE_PREFIX):
             raise IconsetError("Unsichere Downloadadresse im Wetterkatalog.")
         request = Request(url, headers={"User-Agent": "AnimatedWeather/0.3"})
         total = 0
@@ -792,13 +793,16 @@ class IconsetManager(object):
             package_filename = package.get("file", "")
             if not package_filename or os.path.basename(package_filename) != package_filename:
                 raise IconsetError("Ungültiger Dateiname im Wetterkatalog.")
+            package_url = package.get("url") or (RELEASE_BASE_URL + package_filename)
+            if package_url.rsplit("/", 1)[-1] != package_filename:
+                raise IconsetError("Dateiname und Downloadadresse passen nicht zusammen.")
             archive_handle, archive_filename = tempfile.mkstemp(
                 prefix="animatedweather-", suffix=".zip", dir="/tmp"
             )
             os.close(archive_handle)
             progress("Wetterset wird von GitHub geladen …")
             self._download(
-                RELEASE_BASE_URL + package_filename,
+                package_url,
                 archive_filename,
                 package.get("bytes"),
                 progress,
