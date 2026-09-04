@@ -496,14 +496,22 @@ class BundesligaFHDConfig(Screen, ConfigListScreen):
             return
         iconset_preview = self["config"].getCurrent() == self.weather_iconset_entry
         if iconset_preview:
-            preview = join(
-                SKIN_BASE,
-                "weather",
-                "IconsetPreviews",
-                "%s.png" % weather_iconset_config().value
-            )
-            if not isfile(preview):
-                preview = ""
+            preview = ""
+            preview_file = getattr(self.weather_icons, "preview_file", None)
+            if preview_file is not None:
+                try:
+                    preview = preview_file(weather_iconset_config().value) or ""
+                except Exception:
+                    preview = ""
+            if not preview:
+                preview = join(
+                    SKIN_BASE,
+                    "weather",
+                    "IconsetPreviews",
+                    "%s.png" % weather_iconset_config().value
+                )
+                if not isfile(preview):
+                    preview = ""
         else:
             source = self.team_config.value
             preview = self.manager.preview_for_source(source, "team_colors")

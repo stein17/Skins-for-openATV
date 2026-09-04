@@ -405,3 +405,62 @@ class WeatherIconsetManager(object):
                     shutil.rmtree(backup)
                 except OSError:
                     pass
+
+
+
+# Zentrale Animated-Weather-Verwaltung bevorzugen. Dadurch verwenden
+# BundesligaWQHD, OAWeather und andere Skins dasselbe Set am selben Speicherort.
+# Ist das Plugin nicht installiert, bleibt die bisherige Verwaltung aktiv.
+try:
+    from Plugins.Extensions.AnimatedWeather.constants import (
+        PREVIEW_PATH as _CENTRAL_PREVIEW_PATH,
+        STATIC_ICONSET_ID as _CENTRAL_DEFAULT_ICONSET_ID,
+    )
+    from Plugins.Extensions.AnimatedWeather.settings import (
+        manager_for_current_storage as _central_manager_for_current_storage,
+    )
+except (ImportError, AttributeError):
+    _CENTRAL_PREVIEW_PATH = ""
+    _CENTRAL_DEFAULT_ICONSET_ID = None
+    _central_manager_for_current_storage = None
+
+
+if _central_manager_for_current_storage is not None:
+    DEFAULT_ICONSET_ID = _CENTRAL_DEFAULT_ICONSET_ID
+
+    def iconset_choices():
+        return _central_manager_for_current_storage().choices()
+
+    def iconset_entry(iconset_id):
+        manager = _central_manager_for_current_storage()
+        return manager.public_entry(iconset_id) or manager.installed_entry(iconset_id)
+
+    def resolved_iconset_path(iconset_id):
+        return _central_manager_for_current_storage().selected_path(iconset_id)
+
+    class WeatherIconsetManager(object):
+        def _manager(self):
+            return _central_manager_for_current_storage()
+
+        def entry(self, iconset_id):
+            return self._manager().public_entry(iconset_id)
+
+        def package_size_text(self, entry):
+            return self._manager().package_size_text(entry)
+
+        def is_installed(self, iconset_id):
+            if iconset_id == DEFAULT_ICONSET_ID:
+                return True
+            return self._manager().is_installed(iconset_id)
+
+        def install(self, iconset_id, progress=None):
+            if iconset_id == DEFAULT_ICONSET_ID:
+                return iconset_id
+            return self._manager().install_public(iconset_id, progress=progress)
+
+        def preview_file(self, iconset_id):
+            candidate = os.path.join(_CENTRAL_PREVIEW_PATH, "%s.png" % iconset_id)
+            if os.path.isfile(candidate) and not os.path.islink(candidate):
+                return candidate
+            return self._manager().preview_frame(iconset_id)
+

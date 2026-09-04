@@ -289,3 +289,17 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 			return
 		self.frameIndex = (self.frameIndex + 1) % len(self.frames)
 		self.instance.setPixmap(self.frames[self.frameIndex])
+
+
+# Wenn das eigenständige Animated-Weather-Plugin installiert ist, verwendet
+# der Bundesliga-Skin dessen zentrale Auswahl, Speicherort und Renderer. Ohne
+# das Plugin bleibt der bisherige skininterne Renderer als Rückfall erhalten.
+try:
+	from Components.Renderer.AnimatedWeatherPixmap import (
+		AnimatedWeatherPixmap as _CentralAnimatedWeatherPixmap,
+	)
+except (ImportError, AttributeError):
+	_CentralAnimatedWeatherPixmap = None
+
+if _CentralAnimatedWeatherPixmap is not None:
+	BLFHDAnimatedWeatherPixmap = _CentralAnimatedWeatherPixmap

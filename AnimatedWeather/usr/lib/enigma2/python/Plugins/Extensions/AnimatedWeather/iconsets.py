@@ -699,6 +699,33 @@ class IconsetManager(object):
                 os.rename(backup, target)
             raise
 
+    def _remove_replaced_sets(self, entry, keep_id):
+        """Entfernt ausdrücklich abgelöste Set-Versionen nach der Installation.
+
+        Es werden ausschließlich sichere, direkte Unterordner des aktuell
+        gewählten Speicherorts berücksichtigt, die im Katalogeintrag unter
+        ``replaces`` aufgeführt sind. Das gerade installierte Set bleibt dabei
+        immer unangetastet.
+        """
+        removed = []
+        replaced = (entry or {}).get("replaces", [])
+        if not isinstance(replaced, (list, tuple)):
+            return removed
+        for old_id in replaced:
+            old_id = str(old_id or "")
+            if old_id == keep_id or not _safe_target(old_id):
+                continue
+            old_path = self.iconset_path(old_id)
+            if not old_path or not os.path.lexists(old_path):
+                continue
+            if os.path.islink(old_path) or not os.path.isdir(old_path):
+                continue
+            shutil.rmtree(old_path)
+            removed.append(old_id)
+        if removed:
+            self.invalidate_installed_cache()
+        return removed
+
     def import_local(self, archive_filename, candidate, label, overwrite=False, progress=None):
         progress = progress or (lambda text: None)
         label = (label or candidate.get("label") or "Lokales Iconset").strip()
@@ -827,6 +854,9 @@ class IconsetManager(object):
             )
             progress("Iconset wird installiert …")
             self._replace_target(staging, self.iconset_path(iconset_id))
+            removed = self._remove_replaced_sets(entry, iconset_id)
+            if removed:
+                progress("Ältere Versionen dieses Iconsets wurden entfernt.")
             return iconset_id
         finally:
             if archive_filename and os.path.isfile(archive_filename):

@@ -15,6 +15,21 @@ from Components.config import (
 from .constants import COLOR_ITEMS, COLOR_CHOICES
 from .weathericons import DEFAULT_ICONSET_ID, iconset_choices
 
+try:
+    from Plugins.Extensions.AnimatedWeather.settings import (
+        animation_config as _central_animation_config,
+        cancel_settings as _central_cancel_settings,
+        iconset_config as _central_iconset_config,
+        interval_config as _central_interval_config,
+        save_settings as _central_save_settings,
+    )
+except (ImportError, AttributeError):
+    _central_animation_config = None
+    _central_cancel_settings = None
+    _central_iconset_config = None
+    _central_interval_config = None
+    _central_save_settings = None
+
 
 if not hasattr(config.plugins, "BundesligaFHD"):
     config.plugins.BundesligaFHD = ConfigSubsection()
@@ -56,18 +71,27 @@ def color_config(key):
 
 
 def weather_animation_config():
+    if _central_animation_config is not None:
+        return _central_animation_config()
     return _cfg.weather_animation
 
 
 def weather_animation_interval_config():
+    if _central_interval_config is not None:
+        return _central_interval_config()
     return _cfg.weather_animation_interval
 
 
 def weather_iconset_config():
+    if _central_iconset_config is not None:
+        return _central_iconset_config()
     return _cfg.weather_iconset
 
 
 def save_weather_settings():
+    if _central_save_settings is not None:
+        _central_save_settings()
+        return
     _cfg.weather_animation.save()
     _cfg.weather_animation_interval.save()
     _cfg.weather_iconset.save()
@@ -75,6 +99,9 @@ def save_weather_settings():
 
 
 def cancel_weather_settings():
+    if _central_cancel_settings is not None:
+        _central_cancel_settings()
+        return
     _cfg.weather_animation.cancel()
     _cfg.weather_animation_interval.cancel()
     _cfg.weather_iconset.cancel()
