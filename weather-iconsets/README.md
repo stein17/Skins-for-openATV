@@ -1,7 +1,7 @@
 # Animated Weather – Wettersets
 
 Diese neutralen Wettersets sind für das skinunabhängige Enigma2-Plugin
-**Animated Weather 0.3-r3** vorbereitet. Das Plugin verändert OAWeather nicht.
+**Animated Weather 0.3-r4** vorbereitet. Das Plugin verändert OAWeather nicht.
 
 Die Archive werden nicht im Plugin-IPK gespeichert. Bei der Installation lädt
 das Plugin nur das ausgewählte Set aus dem offiziellen GitHub-Release, prüft

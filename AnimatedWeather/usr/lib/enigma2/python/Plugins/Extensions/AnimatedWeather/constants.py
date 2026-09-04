@@ -4,7 +4,7 @@ from os.path import join
 
 
 PLUGIN_NAME = "Animated Weather"
-PLUGIN_VERSION = "0.3-r3"
+PLUGIN_VERSION = "0.3-r4"
 PLUGIN_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/AnimatedWeather"
 DATA_PATH = "/usr/share/enigma2/AnimatedWeather"
 CATALOG_PATH = join(DATA_PATH, "catalog.json")

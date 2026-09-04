@@ -7,6 +7,27 @@ from xml.etree.ElementTree import fromstring, tostring
 
 PATCH_MARKER = "_animatedweather_skin_loader"
 DETAIL_GUARD_MARKER = "_animatedweather_detail_guard"
+SKIN_CALLBACK_MARKER = "_animatedweather_registry_callback"
+
+
+def rewrite_oaweather_element(root):
+    """Ersetzt echte OAWeather-Wetterbilder in einem XML-Element."""
+    if root is None or not hasattr(root, "iter"):
+        return 0
+
+    changed = 0
+    for widget in root.iter("widget"):
+        if widget.get("render") != "OAWeatherPixmap":
+            continue
+        for converter in widget.findall("convert"):
+            if converter.get("type") != "OAWeather":
+                continue
+            mode = (converter.text or "").strip().split(",", 1)[0].strip()
+            if mode == "weathericon":
+                widget.set("render", "AnimatedWeatherPixmap")
+                changed += 1
+                break
+    return changed
 
 
 def rewrite_oaweather_skin(skin_text):
@@ -21,18 +42,7 @@ def rewrite_oaweather_skin(skin_text):
     except Exception:
         return skin_text, 0
 
-    changed = 0
-    for widget in root.iter("widget"):
-        if widget.get("render") != "OAWeatherPixmap":
-            continue
-        for converter in widget.findall("convert"):
-            if converter.get("type") != "OAWeather":
-                continue
-            mode = (converter.text or "").strip().split(",", 1)[0].strip()
-            if mode == "weathericon":
-                widget.set("render", "AnimatedWeatherPixmap")
-                changed += 1
-                break
+    changed = rewrite_oaweather_element(root)
     if not changed:
         return skin_text, 0
     return tostring(root, encoding="unicode"), changed
@@ -57,6 +67,66 @@ def patch_oaweather_skin_loader(weatherhelper):
 
     weatherhelper.loadSkin = load_skin
     setattr(weatherhelper, PATCH_MARKER, True)
+    return True
+
+
+def patch_registered_oaweather_screens(skin_module):
+    """Aktiviert Wetterbilder in vom aktuellen Skin gelieferten Screens.
+
+    Aktuelle OpenATV-Versionen speichern Skin-Screens in ``domScreens`` als
+    ``(XML-Element, Basispfad)``. Einige ältere Images verwenden dafür den
+    Namen ``dom_screens``. Beide Varianten werden unterstützt.
+
+    Es werden nur Screens berücksichtigt, deren Name mit ``OAWeather``
+    beginnt. Innerhalb dieser Screens bleiben Logo, Mondphase und alle
+    anderen Pixmaps unangetastet.
+    """
+    registry = getattr(skin_module, "domScreens", None)
+    if registry is None:
+        registry = getattr(skin_module, "dom_screens", None)
+    if not isinstance(registry, dict):
+        return 0, 0
+
+    changed_screens = 0
+    changed_widgets = 0
+    for screen_name, entry in list(registry.items()):
+        if not str(screen_name).startswith("OAWeather"):
+            continue
+        if isinstance(entry, (tuple, list)):
+            root = entry[0] if entry else None
+        else:
+            root = entry
+        changed = rewrite_oaweather_element(root)
+        if changed:
+            changed_screens += 1
+            changed_widgets += changed
+            print(
+                "[AnimatedWeather] Skin-Screen %s: %d Wetterwidgets aktiviert."
+                % (screen_name, changed)
+            )
+    return changed_screens, changed_widgets
+
+
+def patch_oaweather_skin_registry():
+    """Aktiviert auch bereits registrierte OAWeather-Screens eines Skins."""
+    try:
+        import skin as skin_module
+    except ImportError:
+        return False
+
+    # Die aktuellen Screens sind beim Sessionstart bereits geladen.
+    patch_registered_oaweather_screens(skin_module)
+
+    # Falls ein Image Skinteile ohne GUI-Neustart nachlädt, wird die
+    # Umschaltung über den offiziellen Skin-Callback erneut ausgeführt.
+    if not getattr(skin_module, SKIN_CALLBACK_MARKER, False):
+        def refresh_registered_screens():
+            patch_registered_oaweather_screens(skin_module)
+
+        add_callback = getattr(skin_module, "addCallback", None)
+        if callable(add_callback):
+            add_callback(refresh_registered_screens)
+            setattr(skin_module, SKIN_CALLBACK_MARKER, refresh_registered_screens)
     return True
 
 
@@ -99,9 +169,12 @@ def install_oaweather_integration():
         print("[AnimatedWeather] OAWeather ist nicht installiert; Integration übersprungen.")
         return False
     patched = patch_oaweather_skin_loader(oaweather_plugin.weatherhelper)
+    registry_patched = patch_oaweather_skin_registry()
     detail_guard = patch_oaweather_detail_view(oaweather_plugin)
     if patched:
         print("[AnimatedWeather] OAWeather-Laufzeitintegration ist aktiv.")
     if detail_guard:
         print("[AnimatedWeather] OAWeather-Detailansicht ist abgesichert.")
-    return patched
+    if registry_patched:
+        print("[AnimatedWeather] OAWeather-Screens des aktiven Skins sind eingebunden.")
+    return patched or registry_patched
