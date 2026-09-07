@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 
 
-class BLNetworkAdapterIcon(Converter):
+class BLWQHDNetworkAdapterIcon(Converter):
 	"""Select the 80x80 adapter type icon for one NetworkOverview row."""
 
 	VERSION = 1
