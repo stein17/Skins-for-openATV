@@ -109,7 +109,8 @@
     <font filename="/usr/share/fonts/ae_AlMateen.ttf" name="Replacement" scale="90" replacement="1" />
     <font filename="/usr/share/fonts/tuxtxt.ttf" name="Console" scale="100" />
     <font filename="/usr/share/fonts/andale.ttf" name="Fixed" scale="100" />
-	<font filename="/usr/share/enigma2/MetrixHD/fonts/MetrixLogos.ttf" name="MetrixLogos" scale="100" />
+    <font filename="/usr/share/enigma2/MetrixHD/fonts/MetrixIcons.ttf" name="MetrixIcons" scale="100" />
+    <font filename="/usr/share/enigma2/MetrixHD/fonts/MetrixLogos.ttf" name="MetrixLogos" scale="100" />
     <!-- Aliases that should be present -->
     <!-- aliases -->
     <alias name="Body" font="Regular" size="30" height="45" />
@@ -248,23 +249,21 @@
       <templates>
         <template name="Default" fonts="Regular;44,Regular;42,Regular;41" itemWidth="1040" itemHeight="81">
           <mode name="default" itemHeight="75">
-            <text index="0" position="30,3" size="810,75" font="0" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="NumberText" position="30,3" size="810,75" font="0" verticalAlignment="center" horizontalAlignment="left" />
           </mode>
           <mode name="text">
-            <text index="3" position="30,3" size="810,75" font="0" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Text" position="30,3" size="810,75" font="0" verticalAlignment="center" horizontalAlignment="left" />
           </mode>
           <mode name="number">
-            <text index="2" position="30,3" size="45,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
-            <text index="3" position="75,3" size="765,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Number" position="30,3" size="45,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Text" position="75,3" size="765,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
           </mode>
           <mode name="image">
-            <pixmap index="1" position="30,6" size="75,75" alpha="blend" scale="centerScaled" />
-            <text index="3" position="113,3" size="728,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Text" position="30,3" size="810,75" font="1" verticalAlignment="center" horizontalAlignment="left" />
           </mode>
           <mode name="both">
-            <pixmap index="1" position="30,6" size="75,75" alpha="blend" scale="centerScaled" />
-            <text index="2" position="113,3" size="45,75" font="2" verticalAlignment="center" horizontalAlignment="left" />
-            <text index="3" position="170,3" size="698,75" font="2" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Number" position="30,3" size="45,75" font="2" verticalAlignment="center" horizontalAlignment="left" />
+            <text index="Text" position="75,3" size="765,75" font="2" verticalAlignment="center" horizontalAlignment="left" />
           </mode>
         </template>
       </templates>
@@ -366,6 +365,203 @@
 </screen>
   <screen name="HelpWindow">
     <widget name="HelpWindow" position="1161,15" size="729,153" zPosition="1" transparent="1" alphatest="blend" />
+  </screen>
+  <screen name="NetworkOverview" position="0,0" size="1920,1080" title="Network Overview" flags="wfNoBorder" backgroundColor="transparent">
+
+    <!-- Kopfzeile plus maximal drei gleichzeitig sichtbare Adapter: LAN, WLAN und VPN. -->
+    <widget source="adapterList" render="Listbox" position="300,0" size="1050,780" zPosition="3" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" backgroundColorSelected="bl_bg" selectionPixmap="/usr/share/enigma2/icons/empty.png" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+      <template name="Default" colors="#00003300,#00330000,#00333333,#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;32,Regular;30,Regular;26" itemHeight="195">
+
+        <rowtemplate>
+          <text index="AdapterName" position="0,150" size="390,45" font="0" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
+          <text index="StatusText" position="405,150" size="255,45" font="0" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
+          <text index="MAC" position="675,150" size="375,45" font="0" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
+        </rowtemplate>
+
+        <rowtemplate>
+          <rectangle position="0,0" size="1050,75" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
+          <rectangle position="0,120" size="1050,75" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
+          <rectangle position="0,0" size="1050,2" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
+          <rectangle position="0,193" size="1050,2" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
+
+          <!-- AdapterGlyph und InternetGlyph werden durch externe PNGs ersetzt. -->
+          <text index="AdapterName" position="75,0" size="300,41" font="1" padding="8,0" verticalAlignment="center" />
+          <text index="AdapterType" position="75,41" size="300,34" font="2" padding="8,0" verticalAlignment="center" />
+          <text index="StatusText" position="435,0" size="225,75" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" padding="8,0" verticalAlignment="center" />
+          <text index="MAC" position="675,0" size="375,75" font="2" padding="8,0" verticalAlignment="center" />
+
+          <text text="IP-Adresse" position="0,75" size="338,45" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="8,0" verticalAlignment="center" />
+          <text text="Gateway" position="353,75" size="338,45" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="8,0" verticalAlignment="center" />
+          <text text="Geschwindigkeit" position="705,75" size="345,45" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="8,0" verticalAlignment="center" />
+
+          <text index="IPAddress" position="0,120" size="338,75" font="2" padding="8,0" verticalAlignment="center" />
+          <text index="Gateway" position="353,120" size="338,75" font="2" padding="8,0" verticalAlignment="center" />
+          <text index="Speed" position="705,120" size="345,75" font="2" padding="8,0" verticalAlignment="center" />
+        </rowtemplate>
+
+      </template>
+    </widget>
+
+    <!-- Adaptertyp: erste, zweite und dritte Datenzeile. -->
+    <widget source="adapterList" render="Pixmap" position="308,203" size="60,60" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/adapter_ethernet.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_wifi.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_vpn.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkAdapterIcon">1</convert>
+    </widget>
+    <widget source="adapterList" render="Pixmap" position="308,398" size="60,60" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/adapter_ethernet.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_wifi.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_vpn.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkAdapterIcon">2</convert>
+    </widget>
+    <widget source="adapterList" render="Pixmap" position="308,593" size="60,60" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/adapter_ethernet.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_wifi.png,/usr/share/enigma2/BundesligaFHD/Network/adapter_vpn.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkAdapterIcon">3</convert>
+    </widget>
+
+    <!-- Verbindungszustand: LAN aus/an, WLAN aus/an und VPN aus/an. -->
+    <widget source="adapterList" render="Pixmap" position="697,217" size="32,32" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/lan_on.png,/usr/share/enigma2/BundesligaFHD/Network/lan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_on.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkStatusIcon">1</convert>
+    </widget>
+    <widget source="adapterList" render="Pixmap" position="697,412" size="32,32" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/lan_on.png,/usr/share/enigma2/BundesligaFHD/Network/lan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_on.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkStatusIcon">2</convert>
+    </widget>
+    <widget source="adapterList" render="Pixmap" position="697,607" size="32,32" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/lan_on.png,/usr/share/enigma2/BundesligaFHD/Network/lan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaFHD/Network/vpn_status_on.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkStatusIcon">3</convert>
+    </widget>
+
+    <!-- Rechts: gespeicherte WLAN-Netzwerke. -->
+    <widget source="savedLabel" render="Label" position="1391,533" size="450,45" zPosition="6" font="Regular;21" foregroundColor="gray" padding="8,0" verticalAlignment="center" widgetBorderColor="gray" widgetBorderWidth="1" backgroundColor="bl_bg" transparent="1">
+      <convert type="ConditionalShowHide" />
+    </widget>
+
+    <widget source="savedList" render="Listbox" position="1391,578" size="450,225" zPosition="6" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" backgroundColorSelected="bl_bg" selectionPixmap="/usr/share/enigma2/icons/empty.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+      <template name="Default" colors="#00003300,#00330000,#00333333,#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;21,Regular;18,Regular;17,Regular;14" itemHeight="75">
+        <rowtemplate>
+          <text text="SSID / BSSID" position="0,0" size="165,75" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="6,0" verticalAlignment="center" />
+          <text index="StatusText" position="165,0" size="135,75" font="0" foregroundColor="gray" padding="6,0" verticalAlignment="center" />
+          <text text="Details" position="300,0" size="150,75" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="6,0" verticalAlignment="center" />
+        </rowtemplate>
+        <rowtemplate>
+          <rectangle position="0,0" size="450,75" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
+          <text index="SSID" position="0,0" size="165,38" font="1" padding="6,0" verticalAlignment="center" />
+          <text index="BSSID" position="0,38" size="165,37" font="2" foregroundColor="gray" foregroundColorSelected="club_selection_fg" padding="6,0" verticalAlignment="center" />
+          <text index="StatusText" position="165,0" size="135,38" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" horizontalAlignment="center" padding="3,0" verticalAlignment="center" />
+          <text index="Frequency" position="300,0" size="150,25" font="2" padding="6,0" verticalAlignment="center" />
+          <text text="Kanal" position="300,25" size="60,25" font="3" foregroundColor="gray" foregroundColorSelected="club_selection_fg" padding="6,0" verticalAlignment="center" />
+          <text index="Channel" position="360,25" size="90,25" font="2" padding="3,0" verticalAlignment="center" />
+          <text index="Encryption" position="300,50" size="150,25" font="2" padding="6,0" verticalAlignment="center" />
+        </rowtemplate>
+      </template>
+    </widget>
+
+    <widget source="savedList" render="Pixmap" position="1607,692" size="32,32" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_on.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkSavedStatusIcon">1</convert>
+    </widget>
+    <widget source="savedList" render="Pixmap" position="1607,767" size="32,32" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaFHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaFHD/Network/wlan_on.png" transparent="1" alphatest="blend" scale="1">
+      <convert type="BLFHDNetworkSavedStatusIcon">2</convert>
+    </widget>
+
+    <panel position="30,25" size="130,130"><panel name="Logo_Bundesliga_Default" /></panel>
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_I_M_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
+  </screen>
+  <screen name="NetworkWiFiScan" position="0,0" size="1920,1080" title="Wi-Fi Scan" flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="list" render="Listbox" position="305,150" size="1050,675" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="club_selection_gradient" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+      <template name="Default" fonts="Regular;33,Regular;30,enigma2icons;30" itemHeight="90">
+        <mode name="default">
+          <text index="Name" position="0,0" size="840,45" flags="scroll" font="0" padding="8,0" verticalAlignment="center" />
+          <text index="Channel" position="870,0" size="180,45" font="1" horizontalAlignment="right" padding="8,0" verticalAlignment="center" />
+          <text index="Glyph" position="30,45" size="45,45" font="2" horizontalAlignment="center" padding="8,0" verticalAlignment="center" />
+          <text index="Percentage" position="75,45" size="135,45" font="1" horizontalAlignment="right" padding="8,0" verticalAlignment="center" />
+          <text index="dBm" position="210,45" size="165,45" font="1" horizontalAlignment="right" padding="8,0" verticalAlignment="center" />
+          <text index="Encryption" position="405,45" size="270,45" font="1" horizontalAlignment="center" padding="8,0" verticalAlignment="center" />
+          <text index="Frequency" position="705,45" size="345,45" font="1" horizontalAlignment="right" padding="8,0" verticalAlignment="center" />
+        </mode>
+      </template>
+    </widget>
+    <widget name="description" position="1382,540" size="468,270" font="Regular;30" foregroundColor="bl_text" halign="center" backgroundColor="bl_bg" valign="center" transparent="1" zPosition="2" />
+    <panel position="30,25" size="130,130"><panel name="Logo_Bundesliga_Default" /></panel>
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
+  </screen>
+  <screen name="NetworkTest" position="0,0" size="1920,1080" title="Network Test" flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="list" render="Listbox" position="305,150" size="1050,675" foregroundColor="bl_text" backgroundColor="bl_bg" scrollbarMode="showNever" selection="false" transparent="1">
+      <template name="Default" fonts="enigma2icons;36,Regular;36,Regular;33,Regular;27" itemHeight="90">
+        <mode name="default">
+          <text index="Glyph" position="15,0" size="60,90" font="0" foregroundColor="+Color" foregroundColorSelected="+Color" horizontalAlignment="center" padding="8,0" verticalAlignment="center" />
+          <text index="Label" position="90,0" size="420,90" font="1" padding="8,0" verticalAlignment="center" />
+          <text index="Result" position="525,0" size="315,90" font="2" foregroundColor="+Color" foregroundColorSelected="+Color" padding="8,0" verticalAlignment="center" />
+          <text index="Detail" position="855,0" size="195,90" font="3" padding="8,0" verticalAlignment="center" />
+        </mode>
+      </template>
+    </widget>
+    <panel position="30,25" size="130,130"><panel name="Logo_Bundesliga_Default" /></panel>
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_H_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
+  </screen>
+  <screen name="NetworkMountsOverview" position="0,0" size="1920,1080" title="Network Mounts Overview" flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="mountList" render="Listbox" position="305,150" size="1050,675" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="club_selection_gradient" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+      <templates>
+        <template name="Default" fonts="Regular;33,Regular;27" itemHeight="75">
+          <mode name="default">
+            <text index="ShareName" position="0,0" size="675,42" font="0" padding="8,0" verticalAlignment="center" />
+            <text index="Description" position="30,42" size="645,30" font="1" padding="8,0" foregroundColor="gray" />
+            <text index="Mounted" position="675,0" size="188,75" font="0" padding="8,0" verticalAlignment="center" />
+            <text index="Active" position="863,0" size="187,75" font="0" horizontalAlignment="right" padding="8,0" verticalAlignment="center" />
+          </mode>
+        </template>
+      </templates>
+    </widget>
+    <panel position="30,25" size="130,130"><panel name="Logo_Bundesliga_Default" /></panel>
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_I_M_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
+  </screen>
+  <screen name="NetworkShares" position="0,0" size="1920,1080" title="Network Shares Browser" flags="wfNoBorder" backgroundColor="transparent">
+    <widget source="list" render="Listbox" position="305,150" size="1050,675" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="club_selection_gradient" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+      <template name="Default" fonts="enigma2icons;42,Regular;33,enigma2icons;32,Regular;27" itemHeight="75">
+        <rowtemplate>
+          <text index="Glyph" position="0,6" size="65,63" font="0" horizontalAlignment="center" padding="8,0" verticalAlignment="center" />
+          <text index="IPAddress" position="65,0" size="270,75" font="1" padding="8,0" verticalAlignment="center" />
+          <text index="Name" position="335,0" size="715,75" font="1" padding="8,0" verticalAlignment="center" />
+        </rowtemplate>
+        <rowtemplate>
+          <text index="Glyph" position="62,14" size="53,48" font="2" foregroundColor="+GlyphColor" horizontalAlignment="center" padding="8,0" verticalAlignment="center" />
+          <text index="Type" position="126,0" size="87,75" font="3" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
+          <text index="Name" position="213,0" size="246,75" font="3" padding="8,0" verticalAlignment="center" />
+          <text index="Description" position="459,0" size="591,38" font="3" padding="8,0" verticalAlignment="center" />
+          <text index="LocalPath" position="484,38" size="566,37" font="3" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
+        </rowtemplate>
+      </template>
+    </widget>
+    <widget name="description" position="1382,540" size="468,270" font="Regular;30" foregroundColor="bl_text" halign="center" backgroundColor="bl_bg" valign="center" transparent="1" zPosition="2" />
+    <panel position="30,25" size="130,130"><panel name="Logo_Bundesliga_Default" /></panel>
+    <panel name="Template_Color_Button_Automatic_all" />
+    <panel name="Template_Text_Buttons_O_E" />
+    <panel name="Logo_Setup_Default" />
+    <panel name="Header_Title_Clock_Setup" />
+    <panel name="VideoPicture_Setup" />
+    <panel name="Bundesliga_Basic_Setup_club_primary" />
+    <panel name="Bundesliga_Setup_right_Pic_club_primary" />
+    <panel name="Banner_Setup_Default" />
   </screen>
   <!-- Network Adapter -->
   <screen name="AdapterSetup" position="0,0" size="1920,1080" title="Network Setup" flags="wfNoBorder" backgroundColor="transparent">
