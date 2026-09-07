@@ -3,7 +3,7 @@ from Components.NetworkManager import networkManager
 from Components.Element import cached
 
 
-class BLNetworkStatusIcon(Converter):
+class BLWQHDNetworkStatusIcon(Converter):
 	"""Select the 43x43 LAN, WLAN or VPN status icon for one overview row."""
 
 	VERSION = 4
