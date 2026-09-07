@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 
 
-class BLNetworkSavedStatusIcon(Converter):
+class BLWQHDNetworkSavedStatusIcon(Converter):
 	"""Select WLAN on/off for one visible saved-network row."""
 
 	VERSION = 1
