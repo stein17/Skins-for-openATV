@@ -6,6 +6,7 @@ OAWeather selbst wird nicht verändert. Der Skin ersetzt lediglich
 """
 from __future__ import absolute_import
 
+from collections import OrderedDict
 from json import load
 from os.path import basename, exists, isdir, isfile, join, splitext
 from Components.Renderer.Renderer import Renderer
@@ -37,29 +38,33 @@ except Exception:
 
 
 DEFAULT_FRAME_INTERVAL = 200
+MAX_CACHED_FRAME_PATHS = 8
 
 
 class _FrameCache(object):
-    frames = {}
+    frames = OrderedDict()
 
     @classmethod
     def get(cls, frame_path):
-        if frame_path in cls.frames:
-            return cls.frames[frame_path]
-        result = []
-        if isfile(frame_path):
-            pixmap = LoadPixmap(frame_path, cached=False)
-            if pixmap is not None:
-                result.append(pixmap)
-        elif isdir(frame_path):
-            for index in range(MAX_FRAMES):
-                filename = join(frame_path, "a%d.png" % index)
-                if not isfile(filename):
-                    break
-                pixmap = LoadPixmap(filename, cached=False)
+        try:
+            result = cls.frames.pop(frame_path)
+        except KeyError:
+            result = []
+            if isfile(frame_path):
+                pixmap = LoadPixmap(frame_path, cached=False)
                 if pixmap is not None:
                     result.append(pixmap)
+            elif isdir(frame_path):
+                for index in range(MAX_FRAMES):
+                    filename = join(frame_path, "a%d.png" % index)
+                    if not isfile(filename):
+                        break
+                    pixmap = LoadPixmap(filename, cached=False)
+                    if pixmap is not None:
+                        result.append(pixmap)
         cls.frames[frame_path] = result
+        while len(cls.frames) > MAX_CACHED_FRAME_PATHS:
+            cls.frames.popitem(last=False)
         return result
 
 

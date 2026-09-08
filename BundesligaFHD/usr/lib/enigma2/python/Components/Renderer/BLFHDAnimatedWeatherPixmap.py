@@ -1,6 +1,7 @@
 # Animierter OAWeather-Renderer fuer den BundesligaFHD Skin.
 # Die SVG-Animationen von Meteocons werden als vorbereitete PNG-Frames geladen.
 
+from collections import OrderedDict
 from json import load
 from os.path import basename, exists, join, splitext
 from weakref import WeakSet
@@ -36,16 +37,19 @@ from enigma import (
 DEFAULT_ANIMATION_PATH = ""
 DEFAULT_FRAME_INTERVAL = 200
 FRAME_COUNT = 24
+MAX_CACHED_FRAME_PATHS = 8
 
 
 class _FrameCache:
 	"""Teilt bereits geladene Frames zwischen allen Wetterwidgets."""
 
-	frames = {}
+	frames = OrderedDict()
 
 	@classmethod
 	def get(cls, framePath):
-		if framePath not in cls.frames:
+		try:
+			result = cls.frames.pop(framePath)
+		except KeyError:
 			result = []
 			for index in range(FRAME_COUNT):
 				filename = join(framePath, "a%d.png" % index)
@@ -54,8 +58,10 @@ class _FrameCache:
 				pixmap = LoadPixmap(filename, cached=False)
 				if pixmap is not None:
 					result.append(pixmap)
-			cls.frames[framePath] = result
-		return cls.frames[framePath]
+		cls.frames[framePath] = result
+		while len(cls.frames) > MAX_CACHED_FRAME_PATHS:
+			cls.frames.popitem(last=False)
+		return result
 
 
 class _AnimationClock:
