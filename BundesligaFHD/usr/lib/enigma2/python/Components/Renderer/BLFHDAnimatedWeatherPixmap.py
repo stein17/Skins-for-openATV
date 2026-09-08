@@ -38,6 +38,26 @@ DEFAULT_FRAME_INTERVAL = 200
 FRAME_COUNT = 24
 
 
+class _FrameCache:
+	"""Teilt bereits geladene Frames zwischen allen Wetterwidgets."""
+
+	frames = {}
+
+	@classmethod
+	def get(cls, framePath):
+		if framePath not in cls.frames:
+			result = []
+			for index in range(FRAME_COUNT):
+				filename = join(framePath, "a%d.png" % index)
+				if not exists(filename):
+					break
+				pixmap = LoadPixmap(filename, cached=False)
+				if pixmap is not None:
+					result.append(pixmap)
+			cls.frames[framePath] = result
+		return cls.frames[framePath]
+
+
 class _AnimationClock:
 	"""Ein gemeinsamer Taktgeber fuer alle fuenf Wetterwidgets."""
 
@@ -241,16 +261,9 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 	def loadFrames(self, code, animationPath, conditionText=""):
 		folder = self.getMappedFolder(code, animationPath, conditionText)
 		framePath = join(animationPath, folder)
-		frames = []
 		if folder and exists(framePath):
-			for index in range(FRAME_COUNT):
-				filename = join(framePath, "a%d.png" % index)
-				if not exists(filename):
-					break
-				pixmap = LoadPixmap(filename, cached=False)
-				if pixmap is not None:
-					frames.append(pixmap)
-		return frames
+			return _FrameCache.get(framePath)
+		return []
 
 	def showStaticFallback(self):
 		try:

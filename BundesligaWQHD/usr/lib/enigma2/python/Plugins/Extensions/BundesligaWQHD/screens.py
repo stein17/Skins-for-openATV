@@ -713,7 +713,7 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
         self.session.openWithCallback(
             lambda answer: self._iconset_download_answer(answer, team_changed, entry),
             MessageBox,
-            _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?\n\nBis zur Installation bleiben die statischen OAWeather-Symbole aktiv.")
+            _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?\n\nBis zur Installation bleiben die statischen OAWeather-Symbole aktiv.\n\nUm Flash-Speicher zu sparen, bleibt nur das ausgewählte animierte Wetterset installiert. Ein zuvor geladenes Set wird entfernt.")
             % (entry["title"], self.weather_icons.package_size_text(entry)),
             MessageBox.TYPE_YESNO,
             default=True
