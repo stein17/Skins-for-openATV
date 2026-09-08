@@ -14,7 +14,7 @@ from urllib.request import Request, urlopen
 from .constants import SKIN_BASE
 
 
-DEFAULT_ICONSET_ID = "meteocons-2-fill"
+DEFAULT_ICONSET_ID = "static"
 RESOLUTION_KEY = "wqhd"
 FRAME_COUNT = 24
 MAX_ARCHIVE_SIZE = 25 * 1024 * 1024
@@ -25,15 +25,21 @@ OFFICIAL_RELEASE_PREFIX = (
     "https://github.com/stein17/Skins-for-openATV/releases/download/"
 )
 RELEASE_BASE_URL = OFFICIAL_RELEASE_PREFIX + "animated-weather-icons-v1.0.0/"
-DEFAULT_PATH = os.path.join(SKIN_BASE, "weather", "Meteocons_Animated")
 OPTIONAL_BASE = os.path.join(SKIN_BASE, "weather", "AnimatedWeatherSets")
 
 
 ICONSETS = (
     {
         "id": DEFAULT_ICONSET_ID,
-        "title": "Meteocons 2 Fill (Standard)",
+        "title": "OAWeather Original (statisch)",
         "bundled_default": True,
+        "license": "OAWeather",
+        "packages": {},
+    },
+    {
+        "id": "meteocons-2-fill",
+        "title": "Meteocons 2 Fill",
+        "bundled_default": False,
         "license": "MIT",
         "packages": {
             "fhd": {
@@ -189,17 +195,17 @@ def iconset_entry(iconset_id):
 
 def iconset_path(iconset_id):
     if iconset_id == DEFAULT_ICONSET_ID:
-        return DEFAULT_PATH
+        return ""
     if not re.match(r"^[a-z0-9][a-z0-9.-]+$", iconset_id or ""):
-        return DEFAULT_PATH
+        return ""
     return os.path.join(OPTIONAL_BASE, iconset_id)
 
 
 def resolved_iconset_path(iconset_id):
     selected = iconset_path(iconset_id)
-    if os.path.isfile(os.path.join(selected, "mapping.json")):
+    if selected and os.path.isfile(os.path.join(selected, "mapping.json")):
         return selected
-    return DEFAULT_PATH
+    return ""
 
 
 def _format_bytes(value):
@@ -225,6 +231,8 @@ class WeatherIconsetManager(object):
         return _format_bytes(self.package(entry).get("bytes", 0))
 
     def is_installed(self, iconset_id):
+        if iconset_id == DEFAULT_ICONSET_ID:
+            return True
         return self._validate_installation(iconset_path(iconset_id), quiet=True)
 
     def _download(self, url, destination, expected_size):
@@ -345,9 +353,9 @@ class WeatherIconsetManager(object):
             raise
 
     def entry_from_directory(self, directory):
-        base = os.path.basename(os.path.normpath(directory))
-        if os.path.normpath(directory) == os.path.normpath(DEFAULT_PATH):
+        if not directory:
             return self.entry(DEFAULT_ICONSET_ID)
+        base = os.path.basename(os.path.normpath(directory))
         return self.entry(base)
 
     def _remove_other_optional_sets(self, keep_id, entry=None):

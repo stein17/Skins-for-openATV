@@ -21,7 +21,7 @@ except ImportError:
 	weather_animation_config = None
 	weather_animation_interval_config = None
 	weather_iconset_config = None
-	DEFAULT_ICONSET_ID = "meteocons-2-fill"
+	DEFAULT_ICONSET_ID = "static"
 	resolved_iconset_path = None
 from enigma import (
 	BT_HALIGN_CENTER,
@@ -33,7 +33,7 @@ from enigma import (
 )
 
 
-DEFAULT_ANIMATION_PATH = "/usr/share/enigma2/BundesligaFHD/weather/Meteocons_Animated"
+DEFAULT_ANIMATION_PATH = ""
 DEFAULT_FRAME_INTERVAL = 200
 FRAME_COUNT = 24
 

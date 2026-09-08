@@ -713,7 +713,7 @@ class BundesligaWQHDConfig(Screen, ConfigListScreen):
         self.session.openWithCallback(
             lambda answer: self._iconset_download_answer(answer, team_changed, entry),
             MessageBox,
-            _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?\n\nDas Standardset bleibt als Rückfall erhalten.")
+            _("%s ist noch nicht installiert.\n\nJetzt %s von GitHub herunterladen?\n\nBis zur Installation bleiben die statischen OAWeather-Symbole aktiv.")
             % (entry["title"], self.weather_icons.package_size_text(entry)),
             MessageBox.TYPE_YESNO,
             default=True
