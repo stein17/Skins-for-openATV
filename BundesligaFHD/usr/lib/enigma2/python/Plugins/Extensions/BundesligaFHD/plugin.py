@@ -21,6 +21,15 @@ from .settings import (
 )
 
 
+def _install_weather_integration():
+    """Aktiviert animierte Wetterbilder im OAWeather-Hauptfenster."""
+    try:
+        from .weatherintegration import install_oaweather_integration
+        install_oaweather_integration()
+    except Exception as error:
+        print("[BundesligaFHDConfig] OAWeather-Integration fehlgeschlagen: %s" % error)
+
+
 def restore_runtime_state():
     """Synchronize the backed-up state with the installed skin files."""
     try:
@@ -141,6 +150,7 @@ def sessionstart(reason, session=None, **kwargs):
     session = session or kwargs.get("session")
     if session is None or config.skin.primary_skin.value != SKIN_XML:
         return
+    _install_weather_integration()
     missing = restore_runtime_state()
     if missing and _restore_helper is None:
         _restore_helper = _RestoreTeamHelper(session, missing)

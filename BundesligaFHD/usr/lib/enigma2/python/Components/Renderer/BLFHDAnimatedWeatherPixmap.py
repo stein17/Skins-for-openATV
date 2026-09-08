@@ -172,36 +172,53 @@ class BLFHDAnimatedWeatherPixmap(Renderer):
 			pass
 		return ""
 
+	def _normalizedText(self, conditionText):
+		return (
+			(conditionText or "")
+			.casefold()
+			.replace("ä", "ae")
+			.replace("ö", "oe")
+			.replace("ü", "ue")
+			.replace("ß", "ss")
+		)
+
+	def _existingTarget(self, animationPath, preferred, fallback):
+		target = join(animationPath, preferred) if preferred else ""
+		return preferred if target and exists(target) else fallback
+
 	def getMappedFolder(self, code, animationPath, conditionText=""):
 		mapping = self.getWeatherMap(animationPath)
 		entry = mapping.get(code, mapping.get("NA", {}))
 		folder = entry.get("icon", "") if isinstance(entry, dict) else str(entry)
-		text = ""
-		if conditionText:
-			text = conditionText.casefold().replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
+		text = self._normalizedText(conditionText)
 
-		# Die beiden verwechselbaren Tagesvarianten anhand des Textes trennen.
+		# Die Textkorrekturen sind für das stein17-Set gedacht. Bei anderen
+		# Sets bleibt ihr eigenes mapping.json erhalten, wenn der bevorzugte
+		# Motivordner dort nicht existiert.
 		if code in ("30", "34") and text:
-			if any(word in text for word in ("sonnig", "heiter", "sunny", "fair")):
-				folder = "mostly-sunny-day"
-			elif any(word in text for word in ("bewoelkt", "cloudy")):
-				folder = "partly-cloudy-day"
+			if any(phrase in text for phrase in (
+				"teilweise sonnig", "teils sonnig", "teilweise bewoelkt",
+				"partly sunny", "partly cloudy", "partly clear",
+			)):
+				folder = self._existingTarget(animationPath, "partly-cloudy-day", folder)
+			elif any(phrase in text for phrase in (
+				"ueberwiegend sonnig", "meist sonnig",
+				"groesstenteils sonnig", "mostly sunny",
+				"mainly sunny", "fair",
+			)):
+				folder = self._existingTarget(animationPath, "mostly-sunny-day", folder)
 
-		# MSN/OAWeather kann auch bei Regenlagen unterschiedliche Codes mit
-		# demselben sichtbaren Text liefern. Nur eindeutig benannte Regenstufen
-		# werden deshalb textbasiert vereinheitlicht; Schauer und Gewitter
-		# bleiben weiterhin vollständig mapping.json-gesteuert.
 		if text:
 			if any(word in text for word in ("gefrierender regen", "gefrierender nieselregen", "freezing rain", "freezing drizzle")):
-				folder = "freezing-rain"
+				folder = self._existingTarget(animationPath, "freezing-rain", folder)
 			elif any(word in text for word in ("starker regen", "starkregen", "heavy rain", "heavy rainfall")):
-				folder = "heavy-rain"
+				folder = self._existingTarget(animationPath, "heavy-rain", folder)
 			elif any(word in text for word in ("leichter regen", "leichter regenfall", "light rain", "light rainfall")):
-				folder = "light-rain"
+				folder = self._existingTarget(animationPath, "light-rain", folder)
 			elif any(word in text for word in ("nieselregen", "spruehregen", "drizzle")):
-				folder = "drizzle"
+				folder = self._existingTarget(animationPath, "drizzle", folder)
 			elif text.strip(" .,-") in ("regen", "regenfall", "rain", "rainfall"):
-				folder = "rain"
+				folder = self._existingTarget(animationPath, "rain", folder)
 		return folder
 
 	def animationEnabled(self):
