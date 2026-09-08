@@ -57,6 +57,16 @@ if not hasattr(_cfg, "weather_iconset"):
         choices=iconset_choices()
     )
 
+# Eine gespeicherte Auswahl aus der alten skininternen Wetterverwaltung wird
+# auf das aktuelle Set umgestellt. Der Download erfolgt wie bisher erst nach
+# Bestätigung beim Speichern der Bundesliga-Konfiguration.
+if getattr(_cfg.weather_iconset, "value", "") in (
+    "stein17-animated-v1.0",
+    "stein17-weather-v1.2",
+    "stein17-weather-v1.3",
+):
+    _cfg.weather_iconset.value = "stein17-weather-v1.4"
+
 for key, _label, _xml_name in COLOR_ITEMS:
     if not hasattr(_cfg, key):
         setattr(

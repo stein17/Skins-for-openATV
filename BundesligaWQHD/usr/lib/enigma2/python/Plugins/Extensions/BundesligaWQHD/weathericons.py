@@ -21,10 +21,10 @@ MAX_ARCHIVE_SIZE = 25 * 1024 * 1024
 MAX_UNPACKED_SIZE = 35 * 1024 * 1024
 MAX_ARCHIVE_FILES = 1200
 DOWNLOAD_CHUNK_SIZE = 128 * 1024
-RELEASE_BASE_URL = (
+OFFICIAL_RELEASE_PREFIX = (
     "https://github.com/stein17/Skins-for-openATV/releases/download/"
-    "animated-weather-icons-v1.0.0/"
 )
+RELEASE_BASE_URL = OFFICIAL_RELEASE_PREFIX + "animated-weather-icons-v1.0.0/"
 DEFAULT_PATH = os.path.join(SKIN_BASE, "weather", "Meteocons_Animated")
 OPTIONAL_BASE = os.path.join(SKIN_BASE, "weather", "AnimatedWeatherSets")
 
@@ -53,23 +53,30 @@ ICONSETS = (
         },
     },
     {
-        "id": "stein17-animated-v1.0",
-        "title": "stein17 Animated Weather v1.1",
+        "id": "stein17-weather-v1.4",
+        "title": "stein17 Weather v1.4 (animiert)",
         "bundled_default": False,
-        "license": "Copyright stein17 - private Nutzung",
+        "replaces": (
+            "stein17-animated-v1.0",
+            "stein17-weather-v1.2",
+            "stein17-weather-v1.3",
+        ),
+        "license": "Copyright stein17 - Nutzung mit Animated Weather gestattet; sonst nur mit Genehmigung",
         "packages": {
             "fhd": {
-                "file": "stein17-animated-v1.1-universal-180.zip",
-                "bytes": 17897047,
-                "sha256": "2888b41da28e38d1ad6478793c4de48d5f718a1968379bcc9389e473c9d1131f",
-                "archive_root": "stein17-animated-v1.0",
+                "file": "stein17-weather-v1.4.zip",
+                "url": OFFICIAL_RELEASE_PREFIX + "animated-weather-icons-v1.4.0/stein17-weather-v1.4.zip",
+                "bytes": 12789985,
+                "sha256": "9aa01d75ea5a6bae812918e8ac620cfb119880c23b967d8649fac10dc9a81274",
+                "archive_root": "stein17-weather-v1.4",
                 "icon_size": 180,
             },
             "wqhd": {
-                "file": "stein17-animated-v1.1-universal-180.zip",
-                "bytes": 17897047,
-                "sha256": "2888b41da28e38d1ad6478793c4de48d5f718a1968379bcc9389e473c9d1131f",
-                "archive_root": "stein17-animated-v1.0",
+                "file": "stein17-weather-v1.4.zip",
+                "url": OFFICIAL_RELEASE_PREFIX + "animated-weather-icons-v1.4.0/stein17-weather-v1.4.zip",
+                "bytes": 12789985,
+                "sha256": "9aa01d75ea5a6bae812918e8ac620cfb119880c23b967d8649fac10dc9a81274",
+                "archive_root": "stein17-weather-v1.4",
                 "icon_size": 180,
             },
         },
@@ -221,9 +228,9 @@ class WeatherIconsetManager(object):
         return self._validate_installation(iconset_path(iconset_id), quiet=True)
 
     def _download(self, url, destination, expected_size):
-        if not url.startswith(RELEASE_BASE_URL):
+        if not url.startswith(OFFICIAL_RELEASE_PREFIX):
             raise WeatherIconsetError("Unsichere Downloadadresse im Wetterkatalog.")
-        request = Request(url, headers={"User-Agent": "BundesligaWQHD-WeatherIconsets/1.0"})
+        request = Request(url, headers={"User-Agent": "BundesligaWQHD-WeatherIconsets/1.4"})
         total = 0
         try:
             response = urlopen(request, timeout=35)
@@ -343,12 +350,22 @@ class WeatherIconsetManager(object):
             return self.entry(DEFAULT_ICONSET_ID)
         return self.entry(base)
 
-    def _remove_other_optional_sets(self, keep_id):
+    def _remove_other_optional_sets(self, keep_id, entry=None):
+        removable_ids = set(
+            item["id"] for item in ICONSETS
+            if not item.get("bundled_default")
+        )
+        removable_ids.update((entry or {}).get("replaces", ()))
         if not os.path.isdir(OPTIONAL_BASE):
             return
         for name in os.listdir(OPTIONAL_BASE):
             path = os.path.join(OPTIONAL_BASE, name)
-            if name != keep_id and iconset_entry(name) and os.path.isdir(path) and not os.path.islink(path):
+            if (
+                name != keep_id
+                and name in removable_ids
+                and os.path.isdir(path)
+                and not os.path.islink(path)
+            ):
                 shutil.rmtree(path)
 
     def install(self, iconset_id, progress=None):
@@ -371,7 +388,8 @@ class WeatherIconsetManager(object):
         backup = ""
         try:
             progress("Wetterpaket wird von GitHub geladen …")
-            self._download(RELEASE_BASE_URL + package["file"], archive_filename, package.get("bytes"))
+            package_url = package.get("url") or (RELEASE_BASE_URL + package["file"])
+            self._download(package_url, archive_filename, package.get("bytes"))
             progress("SHA-256-Prüfsumme wird kontrolliert …")
             self._verify_sha256(archive_filename, package.get("sha256"))
             unpack_directory = os.path.join(work, "unpacked")
@@ -391,7 +409,7 @@ class WeatherIconsetManager(object):
             if backup:
                 shutil.rmtree(backup)
                 backup = ""
-            self._remove_other_optional_sets(iconset_id)
+            self._remove_other_optional_sets(iconset_id, entry)
         except Exception:
             if backup and os.path.isdir(backup) and not os.path.lexists(target):
                 os.rename(backup, target)
