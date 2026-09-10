@@ -375,41 +375,48 @@
       gesperrte Listenzeile geliefert.
     -->
     <widget source="adapterList" render="Listbox" position="400,0" size="1400,1040" zPosition="3" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" backgroundColorSelected="bl_bg" selectionPixmap="/usr/share/enigma2/icons/empty.png" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
-      <template name="Default" colors="#00003300,#00330000,#00333333,#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;42,Regular;40,Regular;34" itemHeight="260">
+      <template name="Default" colors="#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;42,Regular;40,Regular;34" itemHeight="260">
 
         <!-- Einmalige Überschrift: Adapter / Status / MAC-Adresse. -->
         <rowtemplate>
-          <text index="AdapterName" position="0,200" size="520,60" font="0" foregroundColor="gray" padding="10,0" verticalAlignment="center" />
-          <text index="StatusText" position="540,200" size="340,60" font="0" foregroundColor="gray" padding="10,0" verticalAlignment="center" />
-          <text index="MAC" position="900,200" size="500,60" font="0" foregroundColor="gray" padding="10,0" verticalAlignment="center" />
+          <text index="AdapterName" position="0,187" size="469,60" font="0" foregroundColor="bernstein" padding="10,0" verticalAlignment="center" />
+          <text index="StatusText" position="469,187" size="470,60" font="0" foregroundColor="bernstein" padding="10,0" verticalAlignment="center" />
+          <text index="MAC" position="939,187" size="461,60" font="0" foregroundColor="bernstein" padding="10,0" verticalAlignment="center" />
         </rowtemplate>
 
         <!-- Adapterdaten in zwei gleich breiten Auswahlflächen. -->
         <rowtemplate>
-          <rectangle position="0,0" size="1400,100" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
-          <rectangle position="0,160" size="1400,100" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
+  <!-- Kompletter Hintergrund des ausgewählten Adapters -->
+<rectangle position="0,0" size="1400,260" backgroundColor="bl_bg" backgroundColorSelected="#0018171c" />
+
+<!-- Linien über dem Auswahlhintergrund -->
+<rectangle position="0,0" size="1400,3" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
+<rectangle position="0,257" size="1400,3" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
           <rectangle position="0,0" size="1400,3" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
           <rectangle position="0,257" size="1400,3" backgroundColor="bl_bg" backgroundColorSelected="club_primary" />
 
           <!-- Der AdapterGlyph-Font wird durch externe 80x80-PNGs ersetzt. -->
-          <text index="AdapterName" position="100,0" size="400,55" font="1" padding="10,0" verticalAlignment="center" />
-          <text index="AdapterType" position="100,55" size="400,45" font="2" padding="10,0" verticalAlignment="center" />
+          <text index="AdapterName" position="100,0" size="369,55" font="1" padding="10,0" verticalAlignment="center" />
+          <text index="AdapterType" position="100,55" size="369,45" font="2" padding="10,0" verticalAlignment="center" />
 
-          <!-- Das InternetGlyph wird durch externe 43x43-Status-PNGs ersetzt. -->
-          <text index="StatusText" position="580,0" size="300,100" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" padding="10,0" verticalAlignment="center" />
-          <text index="MAC" position="900,0" size="500,100" font="2" padding="10,0" verticalAlignment="center" />
+          <!-- Das InternetGlyph wird durch externe 48x48-Status-PNGs ersetzt. -->
+          <text index="StatusText" position="540,0" size="399,100" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" padding="10,0" verticalAlignment="center" />
+          <text index="MAC" position="939,0" size="461,100" font="2" padding="10,0" verticalAlignment="center" />
 
-          <text text="IP-Adresse" position="0,100" size="450,60" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="10,0" verticalAlignment="center" />
-          <text text="Gateway" position="470,100" size="450,60" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="10,0" verticalAlignment="center" />
-          <text text="Geschwindigkeit" position="940,100" size="460,60" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="10,0" verticalAlignment="center" />
+          <text text="IP-Adresse" position="0,100" size="469,60" font="0" foregroundColor="cyan" foregroundColorSelected="grey" padding="10,0" verticalAlignment="center" />
+          <text text="Gateway" position="469,100" size="470,60" font="0" foregroundColor="cyan" foregroundColorSelected="grey" padding="10,0" verticalAlignment="center" />
+          <text text="Geschwindigkeit" position="939,100" size="461,60" font="0" foregroundColor="cyan" foregroundColorSelected="grey" padding="10,0" verticalAlignment="center" />
 
-          <text index="IPAddress" position="0,160" size="450,100" font="2" padding="10,0" verticalAlignment="center" />
-          <text index="Gateway" position="470,160" size="450,100" font="2" padding="10,0" verticalAlignment="center" />
-          <text index="Speed" position="940,160" size="460,100" font="2" padding="10,0" verticalAlignment="center" />
+          <text index="IPAddress" position="0,160" size="469,100" font="2" padding="10,0" verticalAlignment="center" />
+          <text index="Gateway" position="469,160" size="470,100" font="2" padding="10,0" verticalAlignment="center" />
+          <text index="Speed" position="939,160" size="461,100" font="2" padding="10,0" verticalAlignment="center" />
         </rowtemplate>
 
       </template>
     </widget>
+
+    <!-- Feste Trennlinie unter Adapter, Status und MAC-Adresse. -->
+    <eLabel position="400,253" size="1400,4" zPosition="10" backgroundColor="club_primary" />
 
     <!-- Adaptertyp: erste, zweite und dritte Datenzeile. -->
     <widget source="adapterList" render="Pixmap" position="410,270" size="80,80" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/adapter_ethernet.png,/usr/share/enigma2/BundesligaWQHD/Network/adapter_wifi.png,/usr/share/enigma2/BundesligaWQHD/Network/adapter_vpn.png" transparent="1" alphatest="blend">
@@ -423,53 +430,53 @@
     </widget>
 
     <!-- Verbindungszustand: LAN aus/an, WLAN aus/an und VPN aus/an. -->
-    <widget source="adapterList" render="Pixmap" position="929,289" size="43,43" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
+    <widget source="adapterList" render="Pixmap" position="880,285" size="48,48" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
       <convert type="BLWQHDNetworkStatusIcon">1</convert>
     </widget>
-    <widget source="adapterList" render="Pixmap" position="929,549" size="43,43" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
+    <widget source="adapterList" render="Pixmap" position="880,545" size="48,48" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
       <convert type="BLWQHDNetworkStatusIcon">2</convert>
     </widget>
-    <widget source="adapterList" render="Pixmap" position="929,809" size="43,43" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
+    <widget source="adapterList" render="Pixmap" position="880,805" size="48,48" zPosition="8" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/lan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/lan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_off.png,/usr/share/enigma2/BundesligaWQHD/Network/vpn_status_on.png" transparent="1" alphatest="blend">
       <convert type="BLWQHDNetworkStatusIcon">3</convert>
     </widget>
 
     <!-- Rechts: Überschrift der gespeicherten WLAN-Netzwerke. -->
-    <widget source="savedLabel" render="Label" position="1854,710" size="600,60" zPosition="6" font="Regular;28" foregroundColor="gray" padding="10,0" verticalAlignment="center" widgetBorderColor="gray" widgetBorderWidth="1" backgroundColor="bl_bg" transparent="1">
+    <widget source="savedLabel" render="Label" position="1854,711" size="600,40" zPosition="6" font="Regular;28" foregroundColor="grey" padding="10,0" verticalAlignment="center" widgetBorderColor="grey" widgetBorderWidth="1" backgroundColor="bl_bg" transparent="1">
       <convert type="ConditionalShowHide" />
     </widget>
 
     <!-- Rechts: zwei gespeicherte WLAN-Netzwerke samt Details. -->
-    <widget source="savedList" render="Listbox" position="1854,770" size="600,300" zPosition="6" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" backgroundColorSelected="bl_bg" selectionPixmap="/usr/share/enigma2/icons/empty.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
-      <template name="Default" colors="#00003300,#00330000,#00333333,#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;28,Regular;24,Regular;22,Regular;18" itemHeight="100">
+    <widget source="savedList" render="Listbox" position="1854,751" size="600,261" zPosition="6" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" backgroundColorSelected="bl_bg" selectionPixmap="/usr/share/enigma2/icons/empty.png" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
+      <template name="Default" colors="#0000CC00,#00CC0000,#00CCCCCC" fonts="Regular;28,Regular;24,Regular;22,Regular;18" itemHeight="87">
 
         <rowtemplate>
-          <text text="SSID / BSSID" position="0,0" size="220,100" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="8,0" verticalAlignment="center" />
-          <text index="StatusText" position="220,0" size="180,100" font="0" foregroundColor="gray" padding="8,0" verticalAlignment="center" />
-          <text text="Details" position="400,0" size="200,100" font="0" foregroundColor="gray" foregroundColorSelected="gray" padding="8,0" verticalAlignment="center" />
+          <text text="SSID / BSSID" position="0,0" size="280,87" font="0" foregroundColor="grey" foregroundColorSelected="grey" padding="8,0" verticalAlignment="center" />
+          <text index="StatusText" position="280,0" size="187,87" font="0" foregroundColor="grey" horizontalAlignment="center" padding="4,0" verticalAlignment="center" />
+          <text text="Details" position="467,0" size="133,87" font="0" foregroundColor="grey" foregroundColorSelected="grey" padding="5,0" verticalAlignment="center" />
         </rowtemplate>
 
         <rowtemplate>
-          <rectangle position="0,0" size="600,100" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
+          <rectangle position="0,0" size="600,87" foregroundGradient="bl_bg,bl_bg,vertical" foregroundGradientSelected="club_selection_gradient" />
 
-          <text index="SSID" position="0,0" size="220,50" font="1" padding="8,0" verticalAlignment="center" />
-          <text index="BSSID" position="0,50" size="220,50" font="2" foregroundColor="gray" foregroundColorSelected="club_selection_fg" padding="8,0" verticalAlignment="center" />
+          <text index="SSID" position="0,0" size="280,44" font="1" padding="8,0" verticalAlignment="center" />
+          <text index="BSSID" position="0,44" size="280,43" font="2" foregroundColor="grey" foregroundColorSelected="club_selection_fg" padding="8,0" verticalAlignment="center" />
 
-          <text index="StatusText" position="220,0" size="180,50" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" horizontalAlignment="center" padding="4,0" verticalAlignment="center" />
+          <text index="StatusText" position="280,0" size="187,43" font="2" foregroundColor="+StatusColor" foregroundColorSelected="+StatusColorSelected" horizontalAlignment="center" padding="4,0" verticalAlignment="center" />
 
-          <text index="Frequency" position="400,0" size="200,33" font="2" padding="8,0" verticalAlignment="center" />
-          <text text="Kanal" position="400,33" size="80,33" font="3" foregroundColor="gray" foregroundColorSelected="club_selection_fg" padding="8,0" verticalAlignment="center" />
-          <text index="Channel" position="480,33" size="120,33" font="2" padding="4,0" verticalAlignment="center" />
-          <text index="Encryption" position="400,66" size="200,34" font="2" padding="8,0" verticalAlignment="center" />
+          <text index="Frequency" position="467,0" size="133,29" font="2" padding="5,0" verticalAlignment="center" />
+          <text text="Kanal" position="467,29" size="77,28" font="3" foregroundColor="grey" foregroundColorSelected="club_selection_fg" padding="5,0" verticalAlignment="center" />
+          <text index="Channel" position="544,29" size="56,28" font="2" padding="3,0" verticalAlignment="center" />
+          <text index="Encryption" position="467,57" size="133,30" font="2" padding="5,0" verticalAlignment="center" />
         </rowtemplate>
 
       </template>
     </widget>
 
     <!-- WLAN-Statusbilder unterhalb des Statustexts der ersten zwei Profile. -->
-    <widget source="savedList" render="Pixmap" position="2143,922" size="43,43" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png" transparent="1" alphatest="blend">
+    <widget source="savedList" render="Pixmap" position="2204,876" size="48,48" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png" transparent="1" alphatest="blend">
       <convert type="BLWQHDNetworkSavedStatusIcon">1</convert>
     </widget>
-    <widget source="savedList" render="Pixmap" position="2143,1022" size="43,43" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png" transparent="1" alphatest="blend">
+    <widget source="savedList" render="Pixmap" position="2204,963" size="48,48" zPosition="9" pixmaps="/usr/share/enigma2/BundesligaWQHD/Network/wlan_off.png,/usr/share/enigma2/BundesligaWQHD/Network/wlan_on.png" transparent="1" alphatest="blend">
       <convert type="BLWQHDNetworkSavedStatusIcon">2</convert>
     </widget>
 
@@ -484,6 +491,7 @@
     <panel name="Banner_Setup_Default" />
 
   </screen>
+
   <screen name="NetworkWiFiScan" position="0,0" size="2560,1440" title="Wi-Fi Scan" flags="wfNoBorder" backgroundColor="transparent">
     <widget source="list" render="Listbox" position="407,200" size="1400,900" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" itemGradientSelected="club_selection_gradient" scrollbarMode="showOnDemand" enableWrapAround="1" transparent="1">
       <template name="Default" fonts="Regular;44,Regular;40,enigma2icons;40" itemHeight="120">
