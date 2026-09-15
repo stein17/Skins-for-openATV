@@ -62,6 +62,7 @@ LOGDIR = '/var/volatile/tmp' if os.path.isdir('/var/volatile/tmp') else '/tmp'
 POSTER_LOG = os.path.join(LOGDIR, 'PosterAutoDB.log')
 BACKDROP_LOG = os.path.join(LOGDIR, 'BackdropAutoDB.log')
 STATUS_FILE = os.path.join(LOGDIR, 'autodb_last_run.txt')
+UI_LOG = os.path.join(LOGDIR, 'AutoDBUI.log')
 
 TRIG_POSTER = '/tmp/run_poster_autodb_once'
 TRIG_BACKDROP = '/tmp/run_backdrop_autodb_once'
@@ -380,11 +381,49 @@ def _remove(path):
         pass
 
 
+def _ui_log(message):
+    try:
+        with open(UI_LOG, 'a') as f:
+            f.write('[%s] %s\n' % (time.strftime('%Y-%m-%d %H:%M:%S'), message))
+    except Exception:
+        pass
+
+
+def _dialog_context(session):
+    current = ''
+    stack_names = []
+    try:
+        dlg = getattr(session, 'current_dialog', None)
+        current = dlg.__class__.__name__ if dlg is not None else 'None'
+    except Exception:
+        current = 'error'
+    try:
+        for item in list(getattr(session, 'dialog_stack', []) or []):
+            dlg = item[0] if isinstance(item, (list, tuple)) else item
+            stack_names.append(dlg.__class__.__name__ if dlg is not None else 'None')
+    except Exception:
+        stack_names = ['error']
+    return current, stack_names
+
+
 def _return_to_livetv(session):
+    """Prepare only parent menus for closing; keep Gradient config active.
+
+    The AutoDB manager closes itself after the confirmation.  The Gradient
+    configuration screen deliberately remains active so the user's first
+    EXIT keeps its normal meaning.  Only after that screen has closed is the
+    global AutoDB EXIT handler allowed to act in LiveTV.
+    """
     try:
         stack = list(getattr(session, 'dialog_stack', []) or [])
     except Exception:
         stack = []
+
+    try:
+        current, stack_names = _dialog_context(session)
+        _ui_log('prepare parent return: current=%s stack=%s' % (current, ','.join(stack_names)))
+    except Exception:
+        pass
 
     dialogs = []
     for item in stack:
@@ -395,13 +434,17 @@ def _return_to_livetv(session):
         if dlg is not None:
             dialogs.append(dlg)
 
+    # Historical working behaviour: never close AutoDBManager or a Gradient
+    # config screen here.  Their normal ActionMaps must handle the first EXIT.
     names_to_close = set([
-        'PluginBrowser', 'PluginBrowserSetup', 'Setup', 'PluginBrowserSetupSummary', 'SetupSummary', 'ChoiceBox', 'ExtensionsList', 'ExtensionsMenu'
+        'PluginBrowser', 'PluginBrowserSetup', 'Setup',
+        'PluginBrowserSetupSummary', 'SetupSummary', 'ChoiceBox',
+        'ExtensionsList', 'ExtensionsMenu'
     ])
 
     for dlg in reversed(dialogs):
         try:
-            nm = dlg.__class__.__name__
+            nm = dlg.__class__.__name__ or ''
         except Exception:
             nm = ''
         if nm in names_to_close:
@@ -413,7 +456,7 @@ def _return_to_livetv(session):
 
 class AutoDBStatusOSD(Screen):
     skin = """
-        <screen name="AutoDBStatusOSD" position="10,10" size="980,40" backgroundColor="#80000000" cornerRadius="16" flags="wfNoBorder" zPosition="999">
+        <screen name="AutoDBStatusOSD" position="10,10" size="980,40" backgroundColor="#80000000" cornerRadius="16" flags="wfNoBorder,wfModal" zPosition="101">
             <widget name="text" position="center,0" size="980,40" font="Regular;27" valign="center" halign="center" cornerRadius="16" transparent="1" foregroundColor="#ffffff" borderWidth="1" borderColor="black" />
         </screen>
     """
@@ -421,10 +464,9 @@ class AutoDBStatusOSD(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self['text'] = Label('AutoDB ...')
-        try:
-            self.onShown.append(lambda: self.instance.setFocus(None))
-        except Exception:
-            pass
+        # Do not clear GUI focus from this passive overlay.  On newer
+        # Enigma2/Python 3.14 images this call can also remove the focus
+        # from the active dialog and leave all remote-control keys ineffective.
 
     def setText(self, t):
         try:
@@ -445,6 +487,8 @@ class AutoDBRunWatcher(object):
     def __init__(self):
         self.timer = eTimer()
         self._osd_finish_timer = None
+        self._return_timer = None
+        self._return_tries = 0
         try:
             self.timer_conn = self.timer.timeout.connect(self._tick)
         except Exception:
@@ -478,6 +522,26 @@ class AutoDBRunWatcher(object):
         self._stop_requested = False
         self._stop_box_open = False
 
+    def schedule_return_to_livetv(self):
+        """Prepare parent menus after the confirmation callback has unwound."""
+        if self._return_timer is None:
+            self._return_timer = eTimer()
+            try:
+                self._return_timer.timeout.connect(self._return_to_livetv_tick)
+            except Exception:
+                self._return_timer.callback.append(self._return_to_livetv_tick)
+        self._return_timer.start(250, True)
+
+    def _return_to_livetv_tick(self):
+        try:
+            _return_to_livetv(self.session)
+        except Exception:
+            pass
+        try:
+            self._return_timer.stop()
+        except Exception:
+            pass
+
     def _seek_end(self, path):
         try:
             return os.path.getsize(path)
@@ -485,30 +549,33 @@ class AutoDBRunWatcher(object):
             return 0
 
     def _close_osd(self):
-        try:
-            if self.osd is not None:
-                self.osd.hide()
-        except Exception:
-            pass
-        try:
-            if self.osd is not None:
-                self.osd.close()
-        except Exception:
-            pass
+        osd = self.osd
         self.osd = None
+        if osd is None:
+            return
+        try:
+            osd.hide()
+        except Exception:
+            pass
+        try:
+            if self.session is not None:
+                self.session.deleteDialog(osd)
+        except Exception:
+            pass
 
     def _ensure_osd(self):
-        if not self.osd_visible:
-            return
-        if self.session is None:
-            return
-        if self.osd is not None:
+        if not self.osd_visible or self.session is None or self.osd is not None:
             return
         try:
+            # Match OpenATV's passive Toast overlay: moderate z-position,
+            # modal compositing, no ActionMap and no focus manipulation.
             self.osd = self.session.instantiateDialog(AutoDBStatusOSD)
+            self.osd.setAnimationMode(0)
             self.osd.show()
-        except Exception:
+            _ui_log('safe status OSD shown: z=101 focus untouched')
+        except Exception as err:
             self.osd = None
+            _ui_log('safe status OSD FAILED: %s: %s' % (err.__class__.__name__, err))
 
     def _hook_global_exit(self):
         if self._hooked:
@@ -712,9 +779,12 @@ class AutoDBRunWatcher(object):
         # _notify('AutoDB gestartet (%s).' % mode, timeout=8)
 
         self._hook_global_exit()
+        try:
+            current, stack_names = _dialog_context(self.session)
+            _ui_log('watcher start; LiveTV EXIT hook enabled: current=%s stack=%s' % (current, ','.join(stack_names)))
+        except Exception:
+            pass
         self._ensure_osd()
-        # Auto-close PluginBrowser so LiveTV is immediately usable
-        self._schedule_close_pluginbrowser()
 
         self.timer.start(1000, False)
 
@@ -1124,14 +1194,33 @@ class AutoDBManager(Screen):
         if not ok:
             return
 
-        # Ensure AutoDB workers are loaded even if no Infobar widgets are active
+        # Start a fresh UI trace before importing either worker.  Do not clear
+        # it later in WATCHER.start(), otherwise import failures disappear.
+        _remove(UI_LOG)
+
+        # Give the shared fallback service one fresh attempt for this scan.
+        # After a failure its circuit breaker skips all further proxy calls.
         try:
-            if self.run_poster:
-                from Components.Renderer import GradientFHDPosterX  # noqa: F401
-            if self.run_backdrop:
-                from Components.Renderer import GradientFHDBackdropX  # noqa: F401
+            from Components.Renderer.GradientFHDAPIProxy import reset_proxy_circuit
+            reset_proxy_circuit()
         except Exception:
             pass
+
+        # Ensure AutoDB workers are loaded even if no Infobar widgets are active.
+        # Import them separately so one broken worker cannot hide or prevent the
+        # other one.  Keep the exact exception in AutoDBUI.log for box-side tests.
+        if self.run_poster:
+            try:
+                from Components.Renderer import GradientFHDPosterX  # noqa: F401
+                _ui_log('poster worker import OK')
+            except Exception as err:
+                _ui_log('poster worker import FAILED: %s: %s' % (err.__class__.__name__, err))
+        if self.run_backdrop:
+            try:
+                from Components.Renderer import GradientFHDBackdropX  # noqa: F401
+                _ui_log('backdrop worker import OK')
+            except Exception as err:
+                _ui_log('backdrop worker import FAILED: %s: %s' % (err.__class__.__name__, err))
 
         if self.run_poster:
             _touch(TRIG_POSTER)
@@ -1140,16 +1229,7 @@ class AutoDBManager(Screen):
 
         WATCHER.start(self.session, self.run_poster, self.run_backdrop, active_bq, total_srv)
 
-        t = eTimer()
-        def _do():
-            try:
-                _return_to_livetv(self.session)
-            except Exception:
-                pass
-        try:
-            t.timeout.connect(_do)
-        except Exception:
-            t.callback.append(_do)
-        t.start(250, True)
-
+        # Keep the Gradient configuration and its parent navigation available,
+        # so further settings (for example Weather) can be changed during AutoDB.
+        _ui_log('start callback: closing AutoDBManager only; parents untouched')
         self.close()
