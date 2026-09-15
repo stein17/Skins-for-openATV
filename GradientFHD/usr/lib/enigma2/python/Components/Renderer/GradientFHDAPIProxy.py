@@ -8,7 +8,7 @@ except ImportError:
     from urllib import quote as _urlquote
 
 
-API_PROXY_BASE = "https://gradient-api-proxy.lutzkroll.chatgpt.site"
+API_PROXY_BASE = "https://gradient-api-proxygradient.stein17.workers.dev"
 FALLBACK_API_MARKER = "gradient-default-proxy"
 
 # If the shared fallback service is unavailable, do not repeat the same slow
