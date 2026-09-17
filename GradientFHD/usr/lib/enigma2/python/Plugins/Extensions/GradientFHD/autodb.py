@@ -456,8 +456,8 @@ def _return_to_livetv(session):
 
 class AutoDBStatusOSD(Screen):
     skin = """
-        <screen name="AutoDBStatusOSD" position="10,10" size="980,40" backgroundColor="#80000000" cornerRadius="16" flags="wfNoBorder,wfModal" zPosition="101">
-            <widget name="text" position="center,0" size="980,40" font="Regular;27" valign="center" halign="center" cornerRadius="16" transparent="1" foregroundColor="#ffffff" borderWidth="1" borderColor="black" />
+        <screen name="AutoDBStatusOSD" position="10,10" size="1500,40" backgroundColor="#80000000" cornerRadius="16" flags="wfNoBorder,wfModal" zPosition="101">
+            <widget name="text" position="center,0" size="1500,40" font="Regular;27" valign="center" halign="center" cornerRadius="16" transparent="1" foregroundColor="#ffffff" borderWidth="1" borderColor="black" />
         </screen>
     """
 
@@ -478,6 +478,7 @@ class AutoDBStatusOSD(Screen):
 class AutoDBRunWatcher(object):
     RX_TOTAL = re.compile(r"Total services in apdb:\s*(\d+)")
     RX_ADDED = re.compile(r"\]\s*(\d+)\s+new file\(s\) added\s*\(")
+    RX_FINAL_MISS = re.compile(r"\[AutoDB\]\s+FINAL_MISS\b")
     RX_FIN = re.compile(r"\*\*\* Job finished \*\*\*")
     RX_ACTIVITY = re.compile(r"\*\*\* Triggered run requested \*\*\*|\*\*\* Running \*\*\*|Total services in apdb")
 
@@ -497,6 +498,8 @@ class AutoDBRunWatcher(object):
         self.running = False
         self.want_poster = False
         self.want_backdrop = False
+        self._display_poster = False
+        self._display_backdrop = False
 
         self._pos_p = 0
         self._pos_b = 0
@@ -511,6 +514,8 @@ class AutoDBRunWatcher(object):
         self.done_b = 0
         self.new_p = 0
         self.new_b = 0
+        self.miss_p = 0
+        self.miss_b = 0
 
         self.session = None
         self.osd = None
@@ -745,6 +750,8 @@ class AutoDBRunWatcher(object):
         self.session = session
         self.want_poster = bool(run_poster)
         self.want_backdrop = bool(run_backdrop)
+        self._display_poster = self.want_poster
+        self._display_backdrop = self.want_backdrop
 
         _remove(STOP_POSTER)
         _remove(STOP_BACKDROP)
@@ -761,6 +768,8 @@ class AutoDBRunWatcher(object):
         self.done_b = 0
         self.new_p = 0
         self.new_b = 0
+        self.miss_p = 0
+        self.miss_b = 0
 
         self._start_ts = time.time()
         self.running = True
@@ -821,6 +830,12 @@ class AutoDBRunWatcher(object):
                 self.done_b += 1
                 self.new_b += n
 
+        final_misses = len(self.RX_FINAL_MISS.findall(data))
+        if kind == 'poster':
+            self.miss_p += final_misses
+        else:
+            self.miss_b += final_misses
+
     def _pct(self, done, total):
         return int((done * 100) / total) if total else 0
 
@@ -830,10 +845,10 @@ class AutoDBRunWatcher(object):
         ss = elapsed % 60
 
         parts = []
-        if self.want_poster:
-            parts.append(tr('Poster %d%% (%d/%d) New:%d', 'Poster %d%% (%d/%d) Neu:%d') % (self._pct(self.done_p, self.total_p), self.done_p, self.total_p, self.new_p))
-        if self.want_backdrop:
-            parts.append(tr('Backdrop %d%% (%d/%d) New:%d', 'Backdrop %d%% (%d/%d) Neu:%d') % (self._pct(self.done_b, self.total_b), self.done_b, self.total_b, self.new_b))
+        if self._display_poster:
+            parts.append(tr('Poster %d%% (%d/%d) New:%d Miss:%d', 'Poster %d%% (%d/%d) Neu:%d Ohne:%d') % (self._pct(self.done_p, self.total_p), self.done_p, self.total_p, self.new_p, self.miss_p))
+        if self._display_backdrop:
+            parts.append(tr('Backdrop %d%% (%d/%d) New:%d Miss:%d', 'Backdrop %d%% (%d/%d) Neu:%d Ohne:%d') % (self._pct(self.done_b, self.total_b), self.done_b, self.total_b, self.new_b, self.miss_b))
 
         return 'AutoDB: ' + ' | '.join(parts) + '  %02d:%02d' % (mm, ss)
 

@@ -2121,8 +2121,18 @@ class BackdropAutoDB(GradientFHDBackdropXDownloadThread):
                             _track(p, log)
                             self.logAutoDB(log)
                         
-                        if os.path.exists(dwn_backdrop) and os.path.getsize(dwn_backdrop) > 0:
+                        try:
+                            final_found = os.path.exists(dwn_backdrop) and os.path.getsize(dwn_backdrop) > 0
+                        except Exception:
+                            final_found = False
+
+                        if final_found:
                             newfd += 1
+                        else:
+                            # One marker per completed event/provider chain.
+                            # Individual provider SKIPs above are intentionally
+                            # not used by the OSD counter.
+                            self.logAutoDB("[AutoDB] FINAL_MISS (%s)" % slug)
                         
                         # Persist backdrop_info json (AutoDB)
                         try:
@@ -2717,4 +2727,3 @@ class GradientFHDBackdropX(Renderer):
             except Exception:
                 pass
             return
-

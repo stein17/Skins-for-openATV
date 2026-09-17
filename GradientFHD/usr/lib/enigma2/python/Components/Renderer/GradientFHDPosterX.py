@@ -1730,6 +1730,16 @@ class PosterAutoDB(GradientFHDPosterXDownloadThread):
                                                                         self.logAutoDB(log)
                                                                         if os.path.exists(dwn_poster) and os.path.getsize(dwn_poster) > 0:
                                                                                 newfd = newfd + 1
+
+                                                        # Count only the final outcome after every enabled provider
+                                                        # and language variant has been tried.  Earlier provider SKIPs
+                                                        # are normal fallback steps and must not affect the OSD.
+                                                        try:
+                                                                final_found = os.path.exists(dwn_poster) and os.path.getsize(dwn_poster) > 0
+                                                        except Exception:
+                                                                final_found = False
+                                                        if not final_found:
+                                                                self.logAutoDB("[AutoDB] FINAL_MISS (%s)" % store_slug)
                                                         
                                                         # Persist poster_info json (AutoDB)
                                                         try:
