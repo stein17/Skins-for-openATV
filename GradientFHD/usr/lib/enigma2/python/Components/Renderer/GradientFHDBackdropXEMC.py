@@ -53,9 +53,6 @@ import json
 import time
 import threading
 import requests
-from Components.Renderer.GradientFHDAPIProxy import FALLBACK_API_MARKER, wrap_requests
-
-requests = wrap_requests(requests)
 from twisted.internet.reactor import callInThread
 PY3 = sys.version_info[0] >= 3
 if PY3:
@@ -398,9 +395,34 @@ try:
     lng = lng[:-3]
 except Exception:
     lng = 'de'
-tmdb_api = FALLBACK_API_MARKER
-omdb_api = FALLBACK_API_MARKER
-fanart_api = FALLBACK_API_MARKER
+tmdb_api = ''
+omdb_api = ''
+fanart_api = ''
+
+def _load_private_api_keys():
+    global tmdb_api, omdb_api, fanart_api
+    try:
+        skin = config.skin.primary_skin.value.replace('/skin.xml', '')
+        skin_dir = '/usr/share/enigma2/%s' % skin
+        key_files = (
+            ('tmdb_api', ('tmdbkey', 'apikey')),
+            ('omdb_api', ('omdbkey',)),
+            ('fanart_api', ('fanartkey',)),
+        )
+        for key_name, filenames in key_files:
+            for filename in filenames:
+                path = os.path.join(skin_dir, filename)
+                if not os.path.exists(path):
+                    continue
+                with open(path, 'r') as key_file:
+                    value = (key_file.read() or '').strip()
+                if value:
+                    globals()[key_name] = value
+                    break
+    except Exception:
+        pass
+
+_load_private_api_keys()
 FILENAME_JUNK = ['_+', '-+', '\\.+', '\\d{4}[-_]\\d{2}[-_]\\d{2}', '\\d{2}[-_]\\d{2}[-_]\\d{4}', '\\d{8}', '\\d{4}', '[Ss]\\d{1,2}[Ee]\\d{1,2}', '[Ss]taffel\\s*\\d+', '[Ee]pisode\\s*\\d+', '[Ff]olge\\s*\\d+', '[Tt]eil\\s*\\d+', '1080[pi]', '720[pi]', '576[pi]', '480[pi]', '[Hh][Dd][Tt][Vv]', '[Ww][Ee][Bb]', '[Bb][Dd][Rr][Ii][Pp]', '[Xx]264', '[Hh]264', '[Hh]265', '[Aa][Vv][Cc]', '[Aa][Cc]3', '[Dd][Tt][Ss]', '[Aa][Aa][Cc]', '[Gg][Ee][Rr][Mm][Aa][Nn]', '[Ee][Nn][Gg][Ll][Ii][Ss][Hh]', '[Dd][Uu][Bb][Bb][Ee][Dd]', '[Ss][Yy][Nn][Cc]']
 
 def get_storage_folder():
@@ -498,6 +520,8 @@ class EMCBackdropWorker(threading.Thread):
                 print('[EMC BACKDROP ERROR] %s' % str(e))
 
     def search_tmdb(self, title, slug):
+        if not tmdb_api:
+            return False
         try:
             url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (tmdb_api, lng, urlquote(title))
             headers = {'User-Agent': getRandomUserAgent()}
@@ -531,6 +555,8 @@ class EMCBackdropWorker(threading.Thread):
             return False
 
     def search_fanart(self, title, slug):
+        if not fanart_api:
+            return False
         try:
             url_maze = 'http://api.tvmaze.com/singlesearch/shows?q=%s' % urlquote(title)
             mj = requests.get(url_maze, timeout=(3, 6)).json()

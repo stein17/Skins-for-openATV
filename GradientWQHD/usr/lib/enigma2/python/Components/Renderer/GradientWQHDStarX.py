@@ -19,9 +19,6 @@ import re
 import threading
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from Components.Renderer.GradientWQHDAPIProxy import FALLBACK_API_MARKER, wrap_requests
-
-requests = wrap_requests(requests)
 
 try:
     from .GradientWQHDConverlibr import convtext, quoteEventName, apply_title_mapping
@@ -31,8 +28,8 @@ except Exception:
 PY3 = sys.version_info[0] >= 3
 STORAGE_BASES = ('/media/hdd', '/media/usb', '/media/mmc', '/media/net', '/media/autofs')
 
-# --- TMDB key (keep user's logic) ---
-tmdb_api = FALLBACK_API_MARKER
+# --- Private TMDb key (optional) ---
+tmdb_api = ''
 try:
     lng = config.osd.language.value
     lng = lng[:-3]

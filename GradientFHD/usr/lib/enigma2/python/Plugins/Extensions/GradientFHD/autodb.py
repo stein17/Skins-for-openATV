@@ -1198,14 +1198,6 @@ class AutoDBManager(Screen):
         # it later in WATCHER.start(), otherwise import failures disappear.
         _remove(UI_LOG)
 
-        # Give the shared fallback service one fresh attempt for this scan.
-        # After a failure its circuit breaker skips all further proxy calls.
-        try:
-            from Components.Renderer.GradientFHDAPIProxy import reset_proxy_circuit
-            reset_proxy_circuit()
-        except Exception:
-            pass
-
         # Ensure AutoDB workers are loaded even if no Infobar widgets are active.
         # Import them separately so one broken worker cannot hide or prevent the
         # other one.  Keep the exact exception in AutoDBUI.log for box-side tests.

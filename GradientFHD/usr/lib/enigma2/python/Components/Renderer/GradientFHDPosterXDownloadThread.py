@@ -49,7 +49,7 @@ def _is_tvdb_uuid_key(api_key):
 
 
 # ------------------------------------------------------------
-# TVDb legacy XML API (requires only legacy key; can be built-in)
+# TVDb legacy XML API (requires a private legacy key)
 # ------------------------------------------------------------
 import xml.etree.ElementTree as _ET
 
@@ -58,7 +58,7 @@ _TVDB_HEX32_RE = re.compile(r"^[0-9a-fA-F]{32}$")
 def _is_tvdb_hex32_key(api_key):
     try:
         value = (api_key or '').strip()
-        return value == FALLBACK_API_MARKER or bool(_TVDB_HEX32_RE.match(value))
+        return bool(_TVDB_HEX32_RE.match(value))
     except Exception:
         return False
 
@@ -161,56 +161,6 @@ def _tvdb_legacy_search(api_key, query, want='poster', prefer_langs=('de','en','
     path = _tvdb_legacy_pick_banner(bx, want=want, prefer_langs=prefer_langs)
     return _tvdb_legacy_banner_url(path) if path else None
 
-def _tvdb_web_find_first_series_url(query):
-    """Fallback that does NOT require an API key.
-    It scrapes the TVDb website search page to obtain a series page URL.
-    This is best-effort and may break if TVDb changes HTML."""
-    q = (query or '').strip()
-    if not q:
-        return None
-    try:
-        url = "https://thetvdb.com/search?query=%s" % requests.utils.quote(q)
-        r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=8)
-        if r.status_code != 200:
-            return None
-        html = r.text or ""
-        # Prefer explicit /series/ links
-        m = re.search(r'href="(/series/[^"]+)"', html)
-        if not m:
-            return None
-        return "https://thetvdb.com%s" % m.group(1)
-    except Exception:
-        return None
-
-def _tvdb_web_extract_poster_url(series_url):
-    """Extract a poster URL from a TVDb series page (best-effort)."""
-    if not series_url:
-        return None
-    try:
-        r = requests.get(series_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=8)
-        if r.status_code != 200:
-            return None
-        html = r.text or ""
-        # Look for artworks.thetvdb.com poster URLs (v4 or legacy)
-        # v4 example: https://artworks.thetvdb.com/banners/v4/series/<id>/posters/<hash>.jpg
-        m = re.search(r'(https://artworks\.thetvdb\.com/banners/(?:v4/series/[^"]+/posters/[^"]+\.jpg|posters/[^"]+\.jpg))', html)
-        if m:
-            return m.group(1)
-        # fallback: any artworks jpg that includes /posters/
-        m = re.search(r'(https://artworks\.thetvdb\.com/[^"]*posters[^"]*\.jpg)', html)
-        if m:
-            return m.group(1)
-    except Exception:
-        pass
-    return None
-
-def _tvdb_web_search_poster(query):
-    series_url = _tvdb_web_find_first_series_url(query)
-    if not series_url:
-        return None
-    return _tvdb_web_extract_poster_url(series_url)
-
-
 def _force_tv_hint_if_episodic(hint, raw_title):
     try:
         if (hint or '').lower() != 'movie':
@@ -301,10 +251,6 @@ except ImportError:
     from httplib import HTTPConnection
     HTTPConnection.debuglevel = 0
 from requests.adapters import HTTPAdapter, Retry
-from Components.Renderer.GradientFHDAPIProxy import FALLBACK_API_MARKER, wrap_get, wrap_requests
-
-requests = wrap_requests(requests)
-get = wrap_get(get)
 
 global my_cur_skin, srch
 
@@ -418,22 +364,19 @@ def getRandomUserAgent():
     return random.choice(useragents)
 
 
-tmdb_api = FALLBACK_API_MARKER
-omdb_api = FALLBACK_API_MARKER
-# TheTVDB fallback is supplied by the Gradient API proxy.
-TVDB_LEGACY_DEFAULT_KEY = FALLBACK_API_MARKER
-# default: use built-in legacy key unless user overrides via /usr/share/enigma2/<skin>/thetvdbkey
-thetvdbkey = TVDB_LEGACY_DEFAULT_KEY
+tmdb_api = ''
+omdb_api = ''
+thetvdbkey = ''
 
 # Fanart.tv API key (optional). Override via /usr/share/enigma2/<skin>/fanartkey
-fanart_api = FALLBACK_API_MARKER
+fanart_api = ''
 
 
 
 
 # ----------------------------------------------------------------------------
-# Central API key container (used by MovieScanner + other modules)
-# Plugin-config keys (if set) still have priority; this is only the bundled default.
+# Central API key container (used by MovieScanner + other modules).
+# Values stay empty until the user's private key files are loaded.
 # ----------------------------------------------------------------------------
 API_KEYS = {
 	"tmdb_api": tmdb_api,
@@ -678,7 +621,7 @@ def clean_recursive(regexStr="", replaceStr="", eventTitle=""):
 
 def _load_custom_api_keys():
     """Load custom API keys from skin folder (called once at module level and on demand).
-    Priority: skin-folder files > built-in renderer defaults.
+    Only private keys from the active skin folder are used.
     Supports both thetvdbkey (UUID v4) and thetvdbkey_legacy (32-hex) separately.
     """
     global tmdb_api, omdb_api, fanart_api, thetvdbkey, my_cur_skin
@@ -2191,6 +2134,22 @@ class GradientFHDPosterXDownloadThread(threading.Thread):
             return True, msg_custom
 
         api_key = (thetvdbkey or '').strip()
+        legacy_key = ''
+        if _is_tvdb_hex32_key(api_key):
+            legacy_key = api_key
+        else:
+            try:
+                legacy_path = os.path.join(_tvdb_skin_dir(), 'thetvdbkey_legacy')
+                if os.path.exists(legacy_path):
+                    with open(legacy_path, 'r') as legacy_file:
+                        candidate = (legacy_file.read() or '').strip()
+                    if _is_tvdb_hex32_key(candidate):
+                        legacy_key = candidate
+            except Exception:
+                pass
+
+        if not _is_tvdb_uuid_key(api_key) and not legacy_key:
+            return False, "TVDb: missing private key"
 
         q = (title or '').replace('+',' ').strip()
         if not q:
@@ -2209,32 +2168,9 @@ class GradientFHDPosterXDownloadThread(threading.Thread):
                 # Determine the best legacy key to use:
                 # 1. If thetvdbkey is already a 32-hex key, use it directly.
                 # 2. Otherwise try to read thetvdbkey_legacy from the skin folder.
-                legacy_key = None
-                if api_key and _is_tvdb_hex32_key(api_key):
-                    legacy_key = api_key
-                else:
-                    # Try thetvdbkey_legacy file
-                    try:
-                        lp = os.path.join(_tvdb_skin_dir(), 'thetvdbkey_legacy')
-                        if os.path.exists(lp):
-                            with open(lp, 'r') as _f:
-                                _lv = (_f.read() or '').strip()
-                            if _lv and _is_tvdb_hex32_key(_lv):
-                                legacy_key = _lv
-                    except Exception:
-                        pass
-                    # Last resort: built-in default
-                    if not legacy_key:
-                        _bik = (TVDB_LEGACY_DEFAULT_KEY or '').strip()
-                        if _bik and _is_tvdb_hex32_key(_bik):
-                            legacy_key = _bik
-
                 if legacy_key:
                     poster_url = _tvdb_legacy_search(legacy_key, q, want='poster', prefer_langs=('de','en',''))
 
-            # --- Web scrape fallback (no key needed) ---
-            if not poster_url:
-                poster_url = _tvdb_web_search_poster(q)
             if not poster_url:
                 return False, "TVDb: Not found"
             if not poster_url:
@@ -2242,7 +2178,7 @@ class GradientFHDPosterXDownloadThread(threading.Thread):
             if poster_url.rstrip('/').endswith('/banners'):
                 return False, "TVDb: invalid poster url"
 
-            # TVDB placeholder detection (legacy/v4/web)
+            # TVDB placeholder detection (legacy/v4)
             # Example: https://artworks.thetvdb.com/banners/images/missing/series.jpg
             try:
                 _pu = (poster_url or "")

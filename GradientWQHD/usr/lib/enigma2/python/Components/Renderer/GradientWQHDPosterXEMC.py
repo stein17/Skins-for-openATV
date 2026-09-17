@@ -47,9 +47,6 @@ import json
 import time
 import threading
 import requests
-from Components.Renderer.GradientWQHDAPIProxy import FALLBACK_API_MARKER, wrap_requests
-
-requests = wrap_requests(requests)
 
 def getPosterXBasePath():
     try:
@@ -414,8 +411,32 @@ except Exception:
     lng = 'de'
 
 # API Keys
-tmdb_api = FALLBACK_API_MARKER
-omdb_api = FALLBACK_API_MARKER
+tmdb_api = ''
+omdb_api = ''
+
+def _load_private_api_keys():
+    global tmdb_api, omdb_api
+    try:
+        skin = config.skin.primary_skin.value.replace('/skin.xml', '')
+        skin_dir = '/usr/share/enigma2/%s' % skin
+        key_files = (
+            ('tmdb_api', ('tmdbkey', 'apikey')),
+            ('omdb_api', ('omdbkey',)),
+        )
+        for key_name, filenames in key_files:
+            for filename in filenames:
+                path = os.path.join(skin_dir, filename)
+                if not os.path.exists(path):
+                    continue
+                with open(path, 'r') as key_file:
+                    value = (key_file.read() or '').strip()
+                if value:
+                    globals()[key_name] = value
+                    break
+    except Exception:
+        pass
+
+_load_private_api_keys()
 
 # TITLE_MAPPINGS - Gleiche wie in GradientWQHDPosterXDownloadThread
 TITLE_MAPPINGS = {
@@ -695,6 +716,8 @@ class EMCPosterWorker(threading.Thread):
                 print("[EMC ERROR] %s" % str(e))
     
     def search_tmdb(self, title, slug):
+        if not tmdb_api:
+            return False
         try:
             url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (
                 tmdb_api, lng, urlquote(title)
@@ -750,6 +773,8 @@ class EMCPosterWorker(threading.Thread):
             return False
     
     def search_omdb(self, title, slug):
+        if not omdb_api:
+            return False
         try:
             url = 'http://www.omdbapi.com/?t=%s&apikey=%s' % (urlquote(title), omdb_api)
             response = requests.get(url, timeout=(3, 6))

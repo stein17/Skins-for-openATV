@@ -40,9 +40,7 @@ import threading
 import time
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from Components.Renderer.GradientWQHDAPIProxy import FALLBACK_API_MARKER, wrap_requests
 
-requests = wrap_requests(requests)
 PY3 = sys.version_info[0] >= 3
 if PY3:
     from urllib.parse import quote as urlquote
@@ -62,7 +60,7 @@ try:
     lng = lng[:-3]
 except:
     lng = 'de'
-tmdb_api = FALLBACK_API_MARKER
+tmdb_api = ''
 STORAGE_BASES = ('/media/hdd', '/media/usb', '/media/mmc', '/media/net', '/media/autofs')
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 try:
@@ -158,6 +156,8 @@ def save_event_info_to_json(slug, data):
         return False
 
 def fetch_from_tmdb(title, slug):
+    if not tmdb_api:
+        return None
     try:
         search_title = apply_title_mapping(title)
         url = 'https://api.themoviedb.org/3/search/multi?api_key=%s&language=%s&query=%s' % (tmdb_api, lng, urlquote(search_title))

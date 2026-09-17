@@ -463,35 +463,20 @@ def _cfg_value(*path):
 
 
 def get_tmdb_key():
-	"""TMDb v3 key. Priority: plugin API screen -> (old) scanner field -> skin files -> renderer default."""
+	"""Private TMDb v3 key from plugin config or the active skin files."""
 	k = _cfg_value("plugins", "GradientFHD", "tmdb_api") or _cfg_value("plugins", "GradientFHD", "scanner", "tmdb_key")
 	if k:
 		return k
 	k = _read_key_file("tmdbkey", "apikey")
 	if k:
 		return k
-	# Legacy/fallback key bundled in the renderers
-	try:
-		from Components.Renderer.GradientFHDPosterXDownloadThread import get_tmdb_api_key as _get
-		k = (_get() or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
-	try:
-		from Components.Renderer import GradientFHDPosterXDownloadThread as _r
-		k = (getattr(_r, 'tmdb_api', '') or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
 	return ""
 
 
 def get_tvdb_key():
 	"""TheTVDB key (v4 UUID or legacy XML).
 
-	Priority: plugin config -> scanner config -> skin file -> renderer default.
+	Priority: plugin config -> scanner config -> active skin file.
 	"""
 	k = _cfg_value("plugins", "GradientFHD", "thetvdb_v4_api") or _cfg_value("plugins", "GradientFHD", "scanner", "tvdb_key")
 	if k:
@@ -499,14 +484,6 @@ def get_tvdb_key():
 	k = _read_key_file("thetvdbkey")
 	if k:
 		return k
-	# Renderer defaults (legacy key bundled in GradientFHDPosterXDownloadThread)
-	try:
-		from Components.Renderer import GradientFHDPosterXDownloadThread as _r
-		k = (getattr(_r, 'thetvdbkey', '') or getattr(_r, 'TVDB_LEGACY_DEFAULT_KEY', '') or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
 	return ""
 
 
@@ -524,13 +501,6 @@ def get_tvdb_legacy_key():
 	k = _read_key_file("thetvdbkey_legacy", "thetvdbkey")
 	if k:
 		return k
-	try:
-		from Components.Renderer import GradientFHDPosterXDownloadThread as _r
-		k = (getattr(_r, 'TVDB_LEGACY_DEFAULT_KEY', '') or getattr(_r, 'thetvdbkey', '') or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
 	return ""
 
 
@@ -725,36 +695,22 @@ def _tvdb_legacy_fetch_xml(query, api_key, prefer_langs=('de','en','')):
 
 
 def get_omdb_key():
-	"""Return first OMDb key (may be comma separated in config). Includes renderer default fallback."""
+	"""Return the first private OMDb key (config may contain several)."""
 	keys = _get_omdb_keys()
 	k = (keys[0] if keys else "").strip()
 	if k:
 		return k
-	try:
-		from Components.Renderer import GradientFHDPosterXDownloadThread as _r
-		k = (getattr(_r, 'omdb_api', '') or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
 	return ""
 
 
 def get_fanart_key():
-	"""Fanart.tv key. Priority: plugin config -> (old) scanner field -> skin file -> renderer default."""
+	"""Private Fanart.tv key from plugin config or the active skin file."""
 	k = _cfg_value("plugins", "GradientFHD", "fanart_api") or _cfg_value("plugins", "GradientFHD", "scanner", "fanart_key")
 	if k:
 		return k
 	k = _read_key_file("fanartkey")
 	if k:
 		return k
-	try:
-		from Components.Renderer import GradientFHDPosterXDownloadThread as _r
-		k = (getattr(_r, 'fanart_api', '') or '').strip()
-		if k:
-			return k
-	except Exception:
-		pass
 	return ""
 
 
@@ -3395,8 +3351,7 @@ class MovieScannerMain(Screen):
 		"""Download a banner via the TVDb Legacy XML API.
 
 		api_key must be a 32-hex legacy key. If a UUID v4 key is passed,
-		we try to resolve the legacy key from thetvdbkey_legacy file or the
-		built-in TVDB_LEGACY_DEFAULT_KEY so banners still work alongside v4.
+		we try to resolve the user's private thetvdbkey_legacy file.
 		"""
 		if not requests or not api_key:
 			return False
@@ -3417,15 +3372,6 @@ class MovieScannerMain(Screen):
 						resolved = _v
 			except Exception:
 				pass
-			# 2) Built-in renderer default
-			if not resolved:
-				try:
-					from Components.Renderer import GradientFHDPosterXDownloadThread as _rdt
-					_bk = (getattr(_rdt, 'TVDB_LEGACY_DEFAULT_KEY', '') or '').strip()
-					if _bk and _is_tvdb_hex32_key(_bk):
-						resolved = _bk
-				except Exception:
-					pass
 			if not resolved:
 				return False
 			legacy_key = resolved

@@ -1,7 +1,7 @@
 import re
 # 02.26 @stein17, Many new features and improvements
 # ------------------------------------------------------------
-# TVDb helpers: UUID(v4) vs legacy/no-key web fallback
+# TVDb helpers: private UUID(v4) or private legacy key
 # ------------------------------------------------------------
 _TVDB_UUID_RE = re.compile(r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
 
@@ -13,7 +13,7 @@ def _is_tvdb_uuid_key(api_key):
 
 
 # ------------------------------------------------------------
-# TVDb legacy XML API (requires only legacy key; can be built-in)
+# TVDb legacy XML API (requires a private legacy key)
 # ------------------------------------------------------------
 import xml.etree.ElementTree as _ET
 
@@ -22,7 +22,7 @@ _TVDB_HEX32_RE = re.compile(r"^[0-9a-fA-F]{32}$")
 def _is_tvdb_hex32_key(api_key):
     try:
         value = (api_key or '').strip()
-        return value == FALLBACK_API_MARKER or bool(_TVDB_HEX32_RE.match(value))
+        return bool(_TVDB_HEX32_RE.match(value))
     except Exception:
         return False
 
@@ -118,55 +118,6 @@ def _tvdb_legacy_search(api_key, query, want='poster', prefer_langs=('de','en','
         return None
     path = _tvdb_legacy_pick_banner(bx, want=want, prefer_langs=prefer_langs)
     return _tvdb_legacy_banner_url(path) if path else None
-
-def _tvdb_web_find_first_series_url(query):
-    """Fallback that does NOT require an API key.
-    It scrapes the TVDb website search page to obtain a series page URL.
-    This is best-effort and may break if TVDb changes HTML."""
-    q = (query or '').strip()
-    if not q:
-        return None
-    try:
-        url = "https://thetvdb.com/search?query=%s" % requests.utils.quote(q)
-        r = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=8)
-        if r.status_code != 200:
-            return None
-        html = r.text or ""
-        # Prefer explicit /series/ links
-        m = re.search(r'href="(/series/[^"]+)"', html)
-        if not m:
-            return None
-        return "https://thetvdb.com%s" % m.group(1)
-    except Exception:
-        return None
-
-def _tvdb_web_extract_poster_url(series_url):
-    """Extract a poster URL from a TVDb series page (best-effort)."""
-    if not series_url:
-        return None
-    try:
-        r = requests.get(series_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=8)
-        if r.status_code != 200:
-            return None
-        html = r.text or ""
-        # Look for artworks.thetvdb.com poster URLs (v4 or legacy)
-        # v4 example: https://artworks.thetvdb.com/banners/v4/series/<id>/posters/<hash>.jpg
-        m = re.search(r'(https://artworks\.thetvdb\.com/banners/(?:v4/series/[^"]+/posters/[^"]+\.jpg|posters/[^"]+\.jpg))', html)
-        if m:
-            return m.group(1)
-        # fallback: any artworks jpg that includes /posters/
-        m = re.search(r'(https://artworks\.thetvdb\.com/[^"]*posters[^"]*\.jpg)', html)
-        if m:
-            return m.group(1)
-    except Exception:
-        pass
-    return None
-
-def _tvdb_web_search_poster(query):
-    series_url = _tvdb_web_find_first_series_url(query)
-    if not series_url:
-        return None
-    return _tvdb_web_extract_poster_url(series_url)
 
 # BUGFIX VERSION - callInThread zu synchronem Aufruf geändert für korrekte Datei-Existenz-Prüfung
 #!/usr/bin/python
@@ -332,10 +283,6 @@ except ImportError:
     HTTPConnection.debuglevel = 0
 
 from requests.adapters import HTTPAdapter, Retry
-from Components.Renderer.GradientWQHDAPIProxy import FALLBACK_API_MARKER, wrap_get, wrap_requests
-
-requests = wrap_requests(requests)
-get = wrap_get(get)
 
 # ============================================================================
 # PYTHON VERSION
@@ -359,8 +306,8 @@ else:
 DEBUG_BACKDROP = False  # Set to True for debugging
 
 # API Keys (koennen durch skin-spezifische Keys ueberschrieben werden)
-tmdb_api = FALLBACK_API_MARKER
-omdb_api = FALLBACK_API_MARKER
+tmdb_api = ''
+omdb_api = ''
 
 # ============================================================================
 # FIX: Telenovela/Daily-Serie Erkennung (automatisch eingefügt)
@@ -405,7 +352,7 @@ def get_telenovela_base_title(title):
     return result.strip()
 
 
-thetvdbkey = FALLBACK_API_MARKER
+thetvdbkey = ''
 
 
 # ============================================================================
@@ -538,87 +485,85 @@ def _tvdb_v4_search_series(api_key, query, log=None):  # FIX: Logging verbessert
     query = (query or '').strip()
     if not query:
         return None, None
-    
-    # FIX: Verbessertes Logging - zeigt WELCHE SENDUNG gesucht wird (BACKDROP!)
+
     if log:
         log('>>> TVDB v4 BACKDROP-Suche für: "%s"' % query)
 
-    j = _tvdb_v4_get(api_key, '/search', params={'query': query, 'type': 'series', 'language': 'deu', 'limit': 10}, log=log)
-    if not j:
-        return None, None
+    for params in (
+        {'query': query, 'type': 'series', 'language': 'deu', 'limit': 10},
+        {'query': query, 'type': 'series', 'limit': 10},
+        {'query': query, 'type': 'series', 'language': 'eng', 'limit': 10},
+    ):
+        j = _tvdb_v4_get(api_key, '/search', params=params, log=log)
+        data = (j or {}).get('data') or []
+        if not isinstance(data, list) or not data:
+            continue
 
-    data = j.get('data') or []
-    if not isinstance(data, list) or not data:
-        return None, None
+        it = data[0] or {}
+        tvdb_id = it.get('tvdb_id') or it.get('id')
+        try:
+            tvdb_id = int(tvdb_id)
+        except Exception:
+            tvdb_id = None
 
-    it = data[0] or {}
-    tvdb_id = it.get('tvdb_id') or it.get('id')
-    try:
-        tvdb_id = int(tvdb_id)
-    except Exception:
-        tvdb_id = None
+        poster = it.get('poster') or it.get('image_url') or it.get('thumbnail')
+        return tvdb_id, _tvdb_v4_artwork_url(poster)
 
-    poster = it.get('poster') or it.get('image_url') or it.get('thumbnail')
-    return tvdb_id, _tvdb_v4_artwork_url(poster)
+    return None, None
 
 
 def _tvdb_v4_best_backdrop(api_key, tvdb_id, log=None, search_title=None):  # FIX: Parameter erweitert
     if not tvdb_id:
         return None
-    
-    # FIX: Log entfernt (zu verbose) - wird am Ende mit URL geloggt
-    # search_title wird für "nicht gefunden" Log verwendet
-    _search_title = search_title  # Speichere für später
 
-    j = _tvdb_v4_get(api_key, '/series/%s/artworks' % tvdb_id, params={'lang': 'deu'}, log=log)
-    if not j:
-        return None
-
-    data = j.get('data')
-    artworks = None
-
-    if isinstance(data, dict):
-        artworks = data.get('artworks') or data.get('images')
-    elif isinstance(data, list):
-        artworks = data
-
-    if not isinstance(artworks, list) or not artworks:
-        return None
-
-    best = None
-    for a in artworks:
-        if not isinstance(a, dict):
-            continue
-        img = a.get('image') or a.get('image_url') or a.get('thumbnail')
-        if not img:
-            continue
-        w = a.get('width') or 0
-        h = a.get('height') or 0
-        try:
-            w = int(w)
-            h = int(h)
-        except Exception:
-            w, h = 0, 0
-
-        if h and w and w < h:
+    for params in (
+        {'lang': 'deu'},
+        {},
+        {'lang': 'eng'},
+    ):
+        j = _tvdb_v4_get(api_key, '/series/%s/artworks' % tvdb_id, params=params, log=log)
+        if not j:
             continue
 
-        score = a.get('score') or 0
-        cand = (w, score, img)
-        if best is None or cand[0] > best[0] or (cand[0] == best[0] and cand[1] > best[1]):
-            best = cand
+        data = j.get('data')
+        artworks = None
+        if isinstance(data, dict):
+            artworks = data.get('artworks') or data.get('images')
+        elif isinstance(data, list):
+            artworks = data
+        if not isinstance(artworks, list) or not artworks:
+            continue
 
-    if not best:
-        if log:
-            log('<<< TVDB v4 Kein Backdrop für: "%s"' % (_search_title or 'ID=%s' % tvdb_id))
-        return None
+        best = None
+        for artwork in artworks:
+            if not isinstance(artwork, dict):
+                continue
+            img = artwork.get('image') or artwork.get('image_url') or artwork.get('thumbnail')
+            if not img:
+                continue
+            try:
+                width = int(artwork.get('width') or 0)
+                height = int(artwork.get('height') or 0)
+            except Exception:
+                width, height = 0, 0
+            if width and height and width < height:
+                continue
+            try:
+                score = float(artwork.get('score') or 0)
+            except Exception:
+                score = 0.0
+            candidate = (width, score, img)
+            if best is None or candidate[:2] > best[:2]:
+                best = candidate
 
-    # Log wird beim Aufruf gemacht, hier nicht nötig
-    # ID und URL werden dort angezeigt
-    
-    return _tvdb_v4_artwork_url(best[2])
+        if best:
+            return _tvdb_v4_artwork_url(best[2])
 
-fanart_api = FALLBACK_API_MARKER
+    if log:
+        log('<<< TVDB v4 Kein Backdrop für: "%s"' % (search_title or 'ID=%s' % tvdb_id))
+    return None
+
+fanart_api = ''
 
 # Sprache
 try:
@@ -1047,7 +992,7 @@ except Exception:
 try:
     thetvdbkey_legacy
 except NameError:
-    thetvdbkey_legacy = thetvdbkey  # Built-in legacy key fallback
+    thetvdbkey_legacy = thetvdbkey if _is_tvdb_hex32_key(thetvdbkey) else ''
 
 # ============================================================================
 # IMAGE SIZES - Backdrop
@@ -1929,31 +1874,6 @@ class GradientWQHDBackdropXDownloadThread(threading.Thread):
         """v2.8: Multi-Variant Search"""
         return generate_search_variants(title or '')
 
-    def _tvdb_pick_background_from_series_page(self, series_id):
-        """Scrape TheTVDB series page (by numeric id redirect) and return a background url if present."""
-        try:
-            sid = int(series_id)
-        except Exception:
-            return None
-        try:
-            url = 'https://thetvdb.com/series/%s' % sid
-            headers = {'User-Agent': getRandomUserAgent()}
-            r = self.http.get(url, headers=headers, timeout=(6, 12), allow_redirects=True)
-            if r.status_code != 200:
-                return None
-            html = r.text or ''
-            m = re.search(r'(https?://artworks\.thetvdb\.com/[^"\s>]+/backgrounds/[^"\s<]+\.jpg)', html, re.I)
-            if m:
-                return m.group(1)
-            m = re.search(r'(https?://artworks\.thetvdb\.com/[^"\s>]+/fanart/[^"\s<]+\.jpg)', html, re.I)
-            if m:
-                return m.group(1)
-            m = re.search(r'(https?://artworks\.thetvdb\.com/[^"\s>]+\.jpg)', html, re.I)
-            if m:
-                return m.group(1)
-        except Exception:
-            return None
-        return None
     def apply_title_mapping(self, title):
         """Wendet Title Mappings an um bessere Treffer zu erzielen.
 
@@ -2311,6 +2231,9 @@ class GradientWQHDBackdropXDownloadThread(threading.Thread):
         ok_custom, msg_custom = self._try_custom_backdrop(dwn_backdrop, title, channel, None)
         if ok_custom:
             return True, msg_custom
+
+        if not (tmdb_api or '').strip():
+            return False, "[SKIP : tmdb] Missing private key"
 
         """TMDb search (movie+tv) with proper language fallback and tolerant matching.
 
@@ -2743,93 +2666,69 @@ class GradientWQHDBackdropXDownloadThread(threading.Thread):
         if ok_custom:
             return True, msg_custom
 
-        """TVDb Backdrop: resolve independently (no poster_info dependency)."""
+        """TVDb backdrop using only the user's private v4 or legacy key."""
         try:
             mapped_title = self.apply_title_mapping(title)
             base_title = (mapped_title or title or '').replace('+', ' ').strip()
             if not base_title:
-                return False, "[SKIP : tvdb] Empty title"            # slug for info filenames (do NOT cache across events!)
+                return False, "[SKIP : tvdb] Empty title"
+
+            api_key = (thetvdbkey or '').strip()
+            legacy_key = (thetvdbkey_legacy or '').strip()
+            if _is_tvdb_hex32_key(api_key):
+                legacy_key = api_key
+            if not _is_tvdb_v4_key(api_key) and not _is_tvdb_hex32_key(legacy_key):
+                return False, "[SKIP : tvdb] Missing private key"
+
+            # Slug for info filenames (do not cache across events).
             slug = get_canonical_slug(mapped_title) or convtext(title) or convtext(base_title)
             if not slug:
                 return False, "[SKIP : tvdb] No slug"
-            # 1) Do NOT depend on poster_info (poster/backdrop are independent)
-            series_id = None
 
-            tried = []
             cands = self._tvdb_candidates(base_title)
             try:
                 self.logAutoDB("[TVDB-Search] Query='%s', Variants=%d" % (base_title, len(cands)))
             except Exception:
                 pass
 
-            # 2) Resolve via legacy GetSeries.php (same as PosterDB)
-            LEGACY_KEY = FALLBACK_API_MARKER
-            if not series_id:
+            # Preferred path: private TheTVDB v4 UUID key.
+            if _is_tvdb_v4_key(api_key):
                 for q in cands:
                     if not q:
                         continue
-                    tried.append(q)
-                    try:
-                        qenc = quote(q.encode('utf-8'))
-                    except Exception:
-                        try:
-                            qenc = quote(q)
-                        except Exception:
-                            qenc = q
-                    url = 'https://thetvdb.com/api/GetSeries.php?seriesname=%s' % qenc
-                    headers = {'User-Agent': getRandomUserAgent()}
-                    r = self.http.get(url, headers=headers, timeout=(6, 12))
-                    if r.status_code != 200:
+                    series_id, _poster = _tvdb_v4_search_series(api_key, q, log=self.logAutoDB)
+                    if not series_id:
                         continue
-                    xml = r.text or ''
-                    mid = re.search(r'<seriesid>(\d+)</seriesid>', xml, re.I)
-                    if mid:
-                        try:
-                            series_id = int(mid.group(1))
-                            break
-                        except Exception:
-                            series_id = None
-
-            if not series_id:
-                if tried:
-                    return False, '[SKIP : tvdb] Not found (tried: %s)' % ', '.join(tried)
-                return False, '[SKIP : tvdb] Not found'
-
-            # 3) Try legacy series/<id>/<lang> and read <fanart>
-            for lang in ('de', 'en', ''):
-                try:
-                    url = 'https://thetvdb.com/api/%s/series/%s%s' % (LEGACY_KEY, series_id, ('/%s' % lang) if lang else '')
-                    headers = {'User-Agent': getRandomUserAgent()}
-                    r = self.http.get(url, headers=headers, timeout=(6, 12))
-                    if r.status_code != 200:
+                    img = _tvdb_v4_best_backdrop(api_key, series_id, log=self.logAutoDB, search_title=q)
+                    if not img:
                         continue
-                    xml = r.text or ''
-                    mf = re.search(r'<fanart>(.*?)</fanart>', xml, re.I)
-                    if mf:
-                        path = (mf.group(1) or '').strip()
-                        if path:
-                            img = path if path.startswith('http') else ('https://artworks.thetvdb.com/banners/%s' % path.lstrip('/'))
-                            self.saveBackdrop(img, dwn_backdrop)
-                            if os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop):
-                                if slug:
-                                    self.save_backdrop_info_json(slug, {'title': base_title, 'source': 'tvdb_legacy', 'tvdb_id': int(series_id), 'url': img})
-                                return True, '[SUCCESS : tvdb] %s' % img
-                except Exception:
-                    pass
-
-            # 4) Scrape series page (often exposes v4 /backgrounds/ url publicly)
-            try:
-                img = self._tvdb_pick_background_from_series_page(series_id)
-                if img:
                     self.saveBackdrop(img, dwn_backdrop)
                     if os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop):
-                        if slug:
-                            self.save_backdrop_info_json(slug, {'title': base_title, 'source': 'tvdb_page', 'tvdb_id': int(series_id), 'url': img})
+                        self.save_backdrop_info_json(slug, {
+                            'title': base_title,
+                            'source': 'tvdb_v4',
+                            'tvdb_id': int(series_id),
+                            'url': img,
+                        })
                         return True, '[SUCCESS : tvdb] %s' % img
-            except Exception:
-                pass
 
-            return False, '[SKIP : tvdb] No backdrop found (series_id=%s)' % series_id
+            # Optional compatibility path: private 32-hex legacy key.
+            if _is_tvdb_hex32_key(legacy_key):
+                for q in cands:
+                    if not q:
+                        continue
+                    img = _tvdb_legacy_search(legacy_key, q, want='fanart', prefer_langs=('de', 'en', ''))
+                    if img:
+                        self.saveBackdrop(img, dwn_backdrop)
+                        if os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop):
+                            self.save_backdrop_info_json(slug, {
+                                'title': base_title,
+                                'source': 'tvdb_legacy',
+                                'url': img,
+                            })
+                            return True, '[SUCCESS : tvdb] %s' % img
+
+            return False, '[SKIP : tvdb] No backdrop found'
         except Exception as e:
             return False, '[ERROR : tvdb] %s' % str(e)
 
@@ -2838,6 +2737,9 @@ class GradientWQHDBackdropXDownloadThread(threading.Thread):
         ok_custom, msg_custom = self._try_custom_backdrop(dwn_backdrop, title, channel, None)
         if ok_custom:
             return True, msg_custom
+
+        if not (fanart_api or '').strip():
+            return False, "[SKIP : fanart] Missing private key"
 
         """FanArt.tv Suche - speziell fuer Backdrops optimiert."""
         try:

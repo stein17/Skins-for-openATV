@@ -32,8 +32,8 @@ Keys are written as compatibility files into the current skin folder:
 - TVDB PIN: thetvdbpin
 - Fanart: fanartkey
 
-If a field is empty, the corresponding file is removed and the renderers fall
-back to their built-in defaults.
+If a field is empty, the corresponding file is removed and that provider is
+skipped. Keyless IMDb and Google fallbacks remain available where configured.
 
 Security note
 -------------
@@ -336,8 +336,8 @@ class GradientWQHD_APIKeysSetup(Screen, ConfigListScreen):
         self['key_blue'] = Label(tr('Test', 'Test'))
 
         self['help'] = Label(tr(
-            'OK=Virtual Keyboard | GREEN=Save | BLUE=Test | Empty fields => use built-in defaults',
-            'OK=Virtuelle Tastatur | GRÜN=Speichern | BLAU=Test | Leere Felder => Defaults'
+            'OK=Virtual Keyboard | GREEN=Save | BLUE=Test | Empty fields => provider skipped',
+            'OK=Virtuelle Tastatur | GRÜN=Speichern | BLAU=Test | Leere Felder => Anbieter übersprungen'
         ))
 
         self['actions'] = ActionMap(['SetupActions', 'ColorActions'], {
@@ -447,7 +447,7 @@ class GradientWQHD_APIKeysSetup(Screen, ConfigListScreen):
             code, _ = _http_get('https://api.themoviedb.org/3/configuration?api_key=%s' % tmdb)
             lines.append('TMDb: %s' % ('OK' if code == 200 else 'FAIL (HTTP %s)' % code))
         else:
-            lines.append('TMDb: %s' % tr('EMPTY (default)', 'LEER (Default)'))
+            lines.append('TMDb: %s' % tr('EMPTY (provider skipped)', 'LEER (Anbieter übersprungen)'))
 
         # OMDb
         if omdb:
@@ -455,7 +455,7 @@ class GradientWQHD_APIKeysSetup(Screen, ConfigListScreen):
             ok = (code == 200 and '"Response":"True"' in txt)
             lines.append('OMDb: %s' % ('OK' if ok else 'FAIL (HTTP %s)' % code))
         else:
-            lines.append('OMDb: %s' % tr('EMPTY (default)', 'LEER (Default)'))
+            lines.append('OMDb: %s' % tr('EMPTY (provider skipped)', 'LEER (Anbieter übersprungen)'))
 
         # TVDB v4
         if tvdb_v4:
@@ -475,24 +475,14 @@ class GradientWQHD_APIKeysSetup(Screen, ConfigListScreen):
                 ok, msg = _tvdb_legacy_xml_test(tvdb_legacy)
                 lines.append('TVDB legacy: %s' % msg)
         else:
-            # If legacy empty, attempt to test renderer built-in default (optional)
-            try:
-                from Components.Renderer import GradientWQHDPosterXDownloadThread as t
-                k = getattr(t, 'TVDB_LEGACY_DEFAULT_KEY', None)
-                if k:
-                    ok, msg = _tvdb_legacy_xml_test(str(k))
-                    lines.append('TVDB legacy (renderer default): %s' % msg)
-                else:
-                    lines.append('TVDB legacy: %s' % tr('EMPTY', 'LEER'))
-            except Exception:
-                lines.append('TVDB legacy: %s' % tr('EMPTY', 'LEER'))
+            lines.append('TVDB legacy: %s' % tr('EMPTY', 'LEER'))
 
         # Fanart
         if fanart:
             code, _ = _http_get('https://webservice.fanart.tv/v3/tv/121361?api_key=%s' % fanart)
             lines.append('Fanart: %s' % ('OK' if code == 200 else 'FAIL (HTTP %s)' % code))
         else:
-            lines.append('Fanart: %s' % tr('EMPTY', 'LEER'))
+            lines.append('Fanart: %s' % tr('EMPTY (provider skipped)', 'LEER (Anbieter übersprungen)'))
 
         self.session.open(MessageBox, '\n'.join(lines), MessageBox.TYPE_INFO)
 
