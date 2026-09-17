@@ -516,6 +516,7 @@ def _tvdb_v4_best_backdrop(api_key, tvdb_id, log=None, search_title=None):  # FI
     if not tvdb_id:
         return None
 
+    best = None
     for params in (
         {'lang': 'deu'},
         {},
@@ -534,12 +535,27 @@ def _tvdb_v4_best_backdrop(api_key, tvdb_id, log=None, search_title=None):  # FI
         if not isinstance(artworks, list) or not artworks:
             continue
 
-        best = None
         for artwork in artworks:
             if not isinstance(artwork, dict):
                 continue
             img = artwork.get('image') or artwork.get('image_url') or artwork.get('thumbnail')
             if not img:
+                continue
+            image_lower = str(img).lower()
+            type_text = ' '.join(str(artwork.get(key) or '').lower() for key in (
+                'type', 'typeName', 'type_name', 'artworkType', 'artwork_type', 'name'
+            ))
+
+            # TheTVDB uses /banners/ as the generic artwork root.  The part
+            # below it is what matters: panels, posters, logos and real
+            # banners must never be used as a backdrop.
+            rejected_markers = (
+                '/panels/', '/posters/', '/poster/', '/graphical/',
+                '/clearlogo/', '/logos/', '/clearart/', '/icons/'
+            )
+            if any(marker in image_lower for marker in rejected_markers):
+                continue
+            if any(word in type_text for word in ('panel', 'poster', 'banner', 'logo', 'icon')):
                 continue
             try:
                 width = int(artwork.get('width') or 0)
@@ -548,22 +564,39 @@ def _tvdb_v4_best_backdrop(api_key, tvdb_id, log=None, search_title=None):  # FI
                 width, height = 0, 0
             if width and height and width < height:
                 continue
+            if width and height:
+                ratio = float(width) / float(height)
+                if ratio < 1.40 or ratio > 2.20:
+                    continue
             try:
                 score = float(artwork.get('score') or 0)
             except Exception:
                 score = 0.0
-            candidate = (width, score, img)
-            if best is None or candidate[:2] > best[:2]:
+
+            # Prefer artwork explicitly identified as a background/fanart.
+            # Unknown landscape artwork remains a last resort for older TVDB
+            # records whose metadata contains no semantic type.
+            preferred = 1 if (
+                '/backgrounds/' in image_lower or '/fanart/' in image_lower or
+                'background' in type_text or 'fanart' in type_text
+            ) else 0
+            candidate = (preferred, width, score, img)
+            if best is None or candidate[:3] > best[:3]:
                 best = candidate
 
-        if best:
-            return _tvdb_v4_artwork_url(best[2])
+    if best:
+        return _tvdb_v4_artwork_url(best[3])
 
     if log:
         log('<<< TVDB v4 Kein Backdrop für: "%s"' % (search_title or 'ID=%s' % tvdb_id))
     return None
 
 fanart_api = ''
+
+# Google increasingly rate-limits automated image searches.  Once a receiver
+# gets a 429/challenge page, avoid hammering it again for every EPG event.
+_GOOGLE_BLOCKED_UNTIL = 0.0
+_BING_BLOCKED_UNTIL = 0.0
 
 # Sprache
 try:
@@ -2706,6 +2739,7 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
                     series_id, _poster = _tvdb_v4_search_series(api_key, q, log=provider_log)
                     if not series_id:
                         continue
+                    self._last_tvdb_id = series_id
                     img = _tvdb_v4_best_backdrop(api_key, series_id, log=provider_log, search_title=q)
                     if not img:
                         continue
@@ -2748,64 +2782,99 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
         if not (fanart_api or '').strip():
             return False, "[SKIP : fanart] Missing private key"
 
-        """FanArt.tv Suche - speziell fuer Backdrops optimiert."""
+        """Fanart.tv backdrop search using a reliably resolved TVDB id."""
         try:
             mapped_title = self.apply_title_mapping(title)
-            title_safe = (mapped_title or title or '').replace('+', ' ')
+            title_safe = (mapped_title or title or '').replace('+', ' ').strip()
             try:
                 if not getattr(self, 'slug', None):
                     self.slug = get_canonical_slug(mapped_title or title)
             except Exception:
                 pass
-            try:
-                if not getattr(self, 'slug', None):
-                    self.slug = get_canonical_slug(mapped_title or title)
-            except Exception:
-                pass
-            try:
-                if not getattr(self, 'slug', None):
-                    self.slug = get_canonical_slug(mapped_title or title)
-            except Exception:
-                pass
-            try:
-                if not getattr(self, 'slug', None):
-                    self.slug = get_canonical_slug(mapped_title or title)
-            except Exception:
-                pass
-            
-            # Erst TVMaze fuer TVDB-ID
-            url_maze = "http://api.tvmaze.com/singlesearch/shows?q=%s" % requests.utils.quote(title_safe)
-            mj = self.http.get(url_maze, timeout=(3, 6)).json()
-            if not isinstance(mj, dict):
-                return False, "[SKIP : fanart] Not found"
 
-            tvdb_id = mj.get('externals', {}).get('thetvdb')
-            
-            if not tvdb_id:
-                return False, "[SKIP : fanart] No TVDB ID"
-            
-            # FanArt API
-            url_fanart = "https://webservice.fanart.tv/v3/tv/%s?api_key=%s" % (tvdb_id, fanart_api)
-            fjs = self.http.get(url_fanart, timeout=(3, 6)).json()
-            
-            # Backdrop/Fanart priorisieren
-            backdrop_url = None
-            if fjs.get('showbackground'):
-                backdrop_url = fjs['showbackground'][0].get('url')
-            elif fjs.get('tvthumb'):
-                backdrop_url = fjs['tvthumb'][0].get('url')
-            elif fjs.get('hdtvlogo'):
-                backdrop_url = fjs['hdtvlogo'][0].get('url')
-            
-            if backdrop_url:
-                self.saveBackdrop(backdrop_url, dwn_backdrop)
+            tvdb_ids = []
+
+            def _add_tvdb_id(value):
                 try:
-                    if getattr(self, 'slug', None):
-                        self.save_info_json(self.slug, {'title': (title or '').strip(), 'source': 'fanart'})
+                    value = int(value)
                 except Exception:
-                    pass
-                return True, "[SUCCESS : fanart] %s" % title
-            
+                    return
+                if value > 0 and value not in tvdb_ids:
+                    tvdb_ids.append(value)
+
+            # Reuse the id already resolved by the preceding TVDB provider.
+            _add_tvdb_id(getattr(self, '_last_tvdb_id', None))
+
+            # TVMaze is keyless and useful as a second resolver.  HTTPS is
+            # important because many current receiver images reject or redirect
+            # the former plain-http request.
+            if not tvdb_ids:
+                for query in self._tvdb_candidates(title_safe)[:3]:
+                    try:
+                        url_maze = "https://api.tvmaze.com/singlesearch/shows?q=%s" % requests.utils.quote(query)
+                        response = self.http.get(url_maze, timeout=(3, 6))
+                        if response.status_code != 200:
+                            continue
+                        maze_data = response.json()
+                        if isinstance(maze_data, dict):
+                            _add_tvdb_id((maze_data.get('externals') or {}).get('thetvdb'))
+                        if tvdb_ids:
+                            break
+                    except Exception:
+                        continue
+
+            if not tvdb_ids:
+                return False, "[SKIP : fanart] No TVDB ID"
+
+            for tvdb_id in tvdb_ids:
+                url_fanart = "https://webservice.fanart.tv/v3/tv/%s?api_key=%s" % (tvdb_id, fanart_api)
+                response = self.http.get(url_fanart, timeout=(3, 8))
+                if response.status_code != 200:
+                    continue
+                fanart_data = response.json()
+                if not isinstance(fanart_data, dict):
+                    continue
+
+                # showbackground is genuine fanart.  tvthumb and hdtvlogo are
+                # deliberately excluded because they commonly look like the
+                # banners/title cards reported by users.
+                backgrounds = fanart_data.get('showbackground') or []
+                if not isinstance(backgrounds, list):
+                    continue
+
+                def _fanart_rank(item):
+                    language = str((item or {}).get('lang') or '').lower()
+                    language_rank = {'de': 3, '00': 2, '': 2, 'en': 1}.get(language, 0)
+                    try:
+                        likes = int((item or {}).get('likes') or 0)
+                    except Exception:
+                        likes = 0
+                    return (language_rank, likes)
+
+                for item in sorted(backgrounds, key=_fanart_rank, reverse=True):
+                    backdrop_url = item.get('url') if isinstance(item, dict) else None
+                    if not backdrop_url:
+                        continue
+                    self.saveBackdrop(backdrop_url, dwn_backdrop)
+                    if not (os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop)):
+                        try:
+                            if os.path.exists(dwn_backdrop):
+                                os.remove(dwn_backdrop)
+                        except Exception:
+                            pass
+                        continue
+                    try:
+                        if getattr(self, 'slug', None):
+                            self.save_info_json(self.slug, {
+                                'title': (title or '').strip(),
+                                'source': 'fanart',
+                                'tvdb_id': tvdb_id,
+                                'url': backdrop_url,
+                            })
+                    except Exception:
+                        pass
+                    return True, "[SUCCESS : fanart] %s" % backdrop_url
+
             return False, "[SKIP : fanart] No backdrop"
             
         except Exception as e:
@@ -2943,16 +3012,14 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
         if ok_custom:
             return True, msg_custom
 
-        """Google Bildersuche als letzter Fallback.
-
-        v2.4:
-        - probiert mehrere Query-Varianten (DE/EN) und vereinfacht den Titel
-        - SUCCESS nur, wenn verifyBackdrop() wirklich passt
-        """
+        """Keyless web-image fallback: Google first, Bing if blocked/empty."""
         try:
+            global _GOOGLE_BLOCKED_UNTIL, _BING_BLOCKED_UNTIL
             mapped_title = self.apply_title_mapping(title)
             base_title = self.simplify_title_for_search(mapped_title or title)
             title_safe = (base_title or mapped_title or title or '').replace('+', ' ').strip()
+            if not title_safe:
+                return False, "[SKIP : google] Empty title"
 
             # ensure slug for JSON
             try:
@@ -2961,54 +3028,135 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
             except Exception:
                 pass
 
-            q_variants = []
-            if title_safe:
-                q_variants.append(title_safe)
-            if title and title.strip() and title.strip() != title_safe:
-                q_variants.append(title.strip())
-            # try longer/more specific query first
-            q_variants = list(dict.fromkeys(sorted(q_variants, key=lambda s: len(s or ''), reverse=True)))
+            queries = ['"%s" backdrop' % title_safe]
+            if (title or '').strip() and (title or '').strip() != title_safe:
+                queries.append('%s hintergrund' % (title or '').strip())
 
-            suffixes = [
-                'backdrop',
-                'hintergrund',
-                'wallpaper',
-                'tv show backdrop',
-                'serie hintergrund',
-            ]
+            headers = {
+                'User-Agent': getRandomUserAgent(),
+                'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            }
 
-            headers = {'User-Agent': getRandomUserAgent()}
-            img_pattern = re.compile(r'"(https?://[^\"]+\.(?:jpg|jpeg|png|webp))"', re.I)
+            def _decode_url(value):
+                try:
+                    return (value or '').replace('\\u0026', '&').replace('\\u003d', '=') \
+                        .replace('\\/', '/').replace('&amp;', '&').replace('&quot;', '"')
+                except Exception:
+                    return value
 
-            for q in q_variants[:2]:
-                for suf in suffixes:
-                    search_query = "%s %s" % (q, suf)
-                    url = "https://www.google.com/search?q=%s&tbm=isch" % requests.utils.quote(search_query)
-                    r = self.http.get(url, headers=headers, timeout=(6, 12))
-                    matches = img_pattern.findall(r.text or '')
+            def _unique_urls(values):
+                result = []
+                seen = set()
+                for value in values:
+                    value = _decode_url(value)
+                    if not value or not value.startswith(('http://', 'https://')):
+                        continue
+                    low = value.lower()
+                    if value in seen or value.startswith('data:'):
+                        continue
+                    if any(host in low for host in (
+                        'google.com/images/branding', 'gstatic.com/images/icons',
+                        'bing.com/rp/', 'microsoft.com/favicon'
+                    )):
+                        continue
+                    seen.add(value)
+                    result.append(value)
+                return result
 
-                    for img_url in matches[:12]:
-                        low = img_url.lower()
-                        if 'google' in low or 'gstatic' in low:
-                            continue
+            def _google_urls(page):
+                if not page:
+                    return []
+                decoded = _decode_url(page)
+                values = []
+                values.extend(re.findall(r'"ou":"(https?://[^\"]+)"', decoded))
+                values.extend(re.findall(r'\],\["(https?://[^\"]+)",\d+,\d+\]', decoded))
+                values.extend(re.findall(r'"(https?://[^\"]+\.(?:jpg|jpeg|webp)(?:\?[^\"]*)?)"', decoded, re.I))
+                return _unique_urls(values)
 
-                        self.saveBackdrop(img_url, dwn_backdrop)
+            def _bing_urls(page):
+                if not page:
+                    return []
+                decoded = _decode_url(page)
+                values = re.findall(r'"murl":"(https?://[^\"]+)"', decoded, re.I)
+                values.extend(re.findall(r'murl&amp;quot;:&amp;quot;(https?://.*?)(?:&amp;quot;|&quot;)', page, re.I))
+                return _unique_urls(values)
 
-                        if os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop):
-                            try:
-                                if getattr(self, 'slug', None):
-                                    self.save_info_json(self.slug, {'title': (title or '').strip(), 'source': 'google'})
-                            except Exception:
-                                pass
-                            return True, "[SUCCESS : google] %s" % (title or '')
+            candidates = []
+            google_was_blocked = time.time() < _GOOGLE_BLOCKED_UNTIL
 
-                        try:
-                            if os.path.exists(dwn_backdrop):
-                                os.remove(dwn_backdrop)
-                        except Exception:
-                            pass
+            # Use a session without automatic 429 retries.  The general worker
+            # session retries rate limits and would turn one rejected query into
+            # three, making Google's block last longer.
+            if not google_was_blocked:
+                google_http = requests.Session()
+                for query in queries[:2]:
+                    url = "https://www.google.com/search?q=%s&tbm=isch" % requests.utils.quote(query)
+                    try:
+                        response = google_http.get(
+                            url, headers=headers, cookies={'CONSENT': 'YES+'},
+                            timeout=(6, 12), allow_redirects=True
+                        )
+                    except Exception:
+                        continue
+                    final_url = str(getattr(response, 'url', '') or '')
+                    if response.status_code in (403, 429, 503) or '/sorry/' in final_url:
+                        _GOOGLE_BLOCKED_UNTIL = time.time() + (30 * 60)
+                        google_was_blocked = True
+                        break
+                    if response.status_code != 200:
+                        continue
+                    candidates.extend(('google', image_url) for image_url in _google_urls(response.text or ''))
+                    if candidates:
+                        break
 
-            return False, "[SKIP : google] Not found"
+            # Bing is a keyless emergency fallback when Google changes its HTML,
+            # has no result, or has rate-limited the receiver.
+            bing_was_blocked = time.time() < _BING_BLOCKED_UNTIL
+            if not candidates and not bing_was_blocked:
+                bing_http = requests.Session()
+                for query in queries[:2]:
+                    url = "https://www.bing.com/images/search?q=%s&form=HDRSC2&first=1" % requests.utils.quote(query)
+                    try:
+                        response = bing_http.get(url, headers=headers, timeout=(6, 12), allow_redirects=True)
+                    except Exception:
+                        continue
+                    if response.status_code in (403, 429, 503):
+                        _BING_BLOCKED_UNTIL = time.time() + (30 * 60)
+                        bing_was_blocked = True
+                        break
+                    if response.status_code != 200:
+                        continue
+                    candidates.extend(('bing', image_url) for image_url in _bing_urls(response.text or ''))
+                    if candidates:
+                        break
+
+            seen_candidates = set()
+            for source, image_url in candidates[:30]:
+                if image_url in seen_candidates:
+                    continue
+                seen_candidates.add(image_url)
+                self.saveBackdrop(image_url, dwn_backdrop)
+                if os.path.exists(dwn_backdrop) and self.verifyBackdrop(dwn_backdrop):
+                    try:
+                        if getattr(self, 'slug', None):
+                            self.save_info_json(self.slug, {
+                                'title': (title or '').strip(),
+                                'source': source,
+                                'url': image_url,
+                            })
+                    except Exception:
+                        pass
+                    return True, "[SUCCESS : %s] %s" % (source, image_url)
+                try:
+                    if os.path.exists(dwn_backdrop):
+                        os.remove(dwn_backdrop)
+                except Exception:
+                    pass
+
+            if google_was_blocked:
+                return False, "[SKIP : google] Rate limited; web fallback not found"
+            return False, "[SKIP : google] Not found (Bing fallback tried)"
 
         except Exception as e:
             if DEBUG_BACKDROP:
@@ -3236,6 +3384,9 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
         Canonical slug is provided by GradientFHDBackdropX.py via get_store_slug(title).
         """
         try:
+            # Provider state belongs to one EPG event only.  In particular a
+            # TVDB id must never leak into the following Fanart search.
+            self._last_tvdb_id = None
             raw_title = title or ""
             base_title = _strip_episode_tokens(raw_title)
 
