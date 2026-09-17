@@ -846,9 +846,9 @@ class AutoDBRunWatcher(object):
 
         parts = []
         if self._display_poster:
-            parts.append(tr('Poster %d%% (%d/%d) New:%d Miss:%d', 'Poster %d%% (%d/%d) Neu:%d Ohne:%d') % (self._pct(self.done_p, self.total_p), self.done_p, self.total_p, self.new_p, self.miss_p))
+            parts.append(tr('Poster %d%% (%d/%d) New:%d No results:%d', 'Poster %d%% (%d/%d) Neu:%d No results:%d') % (self._pct(self.done_p, self.total_p), self.done_p, self.total_p, self.new_p, self.miss_p))
         if self._display_backdrop:
-            parts.append(tr('Backdrop %d%% (%d/%d) New:%d Miss:%d', 'Backdrop %d%% (%d/%d) Neu:%d Ohne:%d') % (self._pct(self.done_b, self.total_b), self.done_b, self.total_b, self.new_b, self.miss_b))
+            parts.append(tr('Backdrop %d%% (%d/%d) New:%d No results:%d', 'Backdrop %d%% (%d/%d) Neu:%d No results:%d') % (self._pct(self.done_b, self.total_b), self.done_b, self.total_b, self.new_b, self.miss_b))
 
         return 'AutoDB: ' + ' | '.join(parts) + '  %02d:%02d' % (mm, ss)
 
