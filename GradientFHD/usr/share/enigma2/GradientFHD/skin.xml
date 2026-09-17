@@ -655,6 +655,25 @@
 	<screen name="Setup" position="center,center" size="1450,900"  backgroundColor="transparent" flags="wfNoBorder">
 		<panel name="setup_common" />
 	</screen>
+	<!-- Senderlisten-Einstellungen mit dynamischer Vorschau -->
+	<screen name="ChannelSelectionSetup" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="Channel Selection Settings">
+		<widget name="config" position="50,100" size="1820,408" font="Gradient_Font;36" itemHeight="51" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" backgroundColorSelected="gradient_TBGL" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="1" zPosition="3" />
+
+		<eLabel text="Preview" position="819,570" size="720,36" font="Gradient_Font;30" foregroundColor="bernstein" backgroundColor="gradient_background" transparent="1" valign="center" halign="left" />
+		<eLabel position="57,547" size="726,411" backgroundColor="gradient_Line" zPosition="0" />
+		<eLabel position="60,550" size="720,405" font="Gradient_Font;30" text="Vorschau der Senderliste / Channel list preview&#xA;&#xA;Bitte beachten / Please note:&#xA;&quot;Senderliste / Bildschirm&quot; und&#xA;&quot;Senderliste / Liste&quot; müssen zusammenpassen.&#xA;&#xA;&quot;Channel list / Screen&quot; and&#xA;&quot;Channel list / List&quot; must match.&#xA;&#xA;Nur dann wird ein Vorschaubild angezeigt.&#xA;Only then will a preview be displayed." halign="center" valign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" zPosition="1" />
+		<widget source="global.CurrentTime" render="GradientFHDChannelSelectionPreview" position="60,550" size="720,405" previewPath="/usr/share/enigma2/GradientFHD/preview/channelselection" templateFile="/usr/share/enigma2/GradientFHD/skinTemplates.xml" interval="250" showAfterChange="1" alphatest="blend" scale="1" transparent="1" zPosition="2" />
+
+		<widget name="description" position="820,630" size="1050,230" font="Gradient_Font;30" valign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="footnote" position="820,870" size="1050,100" font="Gradient_Font;30" valign="center" foregroundColor="bernstein" backgroundColor="gradient_background" transparent="1" />
+		<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="4" />
+		<eLabel name="Line_Fullscreen" position="60,520" size="1800,2" zPosition="10" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+
+		<panel name="Template_FullScreen_Base" />
+		<panel position="459,150" size="330,57">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
 	<screen name="SkinSelection" position="center,center" size="1450,900"  backgroundColor="transparent" flags="wfNoBorder" title="Setup">
 		<panel name="setup_common" />
 		<widget name="preview" position="center,360" size="480,270" alphatest="blend" conditional="preview" transparent="1" zPosition="3" />
