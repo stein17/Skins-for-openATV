@@ -2686,20 +2686,27 @@ class GradientFHDBackdropXDownloadThread(threading.Thread):
                 return False, "[SKIP : tvdb] No slug"
 
             cands = self._tvdb_candidates(base_title)
-            try:
-                self.logAutoDB("[TVDB-Search] Query='%s', Variants=%d" % (base_title, len(cands)))
-            except Exception:
-                pass
+            # The provider code is shared by the live and AutoDB workers.
+            # Use the logger offered by the active worker instead of assuming
+            # that the AutoDB-only logger exists on the live BackdropDB class.
+            provider_log = getattr(self, 'logAutoDB', None)
+            if not callable(provider_log):
+                provider_log = getattr(self, 'logDB', None)
+            if callable(provider_log):
+                try:
+                    provider_log("[TVDB-Search] Query='%s', Variants=%d" % (base_title, len(cands)))
+                except Exception:
+                    pass
 
             # Preferred path: private TheTVDB v4 UUID key.
             if _is_tvdb_v4_key(api_key):
                 for q in cands:
                     if not q:
                         continue
-                    series_id, _poster = _tvdb_v4_search_series(api_key, q, log=self.logAutoDB)
+                    series_id, _poster = _tvdb_v4_search_series(api_key, q, log=provider_log)
                     if not series_id:
                         continue
-                    img = _tvdb_v4_best_backdrop(api_key, series_id, log=self.logAutoDB, search_title=q)
+                    img = _tvdb_v4_best_backdrop(api_key, series_id, log=provider_log, search_title=q)
                     if not img:
                         continue
                     self.saveBackdrop(img, dwn_backdrop)
