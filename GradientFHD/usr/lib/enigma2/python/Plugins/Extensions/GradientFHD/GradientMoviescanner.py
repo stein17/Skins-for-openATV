@@ -1782,6 +1782,7 @@ class MovieScannerRunController(object):
 		self.osd_visible = False
 		self._hooked = False
 		self._last_exit_ts = 0.0
+		self._ignore_next_livetv_exit = False
 		self._stop_box_open = False
 		self._finish_pending = None
 		self.scheduled_run = False
@@ -1819,6 +1820,12 @@ class MovieScannerRunController(object):
 		if self._last_exit_ts and (now - self._last_exit_ts) < self.EXIT_DEBOUNCE:
 			return 0
 		self._last_exit_ts = now
+		if self._ignore_next_livetv_exit:
+			# The EXIT which merely closes the remaining Gradient/menu screen may
+			# reveal InfoBar before the global key callback runs.  Do not mistake
+			# that same physical key press for a request to stop MovieScanner.
+			self._ignore_next_livetv_exit = False
+			return 0
 		if self.screen is None and self.osd_visible:
 			# Never open a MessageBox directly inside the global action callback.
 			# ask_stop() schedules it through an eTimer on the GUI mainloop.
@@ -1859,6 +1866,7 @@ class MovieScannerRunController(object):
 		self._finish_pending = None
 		self._stop_box_open = False
 		self._last_exit_ts = 0.0
+		self._ignore_next_livetv_exit = False
 		self._hook_global_actions()
 		self._close_osd()
 		self.ui_timer.start(250, False)
@@ -1888,6 +1896,7 @@ class MovieScannerRunController(object):
 		self._finish_pending = None
 		self._stop_box_open = False
 		self._last_exit_ts = 0.0
+		self._ignore_next_livetv_exit = False
 		self._hook_global_actions()
 		self._close_osd()
 		if show_osd:
@@ -2020,6 +2029,9 @@ class MovieScannerRunController(object):
 	def hide_to_livetv(self):
 		if not self.running or self.engine is None:
 			return
+		# RED closes the scanner first.  If a parent Gradient/menu screen is
+		# still present, its following EXIT is only the way back to Live TV.
+		self._ignore_next_livetv_exit = True
 		# Close the MovieScanner dialog itself first, then unwind dialog stack to InfoBar.
 		try:
 			if self.screen is not None:
@@ -2033,6 +2045,9 @@ class MovieScannerRunController(object):
 	def hide_to_osd(self):
 		if not self.running or self.engine is None:
 			return
+		# The EXIT used to close this screen must not immediately be reused by
+		# the global Live-TV hook to open the stop confirmation.
+		self._ignore_next_livetv_exit = True
 		try:
 			if self.screen is not None:
 				self.screen.close()
