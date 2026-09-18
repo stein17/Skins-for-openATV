@@ -179,10 +179,118 @@ def _gradientfhd_sessionstart(reason=None, session=None, **kwargs):
         pass
 
 
+def _gradientfhd_channel_selection_choices():
+    """Read the ChannelSelection choices from the newly loaded skin."""
+    try:
+        from skin import domScreens
+        from xml.etree.ElementTree import parse
+
+        screen_choices = [("", _("Legacy mode"))]
+        for screen_name in domScreens:
+            element, _source = domScreens.get(screen_name, (None, None))
+            if element is not None and element.get("base") == "ChannelSelection":
+                screen_choices.append((screen_name, element.get("label", screen_name)))
+
+        template_file = path.join(
+            "/usr/share/enigma2",
+            path.dirname(config.skin.primary_skin.value),
+            "skinTemplates.xml"
+        )
+        template_choices = []
+        if path.isfile(template_file):
+            for element in parse(template_file).getroot().findall(".//template"):
+                if element.get("component") != "serviceList":
+                    continue
+                name = element.get("name", "").strip()
+                if name:
+                    template_choices.append((name, name))
+        return screen_choices, template_choices
+    except Exception as error:
+        print("[GradientFHD] Senderlisten-Auswahl konnte nicht gelesen werden: %s" % error)
+        return None, None
+
+
+def _gradientfhd_skinchange(session=None, **kwargs):
+    """Keep valid skin-specific choices and use legacy mode for other skins."""
+    try:
+        # Remove service-list templates belonging to the previously active skin.
+        from skin import reloadSkinTemplates
+        reloadSkinTemplates(clear=True)
+    except Exception as error:
+        print("[GradientFHD] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+
+    screen_choices, template_choices = _gradientfhd_channel_selection_choices()
+    if not screen_choices:
+        return
+
+    screen_config = config.channelSelection.screenStyle
+    template_config = config.channelSelection.widgetStyle
+    old_screen = str(screen_config.value or "")
+    old_template = str(template_config.value or "")
+    valid_screens = [item[0] for item in screen_choices]
+    valid_templates = [item[0] for item in (template_choices or [])]
+    primary_skin = config.skin.primary_skin.value
+
+    if primary_skin in ("GradientFHD/skin.xml", "GradientWQHD/skin.xml"):
+        screen_map = {
+            "BundesligaChannelSelectionPIG": "GradientChannelSelectionPIG",
+            "BundesligaChannelSelection": "GradientChannelSelection",
+        }
+        template_map = {"Bundesliga Standard": "Gradient Standard"}
+        fallback_screen = "GradientChannelSelection"
+        fallback_template = "Gradient Standard"
+    elif primary_skin == "BundesligaFHD/skin.xml":
+        screen_map = {
+            "GradientChannelSelectionPIG": "BundesligaChannelSelectionPIG",
+            "GradientChannelSelection": "BundesligaChannelSelection",
+            "ChannelSelection_4_Backdrops": "BundesligaChannelSelectionPIG",
+            "ChannelSelection_5_Poster": "BundesligaChannelSelection",
+            "ChannelSelection3_Fields_Poster": "BundesligaChannelSelectionPIG",
+            "ChannelSelection3_Fields": "BundesligaChannelSelectionPIG",
+        }
+        template_map = {
+            "Gradient Standard": "Bundesliga Standard",
+            "Gradient Standard 3 Lines": "Bundesliga Standard",
+            "Gradient Standard 3 Lines + Next": "Bundesliga Standard",
+            "Gradient 3 Fields": "Bundesliga Standard",
+            "Gradient 3 Fields_Poster": "Bundesliga Standard",
+            "Gradient 4 Backdrops": "Bundesliga Standard",
+            "Gradient 5 Poster": "Bundesliga Standard",
+        }
+        fallback_screen = "BundesligaChannelSelection"
+        fallback_template = "Bundesliga Standard"
+    else:
+        # MetrixHD and every other foreign skin always get the stable old mode.
+        screen_map = {}
+        template_map = {}
+        fallback_screen = ""
+        fallback_template = valid_templates[0] if valid_templates else ""
+
+    new_screen = old_screen if old_screen in valid_screens else screen_map.get(old_screen, fallback_screen)
+    if new_screen not in valid_screens:
+        new_screen = fallback_screen if fallback_screen in valid_screens else ""
+
+    screen_config.setChoices(screen_choices, default=new_screen)
+    screen_config.value = new_screen
+    screen_config.save()
+
+    if template_choices:
+        new_template = old_template if old_template in valid_templates else template_map.get(old_template, fallback_template)
+        if new_template not in valid_templates:
+            new_template = fallback_template if fallback_template in valid_templates else valid_templates[0]
+        template_config.setChoices(template_choices, default=new_template)
+        template_config.value = new_template
+        template_config.save()
+
+    configfile.save()
+    print("[GradientFHD] Senderlisten-Auswahl synchronisiert: %s / %s" % (screen_config.value, template_config.value))
+
+
 def Plugins(**kwargs):
     return [PluginDescriptor(name=_("GradientFHD  Configtool"), description=_("Personalize your GradientFHD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
     icon="plugin.png", fnc=main),
-    PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=_gradientfhd_sessionstart)]
+    PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=_gradientfhd_sessionstart),
+    PluginDescriptor(where=[PluginDescriptor.WHERE_SKINCHANGE], fnc=_gradientfhd_skinchange)]
 
 
 def main(session, **kwargs):

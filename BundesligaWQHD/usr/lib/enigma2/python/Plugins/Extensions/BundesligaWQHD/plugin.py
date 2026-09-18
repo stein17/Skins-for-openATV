@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 import os
 
-from Components.config import config
+from Components.config import config, configfile
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Standby import TryQuitMainloop
@@ -156,6 +156,113 @@ def sessionstart(reason, session=None, **kwargs):
         _restore_helper = _RestoreTeamHelper(session, missing)
 
 
+def _channel_selection_choices():
+    """Read the ChannelSelection choices belonging to the newly loaded skin."""
+    try:
+        from skin import domScreens
+        from xml.etree.ElementTree import parse
+
+        screen_choices = [("", _("Legacy mode"))]
+        for screen_name in domScreens:
+            element, _source = domScreens.get(screen_name, (None, None))
+            if element is not None and element.get("base") == "ChannelSelection":
+                screen_choices.append((screen_name, element.get("label", screen_name)))
+
+        skin_directory = os.path.dirname(config.skin.primary_skin.value)
+        template_file = os.path.join(
+            "/usr/share/enigma2",
+            skin_directory,
+            "skinTemplates.xml"
+        )
+        if not os.path.isfile(template_file):
+            return None, None
+
+        template_choices = []
+        for element in parse(template_file).getroot().findall(".//template"):
+            if element.get("component") != "serviceList":
+                continue
+            name = element.get("name", "").strip()
+            if name:
+                template_choices.append((name, name))
+        return screen_choices, template_choices
+    except Exception as error:
+        print("[BundesligaWQHDConfig] Senderlisten-Auswahl konnte nicht gelesen werden: %s" % error)
+        return None, None
+
+
+def skinchange(session=None, **kwargs):
+    """Keep ChannelSelection screen/list values valid during fast skin reload."""
+    try:
+        # OpenATV keeps component templates globally.  Clear the templates from
+        # the previous skin before the ChannelSelection dialog is rebuilt.
+        from skin import reloadSkinTemplates
+        reloadSkinTemplates(clear=True)
+    except Exception as error:
+        print("[BundesligaWQHDConfig] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+
+    screen_choices, template_choices = _channel_selection_choices()
+    if not screen_choices or not template_choices:
+        return
+
+    screen_config = config.channelSelection.screenStyle
+    template_config = config.channelSelection.widgetStyle
+    old_screen = str(screen_config.value or "")
+    old_template = str(template_config.value or "")
+    valid_screens = [item[0] for item in screen_choices]
+    valid_templates = [item[0] for item in template_choices]
+    primary_skin = config.skin.primary_skin.value
+
+    if primary_skin == SKIN_XML:
+        screen_map = {
+            "GradientChannelSelectionPIG": "BundesligaChannelSelectionPIG",
+            "GradientChannelSelection": "BundesligaChannelSelection",
+            "ChannelSelection_4_Backdrops": "BundesligaChannelSelectionPIG",
+            "ChannelSelection_5_Poster": "BundesligaChannelSelection",
+            "ChannelSelection3_Fields_Poster": "BundesligaChannelSelectionPIG",
+            "ChannelSelection3_Fields": "BundesligaChannelSelectionPIG",
+        }
+        template_map = {
+            "Gradient Standard": "Bundesliga Standard",
+            "Gradient Standard 3 Lines": "Bundesliga Standard",
+            "Gradient Standard 3 Lines + Next": "Bundesliga Standard",
+            "Gradient 3 Fields": "Bundesliga Standard",
+            "Gradient 3 Fields_Poster": "Bundesliga Standard",
+            "Gradient 4 Backdrops": "Bundesliga Standard",
+            "Gradient 5 Poster": "Bundesliga Standard",
+        }
+        fallback_screen = "BundesligaChannelSelection"
+        fallback_template = "Bundesliga Standard"
+    elif primary_skin in ("GradientFHD/skin.xml", "GradientWQHD/skin.xml"):
+        screen_map = {
+            "BundesligaChannelSelectionPIG": "GradientChannelSelectionPIG",
+            "BundesligaChannelSelection": "GradientChannelSelection",
+        }
+        template_map = {"Bundesliga Standard": "Gradient Standard"}
+        fallback_screen = "GradientChannelSelection"
+        fallback_template = "Gradient Standard"
+    else:
+        screen_map = {}
+        template_map = {}
+        fallback_screen = ""
+        fallback_template = valid_templates[0]
+
+    new_screen = old_screen if old_screen in valid_screens else screen_map.get(old_screen, fallback_screen)
+    new_template = old_template if old_template in valid_templates else template_map.get(old_template, fallback_template)
+    if new_screen not in valid_screens:
+        new_screen = fallback_screen if fallback_screen in valid_screens else ""
+    if new_template not in valid_templates:
+        new_template = fallback_template if fallback_template in valid_templates else valid_templates[0]
+
+    screen_config.setChoices(screen_choices, default=new_screen)
+    template_config.setChoices(template_choices, default=new_template)
+    screen_config.value = new_screen
+    template_config.value = new_template
+    screen_config.save()
+    template_config.save()
+    configfile.save()
+    print("[BundesligaWQHDConfig] Senderlisten-Auswahl synchronisiert: %s / %s" % (new_screen, new_template))
+
+
 def main(session, **kwargs):
     if config.skin.primary_skin.value != SKIN_XML:
         session.open(
@@ -184,6 +291,10 @@ def Plugins(**kwargs):
         PluginDescriptor(
             where=PluginDescriptor.WHERE_AUTOSTART,
             fnc=autostart
+        ),
+        PluginDescriptor(
+            where=PluginDescriptor.WHERE_SKINCHANGE,
+            fnc=skinchange
         ),
         PluginDescriptor(
             where=PluginDescriptor.WHERE_SESSIONSTART,

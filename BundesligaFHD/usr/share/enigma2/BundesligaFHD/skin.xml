@@ -1183,6 +1183,29 @@
 		<panel name="Banner_Setup_Default" />
 	</screen>
 	<!--Setup Screens-->
+	<!-- Senderlisten-Einstellungen mit dynamischer Bundesliga-Vorschau -->
+	<screen name="ChannelSelectionSetup" position="0,0" size="1920,1080" title="Channel Selection Settings" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="config" position="305,115" size="1050,378" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" transparent="1" zPosition="3" />
+		<eLabel text="Vorschau" position="305,510" size="720,36" font="Regular;30" foregroundColor="club_primary" backgroundColor="bl_bg" transparent="1" valign="center" halign="center" />
+		<eLabel position="302,552" size="726,411" backgroundColor="club_primary" zPosition="0" />
+		<eLabel position="305,555" size="720,405" font="Regular;27" text="Vorschau der Senderliste / Channel list preview&#xA;&#xA;Bitte beachten / Please note:&#xA;&quot;Senderliste / Bildschirm&quot; und&#xA;&quot;Senderliste / Liste&quot; müssen zusammenpassen.&#xA;&#xA;&quot;Channel list / Screen&quot; and&#xA;&quot;Channel list / List&quot; must match.&#xA;&#xA;Nur dann wird ein Vorschaubild angezeigt.&#xA;Only then will a preview be displayed." halign="center" valign="center" foregroundColor="bl_text" backgroundColor="bl_bg" zPosition="1" />
+		<widget source="global.CurrentTime" render="BLFHDChannelSelectionPreview" position="305,555" size="720,405" previewPath="/usr/share/enigma2/BundesligaFHD/preview/channelselection" templateFile="/usr/share/enigma2/BundesligaFHD/skinTemplates.xml" interval="250" showAfterChange="1" alphatest="blend" scale="1" transparent="1" zPosition="2" />
+		<widget name="description" position="1382,540" size="468,270" font="Regular;25" halign="center" valign="center" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="2" />
+		<widget name="footnote" position="1039,555" size="315,405" font="Regular;22" halign="left" valign="center" foregroundColor="club_primary" backgroundColor="bl_bg" transparent="1" zPosition="2" />
+		<widget name="HelpWindow" position="1170,15" size="729,153" zPosition="4" transparent="1" alphatest="blend" />
+		<eLabel position="305,500" size="1050,2" backgroundColor="club_primary" zPosition="10" />
+		<panel name="Banner_Setup_Default" />
+		<panel name="Template_Color_Button_Automatic_all" />
+		<panel name="Template_Text_Buttons_O_E" />
+		<panel name="Logo_Setup_Default" />
+		<panel name="Header_Title_Clock_Setup" />
+		<panel name="VideoPicture_Setup" />
+		<panel name="Bundesliga_Basic_Setup_club_primary" />
+		<panel name="Bundesliga_Setup_right_Pic_club_primary" />
+		<panel position="30,25" size="130,130">
+			<panel name="Logo_Bundesliga_Default" />
+		</panel>
+	</screen>
 	<screen name="SkinSelection" position="0,0" size="1920,1080" title="Setup" flags="wfNoBorder" backgroundColor="transparent">
 		<widget name="config" position="305,115" size="1050,630" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="bl_text" foregroundColorSelected="club_selection_fg" backgroundColor="bl_bg" selectionPixmap="Verein/select_54.png" borderWidth="1" borderColor="black" transparent="1" />
 		<widget name="footnote" position="300,935" size="1050,38" font="Regular;24" halign="left" valign="center" foregroundColor="bl_text" backgroundColor="bl_bg" transparent="1" zPosition="5" />
