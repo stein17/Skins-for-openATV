@@ -1625,7 +1625,7 @@ def _ms_notify(text, timeout=6, mtype=None):
 
 class MovieScannerStatusOSD(Screen):
 	skin = """
-        <screen name="MovieScannerStatusOSD" position="13,13" size="1547,120" backgroundColor="#80000000" cornerRadius="27" flags="wfNoBorder" zPosition="999">
+	        <screen name="MovieScannerStatusOSD" position="13,13" size="1547,120" backgroundColor="#80000000" cornerRadius="27" flags="wfNoBorder,wfModal" zPosition="101">
 			<widget name="current" position="27,5" size="1493,43" font="Gradient_Font; 36" foregroundColor="green" backgroundColor="background" transparent="1" valign="center" borderWidth="1" borderColor="black" />
 			<widget name="progress" position="27,53" size="1493,13" foregroundColor="yellow" borderColor="yellow" borderWidth="3" backgroundColor="black" />
 			<widget name="status" position="27,72" size="1493,43" font="Gradient_Font; 36" foregroundColor="white" backgroundColor="background" transparent="1" borderWidth="1" borderColor="black" />
@@ -1639,6 +1639,8 @@ class MovieScannerStatusOSD(Screen):
 		self["progress"].setValue(0)
 		self["status"] = Label("")
 		self["current"] = Label("")
+		# Passive overlay only: no ActionMap and no focus manipulation.
+		# Clearing focus here can disable every remote-control key on newer images.
 
 	def updateState(self, current_text, status_text, percent):
 		try:
@@ -1721,10 +1723,12 @@ class MovieScannerEngine(object):
 		prefix = _t("Aktuell", "Current")
 		counter = (" (%d/%d)" % (idx, total)) if total else (" (%d)" % idx)
 		self.current_line = "%s: %s%s" % (prefix, text, counter)
-		MOVIESCAN_WATCHER.update_views()
+		# Worker thread: never touch Enigma2 widgets here.  The controller's
+		# mainloop timer displays the latest state safely.
 
 	def _ui_progress(self):
-		MOVIESCAN_WATCHER.update_views()
+		# The worker already updated self.stats.  UI refresh is timer-driven.
+		pass
 
 	def _apply_finish_to_visible_screen(self):
 		scr = self._visible_screen()
@@ -1756,14 +1760,19 @@ class MovieScannerEngine(object):
 			pass
 
 	def _ui_finish(self):
-		MOVIESCAN_WATCHER.finish(stopped=bool(self.stop_flag))
+		# Hand completion back to the Enigma2 mainloop.
+		MOVIESCAN_WATCHER.mark_finished(stopped=bool(self.stop_flag))
 
 
 class MovieScannerRunController(object):
 	EXIT_DEBOUNCE = 0.35
-	RED_DEBOUNCE = 0.25
 
 	def __init__(self):
+		self.ui_timer = eTimer()
+		try:
+			self._ui_timer_conn = self.ui_timer.timeout.connect(self._ui_tick)
+		except Exception:
+			self.ui_timer.callback.append(self._ui_tick)
 		self.running = False
 		self.session = None
 		self.screen = None
@@ -1773,8 +1782,8 @@ class MovieScannerRunController(object):
 		self.osd_visible = False
 		self._hooked = False
 		self._last_exit_ts = 0.0
-		self._last_red_ts = 0.0
 		self._stop_box_open = False
+		self._finish_pending = None
 		self.scheduled_run = False
 
 	def _action_allowed(self):
@@ -1799,40 +1808,27 @@ class MovieScannerRunController(object):
 				return True
 		return False
 
-	def _is_red_action(self, args):
-		for a in args:
-			if isinstance(a, str) and a == "red":
-				return True
-		return False
-
 	def _on_global_action(self, *args, **kwargs):
 		if not self.running or self.session is None:
+			return 0
+		if not self._is_exit_action(args):
 			return 0
 		if not self._action_allowed():
 			return 0
 		now = time.time()
-		if self._is_red_action(args):
-			if self._last_red_ts and (now - self._last_red_ts) < self.RED_DEBOUNCE:
-				return 0
-			self._last_red_ts = now
-			if self.osd_visible and self.screen is None:
-					# In hidden LiveTV mode, RED should do nothing.
-					return 0
+		if self._last_exit_ts and (now - self._last_exit_ts) < self.EXIT_DEBOUNCE:
 			return 0
-		if self._is_exit_action(args):
-			if self._last_exit_ts and (now - self._last_exit_ts) < self.EXIT_DEBOUNCE:
-				return 0
-			self._last_exit_ts = now
-			if self.screen is None and self.osd_visible:
-					# In LiveTV with OSD visible, EXIT should stop the scan and close everything.
-					self.stop_and_close_all()
-			return 0
+		self._last_exit_ts = now
+		if self.screen is None and self.osd_visible:
+			# Never open a MessageBox directly inside the global action callback.
+			# ask_stop() schedules it through an eTimer on the GUI mainloop.
+			self.ask_stop()
 		return 0
 
 	def _hook_global_actions(self):
 		if self._hooked:
 			return
-		for ctx in ("OkCancelActions", "InfobarShowHideActions", "ColorActions"):
+		for ctx in ("OkCancelActions", "InfobarShowHideActions"):
 			try:
 				eActionMap.getInstance().bindAction(ctx, -0x7FFFFFFF, self._on_global_action)
 				self._hooked = True
@@ -1860,8 +1856,12 @@ class MovieScannerRunController(object):
 		self.engine.stats["total"] = len(files)
 		self.running = True
 		self.scheduled_run = False
+		self._finish_pending = None
+		self._stop_box_open = False
+		self._last_exit_ts = 0.0
 		self._hook_global_actions()
 		self._close_osd()
+		self.ui_timer.start(250, False)
 		self.scan_thread = threading.Thread(target=self.engine._worker, args=(files,))
 		self.scan_thread.daemon = True
 		self.scan_thread.start()
@@ -1885,35 +1885,43 @@ class MovieScannerRunController(object):
 		self.engine.stats["total"] = len(files)
 		self.running = True
 		self.scheduled_run = bool(scheduled)
+		self._finish_pending = None
+		self._stop_box_open = False
+		self._last_exit_ts = 0.0
 		self._hook_global_actions()
 		self._close_osd()
 		if show_osd:
 			self._ensure_osd()
+		self.ui_timer.start(250, False)
 		self.scan_thread = threading.Thread(target=self.engine._worker, args=(files,))
 		self.scan_thread.daemon = True
 		self.scan_thread.start()
 		return True
 
 	def _close_osd(self):
-		try:
-			if self.osd is not None:
-				self.osd.hide()
-		except Exception:
-			pass
-		try:
-			if self.osd is not None:
-				self.osd.close()
-		except Exception:
-			pass
+		osd = self.osd
 		self.osd = None
 		self.osd_visible = False
+		if osd is None:
+			return
+		try:
+			osd.hide()
+		except Exception:
+			pass
+		try:
+			if self.session is not None:
+				self.session.deleteDialog(osd)
+		except Exception:
+			pass
 
 	def _ensure_osd(self):
 		if not self.running or self.session is None or self.engine is None:
 			return
 		if self.osd is None:
 			try:
+				# Same passive Toast-style overlay as the proven AutoDB OSD.
 				self.osd = self.session.instantiateDialog(MovieScannerStatusOSD)
+				self.osd.setAnimationMode(0)
 			except Exception:
 				self.osd = None
 		if self.osd is not None:
@@ -1932,6 +1940,23 @@ class MovieScannerRunController(object):
 		except Exception:
 			pass
 
+	def mark_finished(self, stopped=False):
+		# Called by the worker thread; do not update any GUI component here.
+		self._finish_pending = bool(stopped)
+
+	def _ui_tick(self):
+		if not self.running:
+			try:
+				self.ui_timer.stop()
+			except Exception:
+				pass
+			return
+		self.update_views()
+		pending = self._finish_pending
+		if pending is not None:
+			self._finish_pending = None
+			self.finish(stopped=bool(pending))
+
 	def show_osd_parallel(self):
 		if not self.running or self.engine is None:
 			return
@@ -1949,91 +1974,46 @@ class MovieScannerRunController(object):
 		self._close_to_livetv()
 
 	def _close_to_livetv(self):
-		"""Close dialogs until we are back on InfoBar/LiveTV (robust async).
-
-		Certain dialog chains (ExtensionsMenu -> Plugin) don't pop synchronously in a tight loop.
-		We therefore close ONE dialog per timer tick until InfoBar becomes current_dialog.
-		"""
+		"""Close only known parent menus after the current callback has unwound."""
 		if self.session is None:
 			return
-		try:
-			from enigma import eTimer
-		except Exception:
-			eTimer = None
-
-		# Fallback: best-effort sync loop
-		if eTimer is None:
-			for _i in range(96):
-				try:
-					dlg = getattr(self.session, "current_dialog", None)
-				except Exception:
-					dlg = None
-				if dlg is None:
-					break
-				try:
-					nm = dlg.__class__.__name__ or ""
-				except Exception:
-					nm = ""
-				if ("InfoBar" in nm) or nm == "InfoBar":
-					break
-				try:
-					dlg.close()
-				except Exception:
-					try:
-						self.session.close(dlg)
-					except Exception:
-						break
-			return
-
-		# Async: close step-by-step
 		try:
 			if getattr(self, "_livetv_close_timer", None) is None:
 				self._livetv_close_timer = eTimer()
 				try:
-					self._livetv_close_timer.callback.append(self._close_to_livetv_step)
-				except Exception:
 					self._livetv_close_timer_conn = self._livetv_close_timer.timeout.connect(self._close_to_livetv_step)
+				except Exception:
+					self._livetv_close_timer.callback.append(self._close_to_livetv_step)
 		except Exception:
 			return
-
-		self._livetv_close_steps_left = 96
 		try:
-			self._livetv_close_timer.start(10, True)
+			self._livetv_close_timer.start(250, True)
 		except Exception:
 			pass
 
 	def _close_to_livetv_step(self):
 		try:
-			steps = int(getattr(self, "_livetv_close_steps_left", 0))
+			stack = list(getattr(self.session, "dialog_stack", []) or [])
 		except Exception:
-			steps = 0
-		if steps <= 0:
-			return
-		self._livetv_close_steps_left = steps - 1
-
-		try:
-			dlg = getattr(self.session, "current_dialog", None)
-		except Exception:
-			dlg = None
-		if dlg is None:
-			return
-		try:
-			nm = dlg.__class__.__name__ or ""
-		except Exception:
-			nm = ""
-		if ("InfoBar" in nm) or nm == "InfoBar":
-			return
-
-		try:
-			dlg.close()
-		except Exception:
+			stack = []
+		names_to_close = set([
+			"PluginBrowser", "PluginBrowserSetup", "Setup",
+			"PluginBrowserSetupSummary", "SetupSummary", "ChoiceBox",
+			"ExtensionsList", "ExtensionsMenu"
+		])
+		for item in reversed(stack):
 			try:
-				self.session.close(dlg)
+				dlg = item[0] if isinstance(item, (list, tuple)) else item
+				nm = dlg.__class__.__name__ if dlg is not None else ""
 			except Exception:
-				return
-
+				continue
+			if nm in names_to_close:
+				try:
+					dlg.close()
+				except Exception:
+					pass
 		try:
-			self._livetv_close_timer.start(10, True)
+			self._livetv_close_timer.stop()
 		except Exception:
 			pass
 
@@ -2053,6 +2033,11 @@ class MovieScannerRunController(object):
 	def hide_to_osd(self):
 		if not self.running or self.engine is None:
 			return
+		try:
+			if self.screen is not None:
+				self.screen.close()
+		except Exception:
+			pass
 		self.screen = None
 		self._ensure_osd()
 
@@ -2093,6 +2078,7 @@ class MovieScannerRunController(object):
 			self._stop_box_open = False
 			if ans:
 				self.request_stop()
+				self._close_osd()
 
 		def _open():
 			try:
@@ -2132,6 +2118,10 @@ class MovieScannerRunController(object):
 		if not self.running:
 			return
 		self.running = False
+		try:
+			self.ui_timer.stop()
+		except Exception:
+			pass
 		self._close_osd()
 		try:
 			if self.engine is not None:
@@ -2151,6 +2141,7 @@ class MovieScannerRunController(object):
 		self.screen = None
 		self.scan_thread = None
 		self.engine = None
+		self._finish_pending = None
 		self.scheduled_run = False
 
 MOVIESCAN_WATCHER = MovieScannerRunController()
@@ -2359,7 +2350,9 @@ class MovieScannerMain(Screen):
 	def keyExitScreen(self):
 		try:
 			if MOVIESCAN_WATCHER.running:
-				MOVIESCAN_WATCHER.stop_and_close_all()
+				# Normal EXIT closes only this screen.  The scan and passive OSD
+				# continue; only EXIT in plain LiveTV opens the stop question.
+				MOVIESCAN_WATCHER.hide_to_osd()
 				return
 		except Exception:
 			pass
@@ -2421,8 +2414,8 @@ class MovieScannerMain(Screen):
 		self["status"].setText("Gesamt: %(total)d  Fertig: %(done)d  Poster: %(poster)d  Backdrop: %(backdrop)d  Banner: %(banner)d  Skip: %(skipped)d  Err: %(err)d" % self.stats)
 		try:
 			run_hint = _t(
-				"Suche läuft...\n\nROT blendet aus. Danach ist Live TV sichtbar, OSD läuft weiter.",
-				"Scan running...\n\nRED hides the window. Live TV becomes visible and the OSD keeps running."
+				"Suche läuft...\n\nROT zeigt Live TV. EXIT schließt nur dieses Fenster. Der Suchlauf läuft weiter.",
+				"Scan running...\n\nRED shows Live TV. EXIT closes only this window. The scan keeps running."
 			)
 			self["hint"].setText(run_hint)
 		except Exception:
@@ -2456,7 +2449,7 @@ class MovieScannerMain(Screen):
 			self["key_red"].setText(_t("Ausblenden", "Hide"))
 		except Exception:
 			pass
-		self["status"].setText(_t("Suchlauf läuft  •  ROT blendet aus  •  EXIT beendet alles", "Scan running  •  RED hides  •  EXIT stops everything"))
+		self["status"].setText(_t("Suchlauf läuft  •  ROT: Live TV  •  EXIT: Fenster schließen", "Scan running  •  RED: Live TV  •  EXIT: Close window"))
 
 	def _worker(self, files):
 		tmdb_key = get_tmdb_key()
