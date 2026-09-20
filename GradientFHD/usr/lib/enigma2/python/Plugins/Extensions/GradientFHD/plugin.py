@@ -166,11 +166,47 @@ try:
 except Exception:
     pass
 # ------------------------------------------
+def _openatv_version():
+    """Return the OpenATV image version without requiring a new-only API."""
+    try:
+        from Components.SystemInfo import BoxInfo
+        version = str(BoxInfo.getItem("imgversion") or "").strip()
+        if version:
+            return version
+    except Exception:
+        pass
+
+    try:
+        values = {}
+        with open("/etc/image-version", "r") as version_file:
+            for line in version_file:
+                key, separator, value = line.strip().partition("=")
+                if separator:
+                    values[key] = value.strip().strip("\"'")
+        return values.get("distro_version") or values.get("version") or ""
+    except Exception:
+        return ""
+
+
+def _is_openatv_76():
+    return _openatv_version().startswith("7.6")
+
+
+def _contains_e2mdb(*values):
+    return any("e2mdb" in str(value or "").lower() for value in values)
+
+
 def _gradientfhd_sessionstart(reason=None, session=None, **kwargs):
     if session is None:
         return
     if config.skin.primary_skin.value != "GradientFHD/skin.xml":
         return
+
+    # OpenATV 7.6 has no e2MDB support.  Replace its globally generated
+    # ChannelSelection choices with the filtered choices for this skin.
+    if _is_openatv_76():
+        _gradientfhd_sync_channel_selection()
+
     try:
         from .GradientMoviescanner import schedule_cleanup_timer, schedule_moviescanner_timer
         schedule_cleanup_timer(session)
@@ -185,11 +221,17 @@ def _gradientfhd_channel_selection_choices():
         from skin import domScreens
         from xml.etree.ElementTree import parse
 
+        filter_e2mdb = _is_openatv_76()
+        hidden_screens = set()
         screen_choices = [("", _("Legacy mode"))]
         for screen_name in domScreens:
             element, _source = domScreens.get(screen_name, (None, None))
             if element is not None and element.get("base") == "ChannelSelection":
-                screen_choices.append((screen_name, element.get("label", screen_name)))
+                label = element.get("label", screen_name)
+                if filter_e2mdb and _contains_e2mdb(screen_name, label):
+                    hidden_screens.add(screen_name)
+                    continue
+                screen_choices.append((screen_name, label))
 
         template_file = path.join(
             "/usr/share/enigma2",
@@ -202,29 +244,36 @@ def _gradientfhd_channel_selection_choices():
                 if element.get("component") != "serviceList":
                     continue
                 name = element.get("name", "").strip()
-                if name:
-                    template_choices.append((name, name))
+                if not name:
+                    continue
+                template_screens = {
+                    item.strip()
+                    for item in element.get("screens", "").split(",")
+                    if item.strip()
+                }
+                if filter_e2mdb and (
+                    _contains_e2mdb(name) or hidden_screens.intersection(template_screens)
+                ):
+                    continue
+                template_choices.append((name, name))
         return screen_choices, template_choices
     except Exception as error:
         print("[GradientFHD] Senderlisten-Auswahl konnte nicht gelesen werden: %s" % error)
         return None, None
 
 
-def _gradientfhd_skinchange(session=None, **kwargs):
-    """Keep valid skin-specific choices and use legacy mode for other skins."""
-    try:
-        # Remove service-list templates belonging to the previously active skin.
-        from skin import reloadSkinTemplates
-        reloadSkinTemplates(clear=True)
-    except Exception as error:
-        print("[GradientFHD] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+def _gradientfhd_sync_channel_selection():
+    """Update the choices and replace values unavailable in the active image."""
+    channel_config = getattr(config, "channelSelection", None)
+    if channel_config is None or not hasattr(channel_config, "screenStyle") or not hasattr(channel_config, "widgetStyle"):
+        return
 
     screen_choices, template_choices = _gradientfhd_channel_selection_choices()
     if not screen_choices:
         return
 
-    screen_config = config.channelSelection.screenStyle
-    template_config = config.channelSelection.widgetStyle
+    screen_config = channel_config.screenStyle
+    template_config = channel_config.widgetStyle
     old_screen = str(screen_config.value or "")
     old_template = str(template_config.value or "")
     valid_screens = [item[0] for item in screen_choices]
@@ -286,11 +335,32 @@ def _gradientfhd_skinchange(session=None, **kwargs):
     print("[GradientFHD] Senderlisten-Auswahl synchronisiert: %s / %s" % (screen_config.value, template_config.value))
 
 
+def _gradientfhd_skinchange(session=None, **kwargs):
+    """Keep valid skin-specific choices and use legacy mode for other skins."""
+    try:
+        # Remove service-list templates belonging to the previously active skin.
+        from skin import reloadSkinTemplates
+        reloadSkinTemplates(clear=True)
+    except Exception as error:
+        print("[GradientFHD] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+
+    _gradientfhd_sync_channel_selection()
+
+
 def Plugins(**kwargs):
-    return [PluginDescriptor(name=_("GradientFHD  Configtool"), description=_("Personalize your GradientFHD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
-    icon="plugin.png", fnc=main),
-    PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=_gradientfhd_sessionstart),
-    PluginDescriptor(where=[PluginDescriptor.WHERE_SKINCHANGE], fnc=_gradientfhd_skinchange)]
+    descriptors = [
+        PluginDescriptor(name=_("GradientFHD  Configtool"), description=_("Personalize your GradientFHD (Skin by stein17)"), where=[PluginDescriptor.WHERE_PLUGINMENU],
+        icon="plugin.png", fnc=main),
+        PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART], fnc=_gradientfhd_sessionstart)
+    ]
+
+    # OpenATV 7.6 restarts Enigma2 after a skin change and does not provide
+    # WHERE_SKINCHANGE. OpenATV 8.0 supports fast skin reload and needs this hook.
+    skinchange_where = getattr(PluginDescriptor, "WHERE_SKINCHANGE", None)
+    if skinchange_where is not None:
+        descriptors.append(PluginDescriptor(where=[skinchange_where], fnc=_gradientfhd_skinchange))
+
+    return descriptors
 
 
 def main(session, **kwargs):

@@ -64,6 +64,36 @@ def autostart(reason, **kwargs):
 _restore_helper = None
 
 
+def _openatv_version():
+    """Return the OpenATV image version without requiring a new-only API."""
+    try:
+        from Components.SystemInfo import BoxInfo
+        version = str(BoxInfo.getItem("imgversion") or "").strip()
+        if version:
+            return version
+    except Exception:
+        pass
+
+    try:
+        values = {}
+        with open("/etc/image-version", "r") as version_file:
+            for line in version_file:
+                key, separator, value = line.strip().partition("=")
+                if separator:
+                    values[key] = value.strip().strip("\"'")
+        return values.get("distro_version") or values.get("version") or ""
+    except Exception:
+        return ""
+
+
+def _is_openatv_76():
+    return _openatv_version().startswith("7.6")
+
+
+def _contains_e2mdb(*values):
+    return any("e2mdb" in str(value or "").lower() for value in values)
+
+
 class _RestoreTeamHelper(object):
     def __init__(self, session, entry):
         self.session = session
@@ -151,6 +181,12 @@ def sessionstart(reason, session=None, **kwargs):
     if session is None or config.skin.primary_skin.value != SKIN_XML:
         return
     _install_weather_integration()
+
+    # OpenATV 7.6 has no e2MDB support.  Replace its globally generated
+    # ChannelSelection choices with the filtered choices for this skin.
+    if _is_openatv_76():
+        _sync_channel_selection()
+
     missing = restore_runtime_state()
     if missing and _restore_helper is None:
         _restore_helper = _RestoreTeamHelper(session, missing)
@@ -162,11 +198,17 @@ def _channel_selection_choices():
         from skin import domScreens
         from xml.etree.ElementTree import parse
 
+        filter_e2mdb = _is_openatv_76()
+        hidden_screens = set()
         screen_choices = [("", _("Legacy mode"))]
         for screen_name in domScreens:
             element, _source = domScreens.get(screen_name, (None, None))
             if element is not None and element.get("base") == "ChannelSelection":
-                screen_choices.append((screen_name, element.get("label", screen_name)))
+                label = element.get("label", screen_name)
+                if filter_e2mdb and _contains_e2mdb(screen_name, label):
+                    hidden_screens.add(screen_name)
+                    continue
+                screen_choices.append((screen_name, label))
 
         skin_directory = os.path.dirname(config.skin.primary_skin.value)
         template_file = os.path.join(
@@ -182,30 +224,36 @@ def _channel_selection_choices():
             if element.get("component") != "serviceList":
                 continue
             name = element.get("name", "").strip()
-            if name:
-                template_choices.append((name, name))
+            if not name:
+                continue
+            template_screens = {
+                item.strip()
+                for item in element.get("screens", "").split(",")
+                if item.strip()
+            }
+            if filter_e2mdb and (
+                _contains_e2mdb(name) or hidden_screens.intersection(template_screens)
+            ):
+                continue
+            template_choices.append((name, name))
         return screen_choices, template_choices
     except Exception as error:
         print("[BundesligaFHDConfig] Senderlisten-Auswahl konnte nicht gelesen werden: %s" % error)
         return None, None
 
 
-def skinchange(session=None, **kwargs):
-    """Keep ChannelSelection screen/list values valid during fast skin reload."""
-    try:
-        # OpenATV keeps component templates globally.  Clear the templates from
-        # the previous skin before the ChannelSelection dialog is rebuilt.
-        from skin import reloadSkinTemplates
-        reloadSkinTemplates(clear=True)
-    except Exception as error:
-        print("[BundesligaFHDConfig] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+def _sync_channel_selection():
+    """Update the choices and replace values unavailable in the active image."""
+    channel_config = getattr(config, "channelSelection", None)
+    if channel_config is None or not hasattr(channel_config, "screenStyle") or not hasattr(channel_config, "widgetStyle"):
+        return
 
     screen_choices, template_choices = _channel_selection_choices()
     if not screen_choices or not template_choices:
         return
 
-    screen_config = config.channelSelection.screenStyle
-    template_config = config.channelSelection.widgetStyle
+    screen_config = channel_config.screenStyle
+    template_config = channel_config.widgetStyle
     old_screen = str(screen_config.value or "")
     old_template = str(template_config.value or "")
     valid_screens = [item[0] for item in screen_choices]
@@ -263,6 +311,19 @@ def skinchange(session=None, **kwargs):
     print("[BundesligaFHDConfig] Senderlisten-Auswahl synchronisiert: %s / %s" % (new_screen, new_template))
 
 
+def skinchange(session=None, **kwargs):
+    """Keep ChannelSelection screen/list values valid during fast skin reload."""
+    try:
+        # OpenATV keeps component templates globally.  Clear the templates from
+        # the previous skin before the ChannelSelection dialog is rebuilt.
+        from skin import reloadSkinTemplates
+        reloadSkinTemplates(clear=True)
+    except Exception as error:
+        print("[BundesligaFHDConfig] Senderlisten-Templates konnten nicht neu geladen werden: %s" % error)
+
+    _sync_channel_selection()
+
+
 def main(session, **kwargs):
     if config.skin.primary_skin.value != SKIN_XML:
         session.open(
@@ -280,7 +341,7 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-    return [
+    descriptors = [
         PluginDescriptor(
             name=_(PLUGIN_NAME),
             description=_("BundesligaFHD personalisieren"),
@@ -292,12 +353,14 @@ def Plugins(**kwargs):
             where=PluginDescriptor.WHERE_AUTOSTART,
             fnc=autostart
         ),
-        PluginDescriptor(
-            where=PluginDescriptor.WHERE_SKINCHANGE,
-            fnc=skinchange
-        ),
-        PluginDescriptor(
-            where=PluginDescriptor.WHERE_SESSIONSTART,
-            fnc=sessionstart
-        ),
     ]
+
+    # OpenATV 7.6 does not provide WHERE_SKINCHANGE. OpenATV 8.0 uses the
+    # hook for its fast skin reload, so register it only when available.
+    skinchange_where = getattr(PluginDescriptor, "WHERE_SKINCHANGE", None)
+    if skinchange_where is not None:
+        descriptors.append(PluginDescriptor(where=skinchange_where, fnc=skinchange))
+
+    descriptors.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=sessionstart))
+
+    return descriptors
