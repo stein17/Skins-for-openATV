@@ -2165,6 +2165,9 @@ if len(listitems.list) &gt; 2:
 		<widget source="session.Event_Now" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="472,1123" size="1040,80" font="Gradient_Font; 56" noWrap="1" valign="center" halign="left" transparent="1" backgroundColor="gradient_background">
 			<convert type="EventName">Name</convert>
 		</widget>
+		<widget source="RdsDecoder" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="472,1123" size="1040,80" font="Gradient_Font; 48" noWrap="1" valign="center" halign="left" transparent="1" backgroundColor="gradient_background" zPosition="5">
+			<convert type="GradientWQHDRdsInfo">RadioTextIfNoEvent</convert>
+		</widget>
 		<widget source="session.Event_Now" render="Label" position="1668,1167" size="180,36" font="Gradient_Font; 36" valign="center" halign="right" transparent="1" backgroundColor="gradient_background">
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText" />
@@ -2175,6 +2178,9 @@ if len(listitems.list) &gt; 2:
 		</widget>
 		<widget source="session.Event_Next" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="472,1243" size="1040,80" font="Gradient_Font; 56" noWrap="1" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="left" transparent="1">
 			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="RdsDecoder" render="RunningText" options="movetype=running,startdelay=600,steptime=60,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="472,1243" size="1040,80" font="Gradient_Font; 40" noWrap="1" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="left" transparent="1" zPosition="5">
+			<convert type="GradientWQHDRdsInfo">RtpTextIfNoEvent</convert>
 		</widget>
 		<widget source="session.Event_Next" render="Label" position="1668,1287" size="180,36" font="Gradient_Font; 36" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" valign="center" halign="right" transparent="1">
 			<convert type="EventTime">Duration</convert>
