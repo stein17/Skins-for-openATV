@@ -2304,8 +2304,11 @@ if len(listitems.list) &gt; 2:
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText" />
 		</widget>
-		<widget source="RdsDecoder" render="Label" position="300,90" size="1412,60" font="LCD;54" halign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" zPosition="1">
-			<convert type="RdsInfo">RadioText</convert>
+		<widget source="RdsDecoder" render="Label" position="300,90" size="1412,33" font="LCD;30" halign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" zPosition="1">
+			<convert type="GradientFHDRdsInfo">RadioTextIfNoEvent</convert>
+		</widget>
+		<widget source="RdsDecoder" render="Label" position="300,123" size="1412,27" font="Gradient_Font;24" halign="center" foregroundColor="gradient_foreground_title" backgroundColor="gradient_background" transparent="1" zPosition="1">
+			<convert type="GradientFHDRdsInfo">RtpTextIfNoEvent</convert>
 		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_dab-plus.png" position="1557,3" size="72,45" zPosition="3" alphatest="blend">
 			<convert type="ServiceInfo">IsDAB</convert>
