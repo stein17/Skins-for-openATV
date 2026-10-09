@@ -2084,13 +2084,17 @@ if len(listitems.list) &gt; 2:
 			<convert type="ValueRange">2,2</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_dvb.i.png" position="2060,1039" size="96,60" zPosition="5" alphatest="blend">
+			<convert type="GradientWQHDDVBIInfo">IsDVBI</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_hbbtv.png" position="1460,1039" size="96,60" zPosition="1" alphatest="blend">
 			<convert type="ServiceInfo">HasHBBTV</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<ePixmap pixmap="infobar/icon_orbital.png" position="1940,1039" size="96,60" zPosition="1" alphatest="blend" />
 		<widget source="session.CurrentService" render="Label" position="1940,1043" size="96,32" backgroundColor="white" transparent="1" zPosition="6" font="Bold; 24" halign="center" valign="center" foregroundColor="black">
-			<convert type="PliExtraInfo">OrbitalPosition</convert>
+			<convert type="ServiceOrbitalPosition" />
 		</widget>
 		<widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_sd576.png" position="1580,1039" size="96,60" zPosition="2" alphatest="blend">
 			<convert type="ServiceInfo">VideoHeight</convert>
@@ -2195,10 +2199,9 @@ if len(listitems.list) &gt; 2:
 		<!--   <widget source="session.Event_Now" render="Progress" position="472,1108" size="1380,16" foregroundColor="gradient_foregroud_progress" zPosition="2" transparent="1">
     <convert type="EventTime">Progress</convert>
   </widget> -->
-    <eLabel position="1920,1240" size="132,68" text="SNR:" zPosition="1" font="Gradient_Font; 40" valign="center" halign="left" transparent="1" backgroundColor="gradient_background" />
     <eLabel position="2180,1240" size="132,68" text="AGC:" zPosition="1" font="Gradient_Font; 40" valign="center" halign="center" transparent="1" backgroundColor="gradient_background" />
-    <widget source="session.FrontendStatus" render="Label" zPosition="3" position="2013,1240" size="132,68" font="Gradient_Font; 40" valign="center" halign="left" transparent="1" backgroundColor="gradient_background">
-      <convert type="FrontendInfo">SNR</convert>
+    <widget source="session.FrontendStatus" render="Label" zPosition="3" position="1920,1240" size="253,68" font="Gradient_Font; 40" valign="center" halign="left" transparent="1" backgroundColor="gradient_background">
+      <convert type="GradientWQHDFrontendInfo">SNRStream</convert>
     </widget>
     <widget source="session.FrontendStatus" render="Label" zPosition="1" position="2299,1240" size="132,68" font="Gradient_Font; 40" valign="center" halign="left" transparent="1" backgroundColor="gradient_background">
       <convert type="FrontendInfo">AGC</convert>
@@ -2561,6 +2564,10 @@ if len(listitems.list) &gt; 2:
 		</widget>
 		<widget source="RdsDecoder" render="Label" position="400,120" size="1883,80" font="LCD;72" halign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" zPosition="1">
 			<convert type="RdsInfo">RadioText</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_dab-plus.png" position="2076,4" size="96,60" zPosition="3" alphatest="blend">
+			<convert type="ServiceInfo">IsDAB</convert>
+			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="RdsDecoder" render="Pixmap" alphatest="blend" pixmap="skin_default/icons/rass_logo.png" position="2184,12" size="100,44" backgroundColor="gradient_background" zPosition="1">
 			<convert type="RdsInfo">RasInteractiveAvailable</convert>

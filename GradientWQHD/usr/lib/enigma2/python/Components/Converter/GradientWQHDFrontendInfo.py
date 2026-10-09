@@ -12,6 +12,7 @@ class GradientWQHDFrontendInfo(Poll, Converter, object):
 	SLOT_NUMBER = 5
 	TUNER_TYPE = 6
 	REC_TUNER = 7
+	SNR_STREAM = 8
 
 	def __init__(self, type):
 		Poll.__init__(self)
@@ -24,6 +25,8 @@ class GradientWQHDFrontendInfo(Poll, Converter, object):
 			self.type = self.SNR
 		elif type == "SNRdB":
 			self.type = self.SNRdB
+		elif type == "SNRStream":
+			self.type = self.SNR_STREAM
 		elif type == "AGC":
 			self.type = self.AGC
 		elif type == "NUMBER":
@@ -39,6 +42,13 @@ class GradientWQHDFrontendInfo(Poll, Converter, object):
 	@cached
 	def getText(self):
 		assert self.type not in (self.LOCK, self.SLOT_NUMBER), "the text output of FrontendInfo cannot be used for lock info"
+		prefix = "SNR: " if self.type == self.SNR_STREAM else ""
+		if self.type == self.SNR_STREAM:
+			nav = NavigationInstance.instance
+			ref = nav.getCurrentlyPlayingServiceReference() if nav and getattr(nav, "isCurrentServiceDVBI", False) else None
+			if ref:
+				stream_type = {0x100: "DASH", 0x200: "HLS"}.get(ref.getUnsignedData(7) & 0x300, "DVB-I")
+				return "IP: %s" % stream_type
 		percent = None
 		if self.type == self.BER: # as count
 			count = self.source.ber
@@ -48,7 +58,7 @@ class GradientWQHDFrontendInfo(Poll, Converter, object):
 				return "N/A"
 		elif self.type == self.AGC:
 			percent = self.source.agc
-		elif self.type == self.SNR:
+		elif self.type in (self.SNR, self.SNR_STREAM):
 			percent = self.source.snr
 		elif self.type == self.SNRdB:
 			if self.source.snr_db is not None:
@@ -58,8 +68,8 @@ class GradientWQHDFrontendInfo(Poll, Converter, object):
 		elif self.type == self.TUNER_TYPE:
 			return self.source.frontend_type and self.frontend_type or "Unknown"
 		if percent is None:
-			return "N/A"
-		return "%d%%" % (percent * 100 / 65536)
+			return prefix + "N/A"
+		return prefix + ("%d%%" % (percent * 100 / 65536))
 
 	@cached
 	def getBool(self):
