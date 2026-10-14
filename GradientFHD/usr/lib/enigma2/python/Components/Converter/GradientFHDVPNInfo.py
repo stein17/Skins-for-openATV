@@ -105,27 +105,18 @@ def _run(cmd):
         return ''
 
 def _default_iface():
-    out = _run("ip -4 route show default 2>/dev/null | head -n1") or _run("ip route show 0.0.0.0/0 2>/dev/null | head -n1")
-    if out:
-        parts = out.split()
-        if 'dev' in parts:
-            try:
-                return parts[parts.index('dev') + 1]
-            except Exception:
-                pass
     try:
         with open('/proc/net/route', 'r') as f:
             for line in f:
                 sp = line.split()
-                if len(sp) >= 4:
-                    iface = sp[0]
-                    dest = sp[1]
-                    try:
-                        flags = int(sp[3], 16)
-                    except Exception:
-                        flags = 0
-                    if dest == '00000000' and (flags & 0x2):
-                        return iface
+                if len(sp) < 4 or sp[1] != '00000000':
+                    continue
+                try:
+                    flags = int(sp[3], 16)
+                except ValueError:
+                    continue
+                if (flags & 0x3) == 0x3:
+                    return sp[0]
     except Exception:
         pass
     return None
@@ -148,23 +139,20 @@ def _iface_online(iface):
     return True
 
 def _ip_for_iface(iface):
+    if not iface:
+        return ''
     try:
-        out = _run('ip -4 addr show dev %s' % iface)
-        for line in out.splitlines():
-            line = line.strip()
-            if line.startswith('inet '):
-                return line.split()[1].split('/')[0]
-    except Exception:
-        pass
-    try:
+        import fcntl
+        import struct
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
+        try:
+            request = struct.pack('256s', iface[:15].encode('utf-8'))
+            result = fcntl.ioctl(s.fileno(), 0x8915, request)
+            return socket.inet_ntoa(result[20:24])
+        finally:
+            s.close()
     except Exception:
-        pass
-    return ''
+        return ''
 
 def _conn_type_for_iface(iface):
     if not iface:
@@ -321,7 +309,9 @@ class GradientFHDVPNInfo(Poll, Converter):
         self._last_vpn_iface = vpn_if
 
         # refresh local provider each time (fast scan)
-        self._prov_local = _scan_local_vpn_configs() or ''
+        if now - getattr(self, '_last_prov_scan_ts', 0) >= 60:
+            self._prov_local = _scan_local_vpn_configs() or ''
+            self._last_prov_scan_ts = now
 
         # Determine net_active: prefer confirmed public IP; respect offline backoff; otherwise fallback to interface link
         if self._last_public_ip:
