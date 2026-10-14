@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 #
+#<convert type="xxxxCaidInfo">Server: %S * CAID: %C * ECM: %T</convert>
+#<convert type="xxxxCaidInfo">OSCam: %K %v * CAID: %C * ECM: %T</convert>
+#<convert type="xxxxCaidInfo">OSCam: %K %v * Server: %S * CAID: %C * ECM: %T</convert>
+#
 # =============================================================================
 #  DEUTSCH / GERMAN
 # =============================================================================
-#  SoftCam Info Converter for Enigma2 Skins
+#  SoftCam-Info Converter for Enigma2 Skins
 #
 #  Copyright (c) 2026  @stein17
 #
@@ -30,7 +34,7 @@
 #
 #  ENGLISH
 # =============================================================================
-#  SoftCam Info Converter for Enigma2 Skins
+#  SoftCam-Info Converter for Enigma2 Skins
 #
 #  Copyright (c) 2026  @stein17
 #
@@ -60,12 +64,133 @@ import os
 import re
 import time
 import subprocess
+import threading
 try:
     from urllib.request import urlopen
 except:
     urlopen = None
 info = {}
 old_ecm_mtime = None
+
+# Shared softcam cache. Thread workers never touch Enigma2 widgets/converters.
+_SOFTCAM_LOCK = threading.Lock()
+_SOFTCAM_STATE = {'kind': '', 'version': '', 'short': '', 'checked': 0.0, 'running': False}
+
+def _softcam_find_running():
+    """Find an actual running softcam using procfs, not an installed package list."""
+    try:
+        pids = sorted((p for p in os.listdir('/proc') if p.isdigit()), key=int)
+    except OSError:
+        return None
+    known = ('oscam', 'ncam', 'cccam', 'mgcamd', 'gbox', 'scam')
+    for pid in pids:
+        try:
+            with open('/proc/%s/cmdline' % pid, 'rb') as f:
+                args = [x.decode('utf-8', 'replace') for x in f.read(8192).split(b'\0') if x]
+            if not args:
+                continue
+            exe = args[0]
+            name = os.path.basename(exe).lower()
+            if not (name.startswith(('oscam', 'ncam', 'cccam', 'mgcamd', 'gbox', 'scam'))):
+                continue
+            # Prefer the process's exact executable, not a similarly named installed binary.
+            actual = os.path.realpath('/proc/%s/exe' % pid)
+            if os.path.isfile(actual):
+                exe = actual
+            return (exe, name, args)
+        except (OSError, ValueError):
+            continue
+    return None
+
+def _softcam_httpport(conf):
+    """Read only the [webif] section; OSCam's +port TLS syntax is deliberately skipped."""
+    section = ''
+    try:
+        with open(conf, 'r') as f:
+            for raw in f:
+                line = raw.split('#', 1)[0].split(';', 1)[0].strip()
+                if line.startswith('[') and line.endswith(']'):
+                    section = line.lower()
+                elif section == '[webif]' and '=' in line:
+                    key, value = line.split('=', 1)
+                    if key.strip().lower() == 'httpport':
+                        value = value.strip()
+                        if value.isdigit() and 0 < int(value) < 65536:
+                            return value
+    except OSError:
+        pass
+    return ''
+
+def _softcam_title(port):
+    if not port or urlopen is None:
+        return ''
+    try:
+        with urlopen('http://127.0.0.1:%s/status.html' % port, timeout=0.7) as response:
+            html = response.read(16384).decode('utf-8', 'ignore')
+        match = re.search(r'<title>\s*([^<]+?)\s*</title>', html, re.IGNORECASE)
+        if match:
+            title = match.group(1).strip()
+            if re.search(r'\b(OSCam|NCam|CCcam|Mgcamd|Gbox|Scam)\b', title, re.IGNORECASE):
+                return title
+    except Exception:
+        pass
+    return ''
+
+def _softcam_version(exe, hint):
+    if not exe or not os.path.isfile(exe):
+        return hint
+    for arg in ('-V', '-v', '--version'):
+        try:
+            out = subprocess.check_output([exe, arg], stderr=subprocess.STDOUT, timeout=0.8).decode('utf-8', 'ignore')
+            m = re.search(r'(OSCam\s+[^\r\n]+|NCam\s+[^\r\n]+|CCcam\s+[^\r\n]+|Mgcamd\s+[^\r\n]+|Gbox\s+[^\r\n]+|Scam\s+[^\r\n]+)', out, re.IGNORECASE)
+            if m:
+                return m.group(1).strip()
+        except Exception:
+            pass
+    return hint
+
+def _softcam_worker():
+    kind = version = short = ''
+    try:
+        found = _softcam_find_running()
+        if found:
+            exe, name, args = found
+            if name.startswith('oscam'):
+                family = 'OSCam'
+                suffix = name[5:].lstrip('-_')
+                kind = suffix.upper() if suffix else ''
+            elif name.startswith('ncam'):
+                family = 'NCam'
+                kind = name[4:].lstrip('-_').upper()
+            else:
+                family = {'cccam': 'CCcam', 'mgcamd': 'Mgcamd', 'gbox': 'Gbox', 'scam': 'Scam'}.get(name.split('-')[0], name)
+                kind = ''
+            confdir = ''
+            for i, arg in enumerate(args):
+                if arg == '--config-dir' and i + 1 < len(args):
+                    confdir = args[i + 1]
+                    break
+                if arg.startswith('--config-dir='):
+                    confdir = arg.partition('=')[2]
+                    break
+            if confdir and family in ('OSCam', 'NCam'):
+                conf = os.path.join(confdir, 'oscam.conf' if family == 'OSCam' else 'ncam.conf')
+                if family == 'NCam' and not os.path.isfile(conf):
+                    conf = os.path.join(confdir, 'oscam.conf')
+                version = _softcam_title(_softcam_httpport(conf))
+            if not version:
+                version = _softcam_version(exe, family)
+            short = re.sub(r'^(OSCam|NCam)\s*', '', version, flags=re.IGNORECASE).strip()
+            if kind == 'SMOD':
+                m = re.search(r'rsvn\s*([0-9]+)|\br\s*([0-9]{4,})\b', short, re.IGNORECASE)
+                if m:
+                    short = 'SMOD ' + next(x for x in m.groups() if x)
+    except Exception:
+        pass
+    finally:
+        with _SOFTCAM_LOCK:
+            _SOFTCAM_STATE.update(kind=kind, version=version, short=short, checked=time.monotonic(), running=False)
+
 
 class BLWQHDCaidInfo(Poll, Converter, object):
     CAID = 0
@@ -439,37 +564,32 @@ class BLWQHDCaidInfo(Poll, Converter, object):
                                         textvalue += param
 
                                     elif param == '%S':
-
-                                        sv = (server or '').strip().lower()
-
-                                        if (not sv) or sv == 'local':
-
-                                            # Local card: show provider label if known (e.g. CAID 1843 => HD+)
-
-                                            local_label = ''
-
-                                            try:
-
-                                                if (caid or '').upper() == '1843':
-
-                                                    local_label = 'HD+'
-
-                                            except:
-
-                                                pass
-
-                                            if local_label:
-
-                                                textvalue += '%s (local)' % local_label
-
+                                        # Prefer the local reader when this ECM was decoded
+                                        # by an internal card, never a stale network server.
+                                        reader_name = (ecm_info.get('reader', '') or '').strip()
+                                        ecm_from = (ecm_info.get('from', '') or '').strip().lower()
+                                        ecm_source = (ecm_info.get('source', '') or '').strip().lower()
+                                        ecm_protocol = (ecm_info.get('protocol', '') or '').strip().lower()
+                                        local_card = (
+                                            ecm_from.startswith('local') or
+                                            ecm_source == 'sci' or
+                                            ecm_protocol == 'internal'
+                                        )
+                                        if local_card:
+                                            if reader_name:
+                                                textvalue += '%s (local)' % reader_name
+                                            elif (caid or '').upper() == '1843':
+                                                textvalue += 'HD+ (local)'
                                             else:
-
                                                 textvalue += 'local'
-
-                                        else:
-
+                                        elif reader_name:
+                                            # The actual ECM reader is more reliable than
+                                            # the upstream host name stored in "from".
+                                            textvalue += reader_name
+                                        elif server and server.strip().lower() != 'local':
                                             textvalue += server
-
+                                        else:
+                                            textvalue += 'unknown'
 
                                     elif param == '%H':
                                         textvalue += hops
@@ -593,146 +713,26 @@ class BLWQHDCaidInfo(Poll, Converter, object):
 
     text = property(getText)
 
-    # --- Softcam version (WebIF/title + fallback) ---
+    # Softcam metadata are shared across converter instances and collected off the GUI thread.
+    # ECM data and CAID formatting remain synchronous and unchanged.
+    def _softcam_snapshot(self):
+        now = time.monotonic()
+        with _SOFTCAM_LOCK:
+            snapshot = dict(_SOFTCAM_STATE)
+            if not snapshot['running'] and now - snapshot['checked'] >= 60:
+                _SOFTCAM_STATE['running'] = True
+                t = threading.Thread(target=_softcam_worker, name='PLiModSoftcamInfo', daemon=True)
+                t.start()
+        return snapshot
+
     def getSoftcamKind(self):
-        # Returns "MASTER", "EMU" or "" (no OSCam prefix, so you can format in skin)
-        try:
-            out = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore").lower()
-        except:
-            out = ""
-        if "oscam-master" in out:
-            return "MASTER"
-        if "oscam-emu" in out:
-            return "EMU"
-        return ""
-
-    def _read_httpport(self, conf_path, default_port="8888"):
-        port = default_port
-        try:
-            if fileExists(conf_path):
-                with open(conf_path, "r") as f:
-                    for line in f:
-                        line_s = line.strip()
-                        if not line_s or line_s.startswith("#") or "=" not in line_s:
-                            continue
-                        k, v = line_s.split("=", 1)
-                        if k.strip().lower() == "httpport":
-                            port = v.strip()
-                            break
-        except:
-            pass
-        return port
-
-    def _webif_title(self, port):
-        if urlopen is None:
-            return ""
-        try:
-            html = urlopen("http://127.0.0.1:%s/status.html" % port, timeout=1).read().decode("utf-8", "ignore")
-            m = re.search(r"<title>\s*([^<]+)\s*</title>", html, re.IGNORECASE)
-            if m:
-                return m.group(1).strip()
-        except:
-            pass
-        return ""
-
-    def _detect_softcam_exec(self):
-        # Returns (exe_path, name_hint)
-        candidates = [
-            ("oscam-emu", "/usr/bin/oscam-emu", "OSCam"),
-            ("oscam", "/usr/bin/oscam", "OSCam"),
-            ("ncam", "/usr/bin/ncam", "NCam"),
-            ("cccam", "/usr/bin/CCcam", "CCcam"),
-            ("mgcamd", "/usr/bin/mgcamd", "Mgcamd"),
-            ("gbox", "/usr/bin/gbox", "Gbox"),
-            ("scam", "/usr/bin/scam", "Scam"),
-        ]
-        try:
-            out = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore")
-        except:
-            out = ""
-        out_l = out.lower()
-
-        for proc_name, exe_path, hint in candidates:
-            if proc_name in out_l:
-                if exe_path and fileExists(exe_path):
-                    return (exe_path, hint)
-                return ("", hint)
-        return ("", "")
+        return self._softcam_snapshot()['kind']
 
     def getSoftcamVersion(self):
-        # Cache (avoid WebIF fetch each poll tick)
-        now = time.time()
-        cache = getattr(self, "_softcam_cache", None)
-        if cache and (now - cache.get("ts", 0)) < 10:
-            return cache.get("val", "")
+        return self._softcam_snapshot()['version']
 
-        exe_path, hint = self._detect_softcam_exec()
-
-        # OSCam / NCam prefer WebIF <title>
-        conf_candidates = []
-        if "oscam" in (exe_path or "").lower() or hint == "OSCam":
-            conf_candidates = [
-                ("/etc/tuxbox/config/oscam-emu/oscam.conf", "8888"),
-                ("/etc/tuxbox/config/oscam/oscam.conf", "8888"),
-                ("/etc/tuxbox/config/oscam-stable/oscam.conf", "8888"),
-                ("/etc/tuxbox/config/oscam-smod/oscam.conf", "8888"),
-                ("/etc/tuxbox/config/oscam-master/oscam.conf", "8888"),
-            ]
-        elif "ncam" in (exe_path or "").lower() or hint == "NCam":
-            conf_candidates = [
-                ("/etc/tuxbox/config/ncam/ncam.conf", "8888"),
-                ("/etc/tuxbox/config/ncam/oscam.conf", "8888"),
-            ]
-
-        for conf_path, def_port in conf_candidates:
-            port = self._read_httpport(conf_path, def_port)
-            title = self._webif_title(port)
-            if title:
-                self._softcam_cache = {"ts": now, "val": title}
-                return title
-
-        # Fallback: try binary flags
-        if exe_path and fileExists(exe_path):
-            for arg in ("-V", "-v", "--version"):
-                try:
-                    out = subprocess.check_output([exe_path, arg], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore")
-                    m = re.search(r"(OSCam\s+[^\r\n]+|NCam\s+[^\r\n]+|CCcam\s+[^\r\n]+|Mgcamd\s+[^\r\n]+|Gbox\s+[^\r\n]+|Scam\s+[^\r\n]+)", out, re.IGNORECASE)
-                    if m:
-                        val = m.group(1).strip()
-                        self._softcam_cache = {"ts": now, "val": val}
-                        return val
-                except:
-                    pass
-
-        # Last resort: name only
-        self._softcam_cache = {"ts": now, "val": (hint or "")}
-        return hint or ""
-
-    
     def getSoftcamVersionShort(self):
-        full = (self.getSoftcamVersion() or "").strip()
-        full_l = full.lower()
-
-        # detect smod by process name or title text
-        try:
-            psout = subprocess.check_output(["ps", "-ef"], stderr=subprocess.STDOUT, timeout=1).decode("utf-8", "ignore").lower()
-        except:
-            psout = ""
-        is_smod = ("oscam-smod" in psout) or ("smod" in full_l)
-
-        # Normalize SMOD: rsvn11726 / "Trunk rsvn11726" / r11726 -> "smod 11726"
-        if is_smod:
-            import re
-            m = re.search(r"rsvn\s*([0-9]+)", full_l)
-            if not m:
-                m = re.search(r"\br\s*([0-9]{4,})\b", full_l)
-            if m:
-                return "SMOD " + m.group(1)
-
-        # Default behavior: strip leading "OSCam " / "NCam "
-        import re
-        out = re.sub(r'^(OSCam|NCam)\s*', '', full, flags=re.IGNORECASE).strip()
-        return out
+        return self._softcam_snapshot()['short']
 
     def ecmfile(self):
         global info
@@ -741,14 +741,21 @@ class BLWQHDCaidInfo(Poll, Converter, object):
         service = self.source.service
         if service:
             try:
-                ecm_mtime = os.stat('/tmp/ecm.info').st_mtime
-                if not os.stat('/tmp/ecm.info').st_size > 0:
+                st = os.stat('/tmp/ecm.info')
+                if st.st_size == 0:
+                    old_ecm_mtime = None
                     info = {}
-                if ecm_mtime == old_ecm_mtime:
                     return info
-                old_ecm_mtime = ecm_mtime
-                ecmf = open('/tmp/ecm.info', 'r')
-                ecm = ecmf.readlines()
+                # Nanosecond timestamp + size + inode protect against rapid rewrites.
+                ecm_signature = (getattr(st, 'st_mtime_ns', int(st.st_mtime * 1e9)),
+                                 st.st_size, st.st_ino)
+                if ecm_signature == old_ecm_mtime:
+                    return info
+                with open('/tmp/ecm.info', 'r') as ecmf:
+                    ecm = ecmf.readlines()
+                old_ecm_mtime = ecm_signature
+                # A new ECM file must never inherit values from the previous ECM.
+                info = {}
             except:
                 old_ecm_mtime = None
                 info = {}
@@ -846,7 +853,6 @@ class BLWQHDCaidInfo(Poll, Converter, object):
                                     elif z != -1:
                                         info['pid'] = line[x + 4:z]
 
-                ecmf.close()
         return info
 
     def changed(self, what):
