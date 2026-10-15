@@ -4,6 +4,7 @@ from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, e
 from ServiceReference import resolveAlternate
 
 from Components.Element import cached
+import NavigationInstance
 
 
 class GradientWQHDServiceOrbitalPosition(Converter):
@@ -19,6 +20,19 @@ class GradientWQHDServiceOrbitalPosition(Converter):
 
 	@cached
 	def getText(self):
+		# OpenATV DAB-over-DVB service references use type 4115 / dab://.
+		nav = NavigationInstance.instance
+		if nav:
+			try:
+				current = nav.getCurrentlyPlayingServiceReference()
+				if current:
+					refstr = current.toString().lower()
+					if refstr.startswith('4115:') or 'dab%3a//' in refstr or 'dab://' in refstr:
+						return 'DAB+'
+			except (AttributeError, TypeError, ValueError):
+				pass
+		if nav and getattr(nav, 'isCurrentServiceDVBI', False):
+			return 'DVB-I'
 		service = self.source.service
 		if isinstance(service, iPlayableServicePtr):
 			info = service and service.info()
