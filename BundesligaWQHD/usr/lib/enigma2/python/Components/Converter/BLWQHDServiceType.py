@@ -340,6 +340,7 @@ Technische Hinweise
 """
 
 import re
+import NavigationInstance
 
 from enigma import eAVControl, iPlayableService, iServiceInformation
 
@@ -895,6 +896,17 @@ class BLWQHDServiceType(Converter):
 
 	@cached
 	def getText(self):
+		if self.argument == 'DABText':
+			try:
+				nav = NavigationInstance.instance
+				ref = nav and nav.getCurrentlyPlayingServiceReference()
+				if ref:
+					name = ref.toString().lower()
+					if name.startswith('4115:') or 'dab%3a//' in name or 'dab://' in name:
+						return 'DAB+'
+			except (AttributeError, TypeError, ValueError):
+				pass
+			return ''
 		service = self.source.service
 		if not service:
 			return ""
