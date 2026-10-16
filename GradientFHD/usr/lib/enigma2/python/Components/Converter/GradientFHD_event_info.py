@@ -155,6 +155,61 @@ def save_event_info_to_json(slug, data):
             print('[INFO ERROR] %s' % str(e))
         return False
 
+
+# TMDb genre ids (movie / TV). Kept offline to avoid extra requests.
+_TMDB_GENRES_DE = {
+    28: 'Action', 12: 'Abenteuer', 16: 'Animation', 35: 'Komödie',
+    80: 'Krimi', 99: 'Dokumentation', 18: 'Drama', 10751: 'Familie',
+    14: 'Fantasy', 36: 'Historie', 27: 'Horror', 10402: 'Musik',
+    9648: 'Mystery', 10749: 'Liebesfilm', 878: 'Science-Fiction',
+    10770: 'TV-Film', 53: 'Thriller', 10752: 'Kriegsfilm', 37: 'Western',
+    10759: 'Action & Abenteuer', 10762: 'Kinder', 10763: 'Nachrichten',
+    10764: 'Reality', 10765: 'Sci-Fi & Fantasy', 10766: 'Soap',
+    10767: 'Talk', 10768: 'Krieg & Politik'
+}
+
+def _genre_names(data):
+    if not isinstance(data, dict):
+        return ''
+    genres = data.get('genres')
+    if isinstance(genres, list):
+        names = [str(g.get('name', '')).strip() for g in genres if isinstance(g, dict)]
+        if any(names):
+            return ' / '.join(x for x in names if x)
+    ids = data.get('genre_ids')
+    if isinstance(ids, list):
+        names = []
+        for gid in ids:
+            try:
+                name = _TMDB_GENRES_DE.get(int(gid))
+                if name and name not in names:
+                    names.append(name)
+            except (TypeError, ValueError):
+                pass
+        return ' / '.join(names)
+    return ''
+
+
+def _selected_event_title(source):
+    # Selected service in ChannelSelection is an eServiceReference, not an
+    # iPlayableService; the original code's service.info() cannot work there.
+    ref = getattr(source, 'service', None)
+    if ref is not None and callable(getattr(ref, 'toString', None)):
+        try:
+            from enigma import eEPGCache
+            items = eEPGCache.getInstance().lookupEvent(
+                ['BDT', (ref.toString(), 0, -1, 1440)])
+            if items and len(items[0]) > 2:
+                return str(items[0][2] or '').strip()
+        except Exception:
+            pass
+        return ''
+    try:
+        event = getattr(source, 'event', None)
+        return (event.getEventName() or '').strip() if event else ''
+    except Exception:
+        return ''
+
 def fetch_from_tmdb(title, slug):
     if not tmdb_api:
         return None
@@ -190,6 +245,7 @@ def fetch_from_tmdb(title, slug):
                 info['year'] = first_air[:4]
         if item.get('genre_ids'):
             info['genre_ids'] = item.get('genre_ids')
+            info['genre'] = _genre_names(info)
         save_event_info_to_json(slug, info)
         return info
     except requests.exceptions.Timeout:
@@ -223,6 +279,11 @@ def _event_info_worker(title, slug, field):
         stored = load_event_info_json(slug)
         if isinstance(stored, dict):
             data.update(stored)
+        if field == 'genre' and not data.get('genre'):
+            genre = _genre_names(data)
+            if genre:
+                data['genre'] = genre
+                save_event_info_to_json(slug, {'genre': genre})
         if data.get(field) is None:
             fetched = fetch_from_tmdb(title, slug)
             if isinstance(fetched, dict):
@@ -296,17 +357,25 @@ class GradientFHD_event_info(Converter, object):
     @cached
     def getText(self):
         try:
-            service = self.source.service
-            info = service and service.info()
-            if not info:
-                return ''
-            event = self.source.event
-            if not event:
-                return ''
-            title = event.getEventName()
+            if self.type == self.GENRE:
+                title = _selected_event_title(self.source)
+            else:
+                # Original behavior retained for all other converter modes.
+                service = self.source.service
+                info = service and service.info()
+                if not info:
+                    return ''
+                event = self.source.event
+                if not event:
+                    return ''
+                title = event.getEventName()
             if not title:
                 return ''
-            title = title.replace('Â\x86', '').replace('Â\x87', '').strip()
+            title = title.replace('\x86', '').replace('\x87', '').strip()
+            try:
+                title = apply_title_mapping(title) or title
+            except Exception:
+                pass
             slug = convtext(title)
             if not slug:
                 return ''

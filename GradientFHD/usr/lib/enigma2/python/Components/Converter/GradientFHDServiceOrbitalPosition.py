@@ -20,17 +20,18 @@ class GradientFHDServiceOrbitalPosition(Converter):
 
 	@cached
 	def getText(self):
-		# OpenATV DAB-over-DVB service references use type 4115 / dab://.
+		# DAB+-Referenz aus Enigma2-Navigation lesen.
 		nav = NavigationInstance.instance
 		if nav:
-			try:
-				current = nav.getCurrentlyPlayingServiceReference()
-				if current:
-					refstr = current.toString().lower()
-					if refstr.startswith('4115:') or 'dab%3a//' in refstr or 'dab://' in refstr:
-						return 'DAB+'
-			except (AttributeError, TypeError, ValueError):
-				pass
+		    try:
+		        ref = nav.getCurrentlyPlayingServiceReference()
+		        if ref:
+		            refstr = ref.toString().lower()
+		            if refstr.startswith('4115:') or 'dab%3a//' in refstr or 'dab://' in refstr:
+		                return 'DAB+'
+		    except (AttributeError, TypeError, ValueError):
+		        pass
+		nav = NavigationInstance.instance
 		if nav and getattr(nav, 'isCurrentServiceDVBI', False):
 			return 'DVB-I'
 		service = self.source.service

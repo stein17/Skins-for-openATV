@@ -201,6 +201,7 @@
   <panel name="ChannelSelection_Poster_X" />
 </screen>	
 	<!-- ChannelSelection3_Fields" label="3_Fields" -->
+<!-- ChannelSelection3_Fields" label="3_Fields" -->
 	<screen name="ChannelSelection3_Fields" label="Gradient 3 Fields" base="ChannelSelection" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="session.VideoPicture" render="Pig" position="1067,120" size="733,413" zPosition="3" backgroundColor="Pic" />
 		<widget source="ServiceEvent" position="1813,1247" size="707,56" font="Gradient_Font;43" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" noWrap="1" zPosition="2" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1">
@@ -231,8 +232,171 @@
 		<widget source="ServiceEvent" position="1067,993" size="733,307" render="RunningText" options="movetype=running,startdelay=10000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Gradient_Font; 40" zPosition="2" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="top">
 			<convert type="EventName">NextDescription</convert>
 		</widget>
-		<widget name="list" position="40,112" size="1013,1195" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" transparent="1" />
+		<widget name="list" position="40,112" size="1013,1195" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" transparent="1" />
 	</screen>
+	<!-- Eigenstaendiger GradientWQHD-Screen. Installierte Renderer: GradientWQHDPosterX, GradientWQHDBackdropX, GradientWQHDStarX, GradientWQHDParental, GradientWQHDSingleEpgList. -->
+<screen name="ChannelSelection_EPG-Galerie" label="Gradient EPG-Galerie" base="ChannelSelection" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="gradient_background">
+<widget source="session.VideoPicture" render="Pig" position="2561,1441" size="1,1" zPosition="0" backgroundColor="Pic" />
+
+    <!-- LINKS: Senderliste mit Picons, Programm und Fortschritt -->
+    <widget name="list" position="13,13" size="955,1364" scrollbarMode="showNever" colorServiceRecorded="ButtonRed" colorServicePseudoRecorded="ButtonBlue" colorServiceStreamed="infobar_tuner_rec" foregroundColorServiceNotAvail="#00555555" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" itemCornerRadiusSelected="12" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" />
+    <eLabel position="975,11" size="3,1365" backgroundColor="gradient_BGO" zPosition="0" />
+    <eLabel position="2089,11" size="3,1368" backgroundColor="gradient_BGO" zPosition="0" />
+ <!--    <eLabel position="997,13" size="291,424" backgroundColor="gradient_BGM" zPosition="0"/> -->
+	
+	<eLabel name="fullscreen_bg" position="11,11" size="2539,1429" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-8" />
+	<eLabel position="11,11" size="2539,3" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	<eLabel position="11,11" size="3,1429" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	<eLabel position="2549,11" size="3,1429" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+	<eLabel position="11,1377" size="2539,3" backgroundColor="gradient_BGLR,gradient_BGLM,gradient_BGLR,horizontal" />
+    <!-- MITTE OBEN: Picon der aktuellen Sendung -->
+<widget source="ServiceEvent" render="Picon" position="1273,24" size="93,56" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <!-- MITTE OBEN: Poster der aktuellen Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDPosterX" nexts="0" position="991,23" size="267,395" cornerRadius="12" zPosition="6" />
+    <eLabel position="989,21" size="269,397" cornerRadius="12" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <!-- MITTE: Poster der naechsten Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDPosterX" nexts="1" position="991,476" size="267,395" cornerRadius="12" zPosition="6" />
+    <eLabel position="989,475" size="269,397" cornerRadius="12" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <!-- MITTE UNTEN: Poster der uebernaechsten Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDPosterX" nexts="2" position="991,931" size="267,395" cornerRadius="12" zPosition="6" />
+    <eLabel position="989,929" size="269,397" cornerRadius="12" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <!-- AKTUELL: Sendungstitel -->
+    <widget source="ServiceEvent" render="RunningText" options="movetype=running,startdelay=900,steptime=60,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1380,27" size="693,56" font="Gradient_Font;43" foregroundColor="EventNameColor" transparent="1" valign="top" noWrap="1">
+        <convert type="EventInfo">NowName</convert>
+    </widget>
+    <!-- AKTUELL: Start- und Endzeit -->
+    <widget source="ServiceEvent" render="Label" position="1273,87" size="227,51" font="Gradient_Font;36" foregroundColor="EventNameColor" transparent="1" halign="left" noWrap="1">
+        <convert type="GradientWQHDMovieGuideInfo">TimeRange,0</convert>
+    </widget>
+    <!-- AKTUELL: Restminuten -->
+    <widget source="ServiceEvent" render="Label" position="1907,87" size="167,51" font="Gradient_Font;36" foregroundColor="EventNameColor" transparent="1" halign="right" noWrap="1">
+        <convert type="GradientWQHDMovieGuideInfo">Remain,0</convert>
+    </widget>
+    <!-- AKTUELL: e2MDB-Infozeile -->
+    <widget source="ServiceEvent" render="Label" position="1273,140" size="800,40" font="Gradient_Font;32" foregroundColor="EventNameColor" transparent="1" valign="top">
+        <convert type="E2MDBEventInfo">InfoLine</convert>
+    </widget>
+    <!-- AKTUELL: Sendungsbeschreibung -->
+    <widget source="ServiceEvent" render="Label" position="1273,187" size="800,219" font="Gradient_Font;35" foregroundColor="gradient_foreground" transparent="1" valign="top" scrollText="direction=top,startDelay=9000,stepDelay=60,stepSize=1,endDelay=1000,repeat=1">
+        <convert type="EventName">FullDescription</convert>
+    </widget>
+    <!-- AKTUELL: Genre -->
+    <!-- AKTUELL: Sternebewertung -->
+    <widget source="ServiceEvent" render="GradientWQHDStarX" position="1000,427" size="247,25" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+       <!-- AKTUELL: Genre -->
+    <widget source="ServiceEvent" render="Label" position="1367,419" size="707,48" font="Gradient_Font;35" foregroundColor="EventNameColor" transparent="1" valign="top">
+         <convert type="GradientWQHD_event_info">genre</convert>
+    </widget>
+<!-- AKTUELL: Progress -->
+	<widget source="ServiceEvent" render="Progress" position="1507,100" size="393,16" foregroundColor="gradient_Line" backgroundColor="gradient_BGO" transparent="0" zPosition="2" borderWidth="1" borderColor="gradient_BGLM" cornerRadius="5">
+		<convert type="EventTime">Progress</convert>
+	</widget>	
+ <!-- AKTUELL: FSK-Freigabe -->
+    <widget source="ServiceEvent" render="GradientWQHDParental" position="1181,341" size="67,67" alphatest="blend" transparent="1" zPosition="10" />
+    <eLabel position="991,467" size="1085,3" backgroundColor="gradient_BGO" zPosition="0" />
+    <!-- NAECHSTE SENDUNG: Titel -->
+    <widget source="ServiceEvent" render="Label" position="1273,480" size="800,53" font="Gradient_Font;40" foregroundColor="EventNameColor" transparent="1" valign="top" noWrap="1">
+        <convert type="EventInfo">NextName</convert>
+    </widget>
+    <!-- NAECHSTE SENDUNG: Startzeit und Gesamtdauer -->
+    <widget source="ServiceEvent" render="Label" position="1273,540" size="347,43" font="Gradient_Font;33" foregroundColor="EventNameColor" transparent="1" halign="left" noWrap="1">
+        <convert type="GradientWQHDMovieGuideInfo">TimeDuration,1</convert>
+    </widget>
+    <!-- NAECHSTE SENDUNG: Beschreibung -->
+    <widget source="ServiceEvent" render="Label" position="1273,589" size="800,325" font="Gradient_Font;35" foregroundColor="gradient_foreground" transparent="1" valign="top" scrollText="direction=top,startDelay=9000,stepDelay=60,stepSize=1,endDelay=1000,repeat=1">
+        <convert type="EventName">NextDescription</convert>
+    </widget>
+    <!-- NAECHSTE SENDUNG: Sterne und FSK (index 1) -->
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="1" position="1000,880" size="247,25" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="1" position="1181,795" size="67,67" alphatest="blend" transparent="1" zPosition="10" />
+    <eLabel position="991,920" size="1085,3" backgroundColor="gradient_BGO" zPosition="0" />
+    <!-- UEBERNAECHSTE SENDUNG: Titel -->
+    <widget source="ServiceEvent" render="Label" position="1273,936" size="800,53" font="Gradient_Font;40" foregroundColor="EventNameColor" transparent="1" valign="top" noWrap="1">
+        <convert type="GradientWQHDMovieGuideInfo">Title,2</convert>
+    </widget>
+    <!-- UEBERNAECHSTE SENDUNG: Startzeit und Gesamtdauer -->
+    <widget source="ServiceEvent" render="Label" position="1273,996" size="347,43" font="Gradient_Font;33" foregroundColor="EventNameColor" transparent="1" halign="left" noWrap="1">
+        <convert type="GradientWQHDMovieGuideInfo">TimeDuration,2</convert>
+    </widget>
+    <!-- UEBERNAECHSTE SENDUNG: Beschreibung -->
+    <widget source="ServiceEvent" render="Label" position="1273,1048" size="800,325" font="Gradient_Font; 35" foregroundColor="gradient_foreground" transparent="1" valign="top" scrollText="direction=top,startDelay=9000,stepDelay=60,stepSize=1,endDelay=1000,repeat=1">
+        <convert type="GradientWQHDMovieGuideInfo">Desc,2</convert>
+    </widget>
+    <!-- UEBERNAECHSTE SENDUNG: Sterne und FSK (index 2) -->
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="2" position="1000,1335" size="247,25" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="2" position="1181,1249" size="67,67" alphatest="blend" transparent="1" zPosition="10" />
+    <!-- RECHTS OBEN: Startzeit und Titel zur 4. Sendung (kompakt) -->
+    <widget source="ServiceEvent" render="GradientWQHDSingleEpgList" maxEvents="3" minEvent="3" position="2100,20" size="440,67" font="Gradient_Font;29" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="left" valign="bottom" zPosition="12" />
+    <!-- RECHTS: Backdrop, FSK und Sterne der 4. Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDBackdropX" nexts="3" position="2107,97" size="360,200" cornerRadius="11" zPosition="6" />
+    <eLabel position="2105,96" size="363,203" cornerRadius="11" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="3" position="2483,100" size="48,48" alphatest="blend" transparent="1" zPosition="12" />
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="3" position="2128,304" size="309,29" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <eLabel position="2100,340" size="451,3" backgroundColor="gradient_BGO" zPosition="0" />
+    <!-- RECHTS MITTE: Startzeit und Titel zur 5. Sendung (kompakt) -->
+    <widget source="ServiceEvent" render="GradientWQHDSingleEpgList" maxEvents="4" minEvent="4" position="2100,347" size="440,67" font="Gradient_Font;29" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="left" valign="bottom" zPosition="12" />
+    <!-- RECHTS: Backdrop, FSK und Sterne der 5. Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDBackdropX" nexts="4" position="2107,424" size="360,200" cornerRadius="11" zPosition="6" />
+    <eLabel position="2105,423" size="363,203" cornerRadius="11" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="4" position="2483,427" size="48,48" alphatest="blend" transparent="1" zPosition="12" />
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="4" position="2128,631" size="309,29" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <eLabel position="2100,667" size="451,3" backgroundColor="gradient_BGO" zPosition="0" />
+    <!-- RECHTS UNTEN: Startzeit und Titel zur 6. Sendung (kompakt) -->
+    <widget source="ServiceEvent" render="GradientWQHDSingleEpgList" maxEvents="5" minEvent="5" position="2100,673" size="440,67" font="Gradient_Font;29" backgroundColor="gradient_background" foregroundColor="EventNameColor" transparent="1" halign="left" valign="bottom" zPosition="12" />
+    <!-- RECHTS: Backdrop, FSK und Sterne der 6. Sendung -->
+    <widget source="ServiceEvent" render="GradientWQHDBackdropX" nexts="5" position="2107,751" size="360,200" cornerRadius="11" zPosition="6" />
+    <eLabel position="2105,749" size="363,203" cornerRadius="11" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="5" position="2483,753" size="48,48" alphatest="blend" transparent="1" zPosition="12" />
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="5" position="2128,957" size="309,29" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <eLabel position="2100,993" size="451,3" backgroundColor="gradient_BGO" zPosition="0" />
+    <!-- PRIMETIME rechts unten -->
+    <eLabel text="P R I M E T I M E" position="2096,1004" size="437,40" font="Gradient_Font;35" foregroundColor="green" transparent="1" halign="right" />
+    <widget source="ServiceEvent" render="Label" position="2100,1053" size="440,67" font="Gradient_Font;29" foregroundColor="gradient_foreground" transparent="1" valign="center" halign="left">
+        <convert type="GradientWQHDMovieGuideInfo">Title,P</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2100,1007" size="171,37" font="Gradient_Font; 31" foregroundColor="green" transparent="1" valign="top">
+        <convert type="GradientWQHDMovieGuideInfo">TimeRange,P</convert>
+    </widget>
+    <!-- PRIMETIME: Backdrop, FSK und Sterne -->
+    <widget source="ServiceEvent" render="GradientWQHDPrimeBackdrop" position="2107,1133" size="360,200" cornerRadius="11" zPosition="6" />
+    <eLabel position="2105,1132" size="363,203" cornerRadius="11" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="0" />
+    <widget source="ServiceEvent" render="GradientWQHDParentalNext" nexts="P" position="2483,1133" size="48,48" alphatest="blend" transparent="1" zPosition="12" />
+    <widget source="ServiceEvent" render="GradientWQHDStarNext" nexts="P" position="2128,1340" size="309,29" alphatest="blend" zPosition="10" pixmap="icons/starbar_filled_color.png" backgroundPixmap="icons/starbar_empty_color.png" />
+    <!-- UNTERE BEDIENLEISTE -->
+<widget source="ServiceEvent" render="Label" position="1528,1387" size="693,51" font="Gradient_Font; 32" backgroundColor="gradient_background" transparent="1" halign="left" valign="center" zPosition="3" foregroundColor="green" noWrap="1">
+      <convert type="TransponderInfo" />
+    </widget>
+    <panel position="640,259" size="440,76">
+        <panel name="Template_Text_Buttons_M_I_EPG" />
+    </panel>
+    <panel position="0,259" size="440,76">
+        <panel name="TemplateButton_Automatic_all" />
+    </panel>
+
+<widget source="ServiceEvent" render="Label" position="1273,412" size="93,48" font="Gradient_Font;33" foregroundColor="bernstein2" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">0</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="1707,535" size="133,43" font="Gradient_Font; 33" foregroundColor="bernstein2" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">1</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="1707,991" size="133,43" font="Gradient_Font; 33" foregroundColor="bernstein2" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">2</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="2453,301" size="101,35" font="Gradient_Font; 29" foregroundColor="bernstein" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">3</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="2453,628" size="101,35" font="Gradient_Font; 29" foregroundColor="bernstein" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">4</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="2453,955" size="101,35" font="Gradient_Font; 29" foregroundColor="bernstein" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">5</convert>
+</widget>
+<widget source="ServiceEvent" render="Label" position="2453,1337" size="101,35" font="Gradient_Font; 29" foregroundColor="bernstein" transparent="1" halign="left" valign="center" noWrap="1">
+<convert type="GradientWQHDRatingNext">P</convert>
+</widget>
+</screen>
 	<!-- ChannelSelectionFull (e2MDB) -->
 	<screen name="ChannelSelectionFull" label="Gradient Full Screen (e2MDB)" base="ChannelSelection" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="transparent">
 		<panel name="Fullscreen_Title_TopPanel" />

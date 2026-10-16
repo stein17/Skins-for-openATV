@@ -2770,6 +2770,26 @@ if len(listitems.list) &gt; 2:
 	<!-- 	<panel name="epg_description_eventview" /> -->
 		<panel name="template_VPN_Eventview" />
 	</screen>
+	<!-- E2MDBEventView -->
+<screen name="E2MDBEventView" position="0,0" size="1920,1080"  title="Eventview" backgroundColor="transparent" flags="wfNoBorder" ignoreWidgets="FullDescription,red,green,yellow,blue">
+  <widget position="32,93" size="576,324" source="session.VideoPicture" render="Pig" backgroundColor="transparent" zPosition="3" />
+  <widget source="e2mdb_backdrop" position="640,95" size="1265,720" render="Pixmap" alphatest="blend" transparent="1" scaleFlags="centerScaled" zPosition="-7" cornerRadius="20" />
+  <ePixmap pixmap="GradientFHD/screens/mask_backdrop.png" position="625,80" size="1280,880" scaleFlags="centerScaled" zPosition="-6" alphatest="blend" />
+  <widget source="e2mdb_imageOrPicon" position="28,580" size="420,236" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="16" />
+  <widget source="e2mdb_cover" position="457,580" size="157,236" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="12" />
+  <widget source="e2mdb_title" position="640,90" size="1250,60" font="Gradient_Font; 40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" render="Label" zPosition="3" borderWidth="2" borderColor="black" />
+  <widget source="e2mdb_subtitle" position="30,430" size="580,142" font="Gradient_Font; 30" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" render="Label" zPosition="3" />
+  <widget source="e2mdb_infoline" position="30,920" size="580,60" font="Gradient_Font;28" foregroundColor="gradient_foreground_title" transparent="1" valign="center" render="Label" zPosition="3" />
+  <widget name="epg_description" position="650,615" size="1250,360" font="Gradient_Font;33" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" scrollbarMode="showOnDemand" borderWidth="2" borderColor="black" />
+  <widget name="channel" position="30,830" size="580,40" font="Gradient_Font;33" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" zPosition="3" halign="left" />
+  <widget name="datetime" position="30,875" size="360,40" font="Gradient_Font; 30" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" zPosition="3" />
+  <widget name="duration" position="430,875" size="180,40" font="Gradient_Font; 30" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" halign="center" zPosition="3" />
+  <panel name="Template_FullScreen_Base" />
+  <panel position="459,150" size="330,57">
+    <panel name="Template_Text_Buttons_I_M_E" />
+  </panel>
+</screen>
+	
 	<!-- EventViewSimple , optimized for MovieInfo (EMC)-->
 	<screen name="EventViewSimple" position="center,center" size="1450,900" backgroundColor="transparent" flags="wfNoBorder" title="EventviewSimple">
 		<widget name="epg_description" position="27,84" size="900,735" font="Gradient_Font;33" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
@@ -4653,7 +4673,7 @@ if len(listitems.list) &gt; 2:
 			<panel name="Template_Text_Buttons_I_M_E" />
 		</panel>
 	</screen>
-	<screen name="MoviePlayer" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
+<!-- 	<screen name="MoviePlayer" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
 		<eLabel name="infobar_bg" position="0,835" size="1830,225" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
 		<eLabel name="title_bg" position="0,775" size="1830,60" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />
 		<eLabel name="title_line" position="0,835" size="1830,3" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="6" />
@@ -4744,7 +4764,108 @@ if len(listitems.list) &gt; 2:
 		</widget>
 		<panel name="progress_Default_MoviePlayer" />
 		<panel name="template_Poster_Player" />
-	</screen>
+	</screen> -->
+	
+<screen name="MoviePlayer" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
+    <eLabel name="infobar_bg" position="0,835" size="1830,225" backgroundGradient="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
+    <eLabel name="title_bg" position="0,775" size="1830,60" backgroundGradient="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />
+    <eLabel name="title_line" position="0,835" size="1830,3" backgroundGradient="gradient_background,gradient_BGLR,gradient_BGLM,horizontal" zPosition="6" />
+    <eLabel name="Line_vertical" position="1395,847" size="3,201" backgroundGradient="gradient_BGLR,gradient_BGLM,gradient_BGLR,vertical" zPosition="6" />
+    <widget backgroundColor="gradient_background" font="Gradient_Font; 45" halign="left" position="242,944" render="Label" size="925,58" source="session.CurrentService" transparent="1" zPosition="6">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget backgroundColor="gradient_background" font="Gradient_Font; 27" halign="center" position="872,849" render="Label" size="120,30" source="session.CurrentService" transparent="1" zPosition="10" foregroundColor="red">
+      <convert type="ServicePosition">Position,ShowHours</convert>
+    </widget>
+    <eLabel backgroundColor="gradient_background" font="Gradient_Font; 45" halign="center" position="792,1989" size="30,60" text="/" transparent="1" zPosition="1" />
+    <widget backgroundColor="gradient_background" font="Gradient_Font; 30" halign="center" position="1169,891" render="Label" size="150,40" source="session.CurrentService" transparent="1" zPosition="10" foregroundColor="EventNameColor">
+      <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" font="Gradient_Font; 45" backgroundColor="gradient_background" halign="center" valign="center" position="1174,1657" size="195,60" zPosition="16" transparent="1">
+      <convert type="ServicePosition">EndTime</convert>
+    </widget>
+    <eLabel text="Min" position="292,775" zPosition="1" size="99,60" halign="left" font="Gradient_Font; 45" transparent="1" valign="center" backgroundColor="gradient_background" />
+    <eLabel text="length" position="6,775" zPosition="1" size="150,60" halign="left" font="Gradient_Font; 45" transparent="1" valign="center" backgroundColor="gradient_background" />
+    <widget source="session.CurrentService" render="Label" position="144,775" size="140,60" halign="right" valign="center" font="Gradient_Font; 45" transparent="1" backgroundColor="gradient_background" foregroundColor="orange">
+      <convert type="ServicePosition">Length</convert>
+    </widget>
+    <eLabel text="EndTime:" position="984,1633" zPosition="1" size="204,60" halign="right" font="Gradient_Font; 45" transparent="1" valign="center" backgroundColor="gradient_background" />
+    <eLabel name="" position="240,909" size="925,2" backgroundGradient="gradient_BGLR,gradient_BGLM,white,horizontal" zPosition="3" />
+    <widget source="session.CurrentService" render="Picon" position="23,856" zPosition="4" size="180,111" transparent="12" alphatest="blend">
+      <convert type="MovieReference" />
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1410,989" size="180,60" font="Gradient_Font; 45" halign="right" valign="center" backgroundColor="gradient_background" transparent="1">
+      <convert type="ServiceInfo">VideoWidth</convert>
+    </widget>
+    <eLabel text="x" position="1590,989" size="60,60" font="Gradient_Font; 45" halign="center" valign="center" backgroundColor="gradient_background" transparent="1" />
+    <widget source="session.CurrentService" render="Label" position="1650,989" size="180,60" font="Gradient_Font; 45" halign="left" valign="center" backgroundColor="gradient_background" transparent="1">
+      <convert type="ServiceInfo">VideoHeight</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1605,835" zPosition="1" size="225,99" font="Gradient_Font; 75" backgroundColor="gradient_background" transparent="1" halign="center" valign="center">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget backgroundColor="gradient_background" font="Gradient_Font; 27" valign="center" halign="right" position="1413,847" render="Label" size="180,36" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="white">
+      <convert type="ClockToText">Format:%A</convert>
+    </widget>
+    <widget backgroundColor="gradient_background" font="Gradient_Font; 27" valign="center" halign="right" position="1413,885" render="Label" size="180,36" source="global.CurrentTime" transparent="1" zPosition="1" foregroundColor="white">
+      <convert type="ClockToText">Format:%e. %B</convert>
+    </widget>
+    <ePixmap pixmap="infobar/icon_stereo.png" position="1734,782" size="72,45" zPosition="1" alphatest="blend" />
+    <widget source="session.RecordState" render="Pixmap" pixmap="infobar/icon_record.png" position="1404,782" size="72,45" zPosition="1" alphatest="blend">
+      <convert type="ConditionalShowHide">Blink,2000</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_subtitle.png" position="1404,782" size="72,45" zPosition="2" alphatest="on">
+      <convert type="ServiceInfo">SubservicesAvailable</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_sd576.png" position="1515,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">0,719</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_fhd1080.png" position="1515,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">721,1080</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_uhd4k.png" position="1515,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoWidth</convert>
+      <convert type="ValueRange">3440,4096</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_qhd1440.png" position="1515,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoWidth</convert>
+      <convert type="ValueRange">1081,1440</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_hd720.png" position="1515,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1079</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_16-9.png" position="1629,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_4-3.png" position="1629,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsNotWidescreen</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="infobar/icon_dolbydigital.png" position="1734,782" size="72,45" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsMultichannel</convert>
+      <convert type="ConditionalShowHide" />
+    </widget>
+<ePixmap position="857,843" size="151,60" zPosition="4" pixmap="playback_pointer.png" alphatest="blend" transparent="1" />
+    <panel name="progress_Default_MoviePlayer0" />
+    <panel name="template_Poster_Player" />
+  <widget source="session.CurrentService" render="Progress" size="925,15" position="240,903" foregroundColor="gradient_Line" zPosition="6" transparent="1">
+    <convert type="ServicePosition">Position</convert>
+  </widget>
+  <widget source="session.CurrentService" render="PositionGauge" size="925,21" position="240,900" transparent="1" zPosition="6">
+    <convert type="ServicePosition">Gauge</convert>
+  </widget>
+  </screen>
+	
 	<screen name="EMCMediaCenter" flags="wfNoBorder" position="45,center" size="1830,1080" title="InfoBar" backgroundColor="transparent">
 		<eLabel name="infobar_bg" position="0,835" size="1830,225" backgroundColor="gradient_BGO,gradient_BGM,gradient_BGU,vertical" zPosition="-11" />
 		<eLabel name="title_bg" position="0,775" size="1830,60" backgroundColor="gradient_TBGL,gradient_BGO,gradient_BGU,horizontal" zPosition="-8" />

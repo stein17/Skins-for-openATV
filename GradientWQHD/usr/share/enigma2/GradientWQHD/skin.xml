@@ -517,7 +517,7 @@
 		<widget source="menu" render="Listbox" position="40,107" size="1387,960" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" backgroundColor="gradient_background" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" transparent="1" enableWrapAround="1" scrollbarMode="showOnDemand">
 			
 <templates>
-	<template name="Default" fonts="Gradient_Font;56,Gradient_Font;53,Gradient_Font;48,MetrixLogos;80" itemWidth="1160" itemHeight="108">
+	<template name="Default" fonts="Gradient_Font;56,Gradient_Font;53,Gradient_Font;48,MetrixLogos;80" itemWidth="1160" itemHeight="106">
 		<mode name="default" itemHeight="100">
 			<text index="0" position="40,4" size="1080,100" font="0" verticalAlignment="center" horizontalAlignment="left" />
 		</mode>
@@ -3028,6 +3028,26 @@ if len(listitems.list) &gt; 2:
 	<!-- 	<panel name="epg_description_eventview" /> -->
 		<panel name="template_VPN_Eventview" />
 	</screen>
+	
+	<!-- E2MDBEventView -->
+	<screen name="E2MDBEventView" position="0,0" size="2560,1440" title="Eventview" backgroundColor="transparent" flags="wfNoBorder" ignoreWidgets="FullDescription,red,green,yellow,blue">
+  <widget position="43,124" size="768,432" source="session.VideoPicture" render="Pig" backgroundColor="transparent" zPosition="3" />
+  <widget source="e2mdb_backdrop" position="853,127" size="1685,960" render="Pixmap" alphatest="blend" transparent="1" scaleFlags="centerScaled" zPosition="-7" cornerRadius="27" />
+  <ePixmap pixmap="GradientWQHD/screens/mask_backdrop.png" position="833,107" size="1707,1173" scaleFlags="centerScaled" zPosition="-6" alphatest="blend" />
+  <widget source="e2mdb_imageOrPicon" position="37,773" size="560,315" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="21" />
+  <widget source="e2mdb_cover" position="609,773" size="209,315" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="16" />
+  <widget source="e2mdb_title" position="853,120" size="1667,80" font="Gradient_Font;53" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" render="Label" zPosition="3" borderWidth="3" borderColor="black" />
+  <widget source="e2mdb_subtitle" position="40,573" size="773,189" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" render="Label" zPosition="3" />
+  <widget source="e2mdb_infoline" position="40,1227" size="773,80" font="Gradient_Font;37" foregroundColor="gradient_foreground_title" transparent="1" valign="center" render="Label" zPosition="3" />
+  <widget name="epg_description" position="867,820" size="1667,480" font="Gradient_Font;44" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" scrollbarMode="showOnDemand" borderWidth="3" borderColor="black" />
+  <widget name="channel" position="40,1107" size="773,53" font="Gradient_Font;44" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" zPosition="3" halign="left" />
+  <widget name="datetime" position="40,1167" size="480,53" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" zPosition="3" />
+  <widget name="duration" position="573,1167" size="240,53" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" valign="center" halign="center" zPosition="3" />
+  <panel name="Template_FullScreen_Base" />
+  <panel position="612,200" size="440,76">
+    <panel name="Template_Text_Buttons_I_M_E" />
+  </panel>
+</screen>
 	<!-- EventViewSimple , optimized for MovieInfo (EMC)-->
 	<screen name="EventViewSimple" position="center,center" size="1933,1200" backgroundColor="transparent" flags="wfNoBorder" title="EventviewSimple">
 		<widget name="epg_description" position="36,112" size="1200,980" font="Gradient_Font;44" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />

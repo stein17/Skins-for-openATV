@@ -22,6 +22,425 @@
 		Für jegliche andere Verwendung oder Modifizierung ist ebenfalls meine Erlaubnis erforderlich. -->
 	</copyright>
 	<!-- ##### skin_GradientWQHD PLUGINS #####-->
+	<!-- Neue OpenATV/e2MDB Screens für GradientWQHD -->
+	<!-- E2MDBMain -->
+	<screen name="E2MDBMain" position="center,center" size="1933,1200" title="e2MDB - Scanner" backgroundColor="transparent" flags="wfNoBorder">
+		<eLabel position="45,729" size="52,52" text="" font="enigma2icons;44" foregroundColor="yellow" transparent="1" alphatest="blend" halign="center" valign="center" />
+		<widget name="path_list" position="40,120" size="1853,547" font="Gradient_Font;40" scrollbarMode="showOnDemand" zPosition="3" itemHeight="60" enableWrapAround="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" transparent="1" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" />
+		<widget position="115,721" size="1773,67" source="progheader" foregroundColor="green" backgroundColor="gradient_background" font="Gradient_Font; 43" transparent="1" valign="center" noWrap="1" render="Label" />
+		<widget position="40,795" size="1853,27" name="progbar" foregroundColor="green" backgroundColor="gradient_background" transparent="1" borderColor="gradient_BGLM" borderWidth="1" cornerRadius="13" />
+		<widget position="40,851" size="1853,87" source="progsubline" foregroundColor="yellow" backgroundColor="gradient_background" transparent="1" font="Gradient_Font;39" valign="center" render="Label" />
+		<widget position="40,949" size="1853,139" source="progstatus" foregroundColor="white" backgroundColor="gradient_background" transparent="1" font="Gradient_Font;36" valign="center" render="Label" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_I_M_E" />
+	</screen>
+	<!-- E2MDBPrefillServiceSelection -->
+	<screen name="E2MDBPrefillServiceSelection" title="e2MDB - Manual prefill services" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget position="40,120" size="1847,64" source="level" font="Gradient_Font; 43" zPosition="1" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" conditional="level" render="Label" />
+		<widget position="40,200" size="1847,89" source="summary" font="Gradient_Font;40" zPosition="1" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" render="Label" />
+		<widget name="service_list" position="40,313" size="1847,720" itemHeight="60" font="Gradient_Font;43" zPosition="2" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" scrollbarMode="showOnDemand" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBCleanupStatusScreen -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBCleanupStatusScreen">
+		<widget position="40,120" size="1847,987" font="Gradient_Font;40" foregroundColor="gradient_foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="gradient_background" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBPatternListSelection -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBPatternListSelection">
+		<widget position="40,120" size="1847,64" font="Gradient_Font;43" foregroundColor="gradient_foreground" transparent="1" valign="center" conditional="level" source="level" render="Label" backgroundColor="gradient_background" />
+		<widget position="40,200" size="1847,89" font="Gradient_Font;37" foregroundColor="gradient_foreground" transparent="1" valign="center" source="summary" render="Label" backgroundColor="gradient_background" />
+		<widget position="40,307" size="1847,780" name="pattern_list" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" scrollbarMode="showOnDemand" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" transparent="1" itemHeight="60" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBPatternSourceSelection -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBPatternSourceSelection">
+		<widget position="40,120" size="1847,64" font="Gradient_Font;43" foregroundColor="gradient_foreground" transparent="1" valign="center" conditional="level" source="level" render="Label" backgroundColor="gradient_background" />
+		<widget position="40,200" size="1847,89" font="Gradient_Font;37" foregroundColor="gradient_foreground" transparent="1" valign="center" source="summary" render="Label" backgroundColor="gradient_background" />
+		<widget position="40,307" size="1847,780" name="source_list" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" scrollbarMode="showOnDemand" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" transparent="1" itemHeight="60" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBPrefillStatusScreen -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBPrefillStatusScreen">
+		<widget position="40,120" size="1847,987" font="Gradient_Font;40" foregroundColor="gradient_foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="gradient_background" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBScanResults -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBScanResults">
+		<widget position="40,120" size="1847,900" source="results" render="Listbox" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" scrollbarMode="showOnDemand" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" transparent="1" itemHeight="60">
+			<template name="Default" fonts="Gradient_Font;39,Gradient_Font;35,Gradient_Font;31" itemHeight="125">
+				<text position="24,7" size="1800,49" index="0" font="0" foregroundColor="gradient_foreground_title" wrap="ellipsis" />
+				<text position="24,59" size="1800,41" index="1" font="1" wrap="ellipsis" />
+				<text position="24,92" size="1800,32" index="2" font="2" foregroundColor="gradient_foreground" wrap="ellipsis" />
+			</template>
+		</widget>
+		<widget position="40,1053" size="1847,53" font="Gradient_Font;37" foregroundColor="gradient_foreground" transparent="1" valign="center" source="status" render="Label" backgroundColor="gradient_background" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2MDBWorkerQueueStatusScreen -->
+	<screen position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent" name="E2MDBWorkerQueueStatusScreen">
+		<widget position="40,120" size="1847,987" font="Gradient_Font;40" scrollbarMode="showOnDemand" foregroundColor="gradient_foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="gradient_background" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- RemoteSupport -->
+	<screen name="RemoteSupportManager" title="Remote Support" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="status" position="40,120" size="1133,67" font="Gradient_Font;35" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="description" position="40,200" size="1133,413" font="Gradient_Font;36" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="counts" position="40,627" size="1133,100" font="Gradient_Font; 40" foregroundColor="bernstein" backgroundColor="gradient_background" transparent="1" />
+		<widget name="url" position="40,740" size="1133,100" font="Gradient_Font; 40" foregroundColor="cyan" backgroundColor="gradient_background" transparent="1" />
+		<widget name="linkwarning" position="40,853" size="1133,247" font="Gradient_Font; 36" foregroundColor="green" backgroundColor="gradient_background" transparent="1" />
+		<widget name="qrcode" position="1287,200" size="547,547" />
+		<widget name="qrhint" position="1227,767" size="667,333" font="Gradient_Font; 36" horizontalAlignment="center" verticalAlignment="top" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_M_O_E" />
+	</screen>
+	<!-- RemoteSupportLogs -->
+	<screen name="RemoteSupportLogs" title="Session Logs" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="list" position="40,120" size="1847,929" itemHeight="40" font="Gradient_Font;27" scrollbarMode="showOnDemand" enableWrapAround="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" foregroundColorSelected="gradient_foreground_selection" transparent="1" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- RemoteSupportViewer -->
+	<screen name="RemoteSupportViewer" title="Support Session" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="header" position="40,100" size="740,71" font="Gradient_Font; 32" foregroundColor="yellow" backgroundColor="gradient_background" transparent="1" />
+		<widget name="connected" position="787,100" size="637,71" font="Gradient_Font; 32" horizontalAlignment="right" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="largeFocus" position="40,173" size="1373,932" backgroundColor="gradient_BGLM" zPosition="1" font="Regular; 29" />
+		<widget name="terminal" position="40,173" size="1365,924" font="Console; 29" noWrap="1" padding="8" backgroundColor="black" zPosition="3" transparent="1" />
+		<widget name="tiles" position="1433,173" size="479,932" itemHeight="213" fieldMargins="3" headerFont="Regular;21" headerColor="yellow" frameColor="gradient_BGLM" activeColor="gradient_foreground" tileColor="black" foregroundColor="gradient_foreground" backgroundColor="gradient_background" backgroundColorSelected="gradient_BGLM" scrollbarMode="showOnDemand" scrollbarScroll="byLine" scrollbarOffset="13" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- RemoteSupport -->
+	<!-- OpenATV Crash Reporter -->
+	<screen name="CrashReporter" title="OpenATV Crash Reporter" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="logs" position="40,120" size="1853,667" enableWrapAround="1" font="Gradient_Font;40" itemHeight="60" scrollbarMode="showOnDemand" verticalAlignment="center" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" />
+		<widget name="description" position="40,867" size="1853,220" font="Gradient_Font;37" padding="10" verticalAlignment="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_M_O_E" />
+	</screen>
+	<!-- Complete Your Crash Report -->
+	<screen name="CrashReporterResult" title="Complete Your Crash Report" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="intro" position="40,120" size="1200,120" font="Gradient_Font;32" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="tracking" position="40,267" size="1200,140" font="Gradient_Font;59" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="details" position="40,427" size="1200,687" font="Gradient_Font;31" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="qr" position="1360,253" size="453,453" />
+		<widget name="qrStatus" position="1287,731" size="600,373" font="Gradient_Font; 32" horizontalAlignment="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- My Crash Reports -->
+	<screen name="CrashReporterReports" title="My Crash Reports" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="reports" position="40,120" size="1853,667" enableWrapAround="1" font="Gradient_Font;40" itemHeight="60" scrollbarMode="showOnDemand" verticalAlignment="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" itemSpacing="0,0" borderWidth="1" borderColor="gradient_BGLM" />
+		<widget name="description" position="40,867" size="1853,220" font="Gradient_Font;37" padding="10" verticalAlignment="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- CrashReporterReport -->
+	<screen name="CrashReporterReport" title="Crash Report" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="text" position="53,120" size="1200,967" font="Gradient_Font;29" scrollbarMode="showOnDemand" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="qr" position="1360,247" size="413,413" />
+		<widget name="qrStatus" position="1307,687" size="587,400" font="Gradient_Font; 29" horizontalAlignment="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- OpenATV Crash Reporter -->
+	<!-- E2iPlayer  -->
+	<!-- ConfigBaseWidgetScreen  -->
+	<screen name="ConfigBaseWidgetScreen" title="IPTV Player - settings" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="config" position="40,107" size="1840,900" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" zPosition="3" itemHeight="60" font="Gradient_Font;40" scrollbarMode="showNever" transparent="1" />
+		<widget name="footnote" position="37,1024" size="1400,51" font="Gradient_Font;32" halign="center" valign="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+		<widget name="HelpWindow" position="1200,863" size="1040,240" zPosition="1" transparent="1" alphatest="blend" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- E2iPlayerWidgetScreen -->
+	<screen name="E2iPlayerWidgetScreen" title="E2iPlayer" position="center,center" size="2560,1440" flags="wfNoBorder" backgroundColor="gradient_background">
+		<ePixmap position="2107,1328" size="80,51" zPosition="10" pixmap="buttons/key_leftright.png" transparent="1" alphatest="blend" />
+		<ePixmap position="2000,1328" size="80,51" zPosition="10" pixmap="buttons/key_updown.png" transparent="1" alphatest="blend" />
+		<widget name="headertext" position="880,200" zPosition="10" size="1560,100" halign="left" valign="center" font="Gradient_Font; 40" backgroundColor="gradient_background" foregroundColor="#66ccff" transparent="1" />
+		<widget name="statustext" position="center,center" zPosition="1" size="1360,180" halign="center" valign="center" font="Gradient_Font;60" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+		<widget name="list" position="600,300" zPosition="2" size="1840,560" itemHeight="56" font="Gradient_Font;40" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" />
+		<widget name="sequencer" position="0,0" zPosition="6" font="Regular;320" halign="center" valign="center" transparent="1" backgroundColor="gradient_background" size="2560,1440" />
+		<widget name="console" position="120,872" zPosition="1" size="2320,384" font="Gradient_Font;40" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="center" />
+		<widget name="cover" position="120,200" size="416,660" zPosition="3" alphatest="blend" />
+		<widget name="playerlogo" zPosition="4" position="604,211" size="240,80" alphatest="blend" transparent="1" backgroundColor="gradient_background" />
+		<widget name="spinner" zPosition="2" position="1224,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_1" zPosition="1" position="1224,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_2" zPosition="1" position="1256,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_3" zPosition="1" position="1288,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_4" zPosition="1" position="1320,600" size="32,32" transparent="1" alphatest="blend" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_I_O_E" />
+		</panel>
+	</screen>
+	<!-- IPTVDMScreen -->
+	<screen name="IPTVDMScreen" title="E2iPlayer Download Manager" position="center,center" size="2560,1440" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="list" position="67,227" zPosition="2" size="2453,1044" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" conditional="list" />
+		<widget source="downloadlist" render="Listbox" position="67,227" zPosition="2" size="2453,1044" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" conditional="downloadlist">
+			<convert type="TemplatedMultiContent">{"template": [
+						MultiContentEntryPixmapAlphaBlend(pos = (20, 16), size = (84, 84), flags = BT_SCALE, png = 0),  # Flag.
+						MultiContentEntryText(pos = (160, 0), size = (2120, 68), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1),  # Title
+						# MultiContentEntryText(pos = (587, 43), size = (667, 32), font = 1, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 2),  # adress
+						MultiContentEntryText(pos = (160, 72), size = (680, 40), font = 1, color=0xa4c400,color_sel=0xffaf17, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 3),  # size
+						MultiContentEntryText(pos = (1600, 72), size = (600, 40), font = 1, color=0x7e93ae,color_sel=0x19f4eb, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 4),  # status
+						],
+						"fonts": [gFont("Gradient_Font",44), gFont("Gradient_Font",36)],
+						"itemHeight": 116
+				}</convert>
+		</widget>
+		<widget name="titel" transparent="1" zPosition="2" halign="center" position="67,120" size="1360,93" font="Gradient_Font; 43" foregroundColor="foreground" backgroundColor="background" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
+	<!-- IPTVDMNotificationScreen -->
+	<screen name="IPTVDMNotificationScreen" position="1133,27" zPosition="10" size="1400,168" title="IPTVPlayer downloader" backgroundColor="transparent" flags="wfNoBorder">
+		<eLabel name="layer1" position="0,0" zPosition="-10" size="1400,168" backgroundColor="gradient_background" />
+		<widget name="message_label" font="Gradient_Font;44" position="20,12" zPosition="2" valign="center" halign="center" size="1360,84" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+		<widget name="status_label" font="Gradient_Font;36" position="20,96" zPosition="2" valign="center" halign="center" size="1360,56" backgroundColor="gradient_background" foregroundColor="green" transparent="1" />
+	</screen>
+	<!-- IPTVArticleView -->
+	<screen name="IPTVArticleView" title="Info..." position="center,center" size="2560,1440" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="cover" position="40,267" size="592,940" zPosition="3" alphatest="blend" />
+		<widget name="spinner" zPosition="2" position="504,173" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_1" zPosition="1" position="504,173" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_2" zPosition="1" position="536,173" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_3" zPosition="1" position="568,173" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_4" zPosition="1" position="600,173" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="text" position="667,173" size="1840,1027" font="Gradient_Font;44" backgroundColor="gradient_background" foregroundColor="gradient_foreground" splitPosition="533" transparent="1" />
+		<widget name="playerlogo" zPosition="4" position="220,147" size="240,80" alphatest="blend" transparent="1" backgroundColor="black" />
+		<panel name="Fullscreen_Title_TopPanel" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
+	<!-- IPTVSubDownloaderScreen -->
+	<screen name="IPTVSubDownloaderScreen" position="0,0" size="2560,1440" title="IPTV Sub Title Downloader" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="headertext" position="120,133" zPosition="10" size="2320,100" halign="left" valign="center" font="Gradient_Font; 43" backgroundColor="gradient_background" foregroundColor="#66ccff" transparent="1" />
+		<widget name="statustext" position="center,center" zPosition="1" size="1360,180" halign="center" valign="center" font="Gradient_Font;60" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" />
+		<widget name="list" position="120,267" zPosition="2" size="2320,600" itemHeight="67" font="Gradient_Font;40" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" />
+		<widget name="console" position="120,893" zPosition="1" size="2320,384" font="Gradient_Font;40" backgroundColor="gradient_background" foregroundColor="gradient_foreground" transparent="1" halign="left" valign="center" />
+		<widget name="spinner" zPosition="2" position="1224,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_1" zPosition="1" position="1224,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_2" zPosition="1" position="1256,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_3" zPosition="1" position="1288,600" size="32,32" transparent="1" alphatest="blend" />
+		<widget name="spinner_4" zPosition="1" position="1320,600" size="32,32" transparent="1" alphatest="blend" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
+	<!-- IPTVDirectorySelectorScreen -->
+	<screen name="IPTVDirectorySelectorScreen" position="0,0" size="2560,1440" title="" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="list" position="120,300" zPosition="2" size="2320,600" itemHeight="67" font="Gradient_Font;40" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" />
+		<widget name="curr_dir" position="120,160" zPosition="10" size="2320,100" halign="left" valign="center" font="Gradient_Font; 43" backgroundColor="gradient_background" foregroundColor="#66ccff" transparent="1" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
+	<!-- IPTVChoiceBoxScreen -->
+	<screen name="IPTVChoiceBoxScreen" position="center,center" title="" size="600,600" flags="wfNoBorder" backgroundColor="transparent">
+		<eLabel name="layer1" position="0,0" zPosition="-10" size="600,600" backgroundColor="gradient_background" />
+		<widget source="Title" render="Label" position="40,28" size="520,88" foregroundColor="#66CCFF" noWrap="1" halign="left" valign="center" font="Gradient_Font;56" backgroundColor="gradient_background" transparent="1" />
+		<widget name="list" position="20,132" zPosition="2" size="560,448" scrollbarMode="showOnDemand" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" enableWrapAround="1" transparent="1" />
+		<applet type="onLayoutFinish">
+			<![CDATA[
+from enigma import eSize, ePoint, getDesktop, eLabel
+try:
+	deskwidth = getDesktop(0).size().width()
+	deskheight = getDesktop(0).size().height()
+	factor = deskwidth / 1280.0
+	params = getattr(self, "params", None) or {}
+	width = int(params.get('width', 300) * factor)
+	height = int(params.get('height', 300) * factor)
+	try:
+		self["list"].instance.resize(eSize(width - int(20 * factor), height - int(76 * factor)))
+	except Exception:
+		pass
+	self.instance.resize(eSize(width, height))
+	self.instance.move(ePoint(int((deskwidth - width) / 2), int((deskheight - height) / 2)))
+	for x in getattr(self, "additionalWidgets", []):
+		try:
+			if isinstance(x.instance, eLabel):
+				x.instance.resize(eSize(width, height))
+		except Exception:
+			pass
+	for r in getattr(self, "renderer", []):
+		try:
+			if r.instance.position().y() < int(60 * factor):
+				r.instance.resize(eSize(width - int(40 * factor), int(44 * factor)))
+		except Exception:
+			pass
+except Exception:
+	pass
+]]>
+		</applet>
+	</screen>
+	<!-- PlayerSelectorGrid -->
+	<screen name="PlayerSelectorGrid" position="0,0" size="2560,1440" title="E2iPlayer" flags="wfNoBorder" backgroundColor="transparent">
+		<widget source="grid" render="Listbox" position="140,200" size="2280,1049" conditional="grid" listOrientation="grid" scrollbarMode="showOnDemand" itemSpacing="40,40" itemAlignment="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" transparent="1">
+			<templates>
+				<template name="Default" fonts="Gradient_Font;40">
+					<mode name="default" itemHeight="193" itemWidth="193">
+						<pixmap index="0" position="29,29" size="133,133" alpha="blend" scale="centerScaled" />
+					</mode>
+					<mode name="120" itemHeight="220" itemWidth="220">
+						<pixmap index="0" position="29,29" size="160,160" alpha="blend" scale="centerScaled" />
+					</mode>
+					<mode name="135" itemHeight="240" itemWidth="240">
+						<pixmap index="0" position="29,29" size="180,180" alpha="blend" scale="centerScaled" />
+					</mode>
+				</template>
+			</templates>
+		</widget>
+	</screen>
+	<!-- PlayerSelectorScreen -->
+	<screen name="PlayerSelectorScreen" position="0,0" size="2560,1440" title="E2iPlayer" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="statustext" position="829,104" size="900,100" font="Gradient_Font;44" valign="center" halign="center" foregroundColor="cyan" zPosition="0" transparent="1" />
+		<panel name="PlayerSelectorGrid" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_O_E" />
+		</panel>
+	</screen>
+	<!-- Favoriten-Verwaltung -->
+	<screen name="IPTVFavouritesMainWidget" title="Favorites manager" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="playerlogo" position="44,88" size="360,160" zPosition="4" alphatest="blend" transparent="1" />
+		<widget name="title" position="423,107" size="1467,120" font="Gradient_Font; 48" halign="left" valign="center" foregroundColor="#66ccff" backgroundColor="gradient_background" zPosition="1" transparent="1" />
+		<widget name="list" position="40,253" size="1840,840" itemHeight="60" font="Gradient_Font;40" scrollbarMode="showOnDemand" scrollbarSliderBorderWidth="1" scrollbarForegroundColor="gradient_background_selection" scrollbarBorderColor="#0040433b" enableWrapAround="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- Suchverlauf bearbeiten -->
+	<screen name="SearchHistoryEditor" position="0,0" size="2560,1440" title="Search History" flags="wfNoBorder" backgroundColor="transparent">
+		<widget name="status" position="140,184" size="2280,64" font="Gradient_Font;44" halign="left" valign="center" foregroundColor="#66ccff" backgroundColor="gradient_background" zPosition="1" transparent="1" />
+		<widget name="list" position="140,272" size="2280,948" itemHeight="72" font="Gradient_Font;40" scrollbarMode="showOnDemand" scrollbarSliderBorderWidth="1" scrollbarForegroundColor="gradient_background_selection" scrollbarBorderColor="#0040433b" enableWrapAround="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" transparent="1" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_O_E" />
+		</panel>
+	</screen>
+	<!-- YouTube-Benutzerlinks bearbeiten -->
+	<screen name="YouTubeUserLinksEditorScreen" title="YouTube User Links Editor" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="playerlogo" position="44,88" size="360,160" zPosition="4" alphatest="blend" transparent="1" />
+		<widget name="status" position="423,107" size="1467,120" font="Gradient_Font;44" halign="left" valign="center" foregroundColor="#66ccff" backgroundColor="gradient_background" zPosition="1" transparent="1" />
+		<widget name="hint" position="40,1040" size="1840,60" font="Gradient_Font; 43" halign="left" valign="center" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
+		<widget name="list" position="40,253" size="1840,780" itemHeight="60" font="Gradient_Font;40" scrollbarMode="showOnDemand" scrollbarSliderBorderWidth="1" scrollbarForegroundColor="gradient_background_selection" scrollbarBorderColor="#0040433b" enableWrapAround="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- Suchergebnis-Grid -->
+	<screen name="SearchResultGridScreen" position="0,0" size="2560,1440" title="E2iPlayer" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget source="grid" render="Listbox" position="140,160" size="2280,1000" conditional="grid" listOrientation="grid" scrollbarMode="showOnDemand" itemSpacing="40,40" itemAlignment="center" backgroundColor="gradient_background" foregroundColor="gradient_foreground" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection">
+			<templates>
+				<template name="Default" fonts="Gradient_Font;40">
+					<mode name="default" itemHeight="291" itemWidth="291">
+						<pixmap index="0" position="44,44" size="200,200" alpha="blend" scale="centerScaled" />
+					</mode>
+					<mode name="120" itemHeight="331" itemWidth="331">
+						<pixmap index="0" position="44,44" size="240,240" alpha="blend" scale="centerScaled" />
+					</mode>
+					<mode name="135" itemHeight="360" itemWidth="360">
+						<pixmap index="0" position="44,44" size="271,271" alpha="blend" scale="centerScaled" />
+					</mode>
+				</template>
+			</templates>
+		</widget>
+		<widget name="statustext" position="140,1212" size="2280,60" font="Gradient_Font; 43" halign="center" valign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_O_E" />
+		</panel>
+	</screen>
+	<!-- Host-/Gruppenauswahl: "List view" / "Simple list" -->
+	<screen name="PlayerSelectorListScreen" position="0,0" size="2560,1440" title="E2iPlayer" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="categorytext" position="140,160" size="2280,60" font="Gradient_Font; 43" halign="center" valign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="grid" position="140,264" size="2280,916" conditional="grid" scrollbarMode="showAlways" scrollbarSliderBorderWidth="1" scrollbarForegroundColor="gradient_background_selection" scrollbarBorderColor="#0040433b" enableWrapAround="1" transparent="1" foregroundColor="gradient_foreground" backgroundColor="gradient_background" backgroundColorSelected="gradient_background_selection" foregroundColorSelected="gradient_foreground_selection" />
+		<widget name="statustext" position="140,1212" size="2280,60" font="Gradient_Font; 43" halign="center" valign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_O_E" />
+		</panel>
+	</screen>
+	<!-- PIN-Eingabe (kleiner Dialog) -->
+	<screen name="IPTVPinWidget" position="center,center" size="900,680" title="E2iPlayer" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget source="Title" render="Label" position="40,24" size="820,80" font="Gradient_Font;48" foregroundColor="#66ccff" noWrap="1" halign="left" valign="center" backgroundColor="gradient_background" transparent="1" />
+		<widget name="cover_0" zPosition="4" position="164,172" size="120,120" transparent="1" alphatest="blend" />
+		<widget name="cover_1" zPosition="4" position="315,172" size="120,120" transparent="1" alphatest="blend" />
+		<widget name="cover_2" zPosition="4" position="464,172" size="120,120" transparent="1" alphatest="blend" />
+		<widget name="cover_3" zPosition="4" position="615,172" size="120,120" transparent="1" alphatest="blend" />
+		<ePixmap position="351,332" zPosition="4" size="200,200" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/IPTVPlayer/icons/HD/pin/lock.png" transparent="1" alphatest="blend" />
+	</screen>
+	<!-- Bildbetrachter (Vollbild) -->
+	<screen name="IPTVPicturePlayerWidget" position="0,0" size="2560,1440" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="picture" position="20,172" size="2520,1096" zPosition="6" transparent="1" alphatest="blend" />
+		<widget name="icon" position="1200,600" size="160,160" zPosition="4" transparent="1" alphatest="blend" />
+		<widget name="status" position="680,784" size="1200,60" zPosition="5" halign="center" valign="center" font="Gradient_Font;43" foregroundColor="gradient_foreground" backgroundColor="black" transparent="1" />
+		<widget name="console" position="0,860" size="2560,60" zPosition="5" halign="center" valign="center" font="Gradient_Font;43" foregroundColor="gradient_foreground" backgroundColor="black" transparent="1" />
+		<panel name="Template_FullScreen_Base" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_M_O_E" />
+		</panel>
+	</screen>
+	<!-- Einfache Eingabe (IPTVInputBoxWidget, Fensterrahmen von MetrixHD) -->
+	<screen name="IPTVInputBoxWidget" position="center,center" size="1240,480" title="Input">
+		<eLabel position="0,0" size="1240,480" zPosition="-10" backgroundColor="gradient_background" />
+		<widget name="text" position="40,36" size="1160,76" font="Gradient_Font;44" valign="center" halign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="input" position="40,148" size="1160,100" font="Gradient_Font;60" valign="center" halign="center" foregroundColor="gradient_foreground" backgroundColor="gradient_background" transparent="1" />
+		<widget name="cover" position="center,264" size="440,180" zPosition="4" transparent="1" alphatest="on" />
+	</screen>
+	<!-- IPTVMultipleInputBox -->
+	<screen name="IPTVMultipleInputBox" title="Input" position="center,center" size="1933,1200" flags="wfNoBorder" backgroundColor="gradient_background">
+		<widget name="text_0" conditional="text_0" position="80,188" size="1360,56" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
+		<widget name="cover_0" conditional="cover_0" position="540,180" size="440,72" zPosition="8" transparent="1" alphatest="blend" />
+		<widget name="border_0" conditional="border_0" position="111,248" size="1336,100" zPosition="1" transparent="0" backgroundColor="#331F93B9" />
+		<widget name="input_0" conditional="input_0" position="172,260" size="1256,76" font="Gradient_Font;44" zPosition="2" foregroundColor="gradient_foreground" backgroundColor="gradient_background_selection" transparent="1" />
+		<widget name="marker_0" conditional="marker_0" position="120,280" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
+		<widget name="text_1" conditional="text_1" position="80,368" size="1360,56" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
+		<widget name="cover_1" conditional="cover_1" position="540,360" size="440,72" zPosition="8" transparent="1" alphatest="blend" />
+		<widget name="border_1" conditional="border_1" position="111,428" size="1336,100" zPosition="1" transparent="0" backgroundColor="#331F93B9" />
+		<widget name="input_1" conditional="input_1" position="172,440" size="1256,76" font="Gradient_Font;44" zPosition="2" foregroundColor="gradient_foreground" backgroundColor="gradient_background_selection" transparent="1" />
+		<widget name="marker_1" conditional="marker_1" position="120,460" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
+		<widget name="text_2" conditional="text_2" position="80,548" size="1360,56" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
+		<widget name="border_2" conditional="border_2" position="111,608" size="1336,100" zPosition="1" transparent="0" backgroundColor="#331F93B9" />
+		<widget name="input_2" conditional="input_2" position="172,620" size="1256,76" font="Gradient_Font;44" zPosition="2" foregroundColor="gradient_foreground" backgroundColor="gradient_background_selection" transparent="1" />
+		<widget name="marker_2" conditional="marker_2" position="120,640" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
+		<widget name="text_3" conditional="text_3" position="80,728" size="1360,56" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="gradient_background" transparent="1" />
+		<widget name="border_3" conditional="border_3" position="111,788" size="1336,100" zPosition="1" transparent="0" backgroundColor="#331F93B9" />
+		<widget name="input_3" conditional="input_3" position="172,800" size="1256,76" font="Gradient_Font;44" zPosition="2" foregroundColor="gradient_foreground" backgroundColor="gradient_background_selection" transparent="1" />
+		<widget name="marker_3" conditional="marker_3" position="120,820" size="32,32" zPosition="1" transparent="1" alphatest="blend" />
+		<widget name="marker" conditional="marker" position="120,280" size="32,32" zPosition="3" transparent="1" alphatest="blend" />
+		<widget name="accept_button" conditional="accept_button" position="104,913" size="1360,88" font="Gradient_Font;44" valign="center" halign="center" foregroundColor="#00FFFFFF" backgroundColor="#3A3A3A" zPosition="2" transparent="1" />
+		<widget name="statustext" conditional="statustext" position="80,724" size="1360,48" font="Gradient_Font;36" halign="center" valign="center" foregroundColor="#66ccff" backgroundColor="gradient_background" transparent="1" />
+		<panel name="Template_Setup_Base" />
+		<panel name="Template_Text_Buttons_O_E" />
+	</screen>
+	<!-- Buffering-Overlay (E2iPlayerBufferingWidget, Vollbild ueber Video) -->
+	<screen name="E2iPlayerBufferingWidget" position="0,0" size="2560,1440" title="E2iPlayer buffering..." flags="wfNoBorder" backgroundColor="gradient_background">
+		<eLabel position="0,0" size="2560,1440" zPosition="-10" backgroundColor="gradient_background" />
+		<widget name="icon" position="1152,464" size="256,256" zPosition="4" transparent="1" alphatest="blend" />
+		<widget name="percentage" position="1152,528" size="256,128" zPosition="5" halign="center" valign="center" font="Gradient_Font;44" foregroundColor="gradient_foreground" backgroundColor="black" transparent="1" />
+		<widget name="console" position="0,752" size="2560,160" zPosition="5" halign="center" valign="center" font="Gradient_Font;43" foregroundColor="gradient_foreground" backgroundColor="black" transparent="1" />
+		<widget name="addinfo" position="20,1080" size="2520,160" zPosition="5" halign="center" valign="center" font="Gradient_Font;40" foregroundColor="gradient_foreground_selection" backgroundColor="black" transparent="1" />
+		<widget name="ok_button" position="71,1325" size="80,52" zPosition="8" transparent="1" alphatest="blend" />
+		<widget name="rec_button" position="240,1325" size="80,52" zPosition="8" transparent="1" alphatest="blend" />
+		<widget name="exit_button" position="411,1325" size="80,52" zPosition="8" transparent="1" alphatest="blend" />
+		<panel name="Fullscreen_Title_TopPanel" />
+		<panel position="612,200" size="440,76">
+			<panel name="Template_Text_Buttons_O_E" />
+		</panel>
+	</screen>
+	<!-- E2iPlayer  -->
 	<!-- BlurayPlayer -->
 	<screen name="BlurayMain" position="0,0" size="2560,1440" title="Blu-ray player" flags="wfNoBorder" backgroundColor="transparent">
 		<widget source="list" render="Listbox" position="140,240" size="1400,860" scrollbarMode="showOnDemand" transparent="1" backgroundColor="gradient_background" foregroundColor="gradient_foreground" itemCornerRadiusSelected="16" itemGradientSelected="gradient_BGLM,gradient_BGLL,gradient_BGLL,horizontal" foregroundColorSelected="gradient_foreground_selection">

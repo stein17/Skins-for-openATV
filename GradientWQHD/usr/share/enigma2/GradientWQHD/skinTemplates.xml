@@ -154,52 +154,74 @@
 	</mode>
 </template>
 	<!-- Gradient 3 Fields -->
-	<template component="serviceList" name="Gradient 3 Fields" screens="ChannelSelection3_Fields" fonts="Gradient_Font;40,Gradient_Font;37,Gradient_Font;35,Gradient_Font;32">
-		<mode name="services" itemHeight="51" itemWidth="800" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" >
-			<panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
-				<pixmap index="Picon" position="left,1" size="80,47" alpha="blend" scale="centerScaled" />
-				<text index="Number" position="left" size="60,51" font="0" horizontalAlignment="right" verticalAlignment="center" />
-				<pixmap index="IsInBouquetImage" position="left,3" size="40,40" alpha="blend" scale="centerScaled" />
-				<text index="ServiceName" position="left,0" size="300,51" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec" />
-				<text index="Title1" position="left,0" size="760,51" font="1" verticalAlignment="center" wrap="noWrap" />
-				<progress index="Progress" position="right,12" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" />
-			</panel>
-		</mode>
-		<mode name="other" itemHeight="51" itemWidth="800" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
-			<panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
-				<pixmap index="MarkerImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled" />
-				<pixmap index="FolderImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled" />
-				<text index="EntryName" position="left" size="e-60,51" font="0" verticalAlignment="center" />
-				<text index="MarkerName" position="left" size="e-60,51" foregroundColor="green" font="0" verticalAlignment="center" />
-			</panel>
-		</mode>
-		<mode name="bouquets" itemHeight="119" itemWidth="811">
-			<panel position="20,0" size="800,119" layout="horizontal" spacing="11">
-				<text index="Number" position="left" size="60,117" font="1" horizontalAlignment="right" verticalAlignment="center" />
-				<pixmap index="Picon" position="left,7" size="183,107" alpha="blend" scale="centerScaled" />
-				<panel position="left" size="51,117" layout="vertical">
-					<pixmap index="CryptoImage" position="687,7" size="40,40" alpha="blend" scale="centerScaled" />
-					<pixmap index="ServiceTypeImage" position="687,24" size="44,44" alpha="blend" scale="centerScaled" />
-				</panel>
-				<panel position="left" size="800,117">
-					<text index="ServiceName" position="0,0" size="747,48" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec" />
-					<text index="Title1" position="0,40" size="747,45" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#00ff9900" />
-				</panel>
-				<panel position="267,3" size="500,117" layout="vertical" spacing="0">
-					<text index="StartEndTime1" position="80,80" size="403,40" font="3" wrap="noWrap" />
-				</panel>
-				<panel position="280,3" size="533,117" layout="vertical" spacing="0">
-					<text index="Remain" position="373,80" size="144,40" font="3" wrap="noWrap" />
-				</panel>
-				<panel position="133,13" size="133,117" layout="vertical" spacing="0">
-					<progress index="Progress" position="400,80" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,vertical" />
-				</panel>
-				<panel position="0,0" size="1040,1" layout="vertical" spacing="0">
-					<text text="Line" position="3,0" size="1027,1" backgroundColor="gradient_Line" />
-				</panel>
-			</panel>
-		</mode>
-	</template>
+<!-- Gradient EPG-Galerie: kompakte Senderliste zur 3+3-EPG-Ansicht -->
+<template component="serviceList" name="Gradient EPG-Galerie" screens="ChannelSelection_EPG-Galerie" fonts="Gradient_Font;40,Gradient_Font;37,Gradient_Font;35,Gradient_Font;32">
+ <mode name="services" itemHeight="51" itemWidth="955" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
+  <panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
+   <pixmap index="Picon" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <text index="Number" position="left" size="60,51" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+   <pixmap index="IsInBouquetImage" position="left,3" size="40,40" alpha="blend" scale="centerScaled"/>
+   <text index="ServiceName" position="left,0" size="300,51" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec" foregroundColorSelected="gradient_foreground_selection"/>
+   <text index="Title1" position="left,0" size="760,51" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="gradient_foreground"/>
+   <progress index="Progress" position="right,12" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+  </panel>
+ </mode>
+ <mode name="other" itemHeight="51" itemWidth="955" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
+  <panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
+   <pixmap index="MarkerImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <pixmap index="FolderImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <text index="EntryName" position="left" size="e-60,51" font="0" verticalAlignment="center"/>
+   <text index="MarkerName" position="left" size="e-60,51" foregroundColor="green" font="0" verticalAlignment="center"/>
+  </panel>
+ </mode>
+ <mode name="bouquets" itemHeight="124" itemWidth="955" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection" recordColor="ButtonRed" recordColorSelected="ButtonRed">
+  <panel position="20,0" size="955,124" layout="horizontal" spacing="11">
+   <text index="Number" position="left" size="60,117" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+   <pixmap index="Picon" position="left,7" size="183,107" alpha="blend" scale="centerScaled"/>
+   <panel position="left" size="800,117">
+    <text index="ServiceName" position="0,0" size="656,48" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec" foregroundColorSelected="gradient_foreground_selection"/>
+    <text index="Title1" position="0,40" size="656,45" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="EventNameColor" foregroundColorSelected="gradient_foreground"/>
+   </panel>
+   <panel position="205,3" size="500,117" layout="vertical" spacing="0"><text index="StartEndTime1" position="80,80" size="403,40" font="3" wrap="noWrap"/></panel>
+   <panel position="213,3" size="533,117" layout="vertical" spacing="0"><text index="Remain" position="400,80" size="160,40" font="3" wrap="noWrap"/></panel>
+   <panel position="67,13" size="133,117" layout="vertical" spacing="0"><progress index="Progress" position="427,80" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,horizontal" cornerRadius="5"/></panel>
+   <panel position="0,0" size="955,1" layout="vertical" spacing="0"><text text="Line" position="3,0" size="949,1" backgroundColor="gradient_Line"/></panel>
+  </panel>
+ </mode>
+</template>
+<!-- Gradient 3 Fields -->
+<template component="serviceList" name="Gradient 3 Fields" screens="ChannelSelection3_Fields" fonts="Gradient_Font;40,Gradient_Font;37,Gradient_Font;35,Gradient_Font;32">
+ <mode name="services" itemHeight="51" itemWidth="800" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
+  <panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
+   <pixmap index="Picon" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <text index="Number" position="left" size="60,51" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+   <pixmap index="IsInBouquetImage" position="left,3" size="40,40" alpha="blend" scale="centerScaled"/>
+   <text index="ServiceName" position="left,0" size="300,51" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec"/>
+   <text index="Title1" position="left,0" size="760,51" font="1" verticalAlignment="center" wrap="noWrap"/>
+   <progress index="Progress" position="right,12" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,horizontal"/>
+  </panel>
+ </mode>
+ <mode name="other" itemHeight="51" itemWidth="800" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
+  <panel position="20,0" size="e-40,51" layout="horizontal" spacing="20">
+   <pixmap index="MarkerImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <pixmap index="FolderImage" position="left,1" size="80,47" alpha="blend" scale="centerScaled"/>
+   <text index="EntryName" position="left" size="e-60,51" font="0" verticalAlignment="center"/>
+   <text index="MarkerName" position="left" size="e-60,51" foregroundColor="green" font="0" verticalAlignment="center"/>
+  </panel>
+ </mode>
+ <mode name="bouquets" itemHeight="119" itemWidth="1013" orientation="grid" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
+  <text index="Number" position="20,0" size="60,117" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+  <pixmap index="Picon" position="91,7" size="183,107" alpha="blend" scale="centerScaled"/>
+  <text index="ServiceName" position="287,0" size="667,48" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="#00555555" recordColor="ButtonRed" pseudoColor="ButtonBlue" streamColor="infobar_tuner_rec"/>
+  <text index="Title1" position="287,40" size="667,45" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="#00ff9900"/>
+  <text index="StartEndTime1" position="287,83" size="403,40" font="3" wrap="noWrap"/>
+  <text index="Remain" position="593,83" size="144,40" font="3" wrap="noWrap"/>
+  <progress index="Progress" position="473,93" size="100,15" borderWidth="1" foregroundGradient="green,yellow,red,vertical"/>
+  <pixmap index="CryptoImage" position="960,7" size="40,40" alpha="blend" scale="centerScaled"/>
+  <pixmap index="ServiceTypeImage" position="960,60" size="44,44" alpha="blend" scale="centerScaled"/>
+  <rectangle position="3,116" size="1008,1" foregroundColor="gradient_Line" foregroundColorSelected="gradient_Line"/>
+ </mode>
+</template>
 	<!-- Gradient 3 Fields_Poster -->
 	<template component="serviceList" name="Gradient 3 Fields_Poster" screens="ChannelSelection3_Fields_Poster" fonts="Gradient_Font;40,Gradient_Font;37,Gradient_Font;35,Gradient_Font;32">
 		<mode name="services" itemHeight="51" itemWidth="800" foregroundColor="gradient_foreground" foregroundColorSelected="gradient_foreground_selection">
