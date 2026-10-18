@@ -1,8 +1,10 @@
-from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService, iPlayableServicePtr, eServiceReference, eServiceCenter, eTimer, getBestPlayableServiceReference
-from Components.Element import cached
-from Components.config import config
+from enigma import eServiceCenter, eServiceReference, eTimer, getBestPlayableServiceReference, iPlayableService, iPlayableServicePtr, iServiceInformation
+
 import NavigationInstance
+from Components.config import config
+from Components.Element import cached
+from Components.Converter.Converter import Converter
+
 try:
     from Components.Renderer.ChannelNumber import ChannelNumberClasses
     correctChannelNumber = True
@@ -276,17 +278,7 @@ class BLServiceName(Converter, object):
             elif f == 'f':
                 if type in ('DVB-S', 'DVB-C'):
                     x = self.tpdata.get('fec_inner', 15)
-                    result += x in range(10) + [15] and {0: 'Auto',
-                     1: '1/2',
-                     2: '2/3',
-                     3: '3/4',
-                     4: '5/6',
-                     5: '7/8',
-                     6: '8/9',
-                     7: '3/5',
-                     8: '4/5',
-                     9: '9/10',
-                     15: 'None'}[x] or ''
+                    result += {0: "Auto", 1: "1/2", 2: "2/3", 3: "3/4", 4: "5/6", 5: "7/8", 6: "8/9", 7: "3/5", 8: "4/5", 9: "9/10", 15: "None"}.get(x, "")
                 elif type == 'DVB-T':
                     x = self.tpdata.get('code_rate_lp', 5)
                     result += x in range(6) and {0: '1/2',
