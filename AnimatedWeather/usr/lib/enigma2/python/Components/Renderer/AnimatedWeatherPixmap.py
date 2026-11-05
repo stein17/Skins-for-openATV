@@ -88,7 +88,7 @@ class AnimatedWeatherPixmap(Renderer):
 
     def startTimer(self):
         self.stopTimer()
-        if self.animationEnabled() and len(self.frames) > 1:
+        if self.isWeatherAnimationEnabled() and len(self.frames) > 1:
             self.timer.start(self.getFrameInterval(), False)
 
     def stopTimer(self):
@@ -125,7 +125,7 @@ class AnimatedWeatherPixmap(Renderer):
         self.stopTimer()
         Renderer.onHide(self)
 
-    def animationEnabled(self):
+    def isWeatherAnimationEnabled(self):
         if animation_config is None:
             return False
         try:
@@ -327,7 +327,7 @@ class AnimatedWeatherPixmap(Renderer):
         self.startTimer()
 
     def showNextFrame(self):
-        if not self.animationEnabled() or self.instance is None or len(self.frames) < 2:
+        if not self.isWeatherAnimationEnabled() or self.instance is None or len(self.frames) < 2:
             return
         self.frameIndex = (self.frameIndex + 1) % len(self.frames)
         self.instance.setPixmap(self.frames[self.frameIndex])
