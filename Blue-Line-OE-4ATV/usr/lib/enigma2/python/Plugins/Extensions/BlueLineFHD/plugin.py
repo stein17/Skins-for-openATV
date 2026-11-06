@@ -8,14 +8,15 @@
 #source code of your modifications.
 
 
-# for localized messages
-from __future__ import absolute_import
-from __future__ import print_function
-from .__init__ import _
+from __future__ import absolute_import, print_function
+from os import chdir, listdir, makedirs, mkdir, path, readlink, remove, rename, symlink, system
+from os.path import join
+from shutil import rmtree
 
 from enigma import eTimer
+
 from Components.ActionMap import ActionMap
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigYesNo, NoSave, ConfigNothing, ConfigNumber
+from Components.config import ConfigNothing, ConfigNumber, ConfigSelection, ConfigSubsection, ConfigYesNo, NoSave, config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
@@ -27,13 +28,12 @@ from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
-from Tools.Directories import *
+from Tools.Directories import SCOPE_SKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
-from Tools.WeatherID import get_woeid_from_yahoo
-from Tools import Notifications
 from Tools.Notifications import AddPopup
-from os import listdir, remove, rename, system, path, symlink, chdir, makedirs, mkdir
-import shutil
+from Tools.WeatherID import get_woeid_from_yahoo
+
+from . import _
 
 cur_skin = config.skin.primary_skin.value.replace('/skin.xml', '')
 
@@ -530,7 +530,8 @@ class BlueLine_Config(Screen, ConfigListScreen):
             self.keyGreen()
 
     def openSkinSelector(self):
-        self.session.openWithCallback(self.skinChanged, SkinSelector)
+        from Screens.SkinSelection import SkinSelection  # Load the setup screen only when it is opened.
+        self.session.openWithCallback(self.skinChanged, SkinSelection)
 
     def openSkinSelectorDelayed(self):
         self.delaytimer = eTimer()
@@ -617,7 +618,7 @@ class BlueLine_Config(Screen, ConfigListScreen):
                         if path.islink("mySkin"):
                             remove("mySkin")
                         else:
-                            shutil.rmtree("mySkin")
+                            rmtree("mySkin")
                     else:
                         rename("mySkin", "mySkin_off")
             self.restartGUI()
@@ -777,7 +778,7 @@ class BlueLineScreens(Screen):
         list_dir = sorted(listdir(dir_path), key=str.lower)
         for f in list_dir:
             if f.endswith('.xml') and f.startswith('skin_'):
-                if (not path.islink(dir_path + "/" + f)) or os.path.exists(os.readlink(dir_path + "/" + f)):
+                if not path.islink(join(dir_path, f)) or path.exists(readlink(join(dir_path, f))):
                     friendly_name = f.replace("skin_", "")
                     friendly_name = friendly_name.replace(".xml", "")
                     friendly_name = friendly_name.replace("_", " ")
