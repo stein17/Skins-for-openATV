@@ -1,0 +1,1753 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<skin>
+  <!-- Allgemeine OpenATV-Systemscreens, die keiner Fachdatei angehören. -->
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: HAUPTMENÜ UND SCHNELLZUGRIFF -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: IPKGMenu -->
+  <screen name="IPKGMenu" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Select IPKG source" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="filelist" position="750,118" size="1125,773" itemHeight="55" font="Regular;29" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: HelpMenu -->
+  <screen position="0,0" size="1920,1080" name="HelpMenu" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="FullNightRemoteControl"/>
+    <widget position="36,103" size="1320,648" source="list" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <template name="Default" fonts="Bold;29,Regular;29,Regular;24" itemHeight="70">
+        <mode name="default" itemHeight="70">
+          <text position="21,7" size="1266,57" index="1" font="1" wrap="wrap" verticalAlignment="center"/>
+        </mode>
+        <mode name="extended" itemHeight="140">
+          <text position="21,7" size="1266,57" index="1" font="1" wrap="wrap" verticalAlignment="center"/>
+          <text position="21,69" size="1266,64" index="2" font="2" wrap="wrap" foregroundColor="secondary"/>
+        </mode>
+        <mode name="default+headings" itemHeight="70">
+          <text position="21,7" size="1266,57" index="1" font="0" wrap="wrap" verticalAlignment="center" foregroundColor="accent"/>
+          <text position="48,7" size="1239,57" index="2" font="1" wrap="wrap" verticalAlignment="center"/>
+        </mode>
+        <mode name="extended+headings" itemHeight="140">
+          <text position="21,7" size="1266,126" index="1" font="0" wrap="wrap" verticalAlignment="center" foregroundColor="accent"/>
+          <text position="48,7" size="1239,57" index="2" font="1" wrap="wrap" verticalAlignment="center"/>
+          <text position="48,69" size="1239,64" index="3" font="2" wrap="wrap" foregroundColor="secondary"/>
+        </mode>
+      </template>
+    </widget>
+    <eLabel position="36,775" size="1320,216" backgroundColor="FullNightPanel" zPosition="-1"/>
+    <widget position="60,790" size="1272,63" font="Regular;32" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" name="buttonlist"/>
+    <widget position="60,865" size="1272,108" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" name="description"/>
+    
+    <panel name="template_help_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: QuickMenu -->
+<screen position="0,0" size="1920,1080" name="QuickMenu" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+  <panel name="Fullscreen_Template_Title_Date" />
+<!-- <eLabel position="10,110" size="600,890" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" /> -->
+
+  <widget position="20,120" size="580,830" source="mainlist" render="Listbox" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+    <template name="Default" fonts="Regular;30,Regular;24" itemHeight="83">
+      <pixmap position="12,16" size="60,52" index="Image" alpha="blend" scale="centerScaled" />
+      <text position="90,7" size="480,36" index="Name" font="0" wrap="ellipsis" verticalAlignment="center" />
+      <text position="90,45" size="480,30" index="Summary" font="1" foregroundColor="secondary" wrap="ellipsis" verticalAlignment="center" />
+    </template>
+  </widget>
+  <widget position="640,120" size="640,830" source="sublist" render="Listbox" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+    <template name="Default" fonts="Regular;30,Regular;22" itemHeight="83">
+      <text position="18,7" size="620,36" index="Name" font="0" wrap="ellipsis" verticalAlignment="center" />
+      <text position="18,45" size="620,30" index="Summary" font="1" foregroundColor="secondary" wrap="ellipsis" verticalAlignment="center" />
+    </template>
+  </widget>
+  <widget position="1326,103" size="558,315" source="session.VideoPicture" render="Pig" backgroundColor="transparent" />
+  <eLabel position="1320,460" size="564,456" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" />
+  <widget position="1326,463" size="558,450" font="Regular;28" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="description" />
+  <panel name="TemplateAllColorButtons_Automatic" />
+  <panel name="template_ok_exit" />
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: QuickMenuDevices -->
+  <screen name="QuickMenuDevices" position="0,0" size="1920,1080" title="Devices" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel text="Detected Devices:" position="750,118" size="900,65" font="Regular;36" halign="left" foregroundColor="accent" backgroundColor="surface" transparent="1"/>
+    <widget source="devicelist" render="Listbox" position="750,223" size="1125,645" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">
+				{"template": [
+				 MultiContentEntryText(pos=(135,0), size=(900,45), font=0, text = 0),
+				 MultiContentEntryText(pos=(165,45), size=(900,75), font=1, flags = RT_VALIGN_TOP, text = 1),
+				 MultiContentEntryPixmapAlphaBlend(pos=(0,0), size=(120,120), png = 2, flags = BT_SCALE),
+				],
+				"fonts": [gFont("Regular",36),gFont("Regular",30)],
+				"itemHeight": 128
+				}
+</convert>
+    </widget>
+    <widget name="lab1" zPosition="2" position="840,223" size="945,60" font="Regular;33" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: easyCIconfigMenu -->
+  <screen name="easyCIconfigMenu" position="0,0" size="1920,1080" title="CI Assignment" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="ServiceList_desc" render="Label" position="750,118" size="1125,48" font="Regular;36" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <eLabel position="750,201" size="1125,3" backgroundColor="accent"/>
+    <widget name="ServiceList" position="750,216" size="1125,675" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget source="ServiceList_info" render="Label" position="750,216" size="1125,675" font="Regular;33" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: Animmain -->
+  <screen name="Animmain" position="0,0" size="1920,1080" title="Mainmenu" backgroundColor="FullNightScreen" flags="wfNoBorder" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="0,853" size="1920,195" backgroundColor="surface" zPosition="-1"/>
+    <eLabel position="0,853" size="1920,8" backgroundColor="surface" zPosition="-1"/>
+    <widget name="title" position="0,703" size="1920,150" zPosition="3" halign="center" valign="bottom" font="Regular;90" backgroundColor="surface" transparent="1" foregroundColor="foreground"/>
+    <widget source="label1" render="Label" position="0,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label2" render="Label" position="384,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <eLabel position="765,874" size="306,156" zPosition="1" backgroundColor="surface"/>
+    <widget source="label3" render="Label" position="768,877" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="0"/>
+    <widget source="label4" render="Label" position="1152,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label5" render="Label" position="1536,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: Iconmain -->
+  <screen name="Iconmain" position="0,0" size="1920,1080" title="Mainmenu" backgroundColor="FullNightScreen" flags="wfNoBorder" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="title" position="0,703" size="1920,150" zPosition="3" halign="center" valign="bottom" font="Regular;90" backgroundColor="surface" transparent="1" foregroundColor="foreground"/>
+    <eLabel position="0,853" size="1920,8" backgroundColor="surface" zPosition="-1"/>
+    <widget source="label1" render="Label" position="23,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label1s" render="Label" position="23,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap1" position="23,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <widget source="label2" render="Label" position="338,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label2s" render="Label" position="338,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap2" position="338,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <widget source="label3" render="Label" position="653,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label3s" render="Label" position="653,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap3" position="653,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <widget source="label4" render="Label" position="968,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label4s" render="Label" position="968,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap4" position="968,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <widget source="label5" render="Label" position="1283,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label5s" render="Label" position="1283,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap5" position="1283,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <widget source="label6" render="Label" position="1598,876" size="300,150" font="Regular;33" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget source="label6s" render="Label" position="1598,876" size="300,150" font="Regular;36" borderWidth="2" borderColor="foreground" halign="center" valign="center" zPosition="2" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="pixmap6" position="1598,876" size="300,150" zPosition="1" transparent="1" alphatest="on"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: MenuHorizontal -->
+  <screen position="75,726" size="1770,318" name="MenuHorizontal" flags="wfNoBorder" backgroundColor="transparent" ignoreWidgets="menuimage" resolution="1920,1080">
+    <widget position="6,0" size="1758,177" source="menu" render="Listbox" listOrientation="horizontal" transparent="1" backgroundColor="background" backgroundColorSelected="selection" foregroundColor="foreground" foregroundColorSelected="selectedFG" itemGradient="FullNightMenuTile" scrollbarMode="showNever" enableWrapAround="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <template name="Default" fonts="Regular;28,enigma2icons;57,Regular;24" itemWidth="342" itemHeight="177">
+        <mode name="default">
+          <text position="129,15" size="84,66" index="Image" font="1" horizontalAlignment="center" verticalAlignment="center" foregroundColor="secondary" foregroundColorSelected="selectedFG"/>
+          <text position="18,82" size="306,76" index="Text" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          <rectangle position="147,164" size="48,2" backgroundColor="muted" backgroundColorSelected="accent"/>
+        </mode>
+        <mode name="text">
+          <text position="18,54" size="306,75" index="Text" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          <rectangle position="147,164" size="48,2" backgroundColor="muted" backgroundColorSelected="accent"/>
+        </mode>
+        <mode name="number">
+          <text position="18,18" size="60,36" index="Number" font="2" horizontalAlignment="left" verticalAlignment="center" foregroundColor="secondary" foregroundColorSelected="selectedFG"/>
+          <text position="18,54" size="306,75" index="Text" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          <rectangle position="147,164" size="48,2" backgroundColor="muted" backgroundColorSelected="accent"/>
+        </mode>
+        <mode name="image">
+          <text position="129,15" size="84,66" index="Image" font="1" horizontalAlignment="center" verticalAlignment="center" foregroundColor="secondary" foregroundColorSelected="selectedFG"/>
+          <text position="18,82" size="306,76" index="Text" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          <rectangle position="147,164" size="48,2" backgroundColor="muted" backgroundColorSelected="accent"/>
+        </mode>
+        <mode name="both">
+          <text position="129,15" size="84,66" index="Image" font="1" horizontalAlignment="center" verticalAlignment="center" foregroundColor="secondary" foregroundColorSelected="selectedFG"/>
+          <text position="18,18" size="60,36" index="Number" font="2" horizontalAlignment="left" verticalAlignment="center" foregroundColor="secondary" foregroundColorSelected="selectedFG"/>
+          <text position="18,82" size="306,76" index="Text" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          <rectangle position="147,164" size="48,2" backgroundColor="muted" backgroundColorSelected="accent"/>
+        </mode>
+      </template>
+    </widget>
+    <eLabel position="6,201" size="1758,117" backgroundColor="FullNightMenuTile" cornerRadius="12" zPosition="-1"/>
+    <widget position="30,212" size="1710,42" font="Regular;27" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="description" render="Label"/>
+    <widget position="30,272" size="4,26" source="key_red" render="FixedLabel" text="" backgroundColor="red" conditional="key_red">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="48,264" size="336,42" font="Regular;24" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" conditional="key_red" source="key_red" render="Label">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="393,272" size="5,26" source="key_green" render="FixedLabel" text="" backgroundColor="green" conditional="key_green">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="411,264" size="336,42" font="Regular;24" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" conditional="key_green" source="key_green" render="Label">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="756,272" size="4,26" source="key_yellow" render="FixedLabel" text="" backgroundColor="yellow" conditional="key_yellow">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="774,264" size="336,42" font="Regular;24" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" conditional="key_yellow" source="key_yellow" render="Label">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1119,272" size="5,26" source="key_blue" render="FixedLabel" text="" backgroundColor="blue" conditional="key_blue">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1137,264" size="336,42" font="Regular;24" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" conditional="key_blue" source="key_blue" render="Label">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1575,262" size="45,46" text="" font="enigma2icons;39" foregroundColor="secondary" transparent="1" halign="center" valign="center" source="key_menu" conditional="key_menu" render="FixedLabel">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1674,262" size="45,46" text="" font="enigma2icons;39" foregroundColor="secondary" transparent="1" halign="center" valign="center" source="key_help" conditional="key_help" render="FixedLabel">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: INFORMATIONEN UND SYSTEMSTATUS -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: ServiceInfoSimple -->
+  <screen name="ServiceInfoSimple" position="0,0" size="1920,1080" title="Choose bouquet" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="infolist" position="750,193" size="1125,675" zPosition="3" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" selectionDisabled="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: BouquetSelector -->
+  <screen name="BouquetSelector" position="0,0" size="1920,1080" title="Choose bouquet" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="menu" position="750,120" size="1125,864" itemHeight="48" font="Regular;36" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;30" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AboutOE -->
+  <screen name="AboutOE" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="AboutScrollLabel" position="105,321" size="1050,585" transparent="0" zPosition="1" font="Regular;30" scrollbarMode="showOnDemand"/>
+    <widget source="lab1" render="Label" position="105,118" size="554,60" font="Regular;45" backgroundColor="surface" foregroundColor="foreground" transparent="0" zPosition="1"/>
+    <widget source="lab2" render="Label" position="105,208" size="555,38" font="Regular;29" backgroundColor="surface" foregroundColor="foreground" transparent="0" zPosition="1"/>
+    <widget source="lab3" render="Label" position="105,246" size="554,38" font="Regular;29" backgroundColor="surface" foregroundColor="foreground" transparent="0" zPosition="1"/>
+    <eLabel text="OPEN SOURCE" position="1238,133" size="570,90" font="Regular;75" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <eLabel text="https://github.com/openatv" position="1238,673" size="570,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <eLabel text="https://github.com/oe-alliance" position="1238,748" size="570,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_info_exit"/>
+  </screen>
+
+  <!-- Screen: Information -->
+  <screen position="0,0" size="1920,1080" name="Information" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Information" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="Image" position="195,103" size="0,0" conditional="Image"/>
+    <widget name="information" position="54,103" size="1812,825" font="Regular;32" splitPosition="690" foregroundColor="foreground" transparent="1" colors="accent,secondary,secondary,foreground,muted,red" alphatest="blend" scrollbarMode="showOnDemand"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_help_exit"/>
+  </screen>
+
+  <!-- Screen: Info -->
+  <screen name="Info" position="0,0" size="1920,1080" title="Info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="label2" position="38,20" foregroundColor="foreground" size="1410,60" valign="bottom" font="Regular;41" backgroundColor="backgroundtop" transparent="1" zPosition="2"/>
+    <widget name="label1" position="750,118" size="1125,795" font="Regular;24" zPosition="1" transparent="1" backgroundColor="surface" foregroundColor="foreground" scrollbarMode="showOnDemand"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: CCcamInfoMain -->
+  <screen position="0,0" size="1920,1080" name="CCcamInfoMain" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,773" name="menu" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoRemoteBoxMenu -->
+  <screen name="CCcamInfoRemoteBoxMenu" position="0,0" size="1920,1080" title="CCcam Remote Info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,765" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoSubMenu -->
+  <screen name="CCcamInfoSubMenu" position="0,0" size="1920,1080" title="CCcamInfo SubMenu" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget name="list" position="750,118" size="1125,720" enableWrapAround="1" itemHeight="90" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <widget name="info" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoServerMenu -->
+  <screen name="CCcamInfoServerMenu" position="0,0" size="1920,1080" title="CCcam Server Info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget name="list" position="750,118" size="1125,765" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <widget name="info" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoConfigMenu -->
+  <screen name="CCcamInfoConfigMenu" position="0,0" size="1920,1080" title="CCcam Info Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="750,118" size="1125,741" enableWrapAround="1" itemHeight="54" font="Regular;26" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" valueFont="Regular;26" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoShareInfo -->
+  <screen name="CCcamInfoShareInfo" position="0,0" size="1920,1080" title="CCcam Share Info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,720" enableWrapAround="1" itemHeight="90" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoConfigSwitcher -->
+  <screen name="CCcamInfoConfigSwitcher" position="0,0" size="1920,1080" title="CCcam Config Switcher" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,765" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoMenuConfig -->
+  <screen name="CCcamInfoMenuConfig" position="0,0" size="1920,1080" title="CCcam Info Config" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,765" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoEcmInfoSelection -->
+  <screen name="CCcamInfoEcmInfoSelection" position="0,0" size="1920,1080" title="CCcam ECM Info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,765" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamInfoInfoScreen -->
+  <screen position="0,0" size="1920,1080" name="CCcamInfoInfoScreen" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,773" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" scrollbarMode="showOnDemand" name="text"/>
+    
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: StreamingClientsInfo -->
+  <screen name="StreamingClientsInfo" position="0,0" size="1920,1080" title="Streaming clients info" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="ScrollLabel" position="750,118" size="1125,45" font="Regular;34" backgroundColor="surface" foregroundColor="foreground" transparent="0" zPosition="1"/>
+    <widget name="ScrollLabel2" position="750,193" size="1125,675" font="Regular;28" backgroundColor="surface" foregroundColor="foreground" transparent="0" zPosition="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: InformationCommit -->
+  <screen name="InformationCommit" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="description" position="105,853" size="1710,45" font="Regular;30" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="information" position="105,118" size="1710,788" conditional="information" font="Regular;26" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: InformationDebug -->
+  <screen name="InformationDebug" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="description" position="105,853" size="1710,45" font="Regular;30" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="information" position="105,118" size="1710,788" conditional="information" font="Regular;26" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: InformationDistribution -->
+  <screen name="InformationDistribution" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel text="OPEN SOURCE" position="1238,133" size="570,90" font="Regular;75" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <eLabel text="https://github.com/openatv" position="1238,673" size="570,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <eLabel text="https://github.com/oe-alliance" position="1238,748" size="570,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" halign="center" transparent="0" zPosition="1"/>
+    <widget name="description" position="1215,553" size="623,330" font="Regular;30" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="information" position="750,118" size="1125,720" colPosition="280" conditional="information" divideChar="|" font="Regular;26" leftColAlign="left" rightColAlign="left" split="1" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: InformationPicture -->
+  <screen position="0,0" size="1920,1080" name="InformationPicture" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Picture Information" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="Image" position="248,103" size="0,0" conditional="Image"/>
+    <widget name="name" position="248,103" size="1424,37" font="Regular;30" halign="center" transparent="1" valign="center" foregroundColor="foreground"/>
+    <widget name="picture" position="248,156" size="1424,712" alphatest="blend" scaleFlags="scaleCenter" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- Screen: InformationSystem -->
+  <screen name="InformationSystem" position="0,0" size="1920,1080" title="About" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="description" position="105,853" size="1710,45" font="Regular;30" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="information" position="105,118" size="1710,788" conditional="information" font="Regular;26" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: ERWEITERUNGEN UND PLUGIN-VERWALTUNG -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: PluginBrowser -->
+  <screen position="0,0" size="1920,1080" name="PluginBrowser" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,752" source="pluginList" render="Listbox" conditional="pluginList" listOrientation="vertical" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+          <template name="Default" fonts="Regular;29,Regular;23" itemHeight="94">
+            <pixmap position="15,10" size="150,73" index="3" alpha="blend" scale="centerScaled"/>
+            <text position="198,8" size="900,41" index="1" font="0" verticalAlignment="center" wrap="ellipsis"/>
+            <text position="198,50" size="900,35" index="2" font="1" foregroundColor="secondary" wrap="ellipsis"/>
+          </template>
+        </widget>
+        <widget position="750,118" size="1125,756" source="pluginGrid" render="Listbox" conditional="pluginGrid" listOrientation="grid" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+          <template name="Default" fonts="Regular;29,Regular;23" itemHeight="252" itemWidth="305">
+            <pixmap position="77,15" size="150,83" index="3" alpha="blend" scale="centerScaled"/>
+            <text position="15,106" size="275,137" index="1" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          </template>
+        </widget>
+        <widget position="750,878" size="1125,59" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="description"/>
+        <widget position="1042,320" size="540,226" font="Regular;135" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="5" name="quickselect"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginBrowserGrid -->
+  <screen position="0,0" size="1920,1080" name="PluginBrowserGrid" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date" />
+    <panel name="Fullscreen_left_Pic" />
+   <widget source="pluginGrid" render="Listbox" position="730,110" size="1160,900" itemSpacing="20,13" selectionZoom="8" scrollbarMode="showNever" listOrientation="grid" moveBackgroundColor="black" borderWidth="2" borderColor="black">
+	<convert type="TemplatedMultiContent">{
+		"template": [
+			MultiContentEntryLinearGradient(
+				pos=(0, 0),
+				size=(270, 165),
+				startColor="FullNightButtonLight",
+				midColor="FullNightButtonMiddle",
+				endColor="FullNightButtonLight",
+				startColorSelected="backgroundTop",
+				midColorSelected="selection",
+				endColorSelected="backgroundTop",
+				cornerRadius=12
+			),
+			MultiContentEntryText(
+				pos=(5, 95),
+				size=(260, 65),
+				font=0,
+				flags=RT_VALIGN_CENTER|RT_HALIGN_CENTER|RT_WRAP,
+				text=1,
+				color=0x00FFFFFF,
+				color_sel=0x00FFFFFF,
+				textBWidth=1,
+				textBColor=0x000000
+			),
+			MultiContentEntryPixmapAlphaBlend(
+				pos=(45, 15),
+				size=(180, 72),
+				png=3,
+				flags=BT_SCALE
+			)
+		],
+		"fonts": [gFont("Regular", 27), gFont("Regular", 21)],
+		"itemWidth": 270,
+		"itemHeight": 165
+	}</convert>
+</widget>
+    <widget position="30,530" size="680,120" font="Regular; 32" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="description" halign="center" />
+    <widget position="1042,320" size="540,226" font="Regular;135" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="5" name="quickselect" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+    <panel name="template_menu_ok_exit" />
+</screen>
+
+  <!-- Screen: PluginBrowserList -->
+  <screen position="0,0" size="1920,1080" name="PluginBrowserList" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,702" source="pluginList" render="Listbox" conditional="pluginList" listOrientation="vertical" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+          <template name="Default" fonts="Regular;29,Regular;23" itemHeight="94">
+            <pixmap position="15,10" size="150,73" index="3" alpha="blend" scale="centerScaled"/>
+            <text position="198,8" size="900,41" index="1" font="0" verticalAlignment="center" wrap="ellipsis"/>
+            <text position="198,50" size="900,35" index="2" font="1" foregroundColor="secondary" wrap="ellipsis"/>
+          </template>
+        </widget>
+        <widget position="750,118" size="1125,706" source="pluginGrid" render="Listbox" conditional="pluginGrid" listOrientation="grid" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+          <template name="Default" fonts="Regular;29,Regular;23" itemHeight="252" itemWidth="305">
+            <pixmap position="77,15" size="150,83" index="3" alpha="blend" scale="centerScaled"/>
+            <text position="15,106" size="275,137" index="1" font="0" horizontalAlignment="center" verticalAlignment="center" wrap="wrap"/>
+          </template>
+        </widget>
+        <widget position="750,878" size="1125,59" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="description"/>
+        <widget position="1042,320" size="540,226" font="Regular;135" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="5" name="quickselect"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginAction -->
+  <screen name="PluginAction" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget source="plugins" render="Listbox" position="750,118" size="1125,750" zPosition="4" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">
+				{
+				"template":
+					[
+					MultiContentEntryPixmapAlphaBlend(pos=(8,0), size=(90,75), png=6, flags=BT_SCALE),
+					MultiContentEntryText(pos=(105,0), size=(870,75), font=0, flags=RT_VALIGN_CENTER, text=2), # Category
+					MultiContentEntryText(pos=(105,0), size=(870,38), font=1, flags=RT_VALIGN_CENTER, text=11), # Name + Version
+					# MultiContentEntryText(pos=(105,2), size=(645,38), font=1, flags=RT_VALIGN_CENTER, text=3), Name
+					# MultiContentEntryText(pos=(720,2), size=(240,38), font=1, flags=RT_VALIGN_CENTER, text=5), Version
+					MultiContentEntryText(pos=(105,36), size=(840,32), font=2, flags=RT_VALIGN_CENTER, text=4, color=0x00b0b0b0), # Description
+					MultiContentEntryPixmapAlphaBlend(pos=(960,2), size=(72,72), png=7, flags=BT_SCALE)
+					],
+				"fonts": [gFont("Regular",35),gFont("Regular",27),gFont("Regular",24)],
+				"itemHeight": 75
+				}
+</convert>
+    </widget>
+    <widget name="description" position="53,553" size="626,345" font="Regular;30" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget source="global.CurrentTime" render="Label" position="85,494" size="570,45" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1">
+			</widget>
+    <widget name="quickselect" position="750,118" size="1125,750" backgroundColor="surface" foregroundColor="foreground" font="Regular;150" halign="center" transparent="1" valign="center" zPosition="5"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginActionLog -->
+  <screen name="PluginActionLog" position="0,0" size="1920,1080" title="Plugin Action Log" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="log" position="105,118" size="1710,788" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" transparent="1" conditional="log"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_ok_exit"/>
+  </screen>
+
+  <!-- Screen: PluginDownloadBrowser -->
+  <screen name="PluginDownloadBrowser" position="0,0" size="1920,1080" title="Downloadable plugins" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget name="list" position="750,118" size="1125,750" zPosition="4" itemHeight="75" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="text" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget source="global.CurrentTime" render="Label" position="85,494" size="570,45" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1" zPosition="10">
+			</widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginManager -->
+<screen name="PluginManager" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Plugin manager" resolution="1920,1080">
+  <panel name="Fullscreen_Template_Title_Date" />
+  <panel name="Fullscreen_left_Pic" />
+  <widget source="list" render="Listbox" position="750,118" size="1125,660" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+    <convert type="TemplatedMultiContent">{"templates": {"default": (90, [MultiContentEntryPixmapAlphaBlend(pos=(14,9), size=(56,72), png=5, flags=BT_SCALE), MultiContentEntryText(pos=(84,5), size=(996,46), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), MultiContentEntryText(pos=(84,47), size=(996,36), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2)]), "category": (90, [MultiContentEntryText(pos=(14,5), size=(1066,46), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), MultiContentEntryText(pos=(14,47), size=(1066,36), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1)])}, "fonts": [gFont("Regular",31), gFont("Regular",25)], "itemHeight": 90}</convert>
+  </widget>
+  <eLabel position="750,802" size="1125,111" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" />
+  <widget source="status" render="Label" position="770,814" size="1080,87" font="Regular;29" foregroundColor="foreground" halign="center" valign="center" transparent="1" />
+  <panel name="TemplateAllColorButtons_Automatic" />
+  <panel name="template_ok_exit" />
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginManagerInfo -->
+  <screen name="PluginManagerInfo" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Plugin manager activity" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="list" render="Listbox" position="750,118" size="1125,660" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">{"template": [MultiContentEntryPixmapAlphaBlend(pos=(14,9), size=(56,72), png=2, flags=BT_SCALE), MultiContentEntryText(pos=(84,5), size=(996,46), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), MultiContentEntryText(pos=(84,47), size=(996,36), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1)], "fonts": [gFont("Regular",31), gFont("Regular",25)], "itemHeight": 90}</convert>
+    </widget>
+     <eLabel position="750,802" size="1125,111" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" />
+  <widget source="status" render="Label" position="770,814" size="1080,87" font="Regular;29" foregroundColor="foreground" halign="center" valign="center" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginManagerHelp -->
+  <screen name="PluginManagerHelp" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Plugin manager help" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="list" render="Listbox" position="750,118" size="1125,660" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">{"template": [MultiContentEntryPixmapAlphaBlend(pos=(14,9), size=(56,72), png=2, flags=BT_SCALE), MultiContentEntryText(pos=(84,5), size=(996,46), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0), MultiContentEntryText(pos=(84,47), size=(996,36), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1)], "fonts": [gFont("Regular",31), gFont("Regular",25)], "itemHeight": 90}</convert>
+    </widget>
+     <eLabel position="750,802" size="1125,111" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" />
+  <widget source="status" render="Label" position="770,814" size="1080,87" font="Regular;29" foregroundColor="foreground" halign="center" valign="center" transparent="1" />
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PluginDetails -->
+  <screen name="PluginDetails" position="0,0" size="1920,1080" title="Plugin details" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="statuspic" position="750,148" size="72,72" alphatest="blend"/>
+    <widget source="author" render="Label" position="840,156" size="900,60" font="Regular;41" backgroundColor="surface" transparent="1"/>
+    <eLabel position="750,238" size="1125,3" backgroundColor="FullNightLineHorizontal"/>
+    <widget name="screenshot" position="750,283" size="480,345" zPosition="10" alphatest="blend"/>
+    <widget name="detailtext" position="1245,283" size="630,630" font="Regular;33" backgroundColor="surface" transparent="1"/>
+    <widget name="divpic" position="0,0" size="0,0"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: ExtensionsList -->
+  <screen position="240,180" size="1440,720" name="ExtensionsList" flags="wfNoBorder" backgroundColor="surface" ignoreWidgets="text" resolution="1920,1080">
+    <panel name="Dialog_1440_Template_Title_Date"/>
+    <widget position="36,100" size="1368,540" name="list" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: installedPlugins -->
+  <screen name="installedPlugins" position="center,center" size="1020,210" title="Install Plugins" flags="wfNoBorder" backgroundColor="surface">
+    <ePixmap name="InfoPixmap" pixmap="icons/info.png" position="12,12" size="80,80" alphatest="blend"/>
+    <!--eLabel name="line1" position="0,69" size="680,1" backgroundColor="layer-a-accent1" zPosition="1" /-->
+    <eLabel name="underline" position="0,102" size="1020,2" backgroundColor="FullNightLineHorizontal"/>
+    <widget name="label" position="8,120" size="1005,75" font="Regular;33" valign="center" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+  </screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: TIMER UND AUFNAHMEPLANUNG -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: RecordTimerQuestion -->
+  <screen name="RecordTimerQuestion" position="0,0" size="753,138" zPosition="99" flags="wfNoBorder" backgroundColor="surface">
+    <widget name="text" position="2,2" size="750,135" backgroundColor="surface" zPosition="-1" transparent="0"/>
+    <widget name="list" position="17,17" size="720,107" itemHeight="53" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <applet type="onLayoutFinish">
+from enigma import eSize
+listitems = self["list"]
+if len(listitems.list) &gt; 2:
+	ls = (listitems.instance.size().width(),listitems.instance.size().height())
+	ws = (self.instance.size().width(),self.instance.size().height())
+	if len(listitems.list) == 3:
+		lsize = (ls[0],int(ls[1]*1.5))
+		wsize = (ws[0],ws[1]+int(ls[1]*0.5))
+	if len(listitems.list) == 4:
+		lsize = (ls[0],ls[1]*2)
+		wsize = (ws[0],ws[1]+ls[1])
+	listitems.instance.resize(eSize(*lsize))
+	pos = self["text"].instance.position().x() * 2
+	wwsize = (wsize[0]-pos,wsize[1]-pos)
+	self["text"].instance.resize(eSize(*wwsize))
+	self["text"].setText("")
+	self.instance.resize(eSize(*wsize))
+		</applet>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TimerOverviewBase -->
+  <screen position="0,0" size="1920,1080" name="TimerOverviewBase" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="750,118" size="1125,773" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+      <widget position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_info_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TimerSelection -->
+  <screen position="0,0" size="1920,1080" name="TimerSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="750,118" size="1125,773" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+      <widget position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_info_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: RecordTimerOverview -->
+  <screen position="0,0" size="1920,1080" name="RecordTimerOverview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="750,118" size="1125,773" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+      <widget position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: ConflictTimerOverview -->
+  <screen position="0,0" size="1920,1080" name="ConflictTimerOverview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="750,118" size="1125,773" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+      <widget position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TimerLog -->
+  <screen position="0,0" size="1920,1080" name="TimerLog" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Timer Log" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="log" position="248,103" size="1424,810" font="Regular;30" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_ok_exit"/>
+  </screen>
+
+  <!-- Screen: TimerEditList -->
+  <screen position="0,0" size="1920,1080" name="TimerEditList" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="750,118" size="1125,773" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+      <widget position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CronTimers -->
+  <screen position="0,0" size="1920,1080" name="CronTimers" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,193" size="1125,660" source="list" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <template name="Default" fonts="Regular;29" itemHeight="57">
+        <text position="21,5" size="1080,47" index="0" font="0" verticalAlignment="center" wrap="ellipsis"/>
+      </template>
+    </widget>
+    <widget position="750,103" size="165,60" font="Regular;30" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="lab1"/>
+    <widget position="930,103" size="225,60" font="Regular;30" foregroundColor="green" transparent="1" alphatest="blend" valign="center" name="labactive"/>
+    <widget position="930,103" size="225,60" font="Regular;30" foregroundColor="muted" transparent="1" alphatest="blend" valign="center" name="labdisabled"/>
+    <widget position="1200,103" size="210,60" font="Regular;30" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="lab2"/>
+    <widget position="1430,103" size="420,60" font="Regular;30" foregroundColor="muted" transparent="1" alphatest="blend" valign="center" name="labstop"/>
+    <widget position="1430,103" size="420,60" font="Regular;30" foregroundColor="green" transparent="1" alphatest="blend" valign="center" name="labrun"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget position="53,553" size="626,345" font="Regular;29" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" halign="center" name="key"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+    <eLabel position="0,1012" size="1920,68" backgroundColor="backgroundtop" zPosition="-1"/>
+    <eLabel position="0,1012" size="1920,3" backgroundColor="FullNightLineHorizontal" zPosition="1"/>
+    <widget position="1575,1028" size="315,39" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="left" noWrap="1" conditional="key_blue" name="key_blue"/>
+    <ePixmap position="1530,1030" size="36,36" pixmap="buttons/key_blue.png" alphatest="blend" transparent="1"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: SchedulerOverview -->
+  <screen position="0,0" size="1920,1080" name="SchedulerOverview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="36,103" size="1215,810" name="timerlist" itemHeight="90" topHeight="42" bottomHeight="36" timerNameFont="Regular;29" statusFont="Regular;23" detailFont="Regular;24" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="Fullscreen_right_Pic_EMC"/>
+      <widget position="1296,457" size="570,474" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="description" name="description"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.timer_preview import install
+  install(self)</applet>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_info_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: SOFTCAMS UND CA-INFORMATIONEN -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: SoftcamPanel -->
+  <screen name="SoftcamPanel" position="0,0" size="1920,1080" title="Softcam Panel" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="750,283" size="1125,3" backgroundColor="accent"/>
+    <eLabel position="750,394" size="1125,3" backgroundColor="accent"/>
+    <widget name="config" position="750,118" size="1125,180" enableWrapAround="1" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="actifcam" font="Regular;30" position="750,319" size="562,48" halign="center"/>
+    <widget name="actifcam2" font="Regular;30" position="1313,319" size="562,48" halign="center"/>
+    <widget name="ecminfo" font="Regular;30" position="750,463" size="1125,450"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MMIDialog -->
+  <screen name="MMIDialog" position="0,0" size="1920,1080" title="Common Interface" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Date"/>
+    <widget name="subtitle" position="38,20" foregroundColor="foreground" size="1410,60" valign="bottom" font="Regular;41" backgroundColor="backgroundtop" transparent="1" zPosition="2"/>
+    <widget name="title" position="105,118" size="1050,48" font="Regular;36" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <eLabel position="105,201" size="1050,3" backgroundColor="accent"/>
+    <widget name="entries" position="105,216" size="1050,630" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <eLabel position="105,853" size="1050,3" backgroundColor="accent"/>
+    <widget name="bottom" position="105,864" size="1050,48" font="Regular;36" halign="center" backgroundColor="surface" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+	<panel name="Fullscreen_right_Pic" />
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CAidSelect -->
+  <screen name="CAidSelect" position="0,0" size="1920,1080" title="select CAId's" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,630" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget source="introduction" render="Label" position="105,861" size="1050,48" font="Regular;36" halign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CCcamShareViewMenu -->
+  <screen name="CCcamShareViewMenu" position="0,0" size="1920,1080" title="CCcam Share Menu" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="list" position="36,103" size="1215,630" enableWrapAround="1" itemHeight="90" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="1" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="uphops" font="Regular;30" position="36,748" size="1215,45" backgroundColor="surface" foregroundColor="foreground" zPosition="1" transparent="1"/>
+    <widget name="cards" font="Regular;30" position="36,793" size="1215,45" backgroundColor="surface" foregroundColor="foreground" zPosition="1" transparent="1"/>
+    <widget name="providers" font="Regular;30" position="36,838" size="1215,45" backgroundColor="surface" foregroundColor="foreground" zPosition="1" transparent="1"/>
+    <widget name="reshare" font="Regular;30" position="36,883" size="1215,45" backgroundColor="surface" foregroundColor="foreground" zPosition="1" transparent="1"/>
+    <widget name="title" position="1296,576" size="588,284" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+	<panel name="Fullscreen_right_Pic" />
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: AUFGABEN, PROTOKOLLE UND FORTSCHRITT -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: JobView -->
+  <screen name="JobView" position="0,0" size="1920,1080" title="JobView" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="435,208" zPosition="-10" size="1050,600" backgroundColor="surface"/>
+    <eLabel position="434,207" zPosition="-11" size="1053,603" backgroundColor="surface"/>
+    <eLabel text="Job View" position="465,219" size="990,75" halign="center" valign="bottom" font="Bold;51" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <eLabel name="underline" position="435,306" size="1050,2" backgroundColor="FullNightLineHorizontal"/>
+    <widget source="job_name" render="Label" position="465,328" size="990,135" font="Regular;33" halign="center" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget source="job_task" render="Label" position="465,468" size="990,45" font="Regular;27" backgroundColor="surface" foregroundColor="accent" transparent="1"/>
+    <widget source="job_progress" render="PLiFullNightProgress" position="465,508" size="990,45" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="6"/>
+    <widget source="job_progress" render="Label" position="465,508" size="990,45" font="Regular;33" foregroundColor="foreground" backgroundColor="accent" zPosition="2" valign="center" halign="center" transparent="1">
+      <convert type="ProgressToText"/>
+    </widget>
+    <widget source="job_status" render="Label" position="465,553" size="990,45" font="Regular;27" backgroundColor="surface" foregroundColor="accent" transparent="1"/>
+    <widget name="config" position="465,643" size="990,45" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget source="cancelable" render="Pixmap" pixmap="buttons/key_red.png" position="428,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="finished" render="Pixmap" pixmap="buttons/key_green.png" position="702,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="backgroundable" render="Pixmap" pixmap="buttons/key_blue.png" position="977,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="cancelable" render="FixedLabel" text="Cancel" position="480,753" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="finished" render="FixedLabel" text="OK" position="755,753" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="backgroundable" render="FixedLabel" text="Continue in background" position="1029,753" size="330,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: Console -->
+  <screen position="0,0" size="1920,1080" name="Console" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,773" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" scrollbarMode="showOnDemand" name="text" colors="accent,foreground,secondary,foreground"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: Processing -->
+<screen position="420,465" size="1080,150" name="Processing" flags="wfNoBorder" backgroundColor="surface" zPosition="99" resolution="1920,1080">
+  <widget position="30,15" size="1020,28" name="progress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="4" />
+  <widget position="30,60" size="1020,74" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" name="description" />
+</screen>
+
+  <!-- Screen: TaskView -->
+  <screen name="TaskView" position="0,0" size="1920,1080" title="TaskView" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="435,208" zPosition="-10" size="1050,600" backgroundColor="surface"/>
+    <eLabel position="434,207" zPosition="-11" size="1053,603" backgroundColor="surface"/>
+    <eLabel text="TaskView" position="465,219" size="990,75" halign="center" valign="bottom" font="Bold;51" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <eLabel name="underline" position="435,306" size="1050,2" backgroundColor="FullNightLineHorizontal"/>
+    <widget source="name" render="Label" position="465,328" size="990,135" font="Regular;33" halign="center" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget source="task" render="Label" position="465,463" size="990,45" font="Regular;27" backgroundColor="surface" foregroundColor="accent" transparent="1"/>
+    <widget source="progress" render="PLiFullNightProgress" position="465,508" size="990,45" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="6"/>
+    <widget source="progress" render="Label" position="465,508" size="990,45" font="Regular;33" foregroundColor="foreground" backgroundColor="accent" zPosition="2" valign="center" halign="center" transparent="1">
+      <convert type="ProgressToText"/>
+    </widget>
+    <widget source="status" render="Label" position="465,561" size="990,45" font="Regular;27" backgroundColor="surface" foregroundColor="accent" transparent="1"/>
+    <widget name="config" position="465,643" size="990,45" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget source="key_red" conditional="key_red" render="Pixmap" pixmap="buttons/key_red.png" position="428,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_red" conditional="key_red" render="Label" position="480,753" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_green" conditional="key_green" render="Pixmap" pixmap="buttons/key_green.png" position="702,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_green" conditional="key_green" render="Label" position="755,753" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_yellow" conditional="key_yellow" render="Pixmap" pixmap="buttons/key_yellow.png" position="977,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_yellow" conditional="key_yellow" render="Label" position="1029,753" size="330,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_blue" conditional="key_blue" render="Pixmap" pixmap="buttons/key_blue.png" position="1202,748" size="45,60" alphatest="blend">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_blue" conditional="key_blue" render="Label" position="1254,753" size="330,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1">
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: LogManager -->
+  <screen name="LogManager" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget source="Title" render="Label" position="750,118" size="1125,45" noWrap="0" font="Regular;36" transparent="1" foregroundColor="foreground" backgroundColor="surface"/>
+    <widget name="list" position="750,193" size="1125,675" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="LogsSize" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: LogManagerViewLog -->
+<screen name="LogManagerViewLog" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+  <panel name="Fullscreen_Template_Title_Date" />
+  <widget source="Title" render="Label" position="105,118" size="1050,45" noWrap="0" font="Regular;36" transparent="1" foregroundColor="foreground" backgroundColor="surface" />
+  <widget name="list" position="105,193" size="1710,720" itemHeight="54" font="Regular;24" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black" />
+  
+  
+    
+  
+   <panel name="TemplateAllColorButtons_Automatic" />
+  <panel name="template_ok_exit" />
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: LogManagerFb -->
+  <screen name="LogManagerFb" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="Title" render="Label" position="750,118" size="1125,45" noWrap="0" font="Regular;36" transparent="1" foregroundColor="foreground" backgroundColor="surface"/>
+    <widget name="list" position="750,193" size="1125,675" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+       <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TaskListScreen -->
+  <screen name="TaskListScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Task list" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="tasklist" render="Listbox" position="750,118" size="1125,773" itemHeight="135" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">{'template': [MultiContentEntryText(pos=(7, 2), size=(958, 90), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=1), MultiContentEntryText(pos=(7, 92), size=(208, 44), font=1, flags=RT_HALIGN_CENTER, text=2), MultiContentEntryProgress(pos=(222, 105), size=(556, 15), percent=-3, borderWidth=1, borderColor=0x00414750, borderColorSelected=0x00414750, backColor=0x0023262c, backColorSelected=0x0023262c, startColor=0x00002e5c, midColor=0x000054a8, endColor=0x001b6fc0, startColorSelected=0x00002e5c, midColorSelected=0x000054a8, endColorSelected=0x001b6fc0, cornerRadius=6), MultiContentEntryText(pos=(798, 92), size=(167, 44), font=1, flags=RT_HALIGN_CENTER, text=4)], 'fonts': [gFont('Regular', 28), gFont('Regular', 30)], 'itemHeight': 135}</convert>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: DIALOGE, EINGABE UND TASTATUR -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: ChoiceBoxBase -->
+  <screen position="0,0" size="1920,1080" name="ChoiceBoxBase" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/><panel name="Fullscreen_left_Pic"/><eLabel position="735,100" size="3,879" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget name="text" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" valign="center" transparent="1"/>
+    <widget name="list" position="795,193" size="1080,750" itemHeight="54" font="Regular;30" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: ChoiceBox -->
+  <screen position="0,0" size="1920,1080" name="ChoiceBox" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/><panel name="Fullscreen_left_Pic"/><eLabel position="735,100" size="3,879" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget name="text" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" valign="center" transparent="1"/>
+    <widget name="list" position="795,193" size="1080,750" itemHeight="54" font="Regular;30" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="2" borderColor="black"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MinuteInput -->
+  <screen name="MinuteInput" position="center,center" size="375,90" title="Input" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel name="b" position="0,0" size="375,90" backgroundColor="surface" zPosition="-10"/>
+    <eLabel name="a" position="2,2" size="372,87" backgroundColor="surface" zPosition="-9"/>
+    <eLabel text="Minutes:" position="38,15" size="165,60" font="Regular;42" valign="center" backgroundColor="surface" foregroundColor="accent"/>
+    <widget name="minutes" position="188,15" size="150,60" halign="right" valign="center" font="Regular;42" backgroundColor="surface" foregroundColor="foreground"/>
+  </screen>
+
+  <!-- Screen: MessageBox -->
+  <screen position="330,180" size="1260,720" name="MessageBox" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="FullNightMessageBoxContent"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.message_layout import fit
+fit(self)</applet>
+  </screen>
+
+  <!-- Screen: MessageBoxExt -->
+  <screen position="330,180" size="1260,720" name="MessageBoxExt" flags="wfNoBorder" backgroundColor="FullNightScreen" zPosition="10" resolution="1920,1080">
+    <panel name="FullNightMessageBoxContent"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.message_layout import fit
+fit(self)</applet>
+  </screen>
+
+  <!-- Screen: MessageBoxSimple -->
+  <screen position="330,180" size="1260,720" name="MessageBoxSimple" flags="wfNoBorder" backgroundColor="FullNightScreen" zPosition="10" resolution="1920,1080">
+    <panel name="FullNightMessageBoxContent"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.message_layout import fit
+fit(self)</applet>
+  </screen>
+
+
+<!-- Screen: VirtualKeyBoard -->
+<screen name="VirtualKeyBoard" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date" />
+    <panel name="template_text_info_exit" />
+    <widget name="prompt" position="54,103" size="1812,102" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" />
+<!-- Äußerer Rahmen in der aktuellen Auswahlfarbe  -->
+<eLabel position="36,224" size="1848,90" backgroundColor="selection" cornerRadius="20" zPosition="1" />
+<!-- graue Innenfläche -->
+<eLabel position="39,227" size="1842,84" backgroundColor="grey" cornerRadius="17" zPosition="2" />
+<!-- Eingabetext -->
+<widget name="text" position="60,226" size="1800,86" font="Regular;42" foregroundColor="black" backgroundColor="transparent" transparent="1" padding="18,0" valign="center" zPosition="3" />
+    <widget name="mode" position="54,334" size="450,48" font="Regular;28" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" />
+    <widget name="locale" position="525,334" size="1341,48" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" halign="right" />
+    <widget name="list" position="center,424" size="1600,450" backgroundColor="background" foregroundColor="foreground" selection="0" scrollbarMode="showNever" />
+    <widget name="language" position="54,933" size="1812,45" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+</screen>
+
+<!-- Screen: VirtualKeyboard -->
+<screen name="VirtualKeyboard" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date" />
+    <panel name="template_text_info_exit" />
+    <widget name="prompt" position="54,103" size="1812,102" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" />
+<!-- Äußerer Rahmen in der aktuellen Auswahlfarbe  -->
+<eLabel position="36,224" size="1848,90" backgroundColor="selection" cornerRadius="20" zPosition="1" />
+<!-- graue Innenfläche -->
+<eLabel position="39,227" size="1842,84" backgroundColor="grey" cornerRadius="17" zPosition="2" />
+<!-- Eingabetext -->
+<widget name="text" position="60,226" size="1800,86" font="Regular;42" foregroundColor="black" backgroundColor="transparent" transparent="1" padding="18,0" valign="center" zPosition="3" />
+    <widget name="mode" position="54,334" size="450,48" font="Regular;28" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" />
+    <widget name="locale" position="525,334" size="1341,48" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" halign="right" />
+    <widget name="list" position="center,424" size="1600,450" backgroundColor="background" foregroundColor="foreground" selection="0" scrollbarMode="showNever" />
+    <widget name="language" position="54,933" size="1812,45" font="Regular;28" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" />
+    <panel name="TemplateAllColorButtons_Automatic" />
+</screen>
+
+  <!-- Screen: PinInput -->
+  <screen position="240,240" size="1440,600" name="PinInput" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Dialog_1440_Template_Title_Date"/>
+    <widget position="36,100" size="1368,150" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="text"/>
+        <widget position="36,278" size="1368,78" font="Regular;39" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" backgroundColor="surface" padding="18,0" name="input"/>
+        <widget position="36,390" size="1368,60" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="service"/>
+        <widget position="36,475" size="1368,51" font="Regular;30" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="tries"/>
+  </screen>
+
+  <!-- Screen: PinInputPopup -->
+  <screen position="240,240" size="1440,600" name="PinInputPopup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Dialog_1440_Template_Title_Date"/>
+    <widget position="36,100" size="1368,150" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="text"/>
+        <widget position="36,278" size="1368,78" font="Regular;39" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" backgroundColor="surface" padding="18,0" name="input"/>
+        <widget position="36,390" size="1368,60" font="Regular;30" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="service"/>
+        <widget position="36,475" size="1368,51" font="Regular;30" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="tries"/>
+  </screen>
+
+  <!-- Screen: InputBox -->
+  <screen position="240,240" size="1440,600" name="InputBox" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Dialog_1440_Template_Title_Date"/>
+    <widget position="36,100" size="1368,150" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="text"/>
+    <widget position="36,278" size="1368,78" font="Regular;39" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" backgroundColor="surface" padding="18,0" name="input"/>
+  </screen>
+
+  <!-- Screen: MessageBoxModal -->
+  <screen position="330,180" size="1260,720" name="MessageBoxModal" flags="wfNoBorder,wfModalFull" backgroundColor="FullNightScreen" zPosition="99" resolution="1920,1080">
+    <panel name="FullNightMessageBoxContent"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.message_layout import fit
+fit(self)</applet>
+  </screen>
+
+  <!-- Screen: PinInputExt -->
+  <screen name="PinInputExt" position="center,center" size="900,450" title="PIN code needed" flags="wfNoBorder" zPosition="1" backgroundColor="transparent">
+    <eLabel name="b" position="0,0" size="900,450" backgroundColor="surface" zPosition="-10"/>
+    <eLabel name="a" position="2,2" size="897,447" backgroundColor="surface" zPosition="-9"/>
+    <eLabel name="underline" position="2,105" size="897,2" backgroundColor="FullNightLineHorizontal"/>
+    <!--eLabel name="line1" position="20,69" size="560,1" backgroundColor="layer-a-accent1" zPosition="1" /-->
+    <widget name="text" position="15,113" size="870,105" font="Regular;33" valign="bottom" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+    <widget name="service" position="15,228" size="870,60" font="Regular;45" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+    <widget name="tries" position="30,293" size="840,60" font="Regular;33" valign="center" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+    <widget name="input" position="30,368" size="840,60" font="Regular;45" valign="center" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+  </screen>
+
+  <!-- Screen: TimeInput -->
+  <screen name="TimeInput" position="390,315" size="1140,450" title="Time Input" backgroundColor="transparent" flags="wfNoBorder,wfModal" resolution="1920,1080">
+    <eLabel position="0,0" size="1140,450" backgroundColor="surface" cornerRadius="12" zPosition="-2"/>
+    <widget position="36,24" size="1068,60" font="Regular;38" foregroundColor="accent" transparent="1" valign="center" source="Title" render="Label"/>
+  <eLabel position="36,363" size="510,5" backgroundColor="red" zPosition="-1"/>
+    <eLabel position="594,363" size="510,5" backgroundColor="green" zPosition="-1"/>
+    <widget name="config" position="36,117" size="1068,165" itemHeight="55" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;28" font="Regular;29" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="canceltext" position="36,372" size="510,51" zPosition="2" valign="center" font="Regular;32" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="oktext" position="594,372" size="510,51" zPosition="2" valign="center" font="Regular;32" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+    <widget name="cancel" position="0,0" size="0,0"/>
+    <widget name="ok" position="0,0" size="0,0"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: OSD-, ZAP-, PIP- UND WIEDERGABEEINBLENDUNGEN -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: Volume -->
+  <screen position="36,228" size="93,441" name="Volume" flags="wfNoBorder,wfModal" backgroundColor="transparent" zPosition="20" resolution="1920,1080">
+    <eLabel position="0,0" size="93,441" backgroundColor="overlay" cornerRadius="12" zPosition="-1"/>
+    <eLabel position="21,22" size="51,52" text="" font="enigma2icons;45" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <widget position="36,96" size="21,256" name="Volume" orientation="orBottomToTop" foregroundColor="muted,accent,vertical" backgroundColor="selection" borderWidth="0" cornerRadius="10"/>
+    <widget position="8,370" size="78,48" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" name="VolumeText"/>
+  </screen>
+
+  <!-- Screen: Mute -->
+  <screen position="36,228" size="93,93" name="Mute" flags="wfNoBorder,wfModal" backgroundColor="transparent" zPosition="20" resolution="1920,1080">
+    <eLabel position="0,0" size="93,93" backgroundColor="overlay" cornerRadius="12" zPosition="-1"/>
+    <eLabel position="15,15" size="63,63" text="" font="enigma2icons;57" foregroundColor="foreground" transparent="1" halign="center" valign="center"/>
+  </screen>
+
+  <!-- Screen: NumberZap -->
+  <screen name="NumberZap" position="center,center" size="390,120" title="QuickZap" flags="wfNoBorder" backgroundColor="transparent">
+    <eLabel name="a" position="8,8" size="225,105" backgroundColor="surface" zPosition="-10"/>
+    <eLabel name="b" position="233,15" size="150,90" backgroundColor="surface" zPosition="-10"/>
+    <widget name="channel" position="8,30" size="225,60" font="Regular;45" halign="center" valign="bottom" backgroundColor="surface" foregroundColor="accent" conditional="channel"/>
+    <widget name="serviceLabel" position="8,30" size="225,60" font="Regular;45" halign="center" valign="bottom" backgroundColor="surface" foregroundColor="accent" conditional="serviceLabel"/>
+    <widget name="number" position="233,39" size="150,60" halign="center" valign="bottom" font="Regular;60" backgroundColor="surface" foregroundColor="foreground" conditional="number"/>
+    <widget name="serviceNumber" position="233,39" size="150,60" halign="center" valign="bottom" font="Regular;60" backgroundColor="surface" foregroundColor="foreground" conditional="serviceNumber"/>
+  </screen>
+
+  <!-- Screen: Seekbar -->
+  <screen name="Seekbar" position="530,357" zPosition="2" size="861,345" backgroundColor="transparent" flags="wfNoBorder">
+    <widget name="cursor" position="0,0" size="24,345" pixmap="window/progress.png" alphatest="blend" zPosition="6"/>
+    <widget name="time" position="0,60" size="861,180" backgroundColor="surface" foregroundColor="foreground" font="Regular;120" halign="center" transparent="1" valign="center"/>
+    <widget source="session.CurrentService" render="Label" position="48,264" size="120,41" font="Regular;30" halign="right" valign="bottom" foregroundColor="foreground" backgroundColor="surface">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="693,264" size="120,41" font="Regular;30" halign="left" valign="bottom" foregroundColor="foreground" backgroundColor="surface">
+      <convert type="ServicePosition">Length</convert>
+    </widget>
+    <widget source="session.CurrentService" render="PLiFullNightProgress" position="228,281" size="405,8" zPosition="5" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="4">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <eLabel name="new eLabel" position="0,240" size="861,89" zPosition="-1" backgroundColor="surface"/>
+    <eLabel name="new eLabel" position="0,240" size="30,89" zPosition="7" backgroundColor="surface"/>
+  </screen>
+
+  <!-- Screen: TimeshiftState -->
+  <screen position="240,564" size="1440,189" name="TimeshiftState" flags="wfNoBorder" backgroundColor="overlay" zPosition="5" resolution="1920,1080">
+    <widget position="36,27" size="60,60" name="statusicon" alphatest="blend" scale="1" pixmaps="icons/play.png,icons/pause.png,icons/stop.png,icons/forward.png,icons/backward.png,icons/slow.png,icons/blank.png"/>
+        <widget position="117,27" size="189,60" font="Regular;38" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" noWrap="1" name="speed"/>
+        <widget position="0,0" size="0,0" font="Regular;2" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="state"/>
+    <widget position="336,21" size="1068,72" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="eventname"/>
+    <widget position="36,141" size="1044,9" name="PTSSeekBack" backgroundColor="selection"/>
+    <widget position="36,141" size="1044,9" source="session.CurrentService" render="PLiFullNightProgress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="4">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <widget position="48,129" size="6,33" name="PTSSeekPointer" borderColor="foreground" borderWidth="3" zPosition="3"/>
+    <widget position="1128,120" size="276,51" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.CurrentService" render="Label">
+      <convert type="ServicePosition">Remaining</convert>
+    </widget>
+  </screen>
+
+  <!-- Screen: HistoryZapSelector -->
+<screen position="0,0" size="1920,1080" name="HistoryZapSelector" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+  <panel name="Fullscreen_Template_Title_Date" />
+  <widget position="750,110" size="1125,840" source="menu" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+  <template name="Default" fonts="Regular;32,Regular;30,Regular;24" itemHeight="140">
+    <pixmap position="18,21" size="144,83" index="6" alpha="blend" scale="centerScaled" />
+    <text position="171,8" size="30,39" index="1" font="0" foregroundColor="accent" />
+    <text position="213,8" size="900,39" index="2" font="0" wrap="ellipsis" />
+    <text position="650,8" size="468,39" index="5" font="2" wrap="ellipsis" horizontalAlignment="right" />
+    <text position="213,48" size="900,88" index="3" font="1" wrap="ellipsis" />
+    <text position="213,91" size="900,36" index="4" font="1" wrap="ellipsis" foregroundColor="secondary" />
+  </template>
+</widget>
+  <panel name="TemplateAllColorButtons_Automatic" />
+<panel name="Fullscreen_left_Pic" />
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PictureInPictureZapping -->
+  <screen name="PictureInPictureZapping" flags="wfNoBorder" position="60,60" size="503,107" title="PiPZap" zPosition="100">
+    <eLabel position="2,2" size="500,104" backgroundColor="surface" zPosition="-1" transparent="0"/>
+    <eLabel position="0,0" size="503,107" backgroundColor="surface" zPosition="-2" transparent="0"/>
+    <eLabel text="PiP-Zap" position="2,2" zPosition="2" size="500,89" backgroundColor="surface" foregroundColor="foreground" font="Regular;60" halign="center" valign="bottom"/>
+  </screen>
+
+  <!-- Screen: NumberZapPicon -->
+  <screen name="NumberZapPicon" position="0,945" size="1920,135" title="QuickZap" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="serviceLabel" position="0,0" size="0,0" font="Regular;45" halign="center" valign="bottom" backgroundColor="surface" foregroundColor="accent" conditional="serviceLabel"/>
+    <eLabel name="a" position="0,0" size="1920,135" backgroundColor="surface" zPosition="-10"/>
+    <widget name="number" position="300,0" size="300,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="number"/>
+    <widget name="serviceNumber" position="300,0" size="300,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="serviceNumber"/>
+    <widget alphatest="blend" position="51,8" render="Picon" size="198,119" source="Service" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget name="servicename" position="600,0" size="1320,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="servicename"/>
+    <widget name="serviceName" position="600,0" size="1320,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="serviceName"/>
+  </screen>
+
+  <!-- Screen: NumberZapName -->
+  <screen name="NumberZapName" position="300,32" size="1575,1245" title="QuickZap" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="serviceLabel" position="0,0" size="0,0" font="Regular;45" halign="center" valign="bottom" backgroundColor="surface" foregroundColor="accent" conditional="serviceLabel"/>
+    <widget name="servicenumber" position="485,425" size="581,258" font="Regular;150" noWrap="0" halign="right" backgroundColor="surface" transparent="1" valign="center" foregroundColor="accent" zPosition="-1" conditional="servicenumber"/>
+    <widget name="serviceNumber" position="485,425" size="581,258" font="Regular;150" noWrap="0" halign="right" backgroundColor="surface" transparent="1" valign="center" foregroundColor="accent" zPosition="-1" conditional="serviceNumber"/>
+    <widget name="servicename" position="279,401" size="750,120" font="Regular;75" halign="left" backgroundColor="surface" transparent="1" conditional="servicename"/>
+    <widget name="serviceName" position="279,401" size="750,120" font="Regular;75" halign="left" backgroundColor="surface" transparent="1" conditional="serviceName"/>
+    <!--<widget name="servicebouquet" position="185,358" size="396,53" font="screen_info;28" halign="left" backgroundColor="layer-a-background" transparent="1" />-->
+    <eLabel position="242,366" size="825,272" backgroundColor="surface" zPosition="-5"/>
+  </screen>
+
+  <!-- Screen: NumberZapNamePicon -->
+  <screen name="NumberZapNamePicon" position="0,945" size="1920,135" title="QuickZap" flags="wfNoBorder" backgroundColor="transparent">
+    <widget name="serviceLabel" position="0,0" size="0,0" font="Regular;45" halign="center" valign="bottom" backgroundColor="surface" foregroundColor="accent" conditional="serviceLabel"/>
+    <eLabel name="a" position="0,0" size="1920,135" backgroundColor="surface" zPosition="-10"/>
+    <widget name="serviceNumber" position="300,0" size="300,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="serviceNumber"/>
+    <widget alphatest="blend" position="51,8" render="Picon" size="198,119" source="Service" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget name="serviceName" position="600,0" size="1320,135" halign="center" valign="center" font="Regular;90" backgroundColor="surface" foregroundColor="foreground" conditional="serviceName"/>
+  </screen>
+
+  <!-- Screen: SeekBar -->
+  <screen name="SeekBar" position="center,10" size="800,50" flags="wfNoBorder" resolution="1280,720" backgroundColor="background">
+    <widget name="target" position="10,10" size="100,20" font="Regular;20" horizontalAlignment="right" transparent="1" verticalAlignment="center"/>
+    <widget source="session.CurrentService" render="PositionGauge" position="120,10" size="e-240,20" foregroundColor="#000000CF" transparent="1">
+      <convert type="ServicePosition">Gauge</convert>
+    </widget>
+    <widget source="session.CurrentService" render="PLiFullNightProgress" position="120,18" size="e-240,4" zPosition="+1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="2">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <widget name="cursor" position="0,0" size="8,18" pixmap="sliders/position_arrow.png" alphatest="blend" zPosition="+2"/>
+    <widget name="length" position="e-110,10" size="100,20" font="Regular;20" transparent="1" verticalAlignment="center"/>
+  </screen>
+
+  <!-- Screen: Standby -->
+  <screen name="Standby" position="0,0" size="1920,1080" title="Standby" flags="wfNoBorder" backgroundColor="black" resolution="1920,1080"/>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: ALLGEMEINE LISTEN UND HILFSDIALOGE -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: NumericalTextInputHelpDialog -->
+  <screen name="NumericalTextInputHelpDialog" position="0,0" size="840,252" flags="wfNoBorder" backgroundColor="background" zPosition="20" resolution="1920,1080">
+    <!-- Zeile 1 -->
+    <widget name="key1" position="12,12" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key2" position="286,12" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key3" position="560,12" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <!-- Zeile 2 -->
+    <widget name="key4" position="12,72" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key5" position="286,72" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key6" position="560,72" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <!-- Zeile 3 -->
+    <widget name="key7" position="12,132" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key8" position="286,132" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key9" position="560,132" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <!-- Zeile 4 -->
+    <widget name="help1" position="12,192" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="key0" position="286,192" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+    <widget name="help2" position="560,192" size="266,50" font="Regular;24" foregroundColor="foreground" transparent="0" backgroundColor="FullNightKeyboardKey" valign="center" halign="center" />
+  </screen>
+
+  <!-- Screen: TextBox -->
+  <screen position="0,0" size="1920,1080" name="TextBox" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="54,103" size="1812,828" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" scrollbarMode="showOnDemand" name="text"/>
+  </screen>
+
+  <!-- Screen: FileBrowser -->
+  <screen name="FileBrowser" position="0,0" size="1920,1080" title="DVD File Browser" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="filelist" position="750,118" size="1125,720" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: Extension -->
+  <screen name="Extension" position="center,center" size="250,200" title="Extension" resolution="1280,720" backgroundColor="background">
+    <widget source="menu" render="Listbox" zPosition="1" transparent="1" position="0,0" size="250,200" scrollbarMode="showOnDemand">
+      <convert type="StringList"/>
+    </widget>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: XMLHelp -->
+  <screen position="0,0" size="1920,1080" name="XMLHelp" flags="wfNoBorder" backgroundColor="FullNightScreen" title="XML Help" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="heading" position="285,103" size="1350,37" font="Regular;30" transparent="1" verticalAlignment="center" foregroundColor="foreground"/>
+    <widget name="detailtext" position="285,156" size="1350,772" font="Regular;30" transparent="1" verticalAlignment="top" foregroundColor="foreground"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: WEITERE OPENATV-SYSTEMSCREENS -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: IpkgInstaller -->
+  <screen name="IpkgInstaller" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Local extension installer" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="30,546" size="683,375" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget name="list" position="750,118" size="1125,690" itemHeight="55" font="Regular;29" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+       <widget source="introduction" render="Label" position="53,553" size="626,345" font="Regular;31" foregroundColor="foreground" halign="center" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: IPKGSource -->
+  <screen name="IPKGSource" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" title="IPKG source" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="240,328" size="1440,240" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1"/>
+    <widget name="text" position="270,358" size="1380,180" font="Regular;33" foregroundColor="foreground" backgroundColor="FullNightPanel" halign="center" valign="center" transparent="1"/>
+  
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: uShareSelection -->
+  <screen name="uShareSelection" title="uShare Setup" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="checkList" position="750,118" size="1125,765" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+      <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: myProviderSelection -->
+  <screen name="myProviderSelection" position="0,0" size="1920,1080" title="Select provider to add..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="750,118" size="1125,675" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget source="introduction" render="Label" position="105,861" size="1050,48" font="Regular;36" halign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: SundtekControlCenter -->
+  <screen name="SundtekControlCenter" title="SundtekControlCenter" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="ok" position="36,703" zPosition="1" size="825,45" font="Regular;30" halign="left" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="infos" position="36,748" zPosition="1" size="825,45" font="Regular;30" halign="left" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="bouquets" position="36,793" zPosition="1" size="825,45" font="Regular;30" halign="left" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="netservers" position="36,838" zPosition="1" size="825,45" font="Regular;30" halign="left" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="config" position="750,118" size="1125,585" itemHeight="54" font="Regular;26" scrollbarMode="showOnDemand" zPosition="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" valueFont="Regular;26" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="btt_red" position="383,1028" size="330,39" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" transparent="1"/>
+    <widget name="btt_green" position="780,1028" size="330,39" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" transparent="1"/>
+    <widget name="btt_yellow" position="1178,1028" size="330,39" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" transparent="1"/>
+    <widget name="btt_blue" position="1575,1028" size="315,39" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_info_ok_exit"/>
+  <ePixmap position="338,1030" size="36,36" pixmap="buttons/key_red.png" alphatest="blend" transparent="1"/><ePixmap position="735,1030" size="36,36" pixmap="buttons/key_green.png" alphatest="blend" transparent="1"/><ePixmap position="1133,1030" size="36,36" pixmap="buttons/key_yellow.png" alphatest="blend" transparent="1"/><ePixmap position="1530,1030" size="36,36" pixmap="buttons/key_blue.png" alphatest="blend" transparent="1"/>    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TimeDateInput -->
+  <screen name="TimeDateInput" position="0,0" size="1920,1080" title="TimeDateInput" flags="wfNoBorder" backgroundColor="FullNightScreen" zPosition="1" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="750,118" size="1125,765" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: Opkg -->
+  <screen name="Opkg" position="0,0" size="1920,1080" title="Installing Software..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="activityslider" position="750,208" size="1125,30" borderColor="accent" foregroundColor="accent" borderWidth="3" transparent="1"/>
+    <widget name="package" position="750,388" size="1125,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="status" position="750,463" size="1125,45" font="Regular;30" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="slider" position="750,658" size="1125,30" borderColor="accent" foregroundColor="accent" borderWidth="3" transparent="1"/>
+    <widget name="log" position="750,163" size="1125,675" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" transparent="1" conditional="log"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+  <!-- Screen: RestartNetwork -->
+  <screen name="RestartNetwork" position="center,center" size="1020,210" title="Restart Network Adapter" flags="wfNoBorder" backgroundColor="surface">
+    <ePixmap name="InfoPixmap" pixmap="icons/info.png" position="12,12" size="80,80" alphatest="blend"/>
+    <!--eLabel name="line1" position="0,69" size="680,1" backgroundColor="layer-a-accent1" zPosition="1" /-->
+    <eLabel name="underline" position="0,102" size="1020,2" backgroundColor="FullNightLineHorizontal"/>
+    <widget name="label" position="8,120" size="1005,75" font="Regular;33" valign="center" halign="center" backgroundColor="surface" foregroundColor="foreground"/>
+  </screen>
+
+  <!-- Screen: TagEditor -->
+  <screen position="0,0" size="1920,1080" name="TagEditor" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Tag Editor" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="taglist" position="750,118" size="1125,472" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_help_exit"/>
+  </screen>
+
+  <!-- Screen: AutoVideoModeLabel -->
+  <screen name="AutoVideoModeLabel" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="transparent" resolution="1920,1080">
+    <widget name="content" position="center,60" size="540,53" font="Regular;30" halign="center" valign="center" backgroundColor="surface" foregroundColor="foreground" zPosition="1" noWrap="1"/>
+    <widget name="restxt" position="center,113" size="540,53" font="Regular;30" halign="center" valign="center" backgroundColor="surface" foregroundColor="foreground" zPosition="1" noWrap="1"/>
+  </screen>
+
+  <!-- Screen: RemoteControlCode -->
+  <screen name="RemoteControlCode" position="0,0" size="1920,1080" title="Position Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/><panel name="Fullscreen_left_Pic"/><panel name="setup_common"/>
+  <panel name="TemplateAllColorButtons_Automatic"/><panel name="template_ok_exit"/></screen>
+
+  <!-- Screen: HideVBILine -->
+  <screen name="HideVBILine" position="0,0" size="1920,3" backgroundColor="black" flags="wfNoBorder"/>
+
+  <!-- Screen: TempFanControl -->
+<screen name="TempFanControl" position="0,0" size="1920,1080" title="Fan Control" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+  <panel name="Fullscreen_Template_Title_Date" />
+ <panel name="Fullscreen_right_Pic" />
+  <widget name="config" position="105,118" size="1050,270" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black" />
+  <widget source="SensorTempText0" render="Label" position="105,418" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp0" render="Label" position="330,418" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText1" render="Label" position="105,463" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp1" render="Label" position="330,463" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText2" render="Label" position="105,508" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp2" render="Label" position="330,508" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText3" render="Label" position="105,553" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp3" render="Label" position="330,553" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText4" render="Label" position="105,598" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp4" render="Label" position="330,598" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText5" render="Label" position="105,643" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp5" render="Label" position="330,643" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText6" render="Label" position="105,688" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp6" render="Label" position="330,688" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorTempText7" render="Label" position="105,733" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorTemp7" render="Label" position="330,733" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText0" render="Label" position="705,418" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan0" render="Label" position="930,418" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText1" render="Label" position="705,463" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan1" render="Label" position="930,463" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText2" render="Label" position="705,508" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan2" render="Label" position="930,508" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText3" render="Label" position="705,553" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan3" render="Label" position="930,553" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText4" render="Label" position="705,598" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan4" render="Label" position="930,598" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText5" render="Label" position="705,643" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan5" render="Label" position="930,643" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText6" render="Label" position="705,688" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan6" render="Label" position="930,688" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="SensorFanText7" render="Label" position="705,733" zPosition="1" size="225,45" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1" />
+  <widget source="SensorFan7" render="Label" position="930,733" zPosition="1" size="225,45" font="Regular;30" halign="right" backgroundColor="surface" foregroundColor="foreground" transparent="1">
+    <convert type="SensorToText" />
+  </widget>
+  <widget source="red" render="Label" position="383,1029" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1" />
+  <widget source="green" render="Label" position="780,1029" size="255,45" zPosition="1" valign="center" font="Regular;30" halign="left" noWrap="1" foregroundColor="foreground" backgroundColor="surface" transparent="1" />
+  <panel name="TemplateAllColorButtons_Automatic" />
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: UnhandledKey -->
+  <screen position="924,21" size="72,72" name="UnhandledKey" flags="wfNoBorder,wfModal" backgroundColor="transparent" zPosition="20" resolution="1920,1080">
+    <widget position="0,0" size="0,0" name="UnhandledKeyPixmap"/>
+    <eLabel position="0,0" size="72,72" text="" font="enigma2icons;66" foregroundColor="foreground" transparent="1" halign="center" valign="center" shadowColor="#00000000" shadowOffset="2,2"/>
+  </screen>
+
+  <!-- Screen: btscan -->
+  <screen name="btscan">
+    <widget source="deviceList" render="Listbox" position="105,150" size="1050,720" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">
+				{"template":
+					[
+						MultiContentEntryText(pos=(120,0), size=(930,105), font=1, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER, text = 0), # index 0 is Name
+						MultiContentEntryPixmapAlphaTest(pos=(15,15), size=(75,75), png = 1, flags = BT_SCALE), # index 1 is bt_icon
+					],
+					"fonts": [gFont("Regular",60), gFont("Regular",36) ,gFont("Regular",30), gFont("Regular",24)],
+					"itemHeight": 90
+				}
+</convert>
+    </widget>
+    <widget source="description" render="Label" position="1215,615" size="623,285" font="Regular;30" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: InputPanelPassword -->
+  <screen name="InputPanelPassword" position="0,0" size="1920,1080" title="Change password for VTI Panel" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="title" render="Label" position="99,21" size="1401,57" valign="bottom" font="Regular;38" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+  <widget name="config" zPosition="2" position="750,118" size="1125,735" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;30" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: PanelPassword -->
+  <screen name="PanelPassword" position="0,0" size="1920,1080" title="Change password for VTI Panel" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="title" render="Label" position="99,21" size="1401,57" valign="bottom" font="Regular;38" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+  <widget name="config" zPosition="2" position="750,118" size="1125,735" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;30" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: QuitMainloopScreen -->
+  <screen name="QuitMainloopScreen" position="0,0" size="1920,1080" flags="wfNoBorder" backgroundColor="black" resolution="1920,1080">
+    <ePixmap pixmap="icons/info.png" position="c-27,c-60" size="80,80" alphatest="blend"/>
+    <widget name="text" position="center,c+10" size="1080,150" font="Regular;30" halign="center" backgroundColor="black" foregroundColor="white"/>
+  </screen>
+
+  <!-- Screen: ToastScreen -->
+  <screen position="0,0" size="1920,1080" name="ToastScreen" flags="wfNoBorder" backgroundColor="transparent" zPosition="101" resolution="1920,1080">
+    <widget position="0,0" size="60,60" name="border" backgroundColor="surface" widgetBorderColor="secondary" widgetBorderWidth="2" cornerRadius="12"/>
+    <widget position="0,0" size="60,60" font="enigma2icons;51" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" backgroundColor="surface" name="icon"/>
+    <widget position="0,0" size="1920,1080" font="Regular;34" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" backgroundColor="surface" name="text"/>
+  </screen>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: AUTOTIMER -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: AutoTimerOverview -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerOverview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,810" name="entries" itemHeight="138" rowSplit1="44" rowSplit2="87" rowHeight="42" iconMargin="12" ServiceNameFont="Regular;32" EventNameFont="Regular;34" DayNameFont="Regular;28" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerImporter -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerImporter" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,773" name="list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerEditor -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerEditor" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,495" name="config" font="Regular;29" valueFont="Regular;28" headerFont="Bold;29" itemHeight="55" padding="21,0" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="FullNightAutoTimerHelpPanel"/>
+    <widget position="63,794" size="1794,132" font="Regular;32" foregroundColor="foreground" transparent="1" valign="center" source="help" render="Label"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerFilterEditor -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerFilterEditor" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,495" name="config" font="Regular;29" valueFont="Regular;28" headerFont="Bold;29" itemHeight="55" padding="21,0" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="FullNightAutoTimerHelpPanel"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerServiceEditor -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerServiceEditor" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,495" name="config" font="Regular;29" valueFont="Regular;28" headerFont="Bold;29" itemHeight="55" padding="21,0" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="FullNightAutoTimerHelpPanel"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerSettings -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerSettings" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,495" name="config" font="Regular;29" valueFont="Regular;28" headerFont="Bold;29" itemHeight="55" padding="21,0" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+  <panel name="FullNightAutoTimerHelpPanel"/>
+    <widget position="63,794" size="1794,132" font="Regular;32" foregroundColor="foreground" transparent="1" valign="center" source="description" render="Label"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerFAQ -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerFAQ" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="54,103" size="1812,75" font="Regular;38" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" conditional="heading" name="heading"/>
+        <widget position="54,208" size="1812,720" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" scrollbarMode="showOnDemand" name="detailtext"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_exit"/>
+  </screen>
+
+  <!-- Screen: AutoTimerHelp -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerHelp" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="54,103" size="1812,75" font="Regular;38" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" conditional="heading" name="heading"/>
+        <widget position="54,208" size="1812,720" font="Regular;32" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" scrollbarMode="showOnDemand" name="detailtext"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_exit"/>
+  </screen>
+
+  <!-- Screen: AutoTimerPreview -->
+  <screen position="0,0" size="1920,1080" name="AutoTimerPreview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="750,118" size="1125,702" source="timerlist" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <template name="Default" fonts="Regular;31,Regular;26" itemHeight="117">
+        <text position="13,8" size="657,35" index="3" font="0" wrap="ellipsis" foregroundColor="foreground"/>
+        <text position="685,8" size="426,35" index="2" font="1" wrap="ellipsis" foregroundColor="secondary"/>
+        <text position="13,45" size="1098,36" index="0" font="1" wrap="ellipsis" foregroundColor="secondary"/>
+        <text position="13,81" size="1098,35" index="4" font="1" wrap="ellipsis" foregroundColor="secondary"/>
+      </template>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: AutoTimerWizard -->
+  <screen name="AutoTimerWizard" position="0,0" size="1920,1080" title="Welcome..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="text" position="105,118" size="1050,450" font="Regular;30" valign="bottom" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <eLabel position="105,598" size="1050,2" backgroundColor="accent"/>
+    <widget source="list" render="Listbox" position="105,621" size="1050,270" zPosition="13" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black">
+      <convert type="TemplatedMultiContent">
+				{"template": [ MultiContentEntryText(pos=(8,0), size=(1020,45), flags = RT_HALIGN_LEFT, text = 0) ],
+				"fonts": [gFont("Regular",30)],
+				"itemHeight": 45
+				}
+</convert>
+    </widget>
+    <widget name="config" position="105,621" size="1050,270" itemHeight="54" zPosition="14" font="Regular;30" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
+    <widget name="HelpWindow" position="1161,15" size="729,153" zPosition="1" transparent="1" alphatest="blend"/>
+    <ePixmap pixmap="buttons/key_red.png" position="53,953" size="45,60" alphatest="blend"/>
+    <widget name="languagetext" position="105,957" size="255,45" noWrap="1" zPosition="1" valign="center" font="Regular;30" halign="left" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <widget name="rc" position="1433,118" size="231,750" pixmaps="skin_default/rc.png,skin_default/rcold.png" zPosition="10" alphatest="blend"/>
+    <widget name="arrowdown" position="-149,-149" size="56,105" pixmap="skin_default/arrowdown.png" zPosition="11" alphatest="blend"/>
+    <widget name="arrowdown2" position="-149,-149" size="56,105" pixmap="skin_default/arrowdown.png" zPosition="11" alphatest="blend"/>
+    <widget name="arrowup" position="-149,-149" size="56,105" pixmap="skin_default/arrowup.png" zPosition="11" alphatest="blend"/>
+    <widget name="arrowup2" position="-149,-149" size="56,105" pixmap="skin_default/arrowup.png" zPosition="11" alphatest="blend"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+    <!-- Screen: EventViewContextMenu -->
+  <screen position="0,0" size="1920,1080" name="EventViewContextMenu" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="1920,1080" title="Eventview Menu">
+    <panel name="Fullscreen_Template_Title_Date"/>
+	<panel name="Fullscreen_left_Pic"/>
+	<eLabel position="735,100" size="3,879" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget name="menu" position="795,133" size="1080,810" itemHeight="54" font="Regular;32" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: EventViewContextMenuChoiceBox -->
+  <screen position="0,0" size="1920,1080" name="EventViewContextMenuChoiceBox" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="1920,1080">
+    <panel name="Fullscreen_Template_Title_Date"/>
+	<panel name="Fullscreen_left_Pic"/>
+	<eLabel position="735,100" size="3,879" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget name="text" position="53,553" size="626,345" font="Regular;30" foregroundColor="foreground" halign="center" valign="center" transparent="1"/>
+    <widget name="list" position="795,193" size="1080,750" itemHeight="54" font="Regular;30" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="2" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightFHD.fit_lists import install; install(self)</applet>
+</screen>
+</skin>

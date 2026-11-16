@@ -1,0 +1,16 @@
+#!/bin/sh
+# Clean removal only: never remove files during an upgrade.
+case "$1" in
+    remove|purge)
+        rm -rf /usr/share/enigma2/PLi-FullNight-FHD-stein17-Mod
+        rm -rf /usr/lib/enigma2/python/Plugins/Extensions/PLiFullNightFHD
+        for kind in Converter Renderer; do
+            base="/usr/lib/enigma2/python/Components/$kind"
+            rm -f "$base"/PLiFullNight*.py
+            rm -f "$base"/PLiFullNight*.pyc
+            rm -f "$base"/PLiFullNight*.pyo
+            rm -f "$base"/__pycache__/PLiFullNight*.pyc
+        done
+        ;;
+esac
+exit 0

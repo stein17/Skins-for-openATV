@@ -1,0 +1,570 @@
+<?xml version='1.0' encoding='utf-8'?>
+<templates>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: OPENATV-STANDARD-SENDERLISTEN -->
+  <!-- ================================================================== -->
+<!-- FullNight Standard -->
+<template component="serviceList" name="FullNight Standard" screens="ChannelSelectionPIG,ChannelSelection" fonts="Regular;32,Regular;29,Regular;27,Regular;24">
+	<!-- Normale Senderliste -->
+	<mode name="services" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="Picon" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="Number" position="75,0" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+			<pixmap index="IsInBouquetImage" position="135,2" size="30,30" alpha="blend" scale="centerScaled"/>
+			<text index="ServiceName" position="180,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="420,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="e-90,13" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="5" />
+		</panel>
+	</mode>
+	<!-- Ordner, Marker und andere Einträge -->
+	<mode name="other" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="MarkerImage" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<pixmap index="FolderImage" position="75,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="EntryName" position="150,0" size="1085,38" font="0" verticalAlignment="center"/>
+			<text index="MarkerName" position="150,0" size="1085,38" font="0" verticalAlignment="center" foregroundColor="accent"/>
+		</panel>
+	</mode>
+	<!-- Zweizeilige Bouquet-Senderliste -->
+	<mode name="bouquets" itemHeight="72" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,72" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,72">
+			<!-- Sendernummer -->
+			<text index="Number" position="0,0" size="65,72" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+			<!-- Picon -->
+			<pixmap index="Picon" position="76,6" size="100,60" alpha="blend" scale="centerScaled"/>
+			<!-- Sendername -->
+			<text index="ServiceName" position="230,0" size="580,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<!-- MarkerName -->
+						<!-- Marker-Symbol -->
+<pixmap index="MarkerImage"
+        position="50,24" size="32,32"
+        alpha="blend" scale="centerScaled" />
+
+<!-- Marker-Text -->
+<text index="MarkerName"
+      position="100,20" size="600,40"
+      font="1"
+      foregroundColor="#f47d19"
+      verticalAlignment="center"
+      wrap="ellipsis" />
+			<!-- Aktuelle Sendung -->
+			<text index="Title1" position="230,34" size="880,34" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="secondary" foregroundColorSelected="foreground" />
+			<!-- Service-Typ -->
+			<pixmap index="ServiceTypeImage" position="190,3" size="30,30" alpha="blend" scale="centerScaled"/>
+			<!-- Verschlüsselung -->
+			<pixmap index="CryptoImage" position="190,38" size="26,26" alpha="blend" scale="centerScaled"/>
+			<!-- Start- und Endzeit der aktuellen Sendung -->
+			<text index="StartEndTime1" position="740,10" size="140,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Fortschrittsbalken -->
+			<progress index="Progress" position="900,17" size="75,12" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="6" />
+			<!-- Restlaufzeit -->
+			<text index="Remain" position="990,10" size="110,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Trennlinie -->
+			<text text="Line" position="2,0" size="1090,1" backgroundColor="FullNightLineLight"/>
+		</panel>
+	</mode>	
+</template>	
+<!-- FullNight Standard 3 Lines -->
+<template component="serviceList" name="FullNight Standard 3 Lines" screens="ChannelSelectionPIG,ChannelSelection" fonts="Regular;32,Regular;29,Regular;27,Regular;24">
+	<!-- Normale Senderliste -->
+	<mode name="services" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="Picon" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="Number" position="75,0" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+			<pixmap index="IsInBouquetImage" position="135,2" size="30,30" alpha="blend" scale="centerScaled"/>
+			<text index="ServiceName" position="180,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="420,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="e-90,13" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="5" />
+		</panel>
+	</mode>
+	<!-- Ordner, Marker und andere Einträge -->
+	<mode name="other" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="MarkerImage" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<pixmap index="FolderImage" position="75,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="EntryName" position="150,0" size="1085,38" font="0" verticalAlignment="center"/>
+			<text index="MarkerName" position="150,0" size="1085,38" font="0" verticalAlignment="center" foregroundColor="accent"/>
+		</panel>
+	</mode>
+	<!-- Zweizeilige Bouquet-Senderliste -->
+	<mode name="bouquets" itemHeight="93" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,93" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,93">
+			<!-- Sendernummer -->
+			<text index="Number" position="0,0" size="45,88" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+			<!-- Picon -->
+			<pixmap index="Picon" position="53,5" size="137,80" alpha="blend" scale="centerScaled"/>
+			<!-- Sendername -->
+			<text index="ServiceName" position="244,0" size="600,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<!-- MarkerName -->
+
+			
+			
+						<!-- Marker-Symbol -->
+<pixmap index="MarkerImage"
+        position="50,34" size="32,32"
+        alpha="blend" scale="centerScaled" />
+
+<!-- Marker-Text -->
+<text index="MarkerName"
+      position="100,30" size="600,40"
+      font="1"
+      foregroundColor="#f47d19"
+      verticalAlignment="center"
+      wrap="ellipsis" />
+			
+			
+			<!-- Aktuelle Sendung -->
+			<text index="Title1" position="244,30" size="840,34" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="secondary" foregroundColorSelected="foreground" />
+			<!-- Service-Typ -->
+			<pixmap index="ServiceTypeImage" position="200,5" size="30,30" alpha="blend" scale="centerScaled"/>
+			<!-- Verschlüsselung -->
+			<pixmap index="CryptoImage" position="200,50" size="30,30" alpha="blend" scale="centerScaled"/>
+			<!-- Start- und Endzeit der aktuellen Sendung -->
+			<text index="StartEndTime1" position="244,62" size="140,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Fortschrittsbalken -->
+			<progress index="Progress" position="405,70" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="5" />
+			<!-- Restlaufzeit -->
+			<text index="Remain" position="500,62" size="108,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Trennlinie -->
+			<text text="Line" position="2,0" size="1110,1" backgroundColor="FullNightLineLight"/>
+		</panel>
+	</mode>
+</template>	
+	<!-- FullNight Standard 3 Lines + Next -->
+	<template component="serviceList" name="Live-TV (3 Lines + Next)" screens="ChannelSelection_Live-TV" fonts="Regular;32,Regular;29,Regular;27,Regular;24">
+	<!-- Normale Senderliste -->
+	<mode name="services" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="Picon" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="Number" position="75,0" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center"/>
+			<pixmap index="IsInBouquetImage" position="135,2" size="30,30" alpha="blend" scale="centerScaled"/>
+			<text index="ServiceName" position="180,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="420,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="e-90,13" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="5" />
+		</panel>
+	</mode>
+	<!-- Ordner, Marker und andere Einträge -->
+	<mode name="other" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,38">
+			<pixmap index="MarkerImage" position="0,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<pixmap index="FolderImage" position="75,1" size="60,35" alpha="blend" scale="centerScaled"/>
+			<text index="EntryName" position="150,0" size="1085,38" font="0" verticalAlignment="center"/>
+			<text index="MarkerName" position="150,0" size="1085,38" font="0" verticalAlignment="center" foregroundColor="accent"/>
+		</panel>
+	</mode>
+	<!-- Dreizeilige Bouquet-Senderliste -->
+	<mode name="bouquets" itemHeight="93" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+		<rectangle position="0,0" size="e-12,93" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+		<panel position="15,0" size="e-30,93">
+			<!-- Sendernummer -->
+			<text index="Number" position="0,0" size="45,88" font="1" horizontalAlignment="right" verticalAlignment="center"/>
+			<!-- Picon -->
+			<pixmap index="Picon" position="53,5" size="137,80" alpha="blend" scale="centerScaled"/>
+			<!-- Sendername -->
+			<text index="ServiceName" position="244,0" size="400,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<!-- Marker mit eigener Textfarbe -->
+			<!-- <text index="MarkerName" position="50,28" size="400,32" font="1" verticalAlignment="center" foregroundColor="cyan" /> -->
+			
+			<!-- Marker-Symbol -->
+<pixmap index="MarkerImage"
+        position="50,34" size="32,32"
+        alpha="blend" scale="centerScaled" />
+
+<!-- Marker-Text -->
+<text index="MarkerName"
+      position="100,30" size="600,40"
+      font="1"
+      foregroundColor="#f47d19"
+      verticalAlignment="center"
+      wrap="ellipsis" />
+			
+			
+			<!-- Aktuelle Sendung -->
+			<text index="Title1" position="244,30" size="520,34" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="secondary" foregroundColorSelected="foreground" />
+			<!-- Service-Typ -->
+			<pixmap index="ServiceTypeImage" position="200,5" size="30,30" alpha="blend" scale="centerScaled"/>
+			<!-- Verschlüsselung -->
+			<pixmap index="CryptoImage" position="200,50" size="30,30" alpha="blend" scale="centerScaled"/>
+			<!-- Start- und Endzeit der aktuellen Sendung -->
+			<text index="StartEndTime1" position="244,62" size="302,27" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Fortschrittsbalken -->
+			<progress index="Progress" position="390,70" size="85,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="5" />
+			<!-- Restlaufzeit -->
+			<text index="Remain" position="490,62" size="108,27" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Folgende Sendung -->
+			<text text="Next:" position="785,2" size="72,36" font="2" foregroundColor="accent"/>
+			<text index="Title2" position="850,2" size="250,60" font="2" wrap="1" foregroundColor="secondary" foregroundColorSelected="selectedFG" />
+			<!-- Start- und Endzeit der folgenden Sendung -->
+			<text index="StartEndTime2" position="850,62" size="140,27" font="3" wrap="noWrap" foregroundColorSelected="selectedFG" />
+			<!-- Dauer der folgenden Sendung -->
+			<text index="Duration2" position="1010,62" size="108,30" font="3" wrap="noWrap"/>
+			<!-- Trennlinie -->
+			<text text="Line" position="2,2" size="1400,1" backgroundColor="FullNightLineLight"/>
+		</panel>
+	</mode>
+		</template>
+<!-- FullNight 3 Fields -->
+	<template component="serviceList" name="FullNight 3 Fields" screens="ChannelSelection3_Fields" fonts="Regular;30,Regular;28,Regular;26,Regular;24">
+		<mode name="services" itemHeight="38" itemWidth="720" foregroundColor="foreground" foregroundColorSelected="selectedFG" >
+			<rectangle position="0,0" size="588,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+				<pixmap index="Picon" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="Number" position="left" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" />
+				<pixmap index="IsInBouquetImage" position="left,2" size="30,30" alpha="blend" scale="centerScaled" />
+				<text index="ServiceName" position="left,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+				<text index="Title1" position="left,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+				<progress index="Progress" position="right,9" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" />
+			</panel>
+		</mode>
+		<mode name="other" itemHeight="38" itemWidth="720" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="720,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+				<pixmap index="MarkerImage" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
+				<pixmap index="FolderImage" position="left,1" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
+				<text index="MarkerName" position="left" size="e-45,38" foregroundColor="accent" font="0" verticalAlignment="center" />
+			</panel>
+		</mode>
+		
+		<mode name="bouquets" itemHeight="93" itemWidth="720" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<rectangle position="0,0" size="720,93" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="15,0" size="720,93" layout="horizontal" spacing="8">
+				<text index="Number" position="left" size="45,88" font="1" horizontalAlignment="right" verticalAlignment="center" />
+				<pixmap index="Picon" position="left,5" size="137,80" alpha="blend" scale="centerScaled" />
+
+				<panel position="left" size="600,88">
+					<text index="ServiceName" position="0,0" size="492,36" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<!-- Marker-Symbol -->
+<pixmap index="MarkerImage"
+        position="50,34" size="32,32"
+        alpha="blend" scale="centerScaled" />
+
+<!-- Marker-Text -->
+<text index="MarkerName"
+      position="100,30" size="600,40"
+      font="1"
+      foregroundColor="#f47d19"
+      verticalAlignment="center"
+      wrap="ellipsis" />
+					<text index="Title1" position="0,30" size="492,34" font="2" verticalAlignment="center" wrap="noWrap" foregroundColor="secondary" foregroundColorSelected="foreground" />
+				</panel>
+				<panel position="154,2" size="375,88" layout="vertical" spacing="0">
+					<text index="StartEndTime1" position="60,60" size="302,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+				</panel>
+				<panel position="160,2" size="400,88" layout="vertical" spacing="0">
+					<text index="Remain" position="300,60" size="120,30" font="3" wrap="noWrap" foregroundColorSelected="cyan" />
+				</panel>
+				<panel position="50,10" size="100,88" layout="vertical" spacing="0">
+					<progress index="Progress" position="320,60" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+				</panel>
+				<panel position="0,0" size="720,1" layout="vertical" spacing="0">
+					<text text="Line" position="2,0" size="720,1" backgroundColor="FullNightLineLight" />
+				</panel>
+			</panel>
+		</mode>
+	</template>
+		<!-- Vollbild Grid e2MDB [12 Service vertical] -->
+	<template component="serviceList" name="Vollbild Grid e2MDB [12 Service vertical]" screens="ChannelSelectionFull" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+		<mode name="services" itemHeight="54" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="e-12,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
+			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" />
+		</mode>
+		<mode name="other" itemHeight="54" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="e-12,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+				<!-- <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" /> -->
+				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
+				<!-- <text index="MarkerName" position="left" size="e-45,38" foregroundColor="accent" font="0" verticalAlignment="center" /> -->
+			</panel>
+		</mode>
+		<mode name="bouquets" itemWidth="313" itemHeight="467" orientation="grid" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<rectangle position="0,0" size="309,463" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<pixmap index="ImageOrPicon1" position="43,6" size="220,124" alpha="blend" scale="centerScaled" cornerRadius="6" />
+			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="secondary" foregroundColorSelected="selectedFG" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
+			<text index="ServiceName" position="0,128" size="302,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="foreground" foregroundColorSelected="selectedFG" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" />
+		<!-- 	<text index="MarkerName" position="0,128" size="302,39" font="1" foregroundColor="accent" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" /> -->
+			<text index="FolderName" position="0,128" size="302,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
+			<progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+			<text index="Remain" position="195,162" size="105,30" font="3" foregroundColor="accent" foregroundColorSelected="cyan" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title1" position="9,191" size="305,62" font="1" foregroundColorSelected="foreground" verticalAlignment="top" wrap="1" />
+			<text index="ShortDescription1" position="9,254" size="305,53" font="2" foregroundColor="secondary" foregroundColorSelected="secondary" verticalAlignment="top" wrap="1" />
+			<text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title2" position="68,306" size="238,27" font="3" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="ellipsis" />
+			<text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title3" position="68,333" size="238,27" font="3" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="ellipsis" />
+			<rectangle position="8,365" size="296,2" backgroundColor="FullNightLineLight" />
+			<text text="Primetime" position="83,371" size="217,33" font="1" foregroundColor="accent" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" translate="1" />
+			<text index="StartTimeP" position="8,371" size="83,33" font="1" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="TitleP" position="9,402" size="305,53" font="2" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="top" wrap="1" />
+		</mode>
+	</template>
+	
+	<!-- Das ist das Vorbild, diese Farben sollen alle bekommen -->
+	
+	 <!-- Template: Vollbild Gallery [18 Service Grid] -->
+  <template component="serviceList" name="Vollbild Gallery [18 Service Gallery]" screens="ChannelSelectionFull" fonts="Regular;23,Regular;23,Regular;19" itemSpacing="0,0">
+    <mode name="services" itemHeight="101" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,0" size="e-24,91" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <panel position="15,5" size="e-54,86" layout="horizontal" spacing="14">
+        <pixmap position="left,0" size="144,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 167" alpha="blend" scale="centerScaled" />
+        <pixmap position="left,0" size="204,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 235" alpha="blend" scale="centerScaled" />
+        <pixmap position="left,0" size="218,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 250" alpha="blend" scale="centerScaled" />
+        <!-- <pixmap position="left,3" size="36,33" index="MarkerImage" alpha="blend" scale="centerScaled" /> -->
+        <pixmap position="left,3" size="36,33" index="FolderImage" alpha="blend" scale="centerScaled" />
+        <text position="left,0" size="50,35" index="Number" font="1" verticalAlignment="center" horizontalAlignment="right" />
+        <panel position="left" size="e,87" layout="stack">
+          <pixmap position="e-138,3" size="28,26" index="CryptoImage" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-102,3" size="28,26" index="ServiceTypeImage" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-66,3" size="28,26" index="RecordingIndicator" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-30,3" size="28,26" index="IsInBouquetImage" alpha="blend" scale="centerScaled" />
+          <text position="0,5" size="e-150,35" index="ServiceName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" fallbackColor="muted" foregroundColorSelected="selectedFG" />
+          <text position="0,38" size="e-112,33" index="Title1" font="1" foregroundColor="secondary" wrap="ellipsis" verticalAlignment="center" foregroundColorSelected="foreground" />
+          <text position="e-105,38" size="105,33" index="Remain" font="2" horizontalAlignment="right" verticalAlignment="center" foregroundColorSelected="cyan" />
+          <progress position="0,75" size="e,3" index="Progress" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" borderWidth="1" cornerRadius="2"  borderColor="FullNightProgressUserSolid" />
+        </panel>
+      </panel>
+    </mode>
+    <mode name="bouquets" orientation="grid" itemWidth="313" itemHeight="310" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,2" size="303,300" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <pixmap position="10,16" size="283,126" index="ImageOrPicon1" alpha="blend" scale="centerScaled" />
+      <text position="10,160" size="42,36" index="Number" font="2" wrap="noWrap" verticalAlignment="center" />
+      <text position="57,160" size="236,36" index="ServiceName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" foregroundColorSelected="selectedFG" />
+      <!-- <text position="57,160" size="236,36" index="MarkerName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" /> -->
+      <text position="57,160" size="236,36" index="FolderName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" />
+      <progress position="10,150" size="283,8" index="Progress"  borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+      <text position="10,200" size="283,33" index="Title1" font="1" wrap="ellipsis" foregroundColor="foreground" foregroundColorSelected="foreground" />
+      <text position="10,234" size="60,30" index="StartTime2" font="2" wrap="noWrap" foregroundColor="accent" foregroundColorSelected="selectedFG" />
+      <text position="75,234" size="218,48" index="Title2" font="2" wrap="wrap" verticalAlignment="top" foregroundColor="secondary" foregroundColorSelected="selectedFG" />
+    </mode>
+    <mode name="other" itemHeight="60" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,0" size="e-24,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <panel position="15,5" size="e-54,44" layout="horizontal" spacing="14">
+        <pixmap position="left,3" size="52,39" index="FolderImage" alpha="blend" scale="centerScaled" />
+        <!-- <pixmap position="left,3" size="52,39" index="MarkerImage" alpha="blend" scale="centerScaled" /> -->
+        <text position="left,0" size="e,44" index="EntryName" font="0" verticalAlignment="center" wrap="ellipsis" />
+      </panel>
+    </mode>
+  </template>
+<!--   ENDE VORBILD -->
+		<!-- Live-TV e2MDB [12 Service Grid] -->
+	<template component="serviceList" name="Live-TV e2MDB [12 Service Grid]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
+		<mode name="services" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+				<pixmap index="Picon" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="Number" position="left" size="45,38" font="0" horizontalAlignment="right" verticalAlignment="center" />
+				<pixmap index="IsInBouquetImage" position="left,3" size="30,30" alpha="blend" scale="centerScaled" />
+				<text index="ServiceName" position="left,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="top" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+				<text index="Title1" position="left,0" size="570,38" font="1" verticalAlignment="center" wrap="ellipsis" foregroundColorSelected="foreground" />
+				<progress index="Progress" position="right,14" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" />
+			</panel>
+		</mode>
+		<mode name="other" itemHeight="38" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="e-12,36" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="15,0" size="e-30,38" layout="horizontal" spacing="15">
+				<!-- <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" /> -->
+				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" wrap="ellipsis" />
+				<!-- <text index="MarkerName" position="left" size="e-45,38" foregroundColor="accent" font="0" verticalAlignment="center" wrap="ellipsis" /> -->
+			</panel>
+		</mode>
+		<mode name="bouquets" itemWidth="675" itemHeight="155" orientation="grid" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<rectangle position="0,1" size="665,153" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<!-- Sendungsbild / Picon -->
+			<pixmap index="ImageOrPicon1" position="8,8" size="188,105" alpha="blend" scale="centerScaled" />
+			<!-- Sendernummer -->
+			<text index="Number" position="210,0" size="60,36" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
+			<!-- Sendername -->
+			<text index="ServiceName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<!-- MarkerName -->
+		<!-- 	<text index="MarkerName" position="50,0" size="328,40" font="0" foregroundColor="accent" horizontalAlignment="center" verticalAlignment="center" /> -->
+			<!-- Marker -->
+			<!-- <text index="MarkerName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis"  /> -->
+			<!-- Ordner -->
+			<text index="FolderName" position="278,0" size="315,36" font="1" verticalAlignment="center" wrap="ellipsis"  />
+			<!-- Service-Symbole -->
+			<pixmap index="CryptoImage" position="600,5" size="30,30" alpha="blend" scale="centerScaled" />
+			<pixmap index="ServiceTypeImage" position="638,2" size="33,33" alpha="blend" scale="centerScaled" />
+			<pixmap index="RecordingIndicator" position="638,2" size="33,33" alpha="blend" scale="centerScaled" />
+			<!-- Aktuelle Sendung -->
+			<text index="Title1" position="210,36" size="465,36" font="2" verticalAlignment="center" wrap="ellipsis" foregroundColorSelected="foreground" />
+			<!-- Kurzbeschreibung -->
+			<text index="ShortDescription1" position="210,72" size="465,72" font="2" verticalAlignment="center" wrap="1" foregroundColorSelected="secondary" />
+			<!-- Anfangs-/Endzeit -->
+			<text index="StartEndTime1" position="4,117" size="135,30" font="3" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="cyan" />
+			<!-- Fortschritt -->
+			<progress index="Progress" position="130,128" size="60,8" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+			<!-- Trennlinie -->
+			<rectangle position="5,154" size="656,2" foregroundColor="FullNightLineLight" foregroundColorSelected="FullNightLineLight" />
+		</mode>
+	</template>
+	
+
+	
+	<!-- Live-TV Grid e2MDB [8 Service vertical] -->
+	<template component="serviceList" name="Live-TV Grid e2MDB [8 Service vertical]" screens="ChannelSelection_Live-TV" fonts="Regular;30,Regular;27,Regular;23,Regular;20" itemSpacing="6,14">
+		<mode name="services" itemHeight="54" foregroundColor="foreground" foregroundColorSelected="selectedFG" >
+			<rectangle position="0,0" size="e-12,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<pixmap index="Picon" position="23,2" size="60,35" alpha="blend" scale="centerScaled" />
+			<text index="ServiceName" position="98,0" size="225,38" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="338,0" size="570,38" font="1" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="e-98,14" size="75,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" />
+		</mode>
+		<mode name="other" itemHeight="54" foregroundColor="foreground" foregroundColorSelected="selectedFG" >
+			<rectangle position="0,0" size="e-12,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="23,0" size="e-45,38" layout="horizontal" spacing="15">
+				<!-- <pixmap index="MarkerImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" /> -->
+				<pixmap index="FolderImage" position="left,2" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="EntryName" position="left" size="e-45,38" font="0" verticalAlignment="center" />
+				<!-- <text index="MarkerName" position="left" size="e-45,38" foregroundColor="accent" font="0" verticalAlignment="center" /> -->
+			</panel>
+		</mode>
+		<mode name="bouquets" itemWidth="342" itemHeight="467" orientation="grid" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<rectangle position="0,0" size="332,457" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<pixmap index="ImageOrPicon1" position="58,6" size="220,124" alpha="blend" scale="centerScaled" cornerRadius="6" />
+			<text index="Number" position="6,128" size="60,39" font="2" foregroundColor="secondary" foregroundColorSelected="selectedFG" horizontalAlignment="left" verticalAlignment="center" wrap="noWrap" />
+			<text index="ServiceName" position="0,128" size="328,39" font="1" verticalAlignment="center" horizontalAlignment="center" wrap="ellipsis" foregroundColor="foreground" foregroundColorSelected="selectedFG" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" />
+		<!-- 	<text index="MarkerName" position="0,128" size="328,39" font="1" foregroundColor="accent" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" /> -->
+			<text index="FolderName" position="0,128" size="328,39" font="1" horizontalAlignment="center" verticalAlignment="center" wrap="ellipsis" />
+			<progress index="Progress" position="9,171" size="189,11" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+			<text index="Remain" position="195,162" size="114,30" font="3" foregroundColor="accent" foregroundColorSelected="cyan" horizontalAlignment="right" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title1" position="9,191" size="330,62" font="1" foregroundColorSelected="foreground" verticalAlignment="top" wrap="1" />
+			<text index="ShortDescription1" position="9,254" size="330,53" font="2" foregroundColor="secondary" foregroundColorSelected="secondary" verticalAlignment="top" wrap="1" />
+			<text index="StartTime2" position="9,306" size="57,27" font="3" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title2" position="68,306" size="260,27" font="3" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="ellipsis" />
+			<text index="StartTime3" position="9,333" size="57,27" font="3" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="Title3" position="68,333" size="260,27" font="3" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="ellipsis" />
+			<rectangle position="8,365" size="312,2" backgroundColor="FullNightLineLight" />
+			<text text="Primetime" position="83,371" size="267,33" font="1" foregroundColor="accent" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" translate="1" />
+			<text index="StartTimeP" position="8,371" size="83,33" font="1" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="center" wrap="noWrap" />
+			<text index="TitleP" position="9,402" size="326,53" font="2" foregroundColor="secondary" foregroundColorSelected="selectedFG" verticalAlignment="top" wrap="1" />
+		</mode>
+	</template>
+	
+		 <!-- Template: Live-TV Gallery [12 Service Grid] -->
+  <template component="serviceList" name="Live-TV Gallery [12 Service Gallery]" screens="ChannelSelection_Live-TV" fonts="Regular;23,Regular;23,Regular;19" itemSpacing="6,14">
+    <mode name="services" itemHeight="101" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,0" size="e-24,91" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <panel position="15,5" size="e-54,86" layout="horizontal" spacing="14">
+        <pixmap position="left,0" size="144,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 167" alpha="blend" scale="centerScaled" />
+        <pixmap position="left,0" size="204,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 235" alpha="blend" scale="centerScaled" />
+        <pixmap position="left,0" size="218,75" index="Picon" conditional="config.channelSelection.piconRatio.value == 250" alpha="blend" scale="centerScaled" />
+        <!-- <pixmap position="left,3" size="36,33" index="MarkerImage" alpha="blend" scale="centerScaled" /> -->
+        <pixmap position="left,3" size="36,33" index="FolderImage" alpha="blend" scale="centerScaled" />
+        <text position="left,0" size="50,35" index="Number" font="1" verticalAlignment="center" horizontalAlignment="right" />
+        <panel position="left" size="e,87" layout="stack">
+          <pixmap position="e-138,3" size="28,26" index="CryptoImage" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-102,3" size="28,26" index="ServiceTypeImage" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-66,3" size="28,26" index="RecordingIndicator" alpha="blend" scale="centerScaled" />
+          <pixmap position="e-30,3" size="28,26" index="IsInBouquetImage" alpha="blend" scale="centerScaled" />
+          <text position="0,5" size="e-150,35" index="ServiceName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" fallbackColor="muted" foregroundColorSelected="selectedFG" />
+          <text position="0,38" size="e-112,33" index="Title1" font="1" foregroundColor="secondary" wrap="ellipsis" verticalAlignment="center" foregroundColorSelected="foreground" />
+          <text position="e-105,38" size="105,33" index="Remain" font="2" horizontalAlignment="right" verticalAlignment="center" foregroundColorSelected="cyan" />
+          <progress position="0,75" size="e,3" index="Progress" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" borderWidth="1" cornerRadius="2"  borderColor="FullNightProgressUserSolid" />
+        </panel>
+      </panel>
+    </mode>
+    <mode name="bouquets" orientation="grid" itemWidth="342" itemHeight="310" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,2" size="332,300" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <pixmap position="58,6" size="220,124" index="ImageOrPicon1" alpha="blend" scale="centerScaled" />
+      <text position="10,160" size="42,36" index="Number" font="2" wrap="noWrap" verticalAlignment="center" />
+      <text position="57,160" size="236,36" index="ServiceName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" foregroundColorSelected="selectedFG" />
+     <!--  <text position="57,160" size="236,36" index="MarkerName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" /> -->
+      <text position="57,160" size="236,36" index="FolderName" font="0" wrap="ellipsis" verticalAlignment="center" pseudoColor="blue" streamColor="yellow" serviceNotAvailColor="disabled" />
+      <progress position="10,150" size="283,8" index="Progress"  borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4"/>
+      <text position="10,200" size="330,30" index="Title1" font="1" wrap="ellipsis" foregroundColor="foreground" foregroundColorSelected="foreground" />
+      <text position="10,234" size="60,30" index="StartTime2" font="2" wrap="noWrap" foregroundColor="accent" foregroundColorSelected="selectedFG" />
+      <text position="75,234" size="330,48" index="Title2" font="2" wrap="wrap" verticalAlignment="top" foregroundColor="secondary" foregroundColorSelected="selectedFG" />
+    </mode>
+    <mode name="other" itemHeight="60" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+      <rectangle position="0,0" size="e-24,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+      <panel position="15,5" size="e-54,44" layout="horizontal" spacing="14">
+        <pixmap position="left,3" size="52,39" index="FolderImage" alpha="blend" scale="centerScaled" />
+        <!-- <pixmap position="left,3" size="52,39" index="MarkerImage" alpha="blend" scale="centerScaled" /> -->
+        <text position="left,0" size="e,44" index="EntryName" font="0" verticalAlignment="center" wrap="ellipsis" />
+      </panel>
+    </mode>
+  </template>
+	
+	<!-- FullNight TV-Spielfilm -->
+	<template component="serviceList" name="FullNight TV-Spielfilm" screens="ChannelSelection_TV-Spielfilm" fonts="Regular;30,Regular;27,Regular;23,Regular;20">
+		<mode name="services" itemWidth="1880" itemHeight="54" orientation="vertical" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<rectangle position="0,0" size="1870,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<pixmap index="Picon" position="23,10" size="60,35" alpha="blend" scale="centerScaled" />
+			<text index="ServiceName" position="98,0" size="390,54" autoFit="Title1" font="1" verticalAlignment="center" wrap="noWrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColorSelected="selectedFG" />
+			<text index="Title1" position="503,0" size="1230,54" font="1" foregroundColor="secondary" verticalAlignment="center" wrap="ellipsis" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="1769,21" size="90,12" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="6" />
+		</mode>
+		<mode name="other" itemWidth="1880" itemHeight="54" orientation="vertical" foregroundColor="foreground" foregroundColorSelected="selectedFG">
+			<rectangle position="0,0" size="1870,50" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<panel position="23,0" size="e-46,54" layout="horizontal" spacing="15">
+				<!-- <pixmap index="MarkerImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled" /> -->
+				<pixmap index="FolderImage" position="left,10" size="60,35" alpha="blend" scale="centerScaled" />
+				<text index="EntryName" position="left" size="e-45,54" font="0" verticalAlignment="center" wrap="ellipsis" />
+				<!-- <text index="MarkerName" position="left" size="e-45,54" font="0" foregroundColor="accent" verticalAlignment="center" wrap="ellipsis" /> -->
+			</panel>
+		</mode>
+		<mode name="bouquets" itemWidth="314" itemHeight="994" orientation="horizontal" foregroundColor="foreground" foregroundColorSelected="selectedFG" recordColor="recording" recordColorSelected="recording">
+			<!-- Durchgehende FullNight-Karte mit abgerundeter Auswahl. -->
+			<rectangle position="0,0" size="314,994" foregroundColor="background" foregroundColorSelected="selectedBG" foregroundGradient="FullNightRow" foregroundGradientSelected="FullNightSelection" cornerRadius="12" />
+			<rectangle position="2,0" size="310,68" foregroundColor="surface" foregroundColorSelected="selectedBG" />
+			<rectangle position="2,393" size="310,598" foregroundColor="surface" foregroundColorSelected="surface" cornerRadius="12" />
+			<!-- Sendername und kleines Picon. -->
+			<text index="ServiceName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" serviceNotAvailColor="disabled" recordColor="recording" pseudoColor="blue" streamColor="yellow" foregroundColor="foreground" foregroundColorSelected="selectedFG" />
+	<!-- 		<text index="MarkerName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColor="accent" /> -->
+			<text index="FolderName" position="11,3" size="206,60" font="1" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" />
+			<pixmap index="Picon" position="227,11" size="66,45" alpha="blend" scale="centerScaled" />
+			<!-- <pixmap index="MarkerImage" position="236,11" size="54,45" alpha="blend" scale="centerScaled" /> -->
+			<pixmap index="FolderImage" position="236,14" size="54,39" alpha="blend" scale="centerScaled" />
+			<!-- Aktuelles Sendungsbild und laufende Sendung. -->
+			<pixmap index="ImageOrPicon1" position="2,68" size="310,175" alpha="blend" scale="centerScaled" />
+			<rectangle position="2,242" size="310,153" foregroundColor="black" foregroundColorSelected="black" />
+			<text index="StartEndTime1" position="9,247" size="185,33" font="1" foregroundColor="accent" verticalAlignment="center" wrap="noWrap" foregroundColorSelected="cyan" />
+			<text index="Remain" position="193,247" size="110,30" font="1" horizontalAlignment="right" wrap="noWrap" foregroundColorSelected="cyan" />
+			<text index="Title1" position="9,300" size="285,96" font="1" foregroundColor="foreground" horizontalAlignment="left" verticalAlignment="center" wrap="wrap" foregroundColorSelected="foreground" />
+			<progress index="Progress" position="9,283" size="294,9" borderWidth="1" foregroundColor="FullNightProgressUserSolid" foregroundColorSelected="FullNightProgressUserSolid" foregroundGradient="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" foregroundGradientSelected="FullNightProgressUserDark,FullNightProgressUserMiddle,FullNightProgressUserLight,horizontal" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressUserSolid" cornerRadius="4" />
+			<!-- Weitere Sendungen. -->
+			<rectangle position="8,395" size="294,2" foregroundColor="FullNightLineLight" />
+			<text index="StartTime2" position="9,401" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" foregroundColorSelected="selectedFG" />
+			<text index="Title2" position="76,401" size="232,32" font="2" foregroundColor="foreground" verticalAlignment="top" wrap="ellipsis" foregroundColorSelected="selectedFG" />
+			<text index="ShortDescription2" position="76,432" size="232,44" font="3" foregroundColor="secondary" verticalAlignment="top" wrap="wrap" />
+			<rectangle position="8,482" size="294,2" foregroundColor="FullNightLineLight" />
+			<text index="StartTime3" position="9,488" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" foregroundColorSelected="selectedFG" />
+			<text index="Title3" position="76,488" size="232,32" font="2" foregroundColor="foreground" verticalAlignment="top" wrap="ellipsis" foregroundColorSelected="selectedFG" />
+			<text index="ShortDescription3" position="76,519" size="232,44" font="3" foregroundColor="secondary" verticalAlignment="top" wrap="wrap" />
+			<rectangle position="8,569" size="294,2" foregroundColor="FullNightLineLight" />
+			<text index="StartTime4" position="9,575" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" />
+			<text index="Title4" position="76,575" size="232,32" font="2" foregroundColor="foreground" verticalAlignment="top" wrap="ellipsis" />
+			<text index="ShortDescription4" position="76,606" size="232,44" font="3" foregroundColor="secondary" verticalAlignment="top" wrap="wrap" />
+			<rectangle position="8,656" size="294,2" foregroundColor="FullNightLineLight" />
+			<text index="StartTime5" position="9,662" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" />
+			<text index="Title5" position="76,662" size="232,32" font="2" foregroundColor="foreground" verticalAlignment="top" wrap="ellipsis" />
+			<text index="ShortDescription5" position="76,693" size="232,44" font="3" foregroundColor="secondary" verticalAlignment="top" wrap="wrap" />
+			<rectangle position="8,743" size="294,2" foregroundColor="FullNightLineLight" />
+			<text index="StartTime6" position="9,749" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" />
+			<text index="Title6" position="76,749" size="232,32" font="2" foregroundColor="foreground" verticalAlignment="top" wrap="ellipsis" />
+			<text index="ShortDescription6" position="76,780" size="232,44" font="3" foregroundColor="secondary" verticalAlignment="top" wrap="wrap" />
+			<!-- Primetime. -->
+			<rectangle position="4,830" size="306,2" foregroundColor="FullNightLineLight" />
+			<text text="Primetime" position="76,836" size="232,30" font="1" foregroundColor="accent" verticalAlignment="center" wrap="noWrap" translate="1" />
+			<text index="StartTimeP" position="9,839" size="59,29" font="2" foregroundColor="accent" verticalAlignment="top" wrap="noWrap" />
+			<text index="TitleP" position="9,870" size="300,54" font="2" foregroundColor="foreground" verticalAlignment="center" wrap="wrap" foregroundColorSelected="selectedFG" />
+			<text index="ShortDescriptionP" position="9,925" size="300,65" font="3" foregroundColor="secondary" verticalAlignment="center" wrap="wrap" />
+		</mode>
+	</template>
+	
+ 
+  
+</templates>
