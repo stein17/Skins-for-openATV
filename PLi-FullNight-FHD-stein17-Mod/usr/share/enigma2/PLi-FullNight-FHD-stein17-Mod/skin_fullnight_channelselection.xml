@@ -7,11 +7,11 @@
   <!-- Panel: kompakter Titel mit Uhrzeit und Datum -->
   <screen name="FullNightChannelHeaderCompact">
     <eLabel position="0,0" size="1920,78" backgroundColor="FullNightChannelPanel" zPosition="-1"/>
-    <widget source="Title" render="Label" position="38,12" size="1400,54" font="Regular;38" foregroundColor="foreground" transparent="1" valign="center"/>
-    <widget source="global.CurrentTime" render="Label" position="1635,8" size="240,39" font="Regular;33" foregroundColor="foreground" transparent="1" halign="right" valign="center">
+    <widget source="Title" render="Label" position="38,12" size="1400,54" font="Regular;38" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background" />
+    <widget source="global.CurrentTime" render="Label" position="1635,8" size="240,39" font="Regular;33" foregroundColor="foreground" transparent="1" halign="right" valign="center" backgroundColor="background" >
       <convert type="ClockToText">Format:%H:%M</convert>
     </widget>
-    <widget source="global.CurrentTime" render="Label" position="1450,43" size="425,30" font="Regular;22" foregroundColor="secondary" transparent="1" halign="right" valign="center">
+    <widget source="global.CurrentTime" render="Label" position="1450,43" size="425,30" font="Regular;22" foregroundColor="secondary" transparent="1" halign="right" valign="center" backgroundColor="background" >
       <convert type="ClockToText">Date</convert>
     </widget>
     <eLabel position="0,75" size="1920,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
@@ -38,34 +38,34 @@
     <widget source="ServiceEvent" render="Picon" position="1180,92" size="120,72" zPosition="6" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1318,90" size="565,75" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center">
+    <widget source="ServiceEvent" render="Label" position="1318,90" size="565,75" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background" >
       <convert type="EventName">NowName</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1178,174" size="135,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left">
+    <widget source="ServiceEvent" render="Label" position="1178,174" size="135,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background" >
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText"/>
     </widget>
     <widget source="ServiceEvent" render="PLiFullNightProgress" position="1280,187" size="285,10" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="4" zPosition="5">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1588,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1">
+    <widget source="ServiceEvent" render="Label" position="1588,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" backgroundColor="background" >
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1725,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right">
+    <widget source="ServiceEvent" render="Label" position="1725,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background" >
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,220" size="705,320" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,220" size="705,320" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel position="1178,550" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1178,564" size="705,390" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1178,964" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="TransponderInfo"/>
     </widget>
   </screen>
@@ -84,10 +84,10 @@
   <panel name="Fullscreen_Template_Title_Date" />
   <widget name="list" position="30,120" size="1150,870" serviceItemHeight="45" serviceNumberFont="Regular;33" serviceNameFont="Regular;33" serviceInfoFont="Regular;30" progressInfoFont="Regular;27" listMarginLeft="8" listMarginRight="33" fieldMargins="8" itemsDistances="8" progressBarWidth="106" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black" />
   <eLabel position="1200,151" size="645,590" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="12" />
-  <widget source="ServiceEvent" render="Label" position="1223,166" size="600,75" font="Regular;36" foregroundColor="foreground" transparent="1" halign="center" valign="center">
+  <widget source="ServiceEvent" render="Label" position="1223,166" size="600,75" font="Regular;36" foregroundColor="foreground" transparent="1" halign="center" valign="center" backgroundColor="background" >
     <convert type="EventName">Name</convert>
   </widget>
-  <widget source="ServiceEvent" render="Label" position="1223,253" size="600,375" font="Regular;27" foregroundColor="foreground" transparent="1" valign="top">
+  <widget source="ServiceEvent" render="Label" position="1223,253" size="600,375" font="Regular;27" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
     <convert type="EventName">FullDescription</convert>
   </widget>
   <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1223,658" size="600,75" font="Regular;29" foregroundColor="secondary" transparent="1" />
@@ -104,34 +104,34 @@
     <widget source="ServiceEvent" render="Picon" position="1170,195" size="150,90" zPosition="6" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1170,399" size="705,45" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1170,399" size="705,45" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background" >
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1170,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left">
+    <widget source="ServiceEvent" render="Label" position="1170,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background" >
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText"/>
     </widget>
     <widget source="ServiceEvent" render="PLiFullNightProgress" position="1270,462" size="285,10" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="4" zPosition="5">
       <convert type="EventTime">Progress</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1570,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1">
+    <widget source="ServiceEvent" render="Label" position="1570,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" backgroundColor="background" >
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1725,450" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right">
+    <widget source="ServiceEvent" render="Label" position="1725,450" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background" >
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,495" size="705,210" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,495" size="705,210" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel position="1170,710" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1170,715" size="705,245" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1170,964" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="TransponderInfo"/>
     </widget>
     
@@ -151,34 +151,34 @@
     <widget source="ServiceEvent" render="Picon" position="1170,195" size="150,90" zPosition="6" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1170,399" size="705,45" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1170,399" size="705,45" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background" >
       <convert type="EventName">Name</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1170,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left">
+    <widget source="ServiceEvent" render="Label" position="1170,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background" >
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText"/>
     </widget>
 	<widget source="ServiceEvent" render="PLiFullNightProgress" position="1270,462" size="285,10" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="4" zPosition="5">
 		<convert type="EventTime">Progress</convert>
 	</widget>
-    <widget source="ServiceEvent" render="Label" position="1570,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1">
+    <widget source="ServiceEvent" render="Label" position="1570,450" size="126,33" font="Regular;30" foregroundColor="accent" transparent="1" backgroundColor="background" >
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1725,450" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right">
+    <widget source="ServiceEvent" render="Label" position="1725,450" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background" >
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,495" size="705,210" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,495" size="705,210" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel position="1170,710" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1170,715" size="705,245" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1170,964" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1170,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="TransponderInfo"/>
     </widget>
   </screen>
@@ -191,34 +191,34 @@
     <widget source="ServiceEvent" render="Picon" position="1180,92" size="120,72" zPosition="6" alphatest="blend" transparent="1">
       <convert type="ServiceName">Reference</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1318,90" size="565,75" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center">
+    <widget source="ServiceEvent" render="Label" position="1318,90" size="565,75" font="Regular;33" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background" >
       <convert type="EventName">NowName</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1178,174" size="135,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left">
+    <widget source="ServiceEvent" render="Label" position="1178,174" size="135,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background" >
       <convert type="EventTime">StartTime</convert>
       <convert type="ClockToText"/>
     </widget>
   	<widget source="ServiceEvent" render="PLiFullNightProgress" position="1280,187" size="285,10" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="4" zPosition="5">
 		<convert type="EventTime">Progress</convert>
 	</widget>
-    <widget source="ServiceEvent" render="Label" position="1588,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1">
+    <widget source="ServiceEvent" render="Label" position="1588,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" backgroundColor="background" >
       <convert type="EventTime">EndTime</convert>
       <convert type="ClockToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="1725,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right">
+    <widget source="ServiceEvent" render="Label" position="1725,174" size="150,33" font="Regular;30" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background" >
       <convert type="EventTime">Remaining</convert>
       <convert type="RemainingToText"/>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,220" size="705,320" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,220" size="705,320" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel position="1178,550" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1178,564" size="705,390" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1178,964" size="705,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1178,970" size="705,40" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="TransponderInfo"/>
     </widget>
     
@@ -232,26 +232,26 @@
     <eLabel position="795,84" size="565,926" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="12"/>
     <eLabel position="1355,84" size="535,926" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="12"/>
     <widget source="session.VideoPicture" render="Pig" position="800,90" size="550,310" zPosition="3" backgroundColor="transparent"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="800,405" size="550,42" font="Regular;32" foregroundColor="accent" transparent="1" valign="center" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="800,405" size="550,42" font="Regular;32" foregroundColor="accent" transparent="1" valign="center" noWrap="1" backgroundColor="background" >
       <convert type="EventInfo">NowName</convert>
     </widget>
     <eLabel position="800,450" size="550,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="800,455" size="550,245" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="800,455" size="550,245" font="Regular;30" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="800,705" size="550,42" font="Regular;32" foregroundColor="accent" transparent="1" valign="center" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="800,705" size="550,42" font="Regular;32" foregroundColor="accent" transparent="1" valign="center" noWrap="1" backgroundColor="background" >
       <convert type="EventInfo">NextName</convert>
     </widget>
     <eLabel position="800,750" size="550,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="802,755" size="550,250" font="Regular;30" foregroundColor="secondary" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="802,755" size="550,250" font="Regular;30" foregroundColor="secondary" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">NextDescription</convert>
     </widget>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1360,90" size="530,860" font="Regular;29" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1360,954" size="530,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1360,965" size="530,42" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1360,965" size="530,42" font="Regular;30" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-  <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+  <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
     <convert type="TransponderInfo"/>
   </widget>
   </screen>
@@ -264,7 +264,7 @@
   <screen name="ChannelSelectionFull" base="ChannelSelection" label="FullNight Vollbild" position="0,0" size="1920,1080" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="1920,1080">
     <panel name="FullNightChannelChrome"/>
     <widget name="list" position="20,78" size="1880,934" serviceItemHeight="45" serviceNumberFont="Regular;33" serviceNameFont="Regular;33" serviceInfoFont="Regular;30" progressInfoFont="Regular;27" listMarginLeft="8" listMarginRight="33" fieldMargins="8" itemsDistances="8" progressBarWidth="106" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
-  <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+  <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
     <convert type="TransponderInfo" />
   </widget>
   </screen>
@@ -275,16 +275,16 @@
     <widget name="list" position="20,78" size="1368,934" serviceItemHeight="45" serviceNumberFont="Regular;33" serviceNameFont="Regular;33" serviceInfoFont="Regular;30" progressInfoFont="Regular;27" listMarginLeft="8" listMarginRight="33" fieldMargins="8" itemsDistances="8" progressBarWidth="106" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
     <eLabel position="1398,84" size="500,929" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="12"/>
     <widget source="session.VideoPicture" render="Pig" position="1410,90" size="476,268" zPosition="3" backgroundColor="transparent"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1410,376" size="476,312" font="Regular;27" foregroundColor="foreground" transparent="1" valign="top">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1410,376" size="476,312" font="Regular;27" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background" >
       <convert type="EventName">FullDescription</convert>
     </widget>
     <eLabel position="1410,696" size="476,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
     <widget source="ServiceEvent" render="PLiFullNightSingleEpgList" position="1410,708" size="476,246" font="Regular;27" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
     <eLabel position="1410,960" size="476,2" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
-    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1410,968" size="476,40" font="Regular;27" foregroundColor="secondary" transparent="1" valign="center">
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1410,968" size="476,40" font="Regular;27" foregroundColor="secondary" transparent="1" valign="center" backgroundColor="background" >
       <convert type="PLiFullNightPrimeTime">PrimeTime,noDuration</convert>
     </widget>
-    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1">
+    <widget source="ServiceEvent" render="Label" position="713,24" size="725,30" font="Regular;22" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background" >
       <convert type="TransponderInfo"/>
     </widget>
   </screen>
@@ -313,7 +313,7 @@
   <screen name="myChannelSelection" position="0,0" size="1920,1080" title="Select service to add..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
     <panel name="Fullscreen_Template_Title_Date"/>
     <widget name="list" position="105,118" size="1710,675" itemHeight="54" font="Regular;30" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="12" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="2" borderColor="black"/>
-    <widget source="introduction" render="Label" position="105,838" size="1710,60" font="Regular;33" halign="center" foregroundColor="secondary" transparent="1"/>
+    <widget source="introduction" render="Label" position="105,838" size="1710,60" font="Regular;33" halign="center" foregroundColor="secondary" transparent="1" backgroundColor="background" />
     <panel name="TemplateAllColorButtons_Automatic"/>
     <panel name="template_ok_exit"/>
   </screen>
