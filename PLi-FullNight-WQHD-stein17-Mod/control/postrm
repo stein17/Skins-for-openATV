@@ -1,0 +1,16 @@
+#!/bin/sh
+# Clean removal only: never remove files during an upgrade.
+case "$1" in
+    remove|purge)
+        rm -rf /usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod
+        rm -rf /usr/lib/enigma2/python/Plugins/Extensions/PLiFullNightWQHD
+        for kind in Converter Renderer; do
+            base="/usr/lib/enigma2/python/Components/$kind"
+            rm -f "$base"/PLiWQHDFullNight*.py
+            rm -f "$base"/PLiWQHDFullNight*.pyc
+            rm -f "$base"/PLiWQHDFullNight*.pyo
+            rm -f "$base"/__pycache__/PLiWQHDFullNight*.pyc
+        done
+        ;;
+esac
+exit 0

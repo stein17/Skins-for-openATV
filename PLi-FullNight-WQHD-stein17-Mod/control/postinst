@@ -1,0 +1,17 @@
+#!/bin/sh
+# Preserve the user's existing theme.xml on upgrades, adding only the new
+# keyboard key color when a prior version left the conffile without it.
+case "$1" in
+    configure)
+        theme=/usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod/theme.xml
+        if [ -f "$theme" ] && ! grep -q 'name="FullNightKeyboardKey"' "$theme"; then
+            if grep -q '</colors>' "$theme"; then
+                sed -i '/<\/colors>/i\		<color name="FullNightKeyboardKey" value="#00293444" />' "$theme" || exit 1
+            else
+                echo "PLi FullNight WQHD: theme.xml has no </colors> section" >&2
+                exit 1
+            fi
+        fi
+        ;;
+esac
+exit 0

@@ -1,0 +1,1200 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<skin>
+  <!-- Player, Filmlisten, EMC, Radio, E2MDBE, Streaming und Cover. -->
+  <!-- Screen: E2MDBEventSelection -->
+  <screen position="0,0" size="2560,1440" name="E2MDBEventSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget position="72,157" size="2416,80" font="Regular;51" foregroundColor="foreground" transparent="1" valign="center" source="searchtitle" render="Label" backgroundColor="background"/>
+  <widget position="72,251" size="2416,64" font="Regular;37" foregroundColor="secondary" transparent="1" valign="center" source="short_desc" render="Label" backgroundColor="background"/>
+  <widget position="48,305" size="2464,816" source="menuList" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+    <template name="Default" fonts="Regular;39,Regular;31,Regular;28" itemHeight="204">
+      <pixmap position="16,13" size="132,172" index="7" alpha="blend" scale="centerScaled"/>
+      <text position="180,7" size="1520,52" index="0" font="0" wrap="ellipsis"/>
+      <text position="1724,13" size="100,40" index="1" font="2" wrap="ellipsis" foregroundColor="accent"/>
+      <text position="1840,13" size="180,40" index="2" font="2" wrap="ellipsis" foregroundColor="accent"/>
+      <text position="2036,13" size="200,40" index="3" font="2" wrap="ellipsis" foregroundColor="accent"/>
+      <text position="2252,13" size="84,40" index="4" font="2" wrap="ellipsis" foregroundColor="accent"/>
+      <text position="2352,13" size="88,40" index="5" font="2" wrap="ellipsis" foregroundColor="accent"/>
+      <text position="180,72" size="2260,112" index="6" font="1" wrap="wrap" foregroundColor="secondary"/>
+    </template>
+  </widget>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: E2MDBEventView -->
+<screen position="0,0" size="2560,1440" name="E2MDBEventView" flags="wfNoBorder" backgroundColor="FullNightScreen" ignoreWidgets="FullDescription,red,green,yellow,blue">
+    <eLabel position="27,161" size="773,437" backgroundColor="accent" zPosition="1"/>
+    <eLabel position="29,164" size="768,432" backgroundColor="surface" zPosition="2"/>
+    <widget position="29,164" size="768,432" source="session.VideoPicture" render="Pig" backgroundColor="transparent" zPosition="3"/>
+    <widget source="e2mdb_backdrop" position="827,213" size="1707,960" render="Pixmap" alphatest="blend" transparent="1" scaleFlags="centerScaled" zPosition="-10" cornerRadius="27"/>
+    <ePixmap pixmap="PLi-FullNight-WQHD-stein17-Mod/images/mask_backdrop.png" position="827,153" size="1707,1173" zPosition="-9" alphatest="blend"/>
+    <widget source="e2mdb_imageOrPicon" position="24,813" size="560,315" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="21"/>
+    <widget source="e2mdb_cover" position="596,813" size="209,315" render="Pixmap" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="16"/>
+    <widget source="e2mdb_title" position="853,160" size="1707,80" font="Regular; 53" foregroundColor="foreground" transparent="1" valign="center" render="Label" zPosition="3" borderWidth="3" borderColor="black" backgroundColor="background"/>
+    <widget source="e2mdb_subtitle" position="27,613" size="773,189" font="Regular; 40" foregroundColor="foreground" transparent="1" valign="center" render="Label" zPosition="3" backgroundColor="background"/>
+    <widget source="e2mdb_infoline" position="27,1267" size="773,80" font="Regular;37" foregroundColor="accent" transparent="1" valign="center" render="Label" zPosition="3" backgroundColor="background"/>
+    <widget name="epg_description" position="853,867" size="1707,480" font="Regular;44" foregroundColor="foreground" backgroundColor="background" transparent="1" valign="center" scrollbarMode="showOnDemand" borderWidth="3" borderColor="black"/>
+    <widget name="channel" position="27,1147" size="773,53" font="Regular;44" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" zPosition="3" halign="left" backgroundColor="background"/>
+    <widget name="datetime" position="27,1207" size="480,53" font="Regular; 40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" zPosition="3" backgroundColor="background"/>
+    <widget name="duration" position="560,1207" size="240,53" font="Regular; 40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="3" backgroundColor="background"/>
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_ok_exit"/>
+</screen>
+  
+    <!-- Screen: E2MDBMediaEventView -->
+<!--  <screen position="0,0" size="1920,1080" name="E2MDBMediaEventView" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="1920,1080">
+    <eLabel position="0,0" size="1920,120" backgroundColor="backgroundtop" zPosition="-1" />
+    <eLabel position="0,1113" size="1920,72" backgroundColor="backgroundtop" zPosition="-1" />
+    <eLabel position="0,118" size="1920,3" backgroundColor="FullNightLineHorizontal" zPosition="2" />
+    <eLabel position="0,1113" size="1920,3" backgroundColor="FullNightLineHorizontal" zPosition="2" />
+    <widget source="global.CurrentTime" render="Label" position="1650,20" size="225,45" foregroundColor="foreground" backgroundColor="background" borderWidth="2" borderColor="black" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1425,68" size="450,36" foregroundColor="foreground" backgroundColor="background" borderWidth="2" borderColor="black" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right">
+      <convert type="ClockToText">Date</convert>
+    </widget>
+    <eLabel position="1316,269" size="580,328" backgroundColor="accent" zPosition="1" />
+    <eLabel position="1317,270" size="576,324" backgroundColor="surface" zPosition="2" />
+    <widget position="1317,270" size="576,324" source="session.VideoPicture" render="Pig" backgroundColor="transparent" zPosition="3" /> 
+    <ePixmap pixmap="PLi-FullNight-WQHD-stein17-Mod/images/mask_backdrop.png" position="30,257" size="1280,720" zPosition="-9" alphatest="blend" />
+
+ 	<widget name="image" position="30,260" size="1265,720" alphatest="blend" transparent="1" scaleFlags="centerScaled" zPosition="-7" cornerRadius="20" />
+    <widget name="cover" position="1221,745" size="200,300" alphatest="blend" scaleFlags="centerScaled" zPosition="3" cornerRadius="12" />
+    <widget name="backdrop" position="1320,730" size="580,326" alphatest="blend" scaleFlags="leftTop" cornerRadius="16" />
+    <widget name="titlelogo" position="40,20" size="1440,90" alphatest="blend" scaleFlags="leftTop" />
+    <widget source="title" position="40,20" size="1440,90" render="Label" font="Regular;68" foregroundColor="foreground" transparent="1" valign="center" zPosition="3" borderWidth="2" borderColor="black" />
+    <widget source="subtitle" position="40,130" size="1860,60" render="Label" font="Regular;48" backgroundColor="black" foregroundColor="foreground" transparent="1" noWrap="1" textBorderColor="black" textBorderWidth="2" borderWidth="2" borderColor="black" />
+    <widget name="infoline" position="40,190" size="1860,60" font="Regular;36" fontAdditional="Regular;22" transparent="1" borderWidth="2" borderColor="black" />
+    <widget name="description" position="40,710" size="1150,360" font="Regular;33" foregroundColor="foreground" backgroundColor="background" transparent="1" valign="center" scrollbarMode="showNever" borderWidth="2" borderColor="black" />
+    
+    
+    <widget source="runtime" position="1322,617" size="380,80" render="Label" font="Regular; 60" foregroundColor="yellow" transparent="1" valign="center" halign="left" zPosition="3" />
+  </screen>  -->
+  
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: FILMLISTE, FILMBEARBEITUNG UND MOVIEPLAYER -->
+  <!-- ================================================================== -->
+<!-- Screen: MovieSelection -->
+<screen position="0,0" size="2560,1440" name="MovieSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+<widget source="session.VideoPicture" render="Pig" position="1833,153" size="711,400" backgroundColor="transparent" zPosition="3"/>
+<widget source="Service" render="Cover" position="1553,153" size="267,400" zPosition="2" backgroundColor="background" transparent="1"/>
+  <widget position="27,200" size="1500,1149" name="list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+
+  <widget position="333,377" size="720,300" font="Regular;180" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="5" name="chosenletter" backgroundColor="background"/>
+  <widget position="73,517" size="1380,140" font="Regular;52" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" halign="center" zPosition="6" backgroundColor="surface" name="waitingtext"/>
+  <!-- <eLabel position="1165,575" size="740,430" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="-1" /> -->
+
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_menu_info_epg"/>
+<widget source="Service" render="Picon" position="1553,576" size="293,176" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="MovieReference"/>
+  </widget>
+<widget source="Service" render="Label" position="1893,660" size="240,40" zPosition="12" font="Regular; 40" halign="left" transparent="1" backgroundColor="background">
+  <convert type="ServiceTime">Duration</convert>
+  <convert type="ClockToText">InMinutes</convert>
+</widget>
+  <widget source="Service" render="Label" position="1893,568" size="640,93" font="Regular; 43" foregroundColor="foreground" backgroundColor="background" valign="center" halign="left" transparent="1" zPosition="5">
+    <convert type="MovieInfo">RecordServiceName</convert>
+  </widget>
+  <widget name="freeDiskSpace" position="27,133" size="1500,60" font="Regular;44" valign="center" halign="center" backgroundColor="background" foregroundColor="foreground" transparent="1"/>
+  <widget source="Service" position="1895,707" size="627,48" render="Label" font="Regular; 40" backgroundColor="background" transparent="1" zPosition="1" halign="left">
+    <convert type="ServiceTime">StartTime</convert>
+    <convert type="ClockToText">Format:%A, %d.%m.%Y,   %H:%M</convert>
+  </widget>
+  <widget source="Service" render="Label" position="2132,660" size="180,40" zPosition="2" font="Regular; 36" halign="center" transparent="1" backgroundColor="background">
+    <convert type="MovieInfo">FileSize</convert>
+  </widget>
+  <widget source="Service" render="RunningText" options="movetype=running,startdelay=1200,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="1573,787" size="947,533" font="Regular;39" zPosition="2" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+    <convert type="MovieInfo">FullDescription</convert>
+  </widget>
+</screen>
+
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: AUSWÄHLBARE PLAYER-VORLAGEN -->
+  <!-- ================================================================== -->
+	<!--FHD port of the original PLi FullNight skinpart: player_Standard.xml-->
+	<!-- Movie_Player -->
+	<!-- Screen: MoviePlayer -->
+	<!-- Screen: MoviePlayer (PLi-FullNight FHD) -->
+<screen name="MoviePlayer" title="InfoBar" position="fill" backgroundColor="transparent" flags="wfNoBorder" ignoreWidgets="key_yellow,key_blue,key_green,eventname,state,speed,statusicon">
+  <eLabel position="253,1323" size="2043,27" zPosition="0" transparent="0" backgroundColor="grey" cornerRadius="11"/>
+  <eLabel position="255,1324" size="2040,24" zPosition="1" transparent="0" backgroundColor="backgroundtop" cornerRadius="11"/>
+  <widget source="session.CurrentService" render="PositionGauge" position="256,1324" size="2036,24" transparent="1" zPosition="4">
+    <convert type="ServicePosition">Gauge</convert>
+  </widget>
+  <widget source="session.CurrentService" render="PLiWQHDFullNightProgress" position="256,1324" size="2036,24" zPosition="2" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="ServicePosition">Position</convert>
+  </widget>
+  <!-- The existing elapsed marker also works with the normal ServicePosition Gauge. -->
+  <!--     <widget source="session.CurrentService" render="PLiWQHDFullNightElapsedMarker" position="122,921" size="1668,72" zPosition="12" transparent="1" barX="70" barY="72" barWidth="1527" flagWidth="140" flagHeight="68" flagGap="4" flagPixmap="/usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod/progress/elapsed_flag.png">
+        <convert type="ServicePosition">Gauge</convert>
+    </widget> -->
+  <widget source="session.CurrentService" render="PLiWQHDFullNightElapsedMarker" position="256,1228" size="187,91" zPosition="12" transparent="1" alphatest="blend" barX="0" barY="96" barWidth="2036" flagWidth="187" flagHeight="91" flagGap="5" flagPixmap="/usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod/progress/elapsed_flag.png">
+    <convert type="ServicePosition">Gauge</convert>
+  </widget>
+
+<eLabel position="19,1271" size="213,135" backgroundColor="FullNightPanel" cornerRadius="11" zPosition="1"/>
+  <widget source="session.CurrentService" render="Label" position="267,1371" size="493,60" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48" valign="center" halign="left">
+    <convert type="PLiWQHDFullNightMovieTime">LengthReadable</convert>
+  </widget>
+
+  <widget name="Cover" position="2056,933" size="200,280" zPosition="4" alphatest="blend" transparent="1" valign="top" halign="center" conditional="Cover"/>
+  
+
+  <widget source="session.CurrentService" position="center,1228" size="2036,91" render="RunningText" options="movetype=running,startdelay=1800,steptime=90,step=3,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" font="Regular; 64" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" valign="center" halign="center">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Picon" position="25,1279" zPosition="4" size="200,120" transparent="1" alphatest="blend">
+    <convert type="MovieReference"/>
+  </widget>
+  <eLabel position="0,1080" size="2560,144" backgroundColor="FullNightInfoFade" zPosition="-1"/>
+  <eLabel position="0,1224" size="2560,296" backgroundColor="FullNightInfoShade" zPosition="-1"/>
+
+
+<widget source="session.CurrentService" render="Label" halign="left" position="807,1371" size="160,60" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48">
+    <convert type="PLiWQHDFullNightServiceTime">EndTime</convert>
+  </widget>
+  <eLabel halign="center" position="760,1371" size="60,60" text="-" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48"/>
+  <widget source="session.CurrentService" render="Label" position="2313,1309" size="247,51" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" zPosition="5" font="Regular; 40" valign="center" halign="left">
+    <convert type="PLiWQHDFullNightMovieTime">Remaining</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" borderWidth="4" position="0,1113" size="293,113" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular; 99" valign="center" halign="center" borderColor="black">
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget name="Cover" position="2313,1013" size="200,280" alphatest="blend" transparent="1" zPosition="4"/>
+  <widget source="session.RecordState" render="Pixmap" position="304,1152" size="40,40" pixmap="icons/rec.png" zPosition="5" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+<widget source="session.CurrentService" render="Label" position="1827,1371" size="720,60" font="Regular; 45" foregroundColor="foreground" backgroundColor="background" transparent="1" halign="center" valign="center" noWrap="1" zPosition="4" borderWidth="4" borderColor="black">
+    <convert type="PLiWQHDFullNightVideoInfo">VideoInfo</convert>
+</widget>
+  <widget source="session.CurrentService" render="Label" position="973,1371" size="853,60" font="Regular; 45" backgroundColor="background" transparent="1" halign="center" valign="center" borderWidth="4" borderColor="black">
+    <convert type="PLiWQHDFullNightAudioInfo">AudioCodec</convert>
+  </widget>
+
+
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: ENHANCED MOVIE CENTER (EMC) -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: EMCSelection (einziges EMC-Layout, immer mit PIG/Video-Vorschau) -->
+<screen position="0,0" size="2560,1440" name="EMCSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Enhanced Movie Center" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <!-- Filmliste: Schriften, Farben und Zeilengeometrie werden direkt hier geändert. -->
+  <widget position="13,147" size="1635,1203" name="list" itemHeight="71" CoolFont="Regular;43" CoolSelectFont="Regular;43" CoolDateFont="Regular;35" CoolTitleColor="0" CoolDateColor="0" CoolHighlightColor="0" DefaultColor="FullNightProgressUserSolid" TitleColor="foreground" DateColor="secondary" UnwatchedColor="FullNightProgressUserSolid" WatchingColor="#D8C100" FinishedColor="#5FA816" RecordingColor="#E51400" BackColor="surface" BackColorSel="selection" FrontColorSel="foreground" CoolSelNumTxtWidth="60" CoolProgressPos="88" CoolProgressHPos="8" CoolIconPos="16" CoolIconHPos="8" CoolIconSize="56,56" CoolBarPos="84" CoolBarHPos="31" CoolBarSize="100,16" CoolBarSizeSa="100,16" CoolMoviePos="208" CoolMovieHPos="8" CoolMovieSize="1140" CoolFolderSize="1140" CoolDatePos="1365" CoolDateHPos="15" CoolDateWidth="240" CoolPiconPos="208" CoolPiconHPos="8" CoolPiconWidth="100" CoolPiconHeight="56" CoolMoviePiconPos="332" CoolMoviePiconSize="1016" CoolCSWidth="300" CoolDirInfoWidth="300" CoolCSPos="1296" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget position="88,521" size="1540,120" font="Regular;45" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" zPosition="4" name="wait" backgroundColor="background"/>
+  <!-- PIG/Video-Vorschau: position und size bestimmen Lage und Größe. -->
+  <panel name="Fullscreen_right_Pic_EMC"/>
+  <!-- Cover: dieselbe position/size bei CoverBg, Cover und CoverBgLbl gemeinsam ändern. -->
+  <widget position="2287,587" size="256,360" name="CoverBg" alphatest="blend" zPosition="1"/>
+  <widget position="2287,587" size="256,360" name="Cover" alphatest="blend" zPosition="2"/>
+  <widget position="2287,587" size="256,360" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" zPosition="0" name="CoverBgLbl" backgroundColor="background"/>
+  <!-- Film- und Aufnahmedaten rechts neben dem Cover. -->
+  <widget position="1667,613" size="613,96" font="Regular; 43" foregroundColor="foreground" transparent="1" valign="center" scrollText="direction=top,startDelay=4000,stepDelay=80,stepSize=1,endDelay=3000,repeat=0" source="Service" render="Label" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget position="1813,723" size="467,85" font="Regular;37" foregroundColor="foreground" transparent="1" valign="center" source="Service" render="Label" backgroundColor="background">
+    <convert type="MovieInfo">RecordServiceName</convert>
+  </widget>
+<widget source="Service" render="Picon" position="1667,725" zPosition="10" size="133,80" transparent="1" alphatest="blend">
+  <convert type="MovieInfo">RecordServiceRef</convert>
+</widget>
+<widget source="Service" render="Label" position="1667,821" size="613,47" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" halign="left" noWrap="1" zPosition="10" backgroundColor="background">
+	<convert type="EMCServiceTime">StartTime</convert>
+	<convert type="EMCClockToText">Format:%A %d. %b. %Y   %H:%M</convert>
+</widget>
+  <widget position="1667,881" size="187,47" font="Regular; 36" foregroundColor="secondary" transparent="1" halign="left" valign="center" source="Service" render="Label" backgroundColor="background">
+  <convert type="ServiceTime">Duration</convert>
+  <convert type="EMCClockToText">Format:%H:%M min</convert>
+</widget>
+  <widget position="1667,960" size="873,379" font="Regular; 36" foregroundColor="foreground" transparent="1" valign="top" scrollText="direction=top,startDelay=4000,stepDelay=80,stepSize=1,endDelay=3000,repeat=0" source="Service" render="Label" zPosition="2" backgroundColor="background">
+    <convert type="MovieInfo">FullDescription</convert>
+  </widget>
+  <widget font="Regular;36" halign="left" valign="center" position="1853,881" render="Label" size="160,47" source="Service" backgroundColor="background" foregroundColor="secondary" transparent="1">
+  <convert type="MovieInfo">FileSize</convert>
+</widget>
+  <!-- Audio-/Metadaten unter der Filmliste. -->
+  <widget position="48,2357" size="1620,59" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="name" backgroundColor="background"/>
+  <widget position="48,2424" size="200,56" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" noWrap="1" name="artistAT" backgroundColor="background"/>
+  <widget position="264,2424" size="584,56" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="artistATtxt" backgroundColor="background"/>
+  <widget position="868,2424" size="200,56" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" noWrap="1" name="albumAT" backgroundColor="background"/>
+  <widget position="1084,2424" size="584,56" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="albumATtxt" backgroundColor="background"/>
+  <widget position="48,2487" size="200,56" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" noWrap="1" name="genreAT" backgroundColor="background"/>
+  <widget position="264,2487" size="584,56" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="genreATtxt" backgroundColor="background"/>
+  <widget position="868,2487" size="200,56" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" noWrap="1" name="runtimeAT" backgroundColor="background"/>
+  <widget position="1084,2487" size="584,56" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="runtimeATtxt" backgroundColor="background"/>
+   <!-- <eLabel position="1250,720" size="655,284" backgroundColor="FullNightPanel" cornerRadius="12" zPosition="1" /> -->
+  <widget position="2013,881" size="267,47" font="Regular; 36" foregroundColor="secondary" transparent="1" valign="center" halign="left" source="spacefree" render="Label" backgroundColor="background"/>
+</screen>
+
+  <!-- Screen: EMCMediaCenter -->
+<!-- Screen: EMCMediaCenter -->
+<!-- <screen name="EMCMediaCenter" position="0,0" size="1920,1080" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent" resolution="1920,1080" ignoreWidgets="audioLabel,subtitleLabel,angleLabel,chapterLabel,anglePix">
+    <eLabel position="190,992" size="1532,20" zPosition="0" transparent="0" backgroundColor="darkgrey" cornerRadius="8" />
+    <eLabel position="191,993" size="1530,18" zPosition="1" transparent="0" backgroundColor="#051b1f27" cornerRadius="8" />
+<eLabel position="14,953" size="160,100" backgroundColor="FullNightPanel" cornerRadius="8" zPosition="1" />
+    <widget source="Service" position="194,993" size="1524,18" render="EMCPositionGauge" zPosition="6" transparent="1">
+        <convert type="EMCServicePosition">Gauge</convert>
+    </widget>
+    <widget source="Service" position="194,993" size="1524,18" render="PLiWQHDFullNightProgress" zPosition="5" transparent="1" foregroundColor="FullNightProgressUser" cornerRadius="6">
+        <convert type="EMCServicePosition">Position</convert>
+    </widget>
+    <widget source="Service" position="194,993" size="1524,18" render="EMCPositionGauge" zPosition="4" pointer="dvr/CoolPointerRec.png:1520,4">
+        <convert type="EMCRecordPosition">Position</convert>
+    </widget>
+<widget source="session.CurrentService" render="Label" position="200,1028" size="370,45" foregroundColor="foreground" backgroundColor="black" borderWidth="3" borderColor="black" transparent="1" font="Regular;36" valign="center" halign="left">
+        <convert type="PLiWQHDFullNightMovieTime">LengthReadable</convert>
+    </widget> -->
+    <!-- Beweglicher Zeitmarker; EMC-Gauge nur fuer den Marker-Renderer -->
+<!-- <widget source="Service" render="PLiWQHDFullNightElapsedMarker" position="192,921" size="140,68" zPosition="12" transparent="1" alphatest="blend" barX="0" barY="72" barWidth="1528" flagWidth="140" flagHeight="68" flagGap="4" flagPixmap="/usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod/progress/elapsed_flag.png">
+    <convert type="EMCServicePosition">Gauge</convert>
+</widget>
+<widget source="session.CurrentService" render="Label" halign="left" position="605,1028" size="120,45" foregroundColor="foreground" backgroundColor="black" borderWidth="3" borderColor="black" transparent="1" font="Regular;36">
+        <convert type="PLiWQHDFullNightServiceTime">EndTime</convert>
+    </widget>
+<eLabel halign="center" position="570,1028" size="45,45" text="-" foregroundColor="foreground" backgroundColor="black" borderWidth="3" borderColor="black" transparent="1" font="Regular;36" />
+    
+    <widget source="Service" render="Label" position="1735,982" size="185,38" foregroundColor="foreground" backgroundColor="black" borderWidth="3" borderColor="black" transparent="1" zPosition="5" font="Regular; 30" valign="center" halign="left">
+   <convert type="PLiWQHDFullNightEMCTime">Remaining</convert>
+    </widget>
+<widget source="global.CurrentTime" render="Label" borderWidth="3" position="0,835" size="220,85" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular; 74" valign="center" halign="center" borderColor="black">
+        <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    
+
+    <widget name="Cover" position="1735,760" size="150,210" alphatest="blend" transparent="1" zPosition="4" />
+    <widget source="session.RecordState" render="Pixmap" position="228,864" size="30,30" pixmap="icons/rec.png" zPosition="5" alphatest="blend">
+        <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+<widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_on.png" position="1400,1028" size="69,42" zPosition="2" alphatest="blend">
+        <convert type="ServiceInfo">IsMultichannel</convert>
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dolby_off.png" position="1400,1028" size="69,42" zPosition="1" alphatest="blend">
+        <convert type="ServiceInfo">IsStereo</convert>
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="Service" render="Label" position="740,1028" size="640,45" font="Regular; 36" backgroundColor="transparent" transparent="1" halign="center" valign="center" borderWidth="3" borderColor="black">
+        <convert type="PLiWQHDFullNightAudioInfo">AudioCodec</convert>
+    </widget>
+    <widget source="session.CurrentService" render="RunningText" options="movetype=running,startdelay=1800,steptime=90,step=2,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="center,921" size="1527,68" font="Regular; 48" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="3" borderColor="black" transparent="1" valign="center" halign="center">
+        <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Picon" position="19,958" size="150,90" zPosition="4" transparent="1" alphatest="blend">
+        <convert type="MovieReference" />
+    </widget>
+ <ePixmap position="51,960" size="86,86" pixmap="/usr/share/enigma2/MetrixHD/icons/movie_small.png" scale="1" alphatest="blend" transparent="1" zPosition="2" />
+
+    <eLabel position="0,810" size="1920,108" backgroundColor="FullNightInfoFade" zPosition="-1" />
+    <eLabel position="0,918" size="1920,222" backgroundColor="FullNightInfoShade" zPosition="-1" />
+
+    <widget source="Service" render="Label" position="1490,1028" size="415,45" font="Regular;26" foregroundColor="foreground" backgroundColor="transparent" transparent="1" noWrap="1" halign="right" valign="center" zPosition="4">
+        <convert type="PLiWQHDFullNightVideoInfo">VideoInfo</convert>
+    </widget>
+</screen> -->
+<screen name="EMCMediaCenter" position="0,0" size="2560,1440" title="InfoBar" flags="wfNoBorder" backgroundColor="transparent" resolution="2560,1440" ignoreWidgets="audioLabel,subtitleLabel,angleLabel,chapterLabel,anglePix">
+  <eLabel position="253,1323" size="2043,27" zPosition="0" transparent="0" backgroundColor="darkgrey" cornerRadius="11"/>
+  <eLabel position="255,1324" size="2040,24" zPosition="1" transparent="0" backgroundColor="#51b1f27" cornerRadius="11"/>
+  <eLabel position="19,1271" size="213,133" backgroundColor="FullNightPanel" cornerRadius="11" zPosition="1"/>
+  <widget source="Service" position="256,1324" size="2037,24" render="EMCPositionGauge" zPosition="6" transparent="1">
+    <convert type="EMCServicePosition">Gauge</convert>
+  </widget>
+  <widget source="Service" position="260,1324" size="2033,24" render="PLiWQHDFullNightProgress" zPosition="5" transparent="1" foregroundColor="FullNightProgressUser" cornerRadius="8">
+    <convert type="EMCServicePosition">Position</convert>
+  </widget>
+  <widget source="Service" position="256,1324" size="2037,24" render="EMCPositionGauge" zPosition="4" pointer="dvr/CoolPointerRec.png:2027,5">
+    <convert type="EMCRecordPosition">Position</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" position="267,1371" size="493,60" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48" valign="center" halign="left">
+    <convert type="PLiWQHDFullNightMovieTime">LengthReadable</convert>
+  </widget>
+  <!-- Beweglicher Zeitmarker; EMC-Gauge nur fuer den Marker-Renderer -->
+  <widget source="Service" render="PLiWQHDFullNightElapsedMarker" position="256,1228" size="187,91" zPosition="12" transparent="1" alphatest="blend" barX="0" barY="96" barWidth="2037" flagWidth="187" flagHeight="91" flagGap="5" flagPixmap="/usr/share/enigma2/PLi-FullNight-WQHD-stein17-Mod/progress/elapsed_flag.png">
+    <convert type="EMCServicePosition">Gauge</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Label" halign="left" position="807,1371" size="160,60" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48">
+    <convert type="PLiWQHDFullNightServiceTime">EndTime</convert>
+  </widget>
+  <eLabel halign="center" position="760,1371" size="60,60" text="-" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" font="Regular;48"/>
+  <widget source="Service" render="Label" position="2313,1309" size="247,51" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" zPosition="5" font="Regular; 40" valign="center" halign="left">
+    <convert type="PLiWQHDFullNightEMCTime">Remaining</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" borderWidth="4" position="0,1113" size="293,113" backgroundColor="secondBG" noWrap="1" transparent="1" zPosition="1" foregroundColor="white" font="Regular; 99" valign="center" halign="center" borderColor="black">
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget name="Cover" position="2313,1013" size="200,280" alphatest="blend" transparent="1" zPosition="4"/>
+  <widget source="session.RecordState" render="Pixmap" position="304,1152" size="40,40" pixmap="icons/rec.png" zPosition="5" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+ 
+
+<widget source="session.CurrentService" render="Label" position="1827,1371" size="720,60" font="Regular; 45" foregroundColor="foreground" backgroundColor="background" transparent="1" halign="center" valign="center" noWrap="1" zPosition="4" borderWidth="4" borderColor="black">
+    <convert type="PLiWQHDFullNightVideoInfo">VideoInfo</convert>
+</widget>
+
+
+
+
+  <widget source="Service" render="Label" position="973,1371" size="853,60" font="Regular; 45" backgroundColor="background" transparent="1" halign="center" valign="center" borderWidth="4" borderColor="black">
+    <convert type="PLiWQHDFullNightAudioInfo">AudioCodec</convert>
+  </widget>
+  <widget source="session.CurrentService" render="RunningText" options="movetype=running,startdelay=1800,steptime=90,step=3,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="center,1228" size="2036,91" font="Regular; 64" zPosition="1" foregroundColor="foreground" backgroundColor="black" borderWidth="4" borderColor="black" transparent="1" valign="center" halign="center">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget source="session.CurrentService" render="Picon" position="25,1277" size="200,120" zPosition="4" transparent="1" alphatest="blend">
+    <convert type="MovieReference"/>
+  </widget>
+  <eLabel position="0,1080" size="2560,144" backgroundColor="FullNightInfoFade" zPosition="-1"/>
+  <eLabel position="0,1224" size="2560,296" backgroundColor="FullNightInfoShade" zPosition="-1"/>
+  <!-- e2MDB-Poster des in EMC markierten Films -->
+  <!-- <widget source="Service" render="Pixmap" position="1675,68" size="230,345" condition="config.plugins.e2mdb.enableDatabase.value" alphatest="blend" scaleFlags="centerScaled" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Cover</convert>
+</widget> -->
+  <!-- e2MDB-Backdrop des in EMC markierten Films -->
+  <!-- <widget source="session.CurrentService" render="Pixmap" position="459,298" size="640,360" condition="config.plugins.e2mdb.enableDatabase.value" alphatest="blend" scaleFlags="centerScaled" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Backdrop</convert>
+</widget> -->
+  <!-- Titel aus e2MDB -->
+  <!-- <widget source="Service" render="Label" position="1160,68" size="490,55" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;32" foregroundColor="#00ffffff" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Title</convert>
+</widget> -->
+  <!-- Von e2MDB zusammengestellte Infozeile -->
+  <!-- <widget source="Service" render="Label" position="1160,135" size="490,65" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;22" foregroundColor="#00cccccc" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">InfoLine</convert>
+</widget> -->
+  <!-- Filmbeschreibung aus e2MDB -->
+  <!-- <widget source="Service" render="Label" position="1160,215" size="490,240" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;24" foregroundColor="#00ffffff" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Overview</convert>
+</widget> -->
+  <!-- Bewertung unterhalb des Posters -->
+  <!-- <eLabel text="Bewertung:" position="1675,430" size="150,35" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;22" foregroundColor="#00cccccc" transparent="1" zPosition="5" />
+
+<widget source="Service" render="Label" position="1830,430" size="75,35" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;22" foregroundColor="#00ffffff" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Rating</convert>
+</widget> -->
+  <!-- Darsteller -->
+  <!-- <eLabel text="Darsteller:" position="1160,480" size="745,35" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;24" foregroundColor="#00cccccc" transparent="1" zPosition="5" />
+
+<widget source="Service" render="Label" position="1160,520" size="745,140" condition="config.plugins.e2mdb.enableDatabase.value" font="Regular;22" foregroundColor="#00ffffff" transparent="1" zPosition="5">
+    <convert type="E2MDBEventInfo">Cast</convert>
+</widget> -->
+</screen>
+  <!-- Screen: MovieTagEditor -->
+  <screen name="MovieTagEditor" position="0,0" size="2560,1440" title="edit tags..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="1000,157" size="1500,960" itemHeight="72" scrollbarMode="showOnDemand" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CutListContextMenu -->
+  <screen position="0,0" size="2560,1440" name="CutListContextMenu" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="2560,1440" title="Menu Cutlisteditor">
+    <panel name="Fullscreen_Template_Title_Date"/>
+	<panel name="Fullscreen_left_Pic"/>
+	<eLabel position="980,133" size="4,1172" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget source="menu" render="Listbox" position="1060,177" size="1440,1080" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="3" borderColor="black">
+      <template name="Default" fonts="Regular;43" itemHeight="72">
+        <text position="24,4" size="1380,64" index="0" font="0" verticalAlignment="center" wrap="ellipsis"/>
+      </template>
+    </widget>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: CutListEditor -->
+  <screen position="0,0" size="2560,1440" name="CutListEditor" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Cutlist editor" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="48,137" size="1620,912" backgroundColor="surface" zPosition="-1"/>
+    <widget position="48,137" size="1620,912" name="Video" backgroundColor="transparent" zPosition="1"/>
+    <widget position="48,1073" size="1620,72" font="Regular;45" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget position="48,1168" size="264,59" font="Regular;40" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" name="SeekState" backgroundColor="background"/>
+    <widget position="348,1168" size="700,59" font="Regular;40" foregroundColor="foreground" transparent="1" valign="center" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServicePosition">Position,Detailed</convert>
+    </widget>
+    <widget position="48,1316" size="2464,40" name="Timeline" pointer="/usr/share/enigma2/skin_default/position_arrow.png:4,7" backgroundColor="selection" foregroundColor="accent"/>
+    <widget position="1728,137" size="768,953" source="cutlist" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <template name="Default" fonts="Regular;35" itemHeight="73">
+        <rectangle position="0,11" size="11,52" backgroundColor="+3"/>
+        <text position="28,7" size="536,59" index="1" font="0" verticalAlignment="center" wrap="ellipsis"/>
+        <text position="564,7" size="180,59" index="2" font="0" horizontalAlignment="right" verticalAlignment="center" wrap="ellipsis"/>
+      </template>
+    </widget>
+    <eLabel position="1788,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <eLabel position="1896,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <eLabel position="2004,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <eLabel position="2112,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <eLabel position="2220,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+    <eLabel position="2328,1176" size="64,64" text="" font="enigma2icons;56" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TitleProperties -->
+  <screen name="TitleProperties" position="0,0" size="2560,1440" title="Properties of current title" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="thumbnail" position="48,177" size="520,320" alphatest="blend"/>
+    <widget source="serviceinfo" render="Label" position="608,177" size="840,320" font="Regular;43" backgroundColor="surface" transparent="1"/>
+    <eLabel position="48,528" size="1620,3" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="config" position="48,568" size="1620,600" itemHeight="72" scrollbarMode="showOnDemand" backgroundColor="surface" transparent="1" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;40" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: TitleList -->
+  <screen name="TitleList" position="0,0" size="2560,1440" title="DVD Tool" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget source="hint" render="Label" position="1853,1136" size="659,49" font="Regular;40" halign="left" backgroundColor="surface" transparent="1"/>
+    <widget source="title_label" render="Label" position="48,137" size="1620,112" font="Regular;45" backgroundColor="surface" transparent="1"/>
+    <widget name="error_label" position="48,137" size="1620,800" zPosition="3" font="Regular;40" backgroundColor="surface"/>
+    <eLabel position="48,307" size="1620,5" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget source="titles" render="Listbox" position="48,328" size="1620,720" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <convert type="TemplatedMultiContent">{'template': [MultiContentEntryText(pos=(20, 4), size=(980, 56), font=0, flags=RT_HALIGN_LEFT, text=1), MultiContentEntryText(pos=(29, 60), size=(740, 51), font=1, flags=RT_HALIGN_LEFT, text=2), MultiContentEntryText(pos=(1011, 8), size=(300, 51), font=1, flags=RT_HALIGN_RIGHT, text=3), MultiContentEntryText(pos=(780, 60), size=(360, 51), font=1, flags=RT_HALIGN_RIGHT, text=4), MultiContentEntryText(pos=(1160, 60), size=(160, 51), font=1, flags=RT_HALIGN_RIGHT, text=5)], 'fonts': [gFont('Regular', 44), gFont('Regular', 36)], 'itemHeight': 120}</convert>
+    </widget>
+    <eLabel position="48,1048" size="1620,3" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="medium_label" position="48,1064" size="1620,49" font="Regular;37" halign="left" foregroundColors="foreground,yellow,red" backgroundColor="surface" transparent="1"/>
+    <widget source="space_bar_single" render="PLiWQHDFullNightProgress" position="48,1128" size="700,51" zPosition="2" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8"/>
+    <widget source="space_label_single" render="Label" position="59,1131" size="680,45" zPosition="3" font="Regular;36" halign="center" transparent="1" foregroundColor="surface" backgroundColor="secondary"/>
+    <widget source="space_bar_dual" render="PLiWQHDFullNightProgress" position="48,1128" size="1620,51" zPosition="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8"/>
+    <widget source="space_label_dual" render="Label" position="59,1131" size="1600,45" zPosition="2" font="Regular;36" halign="center" transparent="1" foregroundColor="surface" backgroundColor="secondary"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MovieInfoSetup -->
+  <screen name="MovieInfoSetup" position="0,0" size="2560,1440" title="Movie Information Download Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="1000,157" size="1500,988" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" enableWrapAround="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MovieMenu -->
+  <screen position="0,0" size="2560,1440" name="MovieMenu" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+	<panel name="Fullscreen_left_Pic"/>
+	<eLabel position="980,133" size="4,1172" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget source="menu" render="Listbox" position="1060,177" size="1440,1080" enableWrapAround="1" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="3" borderColor="black">
+      <template name="Default" fonts="Regular;43" itemHeight="72">
+        <text position="24,4" size="1380,64" index="0" font="0" verticalAlignment="center" wrap="ellipsis"/>
+      </template>
+    </widget> 
+    <panel name="template_ok_exit"/>
+  	<applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MovieRetitle -->
+  <screen position="0,0" size="2560,1440" name="MovieRetitle" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget position="1000,157" size="1500,660" name="config" font="Regular;39" valueFont="Regular;37" headerFont="Bold;39" itemHeight="73" padding="28,0" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget position="72,829" size="2416,60" font="Regular;36" foregroundColor="muted" transparent="1" valign="center" source="footnote" render="Label" backgroundColor="background"/>
+    <eLabel position="48,1037" size="2464,221" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="-1"/>
+    <widget position="84,1059" size="2392,176" font="Regular;43" foregroundColor="foreground" transparent="1" valign="center" source="description" render="Label" backgroundColor="background"/>
+    <widget position="48,905" size="0,0" name="HelpWindow" conditional="HelpWindow"/>
+    <widget position="0,0" size="0,0" name="Image" conditional="Image"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+    <widget position="72,905" size="2416,88" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="Path" backgroundColor="background"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: DownloadMovieInfo -->
+  <screen name="DownloadMovieInfo" position="0,0" size="2560,1440" title="Movie Information Download (TMDb)" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="48,137" size="1620,1080" backgroundColor="surface" zPosition="-1"/>
+    <widget name="movie_name" position="72,153" size="1572,96" font="Regular;45" foregroundColor="accent" backgroundColor="surface" transparent="1" valign="center" halign="center"/>
+    <widget name="movielist" position="72,265" size="1572,928" itemHeight="72" font="Regular;43" padding="24,0" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1728,137" size="768,1080" backgroundColor="surface" zPosition="-1"/>
+    <widget name="resulttext" position="1764,173" size="696,1008" font="Regular;40" foregroundColor="foreground" backgroundColor="surface" transparent="1" valign="center" halign="center"/>
+    <eLabel position="0,1349" size="2560,91" backgroundColor="backgroundtop" zPosition="-1"/>
+    <eLabel position="0,1349" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="1"/>
+    <eLabel position="391,1373" size="91,52" zPosition="0" backgroundColor="#00bec2c8" cornerRadius="8"/>
+    <eLabel position="392,1375" size="88,49" zPosition="1" backgroundColor="FullNightButtonGradient" cornerRadius="7"/>
+    <eLabel text="MENU" position="391,1373" size="91,52" zPosition="2" font="Regular;28" foregroundColor="foreground" backgroundColor="transparent" transparent="1" halign="center" valign="center"/>
+    <widget name="setup" position="504,1371" size="400,56" font="Regular;40" foregroundColor="foreground" transparent="1" valign="center" halign="left" noWrap="1" backgroundColor="background"/>
+    <eLabel position="1011,1373" size="91,52" zPosition="0" backgroundColor="#00bec2c8" cornerRadius="8"/>
+    <eLabel position="1012,1375" size="88,49" zPosition="1" backgroundColor="FullNightButtonGradient" cornerRadius="7"/>
+    <eLabel text="OK" position="1011,1373" size="91,52" zPosition="2" font="Regular;28" foregroundColor="foreground" backgroundColor="transparent" transparent="1" halign="center" valign="center"/>
+    <widget name="save" position="1124,1371" size="400,56" font="Regular;40" foregroundColor="foreground" transparent="1" valign="center" halign="left" noWrap="1" backgroundColor="background"/>
+    <eLabel position="1631,1373" size="91,52" zPosition="0" backgroundColor="#00bec2c8" cornerRadius="8"/>
+    <eLabel position="1632,1375" size="88,49" zPosition="1" backgroundColor="FullNightButtonGradient" cornerRadius="7"/>
+    <eLabel text="INFO" position="1631,1373" size="91,52" zPosition="2" font="Regular;28" foregroundColor="foreground" backgroundColor="transparent" transparent="1" halign="center" valign="center"/>
+    <widget name="movieinfo" position="1744,1371" size="560,56" font="Regular;40" foregroundColor="foreground" transparent="1" valign="center" halign="left" noWrap="1" backgroundColor="background"/>  
+    <panel name="template_menu_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: MovieInfoPreview -->
+  <screen name="MovieInfoPreview" position="0,0" size="2560,1440" title="Movie Information Preview" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="movie_name" position="1000,157" size="1500,120" zPosition="0" font="Regular;43" valign="center" halign="center" transparent="1" foregroundColor="secondary" backgroundColor="surface"/>
+    <widget name="previewtext" position="1000,297" size="1500,900" font="Regular;40" backgroundColor="surface"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+
+
+  <!-- Screen: EnhancedMovieCenterMenu -->
+  <screen name="EnhancedMovieCenterMenu" position="0,0" size="2560,1440" title="EnhancedMovieCenterMenu" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="40,728" size="911,500" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="-1"/>
+    <widget name="config" position="1000,157" size="1500,988" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" enableWrapAround="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget source="help" render="Label" position="71,737" size="835,460" font="Regular;40" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: EMCImdbScan -->
+  <screen position="0,0" size="2560,1440" name="EMCImdbScan" flags="wfNoBorder" backgroundColor="FullNightScreen" title="EMC Cover search" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="140,157" size="1400,900" name="menulist" itemHeight="72" font="Regular;40" padding="20,0" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black" transparent="1"/>
+    <widget position="140,1117" size="1400,60" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="done_msg" halign="center" backgroundColor="background"/>
+    <widget position="1651,157" size="760,111" font="Regular;44" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="m_info" halign="center" backgroundColor="background"/>
+    <widget position="1804,288" size="460,644" name="poster" alphatest="blend"/>
+    <widget position="1651,957" size="760,60" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="info" halign="center" backgroundColor="background"/>
+    <widget position="1651,1085" size="760,60" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="download" halign="center" backgroundColor="background"/>
+    <widget position="1691,1149" size="300,60" font="Regular;37" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" name="exist" halign="right" backgroundColor="background"/>
+    <widget position="2071,1149" size="300,60" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="no_poster" halign="left" backgroundColor="background"/>
+    <eLabel position="1651,1264" size="91,52" zPosition="0" backgroundColor="#00bec2c8" cornerRadius="8"/>
+    <eLabel position="1652,1265" size="88,49" zPosition="1" backgroundColor="FullNightButtonGradient" cornerRadius="7"/>
+    <eLabel text="MENU" position="1651,1264" size="91,52" zPosition="2" font="Regular;28" foregroundColor="foreground" backgroundColor="transparent" transparent="1" halign="center" valign="center"/>
+    <widget position="1760,1260" size="651,60" font="Regular;36" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="Setup" halign="left" backgroundColor="background"/>
+    <eLabel position="0,1349" size="2560,91" backgroundColor="backgroundtop" zPosition="-1"/><eLabel position="0,1349" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="1"/><widget position="511,1371" size="440,52" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="left" noWrap="1" name="ButtonRedText" backgroundColor="background"/>
+    <widget position="1040,1371" size="440,52" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="left" noWrap="1" name="ButtonGreenText" backgroundColor="background"/>
+    <widget position="1571,1371" size="440,52" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="left" noWrap="1" name="Manage Cover" backgroundColor="background"/>
+    <widget position="2100,1371" size="420,52" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="Single search" halign="left" backgroundColor="background"/>
+    
+    <panel name="template_menu_ok_exit"/>
+  
+  <ePixmap position="980,1373" size="48,48" pixmap="buttons/key_green.png" alphatest="blend" transparent="1"/>
+  <ePixmap position="1511,1373" size="48,48" pixmap="buttons/key_yellow.png" alphatest="blend" transparent="1"/>
+  <ePixmap position="2040,1373" size="48,48" pixmap="buttons/key_blue.png" alphatest="blend" transparent="1"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: getCover -->
+  <screen position="0,0" size="2560,1440" name="getCover" flags="wfNoBorder" backgroundColor="FullNightScreen" title="EMC Cover Selecter" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="140,157" size="1400,1020" name="menulist" itemHeight="72" font="Regular;40" padding="20,0" backgroundColor="background" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black" transparent="1"/>
+    <widget position="1651,157" size="760,111" font="Regular;44" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="m_info" halign="center" backgroundColor="background"/>
+    <widget position="1804,288" size="460,644" name="poster" alphatest="blend"/>
+    <widget position="1651,808" size="760,351" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="info" halign="center" backgroundColor="background"/>
+    
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: EMCPlaylist -->
+  <screen name="EMCPlaylist" position="0,0" size="2560,1440" title="EMC Playlist" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="1000,208" size="1500,1" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="playlist" position="1000,237" size="1500,900" posFont="Regular;40" nameFont="Regular;40" itemHeight="72" posWidth="67" nameWidth="867" scrollbarMode="showOnDemand" posColor="foreground" posColorSel="foreground" nameColor="foreground" nameColorSel="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <panel name="panel_color_buttons_red_green_text_cancel_save"/>
+    <widget name="delete" position="1571,1371" size="440,52" noWrap="1" zPosition="1" valign="center" font="Regular;40" halign="left" foregroundColor="foreground" transparent="1" backgroundColor="background"/>
+    <widget name="deleteall" position="2100,1371" size="420,52" noWrap="1" zPosition="1" valign="center" font="Regular;40" halign="left" foregroundColor="foreground" transparent="1" backgroundColor="background"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  <ePixmap position="1511,1373" size="48,48" pixmap="buttons/key_yellow.png" alphatest="blend" transparent="1"/><ePixmap position="2040,1373" size="48,48" pixmap="buttons/key_blue.png" alphatest="blend" transparent="1"/>    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- Screen: EMCPlaylistSetup -->
+  <screen name="EMCPlaylistSetup" position="0,0" size="2560,1440" title="EMC Playlist Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="1000,157" size="1500,988" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <panel name="panel_color_buttons_red_green_text_cancel_save"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: FILM-INFORMATIONEN, COVER, IMDB UND TMDB -->
+  <!-- ================================================================== -->
+  <!-- Screen: IMDB -->
+  <screen position="0,0" size="2560,1440" name="IMDB" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <eLabel position="0,0" size="2560,132" backgroundColor="FullNightPanel" zPosition="-1"/>
+  <eLabel position="132,28" size="1920,76" font="Regular;51" foregroundColor="foreground" transparent="1" valign="center" text="IMDb" backgroundColor="background"/>
+  <panel name="Fullscreen_Template_Date"/>
+  <widget position="1804,40" size="52,52" text="" font="enigma2icons;44" foregroundColor="secondary" transparent="1" halign="center" valign="center" source="key_menu" conditional="key_menu" render="FixedLabel" backgroundColor="background">
+    <convert type="ConditionalShowHide"/>
+  </widget>
+  <widget position="1892,40" size="52,52" text="" font="enigma2icons;44" foregroundColor="secondary" transparent="1" halign="center" valign="center" source="key_help" conditional="key_help" render="FixedLabel" backgroundColor="background">
+    <convert type="ConditionalShowHide"/>
+  </widget>
+  <widget position="72,133" size="2416,116" font="Regular;52" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="titellabel" backgroundColor="background"/>
+  <eLabel position="48,353" size="2464,852" backgroundColor="surface" zPosition="-1"/>
+  <widget position="72,377" size="460,689" name="poster" alphatest="blend" scale="1"/>
+  <widget position="600,377" size="1888,424" font="Regular;43" foregroundColor="foreground" transparent="0" alphatest="blend" valign="top" backgroundColor="surface" scrollbarMode="showOnDemand" name="detailslabel"/>
+  <widget position="600,829" size="1888,364" font="Regular;43" foregroundColor="foreground" transparent="0" alphatest="blend" valign="top" backgroundColor="surface" scrollbarMode="showOnDemand" name="castlabel"/>
+  <widget position="72,377" size="2416,816" font="Regular;43" foregroundColor="foreground" transparent="0" alphatest="blend" valign="top" backgroundColor="surface" scrollbarMode="showOnDemand" name="extralabel"/>
+  <widget position="72,377" size="2416,763" name="menu" itemHeight="69" font="Regular;39" zPosition="3" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget position="72,1260" size="2416,76" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" noWrap="1" name="statusbar" backgroundColor="background"/>
+  <widget position="1868,304" size="620,49" font="Regular;36" foregroundColor="yellow" transparent="1" alphatest="blend" valign="center" halign="right" name="ratinglabel" backgroundColor="background"/>
+  <widget name="starsbg" position="2068,253" size="420,44" pixmap="icons/starsbar_empty_metrix.png" zPosition="2" alphatest="blend"/>
+  <widget name="stars" position="2068,253" size="420,44" pixmap="icons/starsbar_filled_metrix.png" zPosition="3" transparent="1"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_menu_ok_exit"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: imdbSetup -->
+  <screen name="imdbSetup" position="0,0" size="2560,1440" title="EMC Cover search setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="1000,157" size="1500,988" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" enableWrapAround="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: MovieInfoTMDb -->
+  <screen position="0,0" size="2560,1440" name="MovieInfoTMDb" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Movie Information TMDb" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <widget position="48,137" size="1620,108" font="Regular;45" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="movie_name" backgroundColor="background"/>
+  <widget position="48,277" size="420,43" name="starsbg" pixmap="icons/starsbar_empty.png" alphatest="blend" scale="1"/>
+  <widget position="48,277" size="420,43" name="stars" pixmap="icons/starsbar_filled.png" transparent="1" borderWidth="0" alphatest="blend"/>
+  <widget position="516,259" size="260,72" font="Regular;40" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" name="rating" backgroundColor="background"/>
+  <widget position="800,259" size="868,72" font="Regular;40" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" name="ratingtxt" backgroundColor="background"/>
+  <widget position="48,365" size="332,76" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="release" backgroundColor="background"/>
+  <widget position="416,365" size="1252,76" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="releasetxt" backgroundColor="background"/>
+  <widget position="48,449" size="332,76" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="runtime" backgroundColor="background"/>
+  <widget position="416,449" size="1252,76" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="runtimetxt" backgroundColor="background"/>
+  <widget position="48,533" size="332,76" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="genre" backgroundColor="background"/>
+  <widget position="416,533" size="1252,76" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="genretxt" backgroundColor="background"/>
+  <widget position="48,617" size="332,76" font="Regular;40" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="country" backgroundColor="background"/>
+  <widget position="416,617" size="1252,76" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="countrytxt" backgroundColor="background"/>
+  <widget position="1844,181" size="528,740" name="previewcover" alphatest="blend"/>
+  <widget position="48,769" size="1620,420" name="previewlist" itemHeight="84" font="Regular;43" padding="24,0" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget position="48,769" size="1620,420" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" name="contenttxt" backgroundColor="background"/>
+  <eLabel position="0,1349" size="2560,91" backgroundColor="backgroundtop" zPosition="-1"/>
+  <eLabel position="0,1349" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="1"/>
+  <widget position="1041,1373" size="440,52" font="Regular;40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="left" noWrap="1" name="save" backgroundColor="background"/>
+  <eLabel position="440,1372" size="60,60" text="" font="enigma2icons;52" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+  <widget position="512,1375" size="508,52" font="Regular; 40" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="setup" backgroundColor="background"/>
+  <widget position="0,0" size="0,0" name="key_menu"/>
+  <widget position="0,0" size="0,0" name="key_green"/>
+
+  <panel name="template_info_menu_exit"/>
+  <ePixmap position="980,1376" size="48,48" pixmap="buttons/key_green.png" alphatest="blend" transparent="1"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: E2MDBCleanupStatusScreen -->
+  <screen position="0,0" size="2560,1440" name="E2MDBCleanupStatusScreen" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,133" size="2416,1044" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="background"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+
+  <!-- Screen: E2MDBInfoBox -->
+  <screen position="520,549" size="1520,341" name="E2MDBInfoBox" flags="wfNoBorder" backgroundColor="FullNightScreen" zPosition="20" resolution="2560,1440">
+    <widget position="48,40" size="1424,260" font="Regular;45" foregroundColor="foreground" transparent="1" valign="center" halign="center" source="info" render="Label" backgroundColor="background"/>
+  </screen>
+  <!-- Screen: E2MDBMain -->
+  <screen position="0,0" size="2560,1440" name="E2MDBMain" flags="wfNoBorder" backgroundColor="surface" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="Fullscreen_left_Pic"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget position="1000,137" size="1500,720" name="path_list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget position="1000,897" size="1500,64" font="Regular;41" foregroundColor="accent" transparent="0" valign="center" noWrap="1" backgroundColor="surface" source="progheader" render="Label"/>
+  <widget position="1000,977" size="1500,16" name="progbar" foregroundColor="accent" backgroundColor="selection" borderWidth="0" cornerRadius="8"/>
+  <widget position="1000,1013" size="1500,88" font="Regular;39" foregroundColor="foreground" transparent="0" valign="center" backgroundColor="surface" source="progsubline" render="Label"/>
+  <widget position="1000,1117" size="1500,128" font="Regular;36" foregroundColor="secondary" transparent="0" valign="center" backgroundColor="surface" source="progstatus" render="Label"/>
+  <eLabel position="1804,40" size="52,52" text="" font="enigma2icons;44" foregroundColor="secondary" transparent="1" halign="center" valign="center"/>
+</screen>
+
+  <!-- Screen: E2MDBPatternListSelection -->
+  <screen position="0,0" size="2560,1440" name="E2MDBPatternListSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,144" size="2416,60" font="Regular;43" foregroundColor="foreground" transparent="1" valign="center" conditional="level" source="level" render="Label" backgroundColor="background"/>
+  <widget position="72,204" size="2416,104" font="Regular;37" foregroundColor="secondary" transparent="1" valign="center" source="summary" render="Label" backgroundColor="background"/>
+  <widget position="48,305" size="2464,864" name="pattern_list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+  <!-- Screen: E2MDBPatternSourceSelection -->
+  <screen position="0,0" size="2560,1440" name="E2MDBPatternSourceSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,144" size="2416,60" font="Regular;43" foregroundColor="foreground" transparent="1" valign="center" conditional="level" source="level" render="Label" backgroundColor="background"/>
+  <widget position="72,204" size="2416,104" font="Regular;37" foregroundColor="secondary" transparent="1" valign="center" source="summary" render="Label" backgroundColor="background"/>
+  <widget position="48,305" size="2464,864" name="source_list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+  <!-- Screen: E2MDBPrefillServiceSelection -->
+  <screen position="0,0" size="2560,1440" name="E2MDBPrefillServiceSelection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,144" size="2416,60" font="Regular;43" foregroundColor="foreground" transparent="1" valign="center" conditional="level" source="level" render="Label" backgroundColor="background"/>
+  <widget position="72,204" size="2416,104" font="Regular;37" foregroundColor="secondary" transparent="1" valign="center" source="summary" render="Label" backgroundColor="background"/>
+  <widget position="48,305" size="2464,864" name="service_list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+  <!-- Screen: E2MDBPrefillStatusScreen -->
+  <screen position="0,0" size="2560,1440" name="E2MDBPrefillStatusScreen" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,133" size="2416,1044" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="background"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+  <!-- Screen: E2MDBScanResults -->
+  <screen position="0,0" size="2560,1440" name="E2MDBScanResults" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget position="48,137" size="2464,1003" source="results" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <template name="Default" fonts="Regular;39,Regular;35,Regular;31" itemHeight="125">
+        <text position="24,7" size="2416,49" index="0" font="0" foregroundColor="accent" wrap="ellipsis"/>
+        <text position="24,7" size="2416,49" index="1" font="1" wrap="ellipsis"/>
+        <text position="24,63" size="2416,45" index="2" font="2" foregroundColor="secondary" wrap="ellipsis"/>
+      </template>
+    </widget>
+    <widget position="72,1173" size="2416,136" font="Regular;37" foregroundColor="foreground" transparent="1" valign="center" source="status" render="Label" backgroundColor="background"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: E2MDBWorkerQueueStatusScreen -->
+  <screen position="0,0" size="2560,1440" name="E2MDBWorkerQueueStatusScreen" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <widget position="72,133" size="2416,1044" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" source="info" render="Label" backgroundColor="background"/>
+  <panel name="panel_text_ok_e2mdb"/>
+  <panel name="template_info_menu_exit"/>
+</screen>
+  <!-- Screen: tmdbScreen -->
+  <screen name="tmdbScreen" position="0,0" size="2560,1440" title="TMDb - The Movie Database" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget name="searchinfo" position="48,157" size="2464,80" font="Regular;43" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="searchinfo"/>
+  <widget name="list" position="48,229" size="1580,792" itemHeight="72" scrollbarMode="showOnDemand" transparent="1" conditional="list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget name="cover" position="1932,229" size="400,600" alphatest="blend" conditional="cover" scale="centerScaled"/>
+  <widget name="backdrop" position="0,0" size="2560,1440" zPosition="-5" alphatest="blend" conditional="backdrop" scale="centerScaled"/>
+  <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-4"/>
+  <widget position="72,1053" size="1532,184" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="top" conditional="overview" name="overview" backgroundColor="background"/>
+  <widget position="1684,853" size="216,128" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" conditional="title_txt" name="title_txt" backgroundColor="background"/>
+  <widget position="1924,853" size="572,128" font="Regular;37" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" conditional="title" name="title" backgroundColor="background"/>
+  <widget position="1684,997" size="216,76" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" conditional="lang_txt" name="lang_txt" backgroundColor="background"/>
+  <widget position="1924,997" size="572,76" font="Regular;37" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" conditional="lang" name="lang" backgroundColor="background"/>
+  <widget position="1684,1085" size="216,76" font="Regular;37" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" conditional="rating_txt" name="rating_txt" backgroundColor="background"/>
+  <widget position="1924,1085" size="572,76" font="Regular;37" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" conditional="rating" name="rating" backgroundColor="background"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: tmdbScreenMovie -->
+  <screen name="tmdbScreenMovie" position="0,0" size="2560,1440" title="TMDb - The Movie Database" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget name="searchinfo" position="48,157" size="2464,80" font="Regular;43" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="searchinfo"/>
+  <widget name="fulldescription" position="48,229" size="1284,1008" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="fulldescription"/>
+  <widget name="cover" position="2112,169" size="360,540" alphatest="blend" conditional="cover" scale="centerScaled"/>
+  <widget name="backdrop" position="0,0" size="2560,1440" zPosition="-5" alphatest="blend" conditional="backdrop" scale="centerScaled"/>
+  <widget name="rating" position="1420,253" size="252,104" zPosition="2" font="Regular;64" halign="center" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="rating"/>
+  <widget name="votes_brackets" position="1388,377" size="316,76" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" halign="center" transparent="1" conditional="votes_brackets"/>
+  <widget name="fsk" position="1760,245" size="192,192" zPosition="2" font="Regular;43" halign="center" transparent="1" conditional="fsk" foregroundColor="foreground" backgroundColor="surface"/>
+  <widget name="fsklogo" position="1760,245" size="192,192" zPosition="3" scale="centerScaled" alphatest="blend" conditional="fsklogo"/>
+  <widget name="year_txt" position="1388,729" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="year_txt"/>
+  <widget name="year" position="1640,729" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="year"/>
+  <widget name="country_txt" position="1388,793" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="country_txt"/>
+  <widget name="country" position="1640,793" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="country"/>
+  <widget name="runtime_txt" position="1388,857" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="runtime_txt"/>
+  <widget name="runtime" position="1640,857" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="runtime"/>
+  <widget name="votes_txt" position="1388,921" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="votes_txt"/>
+  <widget name="votes" position="1640,921" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="votes"/>
+  <widget name="director_txt" position="1388,985" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="director_txt"/>
+  <widget name="director" position="1640,985" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="director"/>
+  <widget name="author_txt" position="1388,1049" size="232,60" zPosition="2" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="author_txt"/>
+  <widget name="author" position="1640,1049" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="author"/>
+  <widget name="genre_txt" position="1388,1113" size="232,60" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="genre_txt"/>
+  <widget name="genre" position="1640,1113" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="genre"/>
+  <widget name="studio_txt" position="1388,1177" size="232,60" font="Regular;40" foregroundColor="secondary" backgroundColor="surface" transparent="1" conditional="studio_txt"/>
+  <widget name="studio" position="1640,1177" size="840,60" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="studio"/>
+  <widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="subtitle"/>
+  <widget name="description" position="0,0" size="0,0" zPosition="2" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="description"/>
+  <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-4"/>
+</screen>
+  <!-- Screen: tmdbScreenPeople -->
+  <screen name="tmdbScreenPeople" position="0,0" size="2560,1440" title="TMDb - The Movie Database" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget name="searchinfo" position="48,157" size="2464,80" font="Regular;43" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="searchinfo"/>
+  <widget name="list" position="48,229" size="1580,1008" itemHeight="72" scrollbarMode="showOnDemand" transparent="1" conditional="list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget name="cover" position="1732,237" size="640,960" alphatest="blend" conditional="cover" scale="centerScaled"/>
+  <widget name="data" position="0,0" size="0,0" font="Regular;43" conditional="data" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+  <widget name="backdrop" position="0,0" size="2560,1440" zPosition="-5" alphatest="blend" conditional="backdrop" scale="centerScaled"/>
+  <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-4"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: tmdbScreenPerson -->
+  <screen name="tmdbScreenPerson" position="0,0" size="2560,1440" title="TMDb - The Movie Database" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget name="searchinfo" position="48,157" size="2464,80" font="Regular;43" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="searchinfo"/>
+  <widget name="fulldescription" position="48,229" size="1580,1008" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="fulldescription"/>
+  <widget name="cover" position="1732,237" size="640,960" alphatest="blend" conditional="cover" scale="centerScaled"/>
+  <widget name="data" position="0,0" size="0,0" font="Regular;43" conditional="data" foregroundColor="foreground" backgroundColor="surface" transparent="1"/>
+  <widget name="backdrop" position="0,0" size="2560,1440" zPosition="-5" alphatest="blend" conditional="backdrop" scale="centerScaled"/>
+  <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-4"/>
+</screen>
+  <!-- Screen: tmdbScreenSeason -->
+  <screen name="tmdbScreenSeason" position="0,0" size="2560,1440" title="TMDb - The Movie Database" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_info_menu_exit"/>
+  <widget name="searchinfo" position="48,157" size="2464,80" font="Regular;43" foregroundColor="accent" backgroundColor="surface" transparent="1" conditional="searchinfo"/>
+  <widget name="list" position="48,229" size="1580,576" itemHeight="72" scrollbarMode="showOnDemand" transparent="1" conditional="list" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget name="cover" position="1676,273" size="832,468" alphatest="blend" conditional="cover" scale="centerScaled"/>
+  <widget name="data" position="48,849" size="2464,388" font="Regular;43" foregroundColor="foreground" backgroundColor="surface" transparent="1" conditional="data"/>
+  <widget name="backdrop" position="0,0" size="2560,1440" zPosition="-5" alphatest="blend" conditional="backdrop" scale="centerScaled"/>
+  <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-4"/>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: PLAYER UND MEDIENWIEDERGABE -->
+  <!-- ================================================================== -->
+  <!-- Screen: ChapterZap -->
+  <screen position="920,608" size="720,224" name="ChapterZap" flags="wfNoBorder" backgroundColor="transparent" resolution="2560,1440">
+    <eLabel position="0,0" size="720,224" backgroundColor="surface" cornerRadius="16" zPosition="-1"/>
+    <widget position="40,60" size="392,104" font="Regular;52" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" halign="center" name="chapter" backgroundColor="background"/>
+    <widget position="464,52" size="216,120" font="Regular;68" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" halign="center" name="number" backgroundColor="background"/>
+  </screen>
+  <!-- Screen: Screensaver -->
+  <screen name="Screensaver" position="0,0" size="2560,1440" flags="wfNoBorder" resolution="2560,1440">
+    <eLabel position="0,0" size="2560,1440" backgroundColor="black" zPosition="0"/>
+    <!-- cf#_#stop -->
+    <widget name="picture" pixmap="icons/info.png" position="0,0" size="1000,1000" alphatest="blend" zPosition="1"/>
+    <!-- cf#_#start -->
+  </screen>
+  <!-- Screen: RdsInfoDisplay -->
+  <screen position="0,1220" size="2560,220" name="RdsInfoDisplay" flags="wfNoBorder" backgroundColor="transparent" zPosition="-8" resolution="2560,1440">
+    <widget position="48,0" size="2464,100" font="LCD;100" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" halign="center" noWrap="1" backgroundColor="overlay" textBorderColor="black" textBorderWidth="3" name="RadioText"/>
+    <widget position="48,100" size="2340,100" font="LCD;100" foregroundColor="foreground" transparent="0" alphatest="blend" valign="center" halign="center" noWrap="1" backgroundColor="overlay" textBorderColor="black" textBorderWidth="3" name="RtpText"/>
+    <widget position="2412,148" size="100,41" name="RassLogo" pixmap="skin_default/icons/rass_logo.png" alphatest="blend" scale="1"/>
+  </screen>
+  <!-- Screen: MediaPlayerSettings -->
+  <screen name="MediaPlayerSettings" position="0,0" size="2560,1440" title="Edit Settings" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="1000,157" size="1500,936" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" zPosition="3" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" transparent="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel text="Cancel" position="511,1371" size="440,52" valign="center" font="Regular;40" foregroundColor="foreground" halign="left" transparent="1" backgroundColor="background"/>
+    <eLabel text="Save" position="1040,1371" size="440,52" valign="center" font="Regular;40" foregroundColor="foreground" halign="left" transparent="1" backgroundColor="background"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+    <ePixmap position="451,1373" size="48,48" pixmap="buttons/key_red.png" alphatest="blend" transparent="1"/>
+    <ePixmap position="980,1373" size="48,48" pixmap="buttons/key_green.png" alphatest="blend" transparent="1"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: MediaPlayer -->
+  <screen position="0,0" size="2560,1440" name="MediaPlayer" flags="wfNoBorder" backgroundColor="FullNightScreen" title="Media Player" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="template_menu_exit"/>
+    <widget position="72,133" size="1524,68" font="Regular;43" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" noWrap="1" name="currenttext" backgroundColor="background"/>
+    <widget position="48,209" size="1572,376" name="filelist" font="Regular;37" itemHeight="63" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="72,669" size="1308,68" font="Regular;44" foregroundColor="accent" transparent="1" valign="center" text="Playlist" backgroundColor="background"/>
+    <widget position="48,757" size="1572,501" name="playlist" font="Regular;37" itemHeight="63" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget position="1428,673" size="140,60" name="repeat" pixmaps="buttons/repeat-off.png,buttons/repeat-on.png" alphatest="blend" scale="centerScaled" zPosition="2"/>
+    <eLabel position="1964,313" size="160,160" text="" font="enigma2icons;152" foregroundColor="muted" transparent="1" halign="center" valign="center"/>
+    <widget position="1796,133" size="544,544" name="coverArt" alphatest="blend" scale="1" zPosition="2"/>
+    <widget position="1692,725" size="188,76" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="titletext" backgroundColor="background"/>
+    <widget position="1900,725" size="588,76" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="title" backgroundColor="background"/>
+    <widget position="1692,809" size="188,76" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="artisttext" backgroundColor="background"/>
+    <widget position="1900,809" size="588,76" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="artist" backgroundColor="background"/>
+    <widget position="1692,893" size="188,76" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="albumtext" backgroundColor="background"/>
+    <widget position="1900,893" size="588,76" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="album" backgroundColor="background"/>
+    <widget position="1692,977" size="188,76" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="yeartext" backgroundColor="background"/>
+    <widget position="1900,977" size="588,76" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="year" backgroundColor="background"/>
+    <widget position="1692,1061" size="188,76" font="Regular;36" foregroundColor="secondary" transparent="1" alphatest="blend" valign="center" name="genretext" backgroundColor="background"/>
+    <widget position="1900,1061" size="588,76" font="Regular;43" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" noWrap="1" name="genre" backgroundColor="background"/>
+    <widget position="1692,1185" size="200,60" font="Regular;37" foregroundColor="foreground" transparent="1" valign="center" halign="left" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServicePosition">Position,ShowHours</convert>
+    </widget>
+    <widget position="2288,1185" size="200,60" font="Regular;37" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServicePosition">Length,ShowHours</convert>
+    </widget>
+    <widget position="1909,1207" size="364,12" source="session.CurrentService" render="PLiWQHDFullNightProgress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="5">
+      <convert type="ServicePosition">Position</convert>
+    </widget>
+    <widget position="0,0" size="0,0" name="PositionGauge"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: RADIO UND MUSIK -->
+  <!-- ================================================================== -->
+  <!-- Screen: RadioInfoBar -->
+  <screen name="RadioInfoBar" position="139,1048" size="2284,204" title="Radio" zPosition="-9" flags="wfNoBorder" backgroundColor="surface">
+    <eLabel position="3,3" zPosition="0" size="2280,200" backgroundColor="surface" transparent="0"/>
+    <widget alphatest="blend" position="3,3" size="332,200" render="Picon" source="session.CurrentService" transparent="1" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="icons/ico_dab-plus.png" position="237,141" size="92,56" zPosition="3" alphatest="blend">
+      <convert type="ServiceInfo">IsDAB</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget render="PLiWQHDFullNightProgress" position="400,119" size="1883,11" source="session.Event_Now" zPosition="2" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="5">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="400,0" size="1600,71" font="Regular;51" noWrap="1" backgroundColor="surface" transparent="1" zPosition="1">
+      <convert type="ServiceName">Provider</convert>
+    </widget>
+    <widget backgroundColor="surface" foregroundColor="foreground" font="Regular;51" halign="left" noWrap="1" position="400,48" render="Label" size="1600,71" source="session.Event_Now" transparent="1" zPosition="1">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget backgroundColor="surface" foregroundColor="foreground" font="Regular;51" halign="right" noWrap="1" position="2083,48" render="Label" size="200,71" source="session.Event_Now" transparent="1" zPosition="1">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText"/>
+    </widget>
+    <widget source="RdsDecoder" render="Label" position="400,120" size="1883,80" font="LCD;71" halign="center" foregroundColor="foreground" backgroundColor="surface" transparent="1" zPosition="1">
+      <convert type="PLiWQHDFullNightRdsInfo">RadioTextIfNoEvent</convert>
+    </widget>
+    <widget source="RdsDecoder" render="Label" position="1400,0" size="600,51" font="Regular;36" halign="right" foregroundColor="foreground" backgroundColor="surface" transparent="1" zPosition="2">
+      <convert type="PLiWQHDFullNightRdsInfo">RtpTextIfNoEvent</convert>
+    </widget>
+    <widget source="RdsDecoder" render="Pixmap" alphatest="blend" pixmap="skin_default/icons/rass_logo.png" position="2183,11" size="100,43" backgroundColor="surface" zPosition="1">
+      <convert type="RdsInfo">RasInteractiveAvailable</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+  </screen>
+  <!-- Screen: RadioTimesEmulatorGUIScreen -->
+  <screen name="RadioTimesEmulatorGUIScreen" position="0,0" size="2560,1440" title="Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="40,728" size="911,500" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="-1"/>
+    <widget name="config" position="1000,157" size="1500,988" itemHeight="72" font="Regular;35" scrollbarMode="showOnDemand" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" backgroundColor="surface" foregroundColor="foreground" transparent="1" enableWrapAround="1" valueFont="Regular;35" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget name="description" position="71,737" size="835,460" font="Regular;40" conditional="description" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="HelpWindow" position="0,0" size="0,0" zPosition="1" transparent="1" alphatest="blend"/>
+    <widget name="footnote" position="27,1288" size="953,51" font="Regular;32" halign="right" valign="center" backgroundColor="surface" foregroundColor="foreground" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: AUDIO UND UNTERTITEL -->
+  <!-- ================================================================== -->
+  <!-- Screen: SubtitleDisplay -->
+  <screen position="0,0" size="2560,1440" name="SubtitleDisplay" flags="wfNoBorder" backgroundColor="transparent" zPosition="-1" resolution="2560,1440">
+    <widget position="48,1160" size="2464,200" font="Regular;60" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" halign="center" name="subtitles" backgroundColor="background"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+  <!-- Screen: QuickSubtitlesConfigMenu -->
+  <screen name="QuickSubtitlesConfigMenu" position="531,300" size="1500,700" title="Subtitle settings" backgroundColor="transparent" flags="wfNoBorder">
+    <eLabel position="0,0" size="1500,700" zPosition="-11" backgroundColor="surface"/>
+    <eLabel position="3,3" size="1496,696" zPosition="-10" backgroundColor="surface"/>
+    <widget name="config" position="11,11" size="1480,600" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget name="videofps" position="11,600" size="1480,100" backgroundColor="surface" transparent="1" zPosition="1" font="Regular;40" valign="center" halign="center" foregroundColor="accent"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: LoadSub -->
+  <screen name="LoadSub" position="440,149" size="1680,1141" title="AZPlay - Load Subtitle" flags="wfNoBorder,wfModal" backgroundColor="transparent" resolution="2560,1440">
+    <eLabel position="0,0" size="1680,1140" backgroundColor="surface" cornerRadius="16" zPosition="-2"/>
+    <widget position="48,32" size="1584,80" font="Regular;51" foregroundColor="accent" transparent="1" valign="center" source="Title" render="Label" backgroundColor="background"/>
+    <widget name="text" position="48,136" font="Regular;43" size="1584,80" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <widget name="list_left" position="48,240" size="1584,672" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="1" font="Regular;44" valueFont="Regular;43" itemHeight="84" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget source="poraka" render="Label" position="48,948" size="1584,76" font="Regular;43" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <eLabel position="48,1048" size="744,5" backgroundColor="red" objectTypes="key_red,StaticText" zPosition="-1"/>
+    <widget position="48,1056" size="744,68" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" halign="center" objectTypes="key_red,StaticText" source="key_red" conditional="key_red" render="Label" backgroundColor="background"/>
+    <eLabel position="888,1048" size="744,5" backgroundColor="green" objectTypes="key_green,StaticText" zPosition="-1"/>
+    <widget position="888,1056" size="744,68" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" halign="center" objectTypes="key_green,StaticText" source="key_green" conditional="key_green" render="Label" backgroundColor="background"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: Subtitles -->
+  <screen name="Subtitles" position="0,0" size="2560,1440" title="Subtitle selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="config" position="1000,157" size="1500,900" itemHeight="72" backgroundColor="surface" transparent="1" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" valueFont="Regular;40" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: BILDER, DVD UND BLU-RAY -->
+  <!-- ================================================================== -->
+  <!-- Screen: DVDPlayer -->
+  <screen name="DVDPlayer" flags="wfNoBorder" position="0,760" size="1440,320" title="Info bar" backgroundColor="background" resolution="2560,1440">
+    <ePixmap position="0,0" zPosition="-2" size="1440,320" pixmap="skin_default/info-bg_mp.png" alphatest="off"/>
+    <ePixmap position="58,80" zPosition="0" size="1330,208" pixmap="skin_default/screws_mp.png" alphatest="on" transparent="1"/>
+    <ePixmap position="96,140" zPosition="0" size="216,26" pixmap="skin_default/icons/mp_buttons.png" alphatest="on"/>
+    <ePixmap pixmap="skin_default/icons/icon_event.png" position="414,156" zPosition="1" size="30,20" alphatest="on"/>
+    <widget source="session.CurrentService" render="Label" position="460,146" size="600,44" font="Regular;40" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1" noWrap="1">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget name="chapterLabel" position="460,192" size="720,44" font="Regular;40" foregroundColor="#c3c3c9" backgroundColor="#263c59" transparent="1"/>
+    <ePixmap pixmap="skin_default/icons/icon_dolby.png" position="1080,120" zPosition="1" size="52,32" alphatest="on"/>
+    <widget name="audioLabel" position="1140,120" size="260,44" font="Regular;36" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1"/>
+    <widget source="session.CurrentService" render="Pixmap" pixmap="skin_default/icons/icon_txt.png" position="1080,166" zPosition="1" size="52,32" alphatest="on">
+      <convert type="ServiceInfo">HasTelext</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget name="subtitleLabel" position="1140,166" size="260,44" font="Regular;36" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1"/>
+    <widget name="anglePix" pixmap="skin_default/icons/icon_view.png" position="1080,212" size="52,32" alphatest="on"/>
+    <widget name="angleLabel" position="1140,212" size="260,44" font="Regular;36" backgroundColor="#263c59" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1"/>
+    <widget source="session.CurrentService" render="Label" position="410,258" size="200,40" font="Regular;36" halign="center" valign="center" backgroundColor="#6224f" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1">
+      <convert type="ServicePosition">Position,ShowHours</convert>
+    </widget>
+    <widget source="session.CurrentService" render="PositionGauge" position="600,266" size="540,20" zPosition="2" pointer="skin_default/position_pointer.png:1080,0" transparent="1">
+      <convert type="ServicePosition">Gauge</convert>
+    </widget>
+    <widget source="session.CurrentService" render="Label" position="1152,258" size="200,40" font="Regular;36" halign="center" valign="center" backgroundColor="#6224f" shadowColor="#1d354c" shadowOffset="-2,-2" transparent="1">
+      <convert type="ServicePosition">Remaining,Negate,ShowHours</convert>
+    </widget>
+  </screen>
+  <!-- Screen: BlurayMain -->
+  <screen name="BlurayMain" position="0,0" size="2560,1440" title="Blu-ray player" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget source="list" render="Listbox" position="48,177" size="1620,860" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <convert type="TemplatedMultiContent">{'template': [MultiContentEntryText(pos=(20, 20), size=(1300, 60), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=0)], 'fonts': [gFont('Regular', 40)], 'itemHeight': 100}</convert>
+    </widget>
+    <widget name="thumbnail" position="1824,293" size="640,360" zPosition="1" transparent="1" alphatest="blend"/>
+    <widget name="name" render="Label" position="1757,787" size="755,351" font="Regular;40" foregroundColor="foreground" halign="center" backgroundColor="surface" valign="center" transparent="1"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: picshow -->
+  <screen position="0,0" size="2560,1440" name="picshow" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="template_menu_ok_exit"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <widget position="48,137" size="1572,1065" name="filelist" font="Regular;37" itemHeight="63" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget position="1708,157" size="732,660" name="thn" alphatest="blend" scale="1"/>
+    <widget position="1692,877" size="796,364" font="Regular;43" foregroundColor="foreground" transparent="1" valign="top" source="label" render="Label" backgroundColor="background"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: Pic_Exif -->
+  <screen position="0,0" size="2560,1440" name="Pic_Exif" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="template_ok_exit"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <widget position="48,137" size="2464,988" source="menu" render="Listbox" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" scrollbarMode="showOnDemand" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <template name="Default" fonts="Regular;37" itemHeight="76">
+        <text position="24,7" size="672,65" index="0" font="0" wrap="ellipsis" verticalAlignment="center" foregroundColor="secondary"/>
+        <text position="732,7" size="1700,65" index="1" font="0" wrap="ellipsis" verticalAlignment="center"/>
+      </template>
+    </widget>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: DVDToolbox -->
+  <screen name="DVDToolbox" position="0,0" size="2560,1440" title="DVD media toolbox" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget source="info" render="Label" position="1000,157" size="1500,200" font="Regular;44" transparent="1" backgroundColor="background"/>
+    <eLabel position="1000,377" size="1500,4" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="details" position="1000,397" size="1500,600" font="Regular;44" transparent="1"/>
+    <widget source="space_bar" render="PLiWQHDFullNightProgress" position="1000,1037" size="1500,52" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8"/>
+    <widget source="space_label" render="Label" position="1020,1041" size="1460,44" zPosition="2" font="Regular;36" halign="center" transparent="1" foregroundColor="surface" backgroundColor="background"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+  <!-- Screen: PictureExplorerII -->
+  <screen name="PictureExplorerII" position="0,0" size="2560,1440" flags="wfNoBorder" title="Picture-Explorer" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="Picture" position="0,0" size="2560,1440" zPosition="1" alphatest="blend"/>
+    <widget name="State" font="Regular;40" halign="center" valign="center" position="0,1300" size="2560,140" backgroundColor="black" transparent="0" zPosition="9"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+  </screen>
+  <!-- Screen: CDInfo -->
+  <screen name="CDInfo" position="0,0" size="2560,1440" title="CDInfo" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <eLabel position="40,728" size="911,500" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="-1"/>
+    <widget source="info" render="Label" position="71,737" size="835,100" font="Regular;43" transparent="1" valign="center" backgroundColor="background"/>
+    <eLabel position="48,317" size="1620,4" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="config" position="1000,337" size="1500,600" itemHeight="72" scrollbarMode="showOnDemand" transparent="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" valueFont="Regular;40" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="48,957" size="1620,4" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget source="info2" render="Label" position="48,977" size="1620,200" font="Regular;43" transparent="1" backgroundColor="background"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: DVDMovieSelection -->
+  <screen name="DVDMovieSelection" position="0,0" size="2560,1440" title="Select a movie" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <eLabel position="48,307" size="1620,5" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="list" position="48,337" size="1620,751" scrollbarMode="showOnDemand" transparent="1"/>
+    <eLabel position="48,1123" size="1620,5" backgroundColor="FullNightLineHorizontal" zPosition="-1"/>
+    <widget name="freeDiskSpace" position="48,1141" size="1620,51" font="Regular;40" valign="center" backgroundColor="surface" transparent="1"/>
+    <widget source="Service" render="Label" position="1709,169" size="803,100" font="Regular;44" foregroundColor="yellow" backgroundColor="surface" transparent="1">
+      <convert type="MovieInfo">ShortDescription</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1709,289" size="440,48" font="Regular;40" backgroundColor="surface" transparent="1">
+      <convert type="MovieInfo">RecordServiceName</convert>
+    </widget>
+    <widget source="Service" render="Label" position="2187,289" size="160,48" font="Regular;40" halign="right" backgroundColor="surface" transparent="1">
+      <convert type="ServiceTime">Duration</convert>
+      <convert type="ClockToText">AsLength</convert>
+    </widget>
+    <widget source="Service" render="Label" position="2365,291" size="147,48" font="Regular;40" halign="right" backgroundColor="surface" transparent="1">
+      <convert type="MovieInfo">FileSize</convert>
+    </widget>
+    <widget source="Service" render="Label" position="1708,377" size="804,804" font="Regular;37" backgroundColor="surface" transparent="1" valign="top">
+      <convert type="EventName">ExtendedDescription</convert>
+    </widget>
+    <widget name="DescriptionBorder" position="0,0" size="0,0"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+      <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.fit_lists import install; install(self)</applet>
+</screen>
+  <!-- Screen: Pic_Thumb -->
+  <screen position="0,0" size="2560,1440" name="Pic_Thumb" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <widget position="40,48" size="464,416" name="frame" backgroundColor="selection" cornerRadius="16" borderWidth="4" borderColor="accent" zPosition="1"/>
+    <widget position="51,59" size="443,304" name="thumb0" alphatest="blend" zPosition="2"/>
+    <widget position="51,408" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label0" render="Label" backgroundColor="background"/>
+    <widget position="555,59" size="443,304" name="thumb1" alphatest="blend" zPosition="2"/>
+    <widget position="555,408" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label1" render="Label" backgroundColor="background"/>
+    <widget position="1059,59" size="443,304" name="thumb2" alphatest="blend" zPosition="2"/>
+    <widget position="1059,408" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label2" render="Label" backgroundColor="background"/>
+    <widget position="1563,59" size="443,304" name="thumb3" alphatest="blend" zPosition="2"/>
+    <widget position="1563,408" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label3" render="Label" backgroundColor="background"/>
+    <widget position="2067,59" size="443,304" name="thumb4" alphatest="blend" zPosition="2"/>
+    <widget position="2067,408" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label4" render="Label" backgroundColor="background"/>
+    <widget position="51,523" size="443,304" name="thumb5" alphatest="blend" zPosition="2"/>
+    <widget position="51,872" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label5" render="Label" backgroundColor="background"/>
+    <widget position="555,523" size="443,304" name="thumb6" alphatest="blend" zPosition="2"/>
+    <widget position="555,872" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label6" render="Label" backgroundColor="background"/>
+    <widget position="1059,523" size="443,304" name="thumb7" alphatest="blend" zPosition="2"/>
+    <widget position="1059,872" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label7" render="Label" backgroundColor="background"/>
+    <widget position="1563,523" size="443,304" name="thumb8" alphatest="blend" zPosition="2"/>
+    <widget position="1563,872" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label8" render="Label" backgroundColor="background"/>
+    <widget position="2067,523" size="443,304" name="thumb9" alphatest="blend" zPosition="2"/>
+    <widget position="2067,872" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label9" render="Label" backgroundColor="background"/>
+    <widget position="51,987" size="443,304" name="thumb10" alphatest="blend" zPosition="2"/>
+    <widget position="51,1336" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label10" render="Label" backgroundColor="background"/>
+    <widget position="555,987" size="443,304" name="thumb11" alphatest="blend" zPosition="2"/>
+    <widget position="555,1336" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label11" render="Label" backgroundColor="background"/>
+    <widget position="1059,987" size="443,304" name="thumb12" alphatest="blend" zPosition="2"/>
+    <widget position="1059,1336" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label12" render="Label" backgroundColor="background"/>
+    <widget position="1563,987" size="443,304" name="thumb13" alphatest="blend" zPosition="2"/>
+    <widget position="1563,1336" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label13" render="Label" backgroundColor="background"/>
+    <widget position="2067,987" size="443,304" name="thumb14" alphatest="blend" zPosition="2"/>
+    <widget position="2067,1336" size="443,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" zPosition="2" source="label14" render="Label" backgroundColor="background"/>
+  </screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: WIEDERGABE- UND PVR-EINBLENDUNGEN -->
+  <!-- ================================================================== -->
+  <!-- Screen: PVRState -->
+  <screen position="320,848" size="1920,156" name="PVRState" flags="wfNoBorder" backgroundColor="FullNightPanel" zPosition="5" resolution="2560,1440">
+    <widget position="48,36" size="80,80" name="statusicon" alphatest="blend" scale="1" pixmaps="icons/play.png,icons/pause.png,icons/stop.png,icons/forward.png,icons/backward.png,icons/slow.png,icons/blank.png"/>
+    <widget position="156,36" size="252,80" font="Regular;51" foregroundColor="accent" transparent="1" alphatest="blend" valign="center" noWrap="1" name="speed" backgroundColor="background"/>
+    <widget position="0,0" size="0,0" font="Regular;3" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="state" backgroundColor="background"/>
+    <widget position="0,0" size="0,0" font="Regular;3" foregroundColor="foreground" transparent="1" alphatest="blend" valign="center" name="eventname" backgroundColor="background"/>
+    <widget position="448,36" size="1424,80" font="Regular;45" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+  </screen>
+</skin>

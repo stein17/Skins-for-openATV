@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<skin>
+  <!-- InfoBar, SecondInfoBar und zugehörige OSD-Einblendungen. -->
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: INFOBAR UND INFOBAR LITE -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: InfoBar -->
+ <screen position="0,0" size="2560,1440" name="InfoBar" flags="wfNoBorder" backgroundColor="transparent" ignoreWidgets="key_red,key_green,key_yellow,key_blue" resolution="2560,1440">
+  <eLabel position="0,828" size="2560,144" backgroundColor="FullNightInfoFade" zPosition="-1"/>
+  <eLabel position="0,972" size="2560,468" backgroundColor="FullNightInfoShade" zPosition="-1"/>
+  <widget position="27,1025" size="347,208" source="session.CurrentService" render="Picon" alphatest="blend" scale="1" mode="infobar" zPosition="1">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.picon_refresh import prime_picons
+prime_picons(self)</applet>
+  <widget position="40,920" size="2080,83" font="Regular; 61" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" source="session.CurrentService" render="Label" backgroundColor="background">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget position="693,1019" size="1429,69" font="Regular;51" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget position="693,1019" size="1429,69" font="Regular;43" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="RdsDecoder" render="RunningText" zPosition="5" options="movetype=running,startdelay=900,steptime=60,step=3,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightRdsInfo">RadioTextIfNoEvent</convert>
+  </widget>
+  <widget position="400,1104" size="2120,124" font="Regular;36" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="top" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget position="400,1027" size="267,56" font="Regular; 40" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" halign="left" backgroundColor="background">
+    <convert type="EventTime">Times</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget position="400,1245" size="267,55" font="Regular;36" borderWidth="3" borderColor="black" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventTime">Times</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget position="693,1244" size="1493,57" font="Regular;37" borderWidth="3" borderColor="black" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget position="693,1244" size="1493,57" font="Regular;32" borderWidth="3" borderColor="black" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="RdsDecoder" render="RunningText" zPosition="5" options="movetype=running,startdelay=900,steptime=60,step=3,direction=left,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightRdsInfo">RtpTextIfNoEvent</convert>
+  </widget>
+  <widget position="2207,1245" size="307,55" font="Regular;36" borderWidth="3" borderColor="black" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" halign="right" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget position="27,1317" size="2480,16" source="session.Event_Now" render="PLiWQHDFullNightProgress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="Label" borderWidth="3" borderColor="black" zPosition="3" position="1920,1347" size="253,68" font="Regular; 40" valign="center" halign="left" transparent="1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightFrontendInfo">SNRStream</convert>
+  </widget>
+  <eLabel position="2180,1347" size="132,68" text="AGC:" borderWidth="3" borderColor="black" zPosition="1" font="Regular; 40" valign="center" halign="center" transparent="1" backgroundColor="background"/>
+  <widget source="session.FrontendStatus" render="Label" borderWidth="3" borderColor="black" zPosition="1" position="2299,1347" size="132,68" font="Regular; 40" valign="center" halign="left" transparent="1" backgroundColor="background">
+    <convert type="FrontendInfo">AGC</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="PLiWQHDFullNightProgress" zPosition="2" position="1923,1413" size="195,13" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderWidth="3" borderColor="black" cornerRadius="8">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="PLiWQHDFullNightProgress" zPosition="2" position="2195,1413" size="195,13" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="FrontendInfo">AGC</convert>
+  </widget>
+  <widget position="2120,1027" size="187,56" font="Regular;36" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">Default</convert>
+  </widget>
+  <widget position="2327,1027" size="187,56" font="Regular;36" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget position="27,1245" size="347,56" font="Regular; 40" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.FrontendInfo" render="Label" halign="center" backgroundColor="background">
+    <convert type="FrontendInfo">STRING</convert>
+  </widget>
+  <widget position="27,1357" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" halign="center" backgroundColor="background">
+    <convert type="ServiceInfo">VideoInfo</convert>
+  </widget>
+  <widget position="360,1355" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" halign="center" backgroundColor="background">
+    <convert type="PLiWQHDFullNightAudioInfo">AudioCodec</convert>
+  </widget>
+<widget source="session.CurrentService" render="Label" position="693,1355" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" halign="center" valign="center" noWrap="1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightServiceOrbitalPosition"/>
+</widget>
+  <widget position="916,1488" size="360,53" font="Regular;32" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">Genre</convert>
+  </widget>
+  <widget position="1296,1488" size="84,53" font="Regular;32" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">RatingCode</convert>
+  </widget>
+  <panel name="FullNightServiceStatus"/>
+  <widget source="session.RecordState" render="Pixmap" position="647,1035" size="40,40" pixmap="icons/rec.png" zPosition="2" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget position="2140,920" size="373,83" font="Regular; 80" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="global.CurrentTime" render="Label" backgroundColor="background">
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.weather_overlay import install
+install(self, 'off')</applet>
+  <panel name="template_CaidDisplay"/>
+  <panel name="template_VPN_Infobar"/>
+  <panel name="template_OA_weather_default"/>
+  <panel name="template_Poster_Infobar"/>
+  <panel name="template_Backdrop_Infobar"/>
+</screen>
+
+  <!-- Screen: InfoBarLite -->
+  <screen position="0,0" size="2560,1440" name="InfoBarLite" flags="wfNoBorder" backgroundColor="transparent" ignoreWidgets="key_red,key_green,key_yellow,key_blue" resolution="2560,1440">
+    <eLabel position="48,1168" size="2464,224" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="-1"/>
+    <widget position="76,1203" size="216,129" source="session.CurrentService" render="Picon" alphatest="blend" scale="1" mode="infobar" zPosition="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget position="332,1188" size="1756,56" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" backgroundColor="background">
+      <convert type="ServiceName">Name</convert>
+    </widget>
+    <widget position="332,1256" size="1756,64" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" backgroundColor="background">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget position="2136,1256" size="336,56" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText">Default</convert>
+    </widget>
+    <widget position="2240,1188" size="232,56" font="Regular;40" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" halign="right" source="global.CurrentTime" render="Label" backgroundColor="background">
+      <convert type="ClockToText">Default</convert>
+    </widget>
+    <widget position="332,1348" size="2140,8" source="session.Event_Now" render="PLiWQHDFullNightProgress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="4">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget position="2172,1204" size="24,24" source="session.RecordState" render="FixedLabel" text="" backgroundColor="red" cornerRadius="12">
+      <convert type="ConditionalShowHide">Blink</convert>
+    </widget>
+    <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.picon_refresh import prime_picons
+prime_picons(self)</applet>
+
+  </screen>
+
+  <!-- ================================================================== -->
+  <!-- KATEGORIE: SECOND INFOBAR -->
+  <!-- ================================================================== -->
+
+  <!-- Screen: SecondInfoBar -->
+<screen position="0,0" size="2560,1440" name="SecondInfoBar" flags="wfNoBorder" backgroundColor="FullNightScreen" ignoreWidgets="FullDescription,epg_description,channel" resolution="2560,1440">
+  <panel name="FullNightSecondInfoBody"/>
+</screen>
+
+  <!-- Screen: SecondInfoBarECM -->
+<screen position="0,0" size="2560,1440" name="SecondInfoBarECM" flags="wfNoBorder" backgroundColor="FullNightScreen" ignoreWidgets="FullDescription,epg_description,channel" resolution="2560,1440">
+  <panel name="FullNightSecondInfoBody"/>
+  
+  
+  <eLabel position="1693,200" size="704,60" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" text="ECM / CA" zPosition="8" backgroundColor="background"/>
+  <widget position="1693,261" size="704,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" source="session.CurrentService" render="FixedLabel" text="Encrypted" zPosition="8" backgroundColor="background">
+    <convert type="ServiceInfo">IsCrypted</convert>
+    <convert type="ConditionalShowHide"/>
+  </widget>
+  <widget position="1693,315" size="704,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" source="session.CurrentService" render="FixedLabel" text="Free to air" zPosition="8" backgroundColor="background">
+    <convert type="ServiceInfo">IsCrypted</convert>
+    <convert type="ConditionalShowHide">Invert</convert>
+  </widget>
+  <widget position="1693,369" size="704,64" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" zPosition="8" backgroundColor="background">
+    <convert type="PliExtraInfo">CryptoSpecial</convert>
+  </widget>
+  <widget position="1693,436" size="704,256" font="Regular;36" foregroundColor="secondary" transparent="1" valign="top" source="session.CurrentService" render="Label" zPosition="8" backgroundColor="background">
+    <convert type="CryptoInfo">VerboseInfo</convert>
+  </widget>
+  <widget position="1693,436" size="704,296" font="Regular;36" foregroundColor="muted" transparent="1" valign="top" source="global.CurrentTime" render="FixedLabel" text="Crypto information is disabled in the OpenATV OSD settings." zPosition="8" backgroundColor="background">
+    <convert type="ConfigEntryTest">config.usage.show_cryptoinfo,0</convert>
+    <convert type="ConditionalShowHide"/>
+  </widget>
+ <eLabel position="1533,173" size="1008,576" backgroundColor="FullNightPanel" cornerRadius="16" zPosition="5"/>
+
+</screen>
+
+ <!-- Screen: FullNightSecondInfoBody -->
+  <screen name="FullNightSecondInfoBody">
+  <eLabel position="0,0" size="2560,133" backgroundColor="backgroundtop" zPosition="-1"/>
+  <eLabel position="0,128" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="2"/>
+  <widget source="Title" render="Label" position="51,27" size="2100,80" foregroundColor="foreground" backgroundColor="background" borderWidth="3" borderColor="black" transparent="1" zPosition="1" font="Regular;55" valign="center"/>
+  <widget source="global.CurrentTime" render="Label" position="2200,13" size="300,60" foregroundColor="foreground" backgroundColor="background" borderWidth="3" borderColor="black" transparent="1" zPosition="1" font="Regular;48" valign="center" halign="right">
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget source="global.CurrentTime" render="Label" position="1900,77" size="600,48" foregroundColor="foreground" backgroundColor="background" borderWidth="3" borderColor="black" transparent="1" zPosition="1" font="Regular;32" valign="center" halign="right">
+    <convert type="ClockToText">Date</convert>
+  </widget>
+  <eLabel position="27,817" size="2507,4" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+  <widget source="session.Event_Now" font="Regular; 43" zPosition="2" halign="left" position="173,137" render="Label" size="1333,53" transparent="1" valign="center" foregroundColor="accent" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Now" render="Label" position="40,197" size="1467,267" font="Regular; 39" backgroundColor="background" zPosition="2" halign="left" transparent="1" valign="top">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="session.Event_Next" font="Regular; 43" zPosition="1" halign="left" position="173,477" render="Label" size="1333,53" transparent="1" valign="center" foregroundColor="accent" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="session.Event_Next" render="Label" position="40,537" size="1467,267" font="Regular; 39" zPosition="2" halign="left" transparent="1" valign="top" backgroundColor="background">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <eLabel text="Next:" position="40,477" zPosition="1" size="132,53" halign="left" font="Regular; 43" transparent="1" valign="center" foregroundColor="accent" backgroundColor="background"/>
+  <eLabel text="Now:" position="40,137" zPosition="1" size="132,53" halign="left" font="Regular; 43" transparent="1" valign="center" foregroundColor="accent" backgroundColor="background"/>
+  <widget source="session.VideoPicture" render="Pig" position="1539,177" size="996,564" zPosition="3" backgroundColor="transparent"/>
+  <eLabel position="0,828" size="2560,144" backgroundColor="FullNightInfoFade" zPosition="-1"/>
+  <eLabel position="0,972" size="2560,468" backgroundColor="FullNightInfoShade" zPosition="-1"/>
+  <widget position="27,1025" size="347,208" source="session.CurrentService" render="Picon" alphatest="blend" scale="1" mode="infobar" zPosition="1">
+    <convert type="ServiceName">Reference</convert>
+  </widget>
+  <applet type="onLayoutFinish">from Plugins.Extensions.PLiFullNightWQHD.picon_refresh import prime_picons
+prime_picons(self)</applet>
+  <widget position="40,920" size="2080,83" font="Regular; 61" foregroundColor="foreground" transparent="1" valign="center" source="session.CurrentService" render="Label" backgroundColor="background">
+    <convert type="ServiceName">Name</convert>
+  </widget>
+  <widget position="693,1019" size="1429,69" font="Regular;51" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget position="400,1104" size="2120,124" font="Regular;36" foregroundColor="foreground" transparent="1" valign="top" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">ExtendedDescription</convert>
+  </widget>
+  <widget position="400,1027" size="267,56" font="Regular; 40" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" halign="left" backgroundColor="background">
+    <convert type="EventTime">Times</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget position="400,1245" size="267,55" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventTime">Times</convert>
+    <convert type="ClockToText">Format:%H:%M</convert>
+  </widget>
+  <widget position="693,1244" size="1493,57" font="Regular;37" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget position="2207,1245" size="307,55" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" noWrap="1" halign="right" source="session.Event_Next" render="Label" backgroundColor="background">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget position="27,1317" size="2480,16" source="session.Event_Now" render="PLiWQHDFullNightProgress" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="EventTime">Progress</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="Label" zPosition="3" position="1920,1347" size="253,68" font="Regular; 40" valign="center" halign="left" transparent="1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightFrontendInfo">SNRStream</convert>
+  </widget>
+  <eLabel position="2180,1347" size="132,68" text="AGC:" zPosition="1" font="Regular; 40" valign="center" halign="center" transparent="1" backgroundColor="background"/>
+  <widget source="session.FrontendStatus" render="Label" zPosition="1" position="2299,1347" size="132,68" font="Regular; 40" valign="center" halign="left" transparent="1" backgroundColor="background">
+    <convert type="FrontendInfo">AGC</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="PLiWQHDFullNightProgress" zPosition="2" position="1923,1413" size="195,13" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="FrontendInfo">SNR</convert>
+  </widget>
+  <widget source="session.FrontendStatus" render="PLiWQHDFullNightProgress" zPosition="2" position="2195,1413" size="195,13" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" borderWidth="1" cornerRadius="8">
+    <convert type="FrontendInfo">AGC</convert>
+  </widget>
+  <widget position="2120,1027" size="187,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventTime">Remaining</convert>
+    <convert type="RemainingToText">Default</convert>
+  </widget>
+  <widget position="2327,1027" size="187,56" font="Regular;36" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventTime">Duration</convert>
+    <convert type="ClockToText">InMinutes</convert>
+  </widget>
+  <widget position="27,1245" size="347,56" font="Regular; 40" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.FrontendInfo" render="Label" halign="center" backgroundColor="background">
+    <convert type="FrontendInfo">STRING</convert>
+  </widget>
+  <widget position="27,1357" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" halign="center" backgroundColor="background">
+    <convert type="ServiceInfo">VideoInfo</convert>
+  </widget>
+  <widget position="360,1355" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.CurrentService" render="Label" halign="center" backgroundColor="background">
+    <convert type="PLiWQHDFullNightAudioInfo">AudioCodec</convert>
+  </widget>
+<widget source="session.CurrentService" render="Label" position="693,1355" size="307,53" font="Regular; 31" borderWidth="3" borderColor="black" foregroundColor="foreground" transparent="1" halign="center" valign="center" noWrap="1" backgroundColor="background">
+    <convert type="PLiWQHDFullNightServiceOrbitalPosition"/>
+</widget>
+  <widget position="916,1488" size="360,53" font="Regular;32" foregroundColor="foreground" transparent="1" valign="center" noWrap="1" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">Genre</convert>
+  </widget>
+  <widget position="1296,1488" size="84,53" font="Regular;32" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="session.Event_Now" render="Label" backgroundColor="background">
+    <convert type="EventName">RatingCode</convert>
+  </widget>
+  <panel name="FullNightServiceStatus"/>
+  <widget source="session.RecordState" render="Pixmap" position="640,1035" size="40,40" pixmap="icons/rec.png" zPosition="2" alphatest="blend">
+    <convert type="ConditionalShowHide">Blink</convert>
+  </widget>
+  <widget position="2140,920" size="373,83" font="Regular; 80" foregroundColor="foreground" transparent="1" valign="center" halign="right" source="global.CurrentTime" render="Label" backgroundColor="background">
+    <convert type="ClockToText">Default</convert>
+  </widget>
+  <panel name="template_CaidDisplay"/>
+</screen>
+
+	<screen name="FullNightServiceStatus">
+
+    <widget position="1033,1352" size="92,56" pixmap="icons/ico_resolution_sd.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">1,719</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1033,1352" size="92,56" pixmap="icons/ico_resolution_hd.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">720,1079</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1033,1352" size="92,56" pixmap="icons/ico_resolution_fhd.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">1080,2159</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1033,1352" size="92,56" pixmap="icons/ico_resolution_4k.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">VideoHeight</convert>
+      <convert type="ValueRange">2160,10000</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1689,1352" size="92,56" pixmap="icons/ico_hbbtv_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">HasHBBTV</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1143,1352" size="92,56" pixmap="icons/ico_txt_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">HasTeletext</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1252,1352" size="92,56" pixmap="icons/ico_dolby_off.png" source="session.CurrentService" render="Pixmap" zPosition="1" alphatest="blend">
+      <convert type="ServiceInfo">IsStereo</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1252,1352" size="92,56" pixmap="icons/ico_dolby_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsMultichannel</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1361,1352" size="92,56" pixmap="icons/ico_sub_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">SubtitlesAvailable</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1471,1352" size="92,56" pixmap="icons/ico_format_16-9.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsWidescreen</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1471,1352" size="92,56" pixmap="icons/ico_format_4-3.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsNotWidescreen</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1580,1352" size="92,56" pixmap="icons/ico_crypt_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsCrypted</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1580,1352" size="92,56" pixmap="icons/ico_softcsa.png" source="session.CurrentService" render="Pixmap" zPosition="3" alphatest="blend">
+      <convert type="ServiceInfo">IsSoftCSA</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1689,1352" size="92,56" pixmap="icons/ico_iptv_on.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsStream</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget position="1799,1352" size="92,56" pixmap="icons/ico_dab-plus.png" source="session.CurrentService" render="Pixmap" zPosition="2" alphatest="blend">
+      <convert type="ServiceInfo">IsDAB</convert>
+      <convert type="ConditionalShowHide"/>
+    </widget>
+  </screen>
+	
+</skin>

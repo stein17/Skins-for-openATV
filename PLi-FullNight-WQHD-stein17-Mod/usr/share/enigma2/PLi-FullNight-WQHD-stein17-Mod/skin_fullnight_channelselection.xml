@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<skin>
+  <!-- ================================================================ -->
+  <!-- Gemeinsame Bausteine der Senderlisten                             -->
+  <!-- ================================================================ -->
+
+  <!-- Panel: kompakter Titel mit Uhrzeit und Datum -->
+  <screen name="FullNightChannelHeaderCompact">
+    <eLabel position="0,0" size="2560,104" backgroundColor="FullNightChannelPanel" zPosition="-1"/>
+    <widget source="Title" render="Label" position="51,16" size="1867,72" font="Regular;51" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background"/>
+    <widget source="global.CurrentTime" render="Label" position="2180,11" size="320,52" font="Regular;44" foregroundColor="foreground" transparent="1" halign="right" valign="center" backgroundColor="background">
+      <convert type="ClockToText">Format:%H:%M</convert>
+    </widget>
+    <widget source="global.CurrentTime" render="Label" position="1933,57" size="567,40" font="Regular;29" foregroundColor="secondary" transparent="1" halign="right" valign="center" backgroundColor="background">
+      <convert type="ClockToText">Date</convert>
+    </widget>
+    <eLabel position="0,100" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+	<eLabel position="0,1351" size="2560,4" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+  </screen>
+
+  <!-- Panel: gemeinsame Kopf- und Fußzeile -->
+  <screen name="FullNightChannelChrome">
+    <panel name="FullNightChannelHeaderCompact"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_info_epg"/>
+  </screen>
+
+  <!-- ================================================================ -->
+  <!-- Legacy-, System- und Radio-Senderlisten                         -->
+  <!-- ================================================================ -->
+
+  <!-- Screen: SlimChannelSelection -->
+  <screen name="SlimChannelSelection" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+   <!--  <panel name="Fullscreen_Template_Title_Date" /> -->
+    <panel name="FullNightChannelChrome"/>
+     <widget name="list" position="27,103" size="1493,1248" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemCornerRadius="0" itemSpacing="0,0" scrollbarMode="showOnDemand" transparent="0" borderWidth="3" borderColor="black"/>  
+    <eLabel position="1555,112" size="971,1239" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="ServiceEvent" render="Picon" position="1573,123" size="160,96" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1757,120" size="753,100" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background">
+      <convert type="EventName">NowName</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1571,232" size="180,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightProgress" position="1707,249" size="380,13" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="5" zPosition="5">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2117,232" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2300,232" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1571,293" size="940,427" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel position="1571,733" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1571,752" size="940,520" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1571,1285" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1571,1293" size="940,53" font="Regular;40" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="TransponderInfo"/>
+    </widget>
+  </screen>
+
+  <!-- Screen: SimpleChannelSelection -->
+    <screen name="SimpleChannelSelection" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+      <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+      <widget name="list" position="1000,157" size="1500,1056" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+      <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+    </screen>
+
+  <!-- Screen: ChannelSelectionRadio -->
+<screen name="ChannelSelectionRadio" position="0,0" size="2560,1440" title="Radio Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+  <panel name="Fullscreen_Template_Title_Date"/>
+  <widget name="list" position="40,160" size="1533,1160" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <eLabel position="1600,201" size="860,787" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+  <widget source="ServiceEvent" render="Label" position="1631,221" size="800,100" font="Regular;48" foregroundColor="foreground" transparent="1" halign="center" valign="center" backgroundColor="background">
+    <convert type="EventName">Name</convert>
+  </widget>
+  <widget source="ServiceEvent" render="Label" position="1631,337" size="800,500" font="Regular;36" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+    <convert type="EventName">FullDescription</convert>
+  </widget>
+  <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1631,877" size="800,100" font="Regular;39" foregroundColor="secondary" transparent="1"/>
+  <panel name="TemplateAllColorButtons_Automatic"/>
+  <panel name="template_menu_info_epg"/>
+</screen>
+
+  <!-- Screen: ChannelSelection_PIG -->
+  <screen name="ChannelSelection_PIG" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,103" size="1493,1248" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemCornerRadius="0" itemSpacing="0,0" scrollbarMode="showOnDemand" transparent="0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1547,112" size="971,1239" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="session.VideoPicture" render="Pig" position="1788,120" size="712,400" zPosition="3" backgroundColor="transparent"/>
+    <widget source="ServiceEvent" render="Picon" position="1560,260" size="200,120" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1560,532" size="940,60" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1560,600" size="168,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightProgress" position="1693,616" size="380,13" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="5" zPosition="5">
+      <convert type="EventTime">Progress</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2093,600" size="168,44" font="Regular;40" foregroundColor="accent" transparent="1" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2300,600" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1560,660" size="940,280" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel position="1560,947" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1560,953" size="940,327" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1560,1285" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1560,1293" size="940,53" font="Regular;40" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="TransponderInfo"/>
+    </widget>
+    
+    <panel name="template_menu_info_epg"/>
+  </screen>
+
+  <!-- ================================================================ -->
+  <!-- Klassische Senderlisten                                           -->
+  <!-- ================================================================ -->
+
+  <!-- Screen: ChannelSelectionPIG -->
+  <screen name="ChannelSelectionPIG" base="ChannelSelection" label="FullNight Mini-TV" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,103" size="1493,1248" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1547,112" size="971,1239" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="session.VideoPicture" render="Pig" position="1788,120" size="712,400" zPosition="3" backgroundColor="transparent"/>
+    <widget source="ServiceEvent" render="Picon" position="1560,260" size="200,120" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1560,532" size="940,60" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background">
+      <convert type="EventName">Name</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1560,600" size="168,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+	<widget source="ServiceEvent" render="PLiWQHDFullNightProgress" position="1693,616" size="380,13" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="5" zPosition="5">
+		<convert type="EventTime">Progress</convert>
+	</widget>
+    <widget source="ServiceEvent" render="Label" position="2093,600" size="168,44" font="Regular;40" foregroundColor="accent" transparent="1" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2300,600" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1560,660" size="940,280" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel position="1560,947" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1560,953" size="940,327" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1560,1285" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1560,1293" size="940,53" font="Regular;40" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="TransponderInfo"/>
+    </widget>
+  </screen>
+
+  <!-- Screen: ChannelSelection -->
+<screen name="ChannelSelection" base="ChannelSelection" label="FullNight ohne Mini-TV" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,103" size="1493,1248" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" picServiceEventProgressbar="progress/service_event.png" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1555,112" size="971,1239" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="ServiceEvent" render="Picon" position="1573,123" size="160,96" zPosition="6" alphatest="blend" transparent="1">
+      <convert type="ServiceName">Reference</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1757,120" size="753,100" font="Regular;44" foregroundColor="foreground" transparent="1" valign="center" backgroundColor="background">
+      <convert type="EventName">NowName</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="1571,232" size="180,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="left" backgroundColor="background">
+      <convert type="EventTime">StartTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+  	<widget source="ServiceEvent" render="PLiWQHDFullNightProgress" position="1707,249" size="380,13" borderWidth="1" foregroundColor="FullNightProgressUser" backgroundColor="FullNightProgressBackground" borderColor="FullNightProgressBorder" cornerRadius="5" zPosition="5">
+		<convert type="EventTime">Progress</convert>
+	</widget>
+    <widget source="ServiceEvent" render="Label" position="2117,232" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" backgroundColor="background">
+      <convert type="EventTime">EndTime</convert>
+      <convert type="ClockToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="2300,232" size="200,44" font="Regular;40" foregroundColor="accent" transparent="1" halign="right" backgroundColor="background">
+      <convert type="EventTime">Remaining</convert>
+      <convert type="RemainingToText"/>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1571,293" size="940,427" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel position="1571,733" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1571,752" size="940,520" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1571,1285" size="940,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1571,1293" size="940,53" font="Regular;40" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="TransponderInfo"/>
+    </widget>
+    
+    <panel name="template_menu_info_epg"/>
+  </screen>
+
+  <!-- Screen: ChannelSelection3_Fields -->
+<screen name="ChannelSelection3_Fields" base="ChannelSelection" label="FullNight 3 Felder" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,104" size="1040,1245" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1060,112" size="753,1235" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <eLabel position="1807,112" size="713,1235" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="session.VideoPicture" render="Pig" position="1067,120" size="733,413" zPosition="3" backgroundColor="transparent"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1067,540" size="733,56" font="Regular;43" foregroundColor="accent" transparent="1" valign="center" noWrap="1" backgroundColor="background">
+      <convert type="EventInfo">NowName</convert>
+    </widget>
+    <eLabel position="1067,600" size="733,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1067,607" size="733,327" font="Regular;40" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1067,940" size="733,56" font="Regular;43" foregroundColor="accent" transparent="1" valign="center" noWrap="1" backgroundColor="background">
+      <convert type="EventInfo">NextName</convert>
+    </widget>
+    <eLabel position="1067,1000" size="733,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1069,1007" size="733,333" font="Regular;40" foregroundColor="secondary" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">NextDescription</convert>
+    </widget>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1813,120" size="707,1147" font="Regular;39" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1813,1272" size="707,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=2000,stepDelay=50,stepSize=1,endDelay=1000,repeat=2" position="1813,1287" size="707,56" font="Regular;40" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+  <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+    <convert type="TransponderInfo"/>
+  </widget>
+  </screen>
+
+  <!-- ================================================================ -->
+  <!-- Vollbild- und Galerie-Senderlisten                                -->
+  <!-- ================================================================ -->
+
+  <!-- Screen: ChannelSelectionFull -->
+  <screen name="ChannelSelectionFull" base="ChannelSelection" label="FullNight Vollbild" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,104" size="2507,1245" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+  <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+    <convert type="TransponderInfo"/>
+  </widget>
+  </screen>
+
+  <!-- Screen: ChannelSelection_Live-TV -->
+<screen name="ChannelSelection_Live-TV" base="ChannelSelection" label="FullNight Live-TV" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="FullNightChannelChrome"/>
+    <widget name="list" position="27,104" size="1824,1245" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="0" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <eLabel position="1864,112" size="667,1239" backgroundColor="FullNightPanel" zPosition="-1" cornerRadius="16"/>
+    <widget source="session.VideoPicture" render="Pig" position="1880,120" size="635,357" zPosition="3" backgroundColor="transparent"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=top,startDelay=10000,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1880,501" size="635,416" font="Regular;36" foregroundColor="foreground" transparent="1" valign="top" backgroundColor="background">
+      <convert type="EventName">FullDescription</convert>
+    </widget>
+    <eLabel position="1880,928" size="635,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="PLiWQHDFullNightSingleEpgList" position="1880,944" size="635,328" font="Regular;36" foregroundColor="foreground" transparent="1" valign="top" zPosition="2"/>
+    <eLabel position="1880,1280" size="635,3" backgroundColor="FullNightLineHorizontal" zPosition="10"/>
+    <widget source="ServiceEvent" render="Label" scrollText="direction=left,startDelay=600,stepDelay=60,stepSize=1,endDelay=1000,repeat=2" position="1880,1291" size="635,53" font="Regular;36" foregroundColor="secondary" transparent="1" valign="center" backgroundColor="background">
+      <convert type="PLiWQHDFullNightPrimeTime">PrimeTime,noDuration</convert>
+    </widget>
+    <widget source="ServiceEvent" render="Label" position="951,32" size="967,40" font="Regular;29" foregroundColor="secondary" transparent="1" noWrap="1" backgroundColor="background">
+      <convert type="TransponderInfo"/>
+    </widget>
+  </screen>
+
+  <!-- Screen: ChannelSelection_TV-Spielfilm -->
+  <screen name="ChannelSelection_TV-Spielfilm" base="ChannelSelection" label="FullNight TV-Spielfilm" position="0,0" size="2560,1440" title="Channel Selection" flags="wfNoBorder" backgroundColor="FullNightChannelScreen" resolution="2560,1440">
+    <eLabel position="0,0" size="2560,1440" backgroundColor="FullNightPanel" zPosition="-9" cornerRadius="16"/>
+    <widget name="list" position="24,24" size="2512,1325" scrollbarMode="showNever" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="orange" foregroundColorServiceNotAvail="disabled" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="surface" foregroundColorSelected="selectedFG" transparent="1" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_menu_info_epg"/>
+  </screen>
+    <!-- ================================================================ -->
+  <!-- Bouquet- und Kontextmenues                                       -->
+  <!-- ================================================================ -->
+
+  <!-- Screen: ChannelContextMenu -->
+  <screen name="ChannelContextMenu" position="0,0" size="2560,1440" flags="wfNoBorder" backgroundColor="background_Pig_template" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/><panel name="Fullscreen_left_Pic"/><eLabel position="980,133" size="4,1172" backgroundColor="FullNightLineVertical" zPosition="2"/>
+    <widget name="menu" position="1060,177" size="1440,1080" itemHeight="72" font="Regular;43" enableWrapAround="1" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" scrollbarMode="showOnDemand" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+
+<!-- Screen: myChannelSelection -->
+  <screen name="myChannelSelection" position="0,0" size="2560,1440" title="Select service to add..." flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget name="list" position="140,157" size="2280,900" itemHeight="72" font="Regular;40" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <widget source="introduction" render="Label" position="140,1117" size="2280,80" font="Regular;44" halign="center" foregroundColor="secondary" transparent="1" backgroundColor="background"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+<!-- Screen: mySmallChannelSelection -->
+  <screen name="mySmallChannelSelection" position="0,0" size="2560,1440" title="Setup" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <panel name="Fullscreen_left_Pic"/>
+    <widget name="list" position="1000,157" size="1500,1056" serviceItemHeight="60" serviceNumberFont="Regular;44" serviceNameFont="Regular;44" serviceInfoFont="Regular;40" progressInfoFont="Regular;36" listMarginLeft="11" listMarginRight="44" fieldMargins="11" itemsDistances="11" progressBarWidth="141" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" colorServiceRecorded="recording" colorServicePseudoRecorded="blue" colorServiceStreamed="yellow" colorServiceDescription="secondary" colorServiceDescriptionSelected="selectedFG" colorEventProgressbar="FullNightProgressUserSolid" colorEventProgressbarSelected="FullNightProgressUserSolid" colorEventProgressbarBorder="FullNightProgressBorder" colorEventProgressbarBorderSelected="FullNightProgressBorder" foregroundColorMarkedSelected="selectedFG" foregroundColorServiceNotAvail="disabled" scrollbarMode="showOnDemand" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black"/>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_ok_exit"/>
+  </screen>
+
+
+  <!-- ================================================================ -->
+  <!-- Quad-PiP                                                         -->
+  <!-- ================================================================ -->
+
+  <!-- Screen: QuadPiPChannelSelection -->
+  <screen name="QuadPiPChannelSelection" position="0,0" size="2560,1440" title="Quad PiP Channel Selection" flags="wfNoBorder" backgroundColor="FullNightScreen" resolution="2560,1440">
+    <panel name="Fullscreen_Template_Title_Date"/>
+    <widget source="ChannelList" render="Listbox" position="48,177" size="1620,960" zPosition="3" scrollbarMode="showOnDemand" backgroundColor="surface" foregroundColor="foreground" backgroundColorSelected="selection" foregroundColorSelected="selectedFG" transparent="0" itemCornerRadius="0" itemCornerRadiusSelected="16" itemGradientSelected="FullNightListSelection" itemSpacing="0,0" borderWidth="3" borderColor="black">
+      <convert type="TemplatedMultiContent">{'templates': {'default': (320, [MultiContentEntryText(pos=(51, 5), size=(1349, 56), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=0), MultiContentEntryText(pos=(100, 68), size=(1300, 56), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=1), MultiContentEntryText(pos=(100, 128), size=(1300, 56), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=2), MultiContentEntryText(pos=(100, 188), size=(1300, 56), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=3), MultiContentEntryText(pos=(100, 248), size=(1300, 56), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=4)])}, 'fonts': [gFont('Regular', 48), gFont('Regular', 40)], 'itemHeight': 320}</convert>
+    </widget>
+    <panel name="TemplateAllColorButtons_Automatic"/>
+    <panel name="template_exit"/>
+  </screen>
+</skin>
